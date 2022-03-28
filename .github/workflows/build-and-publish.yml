@@ -1,0 +1,53 @@
+# this file handles all the messy business of auto-building the game when changes are pushed and publishing the latest build to itch.io, where it can be enjoyed publicly.
+# please do not modify this file unless you have very good reason to do so, as it will likely break the game for everyone else.
+
+name: build and publish
+
+on:
+  push:
+    branches:
+      - main # triggers ANY time changes are pushed to the main branch
+    paths-ignore: # UNLESS they're not game-relevant
+      - '.godot_ignore'
+      - '.gitignore'
+      - 'LICENSE'
+      - '**.md'
+
+jobs:
+  build_game:
+    runs-on: ubuntu-latest
+    name: Build Game
+    steps:
+      - name: checkout latest code
+        uses: actions/checkout@v2.3.1
+        with:
+          fetch-depth: 0
+      - name: export with Godot Engine and release on GitHub
+        uses: firebelley/godot-export@v3.0.0
+        with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_linux_headless.64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_export_templates.tpz
+          relative_project_path: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  upload_game:
+    runs-on: ubuntu-latest
+    name: Publish Game
+    needs: [build_game]
+    steps:
+      - name: download latest HTML5 build
+        id: download-html
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          version: "latest"
+          file: HTML5.zip
+          token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: deploy to itch.io
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_API_KEY }}
+          CHANNEL: html
+          ITCH_GAME: a-little-game-called-mario
+          ITCH_USER: iznaut
+          PACKAGE: HTML5.zip
+          VERSION: ${{ steps.download-html.outputs.version }}

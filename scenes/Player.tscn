@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sfx/jump.wav" type="AudioStream" id=1]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 160, 480 )
+z_index = 1
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )

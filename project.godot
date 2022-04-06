@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "EndPortal",
+"language": "GDScript",
+"path": "res://scripts/EndPortal.gd"
+} ]
+_global_script_class_icons={
+"EndPortal": ""
+}
+
 [application]
 
 config/name="A Little Game Called Mario"
@@ -41,6 +51,12 @@ jump={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="World"
+2d_physics/layer_3="Portals"
 
 [physics]
 

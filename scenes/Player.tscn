@@ -67,9 +67,13 @@ position = Vector2( -0.5, 5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 32 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 10 )
 animation = "idle"
+offset = Vector2( 0, -16 )
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

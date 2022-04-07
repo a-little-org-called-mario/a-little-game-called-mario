@@ -21,6 +21,7 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL
 		sprite.play("run");
+		# pointing the character in the direction he's running
 		sprite.flip_h = false;
 	elif Input.is_action_pressed("left"):
 		motion.x -= ACCEL
@@ -36,10 +37,11 @@ func _physics_process(_delta):
 			motion.y = -JUMPFORCE
 			$JumpSFX.play()
 	else:
+		# while we're holding the jump button we should jump higher
 		if Input.is_action_pressed("jump"):
 			gravityMultiplier = 0.5;
 		else:
-			gravityMultiplier = 1;
+			gravityMultiplier = 1 
 		sprite.play("jump");
 
 	motion = move_and_slide(motion, UP)

@@ -7,7 +7,7 @@ a bad idea from the mind of [izzy kestrel](https://twitter.com/iznaut), inspired
 
 # 🎮 [play the latest version here](https://iznaut.itch.io/a-little-game-called-mario) 🎮
 
-![The tweet](.godot_ignore/the_tweet.png)
+[![The tweet](.godot_ignore/the_tweet.png)](https://twitter.com/iznaut/status/1508179935977947142)
 
 # about
 this is (at least to start), a simple 2D platformer game made with Godot Engine. it exists for all to enjoy - not only as players, but also as Game Developers.

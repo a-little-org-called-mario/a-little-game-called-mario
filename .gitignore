@@ -1,3 +1,4 @@
 .import
 .vscode
 builds
+.DS_Store

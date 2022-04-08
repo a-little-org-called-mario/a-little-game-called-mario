@@ -7,10 +7,6 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.5, 27 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 32, 32, 32 )
@@ -39,13 +35,12 @@ region = Rect2( 160, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 2 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "run",
@@ -54,6 +49,11 @@ animations = [ {
 "frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
 "speed": 5.0
 } ]
 
@@ -75,5 +75,6 @@ offset = Vector2( 0, -16 )
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
+volume_db = -12.0
 
 [node name="Tween" type="Tween" parent="."]

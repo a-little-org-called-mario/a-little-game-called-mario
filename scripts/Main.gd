@@ -18,10 +18,14 @@ func _hook_portals() -> void:
 		# Avoid connecting the same object several times.
 		if portal.is_connected("body_entered", self, "_on_endportal_body_entered"):
 			continue
-		portal.connect("body_entered", self, "_on_endportal_body_entered", [ portal.next_level ])
+		portal.connect("body_entered", self, "_on_endportal_body_entered", [ portal.next_level, portal ])
 
 
-func _on_endportal_body_entered(_body : Node, next_level : PackedScene) -> void:
+func _on_endportal_body_entered(_body : Node2D, next_level : PackedScene, portal) -> void:
+	var animation = portal.on_portal_enter()
+	_body.visible = false;
+	yield(animation, "animation_finished");
+	_body.visible = true;
 	call_deferred("_finish_level", next_level)
 
 

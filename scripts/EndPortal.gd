@@ -5,3 +5,8 @@ extends Area2D
 # When the player enters the Area2D, the current level will be unloaded and the
 #  new one loaded in its place.
 export var next_level : PackedScene
+
+func on_portal_enter():
+	$Mario.visible = true;
+	$Mario.play();
+	return $Mario

@@ -1,7 +1,10 @@
-# this file handles all the messy business of auto-building the game when changes are pushed and publishing the latest build to itch.io, where it can be enjoyed publicly.
-# please do not modify this file unless you have very good reason to do so, as it will likely break the game for everyone else.
+# This workflow builds the game every time a PR is opened.
+# It will fail the build if it fails to compile
+# And also triggers a separate workflow to deploy a preview copy of the build
+# (which needs to be a separate run for security reasons.
+# see https://securitylab.github.com/research/github-actions-preventing-pwn-requests/ for context)
 
-name: Test and Deploy PRs
+name: Build PR
 
 on:
   pull_request:
@@ -16,12 +19,9 @@ on:
 jobs:
   build_game:
     runs-on: ubuntu-latest
-    name: Build Game
     steps:
       - name: checkout latest code
         uses: actions/checkout@v2.3.1
-        with:
-          fetch-depth: 0
       - name: export with Godot Engine and release on GitHub
         uses: firebelley/godot-export@v3.0.0
         with:
@@ -32,13 +32,8 @@ jobs:
           relative_project_path: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Deploy preview to Netlify
-        uses: nwtgck/actions-netlify@v1.2
+
+      - uses: actions/upload-artifact@v2
         with:
-          publish-dir: './HTML5'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          name: pr
+          path: HTML5

@@ -10,6 +10,9 @@ font_data = ExtResource( 3 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 159, 443 )
@@ -19,6 +22,9 @@ position = Vector2( 159, 443 )
 [node name="UI" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03
@@ -32,3 +38,6 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 text = "ARROW KEYS TO MOVE
 SPACE TO JUMP"
+__meta__ = {
+"_edit_use_anchors_": false
+}

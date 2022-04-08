@@ -5,6 +5,7 @@ extends Area2D
 # When the player enters the Area2D, the current level will be unloaded and the
 #  new one loaded in its place.
 export var next_level : PackedScene
+export var next_level_should_follow_camera : bool
 
 
 func _ready():

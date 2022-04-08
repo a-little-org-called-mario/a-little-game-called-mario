@@ -4,7 +4,7 @@ const UP = Vector2.UP
 const GRAVITY = 100
 const MAXFALLSPEED = 1000
 const MAXSPEED = 300
-const JUMPFORCE = 1100
+const JUMPFORCE = 1200 # Adjusted to make 3 tile high jumps
 const ACCEL = 50
 const COYOTE_TIME = 0.1
 
@@ -71,3 +71,6 @@ func stretch(time=0.2, returnDelay=0):
 		tween.interpolate_property(sprite, "scale", original_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
 		tween.interpolate_property(sprite, "scale", stretch_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
 		tween.start()
+
+func set_camera_follow(follow: bool):
+	$Camera.current = follow

@@ -18,18 +18,18 @@ func _hook_portals() -> void:
 		# Avoid connecting the same object several times.
 		if portal.is_connected("body_entered", self, "_on_endportal_body_entered"):
 			continue
-		portal.connect("body_entered", self, "_on_endportal_body_entered", [ portal.next_level, portal ])
+		portal.connect("body_entered", self, "_on_endportal_body_entered", [ portal.next_level, portal, portal.next_level_should_follow_camera ])
 
 
-func _on_endportal_body_entered(_body : Node2D, next_level : PackedScene, portal) -> void:
+func _on_endportal_body_entered(_body : Node2D, next_level : PackedScene, portal, next_level_should_follow_camera: bool) -> void:
 	var animation = portal.on_portal_enter()
 	_body.visible = false;
 	yield(animation, "animation_finished");
 	_body.visible = true;
-	call_deferred("_finish_level", next_level)
+	call_deferred("_finish_level", next_level, next_level_should_follow_camera)
 
 
-func _finish_level(next_level : PackedScene = null) -> void:
+func _finish_level(next_level : PackedScene = null, next_level_should_follow_camera : bool = false) -> void:
 	if next_level:
 		# Create the new level, insert it into the tree and remove the old one.
 		var new_level : TileMap = next_level.instance()
@@ -42,4 +42,5 @@ func _finish_level(next_level : PackedScene = null) -> void:
 
 		# We need to flash the player out and in the tree to avoid physics errors.
 		remove_child(player)
+		player.set_camera_follow(next_level_should_follow_camera)
 		add_child_below_node(level, player)

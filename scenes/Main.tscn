@@ -39,7 +39,13 @@ margin_right = -230.544
 margin_bottom = -50.2
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+SPACE TO [rainbow freq=0.5 sat=1 val=20]JUMP[/rainbow]"
 text = "ARROW KEYS TO MOVE
 SPACE TO JUMP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="jumping" from="Player" to="Camera" method="trigger_small_shake"]

@@ -35,7 +35,7 @@ _global_script_class_icons={
 config/name="A Little Game Called Mario"
 config/description="open source collective hell game"
 run/main_scene="res://scenes/Main.tscn"
-config/icon="res://sprites/icon.png"
+config/icon="res://sprites/mario-icon.png"
 
 [display]
 
@@ -69,6 +69,7 @@ jump={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="World"
 2d_physics/layer_3="Portals"
+2d_physics/layer_4="Coins"
 
 [physics]
 

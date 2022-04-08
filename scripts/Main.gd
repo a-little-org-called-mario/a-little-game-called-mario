@@ -39,8 +39,8 @@ func _finish_level(next_level : PackedScene = null) -> void:
 
 		# Do not forget to hook the new portals
 		_hook_portals()
-		
-		#Removing instructions 
+
+		#Removing instructions
 		$UI/RichTextLabel.visible = false;
 
 		# We need to flash the player out and in the tree to avoid physics errors.

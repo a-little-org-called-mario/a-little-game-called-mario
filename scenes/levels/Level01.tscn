@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/Level02.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Coin.tscn" type="PackedScene" id=4]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -13,3 +14,17 @@ tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0
 [node name="EndPortal" parent="." instance=ExtResource( 2 )]
 position = Vector2( 800, 135 )
 next_level = ExtResource( 3 )
+
+[node name="coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="coins" instance=ExtResource( 4 )]
+position = Vector2( 160, 160 )
+
+[node name="Coin2" parent="coins" instance=ExtResource( 4 )]
+position = Vector2( 224, 160 )
+
+[node name="Coin3" parent="coins" instance=ExtResource( 4 )]
+position = Vector2( 32, 288 )
+
+[node name="Coin4" parent="coins" instance=ExtResource( 4 )]
+position = Vector2( 992, 288 )

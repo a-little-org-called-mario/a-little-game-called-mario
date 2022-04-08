@@ -41,7 +41,7 @@ func _physics_process(delta : float) -> void:
 		motion.x -= ACCEL
 		sprite.play("run")
 		sprite.flip_h = true
-	else:	
+	else:
 		sprite.play("idle")
 		motion.x = lerp(motion.x, 0, 0.2)
 
@@ -64,7 +64,7 @@ func _physics_process(delta : float) -> void:
 		if Input.is_action_pressed("jump"):
 			gravity_multiplier = 0.5
 		else:
-			gravity_multiplier = 1 
+			gravity_multiplier = 1
 		sprite.play("jump")
 
 	motion = move_and_slide(motion, UP)
@@ -78,7 +78,7 @@ func jump():
 	motion.y = -JUMPFORCE
 	$JumpSFX.play()
 	emit_signal("jumping")
-	
+
 func squash(time=0.1, returnDelay=0):
 	tween.interpolate_property(sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
 	tween.start();

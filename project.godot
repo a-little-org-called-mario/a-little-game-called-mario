@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "EndPortal",
 "language": "GDScript",
 "path": "res://scripts/EndPortal.gd"
+}, {
+"base": "Node",
+"class": "ScreenShake",
+"language": "GDScript",
+"path": "res://scripts/ScreenShake.gd"
+}, {
+"base": "Camera2D",
+"class": "ShakingCamera",
+"language": "GDScript",
+"path": "res://scripts/Camera.gd"
 } ]
 _global_script_class_icons={
-"EndPortal": ""
+"EndPortal": "",
+"ScreenShake": "",
+"ShakingCamera": ""
 }
 
 [application]

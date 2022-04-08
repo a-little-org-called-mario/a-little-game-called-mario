@@ -25,11 +25,18 @@ position = Vector2( 159, 443 )
 
 [node name="TileMap" parent="." instance=ExtResource( 4 )]
 
-[node name="UI" type="Control" parent="."]
+[node name="Effects" type="CanvasLayer" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UI"]
 margin_right = 1024.0
 margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UI"]
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481

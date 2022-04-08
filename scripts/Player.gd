@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal jumping
+
 const UP = Vector2.UP
 const GRAVITY = 100
 const MAXFALLSPEED = 1000
@@ -48,6 +50,7 @@ func _physics_process(delta : float) -> void:
 		coyote_timer = 0
 		motion.y = -JUMPFORCE
 		$JumpSFX.play()
+		emit_signal("jumping")
 
 	if is_on_floor():
 		coyote_timer = COYOTE_TIME

@@ -1,13 +1,40 @@
-[gd_scene load_steps=4 format=2]
-
+[gd_scene load_steps=8 format=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=2]
 [ext_resource path="res://scenes/levels/Level00.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ScreenShake.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/Camera.gd" type="Script" id=6]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 6 )
+
+[node name="ScreenShake" parent="Camera" instance=ExtResource( 5 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 159, 443 )
 
 [node name="TileMap" parent="." instance=ExtResource( 4 )]
+
+[node name="UI" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+anchor_left = 0.03
+anchor_top = 0.05
+anchor_right = 0.481
+anchor_bottom = 0.217
+margin_left = 0.279999
+margin_right = -230.544
+margin_bottom = -50.2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "ARROW KEYS TO MOVE
+SPACE TO JUMP"
+
+[connection signal="jumping" from="Player" to="Camera" method="trigger_small_shake"]

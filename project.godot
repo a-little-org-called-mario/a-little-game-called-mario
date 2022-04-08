@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Enemy",
+"class": "Bub",
+"language": "GDScript",
+"path": "res://scripts/Bub.gd"
+}, {
 "base": "Area2D",
 "class": "EndPortal",
 "language": "GDScript",
 "path": "res://scripts/EndPortal.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scripts/Enemy.gd"
 }, {
 "base": "Node",
 "class": "ScreenShake",
@@ -25,7 +35,9 @@ _global_script_classes=[ {
 "path": "res://scripts/Camera.gd"
 } ]
 _global_script_class_icons={
+"Bub": "",
 "EndPortal": "",
+"Enemy": "",
 "ScreenShake": "",
 "ShakingCamera": ""
 }
@@ -69,6 +81,7 @@ jump={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="World"
 2d_physics/layer_3="Portals"
+2d_physics/layer_4="Enemy"
 
 [physics]
 

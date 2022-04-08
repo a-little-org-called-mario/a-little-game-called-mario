@@ -25,8 +25,6 @@ position = Vector2( 159, 443 )
 
 [node name="TileMap" parent="." instance=ExtResource( 4 )]
 
-[node name="Effects" type="CanvasLayer" parent="."]
-
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="UI" type="Control" parent="UI"]
@@ -48,8 +46,10 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
-SPACE TO [rainbow freq=0.5 sat=1 val=20]JUMP[/rainbow]"
+
+SPACE TO [wave amp=50 freq=2]JUMP[/wave]"
 text = "ARROW KEYS TO MOVE
+
 SPACE TO JUMP"
 __meta__ = {
 "_edit_use_anchors_": false

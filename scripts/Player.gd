@@ -152,6 +152,7 @@ func shoot(projectile_scene :PackedScene):
 	# Projectile handles movement
 	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
 	projectile.start_moving(shoot_dir)
+	emit_signal("shooting")
 
 func look_right():
 	sprite.flip_h = false

@@ -93,6 +93,9 @@ frames = SubResource( 10 )
 animation = "idle"
 offset = Vector2( 0, -16 )
 
+[node name="ShootOrigin" type="Position2D" parent="Sprite"]
+position = Vector2( 4, -16 )
+
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
 volume_db = -12.0

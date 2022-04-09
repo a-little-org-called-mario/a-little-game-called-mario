@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/levels/Level01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/Coin_Gems/Coin/Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=5]
 
 [node name="TileMap2" type="TileMap"]
 tile_set = ExtResource( 2 )
@@ -22,3 +23,7 @@ position = Vector2( 864, 346 )
 
 [node name="Coin3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 735, 152 )
+
+[node name="CoinBox" parent="." instance=ExtResource( 5 )]
+position = Vector2( 864, 224 )
+bounce_count = 2

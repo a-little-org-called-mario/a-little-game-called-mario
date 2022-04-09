@@ -68,6 +68,10 @@ func _on_pause_toggle (data:bool) -> void:
 		$PauseMenu.show();
 		set_active_element_style();
 	else:
+		element_selected=0;
+		current_menu=0;
+		$PauseMenu/MainMenu.show();
+		$PauseMenu/GFXMenu.hide();
 		$PauseMenu.hide();
 	get_tree().paused=data;
 
@@ -79,7 +83,6 @@ func get_element_count () -> int:
 		PAUSE_MENU.SFX:
 			pass #TODO
 	return 1;
-		
 
 func set_active_element_style () -> void:
 	if PAUSE_MENU.MAIN == current_menu:

@@ -1,3 +1,4 @@
+class_name Player
 extends KinematicBody2D
 
 signal jumping
@@ -38,11 +39,11 @@ func _physics_process(delta : float) -> void:
 		motion.x += ACCEL
 		sprite.play("run")
 		# pointing the character in the direction he's running
-		sprite.flip_h = false
+		look_right()
 	elif Input.is_action_pressed("left"):
 		motion.x -= ACCEL
 		sprite.play("run")
-		sprite.flip_h = true
+		look_left()
 	else:	
 		sprite.play("idle")
 		motion.x = lerp(motion.x, 0, 0.2)
@@ -94,7 +95,13 @@ func jump():
 	motion.y = -JUMPFORCE
 	$JumpSFX.play()
 	emit_signal("jumping")
-	
+
+func look_right():
+	sprite.flip_h = false
+
+func look_left():
+	sprite.flip_h = true
+
 func squash(time=0.1, returnDelay=0):
 	tween.interpolate_property(sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
 	tween.start();

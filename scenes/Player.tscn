@@ -7,6 +7,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.5, 27 )
 
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
@@ -35,12 +39,13 @@ region = Rect2( 128, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 160, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 32, 32 )
-
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "jump",
@@ -50,11 +55,6 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 10.0
-}, {
-"frames": [ SubResource( 2 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
 } ]
 
 [node name="Player" type="KinematicBody2D"]

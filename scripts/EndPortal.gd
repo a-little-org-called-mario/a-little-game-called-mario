@@ -8,10 +8,11 @@ export var next_level : PackedScene
 
 
 func _ready():
-	$Sprite.play()
+  $Sprite.play()
 
 func on_portal_enter():
-	$Mario.visible = true;
-	$Mario.play();
-	$PortalSFX.play();
-	return $Mario
+  $Mario.visible = true;
+  $Mario.play();
+  $PortalSFX.play();
+  EventBus.emit_signal("level_completed", { })
+  return $Mario

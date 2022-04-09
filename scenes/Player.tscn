@@ -39,9 +39,6 @@ region = Rect2( 96, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 128, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 160, 32, 32, 32 )
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
 "frames": [ SubResource( 2 ) ],
@@ -49,7 +46,6 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-
 "frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "jump",

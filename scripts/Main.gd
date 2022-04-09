@@ -6,10 +6,19 @@ const ENDPORTALS_GROUP : String = "EndPortals"
 onready var level : TileMap = $TileMap
 onready var player : Player = $Player
 
+<<<<<<< HEAD
 
 func _ready() -> void:
   _hook_portals()
   VisualServer.set_default_clear_color(Color.black)
+=======
+var completionSound = preload("res://sfx/portal.wav")
+var coinSound = preload("res://sfx/coin.wav")
+
+func _ready() -> void:
+	_hook_portals()
+	VisualServer.set_default_clear_color(Color.black)
+>>>>>>> a4e721be4a3d1be15238069f9cedcd137a3f388a
 
 func _hook_portals() -> void:
   for portal in get_tree().get_nodes_in_group(ENDPORTALS_GROUP):
@@ -21,6 +30,7 @@ func _hook_portals() -> void:
       continue
     portal.connect("body_entered", self, "_on_endportal_body_entered", [ portal.next_level, portal ])
 
+<<<<<<< HEAD
 
 func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal) -> void:
   var animation = portal.on_portal_enter()
@@ -28,7 +38,14 @@ func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal)
   yield(animation, "animation_finished");
   body.visible = true;
   call_deferred("_finish_level", next_level)
-
+=======
+func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal) -> void:
+	var animation = portal.on_portal_enter()
+	body.visible = false;
+	yield(animation, "animation_finished");
+	body.visible = true;
+	call_deferred("_finish_level", next_level)
+>>>>>>> a4e721be4a3d1be15238069f9cedcd137a3f388a
 
 func _finish_level(next_level : PackedScene = null) -> void:
   if next_level:
@@ -51,7 +68,11 @@ func _finish_level(next_level : PackedScene = null) -> void:
     player.look_right()
     EventBus.emit_signal("level_started", {})
 
-
 func _get_player_spawn_position() -> Vector2:
+<<<<<<< HEAD
   var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)
   return spawn_points[0].global_position if len(spawn_points) > 0 else player.global_position
+=======
+	var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)
+	return spawn_points[0].global_position if len(spawn_points) > 0 else player.global_position
+>>>>>>> a4e721be4a3d1be15238069f9cedcd137a3f388a

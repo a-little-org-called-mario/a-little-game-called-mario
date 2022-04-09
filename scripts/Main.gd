@@ -7,11 +7,15 @@ const COINS_GROUP : String = "Coins"
 onready var level : TileMap = $TileMap
 onready var player : Player = $Player
 
+onready var container : ViewportContainer = get_parent();
+onready var crt_shader = preload("res://shaders/CRT.gdshader");
+
 var completionSound = preload("res://sfx/portal.wav")
 var coinSound = preload("res://sfx/coin.wav")
 
 func _ready() -> void:
 	_hook_portals()
+	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle");
 	VisualServer.set_default_clear_color(Color.black)
 
 func _hook_portals() -> void:
@@ -55,3 +59,10 @@ func _finish_level(next_level : PackedScene = null) -> void:
 func _get_player_spawn_position() -> Vector2:
 	var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)
 	return spawn_points[0].global_position if len(spawn_points) > 0 else player.global_position
+
+func _on_crt_toggle (on:bool) -> void:
+	print(on);
+	if on:
+		container.material.shader=crt_shader;
+	else:
+		container.material.shader=null;

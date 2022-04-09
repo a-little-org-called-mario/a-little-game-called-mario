@@ -7,3 +7,5 @@ signal level_completed(data)
 signal level_started(data)
 
 signal game_paused(data)
+
+signal crt_filter_toggle (data)

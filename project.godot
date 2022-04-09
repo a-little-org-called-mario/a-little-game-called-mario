@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Bub.gd"
 }, {
+"base": "Node",
+"class": "CameraLeanAmount",
+"language": "GDScript",
+"path": "res://scripts/CameraLeanAmount.gd"
+}, {
 "base": "Area2D",
 "class": "EndPortal",
 "language": "GDScript",
@@ -41,6 +46,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bub": "",
+"CameraLeanAmount": "",
 "EndPortal": "",
 "Enemy": "",
 "Player": "",
@@ -58,6 +64,7 @@ config/icon="res://sprites/icon.png"
 [autoload]
 
 EventBus="*res://autoload/EventBus.gd"
+Settings="*res://autoload/Settings.gd"
 
 [debug]
 

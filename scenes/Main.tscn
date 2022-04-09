@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=2]
+[ext_resource path="res://ui/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/levels/Level00.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ScreenShake.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/Camera.gd" type="Script" id=6]
+[ext_resource path="res://music/platformer.mp3" type="AudioStream" id=7]
+[ext_resource path="res://effects/Transition/Transition.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://shaders/CRT.gdshader" type="Shader" id=10]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 10 )
+shader_param/res = Vector2( 1024, 600 )
+shader_param/mask_type = 0
+shader_param/bloom_type = 0
+shader_param/hardScan = -4.365
+shader_param/hardPix = -2.0
+shader_param/hardBloomScan = -2.0
+shader_param/hardBloomPix = -1.5
+shader_param/bloomAmount = 16.0
+shader_param/warp = Vector2( 64, 24 )
+shader_param/maskDark = 0.5
+shader_param/maskLight = 1.5
+
+[node name="Root" type="Node"]
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+material = SubResource( 2 )
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1024, 600 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+audio_listener_enable_2d = true
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera2D" parent="ViewportContainer/Main"]
+rotating = true
+current = true
+script = ExtResource( 6 )
+
+[node name="ScreenShake" parent="ViewportContainer/Main/Camera" instance=ExtResource( 5 )]
+
+[node name="Player" parent="ViewportContainer/Main" instance=ExtResource( 1 )]
+position = Vector2( 159, 443 )
+
+[node name="TileMap" parent="ViewportContainer/Main" instance=ExtResource( 4 )]
+
+[node name="UI" parent="ViewportContainer/Main" instance=ExtResource( 3 )]
+
+[node name="PauseMenu" parent="ViewportContainer/Main" instance=ExtResource( 9 )]
+
+[node name="Transition" parent="ViewportContainer/Main" instance=ExtResource( 8 )]
+
+[node name="Music" type="Node" parent="ViewportContainer/Main"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ViewportContainer/Main/Music"]
+stream = ExtResource( 7 )
+volume_db = -20.0
+autoplay = true
+
+[connection signal="jumping" from="ViewportContainer/Main/Player" to="ViewportContainer/Main/Camera" method="trigger_small_shake"]

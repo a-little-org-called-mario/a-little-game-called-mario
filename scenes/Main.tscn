@@ -307,14 +307,8 @@ shader_param/maskLight = 1.559
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 material = SubResource( 2 )
-<<<<<<< HEAD
-__meta__ = {
-"_edit_use_anchors_": false
-}
-=======
 margin_right = 1024.0
 margin_bottom = 600.0
->>>>>>> a4e721be4a3d1be15238069f9cedcd137a3f388a
 
 [node name="Main" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1024, 600 )

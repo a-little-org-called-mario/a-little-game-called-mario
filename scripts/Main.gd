@@ -8,7 +8,7 @@ onready var player : KinematicBody2D = $Player
 
 func _ready() -> void:
   _hook_portals()
-
+  VisualServer.set_default_clear_color(Color(0,0,0,1.0))
 
 func _hook_portals() -> void:
   for portal in get_tree().get_nodes_in_group(ENDPORTALS_GROUP):

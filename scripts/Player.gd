@@ -10,6 +10,7 @@ const JUMPFORCE = 1100
 const ACCEL = 50
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
+const JUMP_SLIP_RANGE = 16
 
 var coyote_timer = COYOTE_TIME # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0 # gives a bit of buffer to hit the jump button before landing
@@ -79,7 +80,28 @@ func _physics_process(delta : float) -> void:
 		crouching = false
 		unsquash()
 
-	motion = move_and_slide(motion, UP)
+	var move_and_slide_result = move_and_slide(motion, UP)
+	var slide_count = get_slide_count()
+	# check for an upwards-collision
+	if slide_count && get_slide_collision(slide_count-1).get_angle(Vector2(0,1)) == 0:
+		var slipped = try_jump_slip() # try to adjust player position to "slip" past a wall
+		if !slipped:
+			motion = move_and_slide_result # apply original result if no valid slip found
+	else:
+		motion = move_and_slide_result
+
+func try_jump_slip():
+	var original_x = position.x # remember original x position
+	# check collisions in nearby x positions within JUMP_SLIP_RANGE
+	for x in range(1, JUMP_SLIP_RANGE):
+		for p in [-1, 1]:
+			position.x = original_x + x * p
+			move_and_slide(motion, UP)
+			if(get_slide_count() == 0):
+				return true # if no collision, return success
+	# restore original x position if couldn't find a slip
+	position.x = original_x
+	return false
 
 func crouch():
 	crouching = true

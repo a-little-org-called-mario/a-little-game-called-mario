@@ -37,6 +37,10 @@ config/description="open source collective hell game"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://sprites/icon.png"
 
+[autoload]
+
+EventBus="*res://autoload/EventBus.gd"
+
 [display]
 
 window/stretch/mode="2d"

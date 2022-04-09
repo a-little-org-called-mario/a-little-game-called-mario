@@ -11,7 +11,7 @@ const JUMPFORCE = 1100
 const ACCEL = 50
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
-const JUMP_SLIP_RANGE = 16
+const SLIP_RANGE = 16
 
 var coyote_timer = COYOTE_TIME # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0 # gives a bit of buffer to hit the jump button before landing
@@ -89,25 +89,25 @@ func _physics_process(delta : float) -> void:
 
 	var move_and_slide_result = move_and_slide(motion, UP)
 	var slide_count = get_slide_count()
-	# check for an upwards-collision
-	if slide_count && get_slide_collision(slide_count-1).get_angle(Vector2(0,1)) == 0:
-		var slipped = try_jump_slip() # try to adjust player position to "slip" past a wall
-		if !slipped:
-			motion = move_and_slide_result # apply original result if no valid slip found
-	else:
-		motion = move_and_slide_result
+	var slipped = false
+	# try slipping around block corners when jumping or crossing gaps
+	if slide_count: slipped = try_slip(get_slide_collision(slide_count-1).get_angle())
+	# apply original result if no valid slip found
+	if !slipped: motion = move_and_slide_result
 
-func try_jump_slip():
-	var original_x = position.x # remember original x position
-	# check collisions in nearby x positions within JUMP_SLIP_RANGE
-	for x in range(1, JUMP_SLIP_RANGE):
+func try_slip(angle: float):
+	if angle == 0: return false
+	var axis = "x" if is_equal_approx(angle, PI) else "y"
+	# is_equal_approx(abs(collision_angle - PI), PI/2)
+	var original_v = position[axis] # remember original value on axis
+	# check collisions in nearby positions within SLIP_RANGE
+	for r in range(1, SLIP_RANGE):
 		for p in [-1, 1]:
-			position.x = original_x + x * p
+			position[axis] = original_v + r * p
 			move_and_slide(motion, UP)
-			if(get_slide_count() == 0):
-				return true # if no collision, return success
-	# restore original x position if couldn't find a slip
-	position.x = original_x
+			if(get_slide_count() == 0): return true # if no collision, return success
+	# restore original value on axis if couldn't find a slip
+	position[axis] = original_v
 	return false
 
 func crouch():

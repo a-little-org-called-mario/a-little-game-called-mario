@@ -13,6 +13,7 @@ const JUMP_BUFFER_TIME = 0.05
 
 var coyote_timer = COYOTE_TIME # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0 # gives a bit of buffer to hit the jump button before landing
+var jump_counter = 0 # used to prevent triple jumps
 var motion = Vector2()
 var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
@@ -51,7 +52,7 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		if coyote_timer > 0:
 			jump()
-		elif double_jump:
+		elif double_jump and jump_counter < 1:
 			jump()
 			double_jump = false
 		else:
@@ -66,6 +67,8 @@ func _physics_process(delta : float) -> void:
 			jump()
 		elif Input.is_action_just_pressed("down"):
 			crouch()
+		if jump_counter != 0:
+			jump_counter = 0
 	else:
 		coyote_timer -= delta
 		# while we're holding the jump button we should jump higher
@@ -87,6 +90,7 @@ func crouch():
 
 func jump():
 	jump_buffer_timer = 0
+	jump_counter += 1
 	squash(0.075);
 	yield(tween, "tween_all_completed")
 	stretch(0.15);

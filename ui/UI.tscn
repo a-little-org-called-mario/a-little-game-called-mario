@@ -26,12 +26,16 @@ margin_bottom = -50.2
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+bbcode_text = "ARROW KEYS OR A AND D TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
 
-SPACE TO [wave amp=50 freq=2]JUMP[/wave]"
-text = "ARROW KEYS TO MOVE
+SPACE, UP, OR W TO [wave amp=50 freq=2]JUMP[/wave]
 
-SPACE TO JUMP"
+DOWN OR S TO DUCK"
+text = "ARROW KEYS OR A AND D TO MOVE
+
+SPACE, UP, OR W TO JUMP
+
+DOWN OR S TO DUCK"
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -212,3 +212,10 @@ func unsquash(time=0.1, _returnDelay=0, squash_modifier=1.0):
 		time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)
 	tween.start();
+
+func bounce(strength = 1100):
+	squash(0.075)
+	yield(tween, "tween_all_completed")
+	stretch(0.15)
+	coyote_timer = 0
+	motion.y = -strength

@@ -314,6 +314,7 @@ size = Vector2( 1024, 600 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
+audio_listener_enable_2d = true
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="ViewportContainer/Main"]
@@ -338,9 +339,5 @@ position = Vector2( 159, 443 )
 stream = ExtResource( 7 )
 volume_db = -20.0
 autoplay = true
-
-[node name="SFX" type="Node" parent="ViewportContainer/Main"]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ViewportContainer/Main/SFX"]
 
 [connection signal="jumping" from="ViewportContainer/Main/Player" to="ViewportContainer/Main/Camera" method="trigger_small_shake"]

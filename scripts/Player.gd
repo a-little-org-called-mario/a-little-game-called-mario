@@ -101,8 +101,10 @@ func _physics_process(delta : float) -> void:
 		motion = move_and_slide_result
 
 func _input(event :InputEvent):
+	# Remove one coin and spawn a projectile
+	# Continus shooting after 0 coins
 	if event.is_action_pressed("shoot"):
-		# It should probably cost coins to shoot but they're stored in the UI :skull_emoji:
+		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
 		shoot(default_projectile)
 
 func try_jump_slip():

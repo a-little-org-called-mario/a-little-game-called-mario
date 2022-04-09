@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
+[ext_resource path="res://ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -20,8 +21,8 @@ anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
 anchor_bottom = 0.217
-margin_left = 0.279999
-margin_right = -230.544
+margin_left = 0.280001
+margin_right = -141.544
 margin_bottom = -50.2
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
@@ -32,9 +33,8 @@ SPACE TO [wave amp=50 freq=2]JUMP[/wave]"
 text = "ARROW KEYS TO MOVE
 
 SPACE TO JUMP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 3 )
+localization_key = "TUTORIAL_MOVEMENT"
 
 [node name="CoinCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
@@ -46,10 +46,9 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "
-[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
+[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]
+"
 text = "
-COINS:0 "
+COINS:%d 
+"
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}

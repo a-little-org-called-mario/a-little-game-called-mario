@@ -1,0 +1,11 @@
+"keys","en","de"
+"TRANSLATE_ME","TRANSLATE ME!","Übersetz mich!"
+"TUTORIAL_MOVEMENT","ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+
+SPACE TO [wave amp=50 freq=2]JUMP[/wave]","PFEILTASTEN ZUM [rainbow freq=0.5 sat=1 val=20]BEWEGEN[/rainbow]
+
+LEERTASTE ZUM [wave amp=50 freq=2]SPRINGEN[/wave]"
+"UI_COINS","
+[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]","
+[wave amp=50 freq=2]MÜNZEN:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"
+"CREDITS_TITLE","CREDITS","CREDITS"

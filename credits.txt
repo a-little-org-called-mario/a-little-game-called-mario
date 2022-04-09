@@ -1,12 +1,11 @@
-key,en
-CREDITS,"Albin Bernhardsson
+Albin Bernhardsson
+castpixel
 Cano
 Emilia
+iznaut
+izzy kestrel
+Jakob Mendelsohn
 Patrick Riordan
 Paul Joannon
 Sander Vanhove
 Taylor Anderson
-castpixel
-iznaut
-izzy kestrel
-"

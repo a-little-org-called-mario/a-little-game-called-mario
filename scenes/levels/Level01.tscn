@@ -3,7 +3,9 @@
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/Level02.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/GassyRandal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/enemies/Bub.tscn" type="PackedScene" id=4]
+
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -16,9 +18,14 @@ tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0
 position = Vector2( 800, 135 )
 next_level = ExtResource( 3 )
 
+
+[node name="Node2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 517, 203 )
+
 [node name="Bub" parent="." instance=ExtResource( 4 )]
 position = Vector2( 190, 38 )
 
 [node name="Bub2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 830, 41 )
 direction = 1
+

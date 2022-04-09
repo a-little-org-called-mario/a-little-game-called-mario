@@ -14,4 +14,5 @@ func on_portal_enter():
   $Mario.visible = true;
   $Mario.play();
   $PortalSFX.play();
+  EventBus.emit_signal("level_completed", { })
   return $Mario

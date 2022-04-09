@@ -46,3 +46,4 @@ func _finish_level(next_level : PackedScene = null) -> void:
     # We need to flash the player out and in the tree to avoid physics errors.
     remove_child(player)
     add_child_below_node(level, player)
+    EventBus.emit_signal("level_started", {})

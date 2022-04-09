@@ -7,7 +7,7 @@ onready var _screen_shake: ScreenShake = $ScreenShake
 func _ready():
   position = get_viewport_rect().size / 2
 
-func _process(delta):
+func _process(_delta):
   if Input.is_action_pressed("right"):
     lean(-PI / 64)
   elif Input.is_action_pressed("left"):

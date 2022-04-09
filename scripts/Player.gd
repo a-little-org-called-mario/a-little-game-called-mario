@@ -19,6 +19,7 @@ var motion = Vector2()
 var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
 var crouching = false
+var is_player = true
 
 onready var sprite = $Sprite
 

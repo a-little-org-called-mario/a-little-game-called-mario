@@ -10,6 +10,6 @@ func _on_body_entered(body):
   EventBus.emit_signal("coin_collected", { "value": 1, "type": "gold" })
   audio_player.play()
   animation.play("Collect")
-  monitoring = false
+  set_deferred("monitoring",false)
   yield(animation, "animation_finished")
   queue_free()

@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
+[ext_resource path="res://ui/LivesCount.gd" type="Script" id=3]
+[ext_resource path="res://sprites/anatomical-heart.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -11,9 +13,6 @@ font_data = ExtResource( 1 )
 [node name="UI" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03
@@ -32,9 +31,6 @@ SPACE TO [wave amp=50 freq=2]JUMP[/wave]"
 text = "ARROW KEYS TO MOVE
 
 SPACE TO JUMP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CoinCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
@@ -50,6 +46,31 @@ bbcode_text = "
 text = "
 COINS:0 "
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Lives" type="Node" parent="UI"]
+script = ExtResource( 3 )
+
+[node name="HEART" type="Sprite" parent="UI/Lives"]
+position = Vector2( 985, 562 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="HEART2" type="Sprite" parent="UI/Lives"]
+position = Vector2( 930, 563 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="HEART3" type="Sprite" parent="UI/Lives"]
+position = Vector2( 877, 562 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="HEART4" type="Sprite" parent="UI/Lives"]
+position = Vector2( 824, 560 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="HEART5" type="Sprite" parent="UI/Lives"]
+position = Vector2( 769, 561 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )

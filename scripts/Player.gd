@@ -6,6 +6,8 @@ signal jumping
 const UP = Vector2.UP
 const GRAVITY = 100
 const MAXFALLSPEED = 1000
+const FALLDAMAGETIMETRESHOLD = 0.4
+const FALLDAMAGE = 1
 const MAXSPEED = 300
 const JUMPFORCE = 1100
 const ACCEL = 50
@@ -19,6 +21,7 @@ var motion = Vector2()
 var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
 var crouching = false
+var time_falling = 0.0
 
 var jumpSound = preload("res://sfx/jump.wav");
 
@@ -72,6 +75,12 @@ func _physics_process(delta : float) -> void:
 			jump()
 		elif Input.is_action_just_pressed("down"):
 			crouch()
+			
+		if time_falling > FALLDAMAGETIMETRESHOLD:
+			EventBus.emit_signal("lives_reduced", { "value": 1 })
+		
+		time_falling = 0.0
+			
 	else:
 		coyote_timer -= delta
 		# while we're holding the jump button we should jump higher
@@ -80,6 +89,11 @@ func _physics_process(delta : float) -> void:
 		else:
 			gravity_multiplier = 1 
 		sprite.play("jump")
+		
+		if motion.y > 0:
+			time_falling += delta
+		
+	
 
 	if crouching and not Input.is_action_pressed("down"):
 		crouching = false

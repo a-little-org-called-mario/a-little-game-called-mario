@@ -36,11 +36,11 @@ func _ready():
 	#kill(self)
 
 
-func ai(delta: float):
+func ai(_delta: float):
 	_sprite.flip_h = direction > 0
 
 
-func move(delta: float):
+func move(_delta: float):
 	if is_dying():
 		return
 	
@@ -67,7 +67,7 @@ func disable_collision():
 # Disables collision, plays the sprite death animation and the 
 # death animation from the animation player. The function then yields 
 # until the animations are finished.
-func _handle_dying(killer):
+func _handle_dying(_killer):
 	disable_collision()
 	_sprite.play("die")
 	_animation_player.play("die")

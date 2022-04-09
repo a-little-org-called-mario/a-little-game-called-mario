@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Enemy.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scripts/Player.gd"
+}, {
 "base": "Node",
 "class": "ScreenShake",
 "language": "GDScript",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Bub": "",
 "EndPortal": "",
 "Enemy": "",
+"Player": "",
 "ScreenShake": "",
 "ShakingCamera": ""
 }
@@ -52,6 +58,10 @@ config/icon="res://sprites/icon.png"
 [autoload]
 
 EventBus="*res://autoload/EventBus.gd"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

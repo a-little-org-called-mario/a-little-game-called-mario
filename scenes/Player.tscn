@@ -1,8 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Trail.gd" type="Script" id=4]
+[ext_resource path="res://sprites/flag.jpg" type="Texture" id=5]
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=12]
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.5, 27 )
@@ -39,9 +47,6 @@ region = Rect2( 96, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 128, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 160, 32, 32, 32 )
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
 "frames": [ SubResource( 2 ) ],
@@ -49,7 +54,6 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-
 "frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "jump",
@@ -65,6 +69,18 @@ animations = [ {
 z_index = 1
 collision_mask = 14
 script = ExtResource( 3 )
+
+[node name="Trail" type="Line2D" parent="."]
+width = 30.0
+width_curve = SubResource( 11 )
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 12 )
+texture = ExtResource( 5 )
+texture_mode = 2
+joint_mode = 2
+end_cap_mode = 2
+script = ExtResource( 4 )
+trail_length = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 5 )

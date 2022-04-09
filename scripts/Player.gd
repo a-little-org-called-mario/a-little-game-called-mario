@@ -20,13 +20,9 @@ var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
 var crouching = false
 
-var jumpSound = preload("res://sfx/jump.wav");
-
 onready var sprite = $Sprite
 
 onready var tween = $Tween
-
-onready var audioPlayer = get_node('../SFX/AudioStreamPlayer')
 
 onready var original_scale = sprite.scale;
 onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
@@ -130,15 +126,15 @@ func look_right():
 func look_left():
 	sprite.flip_h = true
 
-func squash(time=0.1, returnDelay=0):
+func squash(time=0.1, _returnDelay=0):
 	tween.interpolate_property(sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
 	tween.start();
 
-func stretch(time=0.2, returnDelay=0):
+func stretch(time=0.2, _returnDelay=0):
 	tween.interpolate_property(sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
 	tween.interpolate_property(sprite, "scale", stretch_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
 	tween.start()
 
-func unsquash(time=0.1, returnDelay=0):
+func unsquash(time=0.1, _returnDelay=0):
 	tween.interpolate_property(sprite, "scale", squash_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
 	tween.start();

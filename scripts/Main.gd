@@ -13,6 +13,7 @@ var coinSound = preload("res://sfx/coin.wav")
 
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected", []);
+	EventBus.connect("build_block", self, "_on_build")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 
@@ -26,7 +27,12 @@ func _hook_portals() -> void:
 			continue
 		portal.connect("body_entered", self, "_on_endportal_body_entered", [ portal.next_level, portal ])
 
-
+func _on_build() -> void:
+	if $TileMap != null:
+		var tile = $TileMap.world_to_map($Player.position)
+		# TODO: Don't always place the block to the right.
+		$TileMap.set_cell(tile[0]+1, tile[1], 0)
+		
 func _on_coin_collected(data) -> void: 
 	audioPlayer.stream = coinSound
 	audioPlayer.play()
@@ -66,3 +72,5 @@ func _finish_level(next_level : PackedScene = null) -> void:
 func _get_player_spawn_position() -> Vector2:
   var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)
   return spawn_points[0].global_position if len(spawn_points) > 0 else player.global_position
+
+

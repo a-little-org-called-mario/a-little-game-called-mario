@@ -83,12 +83,6 @@ func move(_delta: float):
 
 
 func _on_KillTrigger_body_entered(body):
-	if body.get("is_player"):
-		#print("hello")
+	if body is Player:
 		kill(self)
 
-
-
-func _on_KillTrigger_body_exited(body):
-	if body.get("is_player"):
-		print("bye")

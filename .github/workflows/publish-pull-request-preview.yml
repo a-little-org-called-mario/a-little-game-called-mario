@@ -24,7 +24,7 @@ jobs:
             var artifacts = await github.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
-               run_id: ${{github.event.workflow_run.id }},
+               run_id: ${{ github.event.workflow_run.id }},
             });
             var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "pr"
@@ -49,6 +49,7 @@ jobs:
       
       - name: Netlify preview deploy
         uses: nwtgck/actions-netlify@v1.2
+        id: netlify-deploy
         with:
           publish-dir: '.'
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,7 +61,6 @@ jobs:
       - name: 'Comment on PR with link to preview'
         uses: actions/github-script@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             var fs = require('fs');
             var issue_number = process.env.PR_NUM
@@ -68,5 +68,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue_number,
-              body: '🎉 You can test out this change! ✨👉 ${{steps.netlify_preview_deploy.outputs.deploy-url}} 👈✨'
+              body: '🎉 You can test out this change! ✨👉 ${{steps.netlify-deploy.outputs.deploy-url}} 👈✨'
             });

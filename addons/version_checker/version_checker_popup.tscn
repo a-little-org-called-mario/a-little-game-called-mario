@@ -1,0 +1,16 @@
+[gd_scene format=2]
+
+[node name="Control" type="AcceptDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -684.0
+margin_bottom = -420.0
+popup_exclusive = true
+window_title = "Version error"
+dialog_text = "This project is not compatible with the version of Godot you are using (XXX).
+
+Please use Godot 3.4 to edit this project."
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

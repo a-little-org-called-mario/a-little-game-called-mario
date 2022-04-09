@@ -306,9 +306,6 @@ shader_param/maskLight = 1.559
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 material = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Main" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1024, 600 )
@@ -339,5 +336,9 @@ position = Vector2( 159, 443 )
 stream = ExtResource( 7 )
 volume_db = -20.0
 autoplay = true
+
+[node name="SFX" type="Node" parent="ViewportContainer/Main"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ViewportContainer/Main/SFX"]
 
 [connection signal="jumping" from="ViewportContainer/Main/Player" to="ViewportContainer/Main/Camera" method="trigger_small_shake"]

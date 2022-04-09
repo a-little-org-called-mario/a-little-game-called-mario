@@ -15,6 +15,7 @@ var coyote_timer = COYOTE_TIME # used to give a bit of extra-time to jump after 
 var jump_buffer_timer = 0 # gives a bit of buffer to hit the jump button before landing
 var motion = Vector2()
 var gravity_multiplier = 1 # used for jump height variability
+var double_jump = true
 
 onready var sprite = $Sprite
 
@@ -49,10 +50,14 @@ func _physics_process(delta : float) -> void:
   if Input.is_action_just_pressed("jump"):
     if coyote_timer > 0:
       jump()
+    elif double_jump:
+      jump()
+      double_jump = false
     else:
       jump_buffer_timer = JUMP_BUFFER_TIME
 
   if is_on_floor():
+    double_jump = true
     coyote_timer = COYOTE_TIME
     gravity_multiplier = 1
     # the player pressed jump right before landing

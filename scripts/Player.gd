@@ -22,6 +22,8 @@ onready var sprite = $Sprite
 
 onready var tween = $Tween
 
+onready var run_particles = $RunParticles
+
 onready var original_scale = sprite.scale;
 onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
@@ -39,12 +41,15 @@ func _physics_process(delta : float) -> void:
 		sprite.play("run")
 		# pointing the character in the direction he's running
 		sprite.flip_h = false
+		run_particles.emitting = true
 	elif Input.is_action_pressed("left"):
 		motion.x -= ACCEL
 		sprite.play("run")
 		sprite.flip_h = true
+		run_particles.emitting = true
 	else:	
 		sprite.play("idle")
+		run_particles.emitting = false
 		motion.x = lerp(motion.x, 0, 0.2)
 
 	jump_buffer_timer -= delta
@@ -74,6 +79,7 @@ func _physics_process(delta : float) -> void:
 		else:
 			gravity_multiplier = 1 
 		sprite.play("jump")
+		run_particles.emitting = false
 
 	if crouching and not Input.is_action_pressed("down"):
 		crouching = false

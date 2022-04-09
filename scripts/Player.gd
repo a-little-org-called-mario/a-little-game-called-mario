@@ -113,8 +113,6 @@ func crouch():
 	squash()
 
 func jump():
-	audioPlayer.stream = jumpSound
-	audioPlayer.play()
 	jump_buffer_timer = 0
 	squash(0.075);
 	yield(tween, "tween_all_completed")

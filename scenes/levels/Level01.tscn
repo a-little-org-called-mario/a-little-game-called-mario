@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/Level02.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/Bub.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=5]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -28,3 +29,11 @@ position = Vector2( 190, 38 )
 [node name="Bub2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 830, 41 )
 direction = 1
+
+[node name="CoinBox" parent="." instance=ExtResource( 5 )]
+position = Vector2( 480, 352 )
+start_invisible = true
+
+[node name="CoinBox2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 544, 352 )
+start_invisible = true

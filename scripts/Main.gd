@@ -7,7 +7,6 @@ const COINS_GROUP : String = "Coins"
 onready var level : TileMap = $TileMap
 onready var player : Player = $Player
 
-onready var audioPlayer = get_node("SFX/AudioStreamPlayer")
 var completionSound = preload("res://sfx/portal.wav")
 var coinSound = preload("res://sfx/coin.wav")
 
@@ -31,14 +30,11 @@ func _on_coin_collected(data) -> void:
 	audioPlayer.play()
 
 func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal) -> void:
-	audioPlayer.stream = completionSound # load the sound for going through the portal
-	audioPlayer.play()
 	var animation = portal.on_portal_enter()
 	body.visible = false;
 	yield(animation, "animation_finished");
 	body.visible = true;
 	call_deferred("_finish_level", next_level)
-
 
 func _finish_level(next_level : PackedScene = null) -> void:
 	if next_level:

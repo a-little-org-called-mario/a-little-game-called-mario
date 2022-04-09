@@ -20,13 +20,9 @@ var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
 var crouching = false
 
-var jumpSound = preload("res://sfx/jump.wav");
-
 onready var sprite = $Sprite
 
 onready var tween = $Tween
-
-onready var audioPlayer = get_node('../SFX/AudioStreamPlayer')
 
 onready var original_scale = sprite.scale;
 onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
@@ -113,8 +109,6 @@ func crouch():
 	squash()
 
 func jump():
-	audioPlayer.stream = jumpSound
-	audioPlayer.play()
 	jump_buffer_timer = 0
 	squash(0.075);
 	yield(tween, "tween_all_completed")

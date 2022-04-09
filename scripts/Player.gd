@@ -16,6 +16,7 @@ var jump_buffer_timer = 0 # gives a bit of buffer to hit the jump button before 
 var motion = Vector2()
 var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
+var crouching = false
 
 onready var sprite = $Sprite
 
@@ -63,6 +64,8 @@ func _physics_process(delta : float) -> void:
 		# the player pressed jump right before landing
 		if jump_buffer_timer > 0:
 			jump()
+		elif Input.is_action_just_pressed("down"):
+			crouch()
 	else:
 		coyote_timer -= delta
 		# while we're holding the jump button we should jump higher
@@ -72,13 +75,21 @@ func _physics_process(delta : float) -> void:
 			gravity_multiplier = 1 
 		sprite.play("jump")
 
+	if crouching and not Input.is_action_pressed("down"):
+		crouching = false
+		unsquash()
+
 	motion = move_and_slide(motion, UP)
+
+func crouch():
+	crouching = true
+	squash()
 
 func jump():
 	jump_buffer_timer = 0
-	squash();
+	squash(0.075);
 	yield(tween, "tween_all_completed")
-	stretch();
+	stretch(0.15);
 	coyote_timer = 0
 	motion.y = -JUMPFORCE
 	$JumpSFX.play()
@@ -89,6 +100,10 @@ func squash(time=0.1, returnDelay=0):
 	tween.start();
 
 func stretch(time=0.2, returnDelay=0):
-		tween.interpolate_property(sprite, "scale", original_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
-		tween.interpolate_property(sprite, "scale", stretch_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
-		tween.start()
+	tween.interpolate_property(sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.interpolate_property(sprite, "scale", stretch_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
+	tween.start()
+
+func unsquash(time=0.1, returnDelay=0):
+	tween.interpolate_property(sprite, "scale", squash_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.start();

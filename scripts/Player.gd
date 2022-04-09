@@ -19,6 +19,8 @@ var motion = Vector2()
 var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
 var crouching = false
+var grounded = false
+var anticipating_jump = false # the small window of time before the player jumps
 
 onready var sprite = $Sprite
 
@@ -60,6 +62,9 @@ func _physics_process(delta : float) -> void:
 			jump_buffer_timer = JUMP_BUFFER_TIME
 
 	if is_on_floor():
+		if not grounded:
+			grounded = true
+			land()
 		double_jump = true
 		coyote_timer = COYOTE_TIME
 		gravity_multiplier = 1
@@ -69,6 +74,7 @@ func _physics_process(delta : float) -> void:
 		elif Input.is_action_just_pressed("down"):
 			crouch()
 	else:
+		grounded = false
 		coyote_timer -= delta
 		# while we're holding the jump button we should jump higher
 		if Input.is_action_pressed("jump"):
@@ -109,14 +115,23 @@ func crouch():
 	squash()
 
 func jump():
-	jump_buffer_timer = 0
-	squash(0.075);
+	tween.stop_all()
+	anticipating_jump = true
+	squash(0.03, 0, 0.5)
 	yield(tween, "tween_all_completed")
-	stretch(0.15);
+	stretch(0.2, 0, 0.5, 1.2);
+	jump_buffer_timer = 0
 	coyote_timer = 0
 	motion.y = -JUMPFORCE
+	anticipating_jump = false
 	$JumpSFX.play()
 	emit_signal("jumping")
+
+func land():
+	squash(0.05)
+	yield(tween, "tween_all_completed")
+	if grounded and not anticipating_jump:
+		unsquash(0.18)
 
 func look_right():
 	sprite.flip_h = false
@@ -124,15 +139,37 @@ func look_right():
 func look_left():
 	sprite.flip_h = true
 
-func squash(time=0.1, _returnDelay=0):
-	tween.interpolate_property(sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
+func squash(time=0.1, _returnDelay=0, squash_modifier=1.0):
+	tween.remove_all()
+	tween.interpolate_property(
+		sprite, "scale",
+		original_scale,
+		lerp(original_scale, squash_scale, squash_modifier),
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
 	tween.start();
 
-func stretch(time=0.2, _returnDelay=0):
-	tween.interpolate_property(sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
-	tween.interpolate_property(sprite, "scale", stretch_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
+func stretch(time=0.2, _returnDelay=0, squash_modifier=1.0, stretch_modifier=1.0):
+	tween.remove_all()
+	tween.interpolate_property(
+		sprite, "scale",
+		lerp(original_scale, squash_scale, squash_modifier),
+		lerp(original_scale, stretch_scale, stretch_modifier), 
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
+	tween.interpolate_property(
+		sprite, "scale",
+		lerp(original_scale, stretch_scale, stretch_modifier),
+		original_scale,
+		time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
 	tween.start()
 
-func unsquash(time=0.1, _returnDelay=0):
-	tween.interpolate_property(sprite, "scale", squash_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
+func unsquash(time=0.1, _returnDelay=0, squash_modifier=1.0):
+	tween.remove_all()
+	tween.interpolate_property(
+		sprite, "scale",
+		lerp(original_scale, squash_scale, squash_modifier),
+		original_scale,
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
 	tween.start();

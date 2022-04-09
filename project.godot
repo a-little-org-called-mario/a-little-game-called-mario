@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "Achievement",
+"language": "GDScript",
+"path": "res://scripts/Achievement.gd"
+}, {
 "base": "Enemy",
 "class": "Bub",
 "language": "GDScript",
@@ -18,6 +23,11 @@ _global_script_classes=[ {
 "class": "CameraLeanAmount",
 "language": "GDScript",
 "path": "res://scripts/CameraLeanAmount.gd"
+}, {
+"base": "Achievement",
+"class": "CoinsAchievement",
+"language": "GDScript",
+"path": "res://scripts/CoinsAchievement.gd"
 }, {
 "base": "Area2D",
 "class": "EndPortal",
@@ -45,8 +55,10 @@ _global_script_classes=[ {
 "path": "res://scripts/Camera.gd"
 } ]
 _global_script_class_icons={
+"Achievement": "",
 "Bub": "",
 "CameraLeanAmount": "",
+"CoinsAchievement": "",
 "EndPortal": "",
 "Enemy": "",
 "Player": "",
@@ -74,6 +86,10 @@ gdscript/warnings/return_value_discarded=false
 
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/version_checker/plugin.cfg" )
 
 [importer_defaults]
 

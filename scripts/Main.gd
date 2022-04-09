@@ -25,10 +25,6 @@ func _hook_portals() -> void:
 			continue
 		portal.connect("body_entered", self, "_on_endportal_body_entered", [ portal.next_level, portal ])
 
-func _on_coin_collected(data) -> void: 
-	audioPlayer.stream = coinSound
-	audioPlayer.play()
-
 func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal) -> void:
 	var animation = portal.on_portal_enter()
 	body.visible = false;

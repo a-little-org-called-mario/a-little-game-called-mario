@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="UI" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+anchor_left = 0.03
+anchor_top = 0.05
+anchor_right = 0.481
+anchor_bottom = 0.217
+margin_left = 0.279999
+margin_right = -230.544
+margin_bottom = -50.2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+
+SPACE TO [wave amp=50 freq=2]JUMP[/wave]"
+text = "ARROW KEYS TO MOVE
+
+SPACE TO JUMP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinCount" type="RichTextLabel" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -248.0
+margin_right = -125.0
+margin_bottom = 50.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
+text = "
+COINS:0 "
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

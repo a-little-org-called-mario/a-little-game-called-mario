@@ -15,7 +15,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
-shader_param/alpha = 1.0
+shader_param/alpha = -0.1
 
 [sub_resource type="Animation" id=4]
 length = 0.001

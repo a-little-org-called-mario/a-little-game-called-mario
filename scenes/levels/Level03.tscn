@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/levels/Level04.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -10,3 +12,7 @@ tile_data = PoolIntArray( -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=["SpawnPoints"]]
 position = Vector2( 214, 424 )
+
+[node name="EndPortal" parent="." instance=ExtResource( 3 )]
+position = Vector2( 73, -4 )
+next_level = ExtResource( 2 )

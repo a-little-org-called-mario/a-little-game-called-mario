@@ -30,7 +30,13 @@ func _on_build() -> void:
 	if $TileMap != null:
 		var tile = $TileMap.world_to_map($Player.position)
 		# TODO: Don't always place the block to the right.
-		$TileMap.set_cell(tile[0]+1, tile[1], 0)
+		var right_cell_v = $TileMap.get_cell(tile[0]+1, tile[1])
+		if right_cell_v == 0:
+			# If the cell is empty, place a block
+			$TileMap.set_cell(tile[0]+1, tile[1], 1)
+		elif right_cell_v == 1:
+			# If the cell has a block in in, break the block.
+			$TileMap.set_cell(tile[0]+1, tile[1], 0)
 		
 
 func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal) -> void:

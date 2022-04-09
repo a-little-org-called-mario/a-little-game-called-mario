@@ -39,7 +39,7 @@ func _physics_process(delta : float) -> void:
 		motion.y = MAXFALLSPEED
 
 	motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
-	if Input.is_action_pressed("Build"):
+	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block")
 	
 	if Input.is_action_pressed("right"):

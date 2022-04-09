@@ -111,7 +111,7 @@ shape = SubResource( 12 )
 [node name="Sprite" parent="." index="1"]
 frames = SubResource( 3 )
 animation = "move"
-frame = 5
+frame = 2
 playing = true
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="2"]

@@ -1,0 +1,438 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/Todo_Manager/Dock.gd" type="Script" id=1]
+[ext_resource path="res://addons/Todo_Manager/Project.gd" type="Script" id=2]
+[ext_resource path="res://addons/Todo_Manager/Current.gd" type="Script" id=3]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="ButtonGroup" id=2]
+
+[node name="Dock" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 200 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_right = 1024.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeaderLeft" type="HBoxContainer" parent="VBoxContainer/Header"]
+margin_right = 510.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="VBoxContainer/Header/HeaderLeft"]
+margin_top = 3.0
+margin_right = 71.0
+margin_bottom = 17.0
+text = "Todo Dock:"
+align = 1
+valign = 1
+
+[node name="HeaderRight" type="HBoxContainer" parent="VBoxContainer/Header"]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/Header/HeaderRight"]
+visible = false
+margin_left = 447.0
+margin_right = 510.0
+margin_bottom = 20.0
+toggle_mode = true
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+tab_align = 0
+
+[node name="Project" type="Panel" parent="VBoxContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tree" type="Tree" parent="VBoxContainer/TabContainer/Project"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+hide_root = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Current" type="Panel" parent="VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="Tree" type="Tree" parent="VBoxContainer/TabContainer/Current"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/draw_relationship_lines = 0
+hide_folding = true
+hide_root = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="Panel" parent="VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer"]
+margin_right = 1016.0
+margin_bottom = 564.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1011.0
+margin_bottom = 559.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 14
+
+[node name="Scripts" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_right = 1006.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/Scripts"]
+margin_right = 47.0
+margin_bottom = 14.0
+text = "Scripts:"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/Scripts"]
+margin_left = 51.0
+margin_right = 1006.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 1006.0
+margin_bottom = 132.0
+size_flags_horizontal = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+margin_right = 1006.0
+margin_bottom = 104.0
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 50.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="Scripts" type="VBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 54.0
+margin_right = 545.0
+margin_bottom = 104.0
+
+[node name="ScriptName" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts"]
+margin_right = 491.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptName"]
+margin_top = 5.0
+margin_right = 82.0
+margin_bottom = 19.0
+text = "Script Name:"
+
+[node name="FullPathCheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptName"]
+margin_left = 86.0
+margin_right = 169.0
+margin_bottom = 24.0
+group = SubResource( 1 )
+text = "Full path"
+
+[node name="ShortNameCheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptName"]
+margin_left = 173.0
+margin_right = 274.0
+margin_bottom = 24.0
+pressed = true
+group = SubResource( 1 )
+text = "Short name"
+
+[node name="ScriptSort" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts"]
+margin_top = 28.0
+margin_right = 491.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptSort"]
+margin_top = 5.0
+margin_right = 70.0
+margin_bottom = 19.0
+text = "Sort Order:"
+
+[node name="AlphSortCheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptSort"]
+margin_left = 74.0
+margin_right = 181.0
+margin_bottom = 24.0
+pressed = true
+group = SubResource( 2 )
+text = "Alphabetical"
+
+[node name="RAlphSortCheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptSort"]
+margin_left = 185.0
+margin_right = 347.0
+margin_bottom = 24.0
+group = SubResource( 2 )
+text = "Reverse Alphabetical"
+
+[node name="ScriptColour" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts"]
+margin_top = 56.0
+margin_right = 491.0
+margin_bottom = 76.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptColour"]
+margin_top = 3.0
+margin_right = 85.0
+margin_bottom = 17.0
+text = "Script Colour:"
+
+[node name="ScriptColourPickerButton" type="ColorPickerButton" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptColour"]
+margin_left = 89.0
+margin_right = 189.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 100, 0 )
+color = Color( 0.8, 0.807843, 0.827451, 1 )
+
+[node name="IgnorePaths" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts"]
+margin_top = 80.0
+margin_right = 491.0
+margin_bottom = 104.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/IgnorePaths"]
+margin_top = 5.0
+margin_right = 84.0
+margin_bottom = 19.0
+text = "Ignore Paths:"
+
+[node name="TextEdit" type="LineEdit" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/IgnorePaths"]
+margin_left = 88.0
+margin_right = 338.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 0 )
+
+[node name="Label3" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/IgnorePaths"]
+margin_left = 342.0
+margin_top = 5.0
+margin_right = 491.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 0.392157, 0.392157, 0.392157, 1 )
+text = "(Separated by commas)"
+
+[node name="TODOColours" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 146.0
+margin_right = 1006.0
+margin_bottom = 160.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/TODOColours"]
+margin_right = 95.0
+margin_bottom = 14.0
+text = "TODO Colours:"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/TODOColours"]
+margin_left = 99.0
+margin_right = 1006.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 174.0
+margin_right = 1006.0
+margin_bottom = 242.0
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_right = 50.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="Colours" type="VBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 54.0
+margin_right = 223.0
+margin_bottom = 68.0
+
+[node name="Patterns" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 256.0
+margin_right = 1006.0
+margin_bottom = 270.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/Patterns"]
+margin_right = 57.0
+margin_bottom = 14.0
+text = "Patterns:"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/Patterns"]
+margin_left = 61.0
+margin_right = 1006.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 284.0
+margin_right = 1006.0
+margin_bottom = 388.0
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+margin_right = 50.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="Patterns" type="VBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 54.0
+margin_right = 282.0
+margin_bottom = 104.0
+
+[node name="AddPatternButton" type="Button" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/Patterns"]
+margin_top = 84.0
+margin_right = 37.0
+margin_bottom = 104.0
+size_flags_horizontal = 0
+text = "Add"
+
+[node name="Config" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 402.0
+margin_right = 1006.0
+margin_bottom = 416.0
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/Config"]
+margin_right = 43.0
+margin_bottom = 14.0
+text = "Config:"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/Config"]
+margin_left = 47.0
+margin_right = 1006.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 430.0
+margin_right = 1006.0
+margin_bottom = 538.0
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5"]
+margin_right = 50.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="Patterns" type="VBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 54.0
+margin_right = 587.0
+margin_bottom = 108.0
+
+[node name="RefreshCheckButton" type="CheckButton" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns"]
+margin_right = 162.0
+margin_bottom = 40.0
+size_flags_horizontal = 0
+pressed = true
+text = "Auto Refresh"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns"]
+margin_top = 44.0
+margin_right = 533.0
+margin_bottom = 84.0
+
+[node name="BuiltInCheckButton" type="CheckButton" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns/HBoxContainer"]
+margin_right = 207.0
+margin_bottom = 40.0
+text = "Scan Built-in Scripts"
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns/HBoxContainer"]
+margin_left = 211.0
+margin_top = 13.0
+margin_right = 533.0
+margin_bottom = 27.0
+custom_colors/font_color = Color( 0.392157, 0.392157, 0.392157, 1 )
+text = "Some functionality will not work for built-in scripts"
+
+[node name="DefaultButton" type="Button" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns"]
+margin_top = 88.0
+margin_right = 113.0
+margin_bottom = 108.0
+size_flags_horizontal = 0
+text = "Reset to default"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RescanButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_right = -6.0
+margin_bottom = 20.0
+grow_horizontal = 0
+text = "Rescan Files"
+
+[connection signal="toggled" from="VBoxContainer/Header/HeaderRight/SettingsButton" to="." method="_on_SettingsButton_toggled"]
+[connection signal="tab_changed" from="VBoxContainer/TabContainer" to="." method="_on_TabContainer_tab_changed"]
+[connection signal="item_activated" from="VBoxContainer/TabContainer/Project/Tree" to="." method="_on_Tree_item_activated"]
+[connection signal="item_activated" from="VBoxContainer/TabContainer/Current/Tree" to="." method="_on_Tree_item_activated"]
+[connection signal="toggled" from="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptName/FullPathCheckBox" to="." method="_on_FullPathCheckBox_toggled"]
+[connection signal="toggled" from="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptSort/AlphSortCheckBox" to="." method="_on_AlphSortCheckBox_toggled"]
+[connection signal="color_changed" from="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/ScriptColour/ScriptColourPickerButton" to="." method="_on_ScriptColourPickerButton_color_changed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/Patterns/AddPatternButton" to="." method="_on_AddPatternButton_pressed"]
+[connection signal="toggled" from="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns/RefreshCheckButton" to="." method="_on_RefreshCheckButton_toggled"]
+[connection signal="toggled" from="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns/HBoxContainer/BuiltInCheckButton" to="." method="_on_BuiltInCheckButton_toggled"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns/DefaultButton" to="." method="_on_DefaultButton_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="RescanButton" to="." method="_on_RescanButton_pressed"]

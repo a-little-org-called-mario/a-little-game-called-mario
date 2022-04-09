@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/Todo_Manager/Pattern.gd" type="Script" id=1]
+
+[node name="Pattern" type="HBoxContainer"]
+margin_right = 228.0
+margin_bottom = 24.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="."]
+margin_right = 200.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 0
+text = "\\bTODO\\b.*"
+
+[node name="RemoveButton" type="Button" parent="."]
+margin_left = 204.0
+margin_right = 228.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+text = "-"

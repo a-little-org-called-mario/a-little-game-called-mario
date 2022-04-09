@@ -1,4 +1,4 @@
-extends Node2D
+extends Viewport
 
 const SPAWNPOINTS_GROUP : String = "SpawnPoints"
 const ENDPORTALS_GROUP : String = "EndPortals"

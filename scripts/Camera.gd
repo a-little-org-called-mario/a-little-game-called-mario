@@ -1,6 +1,5 @@
 extends Camera2D
 class_name ShakingCamera
-
 onready var _screen_shake: ScreenShake = $ScreenShake
 
 

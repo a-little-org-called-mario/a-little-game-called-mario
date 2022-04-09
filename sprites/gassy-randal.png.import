@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-82ea131e750a89467e27b5ff9b11ce77.stex"
+path="res://.import/gassy-randal.png-1c929e644ca3c7e80baee15100a40e6b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/icon.png"
-dest_files=[ "res://.import/icon.png-82ea131e750a89467e27b5ff9b11ce77.stex" ]
+source_file="res://sprites/gassy-randal.png"
+dest_files=[ "res://.import/gassy-randal.png-1c929e644ca3c7e80baee15100a40e6b.stex" ]
 
 [params]
 

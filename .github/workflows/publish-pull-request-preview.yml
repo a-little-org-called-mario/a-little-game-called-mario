@@ -17,18 +17,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # This is taken from https://securitylab.github.com/research/github-actions-preventing-pwn-requests
-      # I'm not sure if it's necessary to use this complex logic
-      # instead of just giving each artifact a unique name based on PR number
-      # but shrug, this is fine.
-      - name: 'Download artifact'
+      - name: 'Download build artifact'
         uses: actions/github-script@v3.1.0
         with:
           script: |
             var artifacts = await github.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
-               run_id: ${{github.event.workflow_run.id }},
+               run_id: ${{ github.event.workflow_run.id }},
             });
             var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "pr"
@@ -42,11 +38,18 @@ jobs:
             var fs = require('fs');
             fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
 
-      - name: unzip artifact
+      - name: Unzip artifact
         run: unzip pr.zip; rm pr.zip
+
+      - name: Store PR number in ENV
+        run: |
+          PR=$(cat pr_number)
+          echo "PR_NUM=$PR" >> $GITHUB_ENV
+          rm pr_number
       
-      - name: Deploy preview to Netlify
+      - name: Netlify preview deploy
         uses: nwtgck/actions-netlify@v1.2
+        id: netlify-deploy
         with:
           publish-dir: '.'
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -54,3 +57,16 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: 'Comment on PR with link to preview'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            var fs = require('fs');
+            var issue_number = process.env.PR_NUM
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: '🎉 You can test out this change! ✨👉 ${{steps.netlify-deploy.outputs.deploy-url}} 👈✨'
+            });

@@ -14,7 +14,10 @@ onready var _duration_timer: Timer = $Duration
 
 
 func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
-	if (priority < self.priority):
+	if priority < self.priority:
+		return
+
+	if !Settings.screen_shake:
 		return
 
 	self.priority = priority
@@ -33,12 +36,16 @@ func _new_shake():
 	rand.x = rand_range(-amplitude, amplitude)
 	rand.y = rand_range(-amplitude, amplitude)
 
-	_tween.interpolate_property(camera, "offset", camera.offset, rand, _freq_timer.wait_time, TRANS, EASE)
+	_tween.interpolate_property(
+		camera, "offset", camera.offset, rand, _freq_timer.wait_time, TRANS, EASE
+	)
 	_tween.start()
 
 
 func _reset():
-	_tween.interpolate_property(camera, "offset", camera.offset, Vector2.ZERO, _freq_timer.wait_time, TRANS, EASE)
+	_tween.interpolate_property(
+		camera, "offset", camera.offset, Vector2.ZERO, _freq_timer.wait_time, TRANS, EASE
+	)
 	_tween.start()
 
 	priority = 0

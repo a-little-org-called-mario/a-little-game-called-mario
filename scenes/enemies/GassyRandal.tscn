@@ -39,13 +39,21 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 14.8297, 17.6709 )
 
-[node name="Node2D" type="KinematicBody2D"]
+[node name="GassyRandal" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="RandalCloud" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 3
+frame = 1
 speed_scale = 1.25
+playing = true
+
+[node name="BigRandalCloud" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.439216 )
+scale = Vector2( 1.25, 1.25 )
+frames = SubResource( 6 )
+frame = 4
+speed_scale = 0.75
 playing = true
 
 [node name="EyeSprite" type="Sprite" parent="."]

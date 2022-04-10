@@ -2,6 +2,7 @@ extends RichTextLabel
 
 var count := 0
 
+
 func _ready():
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	update_coin_count()

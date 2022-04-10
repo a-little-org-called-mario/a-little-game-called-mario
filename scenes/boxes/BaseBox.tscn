@@ -6,23 +6,32 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 30, 1 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 32, 4 )
 
 [node name="BaseBox" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="box" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="box"]
+shape = SubResource( 1 )
+one_way_collision_margin = 128.0
+
 [node name="Body" type="StaticBody2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource( 1 )
+one_way_collision_margin = 128.0
 
 [node name="HitArea" type="Area2D" parent="."]
 position = Vector2( 0, 35 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-position = Vector2( 0, -1 )
-shape = SubResource( 2 )
+position = Vector2( 0, -3 )
+shape = SubResource( 4 )
+one_way_collision_margin = 128.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

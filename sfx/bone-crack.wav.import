@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bone-crack.wav-b2cee8a9e3fd164a4993da93ffe77bdc.sample"
+
+[deps]
+
+source_file="res://sfx/bone-crack.wav"
+dest_files=[ "res://.import/bone-crack.wav-b2cee8a9e3fd164a4993da93ffe77bdc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Trail.gd" type="Script" id=4]
 [ext_resource path="res://sprites/flag.jpg" type="Texture" id=5]
+[ext_resource path="res://effects/bone-crack.wav" type="AudioStream" id=6]
 
 [sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
@@ -14,10 +15,6 @@ colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.5, 27 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
@@ -47,13 +44,12 @@ region = Rect2( 96, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 128, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 2 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "jump",
@@ -63,6 +59,11 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
 } ]
 
 [node name="Player" type="KinematicBody2D"]
@@ -99,5 +100,9 @@ position = Vector2( 4, -16 )
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
 volume_db = -12.0
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = 4.168
 
 [node name="Tween" type="Tween" parent="."]

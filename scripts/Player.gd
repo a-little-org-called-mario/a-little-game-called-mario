@@ -29,7 +29,8 @@ var grounded = false
 var anticipating_jump = false # the small window of time before the player jumps
 
 onready var sprite = $Sprite
-
+onready var audio_falling = $FallingStream
+onready var audio_life_lost = $LifeLostStream
 onready var tween = $Tween
 
 onready var original_scale = sprite.scale;
@@ -84,6 +85,7 @@ func _physics_process(delta : float) -> void:
 			
 		if time_falling > FALLDAMAGETIMETRESHOLD:
 			EventBus.emit_signal("lives_reduced", { "value": 1 })
+			$HurtSFX.play()
 		
 		time_falling = 0.0
 			

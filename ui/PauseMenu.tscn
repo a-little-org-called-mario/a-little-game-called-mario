@@ -50,6 +50,7 @@ __meta__ = {
 }
 
 [node name="MainMenu" type="Control" parent="PauseMenu"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5.0
@@ -164,21 +165,113 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ShakeLabel" type="RichTextLabel" parent="PauseMenu/GFXMenu"]
+anchor_left = 0.428
+anchor_top = 0.192
+anchor_right = 0.572
+anchor_bottom = 0.404
+margin_left = -118.272
+margin_top = 254.8
+margin_right = -61.728
+margin_bottom = 246.32
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "
+SCREEN SHAKE: ON
+"
+
 [node name="CRTLabel" type="RichTextLabel" parent="PauseMenu/GFXMenu"]
 anchor_left = 0.428
 anchor_top = 0.192
 anchor_right = 0.572
 anchor_bottom = 0.404
 margin_left = -93.272
-margin_top = 254.8
+margin_top = 324.8
 margin_right = -56.728
-margin_bottom = 246.32
+margin_bottom = 316.32
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 text = "
 CRT FILTER: ON
 "
+
+[node name="SFXMenu" type="Control" parent="PauseMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -5.0
+margin_right = -5.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BackLabel" type="RichTextLabel" parent="PauseMenu/SFXMenu"]
+anchor_left = 0.355
+anchor_top = 0.405
+anchor_right = 0.648
+anchor_bottom = 0.618
+margin_left = 13.4799
+margin_top = -12.0
+margin_right = -140.552
+margin_bottom = -85.8
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "
+BACK TO MAIN
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameVolLabel" type="RichTextLabel" parent="PauseMenu/SFXMenu"]
+anchor_left = 0.428
+anchor_top = 0.192
+anchor_right = 0.572
+anchor_bottom = 0.404
+margin_left = -176.272
+margin_top = 184.8
+margin_right = -67.728
+margin_bottom = 176.6
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "
+GAME VOLUME: <  10  >
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicVolLabel" type="RichTextLabel" parent="PauseMenu/SFXMenu"]
+anchor_left = 0.428
+anchor_top = 0.192
+anchor_right = 0.572
+anchor_bottom = 0.404
+margin_left = -186.272
+margin_top = 254.8
+margin_right = -67.728
+margin_bottom = 246.32
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "
+MUSIC VOLUME: <  10  >
+"
+
+[node name="SFXVolLabel" type="RichTextLabel" parent="PauseMenu/SFXMenu"]
+anchor_left = 0.428
+anchor_top = 0.192
+anchor_right = 0.572
+anchor_bottom = 0.404
+margin_left = -186.272
+margin_top = 324.8
+margin_right = -67.728
+margin_bottom = 316.32
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "
+ SFX VOLUME: <  10  >
+"

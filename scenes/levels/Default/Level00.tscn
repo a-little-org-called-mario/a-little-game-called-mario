@@ -27,3 +27,6 @@ position = Vector2( 735, 152 )
 [node name="CoinBox" parent="." instance=ExtResource( 2 )]
 position = Vector2( 864, 224 )
 bounce_count = 2
+
+[node name="Spawn" type="Position2D" parent="." groups=["SpawnPoints"]]
+position = Vector2( 96, 480 )

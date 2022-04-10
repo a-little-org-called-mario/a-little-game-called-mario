@@ -51,7 +51,7 @@ func _on_build() -> void:
 			$TileMap.set_cell(target_tile_x, target_tile_y, 0)
 		
 
-func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal) -> void:
+func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal : EndPortal) -> void:
     var animation = portal.on_portal_enter()
     body.visible = false;
     yield(animation, "animation_finished");
@@ -59,25 +59,29 @@ func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal)
     call_deferred("_finish_level", next_level)
 
 func _finish_level(next_level : PackedScene = null) -> void:
-    if next_level:
-        # Create the new level, insert it into the tree and remove the old one.
-        var new_level : TileMap = next_level.instance()
-        add_child_below_node(level, new_level)
+    # Create the new level, insert it into the tree and remove the old one.
+    # If next_level is null, return to the hub
+    var new_level : TileMap = next_level.instance() if next_level != null else hub
+    add_child_below_node(level, new_level)
+    if level == hub:
         remove_child(level)
-        level = new_level
+    else:
+        level.queue_free()
+        yield(level, "tree_exited")
+    level = new_level
 
-        # Do not forget to hook the new portals
-        _hook_portals()
-    
-        #Removing instructions 
-        $UI/UI/RichTextLabel.visible = false;
+    # Do not forget to hook the new portals
+    _hook_portals()
 
-        # We need to flash the player out and in the tree to avoid physics errors.
-        remove_child(player)
-        add_child_below_node(level, player)
-        player.global_position = _get_player_spawn_position()
-        player.look_right()
-        EventBus.emit_signal("level_started", {})
+    #Removing instructions 
+    $UI/UI/RichTextLabel.visible = false;
+
+    # We need to flash the player out and in the tree to avoid physics errors.
+    remove_child(player)
+    add_child_below_node(level, player)
+    player.global_position = _get_player_spawn_position()
+    player.look_right()
+    EventBus.emit_signal("level_started", {})
 
 func _get_player_spawn_position() -> Vector2:
 	var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)

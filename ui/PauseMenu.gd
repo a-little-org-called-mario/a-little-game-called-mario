@@ -3,7 +3,7 @@ extends CanvasLayer
 ## NOTE (jam):  Right now each submenu can fit comfortably on a single screen, so it's not a pressing concern,
 #               but it might be wise to rework the submenu scene such that they're situated in their own VScrollContainers
 
-const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd");
+const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd")
 
 ### Basic pause menu state variables
 enum SUBMENU { MAIN=0, GFX=1, SFX=2, };

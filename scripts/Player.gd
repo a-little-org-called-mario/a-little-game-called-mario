@@ -2,6 +2,7 @@ class_name Player
 extends KinematicBody2D
 
 signal jumping
+signal shooting
 
 const UP = Vector2.UP
 const GRAVITY = 100
@@ -11,7 +12,9 @@ const JUMPFORCE = 1100
 const ACCEL = 50
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
-const JUMP_SLIP_RANGE = 16
+const SLIP_RANGE = 16
+
+export (PackedScene) var default_projectile :PackedScene= preload("res://scenes/CoinProjectile.tscn")
 
 var coyote_timer = COYOTE_TIME # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0 # gives a bit of buffer to hit the jump button before landing
@@ -37,7 +40,9 @@ func _physics_process(delta : float) -> void:
 		motion.y = MAXFALLSPEED
 
 	motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
-
+	if Input.is_action_just_pressed("Build"):
+		EventBus.emit_signal("build_block")
+	
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL
 		sprite.play("run")
@@ -97,17 +102,23 @@ func _physics_process(delta : float) -> void:
 	else:
 		motion = move_and_slide_result
 
+func _input(event :InputEvent):
+	# Remove one coin and spawn a projectile
+	# Continus shooting after 0 coins
+	if event.is_action_pressed("shoot"):
+		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
+		shoot(default_projectile)
+
 func try_jump_slip():
 	var original_x = position.x # remember original x position
 	# check collisions in nearby x positions within JUMP_SLIP_RANGE
 	for x in range(1, JUMP_SLIP_RANGE):
 		for p in [-1, 1]:
-			position.x = original_x + x * p
+			position[axis] = original_v + r * p
 			move_and_slide(motion, UP)
-			if(get_slide_count() == 0):
-				return true # if no collision, return success
-	# restore original x position if couldn't find a slip
-	position.x = original_x
+			if(get_slide_count() == 0): return true # if no collision, return success
+	# restore original value on axis if couldn't find a slip
+	position[axis] = original_v
 	return false
 
 func crouch():
@@ -132,6 +143,17 @@ func land():
 	yield(tween, "tween_all_completed")
 	if grounded and not anticipating_jump:
 		unsquash(0.18)
+
+func shoot(projectile_scene :PackedScene):
+	# Spawn the projectile and move it to its origin point
+	# Origin is affected by changes to Sprite (ex: squashing)
+	var projectile= projectile_scene.instance()
+	get_parent().add_child(projectile)
+	projectile.position= $Sprite/ShootOrigin.global_position
+	# Projectile handles movement
+	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
+	projectile.start_moving(shoot_dir)
+	emit_signal("shooting")
 
 func look_right():
 	sprite.flip_h = false

@@ -8,6 +8,9 @@ const UP = Vector2.UP
 const GRAVITY = 100
 const MAXFALLSPEED = 1000
 const MAXSPEED = 300
+const MAXBOUNCESPEED = 800
+const BOUNCEBOOSTER = 2
+const BOUNCEFORCE = -800
 const JUMPFORCE = 1100
 const ACCEL = 50
 const COYOTE_TIME = 0.1
@@ -23,6 +26,7 @@ var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
 var crouching = false
 var grounded = false
+var bouncing = false
 var anticipating_jump = false # the small window of time before the player jumps
 
 onready var sprite = $Sprite
@@ -39,7 +43,11 @@ func _physics_process(delta : float) -> void:
 	if motion.y > MAXFALLSPEED:
 		motion.y = MAXFALLSPEED
 
-	motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
+	if bouncing:
+		motion.x = clamp(motion.x, -MAXBOUNCESPEED, MAXBOUNCESPEED)
+	else:
+		motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
+	
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block")
 	
@@ -52,7 +60,7 @@ func _physics_process(delta : float) -> void:
 		motion.x -= ACCEL
 		sprite.play("run")
 		look_left()
-	else:	
+	elif not bouncing:	
 		sprite.play("idle")
 		motion.x = lerp(motion.x, 0, 0.2)
 
@@ -69,6 +77,7 @@ func _physics_process(delta : float) -> void:
 	if is_on_floor():
 		if not grounded:
 			grounded = true
+			bouncing = false
 			land()
 		double_jump = true
 		coyote_timer = COYOTE_TIME
@@ -112,13 +121,13 @@ func _input(event :InputEvent):
 func try_jump_slip():
 	var original_x = position.x # remember original x position
 	# check collisions in nearby x positions within JUMP_SLIP_RANGE
-	for x in range(1, JUMP_SLIP_RANGE):
+	for x in range(1, 10):
 		for p in [-1, 1]:
-			position[axis] = original_v + r * p
+			position[0] = original_x + 1 * p
 			move_and_slide(motion, UP)
 			if(get_slide_count() == 0): return true # if no collision, return success
 	# restore original value on axis if couldn't find a slip
-	position[axis] = original_v
+	position[0] = original_x
 	return false
 
 func crouch():

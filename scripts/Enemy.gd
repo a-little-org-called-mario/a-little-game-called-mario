@@ -85,5 +85,5 @@ func move(_delta: float):
 
 func _on_KillTrigger_body_entered(body):
 	if body is Player:
-		kill(self)
+		kill(body)
 

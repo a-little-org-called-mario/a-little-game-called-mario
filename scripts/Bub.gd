@@ -74,5 +74,8 @@ func _handle_dying(_killer):
 	_sprite.play("die")
 	_animation_player.play("die")
 	$SquishParticles.emitting=true
+	_killer.bouncing = true
+	_killer.motion = Vector2(_killer.motion.x * _killer.BOUNCEBOOSTER, _killer.BOUNCEFORCE)
 	yield(_animation_player, "animation_finished")
+	_killer.bouncing = false
 

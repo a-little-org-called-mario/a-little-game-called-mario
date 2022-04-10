@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Bub.gd"
 }, {
+"base": "Node",
+"class": "CameraLeanAmount",
+"language": "GDScript",
+"path": "res://scripts/CameraLeanAmount.gd"
+}, {
 "base": "Achievement",
 "class": "CoinsAchievement",
 "language": "GDScript",
@@ -57,6 +62,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Achievement": "",
 "Bub": "",
+"CameraLeanAmount": "",
 "CoinsAchievement": "",
 "EndPortal": "",
 "Enemy": "",
@@ -76,6 +82,7 @@ config/icon="res://sprites/icon.png"
 [autoload]
 
 EventBus="*res://autoload/EventBus.gd"
+Settings="*res://autoload/Settings.gd"
 
 [debug]
 
@@ -146,7 +153,9 @@ down={
 }
 pause={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777217,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 Build={

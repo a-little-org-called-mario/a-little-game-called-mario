@@ -12,6 +12,6 @@ signal game_paused(data)
 
 ## settings signals
 # toggles crt filter - emitted by PauseMenu.gd and connected to Main.gd
-signal crt_filter_toggle (data)
+signal crt_filter_toggle(data)
 # self-explanatory - emitted by PauseMenu.gd and connected to Main.gd
-signal volume_changed (data)
+signal volume_changed(data)

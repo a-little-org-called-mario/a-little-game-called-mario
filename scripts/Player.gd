@@ -30,7 +30,7 @@ var hasFlower = false
 
 onready var sprite = $Sprite
 onready var tween = $Tween
-onready var trail : Line2d = $Trail
+onready var trail : Line2D = $Trail
 onready var run_particles : CPUParticles2D = $RunParticles
 
 onready var original_scale = sprite.scale

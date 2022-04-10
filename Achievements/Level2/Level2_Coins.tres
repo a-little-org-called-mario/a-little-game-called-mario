@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/CoinsAchievement.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+type = 0
+ID = "Level2_Coins"
+description = "ACHIEVEMENT UNLOCKED: GET ALL THE COINS IN LEVEL 2"
+levelNumber = 2
+coinsRequired = 5

@@ -37,7 +37,11 @@ func _hook_portals() -> void:
 		)
 
 
-func _on_build() -> void:
+func _on_build(data) -> void:
+	var player = data["player"]
+	# reference to player is needed for the case where there are more than one player
+	# eg. Level03
+	
 	# place a block in the level.
 	if level != null:
 		# Find the player's current position on the tilemap, and look one cell

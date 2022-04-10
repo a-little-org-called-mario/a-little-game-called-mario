@@ -45,25 +45,21 @@ region = Rect2( 96, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 128, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 32, 32 )
+region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 9 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "jump",
+"name": "idle",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "run",
 "speed": 10.0
-}, {
-"frames": [ SubResource( 2 ) ],
-"loop": true,
-"name": "idle",
 }, {
 "frames": [ SubResource( 9 ) ],
 "loop": true,
@@ -108,7 +104,7 @@ volume_db = -12.0
 bus = "sfx"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 7 )
 volume_db = 4.168
 
 [node name="Tween" type="Tween" parent="."]

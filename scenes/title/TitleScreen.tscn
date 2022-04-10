@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/title/Mario.gd" type="Script" id=6]
 [ext_resource path="res://scenes/title/StartButton.gd" type="Script" id=7]
 [ext_resource path="res://scenes/title/OptionsButton.gd" type="Script" id=8]
+[ext_resource path="res://scenes/title/CreditsButton.gd" type="Script" id=9]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
 [ext_resource path="res://scenes/title/Contributors.gd" type="Script" id=11]
 
@@ -139,7 +140,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 392.0
 margin_right = 984.0
-margin_bottom = 468.0
+margin_bottom = 508.0
 
 [node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_right = 984.0
@@ -161,10 +162,21 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SmolCreditsLabel" type="Label" parent="VBoxContainer"]
-margin_top = 472.0
+[node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 80.0
 margin_right = 984.0
-margin_bottom = 552.0
+margin_bottom = 116.0
+disabled = true
+text = "CREDITS"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SmolCreditsLabel" type="Label" parent="VBoxContainer"]
+margin_top = 512.0
+margin_right = 984.0
+margin_bottom = 592.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_vertical = 5
 custom_colors/font_color = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -176,9 +188,9 @@ __meta__ = {
 }
 
 [node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 556.0
+margin_top = 596.0
 margin_right = 984.0
-margin_bottom = 572.0
+margin_bottom = 612.0
 scroll_vertical_enabled = false
 script = ExtResource( 10 )
 __meta__ = {

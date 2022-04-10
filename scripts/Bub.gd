@@ -37,10 +37,8 @@ onready var _ray_walking := $RayCastWalking
 onready var _ray_shooting := $RayCastShooting
 onready var _gun_anchor := $GunAnchor
 onready var _muzzle := $GunAnchor/Sprite/Muzzle
-
-onready var sprite = $Sprite
-
-onready var tween = $Tween
+onready var sprite := $Sprite
+onready var tween := $Tween
 
 onready var original_scale = sprite.scale;
 onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
@@ -124,7 +122,7 @@ func start_walking():
 	_moving = true
 	_animation_player.play("move")
 
-func _on_BounceArea_body_entered(body):
+func _on_KillTrigger_body_entered(body):
 	if not body is Player:
 		return
 	var player = body as Player

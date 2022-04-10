@@ -20,7 +20,7 @@ func _on_OpenTimer_timeout():
 	pass
 
 
-func _process(delta: float):
+func _process(_delta: float):
 	randalRotate()
 	randalVibe()
 

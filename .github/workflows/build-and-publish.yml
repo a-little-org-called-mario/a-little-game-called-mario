@@ -12,6 +12,7 @@ on:
       - '.gitignore'
       - 'LICENSE'
       - '**.md'
+      - '.github'
 
 jobs:
   build_game:

@@ -34,6 +34,7 @@ shape = SubResource( 4 )
 one_way_collision_margin = 128.0
 
 [node name="Sprite" type="Sprite" parent="."]
+z_index = 10
 texture = ExtResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]

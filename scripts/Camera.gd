@@ -2,19 +2,30 @@ extends Camera2D
 class_name ShakingCamera
 onready var _screen_shake: ScreenShake = $ScreenShake
 
+const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd");
 
 func _ready():
+  EventBus.connect("enemy_killed", self, "trigger_small_shake")
   position = get_viewport_rect().size / 2
 
 func _process(_delta):
-  if Input.is_action_pressed("right"):
-    lean(-PI / 64)
-  elif Input.is_action_pressed("left"):
-    lean(PI / 64)
-  else:
-    lean(0, 0.1)
-
-    
+	if Input.is_action_pressed("right"):
+		var lean_amount : float = 0;
+		if CameraLeanAmount.MAX == Settings.camera_lean:
+			lean_amount=PI/64;
+		elif CameraLeanAmount.MIN == Settings.camera_lean:
+			lean_amount=PI/128;
+		lean(-lean_amount);
+	elif Input.is_action_pressed("left"):
+		var lean_amount : float = 0;
+		if CameraLeanAmount.MAX == Settings.camera_lean:
+			lean_amount=PI/64;
+		elif CameraLeanAmount.MIN == Settings.camera_lean:
+			lean_amount=PI/128;
+		lean(lean_amount);
+	else:
+		lean(0, 0.1);
+	
 func lean(radians, speed := 0.05) -> void:
   rotation = lerp(rotation, radians, speed)
   zoom.x = lerp(zoom.x, 1 + radians / 2.0, speed * 2)

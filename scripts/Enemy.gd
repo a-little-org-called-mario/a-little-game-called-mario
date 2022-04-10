@@ -39,6 +39,7 @@ func kill(killer):
 	if is_dying():
 		return
 	_dying = true
+	EventBus.emit_signal("enemy_killed")
 	emit_signal("dying", killer)
 	var res = _handle_dying(killer)
 	if res is GDScriptFunctionState:
@@ -61,7 +62,7 @@ func _handle_dying(_killer):
 # Helper function to disable collision. Useful if you want the enemy to 
 # fall through the world, for instance.
 func disable_collision():
-	_collision.disabled = true
+	_collision.set_deferred("disabled", true)
 
 
 # Override this function to implement enemy-specific AI.

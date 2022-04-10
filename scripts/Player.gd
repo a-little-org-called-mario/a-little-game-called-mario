@@ -30,8 +30,8 @@ var hasFlower = false
 
 onready var sprite = $Sprite
 onready var tween = $Tween
-onready var trail = Line2d = $Trail
-onready var run_particles = CPUParticles2D = $RunParticles
+onready var trail : Line2d = $Trail
+onready var run_particles : CPUParticles2D = $RunParticles
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)

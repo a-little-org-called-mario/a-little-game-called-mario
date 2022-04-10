@@ -92,7 +92,9 @@ func _process (_delta: float):
 						0: pass;
 						1: cam_lean_select(1, label);
 						2: screen_shake_toggle(label);
-						3: crt_filter_toggle(label);
+						3:
+							EventBus.emit_signal("game_paused", false);
+							crt_filter_toggle(label);
 				SUBMENU.SFX:
 					if 0 < selected:    volume_select(1, label);
 		elif Input.is_action_just_pressed("ui_accept"):
@@ -102,7 +104,7 @@ func _process (_delta: float):
 						0: EventBus.emit_signal("game_paused", false);
 						1: go_to_menu(SUBMENU.GFX);
 						2: go_to_menu(SUBMENU.SFX);
-						3: pass; #TODO - handle game restart here!!
+						3: get_tree().reload_current_scene(); # restart
 				SUBMENU.GFX:
 					match selected:
 						0: go_to_menu(SUBMENU.MAIN);

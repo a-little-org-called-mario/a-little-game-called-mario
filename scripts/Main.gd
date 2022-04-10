@@ -18,6 +18,7 @@ func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
 	_hook_portals()
 	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle")
+	EventBus.connect("volume_changed",self,"_on_volume_change")
 	VisualServer.set_default_clear_color(Color.black)
 
 func _hook_portals() -> void:
@@ -92,3 +93,12 @@ func _on_crt_toggle (on:bool) -> void:
 		container.material.shader=crt_shader
 	else:
 		container.material.shader=null
+
+func _on_volume_change (bus) -> void:
+	match str(bus):
+		"game":
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),linear2db(Settings.volume_game/10.0))
+		"music":
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("music"),linear2db(Settings.volume_music/10.0))
+		"sfx":
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("sfx"),linear2db(Settings.volume_sfx/10.0))

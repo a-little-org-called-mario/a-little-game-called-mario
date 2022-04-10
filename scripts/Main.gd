@@ -7,11 +7,17 @@ const COINS_GROUP : String = "Coins"
 onready var level : TileMap = $TileMap
 onready var player : Player = $Player
 
+onready var container : ViewportContainer = get_parent();
+onready var crt_shader = preload("res://shaders/CRT.gdshader");
+
 var completionSound = preload("res://sfx/portal.wav")
 var coinSound = preload("res://sfx/coin.wav")
 
 func _ready() -> void:
+	EventBus.connect("coin_collected", self, "_on_coin_collected", []);
+	EventBus.connect("build_block", self, "_on_build")
 	_hook_portals()
+	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle");
 	VisualServer.set_default_clear_color(Color.black)
 
 func _hook_portals() -> void:
@@ -23,6 +29,27 @@ func _hook_portals() -> void:
 		if portal.is_connected("body_entered", self, "_on_endportal_body_entered"):
 			continue
 		portal.connect("body_entered", self, "_on_endportal_body_entered", [ portal.next_level, portal ])
+
+func _on_build() -> void:
+	# If there is a child named TileMap, place a block.
+	# Otherwise ignore. Note that this condition is false for some levels.
+	if $TileMap != null:
+		# Find the player's current position on the tilemap, and look one cell
+		# to the left or right depending on which direction the player sprite
+		# is facing.
+		var player_tile = $TileMap.world_to_map($Player.position)
+		var target_tile_x = player_tile[0] + 1
+		if $Player.sprite.flip_h:
+			target_tile_x = player_tile[0] - 1
+		var target_tile_y = player_tile[1]
+		var target_cell_v = $TileMap.get_cell(target_tile_x, target_tile_y)
+		if target_cell_v == 0:
+			# If the cell is empty, place a block
+			$TileMap.set_cell(target_tile_x, target_tile_y, 1)
+		elif target_cell_v == 1:
+			# If the cell has a block in in, break the block.
+			$TileMap.set_cell(target_tile_x, target_tile_y, 0)
+		
 
 func _on_endportal_body_entered(body : Node2D, next_level : PackedScene, portal) -> void:
 	var animation = portal.on_portal_enter()
@@ -55,3 +82,9 @@ func _finish_level(next_level : PackedScene = null) -> void:
 func _get_player_spawn_position() -> Vector2:
 	var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)
 	return spawn_points[0].global_position if len(spawn_points) > 0 else player.global_position
+
+func _on_crt_toggle (on:bool) -> void:
+	if on:
+		container.material.shader=crt_shader;
+	else:
+		container.material.shader=null;

@@ -24,7 +24,7 @@ var double_jump = true
 var crouching = false
 var grounded = false
 var anticipating_jump = false # the small window of time before the player jumps
-
+var coins = 0; #grabbed directly from the coin_collected signal;
 onready var sprite = $Sprite
 
 onready var tween = $Tween
@@ -34,6 +34,8 @@ onready var run_particles = $RunParticles
 onready var original_scale = sprite.scale;
 onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
+func _ready() -> void:
+	EventBus.connect("coin_collected", self, "_on_coin_collected")
 
 func _physics_process(delta : float) -> void:
 	if Input.is_action_just_pressed("Build"):
@@ -137,7 +139,7 @@ func try_slip(angle: float):
 func _input(event :InputEvent):
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed("shoot") and coins > 0:
 		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
 		shoot(default_projectile)
 
@@ -222,3 +224,10 @@ func bounce(strength = 1100):
 	stretch(0.15)
 	coyote_timer = 0
 	motion.y = -strength
+
+func _on_coin_collected(data):
+	var value := 1
+	if data.has("value"):
+		value = data["value"]
+
+	coins += value

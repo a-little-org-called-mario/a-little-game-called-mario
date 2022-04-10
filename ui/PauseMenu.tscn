@@ -98,7 +98,6 @@ __meta__ = {
 }
 
 [node name="SFXLabel" type="RichTextLabel" parent="PauseMenu/MainMenu"]
-visible = false
 anchor_left = 0.428
 anchor_top = 0.192
 anchor_right = 0.572
@@ -240,9 +239,6 @@ bbcode_enabled = true
 text = "
 GAME VOLUME: <  10  >
 "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MusicVolLabel" type="RichTextLabel" parent="PauseMenu/SFXMenu"]
 anchor_left = 0.428

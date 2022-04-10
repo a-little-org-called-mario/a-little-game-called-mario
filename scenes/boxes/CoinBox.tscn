@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/boxes/BaseBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/boxes/CoinBox.gd" type="Script" id=2]
+[ext_resource path="res://sprites/Coin_Gems/Coin/MonedaD.png" type="Texture" id=3]
+[ext_resource path="res://sfx/coin.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/meow.wav" type="AudioStream" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+direction = Vector3( 0, -100, 0 )
+spread = 0.0
+gravity = Vector3( 0, 2400, 0 )
+initial_velocity = 800.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+anim_speed = 1.0
+
+[node name="CoinBox" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="CoinEmitter" type="Particles2D" parent="." index="2"]
+material = SubResource( 2 )
+position = Vector2( 0, -8 )
+emitting = false
+amount = 1
+lifetime = 0.2
+one_shot = true
+process_material = SubResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="CoinStream" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource( 4 )
+
+[node name="MeowStream" type="AudioStreamPlayer2D" parent="." index="6"]
+stream = ExtResource( 5 )

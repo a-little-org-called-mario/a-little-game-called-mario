@@ -1,9 +1,17 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=3]
-[ext_resource path="res://sprites/dustparticle.png" type="Texture" id=4]
+[ext_resource path="res://sprites/dustparticle.png" type="Texture" id=6]
+[ext_resource path="res://scripts/Trail.gd" type="Script" id=4]
+[ext_resource path="res://sprites/flag.jpg" type="Texture" id=5]
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=12]
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.5, 27 )
@@ -47,6 +55,11 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "run",
@@ -64,8 +77,20 @@ colors = PoolColorArray( 1, 1, 1, 0.784314, 1, 1, 1, 0 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
-collision_mask = 14
+collision_mask = 15
 script = ExtResource( 3 )
+
+[node name="Trail" type="Line2D" parent="."]
+width = 30.0
+width_curve = SubResource( 11 )
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 12 )
+texture = ExtResource( 5 )
+texture_mode = 2
+joint_mode = 2
+end_cap_mode = 2
+script = ExtResource( 4 )
+trail_length = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 5 )
@@ -78,6 +103,9 @@ frames = SubResource( 10 )
 animation = "idle"
 offset = Vector2( 0, -16 )
 
+[node name="ShootOrigin" type="Position2D" parent="Sprite"]
+position = Vector2( 4, -16 )
+
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
 volume_db = -12.0
@@ -89,7 +117,7 @@ position = Vector2( 0, 30 )
 amount = 6
 lifetime = 0.6
 local_coords = false
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 spread = 180.0
 gravity = Vector2( 0, -80 )
 initial_velocity = 40.0

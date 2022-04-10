@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/Coin_Gems/Coin/MonedaD.png" type="Texture" id=1]
 [ext_resource path="res://sprites/Coin_Gems/Coin/Hitbox.gd" type="Script" id=2]
 [ext_resource path="res://sfx/meow.wav" type="AudioStream" id=3]
+[ext_resource path="res://sfx/coin.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 9.0
@@ -214,8 +215,11 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="MeowStream" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="CoinStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 scale = Vector2( 3, 3 )

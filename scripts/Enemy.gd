@@ -39,6 +39,7 @@ func kill(killer):
 	if is_dying():
 		return
 	_dying = true
+	EventBus.emit_signal("enemy_killed")
 	emit_signal("dying", killer)
 	var res = _handle_dying(killer)
 	if res is GDScriptFunctionState:
@@ -54,7 +55,7 @@ func kill(killer):
 # Prepares the enemy for leaving their physical form. Trigger any death 
 # animations or sounds here. Supports yielding until animations, etc. are 
 # completed. Once this function returns the enemy will be removed.
-func _handle_dying(killer):
+func _handle_dying(_killer):
 	pass
 
 
@@ -71,12 +72,18 @@ func disable_collision():
 # interaction. Note that decisions about movement can happen here, but 
 # should only be implemented in the move() function which happens during 
 # the physics step.
-func ai(delta: float):
+func ai(_delta: float):
 	pass
 
 
 # Override this function to implement enemy-specific movement.
 #
 # Called every _physics_process tick to move the enemy, if necessary.
-func move(delta: float):
+func move(_delta: float):
 	pass
+
+
+func _on_KillTrigger_body_entered(body):
+	if body is Player:
+		kill(self)
+

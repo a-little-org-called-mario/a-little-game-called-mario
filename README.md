@@ -18,6 +18,10 @@ finally, we can put the discourse to rest. are you a Game Developer? no? why not
 will you add some art? some music? some new gameplay mechanics? dialog? robust multiplayer functionality with rollback netcode? it's up to you.
 
 > **your contributions are valuable regardless of how experienced you are or where your strengths lie.**
+>
+> **even if you never touch a line of code, you're still valuable as a player who can spot things that are wrong and reporting them for others to fix.**
+
+i would even go so far as to say you're still a Game Developer by simply playtesting and providing QA support - games can't exist without those people!
 
 this is a game that will live or die by its ability to capture a collective imagination and i like to believe that people can do some pretty amazing things when they organize together under a common goal.
 
@@ -73,24 +77,22 @@ if you're feeling impatient and just want to tinker, you can [download the code 
 
 if you're totally new to GitHub and working with code repositories, i recommend [this guide](https://rogerdudler.github.io/git-guide/) as a quick primer.
 
-pushing your changes back to GitHub can be a little daunting at first, but if you're really struggling i'm sure someone will be willing to help!
+[pushing your changes back to GitHub](HowToGitHub.md) can be a little daunting at first, but if you're really struggling i'm sure someone will be willing to help!
 
 > **you don't need to be an expert at any of this, you just need to know enough to contribute. learn the basics and you'll be fine!**
 
 oh! one last thing - be sure to take advantage of the [Issues page](https://github.com/iznaut/a-little-game-called-mario/issues) to see what kind of outstanding work might need to be done or report problems you're having with the game. in fact, this is a great place to start if you're a new dev and aren't sure what to contribute! games are complex and sprawling things and prone to bugs that often don't get fixed, not because the developers don't want to, but because they have to prioritize other tasks in order to get the game out the door on time. we've got all the time in the world here!
 
-> **even if you never touch a line of code, you're still valuable as a player who can spot things that are wrong and reporting them for others to fix.**
-
-i would even go so far as to say you're still a Game Developer by simply playtesting and providing QA support - games can't exist without those people!
-
 ## 👷‍♀️ the build 👷‍♀️
-you can easily test your changes as you work while developing locally in Godot. once you're happy with what you've added, you can commit the changes (please be sure to comment your code well and include a detailed commit message!) and push up to the remote GitHub repo.
+you can easily test your changes as you work while developing locally in Godot. once you're happy with what you've added, you can start the process of submitting your changes (see [How to GitHub](HowToGitHub.md)).
 
-pushing any changes up to GitHub will kick-off some automated build processes that you don't need to worry about (though if you like to worry or are just curious, you can see how the sausage is made in `.github/workflows/build-and-publish.yml` and visit the [Actions page](https://github.com/iznaut/a-little-game-called-mario/actions) to review the results).
+changes to the remote project on GitHub will kick-off some automated build processes that you don't need to worry about (though if you like to worry or are just curious, you can see how the sausage is made in `.github/workflows/build-and-publish.yml` and visit the [Actions page](https://github.com/iznaut/a-little-game-called-mario/actions) to review the results).
 
 > **give it a few minutes and the game will automatically be built and published! 🙌 [share the link](https://iznaut.itch.io/a-little-game-called-mario) with your friends/family/whoever and tell them proudly what you did to make it better.**
 
 and then? write down their feedback and do it all over again. ask them if they want to help. you're now a Game Developer and you have the skills and knowledge to help them be one too.
+
+For complete instructions on how to submit your changes to the project, click [here](HowToGitHub.md).
 
 # this is all rad but i'm still intimidated 😱
 i could go on for _hours_ about impostor syndrome and all that junk (stuff i feel, just the same as you!!) but some ppl need more encouragement than others so i won't attempt a one-size fits all spiel here 😉

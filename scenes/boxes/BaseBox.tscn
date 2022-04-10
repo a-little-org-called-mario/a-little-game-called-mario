@@ -19,6 +19,7 @@ shape = SubResource( 1 )
 one_way_collision_margin = 128.0
 
 [node name="Body" type="StaticBody2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource( 1 )

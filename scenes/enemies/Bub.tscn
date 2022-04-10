@@ -1,8 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/pistol.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Bub.gd" type="Script" id=3]
 [ext_resource path="res://sprites/bub.png" type="Texture" id=4]
+[ext_resource path="res://scenes/enemies/Bullet.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 26, 24 )
@@ -61,6 +63,72 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="Animation" id=34]
+resource_name = "aim"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("GunAnchor/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.9, 1.1 ),
+"transitions": PoolRealArray( 0.5, 0.5, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -24, 0 ), Vector2( -24, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.875 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "fire_bullet"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GunAnchor/Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 0.5, 0.5, 0.1, 0.5, 1 ),
+"update": 0,
+"values": [ 32.0, 0.0, 0.0, 48.0, 32.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
 [sub_resource type="Animation" id=23]
 resource_name = "die"
 tracks/0/type = "value"
@@ -99,9 +167,122 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "die" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("GunAnchor/Sprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -12, -16 ), Vector2( -24, 8 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("GunAnchor/Sprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 32.0, 120.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("GunAnchor/Sprite:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ), Vector2( 0, 0 ) ]
+}
 
-[sub_resource type="CircleShape2D" id=33]
-radius = 25.0311
+[sub_resource type="Animation" id=33]
+resource_name = "move"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "move" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GunAnchor/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 0.3, 0.3, 0.3, 0.3, 0.3, 0.3 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 8, -8 ), Vector2( 8, 0 ), Vector2( 0, 0 ), Vector2( -8, -8 ), Vector2( -8, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GunAnchor/Sprite:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 32.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=36]
+radius = 25.0
 
 [sub_resource type="Curve" id=35]
 _data = [ Vector2( 0, 0.634091 ), 0.0, 0.0, 0, 0, Vector2( 0.769608, 0.7875 ), -1.01157, -1.01157, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -109,31 +290,57 @@ _data = [ Vector2( 0, 0.634091 ), 0.0, 0.0, 0, 0, Vector2( 0.769608, 0.7875 ), -
 [node name="Bub" instance=ExtResource( 1 )]
 collision_mask = 2
 script = ExtResource( 3 )
+bullet_scene = ExtResource( 5 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 0, 8 )
+position = Vector2( 0, -25 )
 shape = SubResource( 12 )
 
-[node name="Sprite" parent="." index="1"]
-frames = SubResource( 3 )
-animation = "move"
-playing = true
+[node name="GunAnchor" type="Node2D" parent="." index="1"]
+position = Vector2( 0, -32 )
 
-[node name="RayCast2D" type="RayCast2D" parent="." index="2"]
+[node name="Sprite" type="Sprite" parent="GunAnchor" index="0"]
+rotation = 0.558505
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+offset = Vector2( -7, 3 )
+
+[node name="Muzzle" type="Node2D" parent="GunAnchor/Sprite" index="0"]
+position = Vector2( -12, 1.5 )
+
+[node name="Sprite" parent="." index="2"]
+frames = SubResource( 3 )
+animation = "idle"
+frame = 1
+playing = true
+offset = Vector2( 0, -32 )
+
+[node name="RayCastWalking" type="RayCast2D" parent="." index="3"]
+position = Vector2( 0, -32 )
 enabled = true
 cast_to = Vector2( -28, 0 )
 collision_mask = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
-anims/die = SubResource( 23 )
+[node name="RayCastShooting" type="RayCast2D" parent="." index="4"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( -28, 0 )
+collision_mask = 3
 
-[node name="KillTrigger" parent="." index="4"]
-position = Vector2( 0, -3.248 )
+[node name="Tween" type="Tween" parent="." index="5"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+anims/aim = SubResource( 34 )
+anims/die = SubResource( 23 )
+anims/move = SubResource( 33 )
+
+[node name="KillTrigger" parent="." index="7"]
+position = Vector2( 0, -27 )
 
 [node name="CollisionPolygon2D" parent="KillTrigger" index="0"]
-shape = SubResource( 33 )
+shape = SubResource( 36 )
 
-[node name="SquishParticles" parent="." index="5"]
+[node name="SquishParticles" parent="." index="8"]
 emitting = false
 amount = 30
 lifetime = 0.5

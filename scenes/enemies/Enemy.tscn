@@ -18,4 +18,3 @@ script = ExtResource( 1 )
 [node name="SquishParticles" type="CPUParticles2D" parent="."]
 
 [connection signal="body_entered" from="KillTrigger" to="." method="_on_KillTrigger_body_entered"]
-[connection signal="body_exited" from="KillTrigger" to="." method="_on_KillTrigger_body_exited"]

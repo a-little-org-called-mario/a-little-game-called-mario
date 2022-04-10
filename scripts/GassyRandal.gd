@@ -5,33 +5,39 @@ extends KinematicBody2D
 
 var rando = RandomNumberGenerator.new()
 
+
 #blink
 func _on_BlinkTimer_timeout() -> void:
-	$EyeSprite.visible=false
+	$EyeSprite.visible = false
 	$OpenTimer.start()
 	pass
 
+
 #open eyes back up
 func _on_OpenTimer_timeout():
-	$EyeSprite.visible=true
+	$EyeSprite.visible = true
 	$BlinkTimer.start()
-	pass 
+	pass
+
 
 func _process(delta: float):
 	randalRotate()
 	randalVibe()
 
+
 func randalRotate():
-	$RandalCloud.rotation_degrees+=0.5
-	$BigRandalCloud.rotation_degrees-=0.1
+	$RandalCloud.rotation_degrees += 0.5
+	$BigRandalCloud.rotation_degrees -= 0.1
 	pass
+
 
 func randalVibe():
 	rando.randomize()
-	
-	position.x+=rando.randf_range(-1,1)
-	position.y+=rando.randf_range(-1,1)
+
+	position.x += rando.randf_range(-1, 1)
+	position.y += rando.randf_range(-1, 1)
 	pass
 
+
 func _ready():
-	pass # Replace with function body.
+	pass  # Replace with function body.

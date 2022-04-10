@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://sprites/touch_input.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 240, 0, 48, 48 )
+
+[node name="TouchInputs" type="CanvasLayer"]
+
+[node name="LeftButton" type="TouchScreenButton" parent="."]
+position = Vector2( 50, 475 )
+scale = Vector2( 2, 2 )
+normal = SubResource( 1 )
+passby_press = true
+action = "left"
+visibility_mode = 1
+
+[node name="RightButton" type="TouchScreenButton" parent="."]
+position = Vector2( 250, 475 )
+scale = Vector2( 2, 2 )
+normal = SubResource( 2 )
+passby_press = true
+action = "right"
+visibility_mode = 1
+
+[node name="JumpButton" type="TouchScreenButton" parent="."]
+position = Vector2( 675, 375 )
+scale = Vector2( 2, 2 )
+normal = SubResource( 3 )
+passby_press = true
+action = "jump"
+visibility_mode = 1
+
+[node name="SprintButton" type="TouchScreenButton" parent="."]
+position = Vector2( 750, 475 )
+scale = Vector2( 2, 2 )
+normal = SubResource( 4 )
+passby_press = true
+action = "sprint"
+visibility_mode = 1
+
+[node name="CrouchButton" type="TouchScreenButton" parent="."]
+position = Vector2( 825, 375 )
+scale = Vector2( 2, 2 )
+normal = SubResource( 5 )
+passby_press = true
+action = "down"
+visibility_mode = 1
+
+[node name="ShootButton" type="TouchScreenButton" parent="."]
+position = Vector2( 900, 475 )
+scale = Vector2( 2, 2 )
+normal = SubResource( 6 )
+passby_press = true
+action = "shoot"
+visibility_mode = 1

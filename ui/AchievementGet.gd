@@ -3,19 +3,19 @@ extends RichTextLabel
 var coinsSinceStartingLevel := 0
 var currentLevel = 0
 
+onready var coin_counter = preload("res://scripts/CoinCounter.tres")
+
 
 func _ready():
-	EventBus.connect("coin_collected", self, "_on_coin_collected")
+	coin_counter.connect("coin_amount_changed", self, "_on_coin_amount_changed")
 	EventBus.connect("level_completed", self, "_on_level_completed")
 
 
-func _on_coin_collected(data):
-	var value := 1
-	if data and data.value:
-		value = data.value
-	coinsSinceStartingLevel += value
-	print("checking coin achievements")
-	get_achievements()
+func _on_coin_amount_changed(_total, difference):
+	if difference > 0:
+		coinsSinceStartingLevel += difference
+		print("checking coin achievements")
+		get_achievements()
 
 
 func get_achievements():

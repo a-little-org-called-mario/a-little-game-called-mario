@@ -1,14 +1,12 @@
 extends AudioStreamPlayer2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var coin_counter = preload("res://scripts/CoinCounter.tres")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-  EventBus.connect("coin_collected", self, "_on_coin_collected")
-  
-func _on_coin_collected():
-  play()
+	coin_counter.connect("coin_amount_changed", self, "_on_coin_amount_changed")
+
+
+func _on_coin_amount_changed(total, difference):
+	if difference >= 1:
+		play()

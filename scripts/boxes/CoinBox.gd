@@ -4,14 +4,17 @@ extends "res://scripts/boxes/BaseBox.gd"
 onready var particle_emitter = $CoinEmitter
 onready var audio_meow = $MeowStream
 onready var audio_coin = $CoinStream
+onready var coin_counter = preload("res://scripts/CoinCounter.tres")
+
 
 func _ready():
 	pass
+
 
 func on_bounce():
 	.on_bounce()
 	particle_emitter.restart()
 	particle_emitter.emitting = true
-	EventBus.emit_signal("coin_collected", { "value": 1, "type": "gold" })
+	coin_counter.add_coins(1)
 	audio_meow.play()
 	audio_coin.play()

@@ -26,9 +26,8 @@ var grounded = false
 var anticipating_jump = false # the small window of time before the player jumps
 
 onready var sprite = $Sprite
-
 onready var tween = $Tween
-
+onready var trail = $Trail
 onready var run_particles = $RunParticles
 
 onready var original_scale = sprite.scale;
@@ -132,8 +131,6 @@ func try_slip(angle: float):
 	position[axis] = original_v
 	return false
 
-
-
 func _input(event :InputEvent):
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
@@ -189,7 +186,13 @@ func squash(time=0.1, _returnDelay=0, squash_modifier=1.0):
 		lerp(original_scale, squash_scale, squash_modifier),
 		time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)
-	tween.start();
+	tween.interpolate_property(
+		trail, "height",
+		trail.height,
+		20 * squash_modifier,
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
+	tween.start()
 
 func stretch(time=0.2, _returnDelay=0, squash_modifier=1.0, stretch_modifier=1.0):
 	tween.remove_all()
@@ -212,6 +215,12 @@ func unsquash(time=0.1, _returnDelay=0, squash_modifier=1.0):
 		sprite, "scale",
 		lerp(original_scale, squash_scale, squash_modifier),
 		original_scale,
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
+	tween.interpolate_property(
+		trail, "height",
+		trail.height,
+		0,
 		time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)
 	tween.start();

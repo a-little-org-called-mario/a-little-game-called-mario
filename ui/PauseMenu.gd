@@ -92,7 +92,9 @@ func _process (_delta: float):
 						0: pass;
 						1: cam_lean_select(1, label);
 						2: screen_shake_toggle(label);
-						3: crt_filter_toggle(label);
+						3:
+							EventBus.emit_signal("game_paused", false);
+							crt_filter_toggle(label);
 				SUBMENU.SFX:
 					if 0 < selected:    volume_select(1, label);
 		elif Input.is_action_just_pressed("ui_accept"):

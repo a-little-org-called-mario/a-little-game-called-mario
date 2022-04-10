@@ -17,6 +17,10 @@ region = Rect2( 64, 0, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 64, 64 )
 
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 64, 64, 64 )
@@ -41,10 +45,6 @@ region = Rect2( 256, 64, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 320, 64, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 64, 64 )
-
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ SubResource( 30 ), SubResource( 31 ) ],
@@ -52,15 +52,15 @@ animations = [ {
 "name": "idle",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "move",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 32 ) ],
 "loop": true,
 "name": "die",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "move",
+"speed": 10.0
 } ]
 
 [sub_resource type="Animation" id=34]
@@ -293,10 +293,11 @@ script = ExtResource( 3 )
 bullet_scene = ExtResource( 5 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 0, 8 )
+position = Vector2( 0, -25 )
 shape = SubResource( 12 )
 
 [node name="GunAnchor" type="Node2D" parent="." index="1"]
+position = Vector2( 0, -32 )
 
 [node name="Sprite" type="Sprite" parent="GunAnchor" index="0"]
 rotation = 0.558505
@@ -309,30 +310,37 @@ position = Vector2( -12, 1.5 )
 
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 3 )
-animation = "die"
+animation = "idle"
+frame = 1
+playing = true
+offset = Vector2( 0, -32 )
 
 [node name="RayCastWalking" type="RayCast2D" parent="." index="3"]
+position = Vector2( 0, -32 )
 enabled = true
 cast_to = Vector2( -28, 0 )
 collision_mask = 2
 
 [node name="RayCastShooting" type="RayCast2D" parent="." index="4"]
+position = Vector2( 0, -32 )
 enabled = true
 cast_to = Vector2( -28, 0 )
 collision_mask = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="Tween" type="Tween" parent="." index="5"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 anims/aim = SubResource( 34 )
 anims/die = SubResource( 23 )
 anims/move = SubResource( 33 )
 
-[node name="KillTrigger" parent="." index="6"]
-position = Vector2( 0, -3.248 )
+[node name="KillTrigger" parent="." index="7"]
+position = Vector2( 0, -27 )
 
 [node name="CollisionPolygon2D" parent="KillTrigger" index="0"]
 shape = SubResource( 36 )
 
-[node name="SquishParticles" parent="." index="7"]
+[node name="SquishParticles" parent="." index="8"]
 emitting = false
 amount = 30
 lifetime = 0.5

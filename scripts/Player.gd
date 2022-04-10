@@ -9,7 +9,8 @@ const GRAVITY = 100
 const MAXFALLSPEED = 1000
 const FALLDAMAGETIMETRESHOLD = 0.4
 const FALLDAMAGE = 1
-const MAXSPEED = 300
+const MAXFALLSPEED = 1100
+const MAXSPEED = 350
 const JUMPFORCE = 1100
 const ACCEL = 50
 const COYOTE_TIME = 0.1
@@ -32,39 +33,40 @@ onready var sprite = $Sprite
 onready var audio_falling = $FallingStream
 onready var audio_life_lost = $LifeLostStream
 onready var tween = $Tween
+onready var trail = $Trail
+onready var run_particles = $RunParticles
 
 onready var original_scale = sprite.scale;
 onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 
 func _physics_process(delta : float) -> void:
-	motion.y += GRAVITY * gravity_multiplier
-
-	if motion.y > MAXFALLSPEED:
-		motion.y = MAXFALLSPEED
-
-	motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block")
 	
-	var speedModifier = 1
+	var max_speed_modifier = 1
+	var acceleration_modifier = 1
 	var animationSpeed = 8
-	if Input.is_key_pressed(KEY_SHIFT):
-		speedModifier = 5
+	if Input.is_action_pressed("sprint"):
+		max_speed_modifier = 1.5
+		acceleration_modifier = 3
 		animationSpeed = 60
 	sprite.frames.set_animation_speed("run", animationSpeed)
 
 	if Input.is_action_pressed("right"):
-		motion.x += ACCEL * speedModifier
+		motion.x += ACCEL * acceleration_modifier
 		sprite.play("run")
 		# pointing the character in the direction he's running
+		run_particles.emitting = true
 		look_right()
 	elif Input.is_action_pressed("left"):
-		motion.x -= ACCEL * speedModifier
+		motion.x -= ACCEL * acceleration_modifier
 		sprite.play("run")
+		run_particles.emitting = true
 		look_left()
 	else:	
 		sprite.play("idle")
+		run_particles.emitting = false
 		motion.x = lerp(motion.x, 0, 0.2)
 
 	jump_buffer_timer -= delta
@@ -105,15 +107,23 @@ func _physics_process(delta : float) -> void:
 		else:
 			gravity_multiplier = 1 
 		sprite.play("jump")
-		
+
 		if motion.y > 0:
 			time_falling += delta
-		
-	
+
+		run_particles.emitting = false
+
 
 	if crouching and not Input.is_action_pressed("down"):
 		crouching = false
 		unsquash()
+		
+	motion.y += GRAVITY * gravity_multiplier
+	
+	if motion.y > MAXFALLSPEED:
+		motion.y = MAXFALLSPEED
+
+	motion.x = clamp(motion.x, -MAXSPEED * max_speed_modifier, MAXSPEED * max_speed_modifier)
 
 	var move_and_slide_result = move_and_slide(motion, UP)
 	var slide_count = get_slide_count()
@@ -138,8 +148,6 @@ func try_slip(angle: float):
 	# restore original value on axis if couldn't find a slip
 	position[axis] = original_v
 	return false
-
-
 
 func _input(event :InputEvent):
 	# Remove one coin and spawn a projectile
@@ -196,7 +204,13 @@ func squash(time=0.1, _returnDelay=0, squash_modifier=1.0):
 		lerp(original_scale, squash_scale, squash_modifier),
 		time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)
-	tween.start();
+	tween.interpolate_property(
+		trail, "height",
+		trail.height,
+		20 * squash_modifier,
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
+	tween.start()
 
 func stretch(time=0.2, _returnDelay=0, squash_modifier=1.0, stretch_modifier=1.0):
 	tween.remove_all()
@@ -221,4 +235,17 @@ func unsquash(time=0.1, _returnDelay=0, squash_modifier=1.0):
 		original_scale,
 		time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)
+	tween.interpolate_property(
+		trail, "height",
+		trail.height,
+		0,
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
 	tween.start();
+
+func bounce(strength = 1100):
+	squash(0.075)
+	yield(tween, "tween_all_completed")
+	stretch(0.15)
+	coyote_timer = 0
+	motion.y = -strength

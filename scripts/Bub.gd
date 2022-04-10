@@ -20,6 +20,8 @@ const MAXFALLSPEED = 1000
 const RAY_CAST_WALKING_DISTANCE = 28
 const RAY_CAST_SHOOTING_DISTANCE = 600
 const MAX_SHOOTING_COOLDOWN = 2
+const RAY_CAST_DISTANCE = 28
+const BOUNCE_STRENGTH = 1100
 
 # Maximum movement speed
 export(float) var max_speed = 150
@@ -35,7 +37,12 @@ onready var _ray_walking := $RayCastWalking
 onready var _ray_shooting := $RayCastShooting
 onready var _gun_anchor := $GunAnchor
 onready var _muzzle := $GunAnchor/Sprite/Muzzle
+onready var sprite := $Sprite
+onready var tween := $Tween
 
+onready var original_scale = sprite.scale;
+onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
+onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 
 func _ready():
 	start_walking()
@@ -114,3 +121,25 @@ func fire_bullet():
 func start_walking():
 	_moving = true
 	_animation_player.play("move")
+
+func _on_KillTrigger_body_entered(body):
+	if not body is Player:
+		return
+	var player = body as Player
+	player.bounce(BOUNCE_STRENGTH)
+	squash(0.075);
+	yield(tween, "tween_all_completed")
+	stretch(0.15);
+
+
+# This isn't the best place to put these tweening functions and also copied from Player
+# Couldn't this be an animation?
+func squash(time=0.1, returnDelay=0):
+	tween.interpolate_property(sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.start();
+
+func stretch(time=0.2, returnDelay=0):
+	tween.interpolate_property(sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.interpolate_property(sprite, "scale", stretch_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
+	tween.start()
+

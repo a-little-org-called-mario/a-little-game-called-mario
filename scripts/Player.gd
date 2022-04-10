@@ -12,7 +12,7 @@ const JUMPFORCE = 1100
 const ACCEL = 50
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
-const JUMP_SLIP_RANGE = 16
+const SLIP_RANGE = 16
 
 export (PackedScene) var default_projectile :PackedScene= preload("res://scenes/CoinProjectile.tscn")
 
@@ -40,7 +40,9 @@ func _physics_process(delta : float) -> void:
 		motion.y = MAXFALLSPEED
 
 	motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
-
+	if Input.is_action_just_pressed("Build"):
+		EventBus.emit_signal("build_block")
+	
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL
 		sprite.play("run")
@@ -112,12 +114,11 @@ func try_jump_slip():
 	# check collisions in nearby x positions within JUMP_SLIP_RANGE
 	for x in range(1, JUMP_SLIP_RANGE):
 		for p in [-1, 1]:
-			position.x = original_x + x * p
+			position[axis] = original_v + r * p
 			move_and_slide(motion, UP)
-			if(get_slide_count() == 0):
-				return true # if no collision, return success
-	# restore original x position if couldn't find a slip
-	position.x = original_x
+			if(get_slide_count() == 0): return true # if no collision, return success
+	# restore original value on axis if couldn't find a slip
+	position[axis] = original_v
 	return false
 
 func crouch():

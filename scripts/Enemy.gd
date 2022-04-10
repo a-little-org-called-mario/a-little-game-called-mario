@@ -39,6 +39,7 @@ func kill(killer):
 	if is_dying():
 		return
 	_dying = true
+	EventBus.emit_signal("enemy_killed")
 	emit_signal("dying", killer)
 	var res = _handle_dying(killer)
 	if res is GDScriptFunctionState:
@@ -80,3 +81,9 @@ func ai(_delta: float):
 # Called every _physics_process tick to move the enemy, if necessary.
 func move(_delta: float):
 	pass
+
+
+func _on_KillTrigger_body_entered(body):
+	if body is Player:
+		kill(self)
+

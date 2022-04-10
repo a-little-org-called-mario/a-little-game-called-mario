@@ -1,0 +1,195 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
+[ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=3]
+[ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
+[ext_resource path="res://sprites/mario.png" type="Texture" id=5]
+[ext_resource path="res://scenes/title/Mario.gd" type="Script" id=6]
+[ext_resource path="res://scenes/title/StartButton.gd" type="Script" id=7]
+[ext_resource path="res://scenes/title/OptionsButton.gd" type="Script" id=8]
+[ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
+[ext_resource path="res://scenes/title/Contributors.gd" type="Script" id=11]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 2.9, 3.1 ), Vector2( 3.1, 2.9 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ) ]
+}
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -433, -225 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Mario" type="Sprite" parent="."]
+position = Vector2( 513, 356 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -16 )
+hframes = 6
+vframes = 2
+script = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mario"]
+autoplay = "Idle"
+playback_speed = 0.5
+anims/Idle = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_right = -20.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ALittleGameCalled" type="Label" parent="VBoxContainer"]
+margin_right = 984.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 0, 130 )
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "A LITTLE GAME CALLED"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Mario" type="RichTextLabel" parent="VBoxContainer"]
+margin_left = 397.0
+margin_top = 134.0
+margin_right = 587.0
+margin_bottom = 254.0
+rect_min_size = Vector2( 190, 120 )
+size_flags_horizontal = 6
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1]MARIO[/rainbow]"
+text = "
+MARIO"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+margin_top = 258.0
+margin_right = 984.0
+margin_bottom = 388.0
+rect_min_size = Vector2( 0, 130 )
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 392.0
+margin_right = 984.0
+margin_bottom = 468.0
+
+[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_right = 984.0
+margin_bottom = 36.0
+text = "START GAME"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 984.0
+margin_bottom = 76.0
+disabled = true
+text = "OPTIONSs"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SmolCreditsLabel" type="Label" parent="VBoxContainer"]
+margin_top = 472.0
+margin_right = 984.0
+margin_bottom = 552.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.47451, 0.47451, 0.47451, 1 )
+text = "A GAME BY:"
+valign = 2
+clip_text = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 556.0
+margin_right = 984.0
+margin_bottom = 572.0
+scroll_vertical_enabled = false
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+scroll_speed = 75.0
+
+[node name="Contributors" type="Label" parent="VBoxContainer/CreditsContainer"]
+margin_bottom = 16.0
+uppercase = true
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}

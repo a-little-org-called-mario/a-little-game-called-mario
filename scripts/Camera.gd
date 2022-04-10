@@ -6,6 +6,7 @@ const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd")
 
 
 func _ready():
+	EventBus.connect("jumping", self, "trigger_small_shake")
 	EventBus.connect("enemy_killed", self, "trigger_small_shake")
 	position = get_viewport_rect().size / 2
 

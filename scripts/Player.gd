@@ -47,7 +47,7 @@ func _physics_process(delta : float) -> void:
 	
 	var speedModifier = 1
 	var animationSpeed = 8
-	if Input.is_key_pressed(KEY_SHIFT):
+	if Input.is_action_pressed("sprint"):
 		speedModifier = 5
 		animationSpeed = 60
 	sprite.frames.set_animation_speed("run", animationSpeed)

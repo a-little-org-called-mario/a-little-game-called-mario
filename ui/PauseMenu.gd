@@ -21,6 +21,7 @@ onready var labels = [
 							get_node("PauseMenu/MainMenu/BackLabel"),
 							get_node("PauseMenu/MainMenu/GFXLabel"),
 							get_node("PauseMenu/MainMenu/SFXLabel"),
+							get_node("PauseMenu/MainMenu/RestartLabel"),
 						],
 						# all gfx menu items, ordered vertically
 						[
@@ -101,6 +102,7 @@ func _process (_delta: float):
 						0: EventBus.emit_signal("game_paused", false);
 						1: go_to_menu(SUBMENU.GFX);
 						2: go_to_menu(SUBMENU.SFX);
+						3: pass; #TODO - handle game restart here!!
 				SUBMENU.GFX:
 					match selected:
 						0: go_to_menu(SUBMENU.MAIN);

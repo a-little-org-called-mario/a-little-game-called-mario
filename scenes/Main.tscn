@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=2]
@@ -11,8 +11,9 @@
 [ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=9]
 [ext_resource path="res://shaders/CRT.gdshader" type="Shader" id=10]
 [ext_resource path="res://ui/TouchInputs.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/CRTRect.gd" type="Script" id=12]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 10 )
 shader_param/res = Vector2( 1024, 600 )
 shader_param/mask_type = 0
@@ -26,47 +27,44 @@ shader_param/warp = Vector2( 64, 24 )
 shader_param/maskDark = 0.5
 shader_param/maskLight = 1.5
 
-[node name="Root" type="Node"]
-
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-material = SubResource( 2 )
-margin_right = 1024.0
-margin_bottom = 600.0
-
-[node name="Main" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1024, 600 )
-handle_input_locally = false
-usage = 0
-render_target_update_mode = 3
-audio_listener_enable_2d = true
+[node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Camera" type="Camera2D" parent="ViewportContainer/Main"]
+[node name="Camera" type="Camera2D" parent="."]
 rotating = true
 current = true
 script = ExtResource( 6 )
 
-[node name="ScreenShake" parent="ViewportContainer/Main/Camera" instance=ExtResource( 5 )]
+[node name="ScreenShake" parent="Camera" instance=ExtResource( 5 )]
 
-[node name="Player" parent="ViewportContainer/Main" instance=ExtResource( 1 )]
+[node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 159, 443 )
 
-[node name="TileMap" parent="ViewportContainer/Main" instance=ExtResource( 4 )]
+[node name="TileMap" parent="." instance=ExtResource( 4 )]
 
-[node name="UI" parent="ViewportContainer/Main" instance=ExtResource( 3 )]
+[node name="UI" parent="." instance=ExtResource( 3 )]
 
-[node name="PauseMenu" parent="ViewportContainer/Main" instance=ExtResource( 9 )]
+[node name="PauseMenu" parent="." instance=ExtResource( 9 )]
 
-[node name="Transition" parent="ViewportContainer/Main" instance=ExtResource( 8 )]
+[node name="Transition" parent="." instance=ExtResource( 8 )]
 
-[node name="TouchInputs" parent="ViewportContainer/Main" instance=ExtResource( 11 )]
+[node name="TouchInputs" parent="." instance=ExtResource( 11 )]
 
-[node name="Music" type="Node" parent="ViewportContainer/Main"]
+[node name="CRTLayer" type="CanvasLayer" parent="."]
+layer = 10
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ViewportContainer/Main/Music"]
+[node name="CRTRect" type="ColorRect" parent="CRTLayer"]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 12 )
+
+[node name="Music" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 7 )
 volume_db = -20.0
 autoplay = true
 bus = "music"
 
-[connection signal="jumping" from="ViewportContainer/Main/Player" to="ViewportContainer/Main/Camera" method="trigger_small_shake"]
+[connection signal="jumping" from="Player" to="Camera" method="trigger_small_shake"]

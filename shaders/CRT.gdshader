@@ -262,15 +262,15 @@ float Bar(float pos, float bar){ pos -= bar; return pos * pos < 4.0 ? 0.0 : 1.0;
 
 // Entry.
 void fragment(){
-	vec2 coord = UV*res;
-	vec2 pos = Warp(coord.xy / (1.0 / TEXTURE_PIXEL_SIZE).xy);
+	vec2 coord = SCREEN_UV*res;
+	vec2 pos = Warp(SCREEN_UV);
 	
-	COLOR.rgb = Tri(pos, TEXTURE) * Mask(coord.xy);
-	if (bloom_type == 0){ 
-		COLOR.rgb = mix(COLOR.rgb,Bloom(pos, TEXTURE), 1.0 / bloomAmount);    
-	}else if (bloom_type == 1){
-		COLOR.rgb += Bloom(pos, TEXTURE) * 1.0 / bloomAmount;    
-	} 
+	COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(coord.xy);
+	if (bloom_type == 0) {
+		COLOR.rgb = mix(COLOR.rgb,Bloom(pos, SCREEN_TEXTURE), 1.0 / bloomAmount);
+	} else if (bloom_type == 1) {
+		COLOR.rgb += Bloom(pos, SCREEN_TEXTURE) * 1.0 / bloomAmount;
+	}
 	
 	COLOR.a = 1.0;  
 	COLOR.rgb = ToSrgb(COLOR.rgb);

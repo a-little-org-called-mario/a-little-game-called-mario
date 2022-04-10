@@ -103,13 +103,29 @@ func _physics_process(delta : float) -> void:
 
 	var move_and_slide_result = move_and_slide(motion, UP)
 	var slide_count = get_slide_count()
-	# check for an upwards-collision
-	if slide_count && get_slide_collision(slide_count-1).get_angle(Vector2(0,1)) == 0:
-		var slipped = try_jump_slip() # try to adjust player position to "slip" past a wall
-		if !slipped:
-			motion = move_and_slide_result # apply original result if no valid slip found
-	else:
-		motion = move_and_slide_result
+
+	var slipped = false
+	# try slipping around block corners when jumping or crossing gaps
+	if slide_count: slipped = try_slip(get_slide_collision(slide_count-1).get_angle())
+	# apply original result if no valid slip found
+	if !slipped: motion = move_and_slide_result
+
+func try_slip(angle: float):
+	if angle == 0: return false
+	var axis = "x" if is_equal_approx(angle, PI) else "y"
+	# is_equal_approx(abs(collision_angle - PI), PI/2)
+	var original_v = position[axis] # remember original value on axis
+	# check collisions in nearby positions within SLIP_RANGE
+	for r in range(1, SLIP_RANGE):
+		for p in [-1, 1]:
+			position[0] = original_v + r * p
+			move_and_slide(motion, UP)
+			if(get_slide_count() == 0): return true # if no collision, return success
+	# restore original value on axis if couldn't find a slip
+	position[0] = original_v
+	return false
+
+
 
 func _input(event :InputEvent):
 	# Remove one coin and spawn a projectile
@@ -117,18 +133,6 @@ func _input(event :InputEvent):
 	if event.is_action_pressed("shoot"):
 		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
 		shoot(default_projectile)
-
-func try_jump_slip():
-	var original_x = position.x # remember original x position
-	# check collisions in nearby x positions within JUMP_SLIP_RANGE
-	for x in range(1, 10):
-		for p in [-1, 1]:
-			position[0] = original_x + 1 * p
-			move_and_slide(motion, UP)
-			if(get_slide_count() == 0): return true # if no collision, return success
-	# restore original value on axis if couldn't find a slip
-	position[0] = original_x
-	return false
 
 func crouch():
 	crouching = true

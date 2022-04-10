@@ -7,7 +7,7 @@ func _ready():
 	pass
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var collision = move_and_collide(transform.x * SPEED)
 	if collision:
 		# add effect here

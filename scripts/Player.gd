@@ -115,7 +115,7 @@ func _physics_process(delta: float) -> void:
 	if motion.y > MAXFALLSPEED:
 		motion.y = MAXFALLSPEED
 
-  if bouncing:
+	if bouncing:
 		motion.x = clamp(motion.x, -MAXBOUNCESPEED, MAXBOUNCESPEED)
 	else:
 	  motion.x = clamp(motion.x, -MAXSPEED * max_speed_modifier, MAXSPEED * max_speed_modifier)

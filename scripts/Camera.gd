@@ -25,7 +25,7 @@ func _process(_delta):
 		lean(lean_amount);
 	else:
 		lean(0, 0.1);
-    
+	
 func lean(radians, speed := 0.05) -> void:
   rotation = lerp(rotation, radians, speed)
   zoom.x = lerp(zoom.x, 1 + radians / 2.0, speed * 2)

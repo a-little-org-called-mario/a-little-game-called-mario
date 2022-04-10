@@ -118,11 +118,11 @@ func try_slip(angle: float):
 	# check collisions in nearby positions within SLIP_RANGE
 	for r in range(1, SLIP_RANGE):
 		for p in [-1, 1]:
-			position[0] = original_v + r * p
+			position[axis] = original_v + r * p
 			move_and_slide(motion, UP)
 			if(get_slide_count() == 0): return true # if no collision, return success
 	# restore original value on axis if couldn't find a slip
-	position[0] = original_v
+	position[axis] = original_v
 	return false
 
 

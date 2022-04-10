@@ -6,13 +6,16 @@ extends Area2D
 #  new one loaded in its place.
 export var next_level : PackedScene
 
+onready var mario : AnimatedSprite = $Mario
+
 
 func _ready():
   $Sprite.play()
 
 func on_portal_enter():
-  $Mario.visible = true;
-  $Mario.play();
-  $PortalSFX.play();
+  mario.visible = true
+  mario.frame = 0
+  mario.play()
+  $PortalSFX.play()
   EventBus.emit_signal("level_completed", { })
-  return $Mario
+  return mario

@@ -7,9 +7,11 @@ func _ready():
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("level_completed", self, "_on_level_completed")
   
-func _on_coin_collected(_data):
+func _on_coin_collected(data):
 	var value := 1
-	coinsSinceStartingLevel += 1
+	if data and data.value:
+		value = data.value
+	coinsSinceStartingLevel += value
 	print("checking coin achievements")
 	get_achievements()
 

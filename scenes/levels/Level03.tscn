@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/enemies/GassyRandal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/levels/Level04.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/enemies/GassyRandal.tscn" type="PackedScene" id=4]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -12,5 +14,9 @@ tile_data = PoolIntArray( -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 
 [node name="SpawnPoint" type="Position2D" parent="." groups=["SpawnPoints"]]
 position = Vector2( 214, 424 )
 
-[node name="Node2D" parent="." instance=ExtResource( 2 )]
+[node name="EndPortal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 53, 19 )
+next_level = ExtResource( 3 )
+
+[node name="Node2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 377, 289 )

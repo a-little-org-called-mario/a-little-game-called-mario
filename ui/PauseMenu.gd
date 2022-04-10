@@ -8,6 +8,7 @@ onready var label_sfx = get_node("PauseMenu/MainMenu/SFXLabel");
 
 onready var label_gfxback = get_node("PauseMenu/GFXMenu/BackLabel");
 onready var label_camlean = get_node("PauseMenu/GFXMenu/CamLeanLabel");
+onready var label_shake = get_node("PauseMenu/GFXMenu/ShakeLabel");
 onready var label_crt = get_node("PauseMenu/GFXMenu/CRTLabel");
 
 const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd");
@@ -16,12 +17,10 @@ enum PAUSE_MENU {MAIN,GFX,SFX};
 var current_menu : int = PAUSE_MENU.MAIN;
 var element_selected : int = 0;
 
-#note [jam]: this is legal lmao? dynamic typed languages are wild
-var cameralean_OFF=Vector2("OFF",0);
-var cameralean_MIN=Vector2("MIN",1);
-var cameralean_MAX=Vector2("MAX",2);
-
 func _ready() -> void:
+	$PauseMenu/MainMenu.show();
+	$PauseMenu/GFXMenu.hide();
+	$PauseMenu/SFXMenu.hide();
 	$PauseMenu.hide();
 	EventBus.connect("game_paused",self,"_on_pause_toggle");
 	
@@ -43,8 +42,13 @@ func _process(_delta:float) -> void:
 				#camera lean selection
 				if 1 == element_selected && PAUSE_MENU.GFX == current_menu:
 					cam_lean_select(-1);
+				#screen shake selection
+				if 2== element_selected && PAUSE_MENU.GFX == current_menu:
+					Settings.screen_shake=!Settings.screen_shake;
+					label_shake.text="\nSCREEN SHAKE: " + ("ON" if Settings.screen_shake else "OFF");
+					set_active_element_style();
 				#crt filter selection
-				elif 2 == element_selected && PAUSE_MENU.GFX == current_menu:
+				elif 3 == element_selected && PAUSE_MENU.GFX == current_menu:
 					Settings.crt_filter=!Settings.crt_filter;
 					label_crt.text="\nCRT FILTER: " + ("ON" if Settings.crt_filter else "OFF");
 					set_active_element_style();
@@ -53,7 +57,13 @@ func _process(_delta:float) -> void:
 				#camera lean selection
 				if 1 == element_selected && PAUSE_MENU.GFX == current_menu:
 					cam_lean_select(1);
-				elif 2 == element_selected && PAUSE_MENU.GFX == current_menu:
+				#screen shake selection
+				if 2== element_selected && PAUSE_MENU.GFX == current_menu:
+					Settings.screen_shake=!Settings.screen_shake;
+					label_shake.text="\nSCREEN SHAKE: " + ("ON" if Settings.screen_shake else "OFF");
+					set_active_element_style();
+				#crt filter selection
+				elif 3 == element_selected && PAUSE_MENU.GFX == current_menu:
 					Settings.crt_filter=!Settings.crt_filter;
 					label_crt.text="\nCRT FILTER: " + ("ON" if Settings.crt_filter else "OFF");
 					set_active_element_style();
@@ -82,9 +92,8 @@ func _on_pause_toggle (data:bool) -> void:
 func get_element_count () -> int:
 	match current_menu:
 		PAUSE_MENU.MAIN: return 2; #NOTE [jam] - make this 3 when adding sfx options
-		PAUSE_MENU.GFX: return 3;
-		PAUSE_MENU.SFX:
-			pass #TODO
+		PAUSE_MENU.GFX: return 4;
+		PAUSE_MENU.SFX: return 4;
 	return 1;
 
 func set_active_element_style () -> void:
@@ -100,12 +109,14 @@ func set_active_element_style () -> void:
 	elif PAUSE_MENU.GFX == current_menu:
 		label_gfxback.bbcode_text=label_gfxback.text;
 		label_camlean.bbcode_text=label_camlean.text;
+		label_shake.bbcode_text=label_shake.text;
 		label_crt.bbcode_text=label_crt.text;
 
 		match element_selected:
 			0: label_gfxback.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_gfxback.text)+"[/wave][/color]";
 			1: label_camlean.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_camlean.text)+"[/wave][/color]";
-			2: label_crt.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_crt.text)+"[/wave][/color]";
+			2: label_shake.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_shake.text)+"[/wave][/color]";
+			3: label_crt.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_crt.text)+"[/wave][/color]";
 
 func main_menu_accept () -> void:
 	match element_selected:
@@ -117,9 +128,13 @@ func main_menu_accept () -> void:
 			current_menu=PAUSE_MENU.GFX;
 			element_selected=0;
 			set_active_element_style();
-			pass;
 		2:
 			pass;
+			#$PauseMenu/MainMenu.hide();
+			#$PauseMenu/SFXMenu.show();
+			#current_menu=PAUSE_MENU.SFX;
+			#element_selected=0;
+			#set_active_element_style();
 
 func gfx_menu_accept () -> void:
 	match element_selected:
@@ -132,11 +147,15 @@ func gfx_menu_accept () -> void:
 			pass;
 		1:
 			cam_lean_select(1);
-		2:
+		3:
 			Settings.crt_filter=!Settings.crt_filter;
 			label_crt.text="\nCRT FILTER: " + ("ON" if Settings.crt_filter else "OFF");
 			set_active_element_style();
 			EventBus.emit_signal("crt_filter_toggle",Settings.crt_filter);
+		2:
+			Settings.screen_shake=!Settings.screen_shake;
+			label_shake.text="\nSCREEN SHAKE: " + ("ON" if Settings.screen_shake else "OFF");
+			set_active_element_style();
 
 func cam_lean_select (delta: int) -> void:
 	if 1 == delta:

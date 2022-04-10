@@ -16,6 +16,9 @@ onready var _duration_timer: Timer = $Duration
 func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
 	if (priority < self.priority):
 		return
+		
+	if !Settings.screen_shake:
+		return;
 
 	self.priority = priority
 	self.amplitude = amplitude

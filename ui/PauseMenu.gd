@@ -46,6 +46,9 @@ func _process(delta:float) -> void:
 				#crt filter selection
 				elif 2 == element_selected && PAUSE_MENU.GFX == current_menu:
 					Settings.crt_filter=!Settings.crt_filter;
+					label_crt.text="\nCRT FILTER: " + ("ON" if Settings.crt_filter else "OFF");
+					set_active_element_style();
+					EventBus.emit_signal("crt_filter_toggle",Settings.crt_filter);
 			elif Input.is_action_just_pressed("ui_right"):
 				#camera lean selection
 				if 1 == element_selected && PAUSE_MENU.GFX == current_menu:

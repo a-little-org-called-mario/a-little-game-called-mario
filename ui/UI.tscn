@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
 [ext_resource path="res://ui/AchievementGet.gd" type="Script" id=3]
 [ext_resource path="res://ui/LevelCount.gd" type="Script" id=4]
+[ext_resource path="res://ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -21,7 +22,7 @@ anchor_right = 0.481
 anchor_bottom = 0.217
 margin_left = 47.28
 margin_top = -20.0
-margin_right = -183.544
+margin_right = -99.544
 margin_bottom = -17.2
 rect_scale = Vector2( 2, 2 )
 custom_constants/line_separation = 0
@@ -42,6 +43,8 @@ SPACE TO JUMP
 
 CONTROL/Z TO SHOOT"
 fit_content_height = true
+script = ExtResource( 5 )
+localization_key = "TUTORIAL_MOVEMENT"
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0

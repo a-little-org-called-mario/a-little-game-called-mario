@@ -13,6 +13,9 @@ font_data = ExtResource( 1 )
 [node name="UI" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03
@@ -33,15 +36,22 @@ SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
 
 SPACE TO [wave amp=50 freq=2]JUMP[/wave]
 
-CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]"
+CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
+
+Q TO [wave amp=50 freq=2]BUILD/UNBUILD [/wave]"
 text = "ARROW KEYS TO MOVE
 
 SHIFT TO SPRINT
 
 SPACE TO JUMP
 
-CONTROL/Z TO SHOOT"
+CONTROL/Z TO SHOOT
+
+Q TO BUILD/UNBUILD "
 fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
@@ -73,6 +83,9 @@ bbcode_text = "
 text = "
 COINS:0 "
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AchievementLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03

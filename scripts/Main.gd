@@ -39,24 +39,26 @@ func _hook_portals() -> void:
 
 
 func _on_build() -> void:
-	# If there is a child named TileMap, place a block.
+	# If there is a TileMap type child (which at the time of writing is probably a platformer level
+	# then try to "build" on that TileMap
 	# Otherwise ignore. Note that this condition is false for some levels.
-	if $TileMap != null:
-		# Find the player's current position on the tilemap, and look one cell
-		# to the left or right depending on which direction the player sprite
-		# is facing.
-		var player_tile = $TileMap.world_to_map($Player.position)
-		var target_tile_x = player_tile[0] + 1
-		if $Player.sprite.flip_h:
-			target_tile_x = player_tile[0] - 1
-		var target_tile_y = player_tile[1]
-		var target_cell_v = $TileMap.get_cell(target_tile_x, target_tile_y)
-		if target_cell_v == 0:
-			# If the cell is empty, place a block
-			$TileMap.set_cell(target_tile_x, target_tile_y, 1)
-		elif target_cell_v == 1:
-			# If the cell has a block in in, break the block.
-			$TileMap.set_cell(target_tile_x, target_tile_y, 0)
+	for child in get_children():
+		if child is TileMap:
+			# Find the player's current position on the tilemap, and look one cell
+			# to the left or right depending on which direction the player sprite
+			# is facing.
+			var player_tile = child.world_to_map($Player.position)
+			var target_tile_x = player_tile[0] + 1
+			if $Player.sprite.flip_h:
+				target_tile_x = player_tile[0] - 1
+			var target_tile_y = player_tile[1]
+			var target_cell_v = child.get_cell(target_tile_x, target_tile_y)
+			if target_cell_v == 0:
+				# If the cell is empty, place a block
+				child.set_cell(target_tile_x, target_tile_y, 1)
+			elif target_cell_v == 1:
+				# If the cell has a block in in, break the block.
+				child.set_cell(target_tile_x, target_tile_y, 0)
 
 
 func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: EndPortal) -> void:

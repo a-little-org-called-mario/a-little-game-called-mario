@@ -309,7 +309,9 @@ position = Vector2( -12, 1.5 )
 
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 3 )
-animation = "die"
+animation = "idle"
+frame = 1
+playing = true
 
 [node name="RayCastWalking" type="RayCast2D" parent="." index="3"]
 enabled = true
@@ -321,18 +323,20 @@ enabled = true
 cast_to = Vector2( -28, 0 )
 collision_mask = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="Tween" type="Tween" parent="." index="5"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 anims/aim = SubResource( 34 )
 anims/die = SubResource( 23 )
 anims/move = SubResource( 33 )
 
-[node name="KillTrigger" parent="." index="6"]
+[node name="KillTrigger" parent="." index="7"]
 position = Vector2( 0, -3.248 )
 
 [node name="CollisionPolygon2D" parent="KillTrigger" index="0"]
 shape = SubResource( 36 )
 
-[node name="SquishParticles" parent="." index="7"]
+[node name="SquishParticles" parent="." index="8"]
 emitting = false
 amount = 30
 lifetime = 0.5

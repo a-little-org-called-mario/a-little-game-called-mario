@@ -19,21 +19,24 @@ anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
 anchor_bottom = 0.217
-margin_left = 0.279999
+margin_left = 0.280001
 margin_right = -230.544
-margin_bottom = -50.2
+margin_bottom = -21.2
 rect_scale = Vector2( 2, 2 )
+custom_constants/line_separation = 0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
 
-SPACE TO [wave amp=50 freq=2]JUMP[/wave]"
+SPACE TO [wave amp=50 freq=2]JUMP[/wave]
+
+CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]"
 text = "ARROW KEYS TO MOVE
 
-SPACE TO JUMP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+SPACE TO JUMP
+
+CONTROL/Z TO SHOOT"
+fit_content_height = true
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0

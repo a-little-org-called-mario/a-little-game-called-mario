@@ -73,7 +73,7 @@ __meta__ = {
 }
 
 [node name="Mario" type="Sprite" parent="."]
-position = Vector2( 513, 356 )
+position = Vector2( 513, 354 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -16 )
@@ -176,8 +176,8 @@ __meta__ = {
 [node name="SmolCreditsLabel" type="Label" parent="VBoxContainer"]
 margin_top = 512.0
 margin_right = 984.0
-margin_bottom = 592.0
-rect_min_size = Vector2( 0, 80 )
+margin_bottom = 552.0
+rect_min_size = Vector2( 0, 40 )
 size_flags_vertical = 5
 custom_colors/font_color = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "A GAME BY:"
@@ -188,9 +188,9 @@ __meta__ = {
 }
 
 [node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 596.0
+margin_top = 556.0
 margin_right = 984.0
-margin_bottom = 612.0
+margin_bottom = 572.0
 scroll_vertical_enabled = false
 script = ExtResource( 10 )
 __meta__ = {

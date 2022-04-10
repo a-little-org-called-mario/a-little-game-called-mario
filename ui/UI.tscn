@@ -1,9 +1,15 @@
+
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
 [ext_resource path="res://ui/LivesCount.gd" type="Script" id=3]
 [ext_resource path="res://sprites/anatomical-heart.png" type="Texture" id=4]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
+[ext_resource path="res://ui/AchievementGet.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -19,18 +25,23 @@ anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
 anchor_bottom = 0.217
-margin_left = 0.279999
+margin_left = 0.280001
 margin_right = -230.544
-margin_bottom = -50.2
+margin_bottom = -21.2
 rect_scale = Vector2( 2, 2 )
+custom_constants/line_separation = 0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
 
-SPACE TO [wave amp=50 freq=2]JUMP[/wave]"
+SPACE TO [wave amp=50 freq=2]JUMP[/wave]
+
+CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]"
 text = "ARROW KEYS TO MOVE
 
-SPACE TO JUMP"
+SPACE TO JUMP
+CONTROL/Z TO SHOOT"
+fit_content_height = true
 
 [node name="CoinCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
@@ -46,6 +57,7 @@ bbcode_text = "
 text = "
 COINS:0 "
 script = ExtResource( 2 )
+
 
 [node name="Lives" type="Node" parent="UI"]
 script = ExtResource( 3 )
@@ -74,3 +86,22 @@ texture = ExtResource( 4 )
 position = Vector2( 769, 561 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 4 )
+
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AchievementLabel" type="RichTextLabel" parent="UI"]
+anchor_left = 0.03
+anchor_top = 0.05
+anchor_right = 0.481
+anchor_bottom = 0.217
+margin_left = 14.28
+margin_top = 479.0
+margin_right = 22.456
+margin_bottom = 423.8
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+script = ExtResource( 3 )
+

@@ -62,6 +62,8 @@ func move(_delta: float):
 func disable_collision():
 	.disable_collision()
 	_ray.enabled = false
+	$CollisionShape2D.queue_free()
+	$KillTrigger.queue_free()
 
 
 # Disables collision, plays the sprite death animation and the 
@@ -71,5 +73,6 @@ func _handle_dying(_killer):
 	disable_collision()
 	_sprite.play("die")
 	_animation_player.play("die")
+	$SquishParticles.emitting=true
 	yield(_animation_player, "animation_finished")
 

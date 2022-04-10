@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Bub.gd" type="Script" id=3]
@@ -14,6 +14,10 @@ region = Rect2( 64, 0, 64, 64 )
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 4 )
@@ -39,10 +43,6 @@ region = Rect2( 256, 64, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 320, 64, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 64, 64 )
-
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ SubResource( 30 ), SubResource( 31 ) ],
@@ -50,15 +50,15 @@ animations = [ {
 "name": "idle",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "move",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 32 ) ],
 "loop": true,
 "name": "die",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "move",
+"speed": 10.0
 } ]
 
 [sub_resource type="Animation" id=23]
@@ -100,6 +100,12 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="CircleShape2D" id=33]
+radius = 25.0311
+
+[sub_resource type="Curve" id=35]
+_data = [ Vector2( 0, 0.634091 ), 0.0, 0.0, 0, 0, Vector2( 0.769608, 0.7875 ), -1.01157, -1.01157, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
 [node name="Bub" instance=ExtResource( 1 )]
 collision_mask = 2
 script = ExtResource( 3 )
@@ -111,7 +117,7 @@ shape = SubResource( 12 )
 [node name="Sprite" parent="." index="1"]
 frames = SubResource( 3 )
 animation = "move"
-frame = 5
+frame = 2
 playing = true
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="2"]
@@ -121,3 +127,25 @@ collision_mask = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/die = SubResource( 23 )
+
+[node name="KillTrigger" parent="." index="4"]
+position = Vector2( 0, -3.248 )
+
+[node name="CollisionPolygon2D" parent="KillTrigger" index="0"]
+shape = SubResource( 33 )
+
+[node name="SquishParticles" parent="." index="5"]
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+flag_align_y = true
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, 5500 )
+initial_velocity = 1000.0
+initial_velocity_random = 0.19
+scale_amount = 20.0
+scale_amount_curve = SubResource( 35 )
+color = Color( 0.0705882, 0.592157, 0.760784, 1 )

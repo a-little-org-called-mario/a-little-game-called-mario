@@ -67,7 +67,7 @@ animations = [ {
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
-collision_mask = 14
+collision_mask = 15
 script = ExtResource( 3 )
 
 [node name="Trail" type="Line2D" parent="."]

@@ -30,8 +30,8 @@ var hasFlower = false
 
 onready var sprite = $Sprite
 onready var tween = $Tween
-onready var trail = $Trail
-onready var run_particles = $RunParticles
+onready var trail = Line2d = $Trail
+onready var run_particles = CPUParticles2D = $RunParticles
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -263,6 +263,12 @@ func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 	)
 	tween.start()
 
+func reset() -> void:
+	look_right()
+	run_particles.emitting = false
+	run_particles.restart()
+	trail.reset()
+	
 
 func bounce(strength = 1100):
 	squash(0.075)

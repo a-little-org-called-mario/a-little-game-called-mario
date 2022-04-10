@@ -1,0 +1,24 @@
+name: Auto-Format PR
+
+on:
+  # Note that pull_request_target is relatively unsafe
+  # We don't want to build here or run untrusted code
+  pull_request_target:
+    paths: 
+      - '**/*.gd'
+
+jobs:
+   format_code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v3
+        with: 
+          python-version: 3.x
+      - run: pip3 install 'gdtoolkit==3.*'
+      - run: gdformat **/*.gd
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Auto-Format GDScript
+          file_pattern: "**/*.gd"

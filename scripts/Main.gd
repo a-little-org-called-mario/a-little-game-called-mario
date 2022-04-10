@@ -18,9 +18,10 @@ var coinSound = preload("res://sfx/coin.wav")
 
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
+	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle")
+	EventBus.connect("volume_changed",self,"_on_volume_change")
+	Settings.load_data()
 	_hook_portals()
-	EventBus.connect("crt_filter_toggle", self, "_on_crt_toggle")
-	EventBus.connect("volume_changed", self, "_on_volume_change")
 	VisualServer.set_default_clear_color(Color.black)
 
 

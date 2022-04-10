@@ -93,7 +93,7 @@ tracks/1/keys = {
 "values": [ Vector2( 2, 2 ) ]
 }
 
-[node name="CoinProjectile" type="Area2D" groups=["PlayerProjectile"]]
+[node name="CoinProjectile" type="Area2D" groups=["PlayerProjectile", "Projectiles"]]
 collision_layer = 256
 collision_mask = 10
 script = ExtResource( 2 )
@@ -113,10 +113,12 @@ playing = true
 [node name="Shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -5.0
+bus = "sfx"
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = -5.0
+bus = "sfx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/disappear = SubResource( 11 )

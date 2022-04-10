@@ -90,3 +90,4 @@ __meta__ = {
 [node name="PortalSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = -6.0
+bus = "sfx"

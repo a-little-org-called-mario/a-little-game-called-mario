@@ -6,8 +6,8 @@ signal shooting
 
 const UP = Vector2.UP
 const GRAVITY = 100
-const MAXFALLSPEED = 1000
-const MAXSPEED = 300
+const MAXFALLSPEED = 1100
+const MAXSPEED = 350
 const JUMPFORCE = 1100
 const ACCEL = 50
 const COYOTE_TIME = 0.1
@@ -34,29 +34,25 @@ onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 
 func _physics_process(delta : float) -> void:
-	motion.y += GRAVITY * gravity_multiplier
-
-	if motion.y > MAXFALLSPEED:
-		motion.y = MAXFALLSPEED
-
-	motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block")
 	
-	var speedModifier = 1
+	var max_speed_modifier = 1
+	var acceleration_modifier = 1
 	var animationSpeed = 8
 	if Input.is_key_pressed(KEY_SHIFT):
-		speedModifier = 5
+		max_speed_modifier = 1.5
+		acceleration_modifier = 3
 		animationSpeed = 60
 	sprite.frames.set_animation_speed("run", animationSpeed)
 
 	if Input.is_action_pressed("right"):
-		motion.x += ACCEL * speedModifier
+		motion.x += ACCEL * acceleration_modifier
 		sprite.play("run")
 		# pointing the character in the direction he's running
 		look_right()
 	elif Input.is_action_pressed("left"):
-		motion.x -= ACCEL * speedModifier
+		motion.x -= ACCEL * acceleration_modifier
 		sprite.play("run")
 		look_left()
 	else:	
@@ -98,6 +94,13 @@ func _physics_process(delta : float) -> void:
 	if crouching and not Input.is_action_pressed("down"):
 		crouching = false
 		unsquash()
+		
+	motion.y += GRAVITY * gravity_multiplier
+	
+	if motion.y > MAXFALLSPEED:
+		motion.y = MAXFALLSPEED
+
+	motion.x = clamp(motion.x, -MAXSPEED * max_speed_modifier, MAXSPEED * max_speed_modifier)
 
 	var move_and_slide_result = move_and_slide(motion, UP)
 	var slide_count = get_slide_count()

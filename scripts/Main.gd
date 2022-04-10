@@ -41,22 +41,22 @@ func _hook_portals() -> void:
 func _on_build() -> void:
 	# If there is a child named TileMap, place a block.
 	# Otherwise ignore. Note that this condition is false for some levels.
-	if $TileMap != null:
+	if level != null:
 		# Find the player's current position on the tilemap, and look one cell
 		# to the left or right depending on which direction the player sprite
 		# is facing.
-		var player_tile = $TileMap.world_to_map($Player.position)
+		var player_tile = level.world_to_map($Player.position)
 		var target_tile_x = player_tile[0] + 1
 		if $Player.sprite.flip_h:
 			target_tile_x = player_tile[0] - 1
 		var target_tile_y = player_tile[1]
-		var target_cell_v = $TileMap.get_cell(target_tile_x, target_tile_y)
+		var target_cell_v = level.get_cell(target_tile_x, target_tile_y)
 		if target_cell_v == 0:
 			# If the cell is empty, place a block
-			$TileMap.set_cell(target_tile_x, target_tile_y, 1)
+			level.set_cell(target_tile_x, target_tile_y, 1)
 		elif target_cell_v == 1:
 			# If the cell has a block in in, break the block.
-			$TileMap.set_cell(target_tile_x, target_tile_y, 0)
+			level.set_cell(target_tile_x, target_tile_y, 0)
 
 
 func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: EndPortal) -> void:

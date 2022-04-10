@@ -13,6 +13,7 @@ onready var hitArea = $HitArea
 onready var mainCollider : PhysicsBody2D = $Body
 onready var sprite = $Sprite
 onready var tween = $Tween
+onready var audio_meow = $MeowStream
 
 func _ready():
 	hitArea.connect("body_entered", self, "_on_box_entered")
@@ -34,6 +35,7 @@ func bounce(body: KinematicBody2D):
 	tween.start()
 	
 	yield(tween, "tween_all_completed")
+	audio_meow.play()
 	on_bounce(body)
 	
 	tween.interpolate_property(sprite, "position", sprite.position, Vector2.ZERO, bounce_duration / 2)

@@ -25,7 +25,7 @@ func _ready() -> void:
 	$PauseMenu.hide();
 	EventBus.connect("game_paused",self,"_on_pause_toggle");
 	
-func _process(delta:float) -> void:
+func _process(_delta:float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		EventBus.emit_signal("game_paused",!get_tree().paused);
 	else:

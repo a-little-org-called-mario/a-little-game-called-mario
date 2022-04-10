@@ -3,6 +3,7 @@ extends Viewport
 const SPAWNPOINTS_GROUP: String = "SpawnPoints"
 const ENDPORTALS_GROUP: String = "EndPortals"
 const COINS_GROUP: String = "Coins"
+const PROJECTILES_GROUP: String = "Projectiles"
 
 onready var hub: TileMap = $TileMap
 onready var level: TileMap = $TileMap
@@ -58,6 +59,10 @@ func _on_build() -> void:
 
 
 func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: EndPortal) -> void:
+	# Despawn all projectiles
+	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
+		despawn.queue_free()
+
 	var animation = portal.on_portal_enter()
 	body.visible = false
 	yield(animation, "animation_finished")

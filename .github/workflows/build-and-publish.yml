@@ -27,7 +27,6 @@ jobs:
         with:
           commit_message: Auto-Format GDScript
           file_pattern: "**/*.gd"
-          commit_user_name: Grumpy Godot Auto-Formatter
 
   build_game:
     name: Build Game

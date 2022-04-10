@@ -3,6 +3,7 @@
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
 [ext_resource path="res://ui/AchievementGet.gd" type="Script" id=3]
+
 [ext_resource path="res://sprites/anatomical-heart.png" type="Texture" id=4]
 [ext_resource path="res://ui/LivesCount.gd" type="Script" id=5]
 
@@ -53,6 +54,8 @@ bbcode_text = "
 [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
 text = "
 LEVEL:1 "
+
+script = ExtResource( 4 )
 
 [node name="CoinCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0

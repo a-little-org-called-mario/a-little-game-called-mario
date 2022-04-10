@@ -8,16 +8,16 @@ onready var hub : TileMap = $TileMap
 onready var level : TileMap = $TileMap
 onready var player : Player = $Player
 
-onready var container : ViewportContainer = get_parent();
-onready var crt_shader = preload("res://shaders/CRT.gdshader");
+onready var container : ViewportContainer = get_parent()
+onready var crt_shader = preload("res://shaders/CRT.gdshader")
 
 var completionSound = preload("res://sfx/portal.wav")
 var coinSound = preload("res://sfx/coin.wav")
 
 func _ready() -> void:
-	EventBus.connect("coin_collected", self, "_on_coin_collected", []);
+	EventBus.connect("build_block", self, "_on_build")
 	_hook_portals()
-	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle");
+	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle")
 	VisualServer.set_default_clear_color(Color.black)
 
 func _hook_portals() -> void:
@@ -85,6 +85,6 @@ func _get_player_spawn_position() -> Vector2:
 
 func _on_crt_toggle (on:bool) -> void:
 	if on:
-		container.material.shader=crt_shader;
+		container.material.shader=crt_shader
 	else:
-		container.material.shader=null;
+		container.material.shader=null

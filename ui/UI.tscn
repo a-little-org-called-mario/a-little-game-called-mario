@@ -33,14 +33,22 @@ SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
 
 SPACE TO [wave amp=50 freq=2]JUMP[/wave]
 
-CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]"
+CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
+
+B TO[wave amp=50 freq=2] FIREBALL [/wave]
+
+(WITH POWERUP)"
 text = "ARROW KEYS TO MOVE
 
 SHIFT TO SPRINT
 
 SPACE TO JUMP
 
-CONTROL/Z TO SHOOT"
+CONTROL/Z TO SHOOT
+
+B TO FIREBALL 
+
+(WITH POWERUP)"
 fit_content_height = true
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]

@@ -15,3 +15,5 @@ signal game_paused(data)
 signal crt_filter_toggle(data)
 # self-explanatory - emitted by PauseMenu.gd and connected to Main.gd
 signal volume_changed(data)
+
+signal fire_flower_collected(data);

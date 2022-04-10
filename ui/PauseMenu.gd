@@ -6,7 +6,7 @@ extends CanvasLayer
 const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd")
 
 ### Basic pause menu state variables
-enum SUBMENU { MAIN=0, GFX=1, SFX=2, };
+enum SUBMENU { MAIN=0, GFX=1, SFX=2, }
 var current_menu : int  = SUBMENU.MAIN;         # the menu we're currently in
 var menu_count : int    = 3;                    # the total number of menus we can access
 var selected : int      = 0;	                # the menu item we're currently selecting

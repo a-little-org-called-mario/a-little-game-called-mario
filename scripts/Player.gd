@@ -23,7 +23,7 @@ var gravity_multiplier = 1  # used for jump height variability
 var double_jump = true
 var crouching = false
 var grounded = false
-var anticipating_jump = false # the small window of time before the player jumps
+var anticipating_jump = false  # the small window of time before the player jumps
 
 onready var sprite = $Sprite
 onready var tween = $Tween
@@ -33,7 +33,6 @@ onready var run_particles = $RunParticles
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
-
 
 onready var coin_counter = preload("res://scripts/CoinCounter.tres")
 

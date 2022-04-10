@@ -11,7 +11,7 @@ const JUMPFORCE = 1100
 const ACCEL = 50
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
-const JUMP_SLIP_RANGE = 16
+const SLIP_RANGE = 16
 
 var coyote_timer = COYOTE_TIME # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0 # gives a bit of buffer to hit the jump button before landing
@@ -19,6 +19,8 @@ var motion = Vector2()
 var gravity_multiplier = 1 # used for jump height variability
 var double_jump = true
 var crouching = false
+var grounded = false
+var anticipating_jump = false # the small window of time before the player jumps
 
 onready var sprite = $Sprite
 
@@ -62,6 +64,9 @@ func _physics_process(delta : float) -> void:
 			jump_buffer_timer = JUMP_BUFFER_TIME
 
 	if is_on_floor():
+		if not grounded:
+			grounded = true
+			land()
 		double_jump = true
 		coyote_timer = COYOTE_TIME
 		gravity_multiplier = 1
@@ -71,6 +76,7 @@ func _physics_process(delta : float) -> void:
 		elif Input.is_action_just_pressed("down"):
 			crouch()
 	else:
+		grounded = false
 		coyote_timer -= delta
 		# while we're holding the jump button we should jump higher
 		if Input.is_action_pressed("jump"):
@@ -85,25 +91,25 @@ func _physics_process(delta : float) -> void:
 
 	var move_and_slide_result = move_and_slide(motion, UP)
 	var slide_count = get_slide_count()
-	# check for an upwards-collision
-	if slide_count && get_slide_collision(slide_count-1).get_angle(Vector2(0,1)) == 0:
-		var slipped = try_jump_slip() # try to adjust player position to "slip" past a wall
-		if !slipped:
-			motion = move_and_slide_result # apply original result if no valid slip found
-	else:
-		motion = move_and_slide_result
+	var slipped = false
+	# try slipping around block corners when jumping or crossing gaps
+	if slide_count: slipped = try_slip(get_slide_collision(slide_count-1).get_angle())
+	# apply original result if no valid slip found
+	if !slipped: motion = move_and_slide_result
 
-func try_jump_slip():
-	var original_x = position.x # remember original x position
-	# check collisions in nearby x positions within JUMP_SLIP_RANGE
-	for x in range(1, JUMP_SLIP_RANGE):
+func try_slip(angle: float):
+	if angle == 0: return false
+	var axis = "x" if is_equal_approx(angle, PI) else "y"
+	# is_equal_approx(abs(collision_angle - PI), PI/2)
+	var original_v = position[axis] # remember original value on axis
+	# check collisions in nearby positions within SLIP_RANGE
+	for r in range(1, SLIP_RANGE):
 		for p in [-1, 1]:
-			position.x = original_x + x * p
+			position[axis] = original_v + r * p
 			move_and_slide(motion, UP)
-			if(get_slide_count() == 0):
-				return true # if no collision, return success
-	# restore original x position if couldn't find a slip
-	position.x = original_x
+			if(get_slide_count() == 0): return true # if no collision, return success
+	# restore original value on axis if couldn't find a slip
+	position[axis] = original_v
 	return false
 
 func crouch():
@@ -111,14 +117,23 @@ func crouch():
 	squash()
 
 func jump():
-	jump_buffer_timer = 0
-	squash(0.075);
+	tween.stop_all()
+	anticipating_jump = true
+	squash(0.03, 0, 0.5)
 	yield(tween, "tween_all_completed")
-	stretch(0.15);
+	stretch(0.2, 0, 0.5, 1.2);
+	jump_buffer_timer = 0
 	coyote_timer = 0
 	motion.y = -JUMPFORCE
+	anticipating_jump = false
 	$JumpSFX.play()
 	emit_signal("jumping")
+
+func land():
+	squash(0.05)
+	yield(tween, "tween_all_completed")
+	if grounded and not anticipating_jump:
+		unsquash(0.18)
 
 func look_right():
 	sprite.flip_h = false
@@ -126,15 +141,37 @@ func look_right():
 func look_left():
 	sprite.flip_h = true
 
-func squash(time=0.1, _returnDelay=0):
-	tween.interpolate_property(sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
+func squash(time=0.1, _returnDelay=0, squash_modifier=1.0):
+	tween.remove_all()
+	tween.interpolate_property(
+		sprite, "scale",
+		original_scale,
+		lerp(original_scale, squash_scale, squash_modifier),
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
 	tween.start();
 
-func stretch(time=0.2, _returnDelay=0):
-	tween.interpolate_property(sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
-	tween.interpolate_property(sprite, "scale", stretch_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
+func stretch(time=0.2, _returnDelay=0, squash_modifier=1.0, stretch_modifier=1.0):
+	tween.remove_all()
+	tween.interpolate_property(
+		sprite, "scale",
+		lerp(original_scale, squash_scale, squash_modifier),
+		lerp(original_scale, stretch_scale, stretch_modifier), 
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
+	tween.interpolate_property(
+		sprite, "scale",
+		lerp(original_scale, stretch_scale, stretch_modifier),
+		original_scale,
+		time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
 	tween.start()
 
-func unsquash(time=0.1, _returnDelay=0):
-	tween.interpolate_property(sprite, "scale", squash_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
+func unsquash(time=0.1, _returnDelay=0, squash_modifier=1.0):
+	tween.remove_all()
+	tween.interpolate_property(
+		sprite, "scale",
+		lerp(original_scale, squash_scale, squash_modifier),
+		original_scale,
+		time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
 	tween.start();

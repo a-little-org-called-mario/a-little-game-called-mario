@@ -80,3 +80,9 @@ func ai(_delta: float):
 # Called every _physics_process tick to move the enemy, if necessary.
 func move(_delta: float):
 	pass
+
+
+func _on_KillTrigger_body_entered(body):
+	if body is Player:
+		kill(self)
+

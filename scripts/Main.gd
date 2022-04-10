@@ -7,7 +7,7 @@ const COINS_GROUP: String = "Coins"
 onready var hub: TileMap = $TileMap
 onready var level: TileMap = $TileMap
 onready var player: Player = $Player
-
+onready var camera: Camera2D = $Camera
 onready var container: ViewportContainer = get_parent()
 onready var crt_shader = preload("res://shaders/CRT.gdshader")
 
@@ -85,8 +85,17 @@ func _finish_level(next_level: PackedScene = null) -> void:
 
 	# We need to flash the player out and in the tree to avoid physics errors.
 	remove_child(player)
+	remove_child(camera)
 	add_child_below_node(level, player)
+	player.add_child(camera)
+	var Limits = level.get_used_rect()
+	print (Limits.position.x)
 	player.global_position = _get_player_spawn_position()
+	camera.global_position = _get_player_spawn_position()
+	camera.limit_left = Limits.position.x * 64
+	camera.limit_right = Limits.end.x * 64
+	camera.limit_top = Limits.position.y * 64
+	camera.limit_bottom = Limits.end.y * 64
 	player.look_right()
 	EventBus.emit_signal("level_started", {})
 

@@ -5,6 +5,7 @@ extends CanvasLayer
 onready var label_back = get_node("PauseMenu/MainMenu/BackLabel");
 onready var label_gfx = get_node("PauseMenu/MainMenu/GFXLabel");
 onready var label_sfx = get_node("PauseMenu/MainMenu/SFXLabel");
+onready var label_restart = get_node("PauseMenu/MainMenu/RestartLabel");
 
 onready var label_gfxback = get_node("PauseMenu/GFXMenu/BackLabel");
 onready var label_camlean = get_node("PauseMenu/GFXMenu/CamLeanLabel");
@@ -18,7 +19,7 @@ onready var label_volsfx = get_node("PauseMenu/SFXMenu/SFXVolLabel");
 
 const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd");
 
-enum PAUSE_MENU {MAIN,GFX,SFX};
+enum PAUSE_MENU {MAIN,GFX,SFX,RESTART};
 var current_menu : int = PAUSE_MENU.MAIN;
 var element_selected : int = 0;
 
@@ -100,7 +101,7 @@ func _on_pause_toggle (data:bool) -> void:
 #note [jam] : this is a dumb way of getting the total list of menu items - oh well
 func get_element_count () -> int:
 	match current_menu:
-		PAUSE_MENU.MAIN: return 3;
+		PAUSE_MENU.MAIN: return 4;
 		PAUSE_MENU.GFX: return 4;
 		PAUSE_MENU.SFX: return 4;
 	return 1;
@@ -110,11 +111,13 @@ func set_active_element_style () -> void:
 		label_back.bbcode_text=label_back.text;
 		label_gfx.bbcode_text=label_gfx.text;
 		label_sfx.bbcode_text=label_sfx.text;
+		label_restart.bbcode_text=label_restart.text;
 
 		match element_selected:
 			0: label_back.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_back.text)+"[/wave][/color]";
 			1: label_gfx.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_gfx.text)+"[/wave][/color]";
 			2: label_sfx.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_sfx.text)+"[/wave][/color]";
+			3: label_restart.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_restart.text)+"[/wave][/color]";
 	elif PAUSE_MENU.GFX == current_menu:
 		label_gfxback.bbcode_text=label_gfxback.text;
 		label_camlean.bbcode_text=label_camlean.text;
@@ -154,6 +157,9 @@ func main_menu_accept () -> void:
 			current_menu=PAUSE_MENU.SFX;
 			element_selected=0;
 			set_active_element_style();
+		3:
+			EventBus.emit_signal("game_paused", false)
+			get_tree().reload_current_scene()
 
 func gfx_menu_accept () -> void:
 	match element_selected:

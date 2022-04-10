@@ -11,6 +11,11 @@ onready var label_camlean = get_node("PauseMenu/GFXMenu/CamLeanLabel");
 onready var label_shake = get_node("PauseMenu/GFXMenu/ShakeLabel");
 onready var label_crt = get_node("PauseMenu/GFXMenu/CRTLabel");
 
+onready var label_sfxback = get_node("PauseMenu/SFXMenu/BackLabel");
+onready var label_volgame = get_node("PauseMenu/SFXMenu/GameVolLabel");
+onready var label_volmusic = get_node("PauseMenu/SFXMenu/MusicVolLabel");
+onready var label_volsfx = get_node("PauseMenu/SFXMenu/SFXVolLabel");
+
 const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd");
 
 enum PAUSE_MENU {MAIN,GFX,SFX};
@@ -53,6 +58,8 @@ func _process(_delta:float) -> void:
 					label_crt.text="\nCRT FILTER: " + ("ON" if Settings.crt_filter else "OFF");
 					set_active_element_style();
 					EventBus.emit_signal("crt_filter_toggle",Settings.crt_filter);
+				elif 0 < element_selected && PAUSE_MENU.SFX == current_menu:
+					vol_select(element_selected,-1);
 			elif Input.is_action_just_pressed("ui_right"):
 				#camera lean selection
 				if 1 == element_selected && PAUSE_MENU.GFX == current_menu:
@@ -68,12 +75,13 @@ func _process(_delta:float) -> void:
 					label_crt.text="\nCRT FILTER: " + ("ON" if Settings.crt_filter else "OFF");
 					set_active_element_style();
 					EventBus.emit_signal("crt_filter_toggle",Settings.crt_filter);
+				elif 0 < element_selected && PAUSE_MENU.SFX == current_menu:
+					vol_select(element_selected,1);
 			elif Input.is_action_just_pressed("ui_accept"):
 				match current_menu:
 					PAUSE_MENU.MAIN: main_menu_accept();
 					PAUSE_MENU.GFX: gfx_menu_accept();
-					PAUSE_MENU.SFX:
-						pass;
+					PAUSE_MENU.SFX: sfx_menu_accept();
 
 # data: whether or not we want the game to be paused
 func _on_pause_toggle (data:bool) -> void:
@@ -85,13 +93,14 @@ func _on_pause_toggle (data:bool) -> void:
 		current_menu=0;
 		$PauseMenu/MainMenu.show();
 		$PauseMenu/GFXMenu.hide();
+		$PauseMenu/SFXMenu.hide();
 		$PauseMenu.hide();
 	get_tree().paused=data;
 
 #note [jam] : this is a dumb way of getting the total list of menu items - oh well
 func get_element_count () -> int:
 	match current_menu:
-		PAUSE_MENU.MAIN: return 2; #NOTE [jam] - make this 3 when adding sfx options
+		PAUSE_MENU.MAIN: return 3;
 		PAUSE_MENU.GFX: return 4;
 		PAUSE_MENU.SFX: return 4;
 	return 1;
@@ -117,6 +126,17 @@ func set_active_element_style () -> void:
 			1: label_camlean.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_camlean.text)+"[/wave][/color]";
 			2: label_shake.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_shake.text)+"[/wave][/color]";
 			3: label_crt.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_crt.text)+"[/wave][/color]";
+	elif PAUSE_MENU.SFX == current_menu:
+		label_sfxback.bbcode_text=label_sfxback.text;
+		label_volgame.bbcode_text=label_volgame.text;
+		label_volmusic.bbcode_text=label_volmusic.text;
+		label_volsfx.bbcode_text=label_volsfx.text;
+		
+		match element_selected:
+			0: label_sfxback.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_sfxback.text)+"[/wave][/color]";
+			1: label_volgame.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_volgame.text)+"[/wave][/color]";
+			2: label_volmusic.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_volmusic.text)+"[/wave][/color]";
+			3: label_volsfx.bbcode_text="[color=yellow][wave amp=25 freq=1]"+str(label_volsfx.text)+"[/wave][/color]";
 
 func main_menu_accept () -> void:
 	match element_selected:
@@ -129,12 +149,11 @@ func main_menu_accept () -> void:
 			element_selected=0;
 			set_active_element_style();
 		2:
-			pass;
-			#$PauseMenu/MainMenu.hide();
-			#$PauseMenu/SFXMenu.show();
-			#current_menu=PAUSE_MENU.SFX;
-			#element_selected=0;
-			#set_active_element_style();
+			$PauseMenu/MainMenu.hide();
+			$PauseMenu/SFXMenu.show();
+			current_menu=PAUSE_MENU.SFX;
+			element_selected=0;
+			set_active_element_style();
 
 func gfx_menu_accept () -> void:
 	match element_selected:
@@ -156,6 +175,7 @@ func gfx_menu_accept () -> void:
 			Settings.screen_shake=!Settings.screen_shake;
 			label_shake.text="\nSCREEN SHAKE: " + ("ON" if Settings.screen_shake else "OFF");
 			set_active_element_style();
+			
 
 func cam_lean_select (delta: int) -> void:
 	if 1 == delta:
@@ -169,3 +189,27 @@ func cam_lean_select (delta: int) -> void:
 	label_camlean.text="\nCAMERA LEAN: <  "+ ("OFF" if CameraLeanAmount.OFF == Settings.camera_lean else "MIN" if CameraLeanAmount.MIN == Settings.camera_lean else "MAX") +"  >"
 	set_active_element_style();
 	pass;
+	
+func sfx_menu_accept () -> void:
+	if 0 == element_selected:
+		$PauseMenu/SFXMenu.hide();
+		$PauseMenu/MainMenu.show();
+		current_menu=PAUSE_MENU.MAIN;
+		element_selected=0;
+		set_active_element_style();
+	else:
+		vol_select(element_selected,1);
+	
+func vol_select (el,delta) -> void:
+	match el:
+		1:
+			Settings.volume_game=int(clamp(Settings.volume_game+delta,0,10));
+			label_volgame.text="\nGAME VOLUME: <  "+(" " if Settings.volume_game < 10 else "")+str(Settings.volume_game)+"  >\n";
+		2:
+			Settings.volume_music=int(clamp(Settings.volume_music+delta,0,10));
+			label_volmusic.text="\nMUSIC VOLUME: <  "+(" " if Settings.volume_music < 10 else "")+str(Settings.volume_music)+"  >\n";
+		3:
+			Settings.volume_sfx=int(clamp(Settings.volume_sfx+delta,0,10));
+			label_volsfx.text="\n SFX VOLUME: <  "+(" " if Settings.volume_sfx < 10 else "")+str(Settings.volume_sfx)+"  >\n";
+	set_active_element_style();
+	EventBus.emit_signal("volume_changed","game" if 1==el else "music" if 2==el else "sfx");

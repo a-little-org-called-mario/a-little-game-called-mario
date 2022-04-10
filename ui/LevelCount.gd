@@ -10,7 +10,7 @@ func _ready():
 	_on_level_started({})
 
 
-func _on_level_started(data):
+func _on_level_started(_data):
 	self.show()
 	bbcode_text = (
 		"\n[wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow][/wave]"
@@ -20,5 +20,5 @@ func _on_level_started(data):
 	self.hide()
 
 
-func _on_level_completed(data):
+func _on_level_completed(_data):
 	currentLevel += 1

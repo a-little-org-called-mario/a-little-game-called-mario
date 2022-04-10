@@ -138,14 +138,14 @@ func _on_KillTrigger_body_entered(body):
 
 # This isn't the best place to put these tweening functions and also copied from Player
 # Couldn't this be an animation?
-func squash(time = 0.1, returnDelay = 0):
+func squash(time = 0.1, _returnDelay = 0):
 	tween.interpolate_property(
 		sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)
 	tween.start()
 
 
-func stretch(time = 0.2, returnDelay = 0):
+func stretch(time = 0.2, _returnDelay = 0):
 	tween.interpolate_property(
 		sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)

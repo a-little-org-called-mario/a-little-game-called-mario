@@ -63,6 +63,6 @@ func clear_text_after_seconds():
 	self.clear()
 
 
-func _on_level_completed(data):
+func _on_level_completed(_data):
 	coinsSinceStartingLevel = 0
 	currentLevel += 1

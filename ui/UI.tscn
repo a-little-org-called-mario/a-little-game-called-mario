@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
 [ext_resource path="res://ui/AchievementGet.gd" type="Script" id=3]
+[ext_resource path="res://ui/LevelCount.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -37,11 +38,27 @@ SPACE TO JUMP
 CONTROL/Z TO SHOOT"
 fit_content_height = true
 
+[node name="LevelCount" type="RichTextLabel" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -570.0
+margin_top = 258.0
+margin_right = -447.0
+margin_bottom = 308.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
+text = "
+LEVEL:1 "
+script = ExtResource( 4 )
+
 [node name="CoinCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -248.0
-margin_right = -125.0
+margin_left = -247.0
+margin_right = -124.0
 margin_bottom = 50.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
@@ -51,9 +68,6 @@ bbcode_text = "
 text = "
 COINS:0 "
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AchievementLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03

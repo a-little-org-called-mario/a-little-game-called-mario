@@ -2,6 +2,7 @@
 extends Node
 
 signal coin_collected(data)
+signal heart_changed(data)
 signal enemy_killed(data)
 signal build_block(data)
 signal level_completed(data)

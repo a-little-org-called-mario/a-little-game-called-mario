@@ -25,6 +25,7 @@ var crouching = false
 var grounded = false
 var anticipating_jump = false # the small window of time before the player jumps
 var coins = 0; #grabbed directly from the coin_collected signal;
+var hearts = 3;
 
 onready var sprite = $Sprite
 onready var tween = $Tween
@@ -36,6 +37,7 @@ onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
+	EventBus.connect("heart_changed", self, "_on_heart_change")
 
 
 func _physics_process(delta: float) -> void:
@@ -264,5 +266,12 @@ func _on_coin_collected(data):
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
-
 	coins += value
+	
+func _on_heart_change(data):
+	var value := 1
+	if data.has("value"):
+		value = data["value"]
+	hearts += value
+	if(hearts < 0):
+		get_tree().reload_current_scene()

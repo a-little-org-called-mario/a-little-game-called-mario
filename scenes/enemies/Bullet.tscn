@@ -4,11 +4,11 @@
 [ext_resource path="res://scripts/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 3.5 )
+extents = Vector2( 3, 1.5 )
 
-[node name="BubBullet" type="KinematicBody2D"]
-collision_layer = 16
-collision_mask = 3
+[node name="BubBullet" type="Area2D"]
+collision_layer = 256
+collision_mask = 15
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -17,5 +17,6 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 1 )
-scale = Vector2( -1, 1 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
 texture = ExtResource( 1 )

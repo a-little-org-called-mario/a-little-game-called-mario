@@ -113,9 +113,10 @@ func _handle_dying(_killer):
 # called from the animation controller
 func fire_bullet():
 	var bullet = bullet_scene.instance()
-	get_tree().root.add_child(bullet)
+	get_parent().add_child(bullet)
 	bullet.global_position = _muzzle.global_position
 	bullet.scale.x = direction
+	bullet.start_moving(Vector2.LEFT if direction < 0 else Vector2.RIGHT)
 	yield(_animation_player, "animation_finished")
 	_shooting_cooldown = MAX_SHOOTING_COOLDOWN
 	start_walking()

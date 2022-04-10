@@ -6,7 +6,7 @@ extends CanvasLayer
 const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd")
 
 ### Basic pause menu state variables
-enum SUBMENU { MAIN=0, GFX=1, SFX=2, };
+enum SUBMENU { MAIN=0, GFX=1, SFX=2, }
 var current_menu : int  = SUBMENU.MAIN;         # the menu we're currently in
 var menu_count : int    = 3;                    # the total number of menus we can access
 var selected : int      = 0;	                # the menu item we're currently selecting
@@ -102,7 +102,9 @@ func _process (_delta: float):
 						0: EventBus.emit_signal("game_paused", false);
 						1: go_to_menu(SUBMENU.GFX);
 						2: go_to_menu(SUBMENU.SFX);
-						3: pass; #TODO - handle game restart here!!
+						3:
+							EventBus.emit_signal("game_paused", false);
+							get_tree().reload_current_scene(); # restart
 				SUBMENU.GFX:
 					match selected:
 						0: go_to_menu(SUBMENU.MAIN);

@@ -9,30 +9,28 @@ export(int) var bounce_count
 export(bool) var start_invisible 
 
 onready var hitArea = $HitArea
-onready var mainCollider = $Body/CollisionShape2D
+onready var mainCollider = $Body
 onready var sprite = $Sprite
 onready var tween = $Tween
 
 func _ready():
 	hitArea.connect("body_entered", self, "_on_box_entered")
 	if start_invisible:
-		sprite.visible = false;
-		mainCollider.disabled = true
-		$Body/CollisionShape2D2.disabled = true
-		mainCollider.one_way_collision = true
+		sprite.visible = false
+		remove_child(mainCollider)
 		
 
 func _on_box_entered(body):
-	print(body.position.y)
-	print(hitArea.global_position.y)
-	print(" ")
 	if body is KinematicBody2D and body.position.y > hitArea.global_position.y:
 		call_deferred("bounce")
+		$box.connect("body_exited", self, "_on_box_body_exited")
+
+func _on_box_body_exited(body):
+		add_child(mainCollider)
+
 
 func bounce():
 	sprite.visible = true
-	mainCollider.disabled = false
-	$Body/CollisionShape2D2.disabled = false
 	tween.interpolate_property(sprite, "position", sprite.position, bounce_offset, bounce_duration / 2)
 	tween.start()
 	
@@ -54,3 +52,4 @@ func on_bounce():
 func disable():
 	sprite.modulate = sprite.modulate.darkened(0.4)
 	hitArea.disconnect("body_entered", self, "_on_box_entered")
+

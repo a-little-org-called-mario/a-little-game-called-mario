@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "Achievement",
+"language": "GDScript",
+"path": "res://scripts/Achievement.gd"
+}, {
 "base": "Enemy",
 "class": "Bub",
 "language": "GDScript",
 "path": "res://scripts/Bub.gd"
+}, {
+"base": "Achievement",
+"class": "CoinsAchievement",
+"language": "GDScript",
+"path": "res://scripts/CoinsAchievement.gd"
 }, {
 "base": "Area2D",
 "class": "EndPortal",
@@ -40,7 +50,9 @@ _global_script_classes=[ {
 "path": "res://scripts/Camera.gd"
 } ]
 _global_script_class_icons={
+"Achievement": "",
 "Bub": "",
+"CoinsAchievement": "",
 "EndPortal": "",
 "Enemy": "",
 "Player": "",

@@ -39,6 +39,7 @@ func kill(killer):
 	if is_dying():
 		return
 	_dying = true
+	EventBus.emit_signal("enemy_killed")
 	emit_signal("dying", killer)
 	var res = _handle_dying(killer)
 	if res is GDScriptFunctionState:

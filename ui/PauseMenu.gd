@@ -19,7 +19,7 @@ onready var label_volsfx = get_node("PauseMenu/SFXMenu/SFXVolLabel");
 
 const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd");
 
-enum PAUSE_MENU {MAIN,GFX,SFX,RESTART};
+enum PAUSE_MENU {MAIN,GFX,SFX,RESTART}
 var current_menu : int = PAUSE_MENU.MAIN;
 var element_selected : int = 0;
 

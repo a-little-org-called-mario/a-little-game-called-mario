@@ -14,3 +14,8 @@ func _process(_delta):
 		positions.pop_front()
 	positions.push_back(parent.global_position + Vector2(0, height))
 	points = PoolVector2Array(positions)
+
+
+func reset() -> void:
+	positions = []
+	points = PoolVector2Array(positions)

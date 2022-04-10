@@ -43,13 +43,20 @@ func _physics_process(delta : float) -> void:
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block")
 	
+	var speedModifier = 1
+	var animationSpeed = 8
+	if Input.is_key_pressed(KEY_SHIFT):
+		speedModifier = 5
+		animationSpeed = 60
+	sprite.frames.set_animation_speed("run", animationSpeed)
+
 	if Input.is_action_pressed("right"):
-		motion.x += ACCEL
+		motion.x += ACCEL * speedModifier
 		sprite.play("run")
 		# pointing the character in the direction he's running
 		look_right()
 	elif Input.is_action_pressed("left"):
-		motion.x -= ACCEL
+		motion.x -= ACCEL * speedModifier
 		sprite.play("run")
 		look_left()
 	else:	

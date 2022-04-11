@@ -26,4 +26,5 @@ func _on_body_entered(body):
 	
 func collect ():
 	EventBus.emit_signal("coin_collected", { "value": 1, "type": "corn" })
+	EventBus.emit_signal("heart_changed", { "value": 1 })
 	queue_free()

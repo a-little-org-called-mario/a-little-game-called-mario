@@ -82,6 +82,11 @@ func _finish_level(next_level: PackedScene = null) -> void:
 		level.queue_free()
 		yield(level, "tree_exited")
 	level = new_level
+	if level == hub:
+		for c in level.get_children():
+			if c is SpawnPoint:
+				c.spawn_mario()
+				break
 
 	# Do not forget to hook the new portals
 	_hook_portals()

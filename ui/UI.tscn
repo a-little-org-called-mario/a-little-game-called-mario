@@ -5,17 +5,14 @@
 [ext_resource path="res://ui/AchievementGet.gd" type="Script" id=3]
 [ext_resource path="res://ui/LevelCount.gd" type="Script" id=4]
 [ext_resource path="res://ui/HeartCount.gd" type="Script" id=5]
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 1 )
-[ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=5]
-
+[ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=6]
 
 [node name="UI" type="CanvasLayer"]
 
 [node name="UI" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -90,25 +87,25 @@ bbcode_text = "
 text = "
 COINS:0 "
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HeartCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -247.0
-margin_top = 63.0
-margin_right = -124.0
-margin_bottom = 113.0
+margin_left = -248.0
+margin_top = 75.0
+margin_right = -125.0
+margin_bottom = 125.0
 rect_scale = Vector2( 2, 2 )
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "
 [wave amp=50 freq=2]HEARTS:[rainbow freq=0.5 sat=1 val=20]3[/rainbow] [/wave]"
 text = "
 HEARTS:3 "
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AchievementLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/title/CreditsButton.gd" type="Script" id=9]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
 [ext_resource path="res://scenes/title/Contributors.gd" type="Script" id=11]
+[ext_resource path="res://music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -243,3 +244,9 @@ script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 12 )
+volume_db = -20.0
+autoplay = true

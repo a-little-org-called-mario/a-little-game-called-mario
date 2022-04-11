@@ -280,5 +280,5 @@ func _on_heart_change(data):
 	if data.has("value"):
 		value = data["value"]
 	hearts += value
-	if(hearts < 0):
+	if(hearts <= 0):
 		get_tree().reload_current_scene()

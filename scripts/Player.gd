@@ -1,7 +1,6 @@
 class_name Player
 extends KinematicBody2D
 
-signal jumping
 signal shooting
 
 const UP = Vector2.UP

@@ -1,0 +1,5 @@
+
+196 left
+210 down
+224 up
+238 right

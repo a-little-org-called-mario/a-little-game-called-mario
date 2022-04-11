@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/levels/DDR_01/track/ddr.png" type="Texture" id=1]
+[ext_resource path="res://scenes/levels/DDR_01/track/Track.gd" type="Script" id=2]
+[ext_resource path="res://scenes/levels/DDR_01/track/note/Down.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/levels/DDR_01/track/note/Up.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/levels/DDR_01/track/note/Right.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/levels/DDR_01/track/note/Left.tscn" type="PackedScene" id=6]
+
+[node name="Track" type="Node2D"]
+script = ExtResource( 2 )
+NoteUp = ExtResource( 4 )
+NoteDown = ExtResource( 3 )
+NoteLeft = ExtResource( 6 )
+NoteRight = ExtResource( 5 )
+
+[node name="Right" type="Sprite" parent="."]
+position = Vector2( 168, 24 )
+rotation = 1.5708
+texture = ExtResource( 1 )
+hframes = 5
+
+[node name="Left" type="Sprite" parent="."]
+position = Vector2( 24, 24 )
+rotation = -1.5708
+texture = ExtResource( 1 )
+hframes = 5
+
+[node name="Down" type="Sprite" parent="."]
+position = Vector2( 72, 24 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+hframes = 5
+
+[node name="Up" type="Sprite" parent="."]
+position = Vector2( 120, 24 )
+texture = ExtResource( 1 )
+hframes = 5

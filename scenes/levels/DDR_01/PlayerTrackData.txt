@@ -1,0 +1,18 @@
+# Hello
+# If you're reading this, then that means you're interested in the DDR mode, and maybe want to create your own levels!
+# I've left this as a small tutorial on how to make them
+# This file is basically just a list of ticks and poses (up, left, right, down)
+# You can also leave comments with the # char, and you should be able to have empty lines
+
+196 left
+210 left
+
+238 left
+252 right
+266 up
+280 left
+294 right
+308 left
+322 right
+336 left
+350 down

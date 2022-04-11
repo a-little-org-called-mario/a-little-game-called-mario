@@ -15,6 +15,7 @@ const JUMP_BUFFER_TIME = 0.05
 const SLIP_RANGE = 16
 
 export(PackedScene) var default_projectile: PackedScene = preload("res://scenes/CoinProjectile.tscn")
+export(PackedScene) var fireball_projectile: PackedScene = preload("res://scenes/powerups/Fireball.tscn")
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
@@ -24,7 +25,8 @@ var double_jump = true
 var crouching = false
 var grounded = false
 var anticipating_jump = false # the small window of time before the player jumps
-var coins = 0; #grabbed directly from the coin_collected signal;
+var coins = 0 #grabbed directly from the coin_collected signal;
+var hasFlower = false
 
 onready var sprite = $Sprite
 onready var tween = $Tween
@@ -36,11 +38,12 @@ onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
+	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
-		EventBus.emit_signal("build_block")
+		EventBus.emit_signal("build_block", {"player":self})
 
 	var max_speed_modifier = 1
 	var acceleration_modifier = 1
@@ -147,6 +150,9 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("shoot") and coins > 0:
 		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
 		shoot(default_projectile)
+	#Shoots fireball
+	if event.is_action_pressed("fire") and hasFlower:
+		shoot(fireball_projectile)
 
 
 func crouch():
@@ -180,9 +186,14 @@ func shoot(projectile_scene: PackedScene):
 	# Origin is affected by changes to Sprite (ex: squashing)
 	var projectile = projectile_scene.instance()
 	get_parent().add_child(projectile)
+	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
+	#Changes ShootOrigin based on direction
+	if shoot_dir == Vector2.LEFT:
+		$Sprite/ShootOrigin.set_position(Vector2( -4, -16))
+	else:
+		$Sprite/ShootOrigin.set_position(Vector2( 4, -16))
 	projectile.position = $Sprite/ShootOrigin.global_position
 	# Projectile handles movement
-	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
 	projectile.start_moving(shoot_dir)
 	emit_signal("shooting")
 
@@ -252,13 +263,12 @@ func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 	)
 	tween.start()
 
-
 func reset() -> void:
 	look_right()
 	run_particles.emitting = false
 	run_particles.restart()
 	trail.reset()
-
+	
 
 func bounce(strength = 1100):
 	squash(0.075)
@@ -273,3 +283,7 @@ func _on_coin_collected(data):
 		value = data["value"]
 
 	coins += value
+
+func _on_flower_collected(data):
+	if data.has("collected"):
+		hasFlower = data["collected"]	

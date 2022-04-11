@@ -41,7 +41,7 @@ func get_achievements():
 								self.append_bbcode(
 									(
 										"[rainbow][center]"
-										+ current.description
+										+ tr("ACHIEVEMENT_UNLOCKED") % tr(current.description)
 										+ "[/center][/rainbow]"
 									)
 								)

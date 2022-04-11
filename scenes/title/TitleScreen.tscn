@@ -194,8 +194,12 @@ __meta__ = {
 [node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_top = 120.0
 margin_right = 984.0
+<<<<<<< HEAD
 margin_bottom = 156.0
 disabled = true
+=======
+margin_bottom = 116.0
+>>>>>>> 6d78bf8903ad326af6ae4fd06f11bc28415b4e46
 text = "CREDITS"
 script = ExtResource( 9 )
 __meta__ = {
@@ -224,9 +228,15 @@ anims/Init = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 
 [node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer"]
+<<<<<<< HEAD
 margin_top = 552.0
 margin_right = 984.0
 margin_bottom = 568.0
+=======
+margin_top = 512.0
+margin_right = 984.0
+margin_bottom = 528.0
+>>>>>>> 6d78bf8903ad326af6ae4fd06f11bc28415b4e46
 scroll_vertical_enabled = false
 script = ExtResource( 10 )
 __meta__ = {

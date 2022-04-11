@@ -21,6 +21,6 @@ func _on_body_entered(body):
 	if not body is Player:
 		return
 	
-	for i in range(num_kernels):
-		create_kernel();
+	for _i in range(num_kernels):
+		call_deferred("create_kernel");
 	queue_free()

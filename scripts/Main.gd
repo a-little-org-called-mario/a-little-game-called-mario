@@ -7,7 +7,6 @@ const PROJECTILES_GROUP: String = "Projectiles"
 
 onready var hub: TileMap = $TileMap
 onready var level: TileMap = $TileMap
-onready var player: Player = $Player
 
 onready var container: ViewportContainer = get_parent()
 onready var crt_shader = preload("res://shaders/CRT.gdshader")
@@ -67,12 +66,11 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
 		despawn.queue_free()
 
+	body.get_parent().remove_child(body)
 	var animation = portal.on_portal_enter()
-	body.visible = false
+	
 	yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
-	body.visible = true
-
 
 func _finish_level(next_level: PackedScene = null) -> void:
 	# Create the new level, insert it into the tree and remove the old one.
@@ -85,6 +83,11 @@ func _finish_level(next_level: PackedScene = null) -> void:
 		level.queue_free()
 		yield(level, "tree_exited")
 	level = new_level
+	if level == hub:
+		for c in level.get_children():
+			if c is SpawnPoint:
+				c.spawn_mario()
+				break
 
 	# Do not forget to hook the new portals
 	_hook_portals()
@@ -92,17 +95,7 @@ func _finish_level(next_level: PackedScene = null) -> void:
 	#Removing instructions
 	$UI/UI/RichTextLabel.visible = false
 
-	# We need to flash the player out and in the tree to avoid physics errors.
-	remove_child(player)
-	add_child_below_node(level, player)
-	player.reset()
-	player.global_position = _get_player_spawn_position()
 	EventBus.emit_signal("level_started", {})
-
-
-func _get_player_spawn_position() -> Vector2:
-	var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)
-	return spawn_points[0].global_position if len(spawn_points) > 0 else player.global_position
 
 
 func _on_crt_toggle(on: bool) -> void:

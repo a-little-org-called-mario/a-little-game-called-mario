@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/CoinCount.gd" type="Script" id=2]
 [ext_resource path="res://ui/AchievementGet.gd" type="Script" id=3]
 [ext_resource path="res://ui/LevelCount.gd" type="Script" id=4]
 [ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=5]
+[ext_resource path="res://ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
+[ext_resource path="res://ui/HeartCount.gd" type="Script" id=7]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -23,8 +25,8 @@ anchor_right = 0.481
 anchor_bottom = 0.217
 margin_left = 47.28
 margin_top = -20.0
-margin_right = -183.544
-margin_bottom = -17.2
+margin_right = -93.544
+margin_bottom = 55.8
 rect_scale = Vector2( 2, 2 )
 custom_constants/line_separation = 0
 custom_fonts/normal_font = ExtResource( 1 )
@@ -40,21 +42,20 @@ CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
 B TO[wave amp=50 freq=2] FIREBALL [/wave]
 
 (WITH POWERUP)"
-text = "ARROW KEYS TO MOVE
+text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
 
-SHIFT TO SPRINT
+SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
 
-SPACE TO JUMP
+SPACE TO [wave amp=50 freq=2]JUMP[/wave]
 
-CONTROL/Z TO SHOOT
+CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
 
-B TO FIREBALL 
+B TO[wave amp=50 freq=2] FIREBALL [/wave]
 
 (WITH POWERUP)"
 fit_content_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 6 )
+localization_key = "TUTORIAL_MOVEMENT"
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
@@ -69,7 +70,7 @@ bbcode_enabled = true
 bbcode_text = "
 [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
 text = "
-LEVEL:1 "
+[wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
 script = ExtResource( 4 )
 
 [node name="CoinCount" type="RichTextLabel" parent="UI"]
@@ -84,8 +85,27 @@ bbcode_enabled = true
 bbcode_text = "
 [wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
 text = "
-COINS:0 "
+[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeartCount" type="RichTextLabel" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -248.0
+margin_top = 75.0
+margin_right = -125.0
+margin_bottom = 125.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave amp=50 freq=2]HEARTS:[rainbow freq=0.5 sat=1 val=20]3[/rainbow] [/wave]"
+text = "
+HEARTS:3 "
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

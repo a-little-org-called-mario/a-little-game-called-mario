@@ -1,7 +1,6 @@
 extends RigidBody2D
 class_name PopcornPopped
 
-onready var audio_coin = $CoinStream
 const pop_force = 100;
 var rng = RandomNumberGenerator.new()
 
@@ -26,4 +25,5 @@ func _on_body_entered(body):
 	
 func collect ():
 	EventBus.emit_signal("coin_collected", { "value": 1, "type": "corn" })
+	EventBus.emit_signal("heart_changed", { "value": 1 })
 	queue_free()

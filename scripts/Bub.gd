@@ -27,6 +27,7 @@ const BOUNCE_STRENGTH = 1100
 export(float) var max_speed = 150
 export(int) var direction = -1
 export(PackedScene) var bullet_scene
+export(PackedScene) var muzzle_flash_scene
 
 var _motion = Vector2.ZERO
 var _moving = true
@@ -39,6 +40,7 @@ onready var _gun_anchor := $GunAnchor
 onready var _muzzle := $GunAnchor/Sprite/Muzzle
 onready var sprite := $Sprite
 onready var tween := $Tween
+onready var pop_gun_sfx := $PopGun
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -112,10 +114,21 @@ func _handle_dying(_killer):
 
 # called from the animation controller
 func fire_bullet():
+	# instance bullet
 	var bullet = bullet_scene.instance()
-	get_tree().root.add_child(bullet)
+	get_parent().add_child(bullet)
 	bullet.global_position = _muzzle.global_position
 	bullet.scale.x = direction
+
+	bullet.start_moving(Vector2.LEFT if direction < 0 else Vector2.RIGHT)
+	
+	# instance muzzle flash
+	var flash = muzzle_flash_scene.instance()
+	get_tree().root.add_child(flash)
+	flash.global_position = _muzzle.global_position
+	
+	pop_gun_sfx.play()
+	
 	yield(_animation_player, "animation_finished")
 	_shooting_cooldown = MAX_SHOOTING_COOLDOWN
 	start_walking()

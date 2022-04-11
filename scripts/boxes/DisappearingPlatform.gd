@@ -8,10 +8,9 @@ func _ready():
 
 func _on_box_entered(body):
 	if body is KinematicBody2D:
-		call_deferred("bounce")
+		call_deferred("bounce", body)
 
-func bounce():
-	.on_bounce()
+func bounce(body):
 	disable()
 	var timer = Timer.new()
 	self.add_child(timer)

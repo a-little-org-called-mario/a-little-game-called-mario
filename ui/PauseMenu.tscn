@@ -13,6 +13,7 @@ layer = 9
 script = ExtResource( 2 )
 
 [node name="PauseMenu" type="Control" parent="."]
+visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
 

@@ -12,11 +12,12 @@ on:
       - '.gitignore'
       - 'LICENSE'
       - '**.md'
+      - '.github'
 
 jobs:
   build_game:
-    runs-on: ubuntu-latest
     name: Build Game
+    runs-on: ubuntu-latest
     steps:
       - name: checkout latest code
         uses: actions/checkout@v2.3.1

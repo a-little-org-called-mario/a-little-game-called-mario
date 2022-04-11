@@ -1,9 +1,9 @@
 # Implements the Bub enemy type.
-# This enemy walks forward until it bumps into a wall at which point it 
-# reverses direction and continues. Affected by gravity and will fall 
+# This enemy walks forward until it bumps into a wall at which point it
+# reverses direction and continues. Affected by gravity and will fall
 # down stairs and into pits.
 #
-# Bub is a friendly sort and doesn't hurt or damage the player in any 
+# Bub is a friendly sort and doesn't hurt or damage the player in any
 # way. He'll even give the player a lift if he cares to jump on!
 #
 # Bub wishes all enemies were as nice as him.
@@ -40,9 +40,10 @@ onready var _muzzle := $GunAnchor/Sprite/Muzzle
 onready var sprite := $Sprite
 onready var tween := $Tween
 
-onready var original_scale = sprite.scale;
-onready var squash_scale = Vector2(original_scale.x*1.4, original_scale.y*0.4)
+onready var original_scale = sprite.scale
+onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
+
 
 func _ready():
 	start_walking()
@@ -54,7 +55,7 @@ func _ready():
 func ai(_delta: float):
 	_sprite.flip_h = direction > 0
 	_gun_anchor.scale.x = -sign(direction)
-	
+
 	if is_dying():
 		return
 
@@ -72,7 +73,7 @@ func ai(_delta: float):
 func move(_delta: float):
 	if is_dying():
 		return
-	
+
 	_motion.y += GRAVITY
 
 	if _motion.y > MAXFALLSPEED:
@@ -85,7 +86,7 @@ func move(_delta: float):
 		_motion.x = 0
 
 	_motion = move_and_slide(_motion, UP)
-	
+
 	_ray_walking.cast_to.x = direction * RAY_CAST_WALKING_DISTANCE
 	_ray_walking.force_raycast_update()
 	if _ray_walking.is_colliding():
@@ -99,14 +100,15 @@ func disable_collision():
 	$KillTrigger.queue_free()
 
 
-# Disables collision, plays the sprite death animation and the 
-# death animation from the animation player. The function then yields 
+# Disables collision, plays the sprite death animation and the
+# death animation from the animation player. The function then yields
 # until the animations are finished.
 func _handle_dying(_killer):
 	disable_collision()
 	_animation_player.play("die")
-	$SquishParticles.emitting=true
+	$SquishParticles.emitting = true
 	yield(_animation_player, "animation_finished")
+
 
 # called from the animation controller
 func fire_bullet():
@@ -118,28 +120,43 @@ func fire_bullet():
 	_shooting_cooldown = MAX_SHOOTING_COOLDOWN
 	start_walking()
 
+
 func start_walking():
 	_moving = true
 	_animation_player.play("move")
+
 
 func _on_KillTrigger_body_entered(body):
 	if not body is Player:
 		return
 	var player = body as Player
 	player.bounce(BOUNCE_STRENGTH)
-	squash(0.075);
+	squash(0.075)
 	yield(tween, "tween_all_completed")
-	stretch(0.15);
+	stretch(0.15)
 
 
 # This isn't the best place to put these tweening functions and also copied from Player
 # Couldn't this be an animation?
-func squash(time=0.1, returnDelay=0):
-	tween.interpolate_property(sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
-	tween.start();
-
-func stretch(time=0.2, returnDelay=0):
-	tween.interpolate_property(sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT)
-	tween.interpolate_property(sprite, "scale", stretch_scale, original_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT, time/2)
+func squash(time = 0.1, _returnDelay = 0):
+	tween.interpolate_property(
+		sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
 	tween.start()
 
+
+func stretch(time = 0.2, _returnDelay = 0):
+	tween.interpolate_property(
+		sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT
+	)
+	tween.interpolate_property(
+		sprite,
+		"scale",
+		stretch_scale,
+		original_scale,
+		time,
+		Tween.TRANS_BACK,
+		Tween.EASE_OUT,
+		time / 2
+	)
+	tween.start()

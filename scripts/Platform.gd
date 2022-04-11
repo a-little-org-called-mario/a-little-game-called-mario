@@ -4,7 +4,7 @@
 # if you want a way to make it go away
 # For some reason, when you jump into it, it falls with you.
 # Don't know how to fix that.
-# 
+#
 # Platform asset by Hawier at https://hawier.itch.io/hawier-platformer-pack
 extends Enemy
 class_name Platform
@@ -25,11 +25,12 @@ onready var _ray := $RayCast2D
 func _ready():
 	pass
 
+
 func move(_delta: float):
 	_motion.x = clamp(_motion.x, -max_speed, max_speed)
 	_motion.x = direction * max_speed
 	_motion = move_and_slide(_motion, UP)
-	
+
 	_ray.cast_to.x = -1 * direction * RAY_CAST_DISTANCE
 	_ray.force_raycast_update()
 	if _ray.is_colliding():

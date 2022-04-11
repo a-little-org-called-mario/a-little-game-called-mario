@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/levels/Default/Level01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/Coin_Gems/Coin/Coin.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/boxes/DisappearingPlatform.tscn" type="PackedScene" id=7]
 
 [node name="TileMap2" type="TileMap"]
@@ -133,3 +134,6 @@ disappearDelay = 0.1
 [node name="DisappearingPlatform13" parent="." instance=ExtResource( 7 )]
 position = Vector2( 928, -864 )
 disappearDelay = 0.1
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 6 )]
+position = Vector2( 139, 422 )

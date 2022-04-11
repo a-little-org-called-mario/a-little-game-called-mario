@@ -40,6 +40,7 @@ func _copy_zone(topleft: Vector2, bottomright: Vector2) -> Array:
 	return cells
 
 
+
 func _paste_zone(zone: Array, topleft: Vector2) -> void:
 	for x in range(0, len(zone)):
 		for y in range(0, len(zone[0])):
@@ -59,6 +60,7 @@ static func _get_all_first_levels_in_dir(path: String) -> Array:
 					levels.append(level)
 			filename = dir.get_next()
 		dir.list_dir_end()
+
 	levels.sort()
 	return levels
 
@@ -71,6 +73,7 @@ static func _get_first_level_in_dir(path: String) -> String:
 		var filename := dir.get_next()
 		while filename != "":
 			if filename != "." and filename != ".." and !dir.current_is_dir():
+
 				levels.append("%s/%s" % [path, filename])
 			filename = dir.get_next()
 		dir.list_dir_end()

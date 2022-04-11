@@ -279,6 +279,11 @@ fire={
 2d_physics/layer_5="Enemy Projectile"
 2d_physics/layer_9="Player Projectile"
 
+[locale]
+
+translations=PoolStringArray( "res://localization/loca.de.translation", "res://localization/loca.en.translation" )
+locale_filter=[ 1, [ "de", "en" ] ]
+
 [physics]
 
 common/enable_pause_aware_picking=true

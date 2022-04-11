@@ -6,6 +6,6 @@
 script = ExtResource( 1 )
 type = 0
 ID = "Level0_Coins"
-description = "ACHIEVEMENT UNLOCKED: GET ALL THE COINS IN LEVEL 0"
+description = "ACHIEVEMENT_COINS_LEVEL0"
 levelNumber = 0
 coinsRequired = 5

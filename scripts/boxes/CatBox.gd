@@ -1,9 +1,9 @@
 # Spawns a cat to help Mario
 extends BaseBox
 
-export(PackedScene) var cat_scene
+export(PackedScene) var cat_scene: PackedScene
 
-func on_bounce(body: KinematicBody2D):
+func on_bounce(body: KinematicBody2D) -> void:
 	.on_bounce(body)
 	
 	if not body is Player:

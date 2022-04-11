@@ -1,12 +1,12 @@
 class_name SpawnPoint
 extends Position2D
 
-var player_scene = load("res://scenes/Player.tscn")
+var player_scene: PackedScene = load("res://scenes/Player.tscn")
 
-func _ready():
+func _ready() -> void:
 	spawn_mario()
 
-func spawn_mario():
+func spawn_mario() -> void:
 	var player = null
 	for c in get_node("..").get_children():
 		if c is Player:

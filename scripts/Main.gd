@@ -5,15 +5,15 @@ const ENDPORTALS_GROUP: String = "EndPortals"
 const COINS_GROUP: String = "Coins"
 const PROJECTILES_GROUP: String = "Projectiles"
 
+const crt_shader: Shader = preload("res://shaders/CRT.gdshader")
+const completionSound: AudioStreamSample = preload("res://sfx/portal.wav")
+const coinSound: AudioStreamSample = preload("res://sfx/coin.wav")
+
 onready var hub: TileMap = $TileMap
 onready var level: TileMap = $TileMap
-onready var player: Player = $Player
+onready var player: Player = get_node_or_null("Player")
 
 onready var container: ViewportContainer = get_parent()
-onready var crt_shader = preload("res://shaders/CRT.gdshader")
-
-var completionSound = preload("res://sfx/portal.wav")
-var coinSound = preload("res://sfx/coin.wav")
 
 
 func _ready() -> void:
@@ -39,7 +39,7 @@ func _hook_portals() -> void:
 
 
 func _on_build(data) -> void:
-	var player = data["player"]
+	player = data["player"]
 	# reference to player is needed for the case where there are more than one player
 	# eg. Level03
 	

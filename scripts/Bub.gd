@@ -14,24 +14,24 @@ class_name Bub
 
 # General movement constants and logic borrowed from Player.
 # TODO: Generalize enemy movement into a MovingEnemy class?
-const UP = Vector2.UP
-const GRAVITY = 100
-const MAXFALLSPEED = 1000
-const RAY_CAST_WALKING_DISTANCE = 28
-const RAY_CAST_SHOOTING_DISTANCE = 600
-const MAX_SHOOTING_COOLDOWN = 2
-const RAY_CAST_DISTANCE = 28
-const BOUNCE_STRENGTH = 1100
+const UP: Vector2 = Vector2.UP
+const GRAVITY: float = 100.0
+const MAXFALLSPEED: float = 1000.0
+const RAY_CAST_WALKING_DISTANCE: float = 28.0
+const RAY_CAST_SHOOTING_DISTANCE: float = 600.0
+const MAX_SHOOTING_COOLDOWN: float = 2.0
+const RAY_CAST_DISTANCE: float = 28.0
+const BOUNCE_STRENGTH: float = 1100.0
 
 # Maximum movement speed
-export(float) var max_speed = 150
-export(int) var direction = -1
-export(PackedScene) var bullet_scene
-export(PackedScene) var muzzle_flash_scene
+export(float) var max_speed: float = 150.0
+export(int) var direction: float = -1
+export(PackedScene) var bullet_scene: PackedScene
+export(PackedScene) var muzzle_flash_scene: PackedScene
 
-var _motion = Vector2.ZERO
-var _moving = true
-var _shooting_cooldown = 0
+var _motion: Vector2 = Vector2.ZERO
+var _moving: bool = true
+var _shooting_cooldown: float = 0.0
 
 onready var _animation_player := $AnimationPlayer
 onready var _ray_walking := $RayCastWalking
@@ -42,19 +42,19 @@ onready var sprite := $Sprite
 onready var tween := $Tween
 onready var pop_gun_sfx := $PopGun
 
-onready var original_scale = sprite.scale
-onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
-onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
+onready var original_scale: Vector2 = sprite.scale
+onready var squash_scale: Vector2 = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
+onready var stretch_scale: Vector2 = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 
 
-func _ready():
+func _ready() -> void:
 	start_walking()
 	# Uncomment the below lines to trigger death animations after 3 seconds.
 	#yield(get_tree().create_timer(3.0), "timeout")
 	#kill(self)
 
 
-func ai(_delta: float):
+func ai(_delta: float) -> void:
 	_sprite.flip_h = direction > 0
 	_gun_anchor.scale.x = -sign(direction)
 
@@ -72,7 +72,7 @@ func ai(_delta: float):
 		_animation_player.play("aim")
 
 
-func move(_delta: float):
+func move(_delta: float) -> void:
 	if is_dying():
 		return
 
@@ -95,7 +95,7 @@ func move(_delta: float):
 		direction *= -1
 
 
-func disable_collision():
+func disable_collision() -> void:
 	.disable_collision()
 	_ray_walking.enabled = false
 	$CollisionShape2D.queue_free()
@@ -105,7 +105,7 @@ func disable_collision():
 # Disables collision, plays the sprite death animation and the
 # death animation from the animation player. The function then yields
 # until the animations are finished.
-func _handle_dying(_killer):
+func _handle_dying(_killer) -> void:
 	disable_collision()
 	_animation_player.play("die")
 	$SquishParticles.emitting = true
@@ -113,7 +113,7 @@ func _handle_dying(_killer):
 
 
 # called from the animation controller
-func fire_bullet():
+func fire_bullet() -> void:
 	# instance bullet
 	var bullet = bullet_scene.instance()
 	get_parent().add_child(bullet)
@@ -134,12 +134,12 @@ func fire_bullet():
 	start_walking()
 
 
-func start_walking():
+func start_walking() -> void:
 	_moving = true
 	_animation_player.play("move")
 
 
-func _on_KillTrigger_body_entered(body):
+func _on_KillTrigger_body_entered(body: KinematicBody2D) -> void:
 	if not body is Player:
 		return
 	var player = body as Player
@@ -151,14 +151,14 @@ func _on_KillTrigger_body_entered(body):
 
 # This isn't the best place to put these tweening functions and also copied from Player
 # Couldn't this be an animation?
-func squash(time = 0.1, _returnDelay = 0):
+func squash(time: float = 0.1, _returnDelay: float = 0) -> void:
 	tween.interpolate_property(
 		sprite, "scale", original_scale, squash_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)
 	tween.start()
 
 
-func stretch(time = 0.2, _returnDelay = 0):
+func stretch(time: float = 0.2, _returnDelay: float = 0) -> void:
 	tween.interpolate_property(
 		sprite, "scale", squash_scale, stretch_scale, time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)

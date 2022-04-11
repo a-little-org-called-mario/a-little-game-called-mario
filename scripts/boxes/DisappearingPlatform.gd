@@ -1,16 +1,13 @@
 # Extends the BaseBox to destroy box after walking over it, with a brief timeout
 extends BaseBox
 
-export(float) var disappearDelay
+export(float) var disappearDelay: float = 1.0
 
-func _ready():
-	pass
-
-func _on_box_entered(body):
+func _on_box_entered(body: Node2D) -> void:
 	if body is KinematicBody2D:
-		call_deferred("bounce")
+		call_deferred("bounce", body)
 
-func bounce(body):
+func bounce(body) -> void:
 	.on_bounce(body)
 	disable()
 	var timer = Timer.new()

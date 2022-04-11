@@ -1,13 +1,10 @@
 # Extends the BaseBox to let the player collect coins by bouncing.
 extends BaseBox
 
-onready var particle_emitter = $CoinEmitter
-onready var audio_coin = $CoinStream
+onready var particle_emitter: Particles2D = $CoinEmitter
+onready var audio_coin: AudioStreamPlayer2D = $CoinStream
 
-func _ready():
-	pass
-
-func on_bounce(_body: KinematicBody2D):
+func on_bounce(_body: KinematicBody2D) -> void:
 	.on_bounce(_body)
 	particle_emitter.restart()
 	particle_emitter.emitting = true

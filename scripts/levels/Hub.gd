@@ -1,11 +1,10 @@
-#warning-ignore-all: NARROWING_CONVERSION
 extends TileMap
 
-const PORTAL_POSITION := Vector2(6, 4)
-const COPY_ZONE_START := Vector2(5, -1)
-const COPY_ZONE_END := Vector2(7, 9)
-const WALL_START := Vector2(7, -1)
-const WALL_END := Vector2(8, 9)
+const PORTAL_POSITION: Vector2 = Vector2(6, 4)
+const COPY_ZONE_START: Vector2 = Vector2(5, -1)
+const COPY_ZONE_END: Vector2 = Vector2(7, 9)
+const WALL_START: Vector2 = Vector2(7, -1)
+const WALL_END: Vector2 = Vector2(8, 9)
 
 export(String, DIR) var levels_directory: String
 export(PackedScene) var portal_scene: PackedScene
@@ -16,7 +15,7 @@ func _ready() -> void:
 	var wall_zone := _copy_zone(WALL_START, WALL_END)
 
 	var levels := _get_all_first_levels_in_dir(levels_directory)
-	var shift := 0
+	var shift: int = 0
 	for level in levels:
 		_paste_zone(copy_zone, Vector2(COPY_ZONE_START.x + shift, COPY_ZONE_START.y))
 		var portal: EndPortal = portal_scene.instance()
@@ -26,7 +25,7 @@ func _ready() -> void:
 		)
 		portal.next_level = load(level)
 		add_child(portal)
-		shift += COPY_ZONE_END.x - COPY_ZONE_START.x + 1
+		shift += int(floor(COPY_ZONE_END.x - COPY_ZONE_START.x + 1))
 	_paste_zone(wall_zone, Vector2(COPY_ZONE_START.x + shift, COPY_ZONE_START.y))
 
 
@@ -44,7 +43,11 @@ func _copy_zone(topleft: Vector2, bottomright: Vector2) -> Array:
 func _paste_zone(zone: Array, topleft: Vector2) -> void:
 	for x in range(0, len(zone)):
 		for y in range(0, len(zone[0])):
-			set_cell(topleft.x + x, topleft.y + y, zone[x][y])
+			set_cell(
+				int(floor(topleft.x + x)), 
+				int(floor(topleft.y + y)),
+				zone[x][y]
+			)
 
 
 static func _get_all_first_levels_in_dir(path: String) -> Array:

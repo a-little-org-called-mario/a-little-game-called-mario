@@ -1,40 +1,42 @@
 extends RigidBody2D
 class_name PopcornKernel
 
-const initial_scatter_force = 600;
-const initial_scatter_torque = 600;
-var rng = RandomNumberGenerator.new()
-var pop_wait_duration;
-var pop_timer = 0;
+const initial_scatter_force: float = 600.0
+const initial_scatter_torque: float = 600.0
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var pop_wait_duration: float
+var pop_timer: float = 0.0
 
 export(PackedScene) var popcorn_popped: PackedScene = preload("res://scenes/PopcornPopped.tscn")
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	rng.randomize()
-	pop_wait_duration = rng.randf_range(1.5,2.5);
+	pop_wait_duration = rng.randf_range(1.5,2.5)
 	
-	var force_direction = Vector2(0,0)
+	var force_direction: Vector2 = Vector2(0,0)
 	
 	rng.randomize()
-	force_direction.x = rng.randf_range(-1,1);
+	force_direction.x = rng.randf_range(-1,1)
 	rng.randomize()
-	force_direction.y = rng.randf_range(-1,1);
+	force_direction.y = rng.randf_range(-1,1)
 	
-	force_direction = force_direction.normalized();
+	force_direction = force_direction.normalized()
 	apply_central_impulse(force_direction * initial_scatter_force)
 	
 	rng.randomize()
 	apply_torque_impulse(rng.randf_range(-1,1)*initial_scatter_torque)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta) -> void:
 	pop_timer += delta
 	if (pop_timer >= pop_wait_duration):
 		pop()
-		
-func pop():
+
+
+# me when the popcorn pop í ½í²€:skull:
+func pop() -> void:
 	var popped = popcorn_popped.instance()
 	get_parent().add_child(popped)
 	popped.position = global_position

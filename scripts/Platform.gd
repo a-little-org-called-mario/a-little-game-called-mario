@@ -10,23 +10,19 @@ extends Enemy
 class_name Platform
 
 # General movement constants and logic borrowed from Player.
-const UP = Vector2.UP
-const RAY_CAST_DISTANCE = 75
+const UP: Vector2 = Vector2.UP
+const RAY_CAST_DISTANCE: float = 75.0
 
 # Maximum movement speed
-export(float) var max_speed = 150
-export(int) var direction = -1
+export(float) var max_speed: float = 150.0
+export(int) var direction: int = -1
 
-var _motion = Vector2.ZERO
+var _motion: Vector2 = Vector2.ZERO
 
-onready var _ray := $RayCast2D
-
-
-func _ready():
-	pass
+onready var _ray: RayCast2D = $RayCast2D
 
 
-func move(_delta: float):
+func move(_delta: float) -> void:
 	_motion.x = clamp(_motion.x, -max_speed, max_speed)
 	_motion.x = direction * max_speed
 	_motion = move_and_slide(_motion, UP)

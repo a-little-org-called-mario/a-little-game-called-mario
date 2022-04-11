@@ -1,5 +1,5 @@
 extends Achievement
 class_name CoinsAchievement
 
-export(int) var levelNumber
-export(int) var coinsRequired
+export(int) var levelNumber: int
+export(int) var coinsRequired: int

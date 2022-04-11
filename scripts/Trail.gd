@@ -1,13 +1,13 @@
 extends Line2D
 
-export(int) var trail_length = 5
-var positions = []
-var height = 0.0
+export(int) var trail_length: int = 5
+var positions: Array = []
+var height: float = 0.0
 
 onready var parent = get_parent()
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	global_position = Vector2(0, 0)
 
 	while len(positions) > trail_length:

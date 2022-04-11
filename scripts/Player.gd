@@ -4,39 +4,39 @@ extends KinematicBody2D
 signal jumping
 signal shooting
 
-const UP = Vector2.UP
-const GRAVITY = 100
-const MAXFALLSPEED = 1100
-const MAXSPEED = 350
-const JUMPFORCE = 1100
-const ACCEL = 50
-const COYOTE_TIME = 0.1
-const JUMP_BUFFER_TIME = 0.05
-const SLIP_RANGE = 16
+const UP: Vector2 = Vector2.UP
+const GRAVITY: float = 100.0
+const MAXFALLSPEED: float = 1100.0
+const MAXSPEED: float = 350.0
+const JUMPFORCE: float = 1100.0
+const ACCEL: float = 50.0
+const COYOTE_TIME: float = 0.1
+const JUMP_BUFFER_TIME: float = 0.05
+const SLIP_RANGE: float = 16.0
 
 export(PackedScene) var default_projectile: PackedScene = preload("res://scenes/CoinProjectile.tscn")
 export(PackedScene) var fireball_projectile: PackedScene = preload("res://scenes/powerups/Fireball.tscn")
 
-var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
-var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
-var motion = Vector2()
-var gravity_multiplier = 1  # used for jump height variability
-var double_jump = true
-var crouching = false
-var grounded = false
-var anticipating_jump = false # the small window of time before the player jumps
-var coins = 0; #grabbed directly from the coin_collected signal;
-var hearts = 3;
-var hasFlower = false
+var coyote_timer: float = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
+var jump_buffer_timer: float = 0.0 # gives a bit of buffer to hit the jump button before landing
+var motion: Vector2 = Vector2.ZERO
+var gravity_multiplier: float = 1.0  # used for jump height variability
+var double_jump: bool = true
+var crouching: bool = false
+var grounded: bool = false
+var anticipating_jump: bool = false # the small window of time before the player jumps
+var coins: int = 0 #grabbed directly from the coin_collected signal;
+var hearts: int = 3
+var hasFlower: bool = false
 
-onready var sprite = $Sprite
-onready var tween = $Tween
-onready var trail : Line2D = $Trail
-onready var run_particles : CPUParticles2D = $RunParticles
+onready var sprite: AnimatedSprite = $Sprite
+onready var tween: Tween = $Tween
+onready var trail: Line2D = $Trail
+onready var run_particles: CPUParticles2D = $RunParticles
 
-onready var original_scale = sprite.scale
-onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
-onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
+onready var original_scale: Vector2 = sprite.scale
+onready var squash_scale: Vector2 = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
+onready var stretch_scale: Vector2 = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("heart_changed", self, "_on_heart_change")
@@ -48,9 +48,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block", {"player":self})
 
-	var max_speed_modifier = 1
-	var acceleration_modifier = 1
-	var animationSpeed = 8
+	var max_speed_modifier: float = 1.0
+	var acceleration_modifier: float = 1.0
+	var animationSpeed: float = 8.0
 	if Input.is_action_pressed("sprint"):
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
@@ -129,7 +129,7 @@ func _physics_process(delta: float) -> void:
 		motion = move_and_slide_result
 
 
-func try_slip(angle: float):
+func try_slip(angle: float) -> bool:
 	if angle == 0:
 		return false
 	var axis = "x" if is_equal_approx(angle, PI) else "y"
@@ -147,7 +147,7 @@ func try_slip(angle: float):
 	return false
 
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
 	if event.is_action_pressed("shoot") and coins > 0:
@@ -158,12 +158,12 @@ func _input(event: InputEvent):
 		shoot(fireball_projectile)
 
 
-func crouch():
+func crouch() -> void:
 	crouching = true
 	squash()
 
 
-func jump():
+func jump() -> void:
 	tween.stop_all()
 	anticipating_jump = true
 	squash(0.03, 0, 0.5)
@@ -174,17 +174,17 @@ func jump():
 	motion.y = -JUMPFORCE
 	anticipating_jump = false
 	$JumpSFX.play()
-	EventBus.emit_signal("jumping")
+	emit_signal("jumping")
 
 
-func land():
+func land() -> void:
 	squash(0.05)
 	yield(tween, "tween_all_completed")
 	if grounded and not anticipating_jump:
 		unsquash(0.18)
 
 
-func shoot(projectile_scene: PackedScene):
+func shoot(projectile_scene: PackedScene) -> void:
 	# Spawn the projectile and move it to its origin point
 	# Origin is affected by changes to Sprite (ex: squashing)
 	var projectile = projectile_scene.instance()
@@ -201,15 +201,19 @@ func shoot(projectile_scene: PackedScene):
 	emit_signal("shooting")
 
 
-func look_right():
+func look_right() -> void:
 	sprite.flip_h = false
 
 
-func look_left():
+
+func look_left() -> void:
 	sprite.flip_h = true
 
 
-func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
+func squash(
+		time: float = 0.1,
+		_returnDelay: float = 0.0,
+		squash_modifier: float = 1.0) -> void:
 	tween.remove_all()
 	tween.interpolate_property(
 		sprite,
@@ -226,7 +230,10 @@ func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 	tween.start()
 
 
-func stretch(time = 0.2, _returnDelay = 0, squash_modifier = 1.0, stretch_modifier = 1.0):
+func stretch(time: float = 0.2,
+		_returnDelay: float = 0.0,
+		squash_modifier: float = 1.0,
+		stretch_modifier: float = 1.0) -> void:
 	tween.remove_all()
 	tween.interpolate_property(
 		sprite,
@@ -250,7 +257,9 @@ func stretch(time = 0.2, _returnDelay = 0, squash_modifier = 1.0, stretch_modifi
 	tween.start()
 
 
-func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
+func unsquash(time: float = 0.1,
+		_returnDelay: float = 0.0,
+		squash_modifier: float = 1.0) -> void:
 	tween.remove_all()
 	tween.interpolate_property(
 		sprite,
@@ -273,20 +282,20 @@ func reset() -> void:
 	trail.reset()
 	
 
-func bounce(strength = 1100):
+func bounce(strength: float = 1100.0) -> void:
 	squash(0.075)
 	yield(tween, "tween_all_completed")
 	stretch(0.15)
 	coyote_timer = 0
 	motion.y = -strength
 
-func _on_coin_collected(data):
+func _on_coin_collected(data) -> void:
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
 	coins += value
 
-func _on_heart_change(data):
+func _on_heart_change(data) -> void:
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
@@ -294,6 +303,6 @@ func _on_heart_change(data):
 	if(hearts <= 0):
 		get_tree().reload_current_scene()
 
-func _on_flower_collected(data):
+func _on_flower_collected(data) -> void:
 	if data.has("collected"):
 		hasFlower = data["collected"]	

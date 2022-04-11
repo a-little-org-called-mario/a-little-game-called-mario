@@ -3,25 +3,25 @@ extends Area2D
 
 signal destroyed
 
-export(float) var projectile_speed := 4
-export(bool) var look_at_direction := true
+export(float) var projectile_speed: float = 4
+export(bool) var look_at_direction: bool = true
 
-var _direction := Vector2()
-var _active := false
+var _direction: Vector2 = Vector2()
+var _active: bool = false
 
-func _ready():
+func _ready() -> void:
 	self.connect("body_entered", self, "_body_entered")
 
-func start_moving(dir: Vector2 = Vector2()):
+func start_moving(dir: Vector2 = Vector2.ZERO) -> void:
 	_handle_start(dir)
 	_active = true
 	_direction = dir.normalized()
 
-# Override this to play sounds or other animations
-func _handle_start(_dir: Vector2):
+# To be overridden this to play sounds or other animations
+func _handle_start(_dir: Vector2) -> void:
 	pass
 
-func _physics_process(_delta: float):
+func _physics_process(_delta: float) -> void:
 	if _active:
 		_handle_movement()
 		if look_at_direction and _direction != Vector2():
@@ -29,11 +29,11 @@ func _physics_process(_delta: float):
 
 
 # Override to do anything else than move in a straight line
-func _handle_movement():
+func _handle_movement() -> void:
 	position += _direction * projectile_speed
 
 
-func _body_entered(body):
+func _body_entered(body: Node2D) -> void:
 	# If body is the player then lose health
 	if body is Player:
 		print("Player was hit!")

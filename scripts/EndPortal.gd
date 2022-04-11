@@ -9,18 +9,18 @@ export var next_level: PackedScene
 onready var mario: AnimatedSprite = $Mario
 
 
-func _ready():
-    $Sprite.play()
+func _ready() -> void:
+	$Sprite.play()
 
 
 func _enter_tree() -> void:
-    $Mario.visible = false
+	$Mario.visible = false
 
 
-func on_portal_enter():
-    mario.visible = true
-    mario.frame = 0
-    mario.play()
-    $PortalSFX.play()
-    EventBus.emit_signal("level_completed", {})
-    return mario
+func on_portal_enter() -> AnimatedSprite:
+	mario.visible = true
+	mario.frame = 0
+	mario.play()
+	$PortalSFX.play()
+	EventBus.emit_signal("level_completed", {})
+	return mario

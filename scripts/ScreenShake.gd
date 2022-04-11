@@ -4,37 +4,42 @@ class_name ScreenShake
 const TRANS = Tween.TRANS_SINE
 const EASE = Tween.EASE_IN_OUT
 
-var amplitude = 0
-var priority = 0
+var amplitude: float = 0.0
+var priority: float = 0.0
 
-onready var camera = get_parent()
+onready var camera: Camera2D = get_parent()
 onready var _tween: Tween = $Tween
 onready var _freq_timer: Timer = $Frequency
 onready var _duration_timer: Timer = $Duration
 
 
-func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
-	if priority < self.priority:
+func start(_duration: float = 0.2,
+		_frequency: float = 15.0,
+		_amplitude: float = 16.0,
+		_priority = 0) -> void:
+	
+	if _priority < priority:
 		return
 
 	if !Settings.screen_shake:
 		return
 
-	self.priority = priority
-	self.amplitude = amplitude
+	priority = _priority
+	amplitude = _amplitude
 
-	_duration_timer.wait_time = duration
-	_freq_timer.wait_time = 1 / float(frequency)
+	_duration_timer.wait_time = _duration
+	_freq_timer.wait_time = 1 / float(_frequency)
 	_duration_timer.start()
 	_freq_timer.start()
 
 	_new_shake()
 
 
-func _new_shake():
-	var rand = Vector2()
-	rand.x = rand_range(-amplitude, amplitude)
-	rand.y = rand_range(-amplitude, amplitude)
+func _new_shake() -> void:
+	var rand: Vector2 = Vector2(
+		rand_range(-amplitude, amplitude),
+		rand_range(-amplitude, amplitude)
+	)
 
 	_tween.interpolate_property(
 		camera, "offset", camera.offset, rand, _freq_timer.wait_time, TRANS, EASE
@@ -42,7 +47,7 @@ func _new_shake():
 	_tween.start()
 
 
-func _reset():
+func _reset() -> void:
 	_tween.interpolate_property(
 		camera, "offset", camera.offset, Vector2.ZERO, _freq_timer.wait_time, TRANS, EASE
 	)

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 9 )
 
-[node name="BubBullet" type="KinematicBody2D" groups=["Projectiles"]]
+[node name="BubBullet" type="Area2D"]
 collision_layer = 16
 collision_mask = 3
 script = ExtResource( 2 )

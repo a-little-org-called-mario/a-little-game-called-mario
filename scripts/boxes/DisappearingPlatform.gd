@@ -1,5 +1,5 @@
 # Extends the BaseBox to destroy box after walking over it, with a brief timeout
-extends "res://scripts/boxes/BaseBox.gd"
+extends BaseBox
 
 export(float) var disappearDelay
 

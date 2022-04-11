@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/BallSpawnPoint.gd" type="Script" id=1]
+
+[node name="BallSpawnPoint" type="Position2D"]
+script = ExtResource( 1 )

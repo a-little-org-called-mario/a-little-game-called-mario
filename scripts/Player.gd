@@ -40,7 +40,7 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("heart_changed", self, "_on_heart_change")
-	hearts = get_node("../../UI/UI/HeartCount").count
+	hearts = get_node("../../UI/UI/HeartCount").count 
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 
 

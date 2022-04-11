@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/levels/Hub.gd" type="Script" id=6]
 
@@ -13,5 +14,5 @@ script = ExtResource( 6 )
 levels_directory = "res://scenes/levels"
 portal_scene = ExtResource( 3 )
 
-[node name="Spawn" type="Position2D" parent="." groups=["SpawnPoints"]]
+[node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 160, 480 )

@@ -217,9 +217,11 @@ shape = SubResource( 4 )
 
 [node name="MeowStream" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+bus = "sfx"
 
 [node name="CoinStream" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+bus = "sfx"
 
 [node name="Particles2D" type="Particles2D" parent="."]
 scale = Vector2( 3, 3 )

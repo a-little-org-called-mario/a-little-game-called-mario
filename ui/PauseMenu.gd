@@ -61,7 +61,8 @@ func _ready ():
 # NOTE (jam):   This is a bit dirty still - in the event that someone changes the order of menu items, a lot of these
 #               switch statements are going to need to be rewritten, since it's all hardcoded based on index value
 func _process (_delta: float):
-	if Input.is_action_just_pressed("pause"): EventBus.emit_signal("game_paused", !get_tree().paused);
+	if Input.is_action_just_pressed("pause") and !get_tree().paused:
+		EventBus.emit_signal("game_paused", true);
 
 	elif $PauseMenu.visible:
 		var label: RichTextLabel = labels[current_menu][selected];
@@ -114,6 +115,12 @@ func _process (_delta: float):
 				SUBMENU.SFX:
 					if 0 == selected:   go_to_menu(SUBMENU.MAIN);
 					else:               volume_select(1, label);
+		elif Input.is_action_just_pressed("pause"):
+			match current_menu:
+				SUBMENU.MAIN:
+					EventBus.emit_signal("game_paused", false);
+				_:
+					go_to_menu(SUBMENU.MAIN)
 
 ## Callback for the signal "game_paused".
 #  @data: the desired pause state for the game

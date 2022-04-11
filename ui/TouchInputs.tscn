@@ -1,10 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/touch_input.png" type="Texture" id=1]
+[ext_resource path="res://ui/MultiTouchScreenButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/menu-button.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 24, 24 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -18,60 +23,78 @@ region = Rect2( 96, 0, 48, 48 )
 atlas = ExtResource( 1 )
 region = Rect2( 144, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 48, 48 )
-
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 240, 0, 48, 48 )
 
 [node name="TouchInputs" type="CanvasLayer"]
 
-[node name="LeftButton" type="TouchScreenButton" parent="."]
-position = Vector2( 50, 475 )
+[node name="Left" type="Node" parent="."]
+
+[node name="LeftButton" type="TouchScreenButton" parent="Left"]
+position = Vector2( 50, 390 )
 scale = Vector2( 2, 2 )
 normal = SubResource( 1 )
 passby_press = true
 action = "left"
 visibility_mode = 1
 
-[node name="RightButton" type="TouchScreenButton" parent="."]
-position = Vector2( 250, 475 )
+[node name="HiddenCrouchLeft" parent="Left" instance=ExtResource( 2 )]
+position = Vector2( 70, 510 )
+shape = SubResource( 7 )
+actions = [ "left", "down" ]
+
+[node name="CrouchButton" type="TouchScreenButton" parent="Left"]
+position = Vector2( 245, 475 )
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+normal = SubResource( 2 )
+passby_press = true
+action = "down"
+visibility_mode = 1
+
+[node name="RightButton" type="TouchScreenButton" parent="Left"]
+position = Vector2( 250, 390 )
 scale = Vector2( 2, 2 )
 normal = SubResource( 2 )
 passby_press = true
 action = "right"
 visibility_mode = 1
 
-[node name="JumpButton" type="TouchScreenButton" parent="."]
-position = Vector2( 675, 375 )
+[node name="HiddenCrouchRight" parent="Left" instance=ExtResource( 2 )]
+position = Vector2( 275, 510 )
+shape = SubResource( 7 )
+actions = [ "right", "down" ]
+
+[node name="Right" type="Node" parent="."]
+
+[node name="JumpButton" type="TouchScreenButton" parent="Right"]
+position = Vector2( 800, 475 )
 scale = Vector2( 2, 2 )
 normal = SubResource( 3 )
 passby_press = true
 action = "jump"
 visibility_mode = 1
 
-[node name="SprintButton" type="TouchScreenButton" parent="."]
-position = Vector2( 750, 475 )
+[node name="SprintButton" type="TouchScreenButton" parent="Right"]
+position = Vector2( 725, 390 )
 scale = Vector2( 2, 2 )
 normal = SubResource( 4 )
 passby_press = true
 action = "sprint"
 visibility_mode = 1
 
-[node name="CrouchButton" type="TouchScreenButton" parent="."]
-position = Vector2( 825, 375 )
-scale = Vector2( 2, 2 )
-normal = SubResource( 5 )
-passby_press = true
-action = "down"
-visibility_mode = 1
-
-[node name="ShootButton" type="TouchScreenButton" parent="."]
-position = Vector2( 900, 475 )
+[node name="ShootButton" type="TouchScreenButton" parent="Right"]
+position = Vector2( 875, 390 )
 scale = Vector2( 2, 2 )
 normal = SubResource( 6 )
 passby_press = true
 action = "shoot"
+visibility_mode = 1
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( 500, 10 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 3 )
+action = "pause"
 visibility_mode = 1

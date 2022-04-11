@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/MultiTouchScreenButton.gd" type="Script" id=1]
+
+[node name="MultiTouchScreenButton" type="TouchScreenButton"]
+passby_press = true
+action = "down"
+visibility_mode = 1
+script = ExtResource( 1 )
+actions = [ "", "" ]
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="released" from="." to="." method="_on_released"]

@@ -1,0 +1,34 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[resource]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 0.882584, 0.704611, 0.925781, 1 )
+Button/colors/font_color_disabled = Color( 0.333333, 0.329412, 0.329412, 1 )
+Button/colors/font_color_focus = Color( 1, 1, 1, 1 )
+Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
+Button/colors/font_color_pressed = Color( 0.313726, 0.270588, 0.462745, 1 )
+Button/styles/disabled = SubResource( 2 )
+Button/styles/focus = SubResource( 3 )
+Button/styles/hover = SubResource( 4 )
+Button/styles/normal = SubResource( 1 )
+Button/styles/pressed = SubResource( 5 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/fonts/font = null
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+RichTextLabel/constants/shadow_offset_y = 3

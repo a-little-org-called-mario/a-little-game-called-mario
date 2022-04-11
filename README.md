@@ -73,7 +73,7 @@ if videos are more your thing, i recommend these channels:
 ## 👩‍💻 the code 👩‍💻
 if you're feeling impatient and just want to tinker, you can [download the code directly](https://github.com/iznaut/a-little-game-called-mario/archive/refs/heads/main.zip), unzip it, and open it in Godot as a project.
 
-> **however, you will need to learn a thing or two about GitHub in order to submit your changes back into the shared repositiory.**
+> **however, you will need to learn a thing or two about GitHub in order to submit your changes back into the shared repository.**
 
 if you're totally new to GitHub and working with code repositories, i recommend [this guide](https://rogerdudler.github.io/git-guide/) as a quick primer.
 

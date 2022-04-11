@@ -100,13 +100,15 @@ _global_script_class_icons={
 
 config/name="A Little Game Called Mario"
 config/description="open source collective hell game"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/title/TitleScreen.tscn"
 config/icon="res://sprites/icon.png"
 
 [autoload]
 
 EventBus="*res://autoload/EventBus.gd"
 Settings="*res://autoload/Settings.gd"
+SceneTransition="*res://effects/SceneTransition/SceneTransition.tscn"
+GitHubApi="*res://autoload/GitHubAPI.gd"
 
 [debug]
 

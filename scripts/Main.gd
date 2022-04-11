@@ -67,12 +67,11 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
 		despawn.queue_free()
 
+	body.get_parent().remove_child(body)
 	var animation = portal.on_portal_enter()
-	body.visible = false
+	
 	yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
-	body.visible = true
-
 
 func _finish_level(next_level: PackedScene = null) -> void:
 	# Create the new level, insert it into the tree and remove the old one.

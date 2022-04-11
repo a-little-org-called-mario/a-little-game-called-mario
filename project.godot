@@ -63,6 +63,11 @@ _global_script_classes=[ {
 "class": "ShakingCamera",
 "language": "GDScript",
 "path": "res://scripts/Camera.gd"
+}, {
+"base": "Position2D",
+"class": "SpawnPoint",
+"language": "GDScript",
+"path": "res://scripts/SpawnPoint.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
@@ -75,7 +80,8 @@ _global_script_class_icons={
 "Player": "",
 "PlayerProjectile": "",
 "ScreenShake": "",
-"ShakingCamera": ""
+"ShakingCamera": "",
+"SpawnPoint": ""
 }
 
 [application]

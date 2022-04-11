@@ -38,7 +38,7 @@ func _hook_portals() -> void:
 		)
 
 func _on_heart_change(_data) -> void:
-	if(PlayerValues.get_hearts() <= 0):
+	if PlayerValues.get_hearts() <= 0:
 		get_tree().reload_current_scene()
 
 func _on_build(data) -> void:

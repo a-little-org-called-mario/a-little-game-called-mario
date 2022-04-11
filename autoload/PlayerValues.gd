@@ -11,29 +11,27 @@ func _ready():
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 
-func get_coins():
+func get_coins() -> int:
 	return _coins
 
-func get_hearts():
+func get_hearts() -> int:
 	return _hearts
 
-func has_flower():
+func has_flower() -> bool:
 	return _hasFlower
 
-func _on_coin_collected(data):
+func _on_coin_collected(data) -> void:
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
 	_coins += value
 
-func _on_heart_change(data):
+func _on_heart_change(data) -> void:
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
 	_hearts += value
-	if(_hearts <= 0):
-		get_tree().reload_current_scene()
 
-func _on_flower_collected(data):
+func _on_flower_collected(data) -> void:
 	if data.has("collected"):
 		_hasFlower = data["collected"]

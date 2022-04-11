@@ -16,6 +16,7 @@ var coinSound = preload("res://sfx/coin.wav")
 
 
 func _ready() -> void:
+	EventBus.connect("heart_changed",self,"_on_heart_change")
 	EventBus.connect("build_block", self, "_on_build")
 	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle")
 	EventBus.connect("volume_changed",self,"_on_volume_change")
@@ -36,6 +37,9 @@ func _hook_portals() -> void:
 			"body_entered", self, "_on_endportal_body_entered", [portal.next_level, portal]
 		)
 
+func _on_heart_change(_data) -> void:
+	if(PlayerValues.get_hearts() <= 0):
+		get_tree().reload_current_scene()
 
 func _on_build(data) -> void:
 	var player = data["player"]

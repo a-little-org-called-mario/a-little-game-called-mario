@@ -1,6 +1,5 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=2]
 [ext_resource path="res://ui/UI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/levels/Hub.tscn" type="PackedScene" id=4]
@@ -48,9 +47,6 @@ script = ExtResource( 6 )
 
 [node name="ScreenShake" parent="ViewportContainer/Main/Camera" instance=ExtResource( 5 )]
 
-[node name="Player" parent="ViewportContainer/Main" instance=ExtResource( 1 )]
-position = Vector2( 159, 443 )
-
 [node name="TileMap" parent="ViewportContainer/Main" instance=ExtResource( 4 )]
 
 [node name="UI" parent="ViewportContainer/Main" instance=ExtResource( 3 )]
@@ -68,5 +64,3 @@ stream = ExtResource( 7 )
 volume_db = -20.0
 autoplay = true
 bus = "music"
-
-[connection signal="jumping" from="ViewportContainer/Main/Player" to="ViewportContainer/Main/Camera" method="trigger_small_shake"]

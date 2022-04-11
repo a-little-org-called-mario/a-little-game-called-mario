@@ -171,7 +171,7 @@ func jump():
 	motion.y = -JUMPFORCE
 	anticipating_jump = false
 	$JumpSFX.play()
-	emit_signal("jumping")
+	EventBus.emit_signal("jumping")
 
 
 func land():

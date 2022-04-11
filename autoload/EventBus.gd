@@ -1,6 +1,7 @@
 #warning-ignore-all: UNUSED_SIGNAL
 extends Node
 
+signal jumping(data)
 signal coin_collected(data)
 signal enemy_killed(data)
 signal build_block(data)

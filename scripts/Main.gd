@@ -106,9 +106,6 @@ func _get_player_spawn_position() -> Vector2:
 	var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)
 	return spawn_points[0].global_position if len(spawn_points) > 0 else player.global_position
 
-func _input(event):
-	if event.is_action_pressed("show_credits"):
-		get_tree().change_scene("res://scenes/Credits.tscn")
 
 func _on_crt_toggle(on: bool) -> void:
 	if on:

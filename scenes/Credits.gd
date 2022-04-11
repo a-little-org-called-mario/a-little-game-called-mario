@@ -15,4 +15,4 @@ func _process(delta):
 	vscroll.value += delta * SPEED
 
 	if vscroll.value >= vscroll.max_value - scroll_container.rect_size.y:
-		get_tree().change_scene("res://scenes/Main.tscn")
+		EventBus.emit_signal("change_scene", { "scene": "res://scenes/title/TitleScreen.tscn" })

@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/boxes/CatBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Corncob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=5]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -13,9 +15,11 @@ tile_data = PoolIntArray( -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 
 [node name="EndPortal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 946, 53 )
 
-[node name="SpawnPoint" type="Position2D" parent="." groups=["SpawnPoints"]]
+[node name="SpawnPoint2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 753, 419 )
 
-[node name="CoinBox" parent="." instance=ExtResource( 2 )]
+[node name="CatBox" parent="." instance=ExtResource( 2 )]
 position = Vector2( 928, 352 )
-bounce_count = 5
+
+[node name="Corncob" parent="." instance=ExtResource( 4 )]
+position = Vector2( 480, 416 )

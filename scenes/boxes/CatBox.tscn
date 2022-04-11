@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/boxes/BaseBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/boxes/CatBox.gd" type="Script" id=2]
+[ext_resource path="res://scenes/friends/Cat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/cat-ears.png" type="Texture" id=6]
+[ext_resource path="res://sprites/box-cat.png" type="Texture" id=7]
+
+[node name="CatBox" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+cat_scene = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="3"]
+texture = ExtResource( 7 )
+
+[node name="SpriteEars" type="Sprite" parent="Sprite" index="0"]
+position = Vector2( 0, -64 )
+z_index = 10
+texture = ExtResource( 6 )

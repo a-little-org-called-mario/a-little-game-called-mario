@@ -62,3 +62,7 @@ func destroy():
 # Override to add fancy effects
 func _handle_destruction():
 	pass
+
+
+func set_projectile_speed(speed: float):
+	projectile_speed = speed

@@ -5,14 +5,15 @@ const ENDPORTALS_GROUP: String = "EndPortals"
 const COINS_GROUP: String = "Coins"
 const PROJECTILES_GROUP: String = "Projectiles"
 
-const crt_shader: Shader = preload("res://shaders/CRT.gdshader")
-const completionSound: AudioStreamSample = preload("res://sfx/portal.wav")
-const coinSound: AudioStreamSample = preload("res://sfx/coin.wav")
-
 onready var hub: TileMap = $TileMap
 onready var level: TileMap = $TileMap
-onready var player: Player = get_node_or_null("Player")
+onready var player: Player = $Player
+
 onready var container: ViewportContainer = get_parent()
+onready var crt_shader = preload("res://shaders/CRT.gdshader")
+
+var completionSound = preload("res://sfx/portal.wav")
+var coinSound = preload("res://sfx/coin.wav")
 
 
 func _ready() -> void:
@@ -38,7 +39,7 @@ func _hook_portals() -> void:
 
 
 func _on_build(data) -> void:
-	player = data["player"]
+	var player = data["player"]
 	# reference to player is needed for the case where there are more than one player
 	# eg. Level03
 	
@@ -95,7 +96,15 @@ func _finish_level(next_level: PackedScene = null) -> void:
 	#Removing instructions
 	$UI/UI/RichTextLabel.visible = false
 
+	# We need to flash the player out and in the tree to avoid physics errors.
+	remove_child(player)
+	add_child_below_node(level, player)
 	EventBus.emit_signal("level_started", {})
+
+
+func _get_player_spawn_position() -> Vector2:
+	var spawn_points = get_tree().get_nodes_in_group(SPAWNPOINTS_GROUP)
+	return spawn_points[0].global_position if len(spawn_points) > 0 else player.global_position
 
 
 func _on_crt_toggle(on: bool) -> void:

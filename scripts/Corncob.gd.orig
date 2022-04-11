@@ -22,5 +22,9 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	
 	for _i in range(num_kernels):
-		call_deferred("create_kernel")
+<<<<<<< HEAD
+		create_kernel();
+=======
+		call_deferred("create_kernel");
+>>>>>>> 8f985626e070ef4fc4b178a324954f5ebfea0559
 	queue_free()

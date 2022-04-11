@@ -3,7 +3,6 @@ class_name PopcornPopped
 
 const pop_force: int = 100
 
-onready var audio_coin: AudioStreamPlayer = $CoinStream
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.

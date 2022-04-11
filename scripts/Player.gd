@@ -40,7 +40,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
-		EventBus.emit_signal("build_block")
+		EventBus.emit_signal("build_block", {"player":self})
 
 	var max_speed_modifier = 1
 	var acceleration_modifier = 1

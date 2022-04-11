@@ -1,11 +1,8 @@
 class_name Player
 extends KinematicBody2D
 
-signal jumping
 signal shooting
 
-const UP = Vector2.UP
-const GRAVITY = 100
 const MAXFALLSPEED = 1100
 const MAXSPEED = 350
 const JUMPFORCE = 1100
@@ -16,6 +13,8 @@ const SLIP_RANGE = 16
 
 export(PackedScene) var default_projectile: PackedScene = preload("res://scenes/CoinProjectile.tscn")
 export(PackedScene) var fireball_projectile: PackedScene = preload("res://scenes/powerups/Fireball.tscn")
+
+var gravity = preload("res://scripts/resources/Gravity.tres")
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
@@ -83,7 +82,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			jump_buffer_timer = JUMP_BUFFER_TIME
 
-	if is_on_floor():
+	if _is_on_floor():
 		if not grounded:
 			grounded = true
 			land()
@@ -110,14 +109,15 @@ func _physics_process(delta: float) -> void:
 		crouching = false
 		unsquash()
 
-	motion.y += GRAVITY * gravity_multiplier
+	motion.y += gravity.direction.y * gravity.strength * gravity_multiplier
+	sprite.flip_v = gravity.direction.y < 0
 
-	if motion.y > MAXFALLSPEED:
-		motion.y = MAXFALLSPEED
+	if abs(motion.y) > MAXFALLSPEED:
+		motion.y = sign(motion.y) * MAXFALLSPEED
 
 	motion.x = clamp(motion.x, -MAXSPEED * max_speed_modifier, MAXSPEED * max_speed_modifier)
 
-	var move_and_slide_result = move_and_slide(motion, UP)
+	var move_and_slide_result = move_and_slide(motion, Vector2.UP)
 	var slide_count = get_slide_count()
 
 	var slipped = false
@@ -139,7 +139,7 @@ func try_slip(angle: float):
 	for r in range(1, SLIP_RANGE):
 		for p in [-1, 1]:
 			position[axis] = original_v + r * p
-			move_and_slide(motion, UP)
+			move_and_slide(motion, Vector2.UP)
 			if get_slide_count() == 0:
 				return true  # if no collision, return success
 	# restore original value on axis if couldn't find a slip
@@ -171,7 +171,7 @@ func jump():
 	stretch(0.2, 0, 0.5, 1.2)
 	jump_buffer_timer = 0
 	coyote_timer = 0
-	motion.y = -JUMPFORCE
+	motion.y = JUMPFORCE * (gravity.direction.y * -1)
 	anticipating_jump = false
 	$JumpSFX.play()
 	EventBus.emit_signal("jumping")
@@ -266,12 +266,13 @@ func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 	)
 	tween.start()
 
+
 func reset() -> void:
 	look_right()
 	run_particles.emitting = false
 	run_particles.restart()
 	trail.reset()
-	
+
 
 func bounce(strength = 1100):
 	squash(0.075)
@@ -279,6 +280,11 @@ func bounce(strength = 1100):
 	stretch(0.15)
 	coyote_timer = 0
 	motion.y = -strength
+
+func _is_on_floor() -> bool:
+	return (gravity.direction.y == Vector2.DOWN.y and is_on_floor()) \
+		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
+
 
 func _on_coin_collected(data):
 	var value := 1

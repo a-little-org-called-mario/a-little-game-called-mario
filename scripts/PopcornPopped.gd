@@ -1,7 +1,6 @@
 extends RigidBody2D
 class_name PopcornPopped
 
-onready var audio_coin = $CoinStream
 const pop_force = 100;
 var rng = RandomNumberGenerator.new()
 

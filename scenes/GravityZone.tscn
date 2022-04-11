@@ -1,0 +1,132 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scripts/GravityZone.gd" type="Script" id=1]
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 160 )
+
+[sub_resource type="VisualShaderNodeColorConstant" id=13]
+constant = Color( 0.943437, 0, 0.627975, 1 )
+
+[sub_resource type="VisualShaderNodeInput" id=14]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=15]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=16]
+
+[sub_resource type="VisualShaderNodeScalarClamp" id=17]
+default_input_values = [ 0, 0.0, 1, 0.2, 2, 0.5 ]
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=18]
+constant = 3.0
+
+[sub_resource type="VisualShaderNodeScalarOp" id=19]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id=9]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=10]
+function = 1
+
+[sub_resource type="VisualShader" id=3]
+code = "shader_type canvas_item;
+render_mode blend_add;
+
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Color:10
+	vec3 n_out10p0 = vec3(0.943437, 0.000000, 0.627975);
+	float n_out10p1 = 1.000000;
+
+// Input:11
+	vec3 n_out11p0 = vec3(UV, 0.0);
+
+// VectorDecompose:12
+	float n_out12p0 = n_out11p0.x;
+	float n_out12p1 = n_out11p0.y;
+	float n_out12p2 = n_out11p0.z;
+
+// Input:6
+	float n_out6p0 = TIME;
+
+// Scalar:15
+	float n_out15p0 = 3.000000;
+
+// ScalarOp:16
+	float n_out16p0 = n_out6p0 * n_out15p0;
+
+// ScalarFunc:7
+	float n_out7p0 = cos(n_out16p0);
+
+// ScalarOp:13
+	float n_out13p0 = n_out12p1 + n_out7p0;
+
+// ScalarClamp:14
+	float n_in14p1 = 0.20000;
+	float n_in14p2 = 0.50000;
+	float n_out14p0 = clamp(n_out13p0, n_in14p1, n_in14p2);
+
+// Output:0
+	COLOR.rgb = n_out10p0;
+	COLOR.a = n_out14p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -399.29, 140.818 )
+mode = 1
+modes/blend = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 580, 220 )
+nodes/fragment/6/node = SubResource( 9 )
+nodes/fragment/6/position = Vector2( -420, 460 )
+nodes/fragment/7/node = SubResource( 10 )
+nodes/fragment/7/position = Vector2( 20, 480 )
+nodes/fragment/10/node = SubResource( 13 )
+nodes/fragment/10/position = Vector2( 300, 220 )
+nodes/fragment/11/node = SubResource( 14 )
+nodes/fragment/11/position = Vector2( -140, 340 )
+nodes/fragment/12/node = SubResource( 15 )
+nodes/fragment/12/position = Vector2( 20, 340 )
+nodes/fragment/13/node = SubResource( 16 )
+nodes/fragment/13/position = Vector2( 260, 420 )
+nodes/fragment/14/node = SubResource( 17 )
+nodes/fragment/14/position = Vector2( 500, 480 )
+nodes/fragment/15/node = SubResource( 18 )
+nodes/fragment/15/position = Vector2( -440, 540 )
+nodes/fragment/16/node = SubResource( 19 )
+nodes/fragment/16/position = Vector2( -180, 460 )
+nodes/fragment/connections = PoolIntArray( 10, 0, 0, 0, 11, 0, 12, 0, 12, 1, 13, 0, 7, 0, 13, 1, 13, 0, 14, 0, 14, 0, 0, 1, 6, 0, 16, 0, 15, 0, 16, 1, 16, 0, 7, 0 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+
+[node name="GravityZone" type="Area2D"]
+position = Vector2( 224, 352 )
+collision_layer = 4
+gravity_vec = Vector2( 0, -1 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 4 )
+texture = ExtResource( 2 )

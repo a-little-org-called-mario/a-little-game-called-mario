@@ -13,7 +13,3 @@ func _on_level_completed(_data):
 
 func _on_level_started(_data):
   animation.play("TransitionIn")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#  pass

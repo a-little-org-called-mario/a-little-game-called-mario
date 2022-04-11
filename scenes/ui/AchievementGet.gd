@@ -1,6 +1,7 @@
 extends RichTextLabel
 
 var coinsSinceStartingLevel := 0
+var totalShots := 0
 var currentLevel := 0
 
 # A dictionary mapping the level number to the level achievements.
@@ -13,6 +14,7 @@ var completed : Dictionary
 
 
 func _ready():
+	EventBus.connect("shot", self, "_on_shot")
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("level_completed", self, "_on_level_completed")
 	get_achievements()
@@ -23,6 +25,11 @@ func _on_coin_collected(data):
 	if data and data.value:
 		value = data.value
 	coinsSinceStartingLevel += value
+	check_achievements()
+
+
+func _on_shot():
+	totalShots += 1
 	check_achievements()
 
 
@@ -51,6 +58,8 @@ func check_achievements():
 		match achievement.get_script():
 			CoinsAchievement:
 				is_completed = coinsSinceStartingLevel >= achievement.coinsRequired
+			ShootAchievement:
+				is_completed = totalShots >= achievement.shotsRequired
 		if is_completed:
 			# Mark the achievement as completed.
 			completed[achievement] = true

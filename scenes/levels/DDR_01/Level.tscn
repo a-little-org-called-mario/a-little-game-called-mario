@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/levels/DDR_01/dance_actor/DanceActor.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/levels/DDR_01/track/Track.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/levels/DDR_01/Level.gd" type="Script" id=6]
 [ext_resource path="res://music/dramaticgamemusic.mp3" type="AudioStream" id=7]
+[ext_resource path="res://scenes/levels/DDR_01/EnemyTrack.tres" type="Resource" id=8]
+[ext_resource path="res://scenes/levels/DDR_01/PlayerTrack.tres" type="Resource" id=9]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 6 )
@@ -35,14 +37,14 @@ playerTrackPath = NodePath("../RightTrack")
 
 [node name="LeftTrack" parent="." instance=ExtResource( 5 )]
 scale = Vector2( 2, 2 )
-noteData = "res://scenes/levels/DDR_01/EnemyTrackData.txt"
+noteData = ExtResource( 8 )
 actorPaths = [ NodePath("../GreenMario") ]
 spawn_delay = 90
 
 [node name="RightTrack" parent="." instance=ExtResource( 5 )]
 position = Vector2( 640, 0 )
 scale = Vector2( 2, 2 )
-noteData = "res://scenes/levels/DDR_01/PlayerTrackData.txt"
+noteData = ExtResource( 9 )
 spawn_delay = 90
 
 [node name="Position2D" type="Position2D" parent="."]

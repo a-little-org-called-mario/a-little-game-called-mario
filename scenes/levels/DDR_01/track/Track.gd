@@ -1,6 +1,6 @@
 extends Node2D
 
-export(String, FILE) var noteData
+export(Resource) var noteData
 export(Array, NodePath) var actorPaths
 var notes: Array = []
 var actors: Array = []
@@ -16,7 +16,7 @@ export(PackedScene) var NoteRight
 func _ready():
 	for path in actorPaths:
 		actors.push_back(get_node(path))
-	_loadNotes(noteData)
+	_loadNotes(noteData.data)
 
 func set_tick(tick):
 	for note in notes:
@@ -51,18 +51,19 @@ func set_pose(pose):
 	for actor in actors:
 		actor.pose = pose
 
-func _loadNotes(file):
-	if len(file) == 0:
+func _loadNotes(content):
+	if len(content) == 0:
 		return
-	var f = File.new()
-	f.open(file, File.READ)
+	#var f = File.new()
+	#f.open(file, File.READ)
 	var index = 0
 	var last_tick = 0
-	while not f.eof_reached():
-		var line = f.get_line().strip_edges()
+	#while not f.eof_reached():
+	for line in content.split('\n'):
+		#var line = f.get_line().strip_edges()
 		index +=1
 		if len(line) == 0 or line[0] == '#':
-			print(str(last_tick) + ": " + line)
+			#print(str(last_tick) + ": " + line)
 			continue
 		var parts = line.split(' ')
 		if len(parts) < 2:
@@ -78,7 +79,7 @@ func _loadNotes(file):
 			"tick": tick,
 			"pose": parts[1].to_lower(),
 		})
-	print(notes)
+	#print(notes)
 
 
 func _on_Level_set_tick(tick):

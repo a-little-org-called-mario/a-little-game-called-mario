@@ -78,6 +78,11 @@ _global_script_classes=[ {
 "class": "ShakingCamera",
 "language": "GDScript",
 "path": "res://scripts/Camera.gd"
+}, {
+"base": "Resource",
+"class": "TrackData",
+"language": "GDScript",
+"path": "res://scenes/levels/DDR_01/TrackData.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
@@ -93,7 +98,8 @@ _global_script_class_icons={
 "PopcornKernel": "",
 "PopcornPopped": "",
 "ScreenShake": "",
-"ShakingCamera": ""
+"ShakingCamera": "",
+"TrackData": ""
 }
 
 [application]

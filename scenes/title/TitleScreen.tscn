@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
 [ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
+[ext_resource path="res://scenes/title/SmolCreditsLabel.gd" type="Script" id=5]
 [ext_resource path="res://scenes/title/StartButton.gd" type="Script" id=7]
 [ext_resource path="res://scenes/title/OptionsButton.gd" type="Script" id=8]
 [ext_resource path="res://scenes/title/CreditsButton.gd" type="Script" id=9]
@@ -17,6 +18,75 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "A", "A G", "A GA", "A GAM", "A GAME", "A GAME B", "A GAME BY", "A GAME BY:" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Init"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "A" ]
+}
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -125,18 +195,25 @@ __meta__ = {
 }
 
 [node name="SmolCreditsLabel" type="Label" parent="VBoxContainer"]
+visible = false
 margin_top = 512.0
 margin_right = 984.0
 margin_bottom = 552.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_vertical = 5
 custom_colors/font_color = Color( 0.47451, 0.47451, 0.47451, 1 )
-text = "A GAME BY:"
+text = "A"
 valign = 2
 clip_text = true
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/SmolCreditsLabel"]
+anims/Appear = SubResource( 3 )
+anims/Init = SubResource( 4 )
+anims/RESET = SubResource( 5 )
 
 [node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 556.0

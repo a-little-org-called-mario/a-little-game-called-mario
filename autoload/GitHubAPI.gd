@@ -13,7 +13,10 @@ func _ready():
   yield(http_request, "request_completed")
   http_request.queue_free()
 
-func _on_request_completed(_result, _response_code, _headers, body):
+func _on_request_completed(result, _response_code, _headers, body):
+  if result != HTTPRequest.RESULT_SUCCESS:
+    return
+    
   var json = JSON.parse(body.get_string_from_utf8())
   contributors = json.result
   var names:PoolStringArray = []

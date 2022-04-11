@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://scripts/CoinsAchievement.gd"
 }, {
 "base": "Area2D",
+"class": "Corncob",
+"language": "GDScript",
+"path": "res://scripts/Corncob.gd"
+}, {
+"base": "Area2D",
 "class": "EndPortal",
 "language": "GDScript",
 "path": "res://scripts/EndPortal.gd"
@@ -54,6 +59,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/PlayerProjectile.gd"
 }, {
+"base": "RigidBody2D",
+"class": "PopcornKernel",
+"language": "GDScript",
+"path": "res://scripts/PopcornKernel.gd"
+}, {
+"base": "RigidBody2D",
+"class": "PopcornPopped",
+"language": "GDScript",
+"path": "res://scripts/PopcornPopped.gd"
+}, {
 "base": "Node",
 "class": "ScreenShake",
 "language": "GDScript",
@@ -69,11 +84,14 @@ _global_script_class_icons={
 "Bub": "",
 "CameraLeanAmount": "",
 "CoinsAchievement": "",
+"Corncob": "",
 "EndPortal": "",
 "Enemy": "",
 "Platform": "",
 "Player": "",
 "PlayerProjectile": "",
+"PopcornKernel": "",
+"PopcornPopped": "",
 "ScreenShake": "",
 "ShakingCamera": ""
 }

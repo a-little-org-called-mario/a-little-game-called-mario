@@ -4,15 +4,47 @@
 # This file is basically just a list of ticks and poses (up, left, right, down)
 # You can also leave comments with the # char, and you should be able to have empty lines
 
-196 left
-210 left
+## MAIN
+386 left
++28 left
 
-238 left
-252 right
-266 up
-280 left
-294 right
-308 left
-322 right
-336 left
-350 down
++20 left
++14 right
++14 up
++14 left
++14 right
+
++20 left
++28 right
++28 down
+
+#### AMPlIFY
+## MAIN
+802 left
++28 left
+
++20 left
++14 right
++14 up
++14 left
++14 right
+
++20 left
++28 right
++28 down
+
++0 idle
+
+## MAIN
++28 left
++28 left
+
++20 left
++14 right
++14 up
++14 left
++14 right
+
++20 left
++28 right
++28 down

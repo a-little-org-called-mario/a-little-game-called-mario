@@ -10,6 +10,4 @@ func _process(delta):
 	
 	life -= 1
 	if life < 0:
-		print("position")
-		print(position)
 		queue_free()

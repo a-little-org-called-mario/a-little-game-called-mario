@@ -22,7 +22,6 @@ func set_tick(tick):
 	for note in notes:
 		if note["tick"] == tick:
 			set_pose(note["pose"])
-			print(name + ": " + str(note["pose"]))
 		if note["tick"] == tick + spawn_delay:
 			spawn_note(note["pose"])
 			
@@ -46,9 +45,6 @@ func spawn_note(pose):
 	node.position.y += note_y_offset
 	node.speed = note_y_offset / spawn_delay
 	node.life = spawn_delay
-	print(node.position)
-	print(node.speed)
-	print(node.life)
 	add_child(node)
 
 func set_pose(pose):
@@ -61,17 +57,25 @@ func _loadNotes(file):
 	var f = File.new()
 	f.open(file, File.READ)
 	var index = 0
+	var last_tick = 0
 	while not f.eof_reached():
 		var line = f.get_line().strip_edges()
 		index +=1
 		if len(line) == 0 or line[0] == '#':
+			print(str(last_tick) + ": " + line)
 			continue
 		var parts = line.split(' ')
 		if len(parts) < 2:
 			print("line (" + index + "): " + line + " is incorrect")
 			continue
+		var tick = 0
+		if parts[0][0] == '+':
+			tick = int(parts[0].substr(1)) + last_tick
+		else:
+			tick = int(parts[0])
+		last_tick = tick
 		notes.push_back({
-			"tick": int(parts[0]),
+			"tick": tick,
 			"pose": parts[1].to_lower(),
 		})
 	print(notes)

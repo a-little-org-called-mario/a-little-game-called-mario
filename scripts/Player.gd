@@ -24,9 +24,6 @@ var double_jump = true
 var crouching = false
 var grounded = false
 var anticipating_jump = false # the small window of time before the player jumps
-var coins = 0; #grabbed directly from the coin_collected signal;
-var hearts = 3;
-var hasFlower = false
 
 onready var sprite = $Sprite
 onready var tween = $Tween
@@ -37,11 +34,7 @@ onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 func _ready() -> void:
-	EventBus.connect("coin_collected", self, "_on_coin_collected")
-	EventBus.connect("heart_changed", self, "_on_heart_change")
-	hearts = get_node("../../UI/UI/HeartCount").count 
-	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
-
+	pass
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
@@ -150,11 +143,11 @@ func try_slip(angle: float):
 func _input(event: InputEvent):
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
-	if event.is_action_pressed("shoot") and coins > 0:
+	if event.is_action_pressed("shoot") and PlayerValues.get_coins() > 0:
 		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
 		shoot(default_projectile)
 	#Shoots fireball
-	if event.is_action_pressed("fire") and hasFlower:
+	if event.is_action_pressed("fire") and PlayerValues.has_flower():
 		shoot(fireball_projectile)
 
 
@@ -284,22 +277,3 @@ func bounce(strength = 1100):
 func _is_on_floor() -> bool:
 	return (gravity.direction.y == Vector2.DOWN.y and is_on_floor()) \
 		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
-
-
-func _on_coin_collected(data):
-	var value := 1
-	if data.has("value"):
-		value = data["value"]
-	coins += value
-
-func _on_heart_change(data):
-	var value := 1
-	if data.has("value"):
-		value = data["value"]
-	hearts += value
-	if(hearts <= 0):
-		get_tree().reload_current_scene()
-
-func _on_flower_collected(data):
-	if data.has("collected"):
-		hasFlower = data["collected"]	

@@ -18,7 +18,7 @@ func _ready():
 
 	force_direction = force_direction.normalized()
 	apply_central_impulse(force_direction * pop_force)
-	
+
 	particles.emitting = true
 
 

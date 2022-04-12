@@ -1,6 +1,7 @@
 extends Node2D
 
 signal box_moved(from, to)
+signal player_moved(PreviousPosition)
 
 # adapted from https://kidscancode.org/godot_recipes/2d/grid_movement/
 
@@ -15,6 +16,7 @@ onready var box_map: TileMap = get_tree().get_nodes_in_group("boxes")[0]
 onready var box_id: int = box_map.tile_set.find_tile_by_name("Box")
 onready var background_id: int = box_map.tile_set.find_tile_by_name("Background")
 
+onready var PreviousPosition
 
 func _ready():
 	self.position = position.snapped(Vector2.ONE * TILE_SIZE)
@@ -28,11 +30,14 @@ func _unhandled_input(event):
 
 
 func try_move(dir):
+	var HasMoved := false
+	
 	var direction: Vector2 = inputs[dir]
 	movement_ray.cast_to = direction * TILE_SIZE
 	movement_ray.force_raycast_update()
 	if !movement_ray.is_colliding():
 		force_move(dir)
+		HasMoved = true
 	# Are we colliding with the box layer?
 	if movement_ray.get_collider() == box_map:
 		var tile_pos := box_map.world_to_map(self.position)
@@ -46,12 +51,16 @@ func try_move(dir):
 				return
 
 		# There's space, move the box
-		box_map.set_cellv(tile_pos, -1)
-		box_map.set_cellv(tile_pos + direction * 1, box_id)
+		box_map.set_cellv(tile_pos, -1) #Removes box from current tileset
+		box_map.set_cellv(tile_pos + direction * 1, box_id) #Adds box to the new tileset
 		# Move the player with the box
 		force_move(dir)
 		emit_signal("box_moved", tile_pos, tile_pos + direction * 1)
-
-
+		HasMoved = true
+		
+	if HasMoved:
+		emit_signal("player_moved", PreviousPosition)
+		
 func force_move(dir):
+	PreviousPosition = self.position #For sending Undo data in try_move()
 	self.position += inputs[dir] * TILE_SIZE

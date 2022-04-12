@@ -318,6 +318,7 @@ position = Vector2( -12, 1.5 )
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 3 )
 animation = "idle"
+frame = 1
 playing = true
 offset = Vector2( 0, -32 )
 

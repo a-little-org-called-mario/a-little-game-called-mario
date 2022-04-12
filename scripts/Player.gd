@@ -32,6 +32,18 @@ var hearts: int = 3
 var hasFlower: bool = false
 var isBus: bool = false
 
+# STATS BLOCK
+var max_hearts: int = 3
+var jump_xp: int = 0
+var coin_shoot_xp: int = 0
+var intelligence: int = 1
+var speed: int = 1
+var charisma: int = 1
+var swim: int = 0
+var acrobatics: int = 0
+var building: int = 1
+var sanity: int = 10
+
 onready var sprite: AnimatedSprite = $Sprite
 onready var tween: Tween = $Tween
 onready var trail: Line2D = $Trail
@@ -49,6 +61,8 @@ func _ready() -> void:
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	hearts = get_node("../../UI/UI/HeartCount").count
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
+	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
+	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
 
 
@@ -60,6 +74,7 @@ func _physics_process(delta: float) -> void:
 	var acceleration_modifier: float = 1.0
 	var animationSpeed: float = 8.0
 	if Input.is_action_pressed("sprint"):
+		speed += 1
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
 		animationSpeed = 60
@@ -329,6 +344,13 @@ func _on_flower_collected(data: Dictionary) -> void:
 	if data.has("collected"):
 		hasFlower = data["collected"]
 
+
+func _on_enemy_hit_coin() -> void:
+	coin_shoot_xp += 1
+
+
+func _on_enemy_hit_fireball() -> void:
+	intelligence += 1
 
 func _on_bus_collected(data: Dictionary) -> void:
 	if data.has("collected"):

@@ -1,5 +1,6 @@
 # gassy randal kicks ASS
 # he doesn't do a lot right now, just floats and vibes. life goals tbh
+# randal is our lord
 
 extends KinematicBody2D
 

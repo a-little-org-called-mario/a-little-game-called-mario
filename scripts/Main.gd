@@ -11,6 +11,7 @@ onready var level: TileMap = $TileMap
 var completionSound = preload("res://sfx/portal.wav")
 var coinSound = preload("res://sfx/coin.wav")
 
+var entering_portal: bool = false
 
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
@@ -57,13 +58,18 @@ func _on_build(data) -> void:
 
 
 func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: EndPortal) -> void:
+	# Make sure the player can't trigger this function more than once.
+	if entering_portal:
+		return
+	entering_portal = true
+	
 	# Despawn all projectiles
 	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
 		despawn.queue_free()
 
 	body.get_parent().remove_child(body)
 	var animation = portal.on_portal_enter()
-
+	
 	yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
 
@@ -91,4 +97,6 @@ func _finish_level(next_level: PackedScene = null) -> void:
 	#Removing instructions
 	$UI/UI/RichTextLabel.visible = false
 
+	# Reset entering portal state
+	entering_portal = false
 	EventBus.emit_signal("level_started", {})

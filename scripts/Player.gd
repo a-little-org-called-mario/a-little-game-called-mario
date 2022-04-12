@@ -1,11 +1,8 @@
 class_name Player
 extends KinematicBody2D
 
-signal jumping
 signal shooting
 
-const UP = Vector2.UP
-const GRAVITY = 100
 const MAXFALLSPEED = 1100
 const MAXSPEED = 350
 const JUMPFORCE = 1100
@@ -15,6 +12,9 @@ const JUMP_BUFFER_TIME = 0.05
 const SLIP_RANGE = 16
 
 export(PackedScene) var default_projectile: PackedScene = preload("res://scenes/CoinProjectile.tscn")
+export(PackedScene) var fireball_projectile: PackedScene = preload("res://scenes/powerups/Fireball.tscn")
+
+var gravity = preload("res://scripts/resources/Gravity.tres")
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
@@ -25,6 +25,8 @@ var crouching = false
 var grounded = false
 var anticipating_jump = false # the small window of time before the player jumps
 var coins = 0; #grabbed directly from the coin_collected signal;
+var hearts = 3;
+var hasFlower = false
 
 onready var sprite = $Sprite
 onready var tween = $Tween
@@ -36,11 +38,14 @@ onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
+	EventBus.connect("heart_changed", self, "_on_heart_change")
+	hearts = get_node("../../UI/UI/HeartCount").count 
+	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
-		EventBus.emit_signal("build_block")
+		EventBus.emit_signal("build_block", {"player":self})
 
 	var max_speed_modifier = 1
 	var acceleration_modifier = 1
@@ -50,8 +55,9 @@ func _physics_process(delta: float) -> void:
 		acceleration_modifier = 3
 		animationSpeed = 60
 	sprite.frames.set_animation_speed("run", animationSpeed)
-
+	print("regular update");
 	if Input.is_action_pressed("right"):
+		print("hitting right");
 		motion.x += ACCEL * acceleration_modifier
 		sprite.play("run")
 		# pointing the character in the direction he's running
@@ -77,7 +83,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			jump_buffer_timer = JUMP_BUFFER_TIME
 
-	if is_on_floor():
+	if _is_on_floor():
 		if not grounded:
 			grounded = true
 			land()
@@ -104,14 +110,15 @@ func _physics_process(delta: float) -> void:
 		crouching = false
 		unsquash()
 
-	motion.y += GRAVITY * gravity_multiplier
+	motion.y += gravity.direction.y * gravity.strength * gravity_multiplier
+	sprite.flip_v = gravity.direction.y < 0
 
-	if motion.y > MAXFALLSPEED:
-		motion.y = MAXFALLSPEED
+	if abs(motion.y) > MAXFALLSPEED:
+		motion.y = sign(motion.y) * MAXFALLSPEED
 
 	motion.x = clamp(motion.x, -MAXSPEED * max_speed_modifier, MAXSPEED * max_speed_modifier)
 
-	var move_and_slide_result = move_and_slide(motion, UP)
+	var move_and_slide_result = move_and_slide(motion, Vector2.UP)
 	var slide_count = get_slide_count()
 
 	var slipped = false
@@ -133,7 +140,7 @@ func try_slip(angle: float):
 	for r in range(1, SLIP_RANGE):
 		for p in [-1, 1]:
 			position[axis] = original_v + r * p
-			move_and_slide(motion, UP)
+			move_and_slide(motion, Vector2.UP)
 			if get_slide_count() == 0:
 				return true  # if no collision, return success
 	# restore original value on axis if couldn't find a slip
@@ -147,6 +154,9 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("shoot") and coins > 0:
 		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
 		shoot(default_projectile)
+	#Shoots fireball
+	if event.is_action_pressed("fire") and hasFlower:
+		shoot(fireball_projectile)
 
 
 func crouch():
@@ -162,10 +172,10 @@ func jump():
 	stretch(0.2, 0, 0.5, 1.2)
 	jump_buffer_timer = 0
 	coyote_timer = 0
-	motion.y = -JUMPFORCE
+	motion.y = JUMPFORCE * (gravity.direction.y * -1)
 	anticipating_jump = false
 	$JumpSFX.play()
-	emit_signal("jumping")
+	EventBus.emit_signal("jumping")
 
 
 func land():
@@ -180,9 +190,14 @@ func shoot(projectile_scene: PackedScene):
 	# Origin is affected by changes to Sprite (ex: squashing)
 	var projectile = projectile_scene.instance()
 	get_parent().add_child(projectile)
+	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
+	#Changes ShootOrigin based on direction
+	if shoot_dir == Vector2.LEFT:
+		$Sprite/ShootOrigin.set_position(Vector2( -4, -16))
+	else:
+		$Sprite/ShootOrigin.set_position(Vector2( 4, -16))
 	projectile.position = $Sprite/ShootOrigin.global_position
 	# Projectile handles movement
-	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
 	projectile.start_moving(shoot_dir)
 	emit_signal("shooting")
 
@@ -267,9 +282,25 @@ func bounce(strength = 1100):
 	coyote_timer = 0
 	motion.y = -strength
 
+func _is_on_floor() -> bool:
+	return (gravity.direction.y == Vector2.DOWN.y and is_on_floor()) \
+		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
+
+
 func _on_coin_collected(data):
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
-
 	coins += value
+
+func _on_heart_change(data):
+	var value := 1
+	if data.has("value"):
+		value = data["value"]
+	hearts += value
+	if(hearts <= 0):
+		get_tree().reload_current_scene()
+
+func _on_flower_collected(data):
+	if data.has("collected"):
+		hasFlower = data["collected"]	

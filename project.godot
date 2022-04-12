@@ -14,6 +14,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Achievement.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "BallPlayer",
+"language": "GDScript",
+"path": "res://scripts/BallPlayer.gd"
+}, {
+"base": "Position2D",
+"class": "BallSpawnPoint",
+"language": "GDScript",
+"path": "res://scripts/BallSpawnPoint.gd"
+}, {
+"base": "Node2D",
+"class": "BaseBox",
+"language": "GDScript",
+"path": "res://scripts/boxes/BaseBox.gd"
+}, {
 "base": "Enemy",
 "class": "Bub",
 "language": "GDScript",
@@ -28,6 +43,11 @@ _global_script_classes=[ {
 "class": "CoinsAchievement",
 "language": "GDScript",
 "path": "res://scripts/CoinsAchievement.gd"
+}, {
+"base": "Area2D",
+"class": "Corncob",
+"language": "GDScript",
+"path": "res://scripts/Corncob.gd"
 }, {
 "base": "Area2D",
 "class": "EndPortal",
@@ -54,6 +74,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/PlayerProjectile.gd"
 }, {
+"base": "RigidBody2D",
+"class": "PopcornKernel",
+"language": "GDScript",
+"path": "res://scripts/PopcornKernel.gd"
+}, {
+"base": "RigidBody2D",
+"class": "PopcornPopped",
+"language": "GDScript",
+"path": "res://scripts/PopcornPopped.gd"
+}, {
 "base": "Node",
 "class": "ScreenShake",
 "language": "GDScript",
@@ -63,32 +93,46 @@ _global_script_classes=[ {
 "class": "ShakingCamera",
 "language": "GDScript",
 "path": "res://scripts/Camera.gd"
+}, {
+"base": "Position2D",
+"class": "SpawnPoint",
+"language": "GDScript",
+"path": "res://scripts/SpawnPoint.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
+"BallPlayer": "",
+"BallSpawnPoint": "",
+"BaseBox": "",
 "Bub": "",
 "CameraLeanAmount": "",
 "CoinsAchievement": "",
+"Corncob": "",
 "EndPortal": "",
 "Enemy": "",
 "Platform": "",
 "Player": "",
 "PlayerProjectile": "",
+"PopcornKernel": "",
+"PopcornPopped": "",
 "ScreenShake": "",
-"ShakingCamera": ""
+"ShakingCamera": "",
+"SpawnPoint": ""
 }
 
 [application]
 
 config/name="A Little Game Called Mario"
 config/description="open source collective hell game"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/title/TitleScreen.tscn"
 config/icon="res://sprites/icon.png"
 
 [autoload]
 
 EventBus="*res://autoload/EventBus.gd"
 Settings="*res://autoload/Settings.gd"
+SceneTransition="*res://effects/SceneTransition/SceneTransition.tscn"
+GitHubApi="*res://autoload/GitHubAPI.gd"
 
 [debug]
 
@@ -141,6 +185,7 @@ ui_left={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_right={
@@ -148,6 +193,7 @@ ui_right={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_up={
@@ -155,6 +201,7 @@ ui_up={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_down={
@@ -162,6 +209,7 @@ ui_down={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
 left={
@@ -228,6 +276,19 @@ sprint={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":6,"axis_value":1.0,"script":null)
  ]
 }
+fire={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":66,"unicode":0,"echo":false,"script":null)
+ ]
+}
+up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777232,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -237,6 +298,11 @@ sprint={
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="Enemy Projectile"
 2d_physics/layer_9="Player Projectile"
+
+[locale]
+
+translations=PoolStringArray( "res://localization/loca.de.translation", "res://localization/loca.en.translation" )
+locale_filter=[ 1, [ "de", "en" ] ]
 
 [physics]
 

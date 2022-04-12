@@ -1,0 +1,253 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
+[ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=3]
+[ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
+[ext_resource path="res://scenes/title/SmolCreditsLabel.gd" type="Script" id=5]
+[ext_resource path="res://scenes/title/DanceButton.gd" type="Script" id=6]
+[ext_resource path="res://scenes/title/StartButton.gd" type="Script" id=7]
+[ext_resource path="res://scenes/title/OptionsButton.gd" type="Script" id=8]
+[ext_resource path="res://scenes/title/CreditsButton.gd" type="Script" id=9]
+[ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
+[ext_resource path="res://scenes/title/Contributors.gd" type="Script" id=11]
+[ext_resource path="res://music/dramaticgamemusic.mp3" type="AudioStream" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "A", "A G", "A GA", "A GAM", "A GAME", "A GAME B", "A GAME BY", "A GAME BY:" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Init"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "A" ]
+}
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -433, -225 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_right = -20.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ALittleGameCalled" type="Label" parent="VBoxContainer"]
+margin_right = 984.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 0, 130 )
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "A LITTLE GAME CALLED"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Mario" type="RichTextLabel" parent="VBoxContainer"]
+margin_left = 397.0
+margin_top = 134.0
+margin_right = 587.0
+margin_bottom = 254.0
+rect_min_size = Vector2( 190, 120 )
+size_flags_horizontal = 6
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1]MARIO[/rainbow]"
+text = "
+MARIO"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+margin_top = 258.0
+margin_right = 984.0
+margin_bottom = 388.0
+rect_min_size = Vector2( 0, 130 )
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_left = 432.0
+margin_top = 392.0
+margin_right = 552.0
+margin_bottom = 548.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_right = 120.0
+margin_bottom = 36.0
+text = "START GAME"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DanceButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 120.0
+margin_bottom = 76.0
+text = "DANCE MODE"
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 120.0
+margin_bottom = 116.0
+disabled = true
+text = "OPTIONSs"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 120.0
+margin_right = 120.0
+margin_bottom = 156.0
+text = "CREDITS"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SmolCreditsLabel" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 512.0
+margin_right = 984.0
+margin_bottom = 552.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.47451, 0.47451, 0.47451, 1 )
+text = "A"
+valign = 2
+clip_text = true
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/SmolCreditsLabel"]
+anims/Appear = SubResource( 3 )
+anims/Init = SubResource( 4 )
+anims/RESET = SubResource( 5 )
+
+[node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 552.0
+margin_right = 984.0
+margin_bottom = 568.0
+size_flags_vertical = 8
+scroll_vertical_enabled = false
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+scroll_speed = 75.0
+
+[node name="Contributors" type="Label" parent="VBoxContainer/CreditsContainer"]
+margin_bottom = 16.0
+uppercase = true
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 12 )
+volume_db = -20.0
+autoplay = true

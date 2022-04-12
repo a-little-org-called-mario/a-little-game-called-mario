@@ -1,7 +1,7 @@
-key,en
-CREDITS,"Albin Bernhardsson
+Albin Bernhardsson
 Cano
 Emilia
+Jakob Mendelsohn
 Patrick Riordan
 Paul Joannon
 Sander Vanhove
@@ -10,4 +10,3 @@ castpixel
 iznaut
 izzy kestrel
 Steve Sefchick
-"

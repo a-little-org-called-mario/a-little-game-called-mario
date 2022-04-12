@@ -1,8 +1,8 @@
 tool
 extends Area2D
 
-export(RectangleShape2D) var shape : RectangleShape2D setget _set_shape
-export(bool) var revert_on_exit : bool
+export(RectangleShape2D) var shape: RectangleShape2D setget _set_shape
+export(bool) var revert_on_exit: bool
 
 var general_gravity = preload("res://scripts/resources/Gravity.tres")
 
@@ -31,6 +31,6 @@ func _on_body_exited(_body: Node) -> void:
 	previous_gravity_direction = Vector2.ZERO
 
 
-func _set_shape(new_shape : RectangleShape2D) -> void:
+func _set_shape(new_shape: RectangleShape2D) -> void:
 	shape = new_shape
 	$CollisionShape2D.shape = shape

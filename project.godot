@@ -162,7 +162,6 @@ config/icon="res://sprites/icon.png"
 EventBus="*res://autoload/EventBus.gd"
 Settings="*res://autoload/Settings.gd"
 SceneTransition="*res://effects/SceneTransition/SceneTransition.tscn"
-GitHubApi="*res://autoload/GitHubAPI.gd"
 
 [debug]
 

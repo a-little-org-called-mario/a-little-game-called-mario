@@ -7,6 +7,11 @@ signal contributors_loaded(names)
 
 
 func _ready():
+	# Don't call the github api while testing in the editor
+	# because we don't need it.
+	if OS.has_feature("editor"):
+		return
+	
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 	http_request.connect("request_completed", self, "_on_request_completed")

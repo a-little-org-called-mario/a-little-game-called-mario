@@ -11,7 +11,7 @@ func _ready():
 	# because we don't need it.
 #	if OS.has_feature("editor"):
 #		return
-	
+
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 	http_request.connect("request_completed", self, "_on_request_completed")
@@ -27,12 +27,12 @@ func _on_request_completed(result, _response_code, _headers, body):
 		return
 	if _response_code != 200:
 		print()
-		print("ERROR: Got response code {code} while trying to get github contributors".format({
-			"code": _response_code
-		}))
-		print("   BODY: {body}".format({
-			"body": JSON.parse(body.get_string_from_utf8()).result
-		}))
+		print(
+			"ERROR: Got response code {code} while trying to get github contributors".format(
+				{"code": _response_code}
+			)
+		)
+		print("   BODY: {body}".format({"body": JSON.parse(body.get_string_from_utf8()).result}))
 		print()
 		return
 

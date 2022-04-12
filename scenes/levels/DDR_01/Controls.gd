@@ -9,7 +9,7 @@ export(NodePath) var playerTrackPath
 onready var playerTrack = get_node(playerTrackPath)
 
 
-func _process(delta):
+func _process(_delta):
 	for pose in poses:
 		if Input.is_action_just_pressed(pose):
 			playerActor.pose = pose

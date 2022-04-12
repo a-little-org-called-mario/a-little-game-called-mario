@@ -61,9 +61,7 @@ func _physics_process(delta: float) -> void:
 		acceleration_modifier = 3
 		animationSpeed = 60
 	sprite.frames.set_animation_speed("run", animationSpeed)
-	print("regular update")
 	if Input.is_action_pressed("right"):
-		print("hitting right")
 		motion.x += ACCEL * acceleration_modifier
 		sprite.play("run")
 		# pointing the character in the direction he's running

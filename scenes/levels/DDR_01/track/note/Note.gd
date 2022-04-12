@@ -3,7 +3,7 @@ extends Sprite
 var speed = 10
 var life = 10
 
-func _process(delta):
+func _process(_delta):
 	var pos = position
 	pos.y -= speed
 	position = pos

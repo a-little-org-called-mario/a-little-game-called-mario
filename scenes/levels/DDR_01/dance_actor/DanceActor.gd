@@ -7,7 +7,7 @@ var pose setget set_pose
 export(int) var BPM = 360
 var bpm_delay = 0
 
-func _process(delta):
+func _process(_delta):
 	if Engine.editor_hint:
 		return
 	bpm_delay += 1

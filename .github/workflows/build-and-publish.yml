@@ -15,8 +15,31 @@ on:
       - '.github'
 
 jobs:
+  format_code:
+    runs-on: ubuntu-latest
+    # To prevent infinite loops
+    if: "!contains(github.event.head_commit.message, 'Auto-Format GDScript'"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.BOT_PAT }}
+
+      - uses: actions/setup-python@v3
+        with: 
+          python-version: 3.x
+
+      - run: pip3 install 'gdtoolkit==3.*'
+
+      - run: gdformat **/*.gd
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Auto-Format GDScript
+          file_pattern: "**/*.gd"
+
   build_game:
     name: Build Game
+    # TODO: this had `needs: format_code`, but I'm not sure how that intersects with our if clause
     runs-on: ubuntu-latest
     steps:
       - name: checkout latest code

@@ -6,6 +6,9 @@ a bad idea from the mind of [izzy kestrel](https://twitter.com/iznaut), inspired
 [![GitHub contributors](https://img.shields.io/github/contributors/iznaut/a-little-game-called-mario.svg)](https://GitHub.com/iznaut/a-little-game-called-mario/graphs/contributors/) [![GitHub contributors](https://img.shields.io/github/workflow/status/iznaut/a-little-game-called-mario/build%20and%20publish.svg)](https://github.com/iznaut/a-little-game-called-mario/actions)
 
 # 🎮 [play the latest version here](https://iznaut.itch.io/a-little-game-called-mario) 🎮
+
+[![Screenshot Of A Little Game Called Mario](/.godot_ignore/screenshot.gif)](https://iznaut.itch.io/a-little-game-called-mario)
+
 # 🗣 [join the discord server](https://discord.gg/TZWUYpuQ6j) 🗣
 
 [![The tweet](.godot_ignore/the_tweet.png)](https://twitter.com/iznaut/status/1508179935977947142)

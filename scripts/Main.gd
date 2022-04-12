@@ -11,13 +11,10 @@ const coinSound: AudioStreamSample = preload("res://sfx/coin.wav")
 
 onready var hub: TileMap = $TileMap
 onready var level: TileMap = $TileMap
-onready var container: ViewportContainer = get_parent()
 
 
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
-	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle")
-	EventBus.connect("volume_changed",self,"_on_volume_change")
 	Settings.load_data()
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
@@ -40,7 +37,7 @@ func _on_build(data) -> void:
 	var player = data["player"]
 	# reference to player is needed for the case where there are more than one player
 	# eg. Level03
-	
+
 	# place a block in the level.
 	if level != null:
 		# Find the player's current position on the tilemap, and look one cell
@@ -67,9 +64,10 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 
 	body.get_parent().remove_child(body)
 	var animation = portal.on_portal_enter()
-	
+
 	yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
+
 
 func _finish_level(next_level: PackedScene = null) -> void:
 	# Create the new level, insert it into the tree and remove the old one.
@@ -95,26 +93,3 @@ func _finish_level(next_level: PackedScene = null) -> void:
 	$UI/UI/RichTextLabel.visible = false
 
 	EventBus.emit_signal("level_started", {})
-
-
-func _on_crt_toggle(on: bool) -> void:
-	if on:
-		container.material.shader = crt_shader
-	else:
-		container.material.shader = null
-
-
-func _on_volume_change(bus) -> void:
-	match str(bus):
-		"game":
-			AudioServer.set_bus_volume_db(
-				AudioServer.get_bus_index("Master"), linear2db(Settings.volume_game / 10.0)
-			)
-		"music":
-			AudioServer.set_bus_volume_db(
-				AudioServer.get_bus_index("music"), linear2db(Settings.volume_music / 10.0)
-			)
-		"sfx":
-			AudioServer.set_bus_volume_db(
-				AudioServer.get_bus_index("sfx"), linear2db(Settings.volume_sfx / 10.0)
-			)

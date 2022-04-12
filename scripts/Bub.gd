@@ -121,14 +121,14 @@ func fire_bullet() -> void:
 	bullet.scale.x = direction
 
 	bullet.start_moving(Vector2.LEFT if direction < 0 else Vector2.RIGHT)
-	
+
 	# instance muzzle flash
 	var flash = muzzle_flash_scene.instance()
 	get_tree().root.add_child(flash)
 	flash.global_position = _muzzle.global_position
-	
+
 	pop_gun_sfx.play()
-	
+
 	yield(_animation_player, "animation_finished")
 	_shooting_cooldown = MAX_SHOOTING_COOLDOWN
 	start_walking()

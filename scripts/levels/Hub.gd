@@ -1,6 +1,7 @@
 extends TileMap
 
 const PORTAL_POSITION: Vector2 = Vector2(6, 4)
+const LABEL_POSITION: Vector2 = Vector2(6, 6)
 const COPY_ZONE_START: Vector2 = Vector2(5, -1)
 const COPY_ZONE_END: Vector2 = Vector2(7, 9)
 const WALL_START: Vector2 = Vector2(7, -1)
@@ -25,9 +26,22 @@ func _ready() -> void:
 		)
 		portal.next_level = load(level)
 		add_child(portal)
+		add_child(_create_label(level, shift))
 		shift += int(floor(COPY_ZONE_END.x - COPY_ZONE_START.x + 1))
 	_paste_zone(wall_zone, Vector2(COPY_ZONE_START.x + shift, COPY_ZONE_START.y))
 
+func _create_label(levelPath: String, xShift: int) -> Label:
+	var label: Label = Label.new()
+	label.set_text(_get_dir_name(levelPath))
+	label.set_global_position(
+		map_to_world(Vector2(LABEL_POSITION.x + xShift, LABEL_POSITION.y))
+	)
+	return label
+
+func _get_dir_name(levelPath: String) -> String:
+	var regex = RegEx.new()
+	regex.compile(".*\/(.*)\/[^\/]+.tscn")
+	return regex.search(levelPath).get_string(1)
 
 func _copy_zone(topleft: Vector2, bottomright: Vector2) -> Array:
 	var cells := []
@@ -75,7 +89,7 @@ static func _get_first_level_in_dir(path: String) -> String:
 		dir.list_dir_begin()
 		var filename := dir.get_next()
 		while filename != "":
-			if filename != "." and filename != ".." and !dir.current_is_dir():
+			if filename != "." and filename != ".." and !dir.current_is_dir() and filename.ends_with(".tscn"):
 
 				levels.append("%s/%s" % [path, filename])
 			filename = dir.get_next()

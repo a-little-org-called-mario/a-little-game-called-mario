@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/Trail.gd" type="Script" id=4]
 [ext_resource path="res://sprites/flag.jpg" type="Texture" id=5]
 [ext_resource path="res://sprites/dustparticle.png" type="Texture" id=6]
+[ext_resource path="res://sprites/bus.png" type="Texture" id=7]
 
 [sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
@@ -66,6 +67,9 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 43.25, 20.1875 )
+
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
 collision_mask = 15
@@ -120,3 +124,15 @@ angle = 90.0
 angle_random = 1.0
 scale_amount = 0.75
 color = Color( 1, 1, 1, 0.784314 )
+
+[node name="BusSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 7, 13 )
+scale = Vector2( 0.0602623, 0.0602623 )
+texture = ExtResource( 7 )
+flip_h = true
+
+[node name="BusCollision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 6.75, 11.1875 )
+shape = SubResource( 13 )

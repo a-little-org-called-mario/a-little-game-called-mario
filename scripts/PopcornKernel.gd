@@ -10,28 +10,30 @@ var pop_timer: float = 0.0
 
 export(PackedScene) var popcorn_popped: PackedScene = preload("res://scenes/PopcornPopped.tscn")
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rng.randomize()
-	pop_wait_duration = rng.randf_range(1.5,2.5)
 	
-	var force_direction: Vector2 = Vector2(0,0)
-	
+	pop_wait_duration = rng.randf_range(1.5, 2.5)
+
+	var force_direction: Vector2 = Vector2.ZERO
+
 	rng.randomize()
-	force_direction.x = rng.randf_range(-1,1)
+	force_direction.x = rng.randf_range(-1, 1)
 	rng.randomize()
-	force_direction.y = rng.randf_range(-1,1)
+	force_direction.y = rng.randf_range(-1, 1)
 	
 	force_direction = force_direction.normalized()
 	apply_central_impulse(force_direction * initial_scatter_force)
-	
+
 	rng.randomize()
-	apply_torque_impulse(rng.randf_range(-1,1)*initial_scatter_torque)
+	apply_torque_impulse(rng.randf_range(-1, 1) * initial_scatter_torque)
 
 
 func _process(delta) -> void:
 	pop_timer += delta
-	if (pop_timer >= pop_wait_duration):
+	if pop_timer >= pop_wait_duration:
 		pop()
 
 
@@ -41,5 +43,5 @@ func pop() -> void:
 	get_parent().add_child(popped)
 	popped.position = global_position
 	popped.rotation = global_rotation
-	
+
 	queue_free()

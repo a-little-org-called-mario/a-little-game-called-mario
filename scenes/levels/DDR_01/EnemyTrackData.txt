@@ -1,0 +1,68 @@
+# intro
+
+## MAIN
+190 right
++28 right
+
++20 right
++14 left
++14 up
++14 right
++14 left
+
++20 right
++28 left
++28 down
+
++14 idle
+
+
+## MAIN
+594 right
++28 right
+
++20 right
++14 left
++14 up
++14 right
++14 left
+
++20 right
++28 left
++28 down
+
++0 idle
+
+
+## MAIN
++28 right
++28 right
+
++20 right
++14 left
++14 up
++14 right
++14 left
+
++20 right
++28 left
++28 down
+
++0 idle
+
+
+## MAIN
++28 right
++28 right
+
++20 right
++14 left
++14 up
++14 right
++14 left
+
++20 right
++28 left
++28 down
+
++0 idle

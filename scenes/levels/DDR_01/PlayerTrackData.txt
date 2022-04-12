@@ -1,0 +1,50 @@
+# Hello
+# If you're reading this, then that means you're interested in the DDR mode, and maybe want to create your own levels!
+# I've left this as a small tutorial on how to make them
+# This file is basically just a list of ticks and poses (up, left, right, down)
+# You can also leave comments with the # char, and you should be able to have empty lines
+
+## MAIN
+386 left
++28 left
+
++20 left
++14 right
++14 up
++14 left
++14 right
+
++20 left
++28 right
++28 down
+
+#### AMPlIFY
+## MAIN
+802 left
++28 left
+
++20 left
++14 right
++14 up
++14 left
++14 right
+
++20 left
++28 right
++28 down
+
++0 idle
+
+## MAIN
++28 left
++28 left
+
++20 left
++14 right
++14 up
++14 left
++14 right
+
++20 left
++28 right
++28 down

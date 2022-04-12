@@ -47,7 +47,7 @@ func bounce(body: KinematicBody2D) -> void:
 		
 
 # To be overidden in children to extend the box behavior
-func on_bounce(body: KinematicBody2D) -> void:
+func on_bounce(_body: KinematicBody2D) -> void:
 	pass
 
 func disable() -> void:

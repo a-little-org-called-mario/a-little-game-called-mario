@@ -21,20 +21,23 @@ var gravity = preload("res://scripts/resources/Gravity.tres")
 
 var coyote_timer: float = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer: float = 0.0 # gives a bit of buffer to hit the jump button before landing
-var motion: Vector2 = Vector2.ZERO
+var motion: Vector2 = Vector2()
 var gravity_multiplier: float = 1.0  # used for jump height variability
 var double_jump: bool = true
 var crouching: bool = false
 var grounded: bool = false
-var anticipating_jump: bool = false # the small window of time before the player jumps
-var coins: int = 0 #grabbed directly from the coin_collected signal;
+var anticipating_jump: bool = false  # the small window of time before the player jumps
+var coins: int = 0  #grabbed directly from the coin_collected signal;
 var hearts: int = 3
 var hasFlower: bool = false
+var isBus: bool = false
 
 onready var sprite: AnimatedSprite = $Sprite
 onready var tween: Tween = $Tween
 onready var trail: Line2D = $Trail
 onready var run_particles: CPUParticles2D = $RunParticles
+
+const bus_sprite: Texture = preload("res://sprites/bus.png")
 
 onready var original_scale: Vector2 = sprite.scale
 onready var squash_scale: Vector2 = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -44,13 +47,14 @@ onready var stretch_scale: Vector2 = Vector2(original_scale.x * 0.4, original_sc
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("heart_changed", self, "_on_heart_change")
-	hearts = get_node("../../UI/UI/HeartCount").count 
+	hearts = get_node("../../UI/UI/HeartCount").count
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
+	EventBus.connect("bus_collected", self, "_on_bus_collected")
 
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
-		EventBus.emit_signal("build_block", {"player":self})
+		EventBus.emit_signal("build_block", {"player": self})
 
 	var max_speed_modifier: float = 1.0
 	var acceleration_modifier: float = 1.0
@@ -60,7 +64,6 @@ func _physics_process(delta: float) -> void:
 		acceleration_modifier = 3
 		animationSpeed = 60
 	sprite.frames.set_animation_speed("run", animationSpeed)
-
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL * acceleration_modifier
 		sprite.play("run")
@@ -156,7 +159,7 @@ func _input(event: InputEvent) -> void:
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
 	if event.is_action_pressed("shoot") and coins > 0:
-		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
+		EventBus.emit_signal("coin_collected", {"value": -1, "type": "gold"})
 		shoot(default_projectile)
 	#Shoots fireball
 	if event.is_action_pressed("fire") and hasFlower:
@@ -197,9 +200,9 @@ func shoot(projectile_scene: PackedScene) -> void:
 	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
 	#Changes ShootOrigin based on direction
 	if shoot_dir == Vector2.LEFT:
-		$Sprite/ShootOrigin.set_position(Vector2( -4, -16))
+		$Sprite/ShootOrigin.set_position(Vector2(-4, -16))
 	else:
-		$Sprite/ShootOrigin.set_position(Vector2( 4, -16))
+		$Sprite/ShootOrigin.set_position(Vector2(4, -16))
 	projectile.position = $Sprite/ShootOrigin.global_position
 	# Projectile handles movement
 	projectile.start_moving(shoot_dir)
@@ -208,11 +211,15 @@ func shoot(projectile_scene: PackedScene) -> void:
 
 func look_right() -> void:
 	sprite.flip_h = false
+	if isBus:
+		$BusSprite.flip_h = true
 
 
 
 func look_left() -> void:
 	sprite.flip_h = true
+	if isBus:
+		$BusSprite.flip_h = false
 
 
 func squash(
@@ -295,9 +302,12 @@ func bounce(strength: float = 1100.0) -> void:
 	coyote_timer = 0
 	motion.y = -strength
 
+
 func _is_on_floor() -> bool:
-	return (gravity.direction.y == Vector2.DOWN.y and is_on_floor()) \
+	return (
+		(gravity.direction.y == Vector2.DOWN.y and is_on_floor())
 		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
+	)
 
 func _on_coin_collected(data: Dictionary) -> void:
 	var value := 1
@@ -305,14 +315,26 @@ func _on_coin_collected(data: Dictionary) -> void:
 		value = data["value"]
 	coins += value
 
+
 func _on_heart_change(data: Dictionary) -> void:
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
 	hearts += value
-	if(hearts <= 0):
+	if hearts <= 0:
 		get_tree().reload_current_scene()
+
 
 func _on_flower_collected(data: Dictionary) -> void:
 	if data.has("collected"):
-		hasFlower = data["collected"]	
+		hasFlower = data["collected"]
+
+
+func _on_bus_collected(data: Dictionary) -> void:
+	if data.has("collected"):
+		isBus = data["collected"]
+		$BusSprite.visible = true
+		$BusCollision.visible = true
+		sprite.visible = false
+		$CollisionShape2D.visible = false
+		trail.height = 15

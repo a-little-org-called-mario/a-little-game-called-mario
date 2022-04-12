@@ -302,7 +302,8 @@ func _on_heart_change(data):
 		value = data["value"]
 	hearts += value
 	if hearts <= 0:
-		get_tree().reload_current_scene()
+		if get_tree() != null:
+			get_tree().reload_current_scene()
 
 
 func _on_enemy_hit_coin():

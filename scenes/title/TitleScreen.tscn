@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
 [ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
-[ext_resource path="res://scenes/title/SmolCreditsLabel.gd" type="Script" id=5]
 [ext_resource path="res://scenes/title/DanceButton.gd" type="Script" id=6]
 [ext_resource path="res://scenes/title/StartButton.gd" type="Script" id=7]
 [ext_resource path="res://scenes/title/OptionsButton.gd" type="Script" id=8]
@@ -150,8 +149,8 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="VBoxContainer"]
 margin_top = 258.0
 margin_right = 984.0
-margin_bottom = 388.0
-rect_min_size = Vector2( 0, 130 )
+margin_bottom = 358.0
+rect_min_size = Vector2( 0, 100 )
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -159,9 +158,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_left = 432.0
-margin_top = 392.0
+margin_top = 362.0
 margin_right = 552.0
-margin_bottom = 548.0
+margin_bottom = 518.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
@@ -216,20 +215,20 @@ custom_colors/font_color = Color( 0.47451, 0.47451, 0.47451, 1 )
 text = "A"
 valign = 2
 clip_text = true
-script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/SmolCreditsLabel"]
+autoplay = "Appear"
 anims/Appear = SubResource( 3 )
 anims/Init = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 
 [node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 552.0
+margin_top = 522.0
 margin_right = 984.0
-margin_bottom = 568.0
+margin_bottom = 550.0
 size_flags_vertical = 8
 scroll_vertical_enabled = false
 script = ExtResource( 10 )
@@ -238,13 +237,30 @@ __meta__ = {
 }
 scroll_speed = 75.0
 
-[node name="Contributors" type="Label" parent="VBoxContainer/CreditsContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CreditsContainer"]
+margin_right = 2008.0
+margin_bottom = 16.0
+
+[node name="Control" type="Control" parent="VBoxContainer/CreditsContainer/HBoxContainer"]
+margin_right = 1000.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 1000, 0 )
+
+[node name="Contributors" type="Label" parent="VBoxContainer/CreditsContainer/HBoxContainer"]
+margin_left = 1004.0
+margin_right = 1004.0
 margin_bottom = 16.0
 uppercase = true
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Control2" type="Control" parent="VBoxContainer/CreditsContainer/HBoxContainer"]
+margin_left = 1008.0
+margin_right = 2008.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 1000, 0 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

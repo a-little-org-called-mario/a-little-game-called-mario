@@ -1,9 +1,9 @@
 extends Node
 
-export(NodePath) var container_path : NodePath
+export(NodePath) var container_path: NodePath
 
-onready var container : ViewportContainer = get_node(container_path)
-onready var crt_shader : Shader = preload("res://shaders/CRT.gdshader")
+onready var container: ViewportContainer = get_node(container_path)
+onready var crt_shader: Shader = preload("res://shaders/CRT.gdshader")
 
 
 func _ready():

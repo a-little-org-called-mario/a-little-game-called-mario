@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/Coin_Gems/Coin/Coin.tscn" type="PackedScene" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://scenes/levels/Default2/Level04.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/enemies/GassyRandal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://QuickText.gd" type="Script" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 8 )
 
 [node name="TileMap2" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -16,12 +21,6 @@ tile_data = PoolIntArray( -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 7 )]
 position = Vector2( 189, 479 )
-
-[node name="Coin" parent="." instance=ExtResource( 2 )]
-position = Vector2( 736, 345 )
-
-[node name="Coin2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 736, 345 )
 
 [node name="Coin3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 736, 345 )
@@ -44,3 +43,19 @@ next_level = ExtResource( 5 )
 
 [node name="Node2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 377, 289 )
+
+[node name="Randall will remember that" type="Label" parent="."]
+visible = false
+margin_left = 12.0
+margin_top = -40.0
+margin_right = 407.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 100, 50 )
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+text = "RANDALL WILL REMEMBER THAT."
+valign = 1
+script = ExtResource( 9 )
+
+[connection signal="tree_exited" from="Coin3" to="Randall will remember that" method="reveal"]

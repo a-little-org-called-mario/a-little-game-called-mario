@@ -9,8 +9,8 @@ signal contributors_loaded(names)
 func _ready():
 	# Don't call the github api while testing in the editor
 	# because we don't need it.
-#	if OS.has_feature("editor"):
-#		return
+	if OS.has_feature("editor"):
+		return
 	
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
@@ -26,6 +26,8 @@ func _on_request_completed(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		return
 	if _response_code != 200:
+		# Something went wrong with the request to the GitHub API
+		# Send an error message and return.
 		print()
 		print("ERROR: Got response code {code} while trying to get github contributors".format({
 			"code": _response_code

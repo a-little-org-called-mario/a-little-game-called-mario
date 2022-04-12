@@ -16,7 +16,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
-	if event.is_action_pressed("shoot") and player.coins > 0:
+	if event.is_action_pressed("shoot") and player.inventory.coins > 0:
 		EventBus.emit_signal("coin_collected", {"value": -1, "type": "gold"})
 		shoot(default_projectile)
 	#Shoots fireball

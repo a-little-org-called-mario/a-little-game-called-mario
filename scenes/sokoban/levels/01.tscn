@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/sokoban/sokoban_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/sokoban/SokobanLevel.gd" type="Script" id=3]
+[ext_resource path="res://scenes/sokoban/SokobanPlayer.tscn" type="PackedScene" id=4]
+
+[node name="SokobanLevel" type="Node2D"]
+script = ExtResource( 3 )
+total_boxes = 6
+
+[node name="Ground" type="TileMap" parent="." groups=["ground"]]
+tile_set = ExtResource( 1 )
+collision_layer = 2
+format = 1
+tile_data = PoolIntArray( 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 2, 0, 131072, 2, 0, 131073, 3, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 2, 0, 196608, 2, 0, 196609, 2, 0, 196610, 2, 0, 196611, 1, 0, 196612, 1, 0, 196613, 3, 0, 196614, 2, 0, 262144, 2, 0, 262145, 3, 0, 262146, 2, 0, 262147, 2, 0, 262148, 1, 0, 262149, 1, 0, 262150, 2, 0, 327680, 2, 0, 327681, 1, 0, 327682, 2, 0, 327683, 1, 0, 327684, 3, 0, 327685, 1, 0, 327686, 2, 0, 327687, 2, 0, 393216, 2, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 3, 0, 393223, 2, 0, 458752, 2, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 3, 0, 458757, 1, 0, 458758, 1, 0, 458759, 2, 0, 524288, 2, 0, 524289, 2, 0, 524290, 2, 0, 524291, 2, 0, 524292, 2, 0, 524293, 2, 0, 524294, 2, 0, 524295, 2, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Boxes" type="TileMap" parent="." groups=["boxes"]]
+tile_set = ExtResource( 1 )
+collision_layer = 2
+format = 1
+tile_data = PoolIntArray( 131075, 0, 0, 262148, 0, 0, 393217, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SokobanPlayer" parent="." instance=ExtResource( 4 )]
+position = Vector2( 160, 160 )

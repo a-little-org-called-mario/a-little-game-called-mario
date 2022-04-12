@@ -4,6 +4,7 @@
 extends PlayerProjectile
 class_name Fireball
 
+
 func _handle_start(_dir: Vector2):
 	$Shoot.play()
 	pass

@@ -10,17 +10,17 @@ onready var mario: AnimatedSprite = $Mario
 
 
 func _ready():
-    $Sprite.play()
+	$Sprite.play()
 
 
 func _enter_tree() -> void:
-    $Mario.visible = false
+	$Mario.visible = false
 
 
 func on_portal_enter():
-    mario.visible = true
-    mario.frame = 0
-    mario.play()
-    $PortalSFX.play()
-    EventBus.emit_signal("level_completed", {})
-    return mario
+	mario.visible = true
+	mario.frame = 0
+	mario.play()
+	$PortalSFX.play()
+	EventBus.emit_signal("level_completed", {})
+	return mario

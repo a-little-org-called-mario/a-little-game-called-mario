@@ -3,8 +3,10 @@ extends Position2D
 
 var player_scene = load("res://scenes/BallPlayer.tscn")
 
+
 func _ready():
 	spawn_mario()
+
 
 func spawn_mario():
 	var player = null

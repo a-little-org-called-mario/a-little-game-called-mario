@@ -9,17 +9,21 @@ export(bool) var look_at_direction := true
 var _direction := Vector2()
 var _active := false
 
+
 func _ready():
 	self.connect("body_entered", self, "_body_entered")
+
 
 func start_moving(dir: Vector2 = Vector2()):
 	_handle_start(dir)
 	_active = true
 	_direction = dir.normalized()
 
+
 # Override this to play sounds or other animations
 func _handle_start(_dir: Vector2):
 	pass
+
 
 func _physics_process(_delta: float):
 	if _active:
@@ -37,7 +41,7 @@ func _body_entered(body):
 	# If body is the player then lose health
 	if body is Player:
 		print("Player was hit!")
-		EventBus.emit_signal("heart_changed", { "value": -1 })
+		EventBus.emit_signal("heart_changed", {"value": -1})
 	destroy()
 
 

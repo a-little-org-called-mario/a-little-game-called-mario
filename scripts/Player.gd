@@ -21,7 +21,7 @@ var gravity = preload("res://scripts/resources/Gravity.tres")
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
 var x_motion = AxisMotion.new(AxisMotion.X, MAXSPEED, MAXACCEL, JERK)
-var y_motion = AxisMotion.new(AxisMotion.Y, JUMPFORCE, gravity.strength, 0.0)
+var y_motion = AxisMotion.new(gravity.direction, JUMPFORCE, gravity.strength, 0.0)
 var gravity_multiplier = 1  # used for jump height variability
 var double_jump = true
 var crouching = false
@@ -70,8 +70,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block", {"player": self})
 
+	# set these each loop in case of changes in gravity or acceleration modifiers
 	x_motion.max_speed = MAXSPEED
 	x_motion.max_accel = MAXACCEL
+	y_motion.set_axis(gravity.direction)
+	y_motion.max_accel = gravity.strength
+
 	var jerk_modifier = 1
 	var animationSpeed = 8
 	if Input.is_action_pressed("sprint"):

@@ -118,6 +118,11 @@ _global_script_classes=[ {
 "class": "SpawnPoint",
 "language": "GDScript",
 "path": "res://scripts/SpawnPoint.gd"
+}, {
+"base": "Reference",
+"class": "TrackParser",
+"language": "GDScript",
+"path": "res://gamemodes/DDR/TrackParser.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
@@ -141,7 +146,8 @@ _global_script_class_icons={
 "Powerup": "",
 "ScreenShake": "",
 "ShakingCamera": "",
-"SpawnPoint": ""
+"SpawnPoint": "",
+"TrackParser": ""
 }
 
 [application]

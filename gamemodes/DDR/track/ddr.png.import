@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ddr.png-871c8377f390cf822b1ab4dfd79b0a80.stex"
+path="res://.import/ddr.png-31bcc53e8e5a31d4a7976baeed66652d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/levels/DDR_01/track/ddr.png"
-dest_files=[ "res://.import/ddr.png-871c8377f390cf822b1ab4dfd79b0a80.stex" ]
+source_file="res://gamemodes/DDR/track/ddr.png"
+dest_files=[ "res://.import/ddr.png-31bcc53e8e5a31d4a7976baeed66652d.stex" ]
 
 [params]
 

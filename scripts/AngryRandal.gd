@@ -13,20 +13,24 @@ var currentSwoopIndex = 0
 var swoopFrom := []
 var swoopTo := []
 
+
 func _ready():
 	initSwoopTimer()
 	initSwoopTargetLocations()
 	initCollisionDetection()
+
 
 func initSwoopTimer() -> void:
 	$SwoopTimer.connect("timeout", self, "_on_SwoopTimer_timeout")
 	$SwoopTimer.wait_time = waitTimeBetweenSwoops
 	$SwoopTimer.start()
 
+
 func _on_SwoopTimer_timeout() -> void:
 	$SwoopTimer.stop()
 	swooping = true
 	currentSwoopIndex = 0
+
 
 func initSwoopTargetLocations() -> void:
 	var screenSize = get_viewport().get_visible_rect().size
@@ -37,16 +41,18 @@ func initSwoopTargetLocations() -> void:
 	swoopFrom = [upperLeftPoint, bottomMiddlePoint, upperRightPoint, bottomMiddlePoint]
 	swoopTo = [bottomMiddlePoint, upperRightPoint, bottomMiddlePoint, upperLeftPoint]
 
+
 func _process(delta: float):
 	if swooping:
 		handleSwoop(delta)
 
+
 func handleSwoop(delta: float) -> void:
-	if (time > moveDuration):
+	if time > moveDuration:
 		time = 0
 		currentSwoopIndex = currentSwoopIndex + 1
-			
-		if (currentSwoopIndex >= len(swoopFrom)):
+
+		if currentSwoopIndex >= len(swoopFrom):
 			stopSwooping()
 	else:
 		time += delta
@@ -54,21 +60,26 @@ func handleSwoop(delta: float) -> void:
 	var t = time / moveDuration
 	position = lerp(swoopFrom[currentSwoopIndex], swoopTo[currentSwoopIndex], t)
 
+
 func stopSwooping() -> void:
 	currentSwoopIndex = 0
 	swooping = false
 	$SwoopTimer.start()
 
+
 func randalVibe():
 	if not swooping:
 		.randalVibe()
 
+
 func initCollisionDetection() -> void:
 	$HitArea.connect("body_entered", self, "_on_body_entered")
+
 
 func _on_body_entered(body) -> void:
 	if body is Player:
 		call_deferred("hitPlayer")
+
 
 func hitPlayer():
 	EventBus.emit_signal("heart_changed", {"value": -1})

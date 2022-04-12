@@ -8,7 +8,7 @@ const JUMPFORCE = 1100
 const MAXACCEL = 50
 const MINACCEL = 0.25 * MAXACCEL
 const JERK = 0.25
-const STOPTHRESHOLD = 5 # Speed at which we should stop motion if idle.
+const STOPTHRESHOLD = 5  # Speed at which we should stop motion if idle.
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
 const SLIP_RANGE = 16
@@ -145,7 +145,8 @@ func _physics_process(delta: float) -> void:
 	sprite.flip_v = gravity.direction.y < 0
 
 	var move_and_slide_result = move_and_slide(
-		y_motion.update_motion() + x_motion.update_motion(), Vector2.UP)
+		y_motion.update_motion() + x_motion.update_motion(), Vector2.UP
+	)
 	var slide_count = get_slide_count()
 
 	var slipped = false
@@ -299,15 +300,18 @@ func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 	)
 	tween.start()
 
-func jerk_left(jerk : float):
+
+func jerk_left(jerk: float):
 	if x_motion.get_accel() > -MINACCEL:
 		x_motion.set_accel(-MINACCEL)
 	x_motion.set_jerk(-jerk)
 
-func jerk_right(jerk : float):
+
+func jerk_right(jerk: float):
 	if x_motion.get_accel() < MINACCEL:
 		x_motion.set_accel(MINACCEL)
 	x_motion.set_jerk(jerk)
+
 
 func reset() -> void:
 	look_right()

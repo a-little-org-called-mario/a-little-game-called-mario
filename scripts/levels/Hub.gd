@@ -86,7 +86,7 @@ static func _get_first_level_in_dir(path: String) -> String:
 		dir.list_dir_begin()
 		var filename := dir.get_next()
 		while filename != "":
-			if filename != "." and filename != ".." and !dir.current_is_dir():
+			if filename != "." and filename != ".." and !dir.current_is_dir() and filename.ends_with(".tscn"):
 
 				levels.append("%s/%s" % [path, filename])
 			filename = dir.get_next()

@@ -1,5 +1,13 @@
-.import
+# IDE folders
 .vscode
 .idea
+
+# Godot generated files
+.import
+*.translation
+
+# Build artifacts
 builds
+
+# Common junk
 .DS_Store

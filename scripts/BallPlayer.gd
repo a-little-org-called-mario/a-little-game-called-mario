@@ -36,7 +36,7 @@ func _physics_process(_delta: float) -> void:
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
 		animationSpeed = 60
-	sprite.frames.set_animation_speed("run", animationSpeed)
+	#sprite.frames.set_animation_speed("run", animationSpeed)
 
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL * acceleration_modifier
@@ -54,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 		
 		"""
 	else:
-		sprite.play("idle")
+		#sprite.play("idle")
 		motion.x = lerp(motion.x, 0, 0.05)
 
 	if Input.is_action_pressed("up"):

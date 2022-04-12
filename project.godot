@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/CameraLeanAmount.gd"
 }, {
+"base": "PlayerProjectile",
+"class": "CoinProjectile",
+"language": "GDScript",
+"path": "res://scripts/CoinProjectile.gd"
+}, {
 "base": "Achievement",
 "class": "CoinsAchievement",
 "language": "GDScript",
@@ -114,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Camera.gd"
 }, {
+"base": "Node2D",
+"class": "SokobanLevel",
+"language": "GDScript",
+"path": "res://scenes/sokoban/SokobanLevel.gd"
+}, {
 "base": "Position2D",
 "class": "SpawnPoint",
 "language": "GDScript",
@@ -132,6 +142,7 @@ _global_script_class_icons={
 "Bub": "",
 "Bus": "",
 "CameraLeanAmount": "",
+"CoinProjectile": "",
 "CoinsAchievement": "",
 "Corncob": "",
 "EndPortal": "",
@@ -146,8 +157,9 @@ _global_script_class_icons={
 "Powerup": "",
 "ScreenShake": "",
 "ShakingCamera": "",
-"SpawnPoint": "",
-"TrackParser": ""
+"TrackParser": "",
+"SokobanLevel": "res://sprites/box.png",
+"SpawnPoint": ""
 }
 
 [application]
@@ -162,7 +174,6 @@ config/icon="res://sprites/icon.png"
 EventBus="*res://autoload/EventBus.gd"
 Settings="*res://autoload/Settings.gd"
 SceneTransition="*res://effects/SceneTransition/SceneTransition.tscn"
-GitHubApi="*res://autoload/GitHubAPI.gd"
 
 [debug]
 

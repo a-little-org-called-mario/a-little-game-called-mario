@@ -29,6 +29,18 @@ var hearts = 3
 var hasFlower = false
 var isBus = false
 
+# STATS BLOCK
+var max_hearts = 3
+var jump_xp = 0
+var coin_shoot_xp = 0
+var intelegence = 1
+var speed = 1
+var charisma = 1
+var swim = 0
+var acrobatics = 0
+var building = 1
+var sanity = 10
+
 onready var sprite = $Sprite
 onready var tween = $Tween
 onready var trail: Line2D = $Trail
@@ -46,6 +58,8 @@ func _ready() -> void:
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	hearts = get_node("../../UI/UI/HeartCount").count
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
+	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
+	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
 
 
@@ -57,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	var acceleration_modifier = 1
 	var animationSpeed = 8
 	if Input.is_action_pressed("sprint"):
+		speed += 1
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
 		animationSpeed = 60
@@ -319,11 +334,19 @@ func _on_flower_collected(data):
 		hasFlower = data["collected"]
 
 
+func _on_enemy_hit_coin():
+	coin_shoot_xp += 1
+
+
+func _on_enemy_hit_fireball():
+	intelegence += 1
+
+
 func _on_bus_collected(data):
 	if data.has("collected"):
 		isBus = data["collected"]
 		$BusSprite.visible = true
-		$BusCollision.visible = true
+		$BusCollision.set_deferred("disabled", false)
 		sprite.visible = false
-		$CollisionShape2D.visible = false
+		$CollisionShape2D.set_deferred("disabled", true)
 		trail.height = 15

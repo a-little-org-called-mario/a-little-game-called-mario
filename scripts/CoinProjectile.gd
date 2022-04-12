@@ -1,4 +1,5 @@
 extends PlayerProjectile
+class_name CoinProjectile
 
 
 func _handle_start(_dir: Vector2):

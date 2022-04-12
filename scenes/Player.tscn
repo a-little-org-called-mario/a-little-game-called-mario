@@ -136,3 +136,4 @@ flip_h = true
 visible = false
 position = Vector2( 6.75, 11.1875 )
 shape = SubResource( 13 )
+disabled = true

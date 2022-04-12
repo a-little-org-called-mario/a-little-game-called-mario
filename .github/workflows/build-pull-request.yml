@@ -24,8 +24,21 @@ jobs:
       - name: checkout latest code
         uses: actions/checkout@v2.3.1
       - name: update credits
-        run: |
-          git shortlog --summary HEAD |sed -E 's/\s*[0-9]+\s+//g' >credits.txt
+        uses: actions/github-script@v3
+        with:
+          script: |
+            var fs = require('fs');
+            var response = await github.repos.listContributors({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            var names = '';
+            for (const contributor of response.data) {
+              if (contributor.type == 'User') {
+                names += contributor.login + '\n';
+              }
+            }
+            fs.writeFileSync('credits.txt', names);
       - name: export with Godot Engine and release on GitHub
         uses: firebelley/godot-export@v3.0.0
         with:

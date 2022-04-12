@@ -1,7 +1,6 @@
 class_name Player
 extends KinematicBody2D
 
-signal jumping
 signal shooting
 
 const UP: Vector2 = Vector2.UP
@@ -40,6 +39,8 @@ onready var run_particles: CPUParticles2D = $RunParticles
 onready var original_scale: Vector2 = sprite.scale
 onready var squash_scale: Vector2 = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
 onready var stretch_scale: Vector2 = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
+
+
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("heart_changed", self, "_on_heart_change")
@@ -178,7 +179,7 @@ func jump() -> void:
 	motion.y = JUMPFORCE * (gravity.direction.y * -1)
 	anticipating_jump = false
 	$JumpSFX.play()
-	emit_signal("jumping")
+	EventBus.emit_signal("jumping")
 
 
 func land() -> void:
@@ -298,13 +299,13 @@ func _is_on_floor() -> bool:
 	return (gravity.direction.y == Vector2.DOWN.y and is_on_floor()) \
 		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
 
-func _on_coin_collected(data) -> void:
+func _on_coin_collected(data: Dictionary) -> void:
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
 	coins += value
 
-func _on_heart_change(data) -> void:
+func _on_heart_change(data: Dictionary) -> void:
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
@@ -312,6 +313,6 @@ func _on_heart_change(data) -> void:
 	if(hearts <= 0):
 		get_tree().reload_current_scene()
 
-func _on_flower_collected(data) -> void:
+func _on_flower_collected(data: Dictionary) -> void:
 	if data.has("collected"):
 		hasFlower = data["collected"]	

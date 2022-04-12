@@ -34,7 +34,7 @@ func is_dying() -> bool:
 	return _dying
 
 
-func kill(killer) -> void:
+func kill(killer: KinematicBody2D) -> void:
 	if is_dying():
 		return
 	_dying = true
@@ -55,7 +55,7 @@ func kill(killer) -> void:
 # Prepares the enemy for leaving their physical form. Trigger any death
 # animations or sounds here. Supports yielding until animations, etc. are
 # completed. Once this function returns the enemy will be removed.
-func _handle_dying(_killer) -> void:
+func _handle_dying(_killer: KinematicBody2D) -> void:
 	pass
 
 

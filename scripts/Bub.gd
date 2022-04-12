@@ -105,7 +105,7 @@ func disable_collision() -> void:
 # Disables collision, plays the sprite death animation and the
 # death animation from the animation player. The function then yields
 # until the animations are finished.
-func _handle_dying(_killer) -> void:
+func _handle_dying(_killer: KinematicBody2D) -> void:
 	disable_collision()
 	_animation_player.play("die")
 	$SquishParticles.emitting = true

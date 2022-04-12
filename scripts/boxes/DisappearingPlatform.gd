@@ -7,7 +7,7 @@ func _on_box_entered(body: Node2D) -> void:
 	if body is KinematicBody2D:
 		call_deferred("bounce", body)
 
-func bounce(_body = null) -> void:
+func bounce(_body: KinematicBody2D) -> void:
 	disable()
 	var timer = Timer.new()
 	self.add_child(timer)

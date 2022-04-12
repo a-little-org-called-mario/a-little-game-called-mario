@@ -11,7 +11,6 @@ const coinSound: AudioStreamSample = preload("res://sfx/coin.wav")
 
 onready var hub: TileMap = $TileMap
 onready var level: TileMap = $TileMap
-onready var player: Player = get_node_or_null("Player")
 onready var container: ViewportContainer = get_parent()
 
 
@@ -38,7 +37,7 @@ func _hook_portals() -> void:
 
 
 func _on_build(data) -> void:
-	player = data["player"]
+	var player = data["player"]
 	# reference to player is needed for the case where there are more than one player
 	# eg. Level03
 	

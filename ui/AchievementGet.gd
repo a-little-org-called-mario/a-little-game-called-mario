@@ -1,15 +1,15 @@
 extends RichTextLabel
 
-var coinsSinceStartingLevel := 0
-var currentLevel = 0
+var coinsSinceStartingLevel: int = 0
+var currentLevel: int = 0
 
 
-func _ready():
+func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("level_completed", self, "_on_level_completed")
 
 
-func _on_coin_collected(data):
+func _on_coin_collected(data: Dictionary) ->  void:
 	var value := 1
 	if data and data.value:
 		value = data.value

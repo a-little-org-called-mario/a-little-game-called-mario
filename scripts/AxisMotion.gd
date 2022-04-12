@@ -36,6 +36,11 @@ func _init(axis: Vector2, speed_max: float, accel_max: float, jerk_max: float):
 	max_jerk = jerk_max
 
 
+# Sets the axis of this motion to the (normalized) axis.
+func set_axis(axis: Vector2):
+	_axis = axis.normalized()
+
+
 # Updates the motion vector of this object, then
 # returns the updated vector for convenience.
 # Applies current jerk and acceleration, then sets

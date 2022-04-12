@@ -39,7 +39,7 @@ jobs:
 
   build_game:
     name: Build Game
-    # TODO: this had `needs: format_code`, but I'm not sure how that intersects with our if clause
+    if: ${{ github.event.label.name != 'skip release' }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout latest code

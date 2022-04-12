@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://scripts/Audio.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=2]
 [ext_resource path="res://ui/UI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/levels/Hub.tscn" type="PackedScene" id=4]
@@ -10,6 +11,7 @@
 [ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=9]
 [ext_resource path="res://shaders/CRT.gdshader" type="Shader" id=10]
 [ext_resource path="res://ui/TouchInputs.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/CRT.gd" type="Script" id=12]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 10 )
@@ -57,10 +59,15 @@ script = ExtResource( 6 )
 
 [node name="TouchInputs" parent="ViewportContainer/Main" instance=ExtResource( 11 )]
 
-[node name="Music" type="Node" parent="ViewportContainer/Main"]
+[node name="Audio" type="Node" parent="ViewportContainer/Main"]
+script = ExtResource( 1 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ViewportContainer/Main/Music"]
+[node name="BGM" type="AudioStreamPlayer" parent="ViewportContainer/Main/Audio"]
 stream = ExtResource( 7 )
 volume_db = -20.0
 autoplay = true
 bus = "music"
+
+[node name="CRT" type="Node" parent="ViewportContainer/Main"]
+script = ExtResource( 12 )
+container_path = NodePath("../..")

@@ -1,10 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/GravityZone.gd" type="Script" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 160 )
 
 [sub_resource type="VisualShaderNodeColorConstant" id=13]
 constant = Color( 0.943437, 0, 0.627975, 1 )
@@ -122,7 +119,6 @@ gravity_vec = Vector2( 0, -1 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }

@@ -18,7 +18,7 @@ jobs:
   format_code:
     runs-on: ubuntu-latest
     # To prevent infinite loops
-    if: "!contains(github.event.head_commit.message, 'Auto-Format GDScript'"
+    if: "!contains(github.event.head_commit.message, 'Auto-Format GDScript')"
     steps:
       - uses: actions/checkout@v3
         with:

@@ -331,13 +331,16 @@ func _on_heart_change(data):
 
 func _on_flower_collected(data):
 	if data.has("collected"):
-		hasFlower = data["collected"]	
+		hasFlower = data["collected"]
+
 
 func _on_enemy_hit_coin():
 	coin_shoot_xp += 1
 
+
 func _on_enemy_hit_fireball():
 	intelegence += 1
+
 
 func _on_bus_collected(data):
 	if data.has("collected"):

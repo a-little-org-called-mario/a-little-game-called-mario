@@ -21,8 +21,8 @@ signal crt_filter_toggle(data)
 # self-explanatory - emitted by PauseMenu.gd and connected to Main.gd
 signal volume_changed(data)
 
-signal enemy_hit_coin()
-signal enemy_hit_fireball()
+signal enemy_hit_coin
+signal enemy_hit_fireball
 
 signal fire_flower_collected(data)
 signal bus_collected(data)

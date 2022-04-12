@@ -1,6 +1,8 @@
 class_name Player
 extends KinematicBody2D
 
+# This signal is emited from Shooter.gd
+#warning-ignore: UNUSED_SIGNAL
 signal shooting
 
 const MAXSPEED = 350
@@ -12,9 +14,6 @@ const STOPTHRESHOLD = 5  # Speed at which we should stop motion if idle.
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
 const SLIP_RANGE = 16
-
-export(PackedScene) var default_projectile: PackedScene = preload("res://scenes/CoinProjectile.tscn")
-export(PackedScene) var fireball_projectile: PackedScene = preload("res://scenes/powerups/Fireball.tscn")
 
 var gravity = preload("res://scripts/resources/Gravity.tres")
 
@@ -29,8 +28,6 @@ var grounded = false
 var anticipating_jump = false  # the small window of time before the player jumps
 var coins = 0  #grabbed directly from the coin_collected signal;
 var hearts = 3
-var hasFlower = false
-var isBus = false
 
 # STATS BLOCK
 var max_hearts = 3
@@ -49,27 +46,19 @@ onready var tween = $Tween
 onready var trail: Line2D = $Trail
 onready var run_particles: CPUParticles2D = $RunParticles
 
-var bus_sprite = preload("res://sprites/bus.png")
-
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 
 
 func _ready() -> void:
-	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	hearts = get_node("../../UI/UI/HeartCount").count
-	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
 	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
-	EventBus.connect("bus_collected", self, "_on_bus_collected")
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("Build"):
-		EventBus.emit_signal("build_block", {"player": self})
-
 	# set these each loop in case of changes in gravity or acceleration modifiers
 	x_motion.max_speed = MAXSPEED
 	x_motion.max_accel = MAXACCEL
@@ -181,17 +170,6 @@ func try_slip(angle: float):
 	return false
 
 
-func _input(event: InputEvent):
-	# Remove one coin and spawn a projectile
-	# Continus shooting after 0 coins
-	if event.is_action_pressed("shoot") and coins > 0:
-		EventBus.emit_signal("coin_collected", {"value": -1, "type": "gold"})
-		shoot(default_projectile)
-	#Shoots fireball
-	if event.is_action_pressed("fire") and hasFlower:
-		shoot(fireball_projectile)
-
-
 func crouch():
 	crouching = true
 	squash()
@@ -218,33 +196,12 @@ func land():
 		unsquash(0.18)
 
 
-func shoot(projectile_scene: PackedScene):
-	# Spawn the projectile and move it to its origin point
-	# Origin is affected by changes to Sprite (ex: squashing)
-	var projectile = projectile_scene.instance()
-	get_parent().add_child(projectile)
-	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
-	#Changes ShootOrigin based on direction
-	if shoot_dir == Vector2.LEFT:
-		$Sprite/ShootOrigin.set_position(Vector2(-4, -16))
-	else:
-		$Sprite/ShootOrigin.set_position(Vector2(4, -16))
-	projectile.position = $Sprite/ShootOrigin.global_position
-	# Projectile handles movement
-	projectile.start_moving(shoot_dir)
-	emit_signal("shooting")
-
-
 func look_right():
 	sprite.flip_h = false
-	if isBus:
-		$BusSprite.flip_h = true
 
 
 func look_left():
 	sprite.flip_h = true
-	if isBus:
-		$BusSprite.flip_h = false
 
 
 func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
@@ -339,13 +296,6 @@ func _is_on_floor() -> bool:
 	)
 
 
-func _on_coin_collected(data):
-	var value := 1
-	if data.has("value"):
-		value = data["value"]
-	coins += value
-
-
 func _on_heart_change(data):
 	var value := 1
 	if data.has("value"):
@@ -355,24 +305,9 @@ func _on_heart_change(data):
 		get_tree().reload_current_scene()
 
 
-func _on_flower_collected(data):
-	if data.has("collected"):
-		hasFlower = data["collected"]
-
-
 func _on_enemy_hit_coin():
 	coin_shoot_xp += 1
 
 
 func _on_enemy_hit_fireball():
 	intelegence += 1
-
-
-func _on_bus_collected(data):
-	if data.has("collected"):
-		isBus = data["collected"]
-		$BusSprite.visible = true
-		$BusCollision.set_deferred("disabled", false)
-		sprite.visible = false
-		$CollisionShape2D.set_deferred("disabled", true)
-		trail.height = 15

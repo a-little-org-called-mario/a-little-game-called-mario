@@ -163,9 +163,9 @@ _global_script_class_icons={
 "Powerup": "",
 "ScreenShake": "",
 "ShakingCamera": "",
-"TrackParser": "",
 "SokobanLevel": "res://sprites/box.png",
-"SpawnPoint": ""
+"SpawnPoint": "",
+"TrackParser": ""
 }
 
 [application]

@@ -51,6 +51,7 @@ position = Vector2( 0, 702.243 )
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 autoplay = true
+bus = "music"
 
 [connection signal="set_tick" from="." to="LeftTrack" method="_on_Level_set_tick"]
 [connection signal="set_tick" from="." to="RightTrack" method="_on_Level_set_tick"]

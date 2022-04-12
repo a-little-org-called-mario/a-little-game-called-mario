@@ -334,9 +334,7 @@ func _on_bus_collected(data: Dictionary) -> void:
 	if data.has("collected"):
 		isBus = data["collected"]
 		$BusSprite.visible = true
-		$BusCollision.visible = true
-		$BusCollision.disabled = false				
+		$BusCollision.set_deferred("disabled", false)		
 		sprite.visible = false
-		$CollisionShape2D.disabled = true		
-		$CollisionShape2D.visible = false
+		$CollisionShape2D.set_deferred("disabled", true)
 		trail.height = 15

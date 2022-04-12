@@ -1,9 +1,10 @@
 extends Node2D
 
-export(String, FILE) var noteData
+export(String, FILE) var trackFile
 export(Array, NodePath) var actorPaths
 var notes: Array = []
 var actors: Array = []
+var last_tick = 0
 
 export(int) var spawn_delay = 30
 export(float) var note_offset = 48
@@ -16,16 +17,18 @@ export(PackedScene) var NoteRight
 func _ready():
 	for path in actorPaths:
 		actors.push_back(get_node(path))
-	_loadNotes(noteData)
+	notes = TrackParser.parse(trackFile)
 
 func set_tick(tick):
 	for note in notes:
-		if note["tick"] == tick:
+		var note_tick = note["tick"]
+		if last_tick < note_tick and note_tick <= tick:
 			set_pose(note["pose"])
-		if note["tick"] == tick + spawn_delay:
-			spawn_note(note["pose"])
+		if last_tick + spawn_delay < note_tick and note_tick <= tick + spawn_delay:
+			spawn_note(note["pose"], note_tick)
+	last_tick = tick
 			
-func spawn_note(pose):
+func spawn_note(pose, note_tick):
 	var node
 	match pose:
 		"left":
@@ -42,44 +45,23 @@ func spawn_note(pose):
 			node.position.x += note_offset * 3;
 		_:
 			return
+			
 	node.position.y += note_y_offset
-	node.speed = note_y_offset / spawn_delay
-	node.life = spawn_delay
+	
+	node.init_pos = node.position.y + note_y_offset
+	node.init_tick = note_tick - spawn_delay
+	node.target_tick = note_tick
+	node.target_pos = position.y
+	
+	connect("set_tick", node, "set_tick")
 	add_child(node)
 
 func set_pose(pose):
 	for actor in actors:
 		actor.pose = pose
 
-func _loadNotes(file):
-	if len(file) == 0:
-		return
-	var f = File.new()
-	f.open(file, File.READ)
-	var index = 0
-	var last_tick = 0
-	while not f.eof_reached():
-		var line = f.get_line().strip_edges()
-		index +=1
-		if len(line) == 0 or line[0] == '#':
-			#print(str(last_tick) + ": " + line)
-			continue
-		var parts = line.split(' ')
-		if len(parts) < 2:
-			print("line (" + index + "): " + line + " is incorrect")
-			continue
-		var tick = 0
-		if parts[0][0] == '+':
-			tick = int(parts[0].substr(1)) + last_tick
-		else:
-			tick = int(parts[0])
-		last_tick = tick
-		notes.push_back({
-			"tick": tick,
-			"pose": parts[1].to_lower(),
-		})
-	#print(notes)
-
-
 func _on_Level_set_tick(tick):
 	set_tick(tick)
+	emit_signal("set_tick", tick)
+
+signal set_tick

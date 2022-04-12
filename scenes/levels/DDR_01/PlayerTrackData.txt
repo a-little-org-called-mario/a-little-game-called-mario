@@ -5,46 +5,128 @@
 # You can also leave comments with the # char, and you should be able to have empty lines
 
 ## MAIN
-386 left
-+28 left
+6900 left
++435 left
 
-+20 left
-+14 right
-+14 up
-+14 left
-+14 right
++435 left
++212 up
++212 right
++212 left
++212 right
 
-+20 left
-+28 right
-+28 down
++435 left
++435 right
++435 down
 
-#### AMPlIFY
+#### AMPLIFY
 ## MAIN
-802 left
-+28 left
+13700 left
++435 left
 
-+20 left
-+14 right
-+14 up
-+14 left
-+14 right
++435 left
++212 up
++212 right
++212 left
++212 right
 
-+20 left
-+28 right
-+28 down
++435 left
++435 right
++435 down
 
 +0 idle
 
 ## MAIN
-+28 left
-+28 left
+17150 left
++435 left
 
-+20 left
-+14 right
-+14 up
-+14 left
-+14 right
++435 left
++212 up
++212 right
++212 left
++212 right
 
-+20 left
-+28 right
-+28 down
++435 left
++435 right
++435 down
+
+
+## MAIN
+20500 left
++435 left
+
++435 left
++212 up
++212 right
++212 left
++212 right
+
++435 left
++435 right
++435 down
+
+## MAIN
+24000 left
++435 left
+
++435 left
++212 up
++212 right
++212 left
++212 right 
+
++435 left
++435 right
++435 down
+
+
+## Up down
+27400 up
++435 down
+
+## Up down
+30800 up
++435 down
+
+
+## MAIN
+37700 left
++435 left
+
++435 left
++212 up
++212 right
++212 left
++212 right
+
++435 left
++435 right
++435 down
+
+## MAIN
+44600 left
++435 left
+
++435 left
++212 up
++212 right
++212 left
++212 right
+
++435 left
++435 right
++435 down
+
+
+## MAIN 
+51400 left
++435 left
+
++435 left
++212 up
++212 right
++212 left
++212 right
+
++435 left
++435 right
++435 down

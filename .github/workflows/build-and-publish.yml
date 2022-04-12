@@ -53,7 +53,8 @@ jobs:
             var fs = require('fs');
             var response = await github.repos.listContributors({
               owner: context.repo.owner,
-              repo: context.repo.repo
+              repo: context.repo.repo,
+              per_page: 100
             });
             var names = '';
             for (const contributor of response.data) {

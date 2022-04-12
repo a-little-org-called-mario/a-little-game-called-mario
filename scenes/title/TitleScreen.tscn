@@ -4,6 +4,7 @@
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
 [ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
+[ext_resource path="res://scenes/title/FlappyMarioButton.gd" type="Script" id=5]
 [ext_resource path="res://scenes/title/DanceButton.gd" type="Script" id=6]
 [ext_resource path="res://scenes/title/StartButton.gd" type="Script" id=7]
 [ext_resource path="res://scenes/title/OptionsButton.gd" type="Script" id=8]
@@ -158,15 +159,15 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 337.0
+margin_left = 242.0
 margin_top = 362.0
-margin_right = 647.0
+margin_right = 742.0
 margin_bottom = 518.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_right = 310.0
+margin_right = 500.0
 margin_bottom = 36.0
 text = "START GAME"
 script = ExtResource( 7 )
@@ -176,7 +177,7 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
 margin_top = 40.0
-margin_right = 310.0
+margin_right = 500.0
 margin_bottom = 76.0
 custom_constants/separation = 46
 alignment = 1
@@ -200,9 +201,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="FlappyMarioButton" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 356.0
+margin_right = 500.0
+margin_bottom = 36.0
+text = "FLAPPY MARIO"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="OptionsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_top = 80.0
-margin_right = 310.0
+margin_right = 500.0
 margin_bottom = 116.0
 disabled = true
 text = "OPTIONSs"
@@ -213,7 +224,7 @@ __meta__ = {
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_top = 120.0
-margin_right = 310.0
+margin_right = 500.0
 margin_bottom = 156.0
 text = "CREDITS"
 script = ExtResource( 9 )

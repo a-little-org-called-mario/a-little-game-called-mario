@@ -54,6 +54,7 @@ jobs:
           publish-dir: '.'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "You can test out these proposed changes!"
+          alias: pr-${{ env.PR_NUM }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

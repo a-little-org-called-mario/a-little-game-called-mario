@@ -107,7 +107,7 @@ rotation = 1.5708
 scale = Vector2( 1.5, 2 )
 frames = SubResource( 10 )
 animation = "spin"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="."]

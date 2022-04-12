@@ -28,6 +28,18 @@ var coins = 0; #grabbed directly from the coin_collected signal;
 var hearts = 3;
 var hasFlower = false
 
+# STATS BLOCK
+var max_hearts = 3
+var jump_xp = 0
+var coin_shoot_xp = 0
+var intelegence = 1
+var speed = 1
+var charisma = 1
+var swim = 0
+var acrobatics = 0
+var building = 1
+var sanity = 10
+
 onready var sprite = $Sprite
 onready var tween = $Tween
 onready var trail : Line2D = $Trail
@@ -41,6 +53,8 @@ func _ready() -> void:
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	hearts = get_node("../../UI/UI/HeartCount").count 
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
+	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
+	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
 
 
 func _physics_process(delta: float) -> void:
@@ -51,6 +65,7 @@ func _physics_process(delta: float) -> void:
 	var acceleration_modifier = 1
 	var animationSpeed = 8
 	if Input.is_action_pressed("sprint"):
+		speed += 1
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
 		animationSpeed = 60
@@ -304,3 +319,9 @@ func _on_heart_change(data):
 func _on_flower_collected(data):
 	if data.has("collected"):
 		hasFlower = data["collected"]	
+
+func _on_enemy_hit_coin():
+	coin_shoot_xp += 1
+
+func _on_enemy_hit_fireball():
+	intelegence += 1

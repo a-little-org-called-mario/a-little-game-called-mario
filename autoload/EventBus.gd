@@ -22,3 +22,6 @@ signal crt_filter_toggle(data)
 signal volume_changed(data)
 
 signal fire_flower_collected(data);
+
+signal enemy_hit_coin()
+signal enemy_hit_fireball()

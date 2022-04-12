@@ -107,6 +107,10 @@ func disable_collision():
 # until the animations are finished.
 func _handle_dying(_killer):
 	disable_collision()
+	if _killer is CoinProjectile:
+		EventBus.emit_signal("enemy_hit_coin")
+	elif _killer is Fireball:
+		EventBus.emit_signal("enemy_hit_fireball")
 	_animation_player.play("die")
 	$SquishParticles.emitting = true
 	yield(_animation_player, "animation_finished")
@@ -143,6 +147,7 @@ func _on_KillTrigger_body_entered(body):
 	if not body is Player:
 		return
 	var player = body as Player
+	player.jump_xp += 1
 	player.bounce(BOUNCE_STRENGTH)
 	squash(0.075)
 	yield(tween, "tween_all_completed")

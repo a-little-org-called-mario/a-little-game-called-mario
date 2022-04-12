@@ -27,11 +27,14 @@ var anticipating_jump = false # the small window of time before the player jumps
 var coins = 0; #grabbed directly from the coin_collected signal;
 var hearts = 3;
 var hasFlower = false
+var isBus = false;
 
 onready var sprite = $Sprite
 onready var tween = $Tween
 onready var trail : Line2D = $Trail
 onready var run_particles : CPUParticles2D = $RunParticles
+
+var bus_sprite = preload("res://sprites/bus.png")
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -41,6 +44,7 @@ func _ready() -> void:
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	hearts = get_node("../../UI/UI/HeartCount").count 
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
+	EventBus.connect("bus_collected", self, "_on_bus_collected")
 
 
 func _physics_process(delta: float) -> void:
@@ -204,10 +208,14 @@ func shoot(projectile_scene: PackedScene):
 
 func look_right():
 	sprite.flip_h = false
+	if isBus:
+		$BusSprite.flip_h = true
 
 
 func look_left():
 	sprite.flip_h = true
+	if isBus:
+		$BusSprite.flip_h = false
 
 
 func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
@@ -304,3 +312,12 @@ func _on_heart_change(data):
 func _on_flower_collected(data):
 	if data.has("collected"):
 		hasFlower = data["collected"]	
+
+func _on_bus_collected(data):
+	if data.has("collected"):
+		isBus = data["collected"]	
+		$BusSprite.visible = true
+		$BusCollision.visible = true
+		sprite.visible = false
+		$CollisionShape2D.visible = false
+		trail.height = 15

@@ -14,19 +14,16 @@ func _on_coin_collected(data):
 	if data and data.value:
 		value = data.value
 	coinsSinceStartingLevel += value
-	print("checking coin achievements")
 	get_achievements()
 
 
 func get_achievements():
-	print("getting achievements")
 	var dir = Directory.new()
 	if (dir.open("res://Achievements")) == OK:
 		if dir.open("res://Achievements/Level" + str(currentLevel)) == OK:
 			#We are now in the folder for the achievements in this level.
 			dir.list_dir_begin()
 			var file_name = dir.get_next()
-			print(file_name)
 			while file_name != "":
 				if !dir.current_is_dir():
 					var current = load(
@@ -37,7 +34,6 @@ func get_achievements():
 						if current is CoinsAchievement:
 							#This is a coins achievement in this level. Do we have the right number of coins?
 							if coinsSinceStartingLevel == current.coinsRequired:
-								print("this is a coins achievement")
 								self.append_bbcode(
 									(
 										"[rainbow][center]"

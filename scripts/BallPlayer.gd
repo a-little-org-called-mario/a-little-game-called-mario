@@ -25,7 +25,7 @@ func _ready() -> void:
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block", {"player": self})
 
@@ -105,7 +105,7 @@ func try_slip(angle: float):
 	return false
 
 
-func _input(event: InputEvent):
+func _input(_event: InputEvent):
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
 	"""

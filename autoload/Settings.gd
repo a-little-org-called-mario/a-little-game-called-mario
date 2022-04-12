@@ -32,7 +32,6 @@ func save_data():
 	var settings_file = File.new()
 	settings_file.open(settings_name, File.WRITE)
 	settings_file.store_line(to_json(settings_values))
-	print(">>>>" + to_json(settings_values))
 	settings_file.close()
 
 

@@ -19,6 +19,10 @@ region = Rect2( 64, 0, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 64, 64 )
 
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 64, 64, 64 )
@@ -43,10 +47,6 @@ region = Rect2( 256, 64, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 320, 64, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 64, 64 )
-
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ SubResource( 30 ), SubResource( 31 ) ],
@@ -54,15 +54,15 @@ animations = [ {
 "name": "idle",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "move",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 32 ) ],
 "loop": true,
 "name": "die",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "move",
+"speed": 10.0
 } ]
 
 [sub_resource type="Animation" id=34]
@@ -365,3 +365,4 @@ color = Color( 0.0705882, 0.592157, 0.760784, 1 )
 [node name="PopGun" type="AudioStreamPlayer" parent="." index="9"]
 stream = SubResource( 37 )
 volume_db = -10.0
+bus = "sfx"

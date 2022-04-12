@@ -12,7 +12,7 @@ on:
       - '.gitignore'
       - 'LICENSE'
       - '**.md'
-      - '.github'
+      - '.github/**'
 
 jobs:
   format_code:

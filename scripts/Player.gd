@@ -23,33 +23,35 @@ var gravity_multiplier = 1  # used for jump height variability
 var double_jump = true
 var crouching = false
 var grounded = false
-var anticipating_jump = false # the small window of time before the player jumps
-var coins = 0; #grabbed directly from the coin_collected signal;
-var hearts = 3;
+var anticipating_jump = false  # the small window of time before the player jumps
+var coins = 0  #grabbed directly from the coin_collected signal;
+var hearts = 3
 var hasFlower = false
-var isBus = false;
+var isBus = false
 
 onready var sprite = $Sprite
 onready var tween = $Tween
-onready var trail : Line2D = $Trail
-onready var run_particles : CPUParticles2D = $RunParticles
+onready var trail: Line2D = $Trail
+onready var run_particles: CPUParticles2D = $RunParticles
 
 var bus_sprite = preload("res://sprites/bus.png")
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
+
+
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("heart_changed", self, "_on_heart_change")
-	hearts = get_node("../../UI/UI/HeartCount").count 
+	hearts = get_node("../../UI/UI/HeartCount").count
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
 
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
-		EventBus.emit_signal("build_block", {"player":self})
+		EventBus.emit_signal("build_block", {"player": self})
 
 	var max_speed_modifier = 1
 	var acceleration_modifier = 1
@@ -59,9 +61,9 @@ func _physics_process(delta: float) -> void:
 		acceleration_modifier = 3
 		animationSpeed = 60
 	sprite.frames.set_animation_speed("run", animationSpeed)
-	print("regular update");
+	print("regular update")
 	if Input.is_action_pressed("right"):
-		print("hitting right");
+		print("hitting right")
 		motion.x += ACCEL * acceleration_modifier
 		sprite.play("run")
 		# pointing the character in the direction he's running
@@ -156,7 +158,7 @@ func _input(event: InputEvent):
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
 	if event.is_action_pressed("shoot") and coins > 0:
-		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
+		EventBus.emit_signal("coin_collected", {"value": -1, "type": "gold"})
 		shoot(default_projectile)
 	#Shoots fireball
 	if event.is_action_pressed("fire") and hasFlower:
@@ -197,9 +199,9 @@ func shoot(projectile_scene: PackedScene):
 	var shoot_dir := Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
 	#Changes ShootOrigin based on direction
 	if shoot_dir == Vector2.LEFT:
-		$Sprite/ShootOrigin.set_position(Vector2( -4, -16))
+		$Sprite/ShootOrigin.set_position(Vector2(-4, -16))
 	else:
-		$Sprite/ShootOrigin.set_position(Vector2( 4, -16))
+		$Sprite/ShootOrigin.set_position(Vector2(4, -16))
 	projectile.position = $Sprite/ShootOrigin.global_position
 	# Projectile handles movement
 	projectile.start_moving(shoot_dir)
@@ -290,9 +292,12 @@ func bounce(strength = 1100):
 	coyote_timer = 0
 	motion.y = -strength
 
+
 func _is_on_floor() -> bool:
-	return (gravity.direction.y == Vector2.DOWN.y and is_on_floor()) \
+	return (
+		(gravity.direction.y == Vector2.DOWN.y and is_on_floor())
 		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
+	)
 
 
 func _on_coin_collected(data):
@@ -301,21 +306,24 @@ func _on_coin_collected(data):
 		value = data["value"]
 	coins += value
 
+
 func _on_heart_change(data):
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
 	hearts += value
-	if(hearts <= 0):
+	if hearts <= 0:
 		get_tree().reload_current_scene()
+
 
 func _on_flower_collected(data):
 	if data.has("collected"):
-		hasFlower = data["collected"]	
+		hasFlower = data["collected"]
+
 
 func _on_bus_collected(data):
 	if data.has("collected"):
-		isBus = data["collected"]	
+		isBus = data["collected"]
 		$BusSprite.visible = true
 		$BusCollision.visible = true
 		sprite.visible = false

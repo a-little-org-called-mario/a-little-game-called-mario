@@ -17,8 +17,8 @@ var coinSound = preload("res://sfx/coin.wav")
 
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
-	EventBus.connect("crt_filter_toggle",self,"_on_crt_toggle")
-	EventBus.connect("volume_changed",self,"_on_volume_change")
+	EventBus.connect("crt_filter_toggle", self, "_on_crt_toggle")
+	EventBus.connect("volume_changed", self, "_on_volume_change")
 	Settings.load_data()
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
@@ -41,7 +41,7 @@ func _on_build(data) -> void:
 	var player = data["player"]
 	# reference to player is needed for the case where there are more than one player
 	# eg. Level03
-	
+
 	# place a block in the level.
 	if level != null:
 		# Find the player's current position on the tilemap, and look one cell
@@ -68,9 +68,10 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 
 	body.get_parent().remove_child(body)
 	var animation = portal.on_portal_enter()
-	
+
 	yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
+
 
 func _finish_level(next_level: PackedScene = null) -> void:
 	# Create the new level, insert it into the tree and remove the old one.

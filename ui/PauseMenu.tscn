@@ -13,7 +13,6 @@ layer = 9
 script = ExtResource( 2 )
 
 [node name="PauseMenu" type="Control" parent="."]
-visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
 
@@ -124,6 +123,21 @@ custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 text = "
 RESTART"
+
+[node name="TitleLabel" type="RichTextLabel" parent="PauseMenu/MainMenu"]
+anchor_left = 0.355
+anchor_top = 0.405
+anchor_right = 0.648
+anchor_bottom = 0.618
+margin_left = -5.51999
+margin_top = 252.0
+margin_right = -149.552
+margin_bottom = 178.2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "
+BACK TO TITLE"
 
 [node name="GFXMenu" type="Control" parent="PauseMenu"]
 visible = false

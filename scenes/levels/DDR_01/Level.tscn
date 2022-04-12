@@ -16,6 +16,7 @@ script = ExtResource( 6 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+bus = "music"
 
 [node name="Controls" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -45,6 +46,7 @@ flip_h = false
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 600, 384 )
 BPM = 28
+
 
 [connection signal="set_tick" from="." to="LeftTrack" method="_on_Level_set_tick"]
 [connection signal="set_tick" from="." to="RightTrack" method="_on_Level_set_tick"]

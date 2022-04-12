@@ -3,10 +3,12 @@ extends KinematicBody2D
 
 signal shooting
 
-const MAXFALLSPEED = 1100
 const MAXSPEED = 350
 const JUMPFORCE = 1100
-const ACCEL = 50
+const MAXACCEL = 50
+const MINACCEL = 0.25 * MAXACCEL
+const JERK = 0.25
+const STOPTHRESHOLD = 5  # Speed at which we should stop motion if idle.
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
 const SLIP_RANGE = 16
@@ -18,7 +20,8 @@ var gravity = preload("res://scripts/resources/Gravity.tres")
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
-var motion = Vector2()
+var x_motion = AxisMotion.new(AxisMotion.X, MAXSPEED, MAXACCEL, JERK)
+var y_motion = AxisMotion.new(AxisMotion.Y, JUMPFORCE, gravity.strength, 0.0)
 var gravity_multiplier = 1  # used for jump height variability
 var double_jump = true
 var crouching = false
@@ -67,30 +70,39 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block", {"player": self})
 
-	var max_speed_modifier = 1
-	var acceleration_modifier = 1
+	x_motion.max_speed = MAXSPEED
+	x_motion.max_accel = MAXACCEL
+	var jerk_modifier = 1
 	var animationSpeed = 8
 	if Input.is_action_pressed("sprint"):
 		speed += 1
-		max_speed_modifier = 1.5
-		acceleration_modifier = 3
+		x_motion.max_speed *= 1.5
+		x_motion.max_accel *= 3
+		jerk_modifier = 3
 		animationSpeed = 60
 	sprite.frames.set_animation_speed("run", animationSpeed)
 	if Input.is_action_pressed("right"):
-		motion.x += ACCEL * acceleration_modifier
+		jerk_right(JERK * jerk_modifier)
 		sprite.play("run")
 		# pointing the character in the direction he's running
 		run_particles.emitting = true
 		look_right()
 	elif Input.is_action_pressed("left"):
-		motion.x -= ACCEL * acceleration_modifier
+		jerk_left(JERK * jerk_modifier)
 		sprite.play("run")
 		run_particles.emitting = true
 		look_left()
 	else:
 		sprite.play("idle")
+		if x_motion.get_speed() > STOPTHRESHOLD:
+			jerk_left(JERK)
+		elif x_motion.get_speed() < -STOPTHRESHOLD:
+			jerk_right(JERK)
+		else:
+			x_motion.set_speed(0)
+			x_motion.set_jerk(0)
+			x_motion.set_accel(0)
 		run_particles.emitting = false
-		motion.x = lerp(motion.x, 0, 0.2)
 
 	jump_buffer_timer -= delta
 	if Input.is_action_just_pressed("jump"):
@@ -129,15 +141,12 @@ func _physics_process(delta: float) -> void:
 		crouching = false
 		unsquash()
 
-	motion.y += gravity.direction.y * gravity.strength * gravity_multiplier
+	y_motion.set_accel(gravity.strength * gravity_multiplier)
 	sprite.flip_v = gravity.direction.y < 0
 
-	if abs(motion.y) > MAXFALLSPEED:
-		motion.y = sign(motion.y) * MAXFALLSPEED
-
-	motion.x = clamp(motion.x, -MAXSPEED * max_speed_modifier, MAXSPEED * max_speed_modifier)
-
-	var move_and_slide_result = move_and_slide(motion, Vector2.UP)
+	var move_and_slide_result = move_and_slide(
+		y_motion.update_motion() + x_motion.update_motion(), Vector2.UP
+	)
 	var slide_count = get_slide_count()
 
 	var slipped = false
@@ -146,7 +155,8 @@ func _physics_process(delta: float) -> void:
 		slipped = try_slip(get_slide_collision(slide_count - 1).get_angle())
 	# apply original result if no valid slip found
 	if !slipped:
-		motion = move_and_slide_result
+		x_motion.set_motion(move_and_slide_result)
+		y_motion.set_motion(move_and_slide_result)
 
 
 func try_slip(angle: float):
@@ -159,7 +169,7 @@ func try_slip(angle: float):
 	for r in range(1, SLIP_RANGE):
 		for p in [-1, 1]:
 			position[axis] = original_v + r * p
-			move_and_slide(motion, Vector2.UP)
+			move_and_slide(x_motion.get_motion() + y_motion.get_motion(), Vector2.UP)
 			if get_slide_count() == 0:
 				return true  # if no collision, return success
 	# restore original value on axis if couldn't find a slip
@@ -191,7 +201,7 @@ func jump():
 	stretch(0.2, 0, 0.5, 1.2)
 	jump_buffer_timer = 0
 	coyote_timer = 0
-	motion.y = JUMPFORCE * (gravity.direction.y * -1)
+	y_motion.set_speed(JUMPFORCE * -1)
 	anticipating_jump = false
 	$JumpSFX.play()
 	EventBus.emit_signal("jumping")
@@ -291,6 +301,18 @@ func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 	tween.start()
 
 
+func jerk_left(jerk: float):
+	if x_motion.get_accel() > -MINACCEL:
+		x_motion.set_accel(-MINACCEL)
+	x_motion.set_jerk(-jerk)
+
+
+func jerk_right(jerk: float):
+	if x_motion.get_accel() < MINACCEL:
+		x_motion.set_accel(MINACCEL)
+	x_motion.set_jerk(jerk)
+
+
 func reset() -> void:
 	look_right()
 	run_particles.emitting = false
@@ -303,7 +325,7 @@ func bounce(strength = 1100):
 	yield(tween, "tween_all_completed")
 	stretch(0.15)
 	coyote_timer = 0
-	motion.y = -strength
+	y_motion.set_speed(-strength)
 
 
 func _is_on_floor() -> bool:

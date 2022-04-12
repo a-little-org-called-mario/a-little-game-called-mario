@@ -1,0 +1,20 @@
+"keys","en","de"
+"TRANSLATE_ME","TRANSLATE ME!","ÜBERSETZ MICH!"
+"TUTORIAL_MOVEMENT","ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
+SPACE TO [wave amp=50 freq=2]JUMP[/wave]
+CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
+B TO[wave amp=50 freq=2] FIREBALL [/wave]  (WITH POWERUP)","PFEILTASTEN ZUM [rainbow freq=0.5 sat=1 val=20]BEWEGEN[/rainbow]
+UMSCHALT ZUM [wave amp=50 freq=2]SPRINTEN[/wave]
+LEERTASTE ZUM [wave amp=50 freq=2]SPRINGEN[/wave]
+STRG/Z ZUM [wave amp=50 freq=2]SCHIESSEN[/wave]
+B ZUM[wave amp=50 freq=2] FEUERBALL [/wave]  (MIT POWERUP)"
+"UI_COINS","
+[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]","
+[wave amp=50 freq=2]MÜNZEN:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"
+"CREDITS_TITLE","CREDITS","CREDITS"
+"UI_LEVEL"," [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"," [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"
+"ACHIEVEMENT_UNLOCKED","ACHIEVEMENT UNLOCKED: %s","ERRUNGENSCHAFT FREIGESCHALTET: %s"
+"ACHIEVEMENT_COINS_LEVEL0","GET ALL THE COINS IN LEVEL 0","SAMMLE ALLE MÜNZEN IN LEVEL 0"
+"ACHIEVEMENT_COINS_LEVEL1","GET ALL THE COINS IN LEVEL 1","SAMMLE ALLE MÜNZEN IN LEVEL 1"
+"ACHIEVEMENT_COINS_LEVEL2","GET ALL THE COINS IN LEVEL 2","SAMMLE ALLE MÜNZEN IN LEVEL 2"

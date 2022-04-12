@@ -219,6 +219,6 @@ func bounce(strength: float = 1100) -> void:
 
 
 func _on_coin_collected(data: Dictionary) -> void:
-	var value := 1
+	var _value := 1
 	if data.has("value"):
-		value = data["value"]
+		_value = data["value"]

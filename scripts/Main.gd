@@ -13,6 +13,7 @@ var coinSound = preload("res://sfx/coin.wav")
 
 var entering_portal: bool = false
 
+
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
 	Settings.load_data()
@@ -62,14 +63,14 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 	if entering_portal:
 		return
 	entering_portal = true
-	
+
 	# Despawn all projectiles
 	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
 		despawn.queue_free()
 
 	body.get_parent().remove_child(body)
 	var animation = portal.on_portal_enter()
-	
+
 	yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
 

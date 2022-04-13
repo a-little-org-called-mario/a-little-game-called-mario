@@ -3,6 +3,11 @@ extends RichTextLabel
 var lines = []
 
 func _ready():
+	# todo credits in editor check exists in two places - should be simiplied to one utility function
+	# Credits file is generated at build time - use placeholder string if in editor
+	if OS.has_feature("editor"):
+		return
+
 	randomize()
 
 	var file = File.new()

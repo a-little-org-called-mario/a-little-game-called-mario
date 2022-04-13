@@ -5,8 +5,8 @@ const PORTAL_POSITION := Vector2(6, 4)
 const LABEL_POSITION := Vector2(6, 6)
 const COPY_ZONE_START := Vector2(5, -1)
 const COPY_ZONE_END := Vector2(7, 9)
-const WALL_START := Vector2(7, -1)
-const WALL_END := Vector2(8, 9)
+const WALL_START := Vector2(13, -1)
+const WALL_END := Vector2(16, 9)
 
 export(String, DIR) var levels_directory: String
 export(PackedScene) var portal_scene: PackedScene

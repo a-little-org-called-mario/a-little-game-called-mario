@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=1]
+[ext_resource path="res://scenes/levels/Flappy/env/env_spawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Player/PlayerFlying.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Obstacles/ObstacleSpawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/levels/Flappy/UI_flappy.tscn" type="PackedScene" id=4]
@@ -14,11 +14,6 @@ extents = Vector2( 125, 28 )
 
 [node name="object_spawner" parent="." instance=ExtResource( 3 )]
 wait_time = 1.5
-
-[node name="Background" type="Sprite" parent="."]
-scale = Vector2( 15.9844, 9.375 )
-texture = ExtResource( 1 )
-centered = false
 
 [node name="Player_RigidBody" parent="." instance=ExtResource( 2 )]
 position = Vector2( 109, 303 )
@@ -38,4 +33,9 @@ shape = SubResource( 1 )
 position = Vector2( 125, -22 )
 shape = SubResource( 1 )
 
+[node name="env_spawner" type="Timer" parent="."]
+autostart = true
+script = ExtResource( 1 )
+
 [connection signal="body_entered" from="deathBounds" to="deathBounds" method="_on_deathBounds_body_entered"]
+[connection signal="timeout" from="env_spawner" to="env_spawner" method="_on_env_spawner_timeout"]

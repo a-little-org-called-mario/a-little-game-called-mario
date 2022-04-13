@@ -48,5 +48,6 @@ func trigger_medium_shake() -> void:
 func trigger_large_shake() -> void:
 	_screen_shake.start(.1, 20, 50, 10)
 
+
 func return_to_center(_data) -> void:
 	position = get_viewport_rect().size / 2

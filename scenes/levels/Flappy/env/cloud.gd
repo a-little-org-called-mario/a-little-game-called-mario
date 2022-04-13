@@ -1,6 +1,6 @@
 extends Sprite
 
-var SPEED = -50
+export var SPEED = -200
 
 func _physics_process(delta: float) -> void:
 	position.x += SPEED * delta

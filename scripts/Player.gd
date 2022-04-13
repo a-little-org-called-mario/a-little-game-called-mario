@@ -306,10 +306,6 @@ func _is_on_floor() -> bool:
 	)
 
 
-func _on_initial_startup() -> void:
-	inventory.reset()
-
-
 func _on_heart_change(data):
 	var value := 1
 	if data.has("value"):

@@ -14,6 +14,7 @@ tile_data = PoolIntArray( -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 
 
 [node name="EndPortal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 946, 53 )
+next_level_path = "res://scenes/levels/Default/Level03.tscn"
 
 [node name="SpawnPoint2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 753, 419 )

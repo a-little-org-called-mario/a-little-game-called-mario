@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=9 format=2]
+=======
+[gd_scene load_steps=7 format=2]
+>>>>>>> c60a1fa (Do not load all levels at once (#273))
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=2]

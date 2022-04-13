@@ -11,3 +11,6 @@ func _on_coin_collected(data: Dictionary) -> void:
 	if data.has("value"):
 		value = data["value"]
 	player.inventory.coins += value
+
+func _exit_tree():
+	EventBus.disconnect("coin_collected", self, "_on_coin_collected")

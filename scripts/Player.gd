@@ -53,6 +53,7 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 func _ready() -> void:
 	_end_flash_sprite()
 
+
 func _enter_tree():
 	if not EventBus.is_connected("game_exit", inventory, "reset"):
 		EventBus.connect("game_exit", inventory, "reset")
@@ -61,11 +62,13 @@ func _enter_tree():
 	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
 	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
 
+
 func _exit_tree():
 	# make sure the Marios in other levels (or hub) don't receive events
 	EventBus.disconnect("heart_changed", self, "_on_heart_change")
 	EventBus.disconnect("enemy_hit_coin", self, "_on_enemy_hit_coin")
 	EventBus.disconnect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
+
 
 func _physics_process(delta: float) -> void:
 	# set these each loop in case of changes in gravity or acceleration modifiers

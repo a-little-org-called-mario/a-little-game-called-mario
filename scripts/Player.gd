@@ -16,6 +16,7 @@ const JUMP_BUFFER_TIME = 0.05
 const SLIP_RANGE = 16
 
 var gravity = preload("res://scripts/resources/Gravity.tres")
+var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
@@ -26,7 +27,6 @@ var double_jump = true
 var crouching = false
 var grounded = false
 var anticipating_jump = false  # the small window of time before the player jumps
-var coins = 0  #grabbed directly from the coin_collected signal;
 var hearts = 3
 
 # STATS BLOCK
@@ -52,6 +52,7 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 
 func _ready() -> void:
+	EventBus.connect("initial_startup", self, "_on_initial_startup")
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	hearts = get_node("../../UI/UI/HeartCount").count
 	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
@@ -295,6 +296,8 @@ func _is_on_floor() -> bool:
 		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
 	)
 
+func _on_initial_startup() -> void:
+	inventory.reset()
 
 func _on_heart_change(data):
 	var value := 1

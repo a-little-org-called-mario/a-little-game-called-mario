@@ -19,6 +19,7 @@ func _ready() -> void:
 	$CoinContainer.visible = price > 0
 	$CoinContainer/CoinLabel.text = str(price)
 
+
 func _enter_tree() -> void:
 	$Mario.visible = false
 

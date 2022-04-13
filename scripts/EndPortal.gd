@@ -19,6 +19,7 @@ func _ready() -> void:
 	$CoinContainer.visible = price > 0
 	$CoinContainer/CoinLabel.text = str(price)
 
+
 func _enter_tree() -> void:
 	$Mario.visible = false
 
@@ -26,7 +27,7 @@ func _enter_tree() -> void:
 func can_enter(node: Node2D) -> bool:
 	if node is Player:
 		return node.inventory.coins >= price
-	
+
 	return true
 
 

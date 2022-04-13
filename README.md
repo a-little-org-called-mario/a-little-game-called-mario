@@ -95,7 +95,7 @@ changes to the remote project on GitHub will kick-off some automated build proce
 
 and then? write down their feedback and do it all over again. ask them if they want to help. you're now a Game Developer and you have the skills and knowledge to help them be one too.
 
-For complete instructions on how to submit your changes to the project, click [here](.godot_ignore/HowToGitHub.md).
+for complete instructions on how to submit your changes to the project, click [here](.godot_ignore/HowToGitHub.md).
 
 # this is all rad but i'm still intimidated 😱
 i could go on for _hours_ about impostor syndrome and all that junk (stuff i feel, just the same as you!!) but some ppl need more encouragement than others so i won't attempt a one-size fits all spiel here 😉

@@ -2,7 +2,7 @@
 # include in your scripts with `const Util = preload("res://scripts/Util.gd")`
 # then call with Util.cool_helper_function()
 # !!make sure new functions added are static or this will not work!!
-
+extends Node
 
 # returns array of GitHub contributor names for use in credits sequences (or wherever!)
 static func get_contributor_names() -> Array:

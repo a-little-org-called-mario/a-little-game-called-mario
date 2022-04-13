@@ -13,7 +13,6 @@ on:
       - 'scripts/**'
       - 'sfx/**'
       - 'sprites/**'
-      - 'ui/**'
       - export_presets.cfg
       - .project.godot
 

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=7 format=2]
 
-[ext_resource path="res://ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://effects/Transition/Transition.gd" type="Script" id=1]
-[ext_resource path="res://effects/Transition/Transition.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Transition/Transition.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Transition/Transition.png" type="Texture" id=2]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;

@@ -296,8 +296,10 @@ func _is_on_floor() -> bool:
 		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
 	)
 
+
 func _on_initial_startup() -> void:
 	inventory.reset()
+
 
 func _on_heart_change(data):
 	var value := 1

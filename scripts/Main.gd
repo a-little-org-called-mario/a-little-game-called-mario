@@ -20,12 +20,9 @@ func _ready() -> void:
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 
-	# make sure all scripts are ready to receive the signal
-	call_deferred("_final_ready")
 
-
-func _final_ready() -> void:
-	EventBus.emit_signal("initial_startup")
+func _exit_tree() -> void:
+	EventBus.emit_signal("game_exit")
 
 
 func _hook_portals() -> void:

@@ -1,15 +1,14 @@
 extends Label
 
-
-export var secondsUntilDisappearing = 5;
+export var secondsUntilDisappearing = 5
 
 
 func _process(delta: float) -> void:
 	if visible:
-		secondsUntilDisappearing -= delta;
+		secondsUntilDisappearing -= delta
 	if secondsUntilDisappearing < 0:
-		queue_free();
+		queue_free()
 
 
 func reveal() -> void:
-	visible = true;
+	visible = true

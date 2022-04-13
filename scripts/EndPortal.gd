@@ -9,8 +9,6 @@ onready var next_level: PackedScene = load(next_level_path) if len(next_level_pa
 
 export var price: int
 
-export var price: int
-
 onready var mario: AnimatedSprite = $Mario
 
 

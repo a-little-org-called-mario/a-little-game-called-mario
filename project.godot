@@ -183,8 +183,8 @@ config/icon="res://sprites/icon.png"
 
 [autoload]
 
-EventBus="*res://autoload/EventBus.gd"
-Settings="*res://autoload/Settings.gd"
+EventBus="*res://scripts/autoload/EventBus.gd"
+Settings="*res://scripts/autoload/Settings.gd"
 SceneTransition="*res://effects/SceneTransition/SceneTransition.tscn"
 
 [debug]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/levels/CameraFollow.gd" type="Script" id=1]
+
+[node name="CameraFollow" type="Position2D"]
+script = ExtResource( 1 )

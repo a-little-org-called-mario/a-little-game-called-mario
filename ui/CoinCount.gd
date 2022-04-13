@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var count := 0
+var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
 
 func _ready():
@@ -8,13 +8,9 @@ func _ready():
 	update_coin_count()
 
 
-func _on_coin_collected(data):
-	var value := 1
-	if data.has("value"):
-		value = data["value"]
-	count += value
-	update_coin_count()
+func _on_coin_collected(_data):
+	call_deferred("update_coin_count")
 
 
 func update_coin_count():
-	bbcode_text = tr("UI_COINS") % count
+	bbcode_text = tr("UI_COINS") % inventory.coins

@@ -22,7 +22,10 @@ func _ready():
 		return
 
 	var file = File.new()
-	file.open("res://credits.txt", File.READ)
+	var err = file.open("res://credits.txt", File.READ)
+	if err != OK:
+		print("Couldn't load credits.txt. The file might be missing.")
+		return
 	label.text = file.get_as_text()
 
 

@@ -34,12 +34,11 @@ func _on_SwoopTimer_timeout() -> void:
 
 func initSwoopTargetLocations() -> void:
 	var screenSize = get_viewport().get_visible_rect().size
-	
+
 	var upperLeftPoint = Vector2(position.x, position.y)
 	var upperRightPoint = Vector2(position.x + screenSize.x - (screenSize.x * 0.1), position.y)
 	var bottomMiddlePoint = Vector2(
-		(upperLeftPoint.x + upperRightPoint.x) / 2,
-		position.y + (screenSize.y * 0.8)
+		(upperLeftPoint.x + upperRightPoint.x) / 2, position.y + (screenSize.y * 0.8)
 	)
 
 	swoopFrom = [upperLeftPoint, bottomMiddlePoint, upperRightPoint, bottomMiddlePoint]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/Flappy/env/env_spawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Player/PlayerFlying.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/levels/Flappy/UI_flappy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/levels/Flappy/deathBounds.gd" type="Script" id=5]
 [ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/levels/Flappy/Characters/Obstacles/Pipes.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 125, 28 )
@@ -36,6 +37,15 @@ shape = SubResource( 1 )
 [node name="env_spawner" type="Timer" parent="."]
 autostart = true
 script = ExtResource( 1 )
+
+[node name="preset_pipes" parent="." instance=ExtResource( 7 )]
+position = Vector2( 571, 286 )
+
+[node name="preset_pipes2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 755, 241 )
+
+[node name="preset_pipes3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 954, 296 )
 
 [connection signal="body_entered" from="deathBounds" to="deathBounds" method="_on_deathBounds_body_entered"]
 [connection signal="timeout" from="env_spawner" to="env_spawner" method="_on_env_spawner_timeout"]

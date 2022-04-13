@@ -13,9 +13,8 @@ on:
       - 'scripts/**'
       - 'sfx/**'
       - 'sprites/**'
-      - 'ui/**'
       - export_presets.cfg
-      - .project.godot
+      - project.godot
 
 jobs:
   build_game:

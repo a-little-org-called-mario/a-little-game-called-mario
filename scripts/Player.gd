@@ -56,6 +56,7 @@ func _ready() -> void:
 	hearts = get_node("../../UI/UI/HeartCount").count
 	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
 	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
+	_end_flash_sprite()
 
 
 func _physics_process(delta: float) -> void:
@@ -279,6 +280,7 @@ func reset() -> void:
 	run_particles.emitting = false
 	run_particles.restart()
 	trail.reset()
+	_end_flash_sprite()
 
 
 func bounce(strength = 1100):
@@ -301,6 +303,11 @@ func _on_heart_change(data):
 	if data.has("value"):
 		value = data["value"]
 	hearts += value
+	
+	if value < 0:
+		$HurtSFX.play()
+		flash_sprite()
+	
 	if hearts <= 0:
 		if get_tree() != null:
 			get_tree().reload_current_scene()
@@ -312,3 +319,15 @@ func _on_enemy_hit_coin():
 
 func _on_enemy_hit_fireball():
 	intelegence += 1
+
+
+func flash_sprite(duration : float = 0.05) -> void:
+	$Sprite.material.set_shader_param("flash_modifier", 1.0)
+	$BusSprite.material.set_shader_param("flash_modifier", 1.0)
+	$HitFlashTimer.wait_time = duration
+	$HitFlashTimer.start()
+
+
+func _end_flash_sprite() -> void:
+	$Sprite.material.set_shader_param("flash_modifier", 0.0)
+	$BusSprite.material.set_shader_param("flash_modifier", 0.0)

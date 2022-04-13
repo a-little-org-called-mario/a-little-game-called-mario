@@ -6,9 +6,6 @@ export(PackedScene) var fireball_projectile: PackedScene = preload("res://scenes
 
 onready var player : Player = owner
 
-var hasFlower : bool = false
-
-
 func _ready() -> void:
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 
@@ -20,7 +17,7 @@ func _input(event: InputEvent) -> void:
 		EventBus.emit_signal("coin_collected", {"value": -1, "type": "gold"})
 		shoot(default_projectile)
 	#Shoots fireball
-	if event.is_action_pressed("fire") and hasFlower:
+	if event.is_action_pressed("fire") and player.inventory.has_flower:
 		shoot(fireball_projectile)
 
 
@@ -43,4 +40,4 @@ func shoot(projectile_scene: PackedScene) -> void:
 
 func _on_flower_collected(data : Dictionary) -> void:
 	if data.has("collected"):
-		hasFlower = data["collected"]
+		player.inventory.has_flower = data["collected"]

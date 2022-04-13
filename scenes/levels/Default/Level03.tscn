@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/levels/Default/Level04.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/enemies/GassyRandal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=8]
@@ -39,7 +38,7 @@ position = Vector2( 195, 472 )
 
 [node name="EndPortal" parent="." instance=ExtResource( 4 )]
 position = Vector2( 30, 99 )
-next_level = ExtResource( 5 )
+next_level_path = "res://scenes/levels/Default/Level04.tscn"
 
 [node name="Node2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 377, 289 )

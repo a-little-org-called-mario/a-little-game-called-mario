@@ -7,8 +7,7 @@ export(float,0,1) var follow_speed: float = 0.1
 
 func _process(_delta):
 	
-	if(not player_reference):
-		print("not player")
+	if(not player_reference or not player_reference.is_inside_tree()):
 		player_reference = $"../Player"
 
 	if(camera_reference and player_reference):

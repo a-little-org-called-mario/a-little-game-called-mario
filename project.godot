@@ -185,7 +185,7 @@ config/icon="res://sprites/icon.png"
 
 EventBus="*res://scripts/autoload/EventBus.gd"
 Settings="*res://scripts/autoload/Settings.gd"
-SceneTransition="*res://effects/SceneTransition/SceneTransition.tscn"
+SceneTransition="*res://scenes/SceneTransition/SceneTransition.tscn"
 
 [debug]
 

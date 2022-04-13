@@ -40,6 +40,8 @@ var swim = 0
 var acrobatics = 0
 var building = 1
 var sanity = 10
+var powerupspeed = 1
+var powerupaccel = 1
 
 onready var sprite = $Sprite
 onready var tween = $Tween
@@ -66,6 +68,9 @@ func _physics_process(delta: float) -> void:
 	x_motion.max_accel = MAXACCEL
 	y_motion.set_axis(gravity.direction)
 	y_motion.max_accel = gravity.strength
+
+	x_motion.max_speed *= powerupspeed
+	x_motion.max_accel *= powerupaccel
 
 	var jerk_modifier = 1
 	var animationSpeed = 8

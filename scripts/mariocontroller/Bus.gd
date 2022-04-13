@@ -15,6 +15,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	sprite.flip_h = !player.sprite.flip_h
+	if isBus:
+		player.powerupspeed = 4
+		player.powerupaccel = 2
+	else:
+		player.powerupspeed = 1
+		player.powerupaccel = 1
 
 
 func _on_bus_collected(data: Dictionary) -> void:

@@ -261,7 +261,7 @@ scroll_vertical_enabled = false
 script = ExtResource( 10 )
 scroll_speed = 75.0
 
-[node name="Mario" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/CreditsContainer"]
+[node name="Credits" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/CreditsContainer"]
 margin_right = 800.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 600, 120 )
@@ -271,7 +271,7 @@ custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 script = ExtResource( 11 )
 
-[node name="Timer" type="Timer" parent="VBoxContainer/HBoxContainer2/CreditsContainer/Mario"]
+[node name="Timer" type="Timer" parent="VBoxContainer/HBoxContainer2/CreditsContainer/Credits"]
 wait_time = 3.0
 autostart = true
 
@@ -282,4 +282,4 @@ volume_db = -20.0
 autoplay = true
 bus = "music"
 
-[connection signal="timeout" from="VBoxContainer/HBoxContainer2/CreditsContainer/Mario/Timer" to="VBoxContainer/HBoxContainer2/CreditsContainer/Mario" method="_on_Timer_timeout"]
+[connection signal="timeout" from="VBoxContainer/HBoxContainer2/CreditsContainer/Credits/Timer" to="VBoxContainer/HBoxContainer2/CreditsContainer/Credits" method="_on_Timer_timeout"]

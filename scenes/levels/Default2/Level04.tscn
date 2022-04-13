@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/Coin_Gems/Coin/Coin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/Donk.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/utensils/Fork.tscn" type="PackedScene" id=6]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -30,3 +31,27 @@ position = Vector2( 1120, 226 )
 
 [node name="Donk" parent="." instance=ExtResource( 4 )]
 position = Vector2( 321, 192 )
+
+[node name="Fork" parent="." instance=ExtResource( 6 )]
+position = Vector2( 35, -223 )
+
+[node name="Fork2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 176, -282 )
+
+[node name="Fork3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 287, -240 )
+
+[node name="Fork4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 405, -273 )
+
+[node name="Fork5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 530, -211 )
+
+[node name="Fork6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 944, -213 )
+
+[node name="Fork7" parent="." instance=ExtResource( 6 )]
+position = Vector2( 787, -276 )
+
+[node name="Fork8" parent="." instance=ExtResource( 6 )]
+position = Vector2( 673, -235 )

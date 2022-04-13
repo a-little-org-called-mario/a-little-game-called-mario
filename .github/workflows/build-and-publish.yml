@@ -39,7 +39,7 @@ jobs:
 
   build_game:
     name: Build Game
-    # TODO: this had `needs: format_code`, but I'm not sure how that intersects with our if clause
+    if: ${{ github.event.label.name != 'skip release' || !contains(github.event.head_commit.message, 'Auto-Format GDScript') }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout latest code
@@ -53,7 +53,8 @@ jobs:
             var fs = require('fs');
             var response = await github.repos.listContributors({
               owner: context.repo.owner,
-              repo: context.repo.repo
+              repo: context.repo.repo,
+              per_page: 100
             });
             var names = '';
             for (const contributor of response.data) {

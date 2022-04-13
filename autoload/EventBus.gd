@@ -9,6 +9,9 @@ signal build_block(data)
 signal level_completed(data)
 signal level_started(data)
 
+# called once on game start
+signal initial_startup
+
 # Scene Transitions, expects "scene" key
 signal change_scene(data)
 

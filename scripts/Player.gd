@@ -16,6 +16,7 @@ const JUMP_BUFFER_TIME = 0.05
 const SLIP_RANGE = 16
 
 var gravity = preload("res://scripts/resources/Gravity.tres")
+var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
@@ -26,7 +27,6 @@ var double_jump = true
 var crouching = false
 var grounded = false
 var anticipating_jump = false  # the small window of time before the player jumps
-var coins = 0  #grabbed directly from the coin_collected signal;
 var hearts = 3
 
 # STATS BLOCK
@@ -52,10 +52,12 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 
 func _ready() -> void:
+	EventBus.connect("initial_startup", self, "_on_initial_startup")
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	hearts = get_node("../../UI/UI/HeartCount").count
 	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
 	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
+	_end_flash_sprite()
 
 
 func _physics_process(delta: float) -> void:
@@ -279,6 +281,7 @@ func reset() -> void:
 	run_particles.emitting = false
 	run_particles.restart()
 	trail.reset()
+	_end_flash_sprite()
 
 
 func bounce(strength = 1100):
@@ -296,13 +299,23 @@ func _is_on_floor() -> bool:
 	)
 
 
+func _on_initial_startup() -> void:
+	inventory.reset()
+
+
 func _on_heart_change(data):
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
 	hearts += value
+
+	if value < 0:
+		$HurtSFX.play()
+		flash_sprite()
+
 	if hearts <= 0:
-		get_tree().reload_current_scene()
+		if get_tree() != null:
+			get_tree().reload_current_scene()
 
 
 func _on_enemy_hit_coin():
@@ -311,3 +324,15 @@ func _on_enemy_hit_coin():
 
 func _on_enemy_hit_fireball():
 	intelegence += 1
+
+
+func flash_sprite(duration: float = 0.05) -> void:
+	$Sprite.material.set_shader_param("flash_modifier", 1.0)
+	$BusSprite.material.set_shader_param("flash_modifier", 1.0)
+	$HitFlashTimer.wait_time = duration
+	$HitFlashTimer.start()
+
+
+func _end_flash_sprite() -> void:
+	$Sprite.material.set_shader_param("flash_modifier", 0.0)
+	$BusSprite.material.set_shader_param("flash_modifier", 0.0)

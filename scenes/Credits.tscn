@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/Credits.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Credits.gd" type="Script" id=1]
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]

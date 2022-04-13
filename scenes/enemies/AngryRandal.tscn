@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://sprites/gassy-randal.png" type="Texture" id=1]
+[ext_resource path="res://scripts/AngryRandal.gd" type="Script" id=2]
+[ext_resource path="res://sprites/angry-randal.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 14.8297, 17.6709 )
+
+[node name="AngryRandal" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="RandalCloud" type="AnimatedSprite" parent="."]
+frames = SubResource( 6 )
+speed_scale = 1.25
+playing = true
+
+[node name="BigRandalCloud" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.439216 )
+scale = Vector2( 1.25, 1.25 )
+frames = SubResource( 6 )
+frame = 3
+speed_scale = 0.75
+playing = true
+
+[node name="EyeSprite" type="Sprite" parent="."]
+position = Vector2( 1.05112, -1.05112 )
+scale = Vector2( 0.507287, 0.507287 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 64, 64 )
+region_filter_clip = true
+
+[node name="Eyebrows" type="Sprite" parent="."]
+position = Vector2( 1.05112, -1.05112 )
+scale = Vector2( 0.507287, 0.507287 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( -3, -7, 74, 70 )
+region_filter_clip = true
+
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 1.558
+one_shot = true
+autostart = true
+
+[node name="OpenTimer" type="Timer" parent="."]
+wait_time = 0.065
+one_shot = true
+
+[node name="SwoopTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="HitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource( 7 )
+
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_BlinkTimer_timeout"]
+[connection signal="timeout" from="OpenTimer" to="." method="_on_OpenTimer_timeout"]
+[connection signal="timeout" from="SwoopTimer" to="." method="_on_OpenTimer_timeout"]

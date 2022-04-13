@@ -6,7 +6,7 @@ var index = 0
 var notes = []
 
 static func parse(fileName):
-	var parser = load("res://gamemodes/DDR/TrackParser.gd").new(fileName)
+	var parser = load("res://scenes/DDR/TrackParser.gd").new(fileName)
 	return parser._parse()
 
 func _init(_fileName):

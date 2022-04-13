@@ -142,7 +142,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "TrackParser",
 "language": "GDScript",
-"path": "res://gamemodes/DDR/TrackParser.gd"
+"path": "res://scenes/DDR/TrackParser.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",

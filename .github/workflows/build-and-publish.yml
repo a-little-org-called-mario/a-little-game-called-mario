@@ -39,7 +39,7 @@ jobs:
 
   build_game:
     name: Build Game
-    if: ${{ github.event.label.name != 'skip release' }}
+    if: ${{ github.event.label.name != 'skip release' || !contains(github.event.head_commit.message, 'Auto-Format GDScript') }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout latest code

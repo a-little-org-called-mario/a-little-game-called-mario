@@ -142,7 +142,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "TrackParser",
 "language": "GDScript",
-"path": "res://gamemodes/DDR/TrackParser.gd"
+"path": "res://scenes/DDR/TrackParser.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
@@ -183,9 +183,9 @@ config/icon="res://sprites/icon.png"
 
 [autoload]
 
-EventBus="*res://autoload/EventBus.gd"
-Settings="*res://autoload/Settings.gd"
-SceneTransition="*res://effects/SceneTransition/SceneTransition.tscn"
+EventBus="*res://scripts/autoload/EventBus.gd"
+Settings="*res://scripts/autoload/Settings.gd"
+SceneTransition="*res://scenes/SceneTransition/SceneTransition.tscn"
 
 [debug]
 

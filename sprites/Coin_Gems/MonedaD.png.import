@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ddr.png-31bcc53e8e5a31d4a7976baeed66652d.stex"
+path="res://.import/MonedaD.png-0b37b2ee666f0c32b9d8e46f15bc2432.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gamemodes/DDR/track/ddr.png"
-dest_files=[ "res://.import/ddr.png-31bcc53e8e5a31d4a7976baeed66652d.stex" ]
+source_file="res://sprites/Coin_Gems/MonedaD.png"
+dest_files=[ "res://.import/MonedaD.png-0b37b2ee666f0c32b9d8e46f15bc2432.stex" ]
 
 [params]
 

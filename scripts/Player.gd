@@ -67,26 +67,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block", {"player": self})
 
-	#regular speed
 	var max_speed_modifier = 1
 	var acceleration_modifier = 1
 	var animationSpeed = 8
-	
-	var issprinting = Input.is_action_pressed("sprint")
-	
-	if issprinting:		#speed when sprinting
+	if Input.is_action_pressed("sprint"):
 		speed += 1
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
 		animationSpeed = 60
-	#speed with bus powerup
-	if isBus:
-		max_speed_modifier = 6
-		acceleration_modifier = 2
-		if issprinting:		#bus AND sprint
-			max_speed_modifier = 10
-			acceleration_modifier = 4
-
 	sprite.frames.set_animation_speed("run", animationSpeed)
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL * acceleration_modifier

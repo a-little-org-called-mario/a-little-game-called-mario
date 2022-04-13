@@ -308,11 +308,11 @@ func _on_heart_change(data):
 	if data.has("value"):
 		value = data["value"]
 	hearts += value
-	
+
 	if value < 0:
 		$HurtSFX.play()
 		flash_sprite()
-	
+
 	if hearts <= 0:
 		if get_tree() != null:
 			get_tree().reload_current_scene()
@@ -326,7 +326,7 @@ func _on_enemy_hit_fireball():
 	intelegence += 1
 
 
-func flash_sprite(duration : float = 0.05) -> void:
+func flash_sprite(duration: float = 0.05) -> void:
 	$Sprite.material.set_shader_param("flash_modifier", 1.0)
 	$BusSprite.material.set_shader_param("flash_modifier", 1.0)
 	$HitFlashTimer.wait_time = duration

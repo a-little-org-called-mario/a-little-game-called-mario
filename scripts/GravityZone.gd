@@ -14,7 +14,9 @@ func _ready() -> void:
 	connect("body_exited", self, "_on_body_exited")
 
 	var sprite: Sprite = $Sprite
-	(sprite.material as ShaderMaterial).set_shader_param("Inverse", sign(gravity_vec.y) == sign(Vector2.DOWN.y))
+	(sprite.material as ShaderMaterial).set_shader_param(
+		"Inverse", sign(gravity_vec.y) == sign(Vector2.DOWN.y)
+	)
 	if shape == null:
 		return
 	var sprite_size: Vector2 = sprite.texture.get_size() / Vector2(sprite.hframes, sprite.vframes)

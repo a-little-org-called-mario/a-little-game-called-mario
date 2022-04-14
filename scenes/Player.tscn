@@ -177,7 +177,7 @@ anims/Idle = SubResource( 24 )
 anims/Jump = SubResource( 25 )
 anims/RESET = SubResource( 26 )
 anims/Run = SubResource( 27 )
-script = ExtResource( 15 )
+script = ExtResource( 14 )
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )

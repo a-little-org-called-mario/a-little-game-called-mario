@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MW1-0_LR7.wav-04fad239ad58169de755dd853d70600d.sample"
+
+[deps]
+
+source_file="res://voice/marwing/MW1-0_LR7.wav"
+dest_files=[ "res://.import/MW1-0_LR7.wav-04fad239ad58169de755dd853d70600d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

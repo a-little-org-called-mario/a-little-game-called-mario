@@ -96,7 +96,6 @@ collision_mask = 3
 script = ExtResource( 3 )
 bullet_scene = ExtResource( 2 )
 muzzle_flash_scene = ExtResource( 4 )
-health = 3
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

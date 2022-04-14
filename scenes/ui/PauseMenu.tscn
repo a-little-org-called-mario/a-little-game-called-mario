@@ -220,7 +220,6 @@ CRT FILTER: ON
 "
 
 [node name="SFXMenu" type="Control" parent="PauseMenu"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5.0
@@ -295,3 +294,25 @@ bbcode_enabled = true
 text = "
  SFX VOLUME: <  10  >
 "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VoiceVolLabel" type="RichTextLabel" parent="PauseMenu/SFXMenu"]
+anchor_left = 0.428
+anchor_top = 0.192
+anchor_right = 0.572
+anchor_bottom = 0.404
+margin_left = -186.272
+margin_top = 384.8
+margin_right = -67.728
+margin_bottom = 376.32
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "
+VOICE VOLUME: <  10  >
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}

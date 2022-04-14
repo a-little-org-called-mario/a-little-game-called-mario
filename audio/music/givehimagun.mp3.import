@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/givehimagun.mp3-670bfec10a42d633de8447b8cf8418b2.mp3str"
+
+[deps]
+
+source_file="res://audio/music/givehimagun.mp3"
+dest_files=[ "res://.import/givehimagun.mp3-670bfec10a42d633de8447b8cf8418b2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

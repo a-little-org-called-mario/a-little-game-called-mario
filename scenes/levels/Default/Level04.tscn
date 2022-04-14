@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/enemies/Donk.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/utensils/Fork.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Star/Star.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=8]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -55,3 +57,10 @@ position = Vector2( 787, -276 )
 
 [node name="Fork8" parent="." instance=ExtResource( 6 )]
 position = Vector2( 673, -235 )
+
+[node name="EndPortal" parent="." instance=ExtResource( 8 )]
+position = Vector2( 78, 18 )
+
+[node name="Star" parent="." instance=ExtResource( 7 )]
+position = Vector2( 165, 84 )
+starname = "DEFAULT MEGA STAR"

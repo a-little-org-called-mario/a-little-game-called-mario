@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/levels/Flappy/UI_flappy_gameover.gd" type="Script" id=2]
-[ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=5]
-[ext_resource path="res://ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
+[ext_resource path="res://scenes/ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -56,7 +56,17 @@ CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
 B TO[wave amp=50 freq=2] FIREBALL [/wave]
 
 (WITH POWERUP)"
-text = "PRESS R TO RESTART"
+text = "ARROW KEYS TO MOVE
+
+SHIFT TO SPRINT
+
+SPACE TO JUMP
+
+CONTROL/Z TO SHOOT
+
+B TO FIREBALL 
+
+(WITH POWERUP)"
 fit_content_height = true
 script = ExtResource( 6 )
 localization_key = "FLAPPY_RESTART"

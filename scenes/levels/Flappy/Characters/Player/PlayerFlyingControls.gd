@@ -5,11 +5,14 @@ const ASCEND_FORCE = -200
 const MAX_ROTATION_UP = -30.0
 const MAX_ROTATION_DOWN = 90.0
 
+var inventory = preload("res://scripts/resources/PlayerInventory.tres")
+
 var GAMEOVER = preload("../../UI_flappy_gameover.tscn").instance()
 var died = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	inventory.reset()
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 
 
@@ -30,11 +33,12 @@ func _physics_process(delta: float) -> void:
 			angular_velocity = 0
 			
 func crash() -> void:
+	inventory.hearts -= 1
 	EventBus.emit_signal("heart_changed", {"value": -1})
 	
 	$CrashAudio.play()
 	
-	var value = get_node("../UI/UI/HeartCount").count
+	var value = inventory.hearts
 	if value <= 0:
 		gameOver()
 	

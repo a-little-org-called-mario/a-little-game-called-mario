@@ -43,9 +43,6 @@ bbcode_text = "
 text = "
 HEARTS:3 "
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03

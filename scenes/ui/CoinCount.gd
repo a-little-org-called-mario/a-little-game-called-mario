@@ -9,6 +9,7 @@ func _ready():
 
 
 func _on_coin_collected(_data):
+	inventory.coins += 1
 	call_deferred("update_coin_count")
 
 

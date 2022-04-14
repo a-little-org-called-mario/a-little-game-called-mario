@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/friends/BunnyCat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/Bub.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/powerups/FireFlower.tscn" type="PackedScene" id=6]
@@ -45,3 +46,8 @@ position = Vector2( 189, 129 )
 
 [node name="FollowTrigger" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1047, 161 )
+
+[node name="Bunny" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2080, 480 )
+frame = 1
+playing = true

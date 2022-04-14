@@ -22,6 +22,7 @@ position = Vector2( 96, 480 )
 
 [node name="EndPortal" parent="." instance=ExtResource( 4 )]
 position = Vector2( 896, 64 )
+next_level_path = "res://scenes/levels/paulloz/002.tscn"
 
 [node name="GravityZone" parent="." instance=ExtResource( 5 )]
 shape = SubResource( 2 )

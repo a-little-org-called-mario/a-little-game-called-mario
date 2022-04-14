@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://sprites/Coin_Gems/Coin/MonedaD.png" type="Texture" id=1]
+[ext_resource path="res://sprites/Coin_Gems/MonedaD.png" type="Texture" id=1]
 [ext_resource path="res://scripts/CoinProjectile.gd" type="Script" id=2]
 [ext_resource path="res://sfx/coinflip.wav" type="AudioStream" id=3]
 [ext_resource path="res://sfx/hit.wav" type="AudioStream" id=4]
@@ -107,7 +107,7 @@ rotation = 1.5708
 scale = Vector2( 1.5, 2 )
 frames = SubResource( 10 )
 animation = "spin"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="."]

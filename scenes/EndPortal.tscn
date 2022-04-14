@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://sprites/portal.png" type="Texture" id=1]
 [ext_resource path="res://scripts/EndPortal.gd" type="Script" id=2]
 [ext_resource path="res://sprites/mario-enter-portal.png" type="Texture" id=3]
 [ext_resource path="res://sfx/portal.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://sprites/Coin_Gems/MonedaD.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
@@ -65,6 +67,10 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32, 32 )
 
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 16 )
+
 [node name="EndPortal" type="Area2D" groups=["EndPortals"]]
 position = Vector2( 416, 224 )
 collision_layer = 4
@@ -91,3 +97,29 @@ __meta__ = {
 stream = ExtResource( 4 )
 volume_db = -6.0
 bus = "sfx"
+
+[node name="CoinContainer" type="HBoxContainer" parent="."]
+visible = false
+margin_left = -32.0
+margin_top = -72.0
+margin_right = 32.0
+margin_bottom = -56.0
+alignment = 1
+
+[node name="CoinSprite" type="TextureRect" parent="CoinContainer"]
+margin_left = 4.0
+margin_right = 20.0
+margin_bottom = 16.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = SubResource( 24 )
+stretch_mode = 3
+
+[node name="CoinLabel" type="Label" parent="CoinContainer"]
+margin_left = 24.0
+margin_right = 60.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 5 )
+text = "999"
+align = 1
+valign = 1

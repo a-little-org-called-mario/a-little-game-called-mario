@@ -139,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Camera.gd"
 }, {
+"base": "Achievement",
+"class": "ShootAchievement",
+"language": "GDScript",
+"path": "res://scripts/ShootAchievement.gd"
+}, {
 "base": "Node2D",
 "class": "SokobanLevel",
 "language": "GDScript",
@@ -181,6 +186,7 @@ _global_script_class_icons={
 "Powerup": "",
 "ScreenShake": "",
 "ShakingCamera": "",
+"ShootAchievement": "",
 "SokobanLevel": "res://sprites/box.png",
 "SpawnPoint": "",
 "TrackParser": ""

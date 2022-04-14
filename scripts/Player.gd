@@ -41,7 +41,7 @@ var building = 1
 var sanity = 10
 
 onready var sprite = $Sprite
-onready var anims = $Sprite/Anims
+onready var anim = $Sprite/Anims
 onready var tween = $Tween
 onready var trail: Line2D = $Trail
 onready var run_particles: CPUParticles2D = $RunParticles
@@ -86,23 +86,20 @@ func _physics_process(delta: float) -> void:
 		x_motion.max_accel *= 3
 		jerk_modifier = 3
 		animationSpeed = 6
-	anims.playback_speed = animationSpeed
+	anim.playback_speed = animationSpeed
 	if Input.is_action_pressed("right"):
 		jerk_right(JERK * jerk_modifier)
-		if anims.current_animation != "Run":
-			anims.play("Run")
+		anim.playAnim("Run")
 		# pointing the character in the direction he's running
 		run_particles.emitting = true
 		look_right()
 	elif Input.is_action_pressed("left"):
 		jerk_left(JERK * jerk_modifier)
-		if anims.current_animation != "Run":
-			anims.play("Run")
+		anim.playAnim("Run")
 		run_particles.emitting = true
 		look_left()
 	else:
-		if anims.current_animation != "Idle":
-			anims.play("Idle")
+		anim.playAnim("Idle")
 		if x_motion.get_speed() > STOPTHRESHOLD:
 			jerk_left(JERK)
 		elif x_motion.get_speed() < -STOPTHRESHOLD:
@@ -143,8 +140,7 @@ func _physics_process(delta: float) -> void:
 			gravity_multiplier = 0.5
 		else:
 			gravity_multiplier = 1
-		if anims.current_animation != "Jump":
-			anims.play("Jump")
+		anim.playAnim("Jump")
 		run_particles.emitting = false
 
 	if crouching and not Input.is_action_pressed("down"):

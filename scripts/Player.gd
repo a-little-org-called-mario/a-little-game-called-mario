@@ -27,7 +27,6 @@ var double_jump = true
 var crouching = false
 var grounded = false
 var anticipating_jump = false  # the small window of time before the player jumps
-var hearts = 3
 
 # STATS BLOCK
 var max_hearts = 3
@@ -40,8 +39,11 @@ var swim = 0
 var acrobatics = 0
 var building = 1
 var sanity = 10
+var powerupspeed = 1
+var powerupaccel = 1
 
 onready var sprite = $Sprite
+onready var anim = $Sprite/Anims
 onready var tween = $Tween
 onready var trail: Line2D = $Trail
 onready var run_particles: CPUParticles2D = $RunParticles
@@ -52,12 +54,23 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 
 func _ready() -> void:
-	EventBus.connect("initial_startup", self, "_on_initial_startup")
+	_end_flash_sprite()
+
+
+func _enter_tree():
+	if not EventBus.is_connected("game_exit", inventory, "reset"):
+		EventBus.connect("game_exit", inventory, "reset")
+
 	EventBus.connect("heart_changed", self, "_on_heart_change")
-	hearts = get_node("../../UI/UI/HeartCount").count
 	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
 	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
-	_end_flash_sprite()
+
+
+func _exit_tree():
+	# make sure the Marios in other levels (or hub) don't receive events
+	EventBus.disconnect("heart_changed", self, "_on_heart_change")
+	EventBus.disconnect("enemy_hit_coin", self, "_on_enemy_hit_coin")
+	EventBus.disconnect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
 
 
 func _physics_process(delta: float) -> void:
@@ -67,28 +80,31 @@ func _physics_process(delta: float) -> void:
 	y_motion.set_axis(gravity.direction)
 	y_motion.max_accel = gravity.strength
 
+	x_motion.max_speed *= powerupspeed
+	x_motion.max_accel *= powerupaccel
+
 	var jerk_modifier = 1
-	var animationSpeed = 8
+	var animationSpeed = 1
 	if Input.is_action_pressed("sprint"):
 		speed += 1
 		x_motion.max_speed *= 1.5
 		x_motion.max_accel *= 3
 		jerk_modifier = 3
-		animationSpeed = 60
-	sprite.frames.set_animation_speed("run", animationSpeed)
+		animationSpeed = 6
+	anim.playback_speed = animationSpeed
 	if Input.is_action_pressed("right"):
 		jerk_right(JERK * jerk_modifier)
-		sprite.play("run")
+		anim.playAnim("Run")
 		# pointing the character in the direction he's running
 		run_particles.emitting = true
 		look_right()
 	elif Input.is_action_pressed("left"):
 		jerk_left(JERK * jerk_modifier)
-		sprite.play("run")
+		anim.playAnim("Run")
 		run_particles.emitting = true
 		look_left()
 	else:
-		sprite.play("idle")
+		anim.playAnim("Idle")
 		if x_motion.get_speed() > STOPTHRESHOLD:
 			jerk_left(JERK)
 		elif x_motion.get_speed() < -STOPTHRESHOLD:
@@ -129,7 +145,7 @@ func _physics_process(delta: float) -> void:
 			gravity_multiplier = 0.5
 		else:
 			gravity_multiplier = 1
-		sprite.play("jump")
+		anim.playAnim("Jump")
 		run_particles.emitting = false
 
 	if crouching and not Input.is_action_pressed("down"):
@@ -299,21 +315,17 @@ func _is_on_floor() -> bool:
 	)
 
 
-func _on_initial_startup() -> void:
-	inventory.reset()
-
-
 func _on_heart_change(data):
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
-	hearts += value
+	inventory.hearts += value
 
 	if value < 0:
 		$HurtSFX.play()
 		flash_sprite()
 
-	if hearts <= 0:
+	if inventory.hearts <= 0:
 		if get_tree() != null:
 			get_tree().reload_current_scene()
 

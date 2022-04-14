@@ -2,7 +2,7 @@
 
 [ext_resource path="res://sprites/pipe-green.png" type="Texture" id=1]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Obstacles/Obstacle.gd" type="Script" id=2]
-[ext_resource path="res://sprites/Coin_Gems/Coin/Coin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24.5, 159.5 )

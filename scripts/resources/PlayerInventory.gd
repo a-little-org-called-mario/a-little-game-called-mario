@@ -3,9 +3,14 @@
 extends Resource
 
 export var coins: int
-
-func _init() -> void:
-	reset()
+export var hearts: int
+export var has_flower: bool
+export var has_bus: bool
+export var stars: Dictionary
 
 func reset() -> void:
-    coins = 0
+	coins = 0
+	hearts = 3
+	has_flower = false
+	has_bus = false
+	stars = {}

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/marwing/DialogueBox.gd" type="Script" id=1]
+[ext_resource path="res://sprites/marwing/DIALOGUE_ICON--LRANDALL.png" type="Texture" id=2]
+[ext_resource path="res://sprites/marwing/DIALOGUE_ICON--TICK.png" type="Texture" id=3]
+[ext_resource path="res://sprites/marwing/DIALOGUE_FRAME.png" type="Texture" id=4]
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://sfx/coin.wav" type="AudioStream" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 5 )
+
+[sub_resource type="AudioStreamSample" id=2]
+
+[node name="DialogueBox" type="Popup"]
+anchor_top = 0.792
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -35.2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Portrait" type="Sprite" parent="."]
+position = Vector2( 158, 84 )
+texture = ExtResource( 2 )
+
+[node name="Frame" type="Sprite" parent="."]
+position = Vector2( 589, 84 )
+texture = ExtResource( 4 )
+
+[node name="Tick" type="Sprite" parent="."]
+visible = false
+position = Vector2( 913, 118 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="RichTextLabel" parent="."]
+margin_left = 260.0
+margin_top = 37.0
+margin_right = 893.0
+margin_bottom = 129.0
+custom_fonts/normal_font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -24.0
+bus = "sfx"
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 2 )
+mix_target = 2
+bus = "voice__radio"

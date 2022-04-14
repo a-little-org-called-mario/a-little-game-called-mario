@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://models/marwing/10_WATER.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/marwing/levels/1-0.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/marwing/Marwing.tscn" type="PackedScene" id=4]
 [ext_resource path="res://textures/marwing/WORLD1.tres" type="Environment" id=5]
 [ext_resource path="res://models/marwing/10_WATER.tres" type="Material" id=6]
+[ext_resource path="res://scenes/marwing/DialogueBox.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -18,6 +19,8 @@ script = ExtResource( 2 )
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 5 )
+
+[node name="DialogueBox" parent="." instance=ExtResource( 7 )]
 
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 

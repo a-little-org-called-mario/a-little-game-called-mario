@@ -6,13 +6,12 @@ name: build and publish
 on:
   push:
     branches:
-      - main # triggers ANY time changes are pushed to the main branch
-    paths-ignore: # UNLESS they're not game-relevant
-      - '.godot_ignore'
-      - '.gitignore'
+      - main
+    paths-ignore: # do not build for game-irrelvant changes
+      - '.**'
       - 'LICENSE'
+      - 'ACKNOWLEDGEMENTS'
       - '**.md'
-      - '.github/**'
 
 jobs:
   format_code:
@@ -39,7 +38,7 @@ jobs:
 
   build_game:
     name: Build Game
-    if: ${{ github.event.label.name != 'skip release' || !contains(github.event.head_commit.message, 'Auto-Format GDScript') }}
+    if: ${{ github.event.label.name != 'skip release' && !contains(github.event.head_commit.message, 'Auto-Format GDScript') }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout latest code

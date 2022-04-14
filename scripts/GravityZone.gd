@@ -13,9 +13,12 @@ func _ready() -> void:
 	connect("body_entered", self, "_on_body_entered")
 	connect("body_exited", self, "_on_body_exited")
 
+	var sprite: Sprite = $Sprite
+	(sprite.material as ShaderMaterial).set_shader_param(
+		"Inverse", sign(gravity_vec.y) == sign(Vector2.DOWN.y)
+	)
 	if shape == null:
 		return
-	var sprite: Sprite = $Sprite
 	var sprite_size: Vector2 = sprite.texture.get_size() / Vector2(sprite.hframes, sprite.vframes)
 	sprite.scale = shape.extents * 2 / sprite_size
 

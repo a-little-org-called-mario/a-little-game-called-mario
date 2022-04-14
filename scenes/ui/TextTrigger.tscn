@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ui/TextPanel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/scripts/TextTrigger.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25, 25 )
+
+[node name="TextTrigger" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="TextPanel" parent="." instance=ExtResource( 1 )]
+visible = false
+margin_left = -146.0
+margin_top = -148.0
+margin_right = 148.0
+margin_bottom = -45.0

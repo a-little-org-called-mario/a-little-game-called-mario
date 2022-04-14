@@ -11,6 +11,7 @@ signal enemy_killed(data)
 signal build_block(data)
 signal level_completed(data)
 signal level_started(data)
+signal player_died
 
 # Scene Transitions, expects "scene" key
 signal change_scene(data)

@@ -4,8 +4,5 @@
 
 [resource]
 script = ExtResource( 1 )
-type = 0
-ID = "Level2_Coins"
 description = "ACHIEVEMENT_COINS_LEVEL2"
-levelNumber = 2
 coinsRequired = 5

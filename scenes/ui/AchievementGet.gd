@@ -1,12 +1,21 @@
 extends RichTextLabel
 
 var coinsSinceStartingLevel := 0
-var currentLevel = 0
+var currentLevel := 0
+
+# A dictionary mapping the level number to the level achievements.
+# The global array contains level agnostic achievements.
+var achievements := {
+	global = []
+}
+# A dictionary containing the completed achievements as keys.
+var completed : Dictionary
 
 
 func _ready():
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("level_completed", self, "_on_level_completed")
+	get_achievements()
 
 
 func _on_coin_collected(data):
@@ -14,39 +23,48 @@ func _on_coin_collected(data):
 	if data and data.value:
 		value = data.value
 	coinsSinceStartingLevel += value
-	get_achievements()
+	check_achievements()
 
 
+# Load the achievements from the Achievements folder.
 func get_achievements():
-	var dir = Directory.new()
-	if (dir.open("res://Achievements")) == OK:
-		if dir.open("res://Achievements/Level" + str(currentLevel)) == OK:
-			#We are now in the folder for the achievements in this level.
-			dir.list_dir_begin()
-			var file_name = dir.get_next()
-			while file_name != "":
-				if !dir.current_is_dir():
-					var current = load(
-						"res://Achievements/Level" + str(currentLevel) + "/" + file_name
-					)
-					#We now have a reference to the achievement. Check if its the right kind
-					if current is Achievement:
-						if current is CoinsAchievement:
-							#This is a coins achievement in this level. Do we have the right number of coins?
-							if coinsSinceStartingLevel == current.coinsRequired:
-								self.append_bbcode(
-									(
-										"[rainbow][center]"
-										+ tr("ACHIEVEMENT_UNLOCKED") % tr(current.description)
-										+ "[/center][/rainbow]"
-									)
-								)
-								clear_text_after_seconds()
-				file_name = dir.get_next()
+	print("loading achievements")
+	for file in list_dir("res://Achievements"):
+		if "Level" in file:
+			var level := int(file.get_file().replace("Level", ""))
+			achievements[level] = []
+			for achievement in list_dir(file):
+				achievements[level].append(load(achievement))
 		else:
-			print("That level's folder does not exist in achievements")
-	else:
-		print("the requested directory does not exist")
+			achievements.global.append(load(file))
+
+
+# Check if any achievement are completed.
+func check_achievements():
+	# We check global and level-specific achievements.
+	var to_check : Array = (achievements.global +
+			achievements.get(currentLevel, []))
+	for achievement in to_check:
+		if achievement in completed:
+			# We already completed this achievement.
+			continue
+		var is_completed := false
+		match achievement.get_script():
+			CoinsAchievement:
+				is_completed = coinsSinceStartingLevel >= achievement.coinsRequired
+		if is_completed:
+			# Mark the achievement as completed.
+			completed[achievement] = true
+			show_completion_message(achievement)
+
+
+func show_completion_message(achievement: Achievement):
+	append_bbcode(
+		"[rainbow][center]"
+		+ tr("ACHIEVEMENT_UNLOCKED") % tr(achievement.description)
+		+ "[/center][/rainbow]"
+	)
+	clear_text_after_seconds()
 
 
 func clear_text_after_seconds():
@@ -62,3 +80,19 @@ func clear_text_after_seconds():
 func _on_level_completed(_data):
 	coinsSinceStartingLevel = 0
 	currentLevel += 1
+	check_achievements()
+
+
+# Returns a list of non-hidden files inside a given directory.
+static func list_dir(path : String) -> Array:
+	var dir := Directory.new()
+	if dir.open(path) != OK:
+		return []
+	if dir.list_dir_begin(true, true) != OK:
+		return []
+	var files := []
+	var file := dir.get_next()
+	while file:
+		files.append(path.plus_file(file))
+		file = dir.get_next()
+	return files

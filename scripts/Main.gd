@@ -6,7 +6,7 @@ const COINS_GROUP: String = "Coins"
 const PROJECTILES_GROUP: String = "Projectiles"
 
 onready var hub: TileMap = $TileMap
-onready var level: TileMap = $TileMap
+onready var level: Node = $TileMap
 
 var completionSound = preload("res://sfx/portal.wav")
 var coinSound = preload("res://sfx/coin.wav")
@@ -85,7 +85,7 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 func _finish_level(next_level: PackedScene = null) -> void:
 	# Create the new level, insert it into the tree and remove the old one.
 	# If next_level is null, return to the hub
-	var new_level: TileMap = next_level.instance() if next_level != null else hub
+	var new_level: Node = next_level.instance() if next_level != null else hub
 	add_child_below_node(level, new_level)
 	if level == hub:
 		remove_child(level)

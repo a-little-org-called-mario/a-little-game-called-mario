@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	sprite.flip_h = !player.sprite.flip_h
-	if isBus:
+	if player.inventory.has_bus:
 		player.powerupspeed = 4
 		player.powerupaccel = 2
 	else:

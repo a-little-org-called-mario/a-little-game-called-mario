@@ -7,6 +7,7 @@ onready var turret_sfx : AudioStreamPlayer2D = $TurretSound
 onready var shoot_timer : Timer = $ShootTimer
 onready var move_timer : Timer = $MoveTimer
 onready var shoot_delay : Timer = $ShootDelayTimer
+onready var anim : AnimationPlayer = $AnimationPlayer
 
 var _moving : bool = true
 var _motion = Vector2.ZERO
@@ -18,6 +19,7 @@ export(Vector2) var shoot_direction = Vector2.LEFT
 export(Vector2) var move_direction = Vector2.DOWN
 export(PackedScene) var bullet_scene
 export(PackedScene) var muzzle_flash_scene
+export(int) var health
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,6 +50,31 @@ func shoot() -> void:
 		
 	# _moving will be set to true after sound effect plays
 	turret_sfx.play()
+
+# The PlayerProjectile.gd expects the enemy to be in the "enemy" group
+# and have a "kill(killer)" function. I think this would be better as a 
+# genearl signal, but this is how it is currently done.
+# Here I am overwriting the Enemy.gd's kill function since this unit
+# has health and therefore acts differently.
+func kill(killer : Object) -> void:
+	# WallMech has 3 hidden hit points.
+	_damage(1, killer)
+
+func _damage(dmg : int, killer : Object) -> void:
+	anim.play("hurt")
+	health = health - dmg
+	if health <= 0:
+		EventBus.emit_signal("enemy_killed")
+		emit_signal("dying", killer)
+		var res = _handle_dying(killer)
+		if res is GDScriptFunctionState:
+			yield(res, "completed")
+		alive = false
+		emit_signal("dead", killer)
+		queue_free()
+
+func _handle_dying(_killer):
+	pass
 
 func _on_ShootTimer_timeout() -> void:
 	# WallMech stops to indicate to the player that it is about to attack

@@ -213,7 +213,7 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 text = "
-CRT FILTER: ON
+CRT FILTER: OFF
 "
 
 [node name="SFXMenu" type="Control" parent="PauseMenu"]

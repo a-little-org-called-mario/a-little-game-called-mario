@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://ui/Themes/Default/default.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=1]
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=3]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=4]

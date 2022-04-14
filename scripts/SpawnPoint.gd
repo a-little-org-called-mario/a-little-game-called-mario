@@ -17,6 +17,7 @@ func spawn_mario():
 
 	if not player:
 		player = player_scene.instance()
+		player.set_name("Player")
 		get_node("..").call_deferred("add_child", player)
 
 	player.position = self.position

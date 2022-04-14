@@ -8,14 +8,11 @@ name: Build PR
 
 on:
   pull_request:
-    paths: 
-      - 'scenes/**'
-      - 'scripts/**'
-      - 'sfx/**'
-      - 'sprites/**'
-      - 'ui/**'
-      - export_presets.cfg
-      - .project.godot
+    paths-ignore: # do not build for game-irrelvant changes
+      - '.**'
+      - 'LICENSE'
+      - 'ACKNOWLEDGEMENTS'
+      - '**.md'
 
 jobs:
   build_game:

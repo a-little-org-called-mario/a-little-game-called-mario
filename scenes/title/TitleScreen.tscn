@@ -152,7 +152,7 @@ bbcode_enabled = true
 bbcode_text = "
 [wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1]MARIO[/rainbow]"
 text = "
-MARIO"
+[wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1]MARIO[/rainbow]"
 __meta__ = {
 "_edit_lock_": true
 }

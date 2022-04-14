@@ -8,8 +8,9 @@ CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
 B TO[wave amp=50 freq=2] FIREBALL [/wave] (WITH POWERUP)","PFEILTASTEN ZUM [rainbow freq=0.5 sat=1 val=20]BEWEGEN[/rainbow]
 UMSCHALT ZUM [wave amp=50 freq=2]SPRINTEN[/wave]
 LEERTASTE ZUM [wave amp=50 freq=2]SPRINGEN[/wave]
+2X LEERTASTE FUER [wave amp=50 freq=2]DOPPELSPRUNG[/wave]
 STRG/Z ZUM [wave amp=50 freq=2]SCHIESSEN[/wave]
-B ZUM[wave amp=50 freq=2] FEUERBALL [/wave]  (MIT POWERUP)"
+B FUER DEN[wave amp=50 freq=2] FEUERBALL [/wave] (MIT POWERUP)"
 "UI_COINS","
 [wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]","
 [wave amp=50 freq=2]MUENZEN:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"

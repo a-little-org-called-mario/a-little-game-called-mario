@@ -1,5 +1,21 @@
-.import
+# IDE folders
 .vscode
 .idea
+
+# Godot generated files
+.import
+*.translation
+
+# Build artifacts
 builds
+
+# Common junk
 .DS_Store
+/.mono/assemblies/Debug/GodotSharp.dll
+/.mono/assemblies/Debug/GodotSharp.pdb
+/.mono/assemblies/Debug/GodotSharp.xml
+/.mono/assemblies/Debug/GodotSharpEditor.dll
+/.mono/assemblies/Debug/GodotSharpEditor.pdb
+/.mono/assemblies/Debug/GodotSharpEditor.xml
+/.mono/assemblies/Debug/api_hash_cache.cfg
+/.mono/metadata/ide_messaging_meta.txt

@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/powerups/FireFlower.gd" type="Script" id=1]
 [ext_resource path="res://sprites/jacob_face.jpg" type="Texture" id=2]
-
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.5, 43 )
@@ -18,3 +18,21 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 3.5, 1 )
 shape = SubResource( 1 )
+
+[node name="Instructions" type="RichTextLabel" parent="."]
+anchor_left = 0.03
+anchor_top = 0.05
+anchor_right = 0.481
+anchor_bottom = 0.217
+margin_left = -184.0
+margin_top = -117.0
+margin_right = 75.0
+margin_bottom = -35.0
+rect_scale = Vector2( 2, 2 )
+custom_constants/line_separation = 0
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_text = "
+B TO SHOOT FIREBALL "
+text = "
+B TO SHOOT FIREBALL "
+fit_content_height = true

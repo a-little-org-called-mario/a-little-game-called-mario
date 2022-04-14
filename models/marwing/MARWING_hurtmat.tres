@@ -1,0 +1,8 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://textures/marwing/MARWING.png" type="Texture" id=1]
+
+[resource]
+flags_transparent = true
+albedo_color = Color( 0.972549, 0.545098, 0.545098, 0.784314 )
+albedo_texture = ExtResource( 1 )

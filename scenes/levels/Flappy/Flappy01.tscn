@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=1]
+[ext_resource path="res://scenes/levels/Flappy/Characters/Player/PlayerFlying.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/levels/Flappy/Characters/Obstacles/ObstacleSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/levels/Flappy/UI_flappy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/levels/Flappy/deathBounds.gd" type="Script" id=5]
+[ext_resource path="res://scenes/ui/PauseMenu.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 125, 28 )
+
+[node name="World" type="Node2D"]
+
+[node name="object_spawner" parent="." instance=ExtResource( 3 )]
+wait_time = 1.5
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 15.9844, 9.375 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Player_RigidBody" parent="." instance=ExtResource( 2 )]
+position = Vector2( 109, 303 )
+
+[node name="UI" parent="." instance=ExtResource( 4 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 6 )]
+
+[node name="deathBounds" type="Area2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathBounds"]
+position = Vector2( 127, 619 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="deathBounds"]
+position = Vector2( 125, -22 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="deathBounds" to="deathBounds" method="_on_deathBounds_body_entered"]

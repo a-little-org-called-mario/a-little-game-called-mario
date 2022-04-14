@@ -1,6 +1,9 @@
 extends RichTextLabel
 
-var lines = []
+const Util = preload("res://scripts/Util.gd")
+
+var contributor_names : Array = []
+
 
 func _ready():
 	# todo credits in editor check exists in two places - should be simiplied to one utility function
@@ -10,23 +13,17 @@ func _ready():
 
 	randomize()
 
-	var file = File.new()
-	var err = file.open("res://credits.txt", File.READ)
-	if err != OK:
-		print("Couldn't load credits.txt. The file might be missing.")
-		return
-	
-	lines = file.get_as_text().split("\n")
-	
-	file.close()
-	setup()
+	contributor_names = Util.get_contributor_names()
 
-func setup():
-	if lines.empty():
-		return
-	var contrib_array = rand_values(lines)
-	bbcode_text = "\n[wave amp=100 freq=2]%s\n%s\n%s" % [str(contrib_array[0]).to_upper(),str(contrib_array[1]).to_upper(),str(contrib_array[2]).to_upper()]
-	
+	display_contributors()
+
+
+func display_contributors():
+	var random_contributors = rand_values(contributor_names)
+
+	bbcode_text = "\n[wave amp=100 freq=2]%s\n%s\n%s" % [str(random_contributors[0]).to_upper(),str(random_contributors[1]).to_upper(),str(random_contributors[2]).to_upper()]
+
+
 func rand_values(arr):
 	if arr.size() < 3:
 		return arr
@@ -40,5 +37,6 @@ func rand_values(arr):
 			count += 1
 	return rand_array
 
+
 func _on_Timer_timeout():
-	setup()
+	display_contributors()

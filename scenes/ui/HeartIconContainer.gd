@@ -37,7 +37,7 @@ func _update_hearts() -> void:
 		node.queue_free()
 	
 	var count : int = inventory.hearts
-	for i in range(count):
+	for _i in range(count):
 		var heart := TextureRect.new()
 		heart.texture = heart_texture
 		add_child(heart)

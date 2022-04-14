@@ -109,6 +109,7 @@ func spawn_fireball(towards :Vector2= Vector2.ZERO):
 	projectile.start_moving(projectile.to_local(towards).rotated(randf() * 0.15))
 
 func _cooldown_finished():
+	if state != COOLDOWN: return
 	state= IDLE
 	$VisionCone.enable_spoting()
 	$AnimationPlayer.stop()
@@ -127,8 +128,8 @@ func kill(killer):
 		$Healthbar/Value.rect_scale.x= float(health) / float(max_health)
 		$Scream.play()
 		if health <= 0:
-			$VisionCone.disable_spoting()
 			state= DYING
+			$VisionCone.disable_spoting()
 			disable_collision()
 			.kill(killer)
 

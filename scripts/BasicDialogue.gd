@@ -24,4 +24,3 @@ func advance_dialogue():
 		bbcode_text= ""
 		emit_signal("dialogue_completed")
 		queue_free()
-	pass

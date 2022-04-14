@@ -3,7 +3,7 @@
 
 a bad idea from the mind of [izzy kestrel](https://twitter.com/iznaut), inspired by [Aaron San Filippo](https://twitter.com/AeornFlippout)
 
-[![GitHub contributors](https://img.shields.io/github/contributors/iznaut/a-little-game-called-mario.svg)](https://GitHub.com/iznaut/a-little-game-called-mario/graphs/contributors/) [![GitHub contributors](https://img.shields.io/github/workflow/status/iznaut/a-little-game-called-mario/build%20and%20publish.svg)](https://github.com/iznaut/a-little-game-called-mario/actions) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+[![GitHub contributors](https://img.shields.io/github/contributors/a-little-org-called-mario/a-little-game-called-mario.svg)](https://GitHub.com/a-little-org-called-mario/a-little-game-called-mario/graphs/contributors/) [![GitHub contributors](https://img.shields.io/github/workflow/status/a-little-org-called-mario/a-little-game-called-mario/build%20and%20publish.svg)](https://github.com/a-little-org-called-mario/a-little-game-called-mario/actions) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
 
 # 🎮 [play the latest version here](http://play.little-mario.com/) 🎮

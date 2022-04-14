@@ -13,11 +13,23 @@ export(PackedScene) var NoteUp
 export(PackedScene) var NoteDown
 export(PackedScene) var NoteLeft
 export(PackedScene) var NoteRight
+export(bool) var player_track = false
 
 func _ready():
 	for path in actorPaths:
 		actors.push_back(get_node(path))
 	notes = TrackParser.parse(trackFile)
+
+func _process(delta):
+	if not player_track: return
+	if Input.is_action_just_pressed("up"):
+		$Up/AnimationPlayer.play("pressed")
+	if Input.is_action_just_pressed("down"):
+		$Down/AnimationPlayer.play("pressed")
+	if Input.is_action_just_pressed("left"):
+		$Left/AnimationPlayer.play("pressed")
+	if Input.is_action_just_pressed("right"):
+		$Right/AnimationPlayer.play("pressed")
 
 func set_tick(tick):
 	for note in notes:

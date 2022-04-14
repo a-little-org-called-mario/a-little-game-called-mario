@@ -30,3 +30,5 @@ signal enemy_hit_fireball
 
 signal fire_flower_collected(data)
 signal bus_collected(data)
+
+signal player_spotted(spotted_by, player)

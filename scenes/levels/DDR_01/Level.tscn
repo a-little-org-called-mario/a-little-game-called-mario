@@ -34,6 +34,7 @@ position = Vector2( 640, 0 )
 scale = Vector2( 2, 2 )
 trackFile = "res://scenes/levels/DDR_01/PlayerTrackData.txt"
 spawn_delay = 1500
+player_track = true
 
 [node name="GreenMario" parent="." instance=ExtResource( 2 )]
 position = Vector2( 430, 384 )
@@ -46,7 +47,6 @@ flip_h = false
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 600, 384 )
 BPM = 28
-
 
 [connection signal="set_tick" from="." to="LeftTrack" method="_on_Level_set_tick"]
 [connection signal="set_tick" from="." to="RightTrack" method="_on_Level_set_tick"]

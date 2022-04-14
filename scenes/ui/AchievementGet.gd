@@ -29,14 +29,13 @@ func _on_coin_collected(data):
 # Load the achievements from the Achievements folder.
 func get_achievements():
 	print("loading achievements")
-	for file in list_dir("res://Achievements"):
-		if "Level" in file:
-			var level := int(file.get_file().replace("Level", ""))
-			achievements[level] = []
-			for achievement in list_dir(file):
-				achievements[level].append(load(achievement))
-		else:
-			achievements.global.append(load(file))
+	for file in list_dir("res://achievements/level"):
+		var level := int(file.get_file())
+		achievements[level] = []
+		for achievement in list_dir(file):
+			achievements[level].append(load(achievement))
+	for file in list_dir("res://achievements/global"):
+		achievements.global.append(load(file))
 
 
 # Check if any achievement are completed.

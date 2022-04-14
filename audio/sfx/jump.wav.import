@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/pop-gun.wav-c407d7f0d1415ca2d3e163e03fad9f29.sample"
+path="res://.import/jump.wav-ca4ccb66e678679518a9b9888fc39709.sample"
 
 [deps]
 
-source_file="res://sfx/pop-gun.wav"
-dest_files=[ "res://.import/pop-gun.wav-c407d7f0d1415ca2d3e163e03fad9f29.sample" ]
+source_file="res://audio/sfx/jump.wav"
+dest_files=[ "res://.import/jump.wav-ca4ccb66e678679518a9b9888fc39709.sample" ]
 
 [params]
 

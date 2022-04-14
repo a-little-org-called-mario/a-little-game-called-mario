@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://sfx/coin.wav" type="AudioStream" id=1]
-[ext_resource path="res://sfx/meow.wav" type="AudioStream" id=2]
+[ext_resource path="res://audio/sfx/coin.wav" type="AudioStream" id=1]
+[ext_resource path="res://audio/sfx/meow.wav" type="AudioStream" id=2]
 [ext_resource path="res://sprites/Coin_Gems/MonedaD.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Coin/Coin.gd" type="Script" id=4]
 

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/coinflip.wav-24b5b90e8b7d8a866718d5a5621c3cfe.sample"
+path="res://.import/pop-gun.wav-c474a46528c1b4510564ae397d1a6af5.sample"
 
 [deps]
 
-source_file="res://sfx/coinflip.wav"
-dest_files=[ "res://.import/coinflip.wav-24b5b90e8b7d8a866718d5a5621c3cfe.sample" ]
+source_file="res://audio/sfx/pop-gun.wav"
+dest_files=[ "res://.import/pop-gun.wav-c474a46528c1b4510564ae397d1a6af5.sample" ]
 
 [params]
 

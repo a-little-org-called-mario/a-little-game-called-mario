@@ -3,6 +3,7 @@ class_name PopcornPopped
 
 const pop_force = 100
 var rng = RandomNumberGenerator.new()
+onready var particles = $Particles2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +18,8 @@ func _ready():
 
 	force_direction = force_direction.normalized()
 	apply_central_impulse(force_direction * pop_force)
+
+	particles.emitting = true
 
 
 func _on_body_entered(body):

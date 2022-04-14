@@ -39,7 +39,7 @@ jobs:
 
   build_game:
     name: Build Game
-    # TODO: this had `needs: format_code`, but I'm not sure how that intersects with our if clause
+    if: ${{ github.event.label.name != 'skip release' || !contains(github.event.head_commit.message, 'Auto-Format GDScript') }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout latest code
@@ -47,8 +47,22 @@ jobs:
         with:
           fetch-depth: 0
       - name: update credits
-        run: |
-          git shortlog --summary HEAD |sed -E 's/\s*[0-9]+\s+//g' >credits.txt
+        uses: actions/github-script@v3
+        with:
+          script: |
+            var fs = require('fs');
+            var response = await github.repos.listContributors({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+            var names = '';
+            for (const contributor of response.data) {
+              if (contributor.type == 'User') {
+                names += contributor.login + '\n';
+              }
+            }
+            fs.writeFileSync('credits.txt', names);
       - name: export with Godot Engine and release on GitHub
         uses: firebelley/godot-export@v3.0.0
         with:

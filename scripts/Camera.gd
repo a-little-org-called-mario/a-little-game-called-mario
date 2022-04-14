@@ -8,6 +8,7 @@ const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd")
 func _ready():
 	EventBus.connect("jumping", self, "trigger_small_shake")
 	EventBus.connect("enemy_killed", self, "trigger_small_shake")
+	EventBus.connect("level_started", self, "return_to_center")
 	position = get_viewport_rect().size / 2
 
 
@@ -46,3 +47,7 @@ func trigger_medium_shake() -> void:
 
 func trigger_large_shake() -> void:
 	_screen_shake.start(.1, 20, 50, 10)
+
+
+func return_to_center(_data) -> void:
+	position = get_viewport_rect().size / 2

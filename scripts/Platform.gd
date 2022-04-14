@@ -29,7 +29,7 @@ func _ready():
 func move(_delta: float):
 	_motion.x = clamp(_motion.x, -max_speed, max_speed)
 	_motion.x = direction * max_speed
-	_motion = move_and_slide(_motion, UP)
+	move_and_collide(_motion * _delta)
 
 	_ray.cast_to.x = -1 * direction * RAY_CAST_DISTANCE
 	_ray.force_raycast_update()

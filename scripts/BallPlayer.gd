@@ -25,7 +25,7 @@ func _ready() -> void:
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block", {"player": self})
 
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
 		animationSpeed = 60
-	sprite.frames.set_animation_speed("run", animationSpeed)
+	#sprite.frames.set_animation_speed("run", animationSpeed)
 
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL * acceleration_modifier
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 		
 		"""
 	else:
-		sprite.play("idle")
+		#sprite.play("idle")
 		motion.x = lerp(motion.x, 0, 0.05)
 
 	if Input.is_action_pressed("up"):
@@ -105,7 +105,7 @@ func try_slip(angle: float):
 	return false
 
 
-func _input(event: InputEvent):
+func _input(_event: InputEvent):
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
 	"""

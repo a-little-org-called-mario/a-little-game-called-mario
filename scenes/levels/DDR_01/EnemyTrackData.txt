@@ -1,68 +1,171 @@
 # intro
 
 ## MAIN
-190 right
-+28 right
+3500 right
++435 right
 
-+20 right
-+14 left
-+14 up
-+14 right
-+14 left
++435 right
++212 up
++212 left
++212 right
++212 left
 
-+20 right
-+28 left
-+28 down
++435 right
++435 left
++435 down
 
-+14 idle
-
-
-## MAIN
-594 right
-+28 right
-
-+20 right
-+14 left
-+14 up
-+14 right
-+14 left
-
-+20 right
-+28 left
-+28 down
-
-+0 idle
++435 idle
 
 
 ## MAIN
-+28 right
-+28 right
+10300 right
++435 right
 
-+20 right
-+14 left
-+14 up
-+14 right
-+14 left
++435 right
++212 up
++212 left
++212 right
++212 left
 
-+20 right
-+28 left
-+28 down
++435 right
++435 left
++435 down
 
-+0 idle
++435 idle
+
+
+#### AMPLIFY
+## MAIN
+13700 right
++435 right
+
++435 right
++212 up
++212 left
++212 right
++212 left
+
++435 right
++435 left
++435 down
+
++435 idle
 
 
 ## MAIN
-+28 right
-+28 right
+17150 right
++435 right
 
-+20 right
-+14 left
-+14 up
-+14 right
-+14 left
++435 right
++212 up
++212 left
++212 right
++212 left
 
-+20 right
-+28 left
-+28 down
++435 right
++435 left
++435 down
 
-+0 idle
++435 idle
+
+
+## MAIN
+20500 right
++435 right
+
++435 right
++212 up
++212 left
++212 right
++212 left
+
++435 right
++435 left
++435 down
+
++435 idle
+
+
+## MAIN
+24000 right
++435 right
+
++435 right
++212 up
++212 left
++212 right
++212 left
+
++435 right
++435 left
++435 down
+
++435 idle
+
+
+## Up down
+29200 up
++435 down
++435 idle
+
+
+
+## Up down
+32600 up
++435 left
++435 right
++435 up
++212 idle
+
+## MAIN
+34300 right
++435 right
+
++435 right
++212 up
++212 left
++212 right
++212 left
+
++435 right
++435 left
++435 down
+
++435 idle
+
+
+## MAIN
+41200 right
++435 right
+
++435 right
++212 up
++212 left
++212 right
++212 left
+
++435 right
++435 left
++435 down
+
++435 idle
+
+
+
+## MAIN
+48000 right
++435 right
+
++435 right
++212 up
++212 left
++212 right
++212 left
+
++435 right
++435 left
++435 down
+
++435 idle
+
+

@@ -58,6 +58,6 @@ func on_heart_changed(data) -> void:
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
-	
+
 	if value < 0:
 		trigger_medium_shake()

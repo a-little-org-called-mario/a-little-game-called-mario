@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://sfx/coin.wav" type="AudioStream" id=1]
+[ext_resource path="res://audio/sfx/coin.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/Star/Star.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Coin_Gems/star.png" type="Texture" id=3]
 

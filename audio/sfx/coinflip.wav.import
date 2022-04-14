@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/buh.wav-41814c2788197242c28909229debe770.sample"
+path="res://.import/coinflip.wav-cfa5b807d02e2661fe6a4fc3327d7d0b.sample"
 
 [deps]
 
-source_file="res://sfx/buh.wav"
-dest_files=[ "res://.import/buh.wav-41814c2788197242c28909229debe770.sample" ]
+source_file="res://audio/sfx/coinflip.wav"
+dest_files=[ "res://.import/coinflip.wav-cfa5b807d02e2661fe6a4fc3327d7d0b.sample" ]
 
 [params]
 

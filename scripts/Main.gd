@@ -8,8 +8,8 @@ const PROJECTILES_GROUP: String = "Projectiles"
 onready var hub: TileMap = $TileMap
 onready var level: Node = $TileMap
 
-var completionSound = preload("res://sfx/portal.wav")
-var coinSound = preload("res://sfx/coin.wav")
+var completionSound = preload("res://audio/sfx/portal.wav")
+var coinSound = preload("res://audio/sfx/coin.wav")
 
 var entering_portal: bool = false
 

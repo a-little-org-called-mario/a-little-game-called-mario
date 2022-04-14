@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/meow.wav-833458903e9b26678199f68915b60caa.sample"
+path="res://.import/coin.wav-5b4ac6f94c17da9cce3726cce99d30c9.sample"
 
 [deps]
 
-source_file="res://sfx/meow.wav"
-dest_files=[ "res://.import/meow.wav-833458903e9b26678199f68915b60caa.sample" ]
+source_file="res://audio/sfx/coin.wav"
+dest_files=[ "res://.import/coin.wav-5b4ac6f94c17da9cce3726cce99d30c9.sample" ]
 
 [params]
 

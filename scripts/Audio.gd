@@ -19,3 +19,7 @@ func _on_volume_change(bus: String) -> void:
 			AudioServer.set_bus_volume_db(
 				AudioServer.get_bus_index("sfx"), linear2db(Settings.volume_sfx / 10.0)
 			)
+		"voice":
+			AudioServer.set_bus_volume_db(
+				AudioServer.get_bus_index("voice"), linear2db(Settings.volume_voice / 10.0)
+			)

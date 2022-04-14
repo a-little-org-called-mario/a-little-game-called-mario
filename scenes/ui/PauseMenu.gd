@@ -135,7 +135,7 @@ func _process(_delta: float):
 							get_tree().reload_current_scene()  # restart
 						4:
 							EventBus.emit_signal("game_paused", false)
-							get_tree().change_scene("res://scenes/title/TitleScreen.tscn")
+							get_tree().change_scene("res://scenes/title/TitleScreen.tscn")	# back to title
 				SUBMENU.GFX:
 					match selected:
 						0:

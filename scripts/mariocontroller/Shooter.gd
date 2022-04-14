@@ -36,6 +36,7 @@ func shoot(projectile_scene: PackedScene) -> void:
 	# Projectile handles movement
 	projectile.start_moving(shoot_dir)
 	player.emit_signal("shooting")
+	EventBus.emit_signal("shot")
 
 
 func _on_flower_collected(data : Dictionary) -> void:

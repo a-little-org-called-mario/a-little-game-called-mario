@@ -42,35 +42,37 @@ func load_data():
 
 	# there is no settings.mario :(
 	if not settings_file.file_exists(settings_name):
-		set_to_default()
+		camera_lean = CameraLeanAmount.OFF
 		screen_shake = true
-		crt_filter = true
-		return
+		crt_filter = false
+
+		volume_game = 10
+		volume_music = 10
+		volume_sfx = 10
 
 	# access settings.mario and read settings
-	settings_file.open(settings_name, File.READ)
-	while settings_file.get_position() < settings_file.get_len():
-		var settings_values = parse_json(settings_file.get_line())
-		for i in settings_values.keys():
-			match i:
-				"gfx_camera_lean":
-					camera_lean = int(settings_values[i])
-				"gfx_screen_shake":
-					screen_shake = bool(settings_values[i])
-				"gfx_crt_filter":
-					crt_filter = bool(settings_values[i])
-				"sfx_volume_game":
-					volume_game = int(settings_values[i])
-				"sfx_volume_music":
-					volume_music = int(settings_values[i])
-				"sfx_volume_sfx":
-					volume_sfx = int(settings_values[i])
-				"sfx_volume_voice":
-					volume_voice = int(settings_values[i])
-	settings_file.close()
-	set_to_default()		# designed to fill in defaults for any settings added since the last time the cookie was saved
-	settings_loaded = true
-
+	else:
+		settings_file.open(settings_name, File.READ)
+		while settings_file.get_position() < settings_file.get_len():
+			var settings_values = parse_json(settings_file.get_line())
+			for i in settings_values.keys():
+				match i:
+					"gfx_camera_lean":
+						camera_lean = int(settings_values[i])
+					"gfx_screen_shake":
+						screen_shake = bool(settings_values[i])
+					"gfx_crt_filter":
+						crt_filter = bool(settings_values[i])
+					"sfx_volume_game":
+						volume_game = int(settings_values[i])
+					"sfx_volume_music":
+						volume_music = int(settings_values[i])
+					"sfx_volume_sfx":
+						volume_sfx = int(settings_values[i])
+			settings_file.close()
+      set_to_default()		# designed to fill in defaults for any settings added since the last time the cookie was saved
+			settings_loaded = true]
+      
 	# emit any relevant signals
 	EventBus.emit_signal("crt_filter_toggle", crt_filter)
 	EventBus.emit_signal("volume_changed", "game")

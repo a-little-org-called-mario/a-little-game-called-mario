@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/CameraFollow.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Star/Star.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 64, 96 )
@@ -148,3 +149,7 @@ collision_mask = 0
 position = Vector2( 1728, 1280 )
 collision_layer = 0
 collision_mask = 0
+
+[node name="Star" parent="." instance=ExtResource( 9 )]
+position = Vector2( 3324, 921 )
+starname = "PAULLOZ"

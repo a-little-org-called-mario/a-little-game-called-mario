@@ -3,7 +3,10 @@ extends Node
 
 signal jumping(data)
 signal coin_collected(data)
+signal star_collected(data)
+signal star_collected_again(data)
 signal heart_changed(data)
+signal shot()
 signal enemy_killed(data)
 signal build_block(data)
 signal level_completed(data)

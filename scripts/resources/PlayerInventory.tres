@@ -8,4 +8,5 @@ coins = 0
 hearts = 3
 has_flower = false
 has_bus = false
-stars = {}
+stars = {
+}

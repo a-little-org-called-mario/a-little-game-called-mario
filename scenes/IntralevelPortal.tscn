@@ -32,6 +32,7 @@ animations = [ {
 extents = Vector2( 32, 32 )
 
 [node name="IntralevelPortal" type="Area2D"]
+modulate = Color( 0, 1, 0.180392, 1 )
 collision_layer = 4
 audio_bus_override = true
 script = ExtResource( 4 )
@@ -39,6 +40,7 @@ script = ExtResource( 4 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 14 )
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true

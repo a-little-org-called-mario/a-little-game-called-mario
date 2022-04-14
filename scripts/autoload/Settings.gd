@@ -42,6 +42,7 @@ func load_data():
 
 	# there is no settings.mario :(
 	if not settings_file.file_exists(settings_name):
+		#set settings to default values.
 		camera_lean = CameraLeanAmount.OFF
 		screen_shake = true
 		crt_filter = false

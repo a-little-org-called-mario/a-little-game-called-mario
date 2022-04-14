@@ -25,7 +25,7 @@ func _ready() -> void:
 			map_to_world(Vector2(PORTAL_POSITION.x + shift, PORTAL_POSITION.y))
 			+ (cell_size / 2)
 		)
-		portal.next_level = load(level)
+		portal.next_level_path = level
 		add_child(portal)
 		add_child(_create_label(level, shift))
 		shift += COPY_ZONE_END.x - COPY_ZONE_START.x + 1

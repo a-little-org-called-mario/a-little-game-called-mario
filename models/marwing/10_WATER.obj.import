@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/10_WATER.obj-46090fa09893632f1ea6296df0782f3b.mesh"
+
+[deps]
+
+files=[ "res://.import/10_WATER.obj-46090fa09893632f1ea6296df0782f3b.mesh" ]
+
+source_file="res://models/marwing/10_WATER.obj"
+dest_files=[ "res://.import/10_WATER.obj-46090fa09893632f1ea6296df0782f3b.mesh", "res://.import/10_WATER.obj-46090fa09893632f1ea6296df0782f3b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

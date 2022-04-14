@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/levels/paulloz/002.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/GravityZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=7]
@@ -23,7 +22,7 @@ position = Vector2( 96, 480 )
 
 [node name="EndPortal" parent="." instance=ExtResource( 4 )]
 position = Vector2( 896, 64 )
-next_level = ExtResource( 2 )
+next_level_path = "res://scenes/levels/paulloz/002.tscn"
 
 [node name="GravityZone" parent="." instance=ExtResource( 5 )]
 shape = SubResource( 2 )

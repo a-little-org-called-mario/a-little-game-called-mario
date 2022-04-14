@@ -84,6 +84,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/powerups/Fireball.gd"
 }, {
+"base": "Area2D",
+"class": "IntralevelPortal",
+"language": "GDScript",
+"path": "res://scripts/IntralevelPortal.gd"
+}, {
+"base": "Spatial",
+"class": "MarwingLevel",
+"language": "GDScript",
+"path": "res://scripts/marwing/MarwingLevel.gd"
+}, {
 "base": "Enemy",
 "class": "Platform",
 "language": "GDScript",
@@ -160,6 +170,8 @@ _global_script_class_icons={
 "Enemy": "",
 "FireFlower": "",
 "Fireball": "",
+"IntralevelPortal": "",
+"MarwingLevel": "",
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",

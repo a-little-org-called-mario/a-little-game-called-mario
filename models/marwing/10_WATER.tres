@@ -1,0 +1,10 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://textures/marwing/10_WATER.png" type="Texture" id=1]
+
+[resource]
+flags_unshaded = true
+albedo_texture = ExtResource( 1 )
+distance_fade_mode = 2
+distance_fade_min_distance = 150.0
+distance_fade_max_distance = 30.0

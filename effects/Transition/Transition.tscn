@@ -15,7 +15,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
-shader_param/alpha = -0.1
+shader_param/alpha = 0.0
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -79,6 +79,7 @@ layer = 3
 script = ExtResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 material = SubResource( 3 )
 margin_right = 40.0
 margin_bottom = 40.0

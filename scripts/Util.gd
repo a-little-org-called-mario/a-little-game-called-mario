@@ -4,9 +4,10 @@
 # !!make sure new functions added are static or this will not work!!
 extends Node
 
+
 # returns array of GitHub contributor names for use in credits sequences (or wherever!)
 static func get_contributor_names() -> Array:
-	var names_array : Array
+	var names_array: Array
 
 	# return placeholder names if testing in editor or running a non-web build
 	if OS.has_feature("editor") or not OS.has_feature("web"):
@@ -23,5 +24,5 @@ static func get_contributor_names() -> Array:
 		names_array = credits_txt.get_as_text().split("\n")
 
 		file.close()
-	
+
 	return names_array

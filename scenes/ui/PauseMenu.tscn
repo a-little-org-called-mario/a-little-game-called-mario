@@ -89,9 +89,6 @@ bbcode_enabled = true
 text = "
 GRAPHICS SETTINGS
 "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SFXLabel" type="RichTextLabel" parent="PauseMenu/MainMenu"]
 anchor_left = 0.428
@@ -181,7 +178,7 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 text = "
-CAMERA LEAN: <  MAX  >
+CAMERA LEAN: <  OFF  >
 "
 __meta__ = {
 "_edit_use_anchors_": false

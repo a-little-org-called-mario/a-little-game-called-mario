@@ -18,3 +18,4 @@ builds
 /.mono/assemblies/Debug/GodotSharpEditor.pdb
 /.mono/assemblies/Debug/GodotSharpEditor.xml
 /.mono/assemblies/Debug/api_hash_cache.cfg
+/.mono/metadata/ide_messaging_meta.txt

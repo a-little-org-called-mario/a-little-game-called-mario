@@ -20,7 +20,7 @@ func _ready():
 		actors.push_back(get_node(path))
 	notes = TrackParser.parse(trackFile)
 
-func _process(delta):
+func _process(_delta):
 	if not player_track: return
 	if Input.is_action_just_pressed("up"):
 		$Up/AnimationPlayer.play("pressed")

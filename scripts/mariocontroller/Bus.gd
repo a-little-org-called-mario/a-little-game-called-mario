@@ -5,8 +5,6 @@ onready var player : Player = owner
 onready var sprite : Sprite = player.get_node("BusSprite")
 onready var collision : CollisionShape2D = player.get_node("BusCollision")
 
-var isBus: bool = false
-
 func _ready() -> void:
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
 	if player.inventory.has_bus:
@@ -17,7 +15,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	sprite.flip_h = !player.sprite.flip_h
-	if isBus:
+	if player.inventory.has_bus:
 		player.powerupspeed = 4
 		player.powerupaccel = 2
 	else:
@@ -32,7 +30,6 @@ func _on_bus_collected(data: Dictionary) -> void:
 
 
 func _activate_bus() -> void:
-	isBus = true
 	sprite.visible = true
 	collision.set_deferred("disabled", false)
 	call_deferred("_update_player")

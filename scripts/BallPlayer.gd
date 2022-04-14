@@ -21,6 +21,7 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
+
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")

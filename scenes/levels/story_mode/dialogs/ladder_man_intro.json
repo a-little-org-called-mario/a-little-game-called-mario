@@ -16,8 +16,9 @@
 			"dialog": {
 				"text": [
 					"No, I'm just a ladder. I'm no use if you want to climb out of here...",
-					"Although I do have something you may find usefull.",
-					"Here, take this!"
+					"Although I do have something you may find useful.",
+					"Here, take this!",
+					"(Press [E] to open the inventory.)"
 				],
 				"choices": [
 					"Wow, that won't help me at all.",

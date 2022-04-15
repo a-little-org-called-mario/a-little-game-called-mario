@@ -355,10 +355,11 @@ func _end_flash_sprite() -> void:
 	$Sprite.material.set_shader_param("flash_modifier", 0.0)
 	$BusSprite.material.set_shader_param("flash_modifier", 0.0)
 
-func set_hitbox_crouching(value :bool):
+
+func set_hitbox_crouching(value: bool):
 	if value:
-		$CollisionShape2D.shape.extents.y= 27 * 0.4
-		$CollisionShape2D.position.y= 21
+		$CollisionShape2D.shape.extents.y = 27 * 0.4
+		$CollisionShape2D.position.y = 21
 	else:
-		$CollisionShape2D.shape.extents.y= 27
-		$CollisionShape2D.position.y= 5
+		$CollisionShape2D.shape.extents.y = 27
+		$CollisionShape2D.position.y = 5

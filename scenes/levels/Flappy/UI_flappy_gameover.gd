@@ -2,6 +2,6 @@ extends CanvasLayer
 
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
-func _process(delta):
-	if Input.is_action_just_pressed("restart"):
+func _unhandled_input(event):
+	if event.is_action_pressed("restart"):
 		get_tree().reload_current_scene()

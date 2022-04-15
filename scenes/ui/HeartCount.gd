@@ -11,7 +11,6 @@ func _on_heart_change(_data: Dictionary) -> void:
 	
 
 func _update_hearts() -> void:
-	print("Update hearts")
 	bbcode_text = (
 		tr("\n[wave amp=50 freq=2]HEARTS:[rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]")
 		% inventory.hearts

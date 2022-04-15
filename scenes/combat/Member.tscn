@@ -172,7 +172,6 @@ stream = SubResource( 31 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="RunParticles" type="CPUParticles2D" parent="."]
-visible = false
 position = Vector2( 0, 30 )
 amount = 6
 lifetime = 0.6

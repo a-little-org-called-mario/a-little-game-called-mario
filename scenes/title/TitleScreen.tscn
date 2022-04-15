@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -14,12 +14,47 @@
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/SokobanButton.gd" type="Script" id=13]
 [ext_resource path="res://scenes/title/MarwingButton.gd" type="Script" id=14]
+[ext_resource path="res://sprites/mario.png" type="Texture" id=15]
+[ext_resource path="res://audio/sfx/meow.wav" type="AudioStream" id=16]
+[ext_resource path="res://scenes/title/Mario.gd" type="Script" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "Idle"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 2.9, 3.1 ), Vector2( 3.1, 2.9 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "Appear"
@@ -101,9 +136,6 @@ font_data = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0.7, 0.7, 0.7, 1 )
@@ -156,6 +188,24 @@ MARIO"
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="IdleMario" type="Sprite" parent="VBoxContainer"]
+position = Vector2( 92, 134 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 15 )
+offset = Vector2( 0, -17 )
+hframes = 6
+vframes = 2
+script = ExtResource( 17 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/IdleMario"]
+autoplay = "Idle"
+playback_speed = 0.7
+anims/Idle = SubResource( 8 )
+anims/RESET = SubResource( 7 )
+
+[node name="Meow" type="AudioStreamPlayer2D" parent="VBoxContainer/IdleMario"]
+stream = ExtResource( 16 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_left = 177.0

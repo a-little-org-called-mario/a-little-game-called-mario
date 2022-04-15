@@ -15,6 +15,11 @@ signal level_started(data)
 # Scene Transitions, expects "scene" key
 signal change_scene(data)
 
+# screenshakes
+signal small_screen_shake
+signal medium_screen_shake
+signal large_screen_shake
+
 # pauses the game - used by PauseMenu.gd
 signal game_paused(data)
 # called once on game ends (or is restarted)
@@ -33,3 +38,5 @@ signal fire_flower_collected(data)
 signal bus_collected(data)
 
 signal player_spotted(spotted_by, player)
+
+signal big_button_pressed(button_id)

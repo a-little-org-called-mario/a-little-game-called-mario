@@ -6,6 +6,9 @@ const CameraLeanAmount = preload("res://scripts/CameraLeanAmount.gd")
 
 
 func _ready():
+	EventBus.connect("small_screen_shake", self, "trigger_small_shake")
+	EventBus.connect("medium_screen_shake", self, "trigger_medium_shake")
+	EventBus.connect("large_screen_shake", self, "trigger_large_shake")
 	EventBus.connect("jumping", self, "trigger_small_shake")
 	EventBus.connect("enemy_killed", self, "trigger_small_shake")
 	EventBus.connect("level_started", self, "return_to_center")

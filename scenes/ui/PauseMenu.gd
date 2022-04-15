@@ -322,7 +322,7 @@ func volume_select(delta: int, label: RichTextLabel):
 		3:
 			Settings.volume_sfx = int(clamp(Settings.volume_sfx + delta, 0, 10))
 			label.text = (
-				"\n SFX VOLUME: "
+				"\nSFX VOLUME: "
 				+ ("<" if 0 < Settings.volume_sfx else " ")
 				+ "  "
 				+ (" " if 10 > Settings.volume_sfx else "")
@@ -402,7 +402,7 @@ func prepare_labels():
 				)
 			3:
 				label.text = (
-					"\n SFX VOLUME: "
+					"\nSFX VOLUME: "
 					+ ("<" if 0 < Settings.volume_sfx else " ")
 					+ "  "
 					+ (" " if 10 > Settings.volume_sfx else "")

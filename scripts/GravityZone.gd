@@ -9,7 +9,7 @@ onready var _sprite: Sprite = $Sprite
 var _general_gravity = preload("res://scripts/resources/Gravity.tres")
 var _previous_gravity_direction: Vector2 = Vector2.DOWN
 
-var active: bool setget ,_get_active
+var active: bool setget , _get_active
 
 
 func _ready() -> void:

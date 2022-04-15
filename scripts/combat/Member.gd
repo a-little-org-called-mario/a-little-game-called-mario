@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-const CHARNAMES = ["Mario"]
+const CHARNAMES = ["Plumber"]
 
 const MAXSPEED = 350
 const JUMPFORCE = 1100
@@ -26,7 +26,7 @@ var inpLaR = 0
 var inpJump = 0
 
 var charID = 0
-var charName = "Mario"
+var charName = "Plumber"
 
 onready var tween = $Tween
 onready var sprite = $Sprite

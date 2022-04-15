@@ -1,7 +1,6 @@
 # hold player information across scenes
 # has to be reset on game restart
 extends Resource
-class_name PlayerInventory
 
 export var coins: int
 export var hearts: int

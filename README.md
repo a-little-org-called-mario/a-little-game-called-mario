@@ -80,20 +80,20 @@ Check out the [discussions](https://github.com/a-little-org-called-mario/a-littl
 [Godot Engine](https://godotengine.org/) is a free and open-source tool for making video games. Check out this video for a very quick primer: [The Godot Game Engine Explained in 5 Minutes](https://www.youtube.com/watch?v=KjX5llYZ5eQ)
 
 You can download Godot here:
-- [Windows](https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_win64.exe.zip)
-- [Mac OS X](https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_osx.universal.zip)
-- [Linux](https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_x11.64.zip)
+* [Windows](https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_win64.exe.zip)
+* [Mac OS X](https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_osx.universal.zip)
+* [Linux](https://downloads.tuxfamily.org/godotengine/3.4.4/Godot_v3.4.4-stable_x11.64.zip)
 
 > **This project was created with v3.4.4 - if you have an older version installed, we recommend upgrading to avoid compatibility issues during development**
 
 Godot is relatively easy to learn but can be fairly powerful. the documentation is very good and includes some helpful resources:
-- [Getting Started](https://docs.godotengine.org/en/3.4/getting_started/introduction/index.html)
-- [Your First 2D Game](https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html)
-- [Tutorials and resources](https://docs.godotengine.org/en/stable/community/tutorials.html)
+* [Getting Started](https://docs.godotengine.org/en/3.4/getting_started/introduction/index.html)
+* [Your First 2D Game](https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html)
+* [Tutorials and resources](https://docs.godotengine.org/en/stable/community/tutorials.html)
 
 If videos are more your thing, I recommend these channels:
-- [GDQuest](https://www.youtube.com/channel/UCxboW7x0jZqFdvMdCFKTMsQ)
-- [Godot Tutorials](https://www.youtube.com/channel/UCnr9ojBEQGgwbcKsZC-2rIg)
+* [GDQuest](https://www.youtube.com/channel/UCxboW7x0jZqFdvMdCFKTMsQ)
+* [Godot Tutorials](https://www.youtube.com/channel/UCnr9ojBEQGgwbcKsZC-2rIg)
 
 > This video was used as reference to create the framework for this project: [Make your first 2D platformer game IN JUST 10 MINUTES](https://www.youtube.com/watch?v=xFEKIWpd0sU)
 

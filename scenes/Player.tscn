@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -237,7 +237,7 @@ disabled = true
 wait_time = 0.05
 one_shot = true
 
-[node name="Moustache" parent="." instance=ExtResource( 14 )]
+[node name="Moustache" parent="." instance=ExtResource( 16 )]
 position = Vector2( 0, 2 )
 
 [connection signal="timeout" from="HitFlashTimer" to="." method="_end_flash_sprite"]

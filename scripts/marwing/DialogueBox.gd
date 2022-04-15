@@ -13,10 +13,13 @@ func _process (dt: float):
 		$Tick.hide()
 
 		if not typing:
-			$Tick.show()	# indicate that we can move on
-			if Input.is_action_just_pressed("ui_accept"):
+			if auto and not $VoicePlayer.playing:
 				start_line(current_line+1)
-				$SFXPlayer.play()	# audio feedback we're moving to the next line
+			elif not auto:
+				$Tick.show()	# indicate that we can move on
+				if Input.is_action_just_pressed("ui_accept"):
+					start_line(current_line+1)
+					$SFXPlayer.play()	# audio feedback we're moving to the next line
 		elif $Label.percent_visible <= 1:
 			var delta := dt * (0.9 if Input.is_action_pressed("ui_accept") else 0.45)
 			$Label.percent_visible = $Label.percent_visible + delta

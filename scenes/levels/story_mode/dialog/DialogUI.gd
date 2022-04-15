@@ -1,6 +1,7 @@
 extends Control
 
 signal dialog_finished
+signal item_received(item)
 
 var dialog : Dialog setget _set_dialog
 var _current_text : int
@@ -42,6 +43,8 @@ func _progress_dialog():
 	var last := _current_text == dialog.text.size() - 1
 	_continue_button.visible = not last
 	_choice_container.visible = last
+	if last and dialog.item:
+		emit_signal("item_received", dialog.item)
 	_animation_player.play("talking")
 
 

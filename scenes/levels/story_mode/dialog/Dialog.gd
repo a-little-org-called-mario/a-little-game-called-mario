@@ -2,6 +2,7 @@ extends Resource
 
 var text : Array
 var choices : Dictionary
+var item
 
 func _init(data := {}) -> void:
 	var text_data = data.get("text", "")
@@ -14,4 +15,8 @@ func _init(data := {}) -> void:
 		choices = {choice_data: null}
 	elif choice_data is Array:
 		for dialog in choice_data:
-			choices[dialog.text] = get_script().new(dialog.dialog)
+			if dialog is String:
+				choices[dialog] = null
+			else:
+				choices[dialog.text] = get_script().new(dialog.dialog)
+	item = data.get("item")

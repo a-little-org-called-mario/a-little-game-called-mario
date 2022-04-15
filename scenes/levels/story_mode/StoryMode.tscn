@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://sprites/ladder_man.png" type="Texture" id=1]
 [ext_resource path="res://sprites/tiles/foreground/brick.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://scenes/levels/story_mode/dialog/DialogUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/levels/story_mode/TopDownPlayer.gd" type="Script" id=10]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=11]
+[ext_resource path="res://scenes/levels/story_mode/Inventory.gd" type="Script" id=12]
+[ext_resource path="res://scenes/levels/story_mode/ItemReceivePopup.gd" type="Script" id=14]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -59,6 +61,10 @@ shader_param/flash_modifier = 0.0
 atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 11 )
+region = Rect2( 32, 0, 32, 32 )
+
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 11 )
 region = Rect2( 32, 0, 32, 32 )
@@ -83,10 +89,6 @@ region = Rect2( 96, 32, 32, 32 )
 atlas = ExtResource( 11 )
 region = Rect2( 128, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 11 )
-region = Rect2( 32, 0, 32, 32 )
-
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 2 ) ],
@@ -94,15 +96,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "jump",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=12]
@@ -202,7 +204,90 @@ shape = SubResource( 12 )
 [node name="DialogUI" parent="CanvasLayer" instance=ExtResource( 9 )]
 visible = false
 
+[node name="Inventory" type="ColorRect" parent="CanvasLayer"]
+visible = false
+margin_left = 635.0
+margin_top = 66.0
+margin_right = 982.0
+margin_bottom = 554.0
+color = Color( 0.0901961, 0.0862745, 0.180392, 1 )
+script = ExtResource( 12 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 27.0
+margin_top = 17.0
+margin_right = -19.0
+margin_bottom = -16.0
+custom_constants/separation = 16
+
+[node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/Inventory/VBoxContainer"]
+margin_right = 301.0
+margin_bottom = 131.0
+size_flags_vertical = 3
+expand = true
+stretch_mode = 6
+
+[node name="ItemNameLabel" type="Label" parent="CanvasLayer/Inventory/VBoxContainer"]
+margin_top = 147.0
+margin_right = 301.0
+margin_bottom = 161.0
+size_flags_vertical = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Inventory/VBoxContainer"]
+margin_top = 177.0
+margin_right = 301.0
+margin_bottom = 308.0
+size_flags_vertical = 3
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer/Inventory/VBoxContainer"]
+margin_top = 324.0
+margin_right = 301.0
+margin_bottom = 455.0
+size_flags_vertical = 3
+auto_height = true
+max_columns = 5
+same_column_width = true
+fixed_column_width = 60
+icon_mode = 0
+fixed_icon_size = Vector2( 80, 80 )
+
+[node name="ItemReceivePopup" type="AcceptDialog" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -167.0
+margin_top = -115.5
+margin_right = 167.0
+margin_bottom = 115.5
+popup_exclusive = true
+window_title = "You received an item!"
+script = ExtResource( 14 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ItemReceivePopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+
+[node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/ItemReceivePopup/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 169.0
+size_flags_vertical = 3
+expand = true
+
+[node name="ItemTitleLabel" type="Label" parent="CanvasLayer/ItemReceivePopup/VBoxContainer"]
+margin_top = 173.0
+margin_right = 318.0
+margin_bottom = 187.0
+
 [connection signal="dialog_finished" from="CanvasLayer/DialogUI" to="." method="_on_DialogUI_dialog_finished"]
+[connection signal="item_received" from="CanvasLayer/DialogUI" to="." method="_on_DialogUI_item_received"]
+[connection signal="item_selected" from="CanvasLayer/Inventory/VBoxContainer/ItemList" to="CanvasLayer/Inventory" method="_on_ItemList_item_selected"]
 
 [editable path="Characters/LadderMan"]
 [editable path="Characters/Stone"]

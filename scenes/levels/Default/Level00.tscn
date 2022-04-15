@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/GreasySteve.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/powerups/Bus.tscn" type="PackedScene" id=7]
 
@@ -34,3 +35,10 @@ position = Vector2( 96, 480 )
 
 [node name="Bus" parent="." instance=ExtResource( 7 )]
 position = Vector2( 252, 469 )
+
+[node name="GreasySteve" parent="." instance=ExtResource( 5 )]
+position = Vector2( 86, 62 )
+is_dripping_grease = false
+
+[node name="GreasySteve2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 734, 39 )

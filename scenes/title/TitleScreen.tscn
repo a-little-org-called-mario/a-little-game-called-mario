@@ -11,7 +11,7 @@
 [ext_resource path="res://scenes/title/CreditsButton.gd" type="Script" id=9]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
 [ext_resource path="res://scenes/title/Contributors.gd" type="Script" id=11]
-[ext_resource path="res://music/dramaticgamemusic.mp3" type="AudioStream" id=12]
+[ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/SokobanButton.gd" type="Script" id=13]
 [ext_resource path="res://scenes/title/MarwingButton.gd" type="Script" id=14]
 

@@ -1,0 +1,359 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://scenes/ConeSpotter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Luigi.gd" type="Script" id=2]
+[ext_resource path="res://audio/sfx/luigi_scream_mario.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/sfx/luigi_hmmm_2.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/sfx/luigi_hmm.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/sfx/luigi_death.wav" type="AudioStream" id=6]
+[ext_resource path="res://sprites/luigi.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 18, 31 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 7 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 7 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 7 )
+region = Rect2( 160, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+} ]
+
+[sub_resource type="Animation" id=19]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 32 ), Vector2( 0, -64 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 996.728, -0.29067, -918.358, 1.20933, 1890.21, 2880, -1.19067, -1865.44, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8, 2 )
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Scream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+}, {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Scream2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+}, {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("Callout")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+}, {
+"args": [ null ],
+"method": "spawn_fireball"
+} ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "squash"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2.5, 1.5 ), Vector2( 2, 2 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "vibrate"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 32 ), Vector2( 4, 28 ), Vector2( 4, 36 ), Vector2( -4, 28 ), Vector2( 0, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+
+[sub_resource type="Gradient" id=13]
+offsets = PoolRealArray( 0, 0.320388, 1 )
+colors = PoolColorArray( 1, 0.498039, 0.223529, 0.839216, 1, 0.223529, 0.223529, 1, 1, 0.498039, 0.223529, 0 )
+
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
+
+[sub_resource type="Curve" id=16]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=17]
+curve = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=15]
+emission_shape = 1
+emission_sphere_radius = 24.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 6.0
+scale_curve = SubResource( 17 )
+color_ramp = SubResource( 14 )
+
+[node name="Luigi" type="KinematicBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 10 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 32 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 9 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -16 )
+
+[node name="Scream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+attenuation = 2.0
+bus = "sfx"
+
+[node name="Scream2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+pitch_scale = 0.9
+attenuation = 2.0
+bus = "sfx"
+
+[node name="Callout" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+attenuation = 2.0
+bus = "sfx"
+
+[node name="Idle1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+attenuation = 2.0
+bus = "sfx"
+
+[node name="Idle2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+attenuation = 2.0
+bus = "sfx"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 19 )
+anims/death = SubResource( 18 )
+anims/squash = SubResource( 11 )
+anims/vibrate = SubResource( 12 )
+
+[node name="TurnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="KillTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FireballTimer" type="Timer" parent="."]
+
+[node name="VisionCone" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -14 )
+report_to_node = NodePath("..")
+cone_color = Color( 1, 0, 0, 1 )
+
+[node name="DeathZone" type="Particles2D" parent="."]
+emitting = false
+amount = 24
+process_material = SubResource( 15 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Healthbar" type="ColorRect" parent="."]
+visible = false
+margin_left = -26.0
+margin_top = -47.0
+margin_right = 26.0
+margin_bottom = -34.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Value" type="ColorRect" parent="Healthbar"]
+margin_right = 52.0
+margin_bottom = 13.0
+color = Color( 1, 0, 0, 1 )

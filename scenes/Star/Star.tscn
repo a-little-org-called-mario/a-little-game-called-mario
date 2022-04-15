@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://audio/sfx/coin.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/Star/Star.gd" type="Script" id=2]
+[ext_resource path="res://sprites/Coin_Gems/star.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 9.0
+height = 6.0
+
+[node name="Star" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="CoinStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+bus = "sfx"
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1.3, 1.3, 1.3, 1 )
+texture = ExtResource( 3 )

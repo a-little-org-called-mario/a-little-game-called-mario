@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/boxes/CatBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Corncob.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/levels/Default/Level04.tscn" type="PackedScene" id=6]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -18,7 +17,7 @@ position = Vector2( 928, 96 )
 
 [node name="EndPortal2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96, 160 )
-next_level = ExtResource( 6 )
+next_level_path = "res://scenes/levels/Default/Level03.tscn"
 price = 16
 
 [node name="SpawnPoint2" parent="." instance=ExtResource( 5 )]

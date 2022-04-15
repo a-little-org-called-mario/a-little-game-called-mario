@@ -49,6 +49,7 @@ func move(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		_handle_input(char(event.unicode).to_upper())
+		get_tree().set_input_as_handled()
 
 
 func _handle_input(input: String):

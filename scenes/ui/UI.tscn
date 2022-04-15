@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
 [ext_resource path="res://scenes/ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
 [ext_resource path="res://scenes/ui/HeartCount.gd" type="Script" id=7]
+[ext_resource path="res://scenes/ui/HeartIconContainer.gd" type="Script" id=8]
+[ext_resource path="res://sprites/heart.png" type="Texture" id=9]
+[ext_resource path="res://scenes/ui/StarNotification.gd" type="Script" id=10]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -42,15 +45,15 @@ CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
 B TO[wave amp=50 freq=2] FIREBALL [/wave]
 
 (WITH POWERUP)"
-text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+text = "ARROW KEYS TO MOVE
 
-SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
+SHIFT TO SPRINT
 
-SPACE TO [wave amp=50 freq=2]JUMP[/wave]
+SPACE TO JUMP
 
-CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
+CONTROL/Z TO SHOOT
 
-B TO[wave amp=50 freq=2] FIREBALL [/wave]
+B TO FIREBALL 
 
 (WITH POWERUP)"
 fit_content_height = true
@@ -70,8 +73,26 @@ bbcode_enabled = true
 bbcode_text = "
 [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
 text = "
-[wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
+LEVEL:1 "
 script = ExtResource( 4 )
+
+[node name="StarNotification" type="RichTextLabel" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -692.0
+margin_top = 145.0
+margin_right = -392.0
+margin_bottom = 245.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = " 
+[wave amp=50 freq=2]YOU GOT THE STAR:
+	 [rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]\""
+text = " 
+YOU GOT THE STAR:
+	 1 \""
+script = ExtResource( 10 )
 
 [node name="CoinCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
@@ -85,7 +106,7 @@ bbcode_enabled = true
 bbcode_text = "
 [wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
 text = "
-[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
+COINS:0 "
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -123,3 +144,36 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeartIconContainer" type="GridContainer" parent="UI"]
+margin_left = 777.0
+margin_top = 154.0
+margin_right = 898.0
+margin_bottom = 242.0
+rect_scale = Vector2( 2, 2 )
+columns = 6
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+heart_texture = ExtResource( 9 )
+
+[node name="TextureRect" type="TextureRect" parent="UI/HeartIconContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 9 )
+
+[node name="TextureRect2" type="TextureRect" parent="UI/HeartIconContainer"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+texture = ExtResource( 9 )
+
+[node name="TextureRect3" type="TextureRect" parent="UI/HeartIconContainer"]
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 16.0
+texture = ExtResource( 9 )

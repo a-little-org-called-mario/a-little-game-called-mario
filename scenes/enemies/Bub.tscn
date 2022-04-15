@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/bub.png" type="Texture" id=4]
 [ext_resource path="res://scenes/enemies/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/SimpleExplosion.tscn" type="PackedScene" id=6]
-[ext_resource path="res://sfx/pop-gun.wav" type="AudioStream" id=7]
+[ext_resource path="res://audio/sfx/pop-gun.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 26, 24 )

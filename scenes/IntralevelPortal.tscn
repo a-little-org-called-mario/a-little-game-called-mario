@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/portal.png" type="Texture" id=1]
-[ext_resource path="res://sfx/portal.wav" type="AudioStream" id=2]
+[ext_resource path="res://audio/sfx/portal.wav" type="AudioStream" id=2]
 [ext_resource path="res://scripts/IntralevelPortal.gd" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=10]

@@ -3,7 +3,7 @@
 
 a bad idea from the mind of [izzy kestrel](https://twitter.com/iznaut), inspired by [Aaron San Filippo](https://twitter.com/AeornFlippout)
 
-[![GitHub contributors](https://img.shields.io/github/contributors/iznaut/a-little-game-called-mario.svg)](https://GitHub.com/iznaut/a-little-game-called-mario/graphs/contributors/) [![GitHub contributors](https://img.shields.io/github/workflow/status/iznaut/a-little-game-called-mario/build%20and%20publish.svg)](https://github.com/iznaut/a-little-game-called-mario/actions) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+[![GitHub contributors](https://img.shields.io/github/contributors/a-little-org-called-mario/a-little-game-called-mario.svg)](https://GitHub.com/a-little-org-called-mario/a-little-game-called-mario/graphs/contributors/) [![GitHub contributors](https://img.shields.io/github/workflow/status/a-little-org-called-mario/a-little-game-called-mario/build%20and%20publish.svg)](https://github.com/a-little-org-called-mario/a-little-game-called-mario/actions) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
 
 # 🎮 [play the latest version here](http://play.little-mario.com/) 🎮
@@ -63,12 +63,12 @@ there are many ways to contribute to the project! games are complex things with 
 ## 🎨 **if you're the creative type** 🎨
 make something! anything! it doesn't need to be perfect or polished and it certainly doesn't have to be hooked up via code right away! leave a little gift for the more technical/design-minded folks - their eyes will light up as they think of a dozen different ways it could be implemented as a weird new power-up or something.
 
-[submit your assets here](http://assets.little-mario.com/)
+[learn more about submitting assets](http://assets.little-mario.com/)
 
 ## ⚙️ **if you're the technical type** ⚙️
 see if there are any open [issues](https://github.com/a-little-org-called-mario/a-little-game-called-mario/issues) to work on! these can range from bug reports to feature requests and some of them may even be tagged as a "good first issue" for new folks. you can also dig around in closed issues and check out what people are actively working on in pull requests.
 
-[learn more about making code changes here](https://github.com/a-little-org-called-mario/a-little-game-called-mario/wiki/Contribution-Basics)
+[learn more about making code changes](https://github.com/a-little-org-called-mario/a-little-game-called-mario/wiki/Contribution-Basics)
 
 ## 🤔 **don't forget the designer types!** 🤔
 i think these folks get a bad rap (not just saying that bc i'm one of them!!) - design is important and even tho you can't throw a rock without hitting someone with a "good game idea", what you may not appreciate is how hard it actually can be to execute on! and i'm not talking about learning to code or create art to support your vision....we have plenty of folks here who are already experts at those things! but at the same time, those same folks may not think about problems in the same creative way that you do.

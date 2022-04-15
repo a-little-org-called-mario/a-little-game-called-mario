@@ -13,6 +13,8 @@ onready var _freq_timer: Timer = $Frequency
 onready var _duration_timer: Timer = $Duration
 
 
+#warning-ignore:SHADOWED_VARIABLE
+#warning-ignore:SHADOWED_VARIABLE
 func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
 	if priority < self.priority:
 		return

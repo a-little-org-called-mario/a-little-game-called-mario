@@ -5,6 +5,7 @@ var last_tick = 0
 var index = 0
 var notes = []
 
+#warning-ignore: SHADOWED_VARIABLE
 static func parse(fileName):
 	var parser = load("res://scenes/DDR/TrackParser.gd").new(fileName)
 	return parser._parse()

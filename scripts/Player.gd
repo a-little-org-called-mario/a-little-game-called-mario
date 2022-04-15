@@ -354,7 +354,7 @@ func _on_enemy_hit_coin():
 
 
 func _on_enemy_hit_fireball():
-	stats.intelegence += 1
+	stats.intelligence += 1
 
 
 func flash_sprite(duration: float = 0.05) -> void:

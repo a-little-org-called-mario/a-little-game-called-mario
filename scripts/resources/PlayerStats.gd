@@ -5,7 +5,7 @@ extends Resource
 export var max_hearts : int
 export var jump_xp : int
 export var coin_shoot_xp : int
-export var intelegence : int
+export var intelligence : int
 export var speed : int
 export var charisma : int
 export var swim : int
@@ -18,7 +18,7 @@ func reset() -> void:
 	max_hearts = 3
 	jump_xp = 0
 	coin_shoot_xp = 0
-	intelegence = 1
+	intelligence = 1
 	speed = 1
 	charisma = 1
 	swim = 1

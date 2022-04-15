@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://sprites/marwing/DIALOGUE_ICON--LRANDALL.png" type="Texture" id=2]
+[ext_resource path="res://sprites/marwing/DIALOGUE_ICON--FRAME.png" type="Texture" id=2]
 [ext_resource path="res://sprites/marwing/DIALOGUE_FRAME.png" type="Texture" id=3]
 [ext_resource path="res://sprites/marwing/DIALOGUE_ICON--TICK.png" type="Texture" id=4]
 [ext_resource path="res://audio/sfx/coin.wav" type="AudioStream" id=5]

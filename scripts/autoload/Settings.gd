@@ -7,15 +7,15 @@ var settings_name = "user://settings.mario"
 var settings_loaded: bool = false
 
 # graphics settings
-var camera_lean: int		= -1
-var screen_shake: bool		= false
-var crt_filter: bool		= false
+var camera_lean: int = -1
+var screen_shake: bool = false
+var crt_filter: bool = false
 
 # sfx settings
-var volume_game: int		= -1
-var volume_music: int		= -1
-var volume_sfx: int			= -1
-var volume_voice: int		= -1
+var volume_game: int = -1
+var volume_music: int = -1
+var volume_sfx: int = -1
+var volume_voice: int = -1
 
 func save_data():
 	# create dictionary of settings data
@@ -26,7 +26,7 @@ func save_data():
 		"sfx_volume_game": volume_game,
 		"sfx_volume_music": volume_music,
 		"sfx_volume_sfx": volume_sfx,
-		"sfx_volume_voice": volume_voice
+		"sfx_volume_voice": volume_voice,
 	}
 
 	# access settings.mario and write settings to it

@@ -28,40 +28,40 @@ colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
 extents = Vector2( 23.5, 27 )
 
 [sub_resource type="ShaderMaterial" id=15]
-shader = ExtResource( 13 )
+shader = ExtResource( 12 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 32, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 64, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 96, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 128, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 160, 32, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=10]
@@ -135,7 +135,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="AudioStreamRandomPitch" id=14]
-audio_stream = ExtResource( 12 )
+audio_stream = ExtResource( 10 )
 random_pitch = 1.5
 
 [sub_resource type="RectangleShape2D" id=13]
@@ -152,18 +152,18 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.527273 ), 0.0, 0.0, 0, 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
 collision_mask = 15
-script = ExtResource( 3 )
+script = ExtResource( 15 )
 
 [node name="Trail" type="Line2D" parent="."]
 width = 30.0
 width_curve = SubResource( 11 )
 default_color = Color( 1, 1, 1, 1 )
 gradient = SubResource( 12 )
-texture = ExtResource( 5 )
+texture = ExtResource( 1 )
 texture_mode = 2
 joint_mode = 2
 end_cap_mode = 2
-script = ExtResource( 4 )
+script = ExtResource( 14 )
 trail_length = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -179,7 +179,7 @@ offset = Vector2( 0, -16 )
 
 [node name="ShootOrigin" type="Position2D" parent="Sprite"]
 position = Vector2( 4, -16 )
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 
 [node name="Anims" type="AnimationPlayer" parent="Sprite"]
 method_call_mode = 1
@@ -187,10 +187,10 @@ anims/Idle = SubResource( 24 )
 anims/Jump = SubResource( 25 )
 anims/RESET = SubResource( 26 )
 anims/Run = SubResource( 27 )
-script = ExtResource( 14 )
+script = ExtResource( 13 )
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 1 )
+stream = ExtResource( 5 )
 volume_db = -12.0
 bus = "sfx"
 
@@ -205,7 +205,7 @@ emitting = false
 amount = 6
 lifetime = 0.6
 local_coords = false
-texture = ExtResource( 6 )
+texture = ExtResource( 3 )
 spread = 180.0
 gravity = Vector2( 0, -80 )
 initial_velocity = 40.0
@@ -218,20 +218,20 @@ scale_amount = 0.75
 color = Color( 1, 1, 1, 0.784314 )
 
 [node name="StarCollector" type="Node" parent="."]
-script = ExtResource( 15 )
+script = ExtResource( 9 )
 
 [node name="BlockBuilder" type="Node" parent="."]
-script = ExtResource( 10 )
+script = ExtResource( 8 )
 
 [node name="Bus" type="Node" parent="."]
-script = ExtResource( 11 )
+script = ExtResource( 6 )
 
 [node name="BusSprite" type="Sprite" parent="."]
 visible = false
 material = SubResource( 15 )
 position = Vector2( 7, 13 )
 scale = Vector2( 0.0602623, 0.0602623 )
-texture = ExtResource( 7 )
+texture = ExtResource( 2 )
 flip_h = true
 
 [node name="BusCollision" type="CollisionShape2D" parent="."]

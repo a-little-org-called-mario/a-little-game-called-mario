@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "AxisMotion",
 "language": "GDScript",
-"path": "res://scripts/AxisMotion.gd"
+"path": "res://scenes/platformer/characters/AxisMotion.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "BallPlayer",
@@ -127,7 +127,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scripts/Player.gd"
+"path": "res://scenes/platformer/characters/Player.gd"
 }, {
 "base": "RigidBody2D",
 "class": "PlayerFlying",

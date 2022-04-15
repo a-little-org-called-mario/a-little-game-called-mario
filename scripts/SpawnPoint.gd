@@ -1,7 +1,7 @@
 class_name SpawnPoint
 extends Position2D
 
-var player_scene = load("res://scenes/Player.tscn")
+var player_scene = load("res://scenes/platformer/characters/Player.tscn")
 
 
 func _ready():

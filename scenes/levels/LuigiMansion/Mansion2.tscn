@@ -5,8 +5,8 @@
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://sprites/ballmario.png" type="Texture" id=4]
 [ext_resource path="res://scripts/BasicDialogue.gd" type="Script" id=5]
-[ext_resource path="res://sfx/luigi_scream_mario.wav" type="AudioStream" id=6]
-[ext_resource path="res://sfx/luigi_death.wav" type="AudioStream" id=7]
+[ext_resource path="res://audio/sfx/luigi_scream_mario.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/sfx/luigi_death.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/enemies/Luigi.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sprites/Coin_Gems/star.png" type="Texture" id=9]
 [ext_resource path="res://scenes/ConeSpotter.tscn" type="PackedScene" id=10]
@@ -14,7 +14,8 @@
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/FollowTrigger.tscn" type="PackedScene" id=14]
-[ext_resource path="res://sfx/luigi_my_coins.wav" type="AudioStream" id=15]
+[ext_resource path="res://audio/sfx/luigi_my_coins.wav" type="AudioStream" id=15]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 64 )

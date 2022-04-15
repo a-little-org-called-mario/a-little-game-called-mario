@@ -2,10 +2,10 @@
 
 [ext_resource path="res://scenes/ConeSpotter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Luigi.gd" type="Script" id=2]
-[ext_resource path="res://sfx/luigi_scream_mario.wav" type="AudioStream" id=3]
-[ext_resource path="res://sfx/luigi_hmmm_2.wav" type="AudioStream" id=4]
-[ext_resource path="res://sfx/luigi_hmm.wav" type="AudioStream" id=5]
-[ext_resource path="res://sfx/luigi_death.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/sfx/luigi_scream_mario.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/sfx/luigi_hmmm_2.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/sfx/luigi_hmm.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/sfx/luigi_death.wav" type="AudioStream" id=6]
 [ext_resource path="res://sprites/luigi.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=10]

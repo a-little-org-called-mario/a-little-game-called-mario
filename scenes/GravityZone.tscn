@@ -1,15 +1,17 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/GravityZone.gd" type="Script" id=1]
-[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
-[ext_resource path="res://shaders/GravityZone.tres" type="Shader" id=3]
+[ext_resource path="res://sprites/arrowup.png" type="Texture" id=2]
+[ext_resource path="res://shaders/GravityZone.gdshader" type="Shader" id=3]
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
-shader_param/Inverse = false
+shader_param/speed = 0.8
+shader_param/direction = -1.0
 
 [node name="GravityZone" type="Area2D"]
+modulate = Color( 1, 1, 1, 0.6 )
 position = Vector2( 224, 352 )
 collision_layer = 4
 gravity_vec = Vector2( 0, -1 )
@@ -21,5 +23,8 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.945098, 0, 0.627451, 1 )
 material = SubResource( 4 )
 texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )

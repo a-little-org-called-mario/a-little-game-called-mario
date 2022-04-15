@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -10,11 +10,10 @@
 [ext_resource path="res://scenes/title/OptionsButton.gd" type="Script" id=8]
 [ext_resource path="res://scenes/title/CreditsButton.gd" type="Script" id=9]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
-[ext_resource path="res://scenes/title/ContributorsLabel.gd" type="Script" id=11]
+[ext_resource path="res://scenes/title/Contributors.gd" type="Script" id=11]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/SokobanButton.gd" type="Script" id=13]
 [ext_resource path="res://scenes/title/MarwingButton.gd" type="Script" id=14]
-[ext_resource path="res://scenes/title/TitleScreen.gd" type="Script" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -102,7 +101,6 @@ font_data = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 3 )
-script = ExtResource( 15 )
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0.7, 0.7, 0.7, 1 )
@@ -165,10 +163,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 255.0
-margin_right = 375.0
+margin_right = 630.0
 margin_bottom = 36.0
-size_flags_horizontal = 4
 text = "START GAME"
 script = ExtResource( 7 )
 __meta__ = {
@@ -222,11 +218,9 @@ __meta__ = {
 }
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 273.0
 margin_top = 80.0
-margin_right = 357.0
+margin_right = 630.0
 margin_bottom = 116.0
-size_flags_horizontal = 4
 disabled = true
 text = "OPTIONSs"
 script = ExtResource( 8 )
@@ -235,11 +229,9 @@ __meta__ = {
 }
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 273.0
 margin_top = 120.0
-margin_right = 357.0
+margin_right = 630.0
 margin_bottom = 156.0
-size_flags_horizontal = 4
 text = "CREDITS"
 script = ExtResource( 9 )
 __meta__ = {

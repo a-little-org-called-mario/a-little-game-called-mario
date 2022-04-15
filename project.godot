@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/CoinsAchievement.gd"
 }, {
+"base": "Spotter",
+"class": "ConeSpotter",
+"language": "GDScript",
+"path": "res://scripts/ConeSpotter.gd"
+}, {
 "base": "Area2D",
 "class": "Corncob",
 "language": "GDScript",
@@ -88,6 +93,11 @@ _global_script_classes=[ {
 "class": "IntralevelPortal",
 "language": "GDScript",
 "path": "res://scripts/IntralevelPortal.gd"
+}, {
+"base": "Enemy",
+"class": "Luigi",
+"language": "GDScript",
+"path": "res://scripts/Luigi.gd"
 }, {
 "base": "Spatial",
 "class": "MarwingLevel",
@@ -154,6 +164,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/SpawnPoint.gd"
 }, {
+"base": "Area2D",
+"class": "Spotter",
+"language": "GDScript",
+"path": "res://scripts/Spotter.gd"
+}, {
 "base": "Reference",
 "class": "TrackParser",
 "language": "GDScript",
@@ -170,12 +185,14 @@ _global_script_class_icons={
 "CameraLeanAmount": "",
 "CoinProjectile": "",
 "CoinsAchievement": "",
+"ConeSpotter": "",
 "Corncob": "",
 "EndPortal": "",
 "Enemy": "",
 "FireFlower": "",
 "Fireball": "",
 "IntralevelPortal": "",
+"Luigi": "",
 "MarwingLevel": "",
 "Platform": "",
 "Player": "",
@@ -189,6 +206,7 @@ _global_script_class_icons={
 "ShootAchievement": "",
 "SokobanLevel": "res://sprites/box.png",
 "SpawnPoint": "",
+"Spotter": "",
 "TrackParser": ""
 }
 

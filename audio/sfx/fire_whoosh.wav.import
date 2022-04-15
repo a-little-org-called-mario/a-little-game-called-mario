@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/player-hurt.wav-9b6ae8f7d26a28e68dc671d3abf78825.sample"
+path="res://.import/fire_whoosh.wav-27d3b6a9bc25a10a8654b35a59f9a0e1.sample"
 
 [deps]
 
-source_file="res://sfx/player-hurt.wav"
-dest_files=[ "res://.import/player-hurt.wav-9b6ae8f7d26a28e68dc671d3abf78825.sample" ]
+source_file="res://audio/sfx/fire_whoosh.wav"
+dest_files=[ "res://.import/fire_whoosh.wav-27d3b6a9bc25a10a8654b35a59f9a0e1.sample" ]
 
 [params]
 

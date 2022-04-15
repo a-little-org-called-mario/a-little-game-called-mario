@@ -5,13 +5,11 @@ const ASCEND_FORCE = -200
 const MAX_ROTATION_UP = -30.0
 const MAX_ROTATION_DOWN = 90.0
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		linear_velocity.y = ASCEND_FORCE;
 		angular_velocity = -10.0
@@ -25,14 +23,14 @@ func _physics_process(delta: float) -> void:
 			angular_velocity = 5
 		else:
 			angular_velocity = 0
-			
+
 func crash() -> void:
 	EventBus.emit_signal("heart_changed", {"value": -1})
 	
 func gameOver() -> void:
 	get_tree().reload_current_scene()
 
-func _on_heart_change(data):
+func _on_heart_change(_data):
 	var value = get_node("../UI/UI/HeartCount").count
 	#one because this is checked before the hearts counter is actually reduced
 	if value <= 1:

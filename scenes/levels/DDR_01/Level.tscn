@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/luigi.png" type="Texture" id=4]
 [ext_resource path="res://scenes/DDR/track/Track.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/DDR/Level.gd" type="Script" id=6]
-[ext_resource path="res://music/dramaticgamemusic_no_loop.mp3" type="AudioStream" id=7]
+[ext_resource path="res://audio/music/dramaticgamemusic_no_loop.mp3" type="AudioStream" id=7]
 
 [node name="Level" type="TileMap"]
 tile_set = ExtResource( 1 )

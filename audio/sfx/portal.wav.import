@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/portal.wav-80fa475b2d86a74b64691f1f38d0d50e.sample"
+path="res://.import/portal.wav-8e0f976fd6b3e7ba0f858997e266e5a0.sample"
 
 [deps]
 
-source_file="res://sfx/portal.wav"
-dest_files=[ "res://.import/portal.wav-80fa475b2d86a74b64691f1f38d0d50e.sample" ]
+source_file="res://audio/sfx/portal.wav"
+dest_files=[ "res://.import/portal.wav-8e0f976fd6b3e7ba0f858997e266e5a0.sample" ]
 
 [params]
 

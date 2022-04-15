@@ -431,8 +431,8 @@ marwing_right={
 
 [locale]
 
-translations=PoolStringArray( "res://localization/loca.de.translation", "res://localization/loca.en.translation" )
-locale_filter=[ 1, [ "de", "en" ] ]
+translations=PoolStringArray( "res://localization/loca.de.translation" )
+locale_filter=[ 1, [ "de" ] ]
 
 [physics]
 

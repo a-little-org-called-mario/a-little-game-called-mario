@@ -69,7 +69,7 @@ func check_achievements():
 func show_completion_message(achievement: Achievement):
 	append_bbcode(
 		"[rainbow][center]"
-		+ tr("ACHIEVEMENT_UNLOCKED") % tr(achievement.description)
+		+ tr("ACHIEVEMENT UNLOCKED: %s") % tr(achievement.description)
 		+ "[/center][/rainbow]"
 	)
 	clear_text_after_seconds()

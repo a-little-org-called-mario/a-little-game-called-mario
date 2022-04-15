@@ -59,9 +59,6 @@ func _ready() -> void:
 
 
 func _enter_tree():
-	if not EventBus.is_connected("game_exit", inventory, "reset"):
-		EventBus.connect("game_exit", inventory, "reset")
-
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
 	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")

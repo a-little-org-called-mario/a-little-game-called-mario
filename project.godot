@@ -119,10 +119,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/Flappy/Characters/Player/PlayerFlyingControls.gd"
 }, {
-"base": "Resource",
-"class": "PlayerInventory",
+"base": "Node2D",
+"class": "PlayerInventoryHandle",
 "language": "GDScript",
-"path": "res://scripts/resources/PlayerInventory.gd"
+"path": "res://scripts/resources/PlayerInventoryHandle.gd"
 }, {
 "base": "Area2D",
 "class": "PlayerProjectile",
@@ -202,7 +202,7 @@ _global_script_class_icons={
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",
-"PlayerInventory": "",
+"PlayerInventoryHandle": "",
 "PlayerProjectile": "",
 "PopcornKernel": "",
 "PopcornPopped": "",

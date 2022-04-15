@@ -23,16 +23,13 @@ func _enter_tree() -> void:
 
 
 func can_enter(node: Node2D) -> bool:
-	if node is Player:
-		return node.inventory.coins >= price
+	if not PlayerInventoryHandle.change_coins_on(node, -price):
+		return false
 
 	return true
 
 
-func on_portal_enter(node: Node2D) -> AnimatedSprite:
-	if node is Player:
-		EventBus.emit_signal("coin_collected", {"value": -price, "type": "gold"})
-
+func on_portal_enter(_node: Node2D) -> AnimatedSprite:
 	mario.visible = true
 	mario.frame = 0
 	mario.play()

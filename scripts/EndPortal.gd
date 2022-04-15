@@ -23,7 +23,7 @@ func _enter_tree() -> void:
 
 
 func can_enter(node: Node2D) -> bool:
-	if not PlayerInventoryHandle.change_coins_on(node, -price):
+	if not CoinInventoryHandle.change_coins_on(node, -price):
 		return false
 
 	return true

@@ -29,6 +29,6 @@ func _on_body_entered(body) -> void:
 
 
 func collect(body) -> void:
-	PlayerInventoryHandle.change_coins_on(body, 1)
+	CoinInventoryHandle.change_coins_on(body, 1)
 	EventBus.emit_signal("heart_changed", {"value": 1})
 	queue_free()

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/BallPlayer.gd" type="Script" id=1]
 [ext_resource path="res://sprites/ballmario.png" type="Texture" id=2]
-[ext_resource path="res://scenes/PlayerInventoryHandle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Trail.gd" type="Script" id=4]
 [ext_resource path="res://sprites/flag.jpg" type="Texture" id=5]
 
@@ -46,4 +46,4 @@ end_cap_mode = 2
 script = ExtResource( 4 )
 trail_length = 30
 
-[node name="PlayerInventoryHandle" parent="." instance=ExtResource( 3 )]
+[node name="CoinInventoryHandle" parent="." instance=ExtResource( 3 )]

@@ -100,7 +100,7 @@ func _finish_level(next_level: PackedScene = null) -> void:
 	_hook_portals()
 
 	#Removing instructions
-	$UI/UI/RichTextLabel.visible = false
+	$UI/UI/Instructions.visible = false
 
 	# Reset entering portal state
 	entering_portal = false

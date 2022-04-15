@@ -13,6 +13,8 @@ onready var _coin_handle: CoinInventoryHandle = $CoinInventoryHandle
 
 var _lines: Array
 var _line_index: int
+var _enemies: Array = []
+var _pause_actions
 
 func _ready() -> void:
 	randomize()
@@ -23,8 +25,13 @@ func _ready() -> void:
 	_spawn_enemy()
 
 	EventBus.connect("heart_changed", self, "_on_heart_change")
+	_remove_pause_action()
 
+
+func _exit_tree() -> void:
+	_restore_pause_action()
 	
+
 func _spawn_enemy() -> void:
 	var enemy = enemy_scene.instance()
 	add_child(enemy)
@@ -33,9 +40,30 @@ func _spawn_enemy() -> void:
 	enemy.global_position = _spawn_location.global_position
 	enemy.set_target(_player)
 	enemy.set_text(_lines[_line_index])
-	_line_index = (_line_index + 1) % _lines.size()
 	enemy.connect("typed_out", self, "_on_enemy_typed_out")
+	enemy.connect("tree_exited", self, "_on_enemy_exited", [enemy])
+	_enemies.push_back(enemy)
+
+	# use next contributor
+	_line_index = _line_index + 1
+	if _line_index >= 3:
+		_line_index = 0
+		_lines = _contributors.get_lines_randomized()
+
+	# decrease spawn timer to make it more difficult
 	_spawn_timer.wait_time = clamp(_spawn_timer.wait_time - 0.2, 0.5, 99)
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed():
+		if event.scancode == KEY_ESCAPE:
+			# reroute to pause menu and allow unpause
+			EventBus.emit_signal("game_paused", true)
+			return
+
+		for enemy in _enemies:
+			enemy.handle_input(char(event.unicode).to_upper())
+		get_tree().set_input_as_handled()
 
 
 func _on_heart_change(data: Dictionary) -> void:
@@ -59,3 +87,20 @@ func _on_enemy_typed_out(enemy: TypeShootEnemy) -> void:
 
 	yield(enemy, "tree_exited")
 	_coin_handle.change_coins(1)
+
+
+func _on_enemy_exited(enemy: TypeShootEnemy) -> void:
+	_enemies.remove(_enemies.find(enemy))
+
+
+func _remove_pause_action():
+	# a hack - we need the 'P' key for the game mode
+	# so clear the action (and add it as empty to prevent console errors)
+	_pause_actions = InputMap.get_action_list("pause")
+	InputMap.erase_action("pause")
+	InputMap.add_action("pause")
+
+
+func _restore_pause_action() -> void:
+	for action in _pause_actions:
+		InputMap.action_add_event("pause", action)

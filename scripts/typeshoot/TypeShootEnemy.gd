@@ -46,13 +46,7 @@ func move(_delta: float) -> void:
 			queue_free()
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		_handle_input(char(event.unicode).to_upper())
-		get_tree().set_input_as_handled()
-
-
-func _handle_input(input: String):
+func handle_input(input: String):
 	# Check if the current input matches the target
 	if _text[_index] != input:
 		_index = 0

@@ -9,12 +9,14 @@ const ACCELERATION = 50
 const JUMP_BUFFER_TIME = 4
 const FRICTION = 0.85
 
+export var charID = 0
+export var isAI = false
+
 var gravity = preload("res://scripts/resources/Gravity.tres")
 
 var grounded = false
 var anticipating_jump = false  # the small window of time before the player jumps
 
-var isAI = false
 var state = "ground"
 var jumpTime = 0
 
@@ -25,8 +27,9 @@ var inpRight = 0
 var inpLaR = 0
 var inpJump = 0
 
-var charID = 0
 var charName = "Plumber"
+
+var rng = RandomNumberGenerator.new()
 
 onready var tween = $Tween
 onready var sprite = $Sprite
@@ -37,13 +40,15 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	rng.randomize()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if not isAI:
 		input()
+	else:
+		ai_input()
 	state()
 
 
@@ -68,6 +73,14 @@ func change_state():
 	if state == "ground":
 		if not is_on_floor():
 			state = "air"
+
+
+func ai_input():
+	inpJump = 0
+	if rng.randi_range(1, 15) == 1:
+		inpLaR = rng.randi_range(-1, 1)
+	if rng.randi_range(1, 100) == 1:
+		inpJump = 1
 
 
 # Handles receiving inputs.

@@ -12,3 +12,11 @@ tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -6
 
 [node name="Member" parent="." instance=ExtResource( 2 )]
 position = Vector2( 300, 474 )
+
+[node name="Member2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 236, 474 )
+isAI = true
+
+[node name="Member3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 169, 474 )
+isAI = true

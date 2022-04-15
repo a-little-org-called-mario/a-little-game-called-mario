@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/ui/HeartIconContainer.gd" type="Script" id=8]
 [ext_resource path="res://sprites/heart.png" type="Texture" id=9]
 [ext_resource path="res://scenes/ui/StarNotification.gd" type="Script" id=10]
+[ext_resource path="res://scenes/ui/PlayerDied.gd" type="Script" id=11]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -18,9 +19,6 @@ margin_right = 1024.0
 margin_bottom = 600.0
 mouse_filter = 2
 theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03
@@ -60,7 +58,6 @@ B TO FIREBALL
 (WITH POWERUP)"
 fit_content_height = true
 script = ExtResource( 6 )
-localization_key = "TUTORIAL_MOVEMENT"
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
@@ -183,3 +180,24 @@ margin_left = 40.0
 margin_right = 56.0
 margin_bottom = 16.0
 texture = ExtResource( 9 )
+
+[node name="PlayerDiedPanel" type="Panel" parent="UI"]
+visible = false
+margin_right = 1032.0
+margin_bottom = 609.0
+script = ExtResource( 11 )
+
+[node name="PlayerDied" type="RichTextLabel" parent="UI/PlayerDiedPanel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -638.0
+margin_top = 264.0
+margin_right = -515.0
+margin_bottom = 314.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow] [/wave]"
+text = "
+YOU DIED "

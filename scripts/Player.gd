@@ -55,6 +55,7 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 func _ready() -> void:
 	_end_flash_sprite()
+	set_hitbox_crouching(false)
 
 
 func _enter_tree():
@@ -150,6 +151,7 @@ func _physics_process(delta: float) -> void:
 
 	if crouching and not Input.is_action_pressed("down"):
 		crouching = false
+		set_hitbox_crouching(false)
 		unsquash()
 
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
@@ -190,12 +192,14 @@ func try_slip(angle: float):
 
 func crouch():
 	crouching = true
+	set_hitbox_crouching(true)
 	squash()
 
 
 func jump():
 	tween.stop_all()
 	anticipating_jump = true
+	set_hitbox_crouching(false)
 	squash(0.03, 0, 0.5)
 	yield(tween, "tween_all_completed")
 	stretch(0.2, 0, 0.5, 1.2)
@@ -326,7 +330,9 @@ func _on_heart_change(data):
 		flash_sprite()
 
 	if inventory.hearts <= 0:
+		EventBus.emit_signal("player_died")
 		if get_tree() != null:
+			yield(get_tree().create_timer(2.0), "timeout")
 			get_tree().reload_current_scene()
 
 
@@ -348,3 +354,12 @@ func flash_sprite(duration: float = 0.05) -> void:
 func _end_flash_sprite() -> void:
 	$Sprite.material.set_shader_param("flash_modifier", 0.0)
 	$BusSprite.material.set_shader_param("flash_modifier", 0.0)
+
+
+func set_hitbox_crouching(value: bool):
+	if value:
+		$CollisionShape2D.shape.extents.y = 27 * 0.4
+		$CollisionShape2D.position.y = 21
+	else:
+		$CollisionShape2D.shape.extents.y = 27
+		$CollisionShape2D.position.y = 5

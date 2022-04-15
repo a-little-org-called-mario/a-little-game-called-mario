@@ -17,6 +17,7 @@
 [node name="UI" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
+mouse_filter = 2
 theme = ExtResource( 5 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
@@ -29,6 +30,7 @@ margin_top = -20.0
 margin_right = -93.544
 margin_bottom = 55.8
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_constants/line_separation = 0
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
@@ -65,6 +67,7 @@ margin_top = 258.0
 margin_right = -447.0
 margin_bottom = 308.0
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -98,6 +101,7 @@ margin_left = -247.0
 margin_right = -124.0
 margin_bottom = 50.0
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -117,6 +121,7 @@ margin_top = 75.0
 margin_right = -125.0
 margin_bottom = 125.0
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -138,6 +143,7 @@ margin_top = 479.0
 margin_right = 22.456
 margin_bottom = 423.8
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 script = ExtResource( 3 )

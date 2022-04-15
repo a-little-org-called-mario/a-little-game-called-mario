@@ -43,6 +43,7 @@ var powerupspeed = 1
 var powerupaccel = 1
 
 onready var sprite = $Sprite
+onready var anim = $Sprite/Anims
 onready var tween = $Tween
 onready var trail: Line2D = $Trail
 onready var run_particles: CPUParticles2D = $RunParticles
@@ -54,6 +55,7 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 func _ready() -> void:
 	_end_flash_sprite()
+	set_hitbox_crouching(false)
 
 
 func _enter_tree():
@@ -83,27 +85,27 @@ func _physics_process(delta: float) -> void:
 	x_motion.max_accel *= powerupaccel
 
 	var jerk_modifier = 1
-	var animationSpeed = 8
+	var animationSpeed = 1
 	if Input.is_action_pressed("sprint"):
 		speed += 1
 		x_motion.max_speed *= 1.5
 		x_motion.max_accel *= 3
 		jerk_modifier = 3
-		animationSpeed = 60
-	sprite.frames.set_animation_speed("run", animationSpeed)
+		animationSpeed = 6
+	anim.playback_speed = animationSpeed
 	if Input.is_action_pressed("right"):
 		jerk_right(JERK * jerk_modifier)
-		sprite.play("run")
+		anim.playAnim("Run")
 		# pointing the character in the direction he's running
 		run_particles.emitting = true
 		look_right()
 	elif Input.is_action_pressed("left"):
 		jerk_left(JERK * jerk_modifier)
-		sprite.play("run")
+		anim.playAnim("Run")
 		run_particles.emitting = true
 		look_left()
 	else:
-		sprite.play("idle")
+		anim.playAnim("Idle")
 		if x_motion.get_speed() > STOPTHRESHOLD:
 			jerk_left(JERK)
 		elif x_motion.get_speed() < -STOPTHRESHOLD:
@@ -144,11 +146,12 @@ func _physics_process(delta: float) -> void:
 			gravity_multiplier = 0.5
 		else:
 			gravity_multiplier = 1
-		sprite.play("jump")
+		anim.playAnim("Jump")
 		run_particles.emitting = false
 
 	if crouching and not Input.is_action_pressed("down"):
 		crouching = false
+		set_hitbox_crouching(false)
 		unsquash()
 
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
@@ -189,12 +192,14 @@ func try_slip(angle: float):
 
 func crouch():
 	crouching = true
+	set_hitbox_crouching(true)
 	squash()
 
 
 func jump():
 	tween.stop_all()
 	anticipating_jump = true
+	set_hitbox_crouching(false)
 	squash(0.03, 0, 0.5)
 	yield(tween, "tween_all_completed")
 	stretch(0.2, 0, 0.5, 1.2)
@@ -325,7 +330,9 @@ func _on_heart_change(data):
 		flash_sprite()
 
 	if inventory.hearts <= 0:
+		EventBus.emit_signal("player_died")
 		if get_tree() != null:
+			yield(get_tree().create_timer(2.0), "timeout")
 			get_tree().reload_current_scene()
 
 
@@ -347,3 +354,12 @@ func flash_sprite(duration: float = 0.05) -> void:
 func _end_flash_sprite() -> void:
 	$Sprite.material.set_shader_param("flash_modifier", 0.0)
 	$BusSprite.material.set_shader_param("flash_modifier", 0.0)
+
+
+func set_hitbox_crouching(value: bool):
+	if value:
+		$CollisionShape2D.shape.extents.y = 27 * 0.4
+		$CollisionShape2D.position.y = 21
+	else:
+		$CollisionShape2D.shape.extents.y = 27
+		$CollisionShape2D.position.y = 5

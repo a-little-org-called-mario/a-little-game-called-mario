@@ -19,6 +19,8 @@ onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 
+var inventory = preload("res://scripts/resources/PlayerInventory.tres")
+
 
 func _ready() -> void:
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
@@ -31,12 +33,9 @@ func _physics_process(_delta: float) -> void:
 
 	var max_speed_modifier = 1
 	var acceleration_modifier = 1
-	var animationSpeed = 8
 	if Input.is_action_pressed("sprint"):
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
-		animationSpeed = 60
-	#sprite.frames.set_animation_speed("run", animationSpeed)
 
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL * acceleration_modifier
@@ -222,3 +221,4 @@ func _on_coin_collected(data):
 	var value := 1
 	if data.has("value"):
 		value = data["value"]
+	inventory.coins += value

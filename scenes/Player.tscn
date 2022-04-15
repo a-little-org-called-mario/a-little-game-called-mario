@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]

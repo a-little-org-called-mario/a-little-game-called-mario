@@ -215,6 +215,7 @@ func jump():
 	$JumpSFX.play()
 	EventBus.emit_signal("jumping")
 
+
 func super_jump():
 	super_jump_timer = 0
 	stats.jump_xp += 1

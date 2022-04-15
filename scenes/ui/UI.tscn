@@ -56,7 +56,6 @@ B TO FIREBALL
 (WITH POWERUP)"
 fit_content_height = true
 script = ExtResource( 6 )
-localization_key = "TUTORIAL_MOVEMENT"
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0

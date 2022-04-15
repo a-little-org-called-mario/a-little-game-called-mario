@@ -86,4 +86,3 @@ B TO FIREBALL
 (WITH POWERUP)"
 fit_content_height = true
 script = ExtResource( 6 )
-localization_key = "TUTORIAL_MOVEMENT_PLANE"

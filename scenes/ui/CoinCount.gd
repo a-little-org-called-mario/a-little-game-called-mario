@@ -13,4 +13,4 @@ func _on_coin_collected(_data):
 
 
 func update_coin_count():
-	bbcode_text = tr("UI_COINS") % inventory.coins
+	bbcode_text = tr("\n[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]") % inventory.coins

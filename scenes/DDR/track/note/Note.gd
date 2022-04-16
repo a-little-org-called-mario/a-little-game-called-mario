@@ -1,5 +1,7 @@
 extends Sprite
 
+var index
+
 var target_pos
 var target_tick
 

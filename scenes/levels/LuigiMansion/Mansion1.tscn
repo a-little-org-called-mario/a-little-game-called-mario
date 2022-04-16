@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemies/Luigi.tscn" type="PackedScene" id=2]
@@ -642,26 +642,103 @@ tracks/0/keys = {
 "values": [ Vector2( 2240, 192 ), Vector2( 2816, 192 ), Vector2( 2816, 192 ), Vector2( 2240, 192 ), Vector2( 2240, 192 ) ]
 }
 
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "bounce"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ), Vector2( 0, 12 ), Vector2( 0, 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2.5, 1.5 ), Vector2( 2, 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 37, 64 )
 
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 128, 10 )
-
-[sub_resource type="GDScript" id=17]
-script/source = "extends Node2D
-
-export (NodePath) onready var cutscene_wall= get_node_or_null(cutscene_wall)
-
-func _ready():
-	$AnimationPlayer.play(\"bounce\")
-	$Kino.auto_advance_dialogue()
-	yield($Kino,\"dialogue_completed\")
-	$AnimationPlayer.play(\"cutscene\")
-	yield($AnimationPlayer, \"animation_finished\")
-	$Label.text= \"AVENGE BALL MARIO!!!\"
-	cutscene_wall.queue_free()
-"
 
 [sub_resource type="Animation" id=18]
 length = 0.001
@@ -870,6 +947,7 @@ price = 5
 position = Vector2( 4224, 296 )
 
 [node name="Sprite" type="Sprite" parent="BallMario2"]
+position = Vector2( 0, 8 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 flip_h = true
@@ -889,6 +967,11 @@ fit_content_height = true
 scroll_active = false
 script = ExtResource( 12 )
 dialogue = [ "We're almost there", "I can practically smell the money from here", "Can you smell it, Mario?", "He he, thought so..." ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BallMario2"]
+autoplay = "bounce"
+anims/RESET = SubResource( 21 )
+anims/bounce = SubResource( 22 )
 
 [node name="EndTrigger" type="Area2D" parent="."]
 position = Vector2( 3912, 480 )
@@ -911,8 +994,6 @@ shape = SubResource( 20 )
 
 [node name="BallMario" type="Node2D" parent="."]
 position = Vector2( 416, 296 )
-script = SubResource( 17 )
-cutscene_wall = NodePath("../InvisibleWall2")
 
 [node name="Sprite" type="Sprite" parent="BallMario"]
 position = Vector2( 0, 8 )

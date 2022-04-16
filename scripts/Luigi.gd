@@ -61,7 +61,8 @@ func move(delta: float):
 			move_and_collide(Vector2.UP * RETURN_SPEED * delta)
 			continue
 		CHARGING, KILLING, COOLDOWN:
-			$Sprite.flip_h = player.global_position.x < global_position.x
+			if player.is_inside_tree():
+				$Sprite.flip_h = player.global_position.x < global_position.x
 			$VisionCone.rotation_degrees = 180 * float($Sprite.flip_h)
 
 

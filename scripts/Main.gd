@@ -7,6 +7,8 @@ const PROJECTILES_GROUP: String = "Projectiles"
 
 onready var hub: TileMap = $TileMap
 onready var level: Node = $TileMap
+onready var bgm: AudioStreamPlayer = $Audio/BGM
+onready var ui: CanvasLayer = $UI
 
 var completionSound = preload("res://audio/sfx/portal.wav")
 var coinSound = preload("res://audio/sfx/coin.wav")
@@ -16,13 +18,25 @@ var entering_portal: bool = false
 
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
-	Settings.load_data()
+	EventBus.connect("bgm_changed", self, "_bgm_changed")
+	EventBus.connect("ui_visibility_changed", self, "_on_ui_visibility_changed")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 
 
 func _exit_tree() -> void:
 	EventBus.emit_signal("game_exit")
+
+
+func _on_ui_visibility_changed(data):
+	ui.get_child(0).visible = data.visible
+
+
+func _bgm_changed(data) -> void:
+	if "playing" in data:
+		bgm.playing = data.playing
+	if "stream" in data:
+		bgm.stream = data.stream
 
 
 func _hook_portals() -> void:
@@ -60,6 +74,13 @@ func _on_build(data) -> void:
 		elif target_cell_v == 1:
 			# If the cell has a block in in, break the block.
 			level.set_cell(target_tile_x, target_tile_y, 0)
+
+
+func _input(event):
+	if event.is_action_pressed("show_instructions"):
+		$UI/UI/RichTextLabel.visible = true
+	elif event.is_action_released("show_instructions"):
+		$UI/UI/RichTextLabel.visible = false
 
 
 func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: EndPortal) -> void:

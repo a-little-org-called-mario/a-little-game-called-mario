@@ -12,7 +12,7 @@ export var price: int
 onready var mario: AnimatedSprite = $Mario
 
 # Set portal colour
-export var colour : Color
+export var colour : Color = "3458ad"
 
 
 func _ready() -> void:

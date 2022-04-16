@@ -13,6 +13,13 @@ signal level_completed(data)
 signal level_started(data)
 signal player_died
 
+# The "stream" key will set the background music and
+# the "playing" will set whenever the music is playing
+signal bgm_changed(data)
+
+# Expects a "visible" boolean key
+signal ui_visibility_changed(data)
+
 # Scene Transitions, expects "scene" key
 signal change_scene(data)
 
@@ -20,6 +27,14 @@ signal change_scene(data)
 signal small_screen_shake
 signal medium_screen_shake
 signal large_screen_shake
+
+# Camera follow
+signal cameraF_candidate_spawned
+signal cameraF_update_current_camera
+signal cameraF_reset_camera
+signal cameraF_set_following
+signal cameraF_move_camera_to(x,y)
+signal cameraF_change_candidate(step_int)
 
 # pauses the game - used by PauseMenu.gd
 signal game_paused(data)

@@ -19,30 +19,26 @@ LEERTASTE ZUM [wave amp=50 freq=2]SPRINGEN[/wave]
 STRG/Z ZUM [wave amp=50 freq=2]SCHIESSEN[/wave]
 
 B FUER DEN[wave amp=50 freq=2] FEUERBALL [/wave] (MIT POWERUP)"
-"
-[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]","
-[wave amp=50 freq=2]MUENZEN:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"
-"Out of the way!","Aus dem Weg!"
-"It won't move.","Es bewegt sich kein Stück."
-"Open Sesame!","Sesam öffne dich!"
+COINS:,MUENZEN:
+Out of the way!,Aus dem Weg!
+It won't move.,Es bewegt sich kein Stück.
+Open Sesame!,Sesam öffne dich!
 "Oh, another visitor!","Oh, ein anderer Besucher!"
-"Who was here before me?","Wer war vor mir hier?"
-"I don't remember...","Ich kann mich nicht erinnern..."
-"There wase definitly someone here.\nHe wanted to do something... Finish something...","Es war auf jeden Fall jemand hier.\nEr wollte irgendwas... Irgendetwas beenden..."
-"I will find out!","Ich werde es herausfinden!"
-"Can you help me get out of here?","Kannst du mir hier heraushelfen?"
+Who was here before me?,Wer war vor mir hier?
+I don't remember...,Ich kann mich nicht erinnern...
+There wase definitly someone here.\nHe wanted to do something... Finish something...,Es war auf jeden Fall jemand hier.\nEr wollte irgendwas... Irgendetwas beenden...
+I will find out!,Ich werde es herausfinden!
+Can you help me get out of here?,Kannst du mir hier heraushelfen?
 "No, I'm just a ladder. I'm no use if you want to climb out of here...","Nein, ich bin nur eine Leiter. Ich nütze nichts wenn du hier herausklettern willst..."
-"Bye then!","Dann tschüß!"
-"CREDITS","CREDITS"
+Bye then!,Dann tschüß!
+CREDITS,CREDITS
 "
 [wave amp=50 freq=2]HEARTS:[rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]","
 [wave amp=50 freq=2]HERZEN:[rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]"
 "
 [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]","
 [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"
-"
-[wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow] [/wave]","
-[wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow] [/wave]"
+YOU DIED,
 "[wave amp=50 freq=2]YOU GOT THE STAR:
 [rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]","[wave amp=50 freq=2]DU HAST DEN STERN:
 [rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]"

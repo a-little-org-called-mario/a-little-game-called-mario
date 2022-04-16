@@ -40,7 +40,6 @@ func _handle_movement():
 func _body_entered(body):
 	# If body is the player then lose health
 	if body is Player:
-		print("Player was hit!")
 		EventBus.emit_signal("heart_changed", {"value": -1})
 	destroy()
 

@@ -124,6 +124,7 @@ one_shot = true
 
 [node name="TurretSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+bus = "sfx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )

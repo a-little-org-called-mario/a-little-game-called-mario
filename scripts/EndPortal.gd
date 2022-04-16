@@ -11,11 +11,16 @@ export var price: int
 
 onready var mario: AnimatedSprite = $Mario
 
+# Set portal colour
+export var colour: Color = "3458ad"
+
 
 func _ready() -> void:
 	$Sprite.play()
 	$CoinContainer.visible = price > 0
 	$CoinContainer/CoinLabel.text = str(price)
+	# Set portal sprite colour in the shader
+	$Sprite.material.set_shader_param("colour", colour)
 
 
 func _enter_tree() -> void:

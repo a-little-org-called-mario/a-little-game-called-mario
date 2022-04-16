@@ -40,7 +40,7 @@ func load_data():
 	var settings_file = File.new()
 
 	# there is no settings.mario :(
-	if not settings_file.file_exists(settings_name):
+	if not settings_file.file_exists(settings_name) or settings_file.open(settings_name, File.READ) != OK:
 		# set settings to default values
 		set_to_default()
 		screen_shake = true
@@ -48,7 +48,6 @@ func load_data():
 
 	# access settings.mario and read settings
 	else:
-		settings_file.open(settings_name, File.READ)
 		while settings_file.get_position() < settings_file.get_len():
 			var settings_values = parse_json(settings_file.get_line())
 			for i in settings_values.keys():
@@ -67,9 +66,9 @@ func load_data():
 						volume_sfx = int(settings_values[i])
 					"sfx_volume_voice":
 						volume_voice = int(settings_values[i])
-			settings_file.close()
-			set_to_default()	# catch any settings that were added since the last time cookie was saved
-			settings_loaded = true
+		settings_file.close()
+		set_to_default()	# catch any settings that were added since the last time cookie was saved
+		settings_loaded = true
 	
 
 	# emit any relevant signals

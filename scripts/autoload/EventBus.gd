@@ -27,9 +27,7 @@ signal game_paused(data)
 signal game_exit
 
 ## settings signals
-# toggles crt filter - emitted by PauseMenu.gd and connected to Main.gd
 signal crt_filter_toggle(data)
-# self-explanatory - emitted by PauseMenu.gd and connected to Main.gd
 signal volume_changed(data)
 
 signal enemy_hit_coin

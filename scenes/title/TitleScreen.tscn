@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/SokobanButton.gd" type="Script" id=13]
 [ext_resource path="res://scenes/title/MarwingButton.gd" type="Script" id=14]
+[ext_resource path="res://scenes/title/TitleScreen.gd" type="Script" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -101,6 +102,7 @@ font_data = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 3 )
+script = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

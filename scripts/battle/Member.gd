@@ -79,7 +79,7 @@ func ai_input():
 	inpJump = 0
 	if rng.randi_range(1, 15) == 1:
 		inpLaR = rng.randi_range(-1, 1)
-	if rng.randi_range(1, 100) == 1:
+	if rng.randi_range(1, 200) == 1:
 		inpJump = 1
 
 

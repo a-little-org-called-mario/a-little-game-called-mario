@@ -263,8 +263,8 @@ anims/Init = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 
 [node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 92.0
-margin_right = 892.0
+margin_left = 154.0
+margin_right = 954.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 800, 0 )
 size_flags_vertical = 8

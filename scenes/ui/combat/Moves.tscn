@@ -1,8 +1,0 @@
-[gd_scene format=2]
-
-[node name="Moves" type="CanvasLayer"]
-
-[node name="Control" type="Control" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0

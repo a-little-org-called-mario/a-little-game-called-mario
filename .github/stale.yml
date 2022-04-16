@@ -1,0 +1,19 @@
+# Label to use when marking an issue as stale
+staleLabel: stale
+
+issues:
+  markComment: >
+    This issue has been automatically marked as stale because it has not had
+    recent activity. You can comment on this (or do anything else) to keep it open,
+    otherwise it'll be automatically closed in one week. Thanks!
+  daysUntilStale: 30
+  daysUntilClose: 7
+
+pulls:
+  markComment: >
+    This PR hasn't been updated in a few days. Since this project moves so quickly, 
+    it probably has a bunch of merge conflicts and can't cleanly be merged in! 
+    If this PR doesn't get updated within a few days, it will be automatically closed.
+    If that happens, feel free to open a new PR again with the same changes. Thanks!
+  daysUntilStale: 5
+  daysUntilClose: 3

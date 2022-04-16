@@ -16,7 +16,6 @@ var entering_portal: bool = false
 
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
-	Settings.load_data()
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 

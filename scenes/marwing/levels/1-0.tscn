@@ -10,7 +10,7 @@
 
 [sub_resource type="Curve3D" id=1]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.000298113, 0.000109732, -2.55853e-05, 0, 0, 0, 0, 0, 0, -359.989, 0.000152588, 0.00374361 ),
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.000298113, 0.000109732, -2.55853e-05, 0, 0, 0, 0, 0, 0, -179.435, -0.14266, -0.0173095 ),
 "tilts": PoolRealArray( 0, 0 )
 }
 
@@ -23,12 +23,12 @@ environment = ExtResource( 5 )
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 
 [node name="Water1" type="MeshInstance" parent="."]
-transform = Transform( -1.31134e-07, 0, 3, 0, 0.1, 0, -3, 0, -1.31134e-07, 0, -5, 180 )
+transform = Transform( -1.31134e-07, 0, 3, 0, 0.1, 0, -3, 0, -1.31134e-07, 0, -5, 0 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 6 )
 
 [node name="Water2" type="MeshInstance" parent="."]
-transform = Transform( -1.31134e-07, 0, 3, 0, 0.1, 0, -3, 0, -1.31134e-07, 0, -5, 540 )
+transform = Transform( -1.31134e-07, 0, 3, 0, 0.1, 0, -3, 0, -1.31134e-07, 0, -5, 180 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 6 )
 

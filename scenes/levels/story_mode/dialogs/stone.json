@@ -1,0 +1,23 @@
+{
+	"text": "...",
+	"choices": [
+		{
+			"text": "Out of the way!",
+			"dialog": {
+				"text": [
+					"...",
+					"...",
+					"..."
+				],
+				"choices": "It won't move."
+			}
+		},
+		{
+			"text": "Open Sesame!",
+			"dialog": {
+				"text": "...",
+				"choices": "It won't move."
+			}
+		}
+	]
+}

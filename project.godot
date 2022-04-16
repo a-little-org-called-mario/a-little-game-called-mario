@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/boxes/BaseBox.gd"
 }, {
+"base": "Node2D",
+"class": "BaseInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/BaseInventoryHandle.gd"
+}, {
 "base": "Enemy",
 "class": "Bub",
 "language": "GDScript",
@@ -48,6 +53,11 @@ _global_script_classes=[ {
 "class": "CameraLeanAmount",
 "language": "GDScript",
 "path": "res://scripts/CameraLeanAmount.gd"
+}, {
+"base": "BaseInventoryHandle",
+"class": "CoinInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/CoinInventoryHandle.gd"
 }, {
 "base": "PlayerProjectile",
 "class": "CoinProjectile",
@@ -119,11 +129,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/Flappy/Characters/Player/PlayerFlyingControls.gd"
 }, {
-"base": "Resource",
-"class": "PlayerInventory",
-"language": "GDScript",
-"path": "res://scripts/resources/PlayerInventory.gd"
-}, {
 "base": "Area2D",
 "class": "PlayerProjectile",
 "language": "GDScript",
@@ -185,9 +190,11 @@ _global_script_class_icons={
 "BallPlayer": "",
 "BallSpawnPoint": "",
 "BaseBox": "",
+"BaseInventoryHandle": "",
 "Bub": "",
 "Bus": "",
 "CameraLeanAmount": "",
+"CoinInventoryHandle": "",
 "CoinProjectile": "",
 "CoinsAchievement": "",
 "ConeSpotter": "",
@@ -202,7 +209,6 @@ _global_script_class_icons={
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",
-"PlayerInventory": "",
 "PlayerProjectile": "",
 "PopcornKernel": "",
 "PopcornPopped": "",

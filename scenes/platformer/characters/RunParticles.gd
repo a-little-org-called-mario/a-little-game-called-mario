@@ -7,7 +7,6 @@ onready var player: Player = owner
 
 
 func _process(_delta: float) -> void:
-	print(player.x_motion.get_motion().length_squared())
 	emitting = player._is_on_floor() && player.x_motion.get_motion().length_squared() > EMISSION_THRESHOLD
 
 

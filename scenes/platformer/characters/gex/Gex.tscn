@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
+[ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
+[ext_resource path="res://sprites/dustparticle.png" type="Texture" id=2]
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/platformer/characters/Player.gd" type="Script" id=4]
 [ext_resource path="res://scenes/platformer/characters/PlayerAnims.gd" type="Script" id=7]
-[ext_resource path="res://scripts/mariocontroller/StarCollector.gd" type="Script" id=8]
 [ext_resource path="res://sprites/characters/Gex.png" type="Texture" id=9]
 [ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=10]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=11]
@@ -121,13 +122,28 @@ stream = SubResource( 14 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="StarCollector" type="Node" parent="."]
-script = ExtResource( 8 )
-
 [node name="HitFlashTimer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
 
 [node name="CoinInventoryHandle" parent="." instance=ExtResource( 11 )]
+
+[node name="RunParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 30 )
+amount = 6
+lifetime = 0.6
+local_coords = false
+texture = ExtResource( 2 )
+spread = 180.0
+gravity = Vector2( 0, -80 )
+initial_velocity = 40.0
+initial_velocity_random = 0.2
+angular_velocity = 30.0
+angular_velocity_random = 1.0
+angle = 90.0
+angle_random = 1.0
+scale_amount = 0.75
+color = Color( 1, 1, 1, 0.784314 )
+script = ExtResource( 1 )
 
 [connection signal="timeout" from="HitFlashTimer" to="." method="_end_flash_sprite"]

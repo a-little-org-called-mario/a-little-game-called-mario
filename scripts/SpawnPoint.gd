@@ -1,6 +1,7 @@
 class_name SpawnPoint
 extends Position2D
 
+# var player_scene = load("res://scenes/platformer/characters/gex/Gex.tscn")
 var player_scene = load("res://scenes/platformer/characters/Player.tscn")
 
 

@@ -1,11 +1,30 @@
-extends RichTextLabel
+extends Object
+class_name Contributors
 
-var lines = []
+var text: String
+var lines: Array
 
-func _ready():
-	# todo credits in editor check exists in two places - should be simiplied to one utility function
+func get_text() -> String:
+	if not text:
+		_load()
+	return text
+
+
+func get_lines() -> Array:
+	if not lines:
+		_load()
+	return lines
+
+
+func get_lines_randomized() -> Array:
+	return _rand_values(get_lines())
+
+
+func _load() -> void:
 	# Credits file is generated at build time - use placeholder string if in editor
 	if OS.has_feature("editor"):
+		text = "Mario Mario\nLuigi Mario\nBaby Mario"
+		lines = text.split("\n")
 		return
 
 	randomize()
@@ -13,22 +32,17 @@ func _ready():
 	var file = File.new()
 	var err = file.open("res://credits.txt", File.READ)
 	if err != OK:
+		lines = []
 		print("Couldn't load credits.txt. The file might be missing.")
 		return
 	
-	lines = file.get_as_text().split("\n")
-	
+	text = file.get_as_text()
+	lines = text.split("\n")
 	file.close()
-	setup()
 
-func setup():
-	if lines.empty():
-		return
-	var contrib_array = rand_values(lines)
-	bbcode_text = "\n[wave amp=100 freq=2]%s\n%s\n%s" % [str(contrib_array[0]).to_upper(),str(contrib_array[1]).to_upper(),str(contrib_array[2]).to_upper()]
-	
-func rand_values(arr):
-	if arr.size() < 3:
+# Randomize the provided array
+func _rand_values(arr: Array) -> Array:
+	if arr.size() <= 3:
 		return arr
 	var rand_array = []
 	var count = 0
@@ -39,6 +53,3 @@ func rand_values(arr):
 			rand_array.append(rand_value)
 			count += 1
 	return rand_array
-
-func _on_Timer_timeout():
-	setup()

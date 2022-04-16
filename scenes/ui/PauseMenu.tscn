@@ -50,10 +50,14 @@ __meta__ = {
 }
 
 [node name="MainMenu" type="Control" parent="PauseMenu"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5.0
 margin_right = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BackLabel" type="RichTextLabel" parent="PauseMenu/MainMenu"]
 anchor_left = 0.355
@@ -112,14 +116,17 @@ anchor_top = 0.405
 anchor_right = 0.648
 anchor_bottom = 0.618
 margin_left = 64.48
-margin_top = 195.0
+margin_top = 193.0
 margin_right = -151.552
-margin_bottom = 121.2
+margin_bottom = 119.2
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 text = "
 RESTART"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TitleLabel" type="RichTextLabel" parent="PauseMenu/MainMenu"]
 anchor_left = 0.355
@@ -127,14 +134,17 @@ anchor_top = 0.405
 anchor_right = 0.648
 anchor_bottom = 0.618
 margin_left = -5.51999
-margin_top = 252.0
+margin_top = 257.0
 margin_right = -149.552
-margin_bottom = 178.2
+margin_bottom = 183.2
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 text = "
 BACK TO TITLE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GFXMenu" type="Control" parent="PauseMenu"]
 visible = false
@@ -217,7 +227,6 @@ CRT FILTER: OFF
 "
 
 [node name="SFXMenu" type="Control" parent="PauseMenu"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5.0
@@ -282,13 +291,32 @@ anchor_left = 0.428
 anchor_top = 0.192
 anchor_right = 0.572
 anchor_bottom = 0.404
-margin_left = -186.272
-margin_top = 324.8
+margin_left = -160.272
+margin_top = 320.8
 margin_right = -67.728
-margin_bottom = 316.32
+margin_bottom = 312.6
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 text = "
- SFX VOLUME: <  10  >
+SFX VOLUME: <  10  >
 "
+
+[node name="VoiceVolLabel" type="RichTextLabel" parent="PauseMenu/SFXMenu"]
+anchor_left = 0.428
+anchor_top = 0.192
+anchor_right = 0.572
+anchor_bottom = 0.404
+margin_left = -186.272
+margin_top = 384.8
+margin_right = -67.728
+margin_bottom = 376.32
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "
+VOICE VOLUME: <  10  >
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}

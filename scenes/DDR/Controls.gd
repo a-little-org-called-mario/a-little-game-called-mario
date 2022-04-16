@@ -16,5 +16,7 @@ func _process(_delta):
 			emit_signal("player_pose_set", pose)
 		elif playerActor.pose == pose and Input.is_action_just_released(pose):
 			playerActor.pose = "idle"
+	if Input.is_action_just_pressed("pause") and !get_tree().paused:
+		EventBus.emit_signal("game_paused", true)
 
 signal player_pose_set(pose)

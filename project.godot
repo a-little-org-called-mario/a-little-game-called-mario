@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ConeSpotter.gd"
 }, {
+"base": "Object",
+"class": "Contributors",
+"language": "GDScript",
+"path": "res://scenes/title/Contributors.gd"
+}, {
 "base": "Area2D",
 "class": "Corncob",
 "language": "GDScript",
@@ -198,6 +203,11 @@ _global_script_classes=[ {
 "class": "TrackParser",
 "language": "GDScript",
 "path": "res://scenes/DDR/TrackParser.gd"
+}, {
+"base": "Enemy",
+"class": "TypeShootEnemy",
+"language": "GDScript",
+"path": "res://scripts/typeshoot/TypeShootEnemy.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
@@ -214,6 +224,7 @@ _global_script_class_icons={
 "CoinProjectile": "",
 "CoinsAchievement": "",
 "ConeSpotter": "",
+"Contributors": "",
 "Corncob": "",
 "EndPortal": "",
 "Enemy": "",
@@ -237,7 +248,8 @@ _global_script_class_icons={
 "SpawnPoint": "",
 "Spotter": "",
 "StoryItem": "",
-"TrackParser": ""
+"TrackParser": "",
+"TypeShootEnemy": ""
 }
 
 [application]

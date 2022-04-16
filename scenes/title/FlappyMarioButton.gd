@@ -4,9 +4,6 @@ var corn_icon = preload("res://sprites/corncob.png")
 
 
 func _ready():
-	# This is so you can use the menu with the keyboard
-	grab_focus()
-
 	# Signals can be found here: https://docs.godotengine.org/en/stable/classes/class_basebutton.html
 	self.connect("mouse_entered", self, "grab_focus")
 	self.connect("pressed", self, "_on_pressed")

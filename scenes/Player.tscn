@@ -1,4 +1,5 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=39 format=2]
+
 
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -15,6 +16,7 @@
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=13]
 [ext_resource path="res://scripts/PlayerAnims.gd" type="Script" id=14]
 [ext_resource path="res://scripts/mariocontroller/StarCollector.gd" type="Script" id=15]
+[ext_resource path="res://scripts/BoucyMoustache.gd" type="Script" id=16]
 
 [sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
@@ -139,6 +141,14 @@ random_pitch = 1.5
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 43.25, 20.1875 )
 
+[sub_resource type="SphereMesh" id=28]
+
+[sub_resource type="CircleShape2D" id=29]
+radius = 4.0
+
+[sub_resource type="Curve" id=30]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.527273 ), 0.0, 0.0, 0, 0 ]
+
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
 collision_mask = 15
@@ -191,6 +201,7 @@ stream = SubResource( 14 )
 
 [node name="RunParticles" type="CPUParticles2D" parent="."]
 position = Vector2( 0, 30 )
+emitting = false
 amount = 6
 lifetime = 0.6
 local_coords = false
@@ -232,6 +243,83 @@ disabled = true
 [node name="HitFlashTimer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
+
+[node name="BoucyMoustache" type="Node2D" parent="."]
+script = ExtResource( 16 )
+
+[node name="DampedSpringJoint2D" type="PinJoint2D" parent="BoucyMoustache"]
+position = Vector2( 4.136, 3.15 )
+rotation = -1.5708
+node_a = NodePath("point1")
+node_b = NodePath("point2")
+bias = 0.5
+disable_collision = false
+softness = 6.0
+
+[node name="point1" type="StaticBody2D" parent="BoucyMoustache/DampedSpringJoint2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="BoucyMoustache/DampedSpringJoint2D/point1"]
+visible = false
+scale = Vector2( 4, 4 )
+mesh = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoucyMoustache/DampedSpringJoint2D/point1"]
+shape = SubResource( 29 )
+disabled = true
+
+[node name="Line2D" type="Line2D" parent="BoucyMoustache/DampedSpringJoint2D/point1"]
+width = 13.066
+width_curve = SubResource( 30 )
+default_color = Color( 0, 0, 0, 1 )
+
+[node name="point2" type="RigidBody2D" parent="BoucyMoustache/DampedSpringJoint2D"]
+position = Vector2( 0.150002, 12.635 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="BoucyMoustache/DampedSpringJoint2D/point2"]
+visible = false
+scale = Vector2( 4, 4 )
+mesh = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoucyMoustache/DampedSpringJoint2D/point2"]
+shape = SubResource( 29 )
+disabled = true
+
+[node name="DampedSpringJoint2D2" type="PinJoint2D" parent="BoucyMoustache"]
+position = Vector2( 4.365, 3.15 )
+rotation = 1.5708
+node_a = NodePath("point1")
+node_b = NodePath("point2")
+bias = 0.5
+disable_collision = false
+softness = 6.0
+
+[node name="point1" type="StaticBody2D" parent="BoucyMoustache/DampedSpringJoint2D2"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="BoucyMoustache/DampedSpringJoint2D2/point1"]
+visible = false
+scale = Vector2( 4, 4 )
+mesh = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoucyMoustache/DampedSpringJoint2D2/point1"]
+shape = SubResource( 29 )
+disabled = true
+
+[node name="Line2D" type="Line2D" parent="BoucyMoustache/DampedSpringJoint2D2/point1"]
+width = 13.066
+width_curve = SubResource( 30 )
+default_color = Color( 0, 0, 0, 1 )
+
+[node name="point2" type="RigidBody2D" parent="BoucyMoustache/DampedSpringJoint2D2"]
+position = Vector2( 0.150002, 12.635 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="BoucyMoustache/DampedSpringJoint2D2/point2"]
+visible = false
+scale = Vector2( 4, 4 )
+mesh = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoucyMoustache/DampedSpringJoint2D2/point2"]
+shape = SubResource( 29 )
+disabled = true
 
 [node name="CoinInventoryHandle" parent="." instance=ExtResource( 9 )]
 

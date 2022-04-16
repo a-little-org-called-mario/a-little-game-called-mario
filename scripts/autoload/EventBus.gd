@@ -21,6 +21,10 @@ signal small_screen_shake
 signal medium_screen_shake
 signal large_screen_shake
 
+# Camera follow
+signal cameraF_candidate_spawned
+signal cameraF_change_candidate(data)
+
 # pauses the game - used by PauseMenu.gd
 signal game_paused(data)
 # called once on game ends (or is restarted)

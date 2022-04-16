@@ -339,6 +339,8 @@ tracks/5/keys = {
 [node name="Marwing" type="PathFollow"]
 loop = false
 script = ExtResource( 2 )
+forward_speed = 24.4
+strafe_speed = 7.2
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -7 )

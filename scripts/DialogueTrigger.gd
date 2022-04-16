@@ -12,7 +12,7 @@ func _ready():
 func _body_entered(body):
 	if (
 		body.is_in_group("Player")
-		and dialogue_node
+		and is_instance_valid(dialogue_node)
 		and dialogue_node.has_method("auto_advance_dialogue")
 	):
 		dialogue_node.auto_advance_dialogue()

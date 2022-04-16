@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/resources/PlayerStats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+max_hearts = 3
+jump_xp = 0
+coin_shoot_xp = 0
+intelligence = 0
+speed = 0
+charisma = 0
+swim = 0
+acrobatics = 0
+building = 0
+sanity = 0

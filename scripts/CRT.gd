@@ -8,6 +8,7 @@ onready var crt_shader: Shader = preload("res://shaders/CRT.gdshader")
 
 func _ready():
 	EventBus.connect("crt_filter_toggle", self, "_on_crt_toggle")
+	_on_crt_toggle(Settings.crt_filter)
 
 
 func _on_crt_toggle(on: bool) -> void:

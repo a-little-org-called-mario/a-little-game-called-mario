@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/boxes/BaseBox.gd"
 }, {
+"base": "Node2D",
+"class": "BaseInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/BaseInventoryHandle.gd"
+}, {
 "base": "Enemy",
 "class": "Bub",
 "language": "GDScript",
@@ -49,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/CameraLeanAmount.gd"
 }, {
+"base": "BaseInventoryHandle",
+"class": "CoinInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/CoinInventoryHandle.gd"
+}, {
 "base": "PlayerProjectile",
 "class": "CoinProjectile",
 "language": "GDScript",
@@ -63,6 +73,11 @@ _global_script_classes=[ {
 "class": "ConeSpotter",
 "language": "GDScript",
 "path": "res://scripts/ConeSpotter.gd"
+}, {
+"base": "Object",
+"class": "Contributors",
+"language": "GDScript",
+"path": "res://scenes/title/Contributors.gd"
 }, {
 "base": "Area2D",
 "class": "Corncob",
@@ -119,11 +134,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/Flappy/Characters/Player/PlayerFlyingControls.gd"
 }, {
-"base": "Resource",
-"class": "PlayerInventory",
-"language": "GDScript",
-"path": "res://scripts/resources/PlayerInventory.gd"
-}, {
 "base": "Area2D",
 "class": "PlayerProjectile",
 "language": "GDScript",
@@ -178,6 +188,11 @@ _global_script_classes=[ {
 "class": "TrackParser",
 "language": "GDScript",
 "path": "res://scenes/DDR/TrackParser.gd"
+}, {
+"base": "Enemy",
+"class": "TypeShootEnemy",
+"language": "GDScript",
+"path": "res://scripts/typeshoot/TypeShootEnemy.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
@@ -185,12 +200,15 @@ _global_script_class_icons={
 "BallPlayer": "",
 "BallSpawnPoint": "",
 "BaseBox": "",
+"BaseInventoryHandle": "",
 "Bub": "",
 "Bus": "",
 "CameraLeanAmount": "",
+"CoinInventoryHandle": "",
 "CoinProjectile": "",
 "CoinsAchievement": "",
 "ConeSpotter": "",
+"Contributors": "",
 "Corncob": "",
 "EndPortal": "",
 "Enemy": "",
@@ -202,7 +220,6 @@ _global_script_class_icons={
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",
-"PlayerInventory": "",
 "PlayerProjectile": "",
 "PopcornKernel": "",
 "PopcornPopped": "",
@@ -213,7 +230,8 @@ _global_script_class_icons={
 "SokobanLevel": "res://sprites/box.png",
 "SpawnPoint": "",
 "Spotter": "",
-"TrackParser": ""
+"TrackParser": "",
+"TypeShootEnemy": ""
 }
 
 [application]
@@ -417,6 +435,11 @@ marwing_right={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777233,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+show_instructions={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

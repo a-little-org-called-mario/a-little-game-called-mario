@@ -13,7 +13,8 @@ func set_player(player: Player):
 
 
 func ai(_delta: float):
-	_targetPos = _player.global_position + OFFSET
+	if _player.is_inside_tree():
+		_targetPos = _player.global_position + OFFSET
 
 
 func move(_delta: float):

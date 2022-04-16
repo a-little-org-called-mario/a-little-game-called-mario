@@ -147,7 +147,7 @@ func _on_KillTrigger_body_entered(body):
 	if not body is Player:
 		return
 	var player = body as Player
-	player.jump_xp += 1
+	player.stats.jump_xp += 1
 	player.bounce(BOUNCE_STRENGTH)
 	squash(0.075)
 	yield(tween, "tween_all_completed")

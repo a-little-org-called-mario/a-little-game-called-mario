@@ -73,6 +73,9 @@ margin_right = 1024.0
 margin_bottom = 600.0
 mouse_filter = 2
 theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 anchor_right = 1.0
@@ -168,7 +171,9 @@ CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
 
 B TO[wave amp=50 freq=2] FIREBALL [/wave]
 
-(WITH POWERUP)"
+(WITH POWERUP)
+
+TAB TO SHOW/HIDE CONTROLS"
 text = "ARROW KEYS TO MOVE
 
 SHIFT TO SPRINT
@@ -179,9 +184,14 @@ CONTROL/Z TO SHOOT
 
 B TO FIREBALL 
 
-(WITH POWERUP)"
+(WITH POWERUP)
+
+TAB TO SHOW/HIDE CONTROLS"
 fit_content_height = true
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
 visible = false

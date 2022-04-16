@@ -14,9 +14,11 @@ const STOPTHRESHOLD = 5  # Speed at which we should stop motion if idle.
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.05
 const SLIP_RANGE = 16
+const SUPER_JUMP_MAX_TIME = 0.5
 
 var gravity = preload("res://scripts/resources/Gravity.tres")
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
+var stats = preload("res://scripts/resources/PlayerStats.tres")
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
@@ -27,18 +29,8 @@ var double_jump = true
 var crouching = false
 var grounded = false
 var anticipating_jump = false  # the small window of time before the player jumps
-
-# STATS BLOCK
-var max_hearts = 3
-var jump_xp = 0
-var coin_shoot_xp = 0
-var intelegence = 1
-var speed = 1
-var charisma = 1
-var swim = 0
-var acrobatics = 0
-var building = 1
-var sanity = 10
+var super_jumping = false
+var super_jump_timer = 0.0
 var powerupspeed = 1
 var powerupaccel = 1
 
@@ -47,6 +39,7 @@ onready var anim = $Sprite/Anims
 onready var tween = $Tween
 onready var trail: Line2D = $Trail
 onready var run_particles: CPUParticles2D = $RunParticles
+onready var moustache = $BoucyMoustache  # Gorgeous bouncy moustache!
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -55,12 +48,10 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 func _ready() -> void:
 	_end_flash_sprite()
+	set_hitbox_crouching(false)
 
 
 func _enter_tree():
-	if not EventBus.is_connected("game_exit", inventory, "reset"):
-		EventBus.connect("game_exit", inventory, "reset")
-
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 	EventBus.connect("enemy_hit_coin", self, "_on_enemy_hit_coin")
 	EventBus.connect("enemy_hit_fireball", self, "_on_enemy_hit_fireball")
@@ -86,7 +77,7 @@ func _physics_process(delta: float) -> void:
 	var jerk_modifier = 1
 	var animationSpeed = 1
 	if Input.is_action_pressed("sprint"):
-		speed += 1
+		stats.speed += 1
 		x_motion.max_speed *= 1.5
 		x_motion.max_accel *= 3
 		jerk_modifier = 3
@@ -116,14 +107,27 @@ func _physics_process(delta: float) -> void:
 		run_particles.emitting = false
 
 	jump_buffer_timer -= delta
-	if Input.is_action_just_pressed("jump"):
-		if coyote_timer > 0:
+	if Input.is_action_just_pressed("jump") and not super_jumping:
+		# If experienced enough, do a super crouch jump
+		if crouching and stats.acrobatics >= 10:
+			super_jumping = true
+			super_jump()
+		elif coyote_timer > 0:
 			jump()
 		elif double_jump:
+			stats.acrobatics += 1
 			jump()
 			double_jump = false
 		else:
 			jump_buffer_timer = JUMP_BUFFER_TIME
+
+	# A super jump is a set height
+	if super_jumping:
+		if super_jump_timer < SUPER_JUMP_MAX_TIME:
+			super_jump_timer += delta
+			gravity_multiplier = 0.1
+		else:
+			super_jumping = false
 
 	if _is_on_floor():
 		if not grounded:
@@ -139,17 +143,21 @@ func _physics_process(delta: float) -> void:
 			crouch()
 	else:
 		grounded = false
+		crouching = false
 		coyote_timer -= delta
 		# while we're holding the jump button we should jump higher
-		if Input.is_action_pressed("jump"):
-			gravity_multiplier = 0.5
-		else:
-			gravity_multiplier = 1
+		if not super_jumping:
+			if Input.is_action_pressed("jump"):
+				gravity_multiplier = 0.5
+			else:
+				gravity_multiplier = 1
 		anim.playAnim("Jump")
 		run_particles.emitting = false
 
 	if crouching and not Input.is_action_pressed("down"):
 		crouching = false
+		set_hitbox_crouching(false)
+		moustache.position.y = 0
 		unsquash()
 
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
@@ -190,18 +198,34 @@ func try_slip(angle: float):
 
 func crouch():
 	crouching = true
+	set_hitbox_crouching(true)
+	moustache.position.y = 17.5  # Moves gorgeous bouncy moustache lower when rouching
 	squash()
 
 
 func jump():
+	stats.jump_xp += 1
 	tween.stop_all()
 	anticipating_jump = true
+	set_hitbox_crouching(false)
 	squash(0.03, 0, 0.5)
 	yield(tween, "tween_all_completed")
 	stretch(0.2, 0, 0.5, 1.2)
 	jump_buffer_timer = 0
 	coyote_timer = 0
 	y_motion.set_speed(JUMPFORCE * -1)
+	anticipating_jump = false
+	$JumpSFX.play()
+	EventBus.emit_signal("jumping")
+
+
+func super_jump():
+	super_jump_timer = 0
+	stats.jump_xp += 1
+	stats.acrobatics += 1
+	tween.stop_all()
+	stretch(0.2, 0, 1.0, 2.5)
+	y_motion.set_speed(JUMPFORCE * -100)
 	anticipating_jump = false
 	$JumpSFX.play()
 	EventBus.emit_signal("jumping")
@@ -216,10 +240,12 @@ func land():
 
 func look_right():
 	sprite.flip_h = false
+	moustache.position.x = 0  # Moves gorgeous bouncy moustache to the mouth
 
 
 func look_left():
 	sprite.flip_h = true
+	moustache.position.x = -10  # Moves gorgeous bouncy moustache to the mouth
 
 
 func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
@@ -326,16 +352,18 @@ func _on_heart_change(data):
 		flash_sprite()
 
 	if inventory.hearts <= 0:
+		EventBus.emit_signal("player_died")
 		if get_tree() != null:
+			yield(get_tree().create_timer(2.0), "timeout")
 			get_tree().reload_current_scene()
 
 
 func _on_enemy_hit_coin():
-	coin_shoot_xp += 1
+	stats.coin_shoot_xp += 1
 
 
 func _on_enemy_hit_fireball():
-	intelegence += 1
+	stats.intelligence += 1
 
 
 func flash_sprite(duration: float = 0.05) -> void:
@@ -348,3 +376,12 @@ func flash_sprite(duration: float = 0.05) -> void:
 func _end_flash_sprite() -> void:
 	$Sprite.material.set_shader_param("flash_modifier", 0.0)
 	$BusSprite.material.set_shader_param("flash_modifier", 0.0)
+
+
+func set_hitbox_crouching(value: bool):
+	if value:
+		$CollisionShape2D.shape.extents.y = 27 * 0.4
+		$CollisionShape2D.position.y = 21
+	else:
+		$CollisionShape2D.shape.extents.y = 27
+		$CollisionShape2D.position.y = 5

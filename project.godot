@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/marwing/MarwingLevel.gd"
 }, {
+"base": "PathFollow",
+"class": "MarwingShip",
+"language": "GDScript",
+"path": "res://scripts/marwing/Ship.gd"
+}, {
 "base": "Enemy",
 "class": "Platform",
 "language": "GDScript",
@@ -206,6 +211,7 @@ _global_script_class_icons={
 "IntralevelPortal": "",
 "Luigi": "",
 "MarwingLevel": "",
+"MarwingShip": "",
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",
@@ -232,8 +238,8 @@ config/icon="res://sprites/icon.png"
 [autoload]
 
 EventBus="*res://scripts/autoload/EventBus.gd"
-Settings="*res://scripts/autoload/Settings.gd"
 SceneTransition="*res://scenes/SceneTransition/SceneTransition.tscn"
+Settings="*res://scripts/autoload/Settings.gd"
 
 [debug]
 

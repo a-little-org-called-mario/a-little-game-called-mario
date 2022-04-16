@@ -39,7 +39,7 @@ onready var anim = $Sprite/Anims
 onready var tween = $Tween
 onready var trail: Line2D = $Trail
 onready var run_particles: CPUParticles2D = $RunParticles
-onready var moustache = $BoucyMoustache # Gorgeous bouncy moustache!
+onready var moustache = $BoucyMoustache  # Gorgeous bouncy moustache!
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -199,7 +199,7 @@ func try_slip(angle: float):
 func crouch():
 	crouching = true
 	set_hitbox_crouching(true)
-	moustache.position.y = 17.5 # Moves gorgeous bouncy moustache lower when rouching
+	moustache.position.y = 17.5  # Moves gorgeous bouncy moustache lower when rouching
 	squash()
 
 
@@ -240,12 +240,12 @@ func land():
 
 func look_right():
 	sprite.flip_h = false
-	moustache.position.x = 0 # Moves gorgeous bouncy moustache to the mouth
+	moustache.position.x = 0  # Moves gorgeous bouncy moustache to the mouth
 
 
 func look_left():
 	sprite.flip_h = true
-	moustache.position.x = -10 # Moves gorgeous bouncy moustache to the mouth
+	moustache.position.x = -10  # Moves gorgeous bouncy moustache to the mouth
 
 
 func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):

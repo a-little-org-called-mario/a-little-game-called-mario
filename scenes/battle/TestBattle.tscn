@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/combat/Member.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/battle/Member.tscn" type="PackedScene" id=2]
 
 [node name="TestCombat" type="Node2D"]
 

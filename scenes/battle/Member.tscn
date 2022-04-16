@@ -3,7 +3,7 @@
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
 [ext_resource path="res://scripts/PlayerAnims.gd" type="Script" id=3]
-[ext_resource path="res://scripts/combat/Member.gd" type="Script" id=4]
+[ext_resource path="res://scripts/battle/Member.gd" type="Script" id=4]
 [ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=5]
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=6]
 [ext_resource path="res://sprites/dustparticle.png" type="Texture" id=7]
@@ -131,7 +131,7 @@ random_pitch = 1.5
 extents = Vector2( 11, 22 )
 
 [node name="Member" type="KinematicBody2D"]
-collision_mask = 30
+collision_mask = 31
 script = ExtResource( 4 )
 
 [node name="Trail" type="Line2D" parent="."]

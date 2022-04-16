@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/attackIcons.png-9715498ee5596a7904378aba95d258cb.stex"
+path="res://.import/attackIcons.png-5422fd07e93dc051f3a98672465b0c48.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/combat/attackIcons.png"
-dest_files=[ "res://.import/attackIcons.png-9715498ee5596a7904378aba95d258cb.stex" ]
+source_file="res://sprites/battle/attackIcons.png"
+dest_files=[ "res://.import/attackIcons.png-5422fd07e93dc051f3a98672465b0c48.stex" ]
 
 [params]
 

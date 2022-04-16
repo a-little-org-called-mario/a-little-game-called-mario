@@ -7,6 +7,7 @@ var actors: Array = []
 var last_tick = 0
 
 export(int) var spawn_delay = 30
+export(int) var max_hit_delta = 300
 export(float) var note_offset = 48
 export(float) var note_y_offset = 300
 export(PackedScene) var NoteUp
@@ -32,15 +33,18 @@ func _process(_delta):
 		$Right/AnimationPlayer.play("pressed")
 
 func set_tick(tick):
-	for note in notes:
+	for i in len(notes):
+		var note = notes[i]
 		var note_tick = note["tick"]
 		if last_tick < note_tick and note_tick <= tick:
-			set_pose(note["pose"])
+			_set_pose(note["pose"])
 		if last_tick + spawn_delay < note_tick and note_tick <= tick + spawn_delay:
-			spawn_note(note["pose"], note_tick)
+			_spawn_note(i, note["pose"], note_tick)
+		if last_tick < note_tick + max_hit_delta and note_tick + max_hit_delta <= tick:
+			_note_miss(i)
 	last_tick = tick
 			
-func spawn_note(pose, note_tick):
+func _spawn_note(index, pose, note_tick):
 	var node
 	match pose:
 		"left":
@@ -64,11 +68,12 @@ func spawn_note(pose, note_tick):
 	node.init_tick = note_tick - spawn_delay
 	node.target_tick = note_tick
 	node.target_pos = position.y
+	node.index = index
 	
 	connect("set_tick", node, "set_tick")
 	add_child(node)
 
-func set_pose(pose):
+func _set_pose(pose):
 	for actor in actors:
 		actor.pose = pose
 
@@ -76,4 +81,41 @@ func _on_Level_set_tick(tick):
 	set_tick(tick)
 	emit_signal("set_tick", tick)
 
+func _note_miss(index):
+	if not player_track || "hit" in notes[index]:
+		return
+	emit_signal("note_hit", -100)
+
+
+func _on_player_pose_set(pose):
+	if not player_track:
+		return
+	var res = _find_closest_pose(pose)
+	var i = res[0]
+	var delta = res[1]
+	if i == -1 || delta > max_hit_delta:
+		emit_signal("note_hit", -100)
+		return
+	notes[i]["hit"] = true
+	var score = floor(((max_hit_delta - delta) / max_hit_delta) * 1000)
+	for node in get_children():
+		if "index" in node && node.index == i:
+			node.queue_free()
+			break
+	emit_signal("note_hit", score)
+	
+func _find_closest_pose(pose):
+	var minVal = null
+	var minIndex = -1
+	for i in len(notes):
+		var note = notes[i]
+		if note["pose"] != pose:
+			continue
+		var delta = abs(note["tick"] - last_tick)
+		if minVal == null || minVal > delta:
+			minVal = delta
+			minIndex = i
+	return [minIndex, minVal]
+
 signal set_tick
+signal note_hit(score)

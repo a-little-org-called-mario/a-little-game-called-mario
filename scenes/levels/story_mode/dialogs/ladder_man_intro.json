@@ -6,7 +6,7 @@
 			"dialog": {
 				"text": [
 					"I don't remember...",
-					"There wase definitly someone here.\nHe wanted to do something... Finish something..."
+					"There was definitly someone here.\nHe wanted to do something... Finish something..."
 				],
 				"choices": "I will find out!"
 			}
@@ -14,8 +14,17 @@
 		{
 			"text": "Can you help me get out of here?",
 			"dialog": {
-				"text": "No, I'm just a ladder. I'm no use if you want to climb out of here...",
-				"choices": "Bye then!"
+				"text": [
+					"No, I'm just a ladder. I'm no use if you want to climb out of here...",
+					"Although I do have something you may find useful.",
+					"Here, take this!",
+					"(Press [E] to open the inventory.)"
+				],
+				"choices": [
+					"Wow, that won't help me at all.",
+					"Thank you so much!"
+				],
+				"item": "stick"
 			}
 		}
 	]

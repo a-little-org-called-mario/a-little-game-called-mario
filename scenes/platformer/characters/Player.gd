@@ -346,9 +346,6 @@ func _on_heart_change(data):
 
 	if inventory.hearts <= 0:
 		EventBus.emit_signal("player_died")
-		if get_tree() != null:
-			yield(get_tree().create_timer(2.0), "timeout")
-			get_tree().reload_current_scene()
 
 
 func _on_enemy_hit_coin():

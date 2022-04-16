@@ -69,10 +69,8 @@ func load_data():
 
 	# emit any relevant signals
 	EventBus.emit_signal("crt_filter_toggle", crt_filter)
-	EventBus.emit_signal("volume_changed", "game")
-	EventBus.emit_signal("volume_changed", "music")
-	EventBus.emit_signal("volume_changed", "sfx")
-	EventBus.emit_signal("volume_changed", "voice")
+	for bus in [ "Master", "music", "sfx", "voice" ]:
+		EventBus.emit_signal("volume_changed", bus);
 
 func set_to_default():
 	if camera_lean == -1: camera_lean = CameraLeanAmount.MAX

@@ -23,3 +23,5 @@ position = Vector2( 169, 474 )
 isAI = true
 
 [node name="Moves" parent="." instance=ExtResource( 3 )]
+
+[connection signal="change_selected" from="Member" to="Moves" method="_on_change_selected"]

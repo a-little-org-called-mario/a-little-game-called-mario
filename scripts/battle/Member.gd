@@ -19,6 +19,7 @@ var anticipating_jump = false  # the small window of time before the player jump
 
 var state = "ground"
 var jumpTime = 0
+var selectedMove = 2
 
 var velocity = Vector2()
 
@@ -26,6 +27,8 @@ var inpLeft = 0
 var inpRight = 0
 var inpLaR = 0
 var inpJump = 0
+var inpBleft = 0
+var inpBright = 0
 
 var charName = "Plumber"
 
@@ -37,6 +40,8 @@ onready var sprite = $Sprite
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
+
+signal change_selected(new_move)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -90,6 +95,9 @@ func input():
 	inpLaR = inpLeft*-1 + inpRight
 	
 	inpJump = Input.is_action_just_pressed("jump")
+	
+	inpBleft = Input.is_action_just_pressed("battle_moves_left")
+	inpBright = Input.is_action_just_pressed("battle_moves_right")
 
 
 func air():
@@ -139,6 +147,9 @@ func ground():
 		$RunParticles.emitting = true
 	
 	handle_movement()
+	
+	if (inpBleft or inpBright) and not isAI:
+		handle_move_select()
 
 
 func handle_gravity():
@@ -213,4 +224,18 @@ func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 		$Trail, "height", $Trail.height, 0, time, Tween.TRANS_BACK, Tween.EASE_OUT
 	)
 	tween.start()
+
+
+func handle_move_select():
+	if inpBleft:
+		selectedMove -= 1
+	if inpBright:
+		selectedMove += 1
+	
+	if selectedMove < 0:
+		selectedMove = 4
+	elif selectedMove > 4:
+		selectedMove = 0
+	
+	emit_signal("change_selected", selectedMove)
 

@@ -30,6 +30,9 @@ func _physics_process (dt: float):
 
 	# toggle death animation when hp hits zero, then remove node from scene
 	if 0 == hp:
+		can_move = false;
+		can_strafe = false;
+		can_shoot = false;
 		$AnimationPlayer.play("die");
 		yield($AnimationPlayer,"animation_finished");
 		queue_free();

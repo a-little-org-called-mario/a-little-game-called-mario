@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scripts/typeshoot/TypeShootEnemy.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 10 )
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="TypeShootEnemy" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 2 )
+
+[node name="SquishParticles" parent="." index="3"]
+emitting = false
+
+[node name="NameLabel" type="RichTextLabel" parent="." index="4"]
+margin_left = -128.0
+margin_top = -8.0
+margin_right = 128.0
+margin_bottom = 8.0
+size_flags_horizontal = 3
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]TARGET NAME[/center]"
+text = "TARGET NAME"

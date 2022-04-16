@@ -27,14 +27,17 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	EventBus.emit_signal("game_exit")
 
+
 func _on_ui_visibility_changed(data):
 	ui.get_child(0).visible = data.visible
+
 
 func _bgm_changed(data) -> void:
 	if "playing" in data:
 		bgm.playing = data.playing
 	if "stream" in data:
 		bgm.stream = data.stream
+
 
 func _hook_portals() -> void:
 	for portal in get_tree().get_nodes_in_group(ENDPORTALS_GROUP):

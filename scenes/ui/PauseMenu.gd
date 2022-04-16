@@ -348,7 +348,7 @@ func volume_select(delta: int, label: RichTextLabel):
 	set_item_style()
 
 	# emit volume change signal, so that Main.gd can modify buses
-	var bus_names = [ "game", "music", "sfx", "voice" ]
+	var bus_names = [ "Master", "music", "sfx", "voice" ]
 	EventBus.emit_signal(
 		"volume_changed", bus_names[selected - 1]
 	)

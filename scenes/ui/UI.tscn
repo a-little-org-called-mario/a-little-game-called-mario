@@ -147,6 +147,7 @@ scroll_active = false
 script = ExtResource( 2 )
 
 [node name="Instructions" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481

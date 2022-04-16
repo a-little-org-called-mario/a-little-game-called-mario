@@ -14,7 +14,7 @@ onready var _coin_handle: CoinInventoryHandle = $CoinInventoryHandle
 var _lines: Array
 var _line_index: int
 var _enemies: Array = []
-var _pause_actions
+var _pause_action: InputEventKey
 
 func _ready() -> void:
 	randomize()
@@ -56,11 +56,6 @@ func _spawn_enemy() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
-		if event.scancode == KEY_ESCAPE:
-			# reroute to pause menu and allow unpause
-			EventBus.emit_signal("game_paused", true)
-			return
-
 		for enemy in _enemies:
 			enemy.handle_input(char(event.unicode).to_upper())
 		get_tree().set_input_as_handled()
@@ -95,12 +90,12 @@ func _on_enemy_exited(enemy: TypeShootEnemy) -> void:
 
 func _remove_pause_action():
 	# a hack - we need the 'P' key for the game mode
-	# so clear the action (and add it as empty to prevent console errors)
-	_pause_actions = InputMap.get_action_list("pause")
-	InputMap.erase_action("pause")
-	InputMap.add_action("pause")
+	var actions = InputMap.get_action_list("pause")
+	for action in actions:
+		if action is InputEventKey and action.physical_scancode == KEY_P:
+			_pause_action = action
+			InputMap.action_erase_event("pause", action)
 
 
 func _restore_pause_action() -> void:
-	for action in _pause_actions:
-		InputMap.action_add_event("pause", action)
+	InputMap.action_add_event("pause", _pause_action)

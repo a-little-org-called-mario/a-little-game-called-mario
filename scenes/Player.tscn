@@ -1,5 +1,6 @@
 [gd_scene load_steps=39 format=2]
 
+
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=3]
@@ -8,7 +9,7 @@
 [ext_resource path="res://sprites/dustparticle.png" type="Texture" id=6]
 [ext_resource path="res://sprites/bus.png" type="Texture" id=7]
 [ext_resource path="res://scripts/mariocontroller/Shooter.gd" type="Script" id=8]
-[ext_resource path="res://scripts/mariocontroller/CoinCollector.gd" type="Script" id=9]
+[ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scripts/mariocontroller/BlockBuilder.gd" type="Script" id=10]
 [ext_resource path="res://scripts/mariocontroller/Bus.gd" type="Script" id=11]
 [ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=12]
@@ -216,9 +217,6 @@ angle_random = 1.0
 scale_amount = 0.75
 color = Color( 1, 1, 1, 0.784314 )
 
-[node name="CoinCollector" type="Node" parent="."]
-script = ExtResource( 9 )
-
 [node name="StarCollector" type="Node" parent="."]
 script = ExtResource( 15 )
 
@@ -322,5 +320,7 @@ mesh = SubResource( 28 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoucyMoustache/DampedSpringJoint2D2/point2"]
 shape = SubResource( 29 )
 disabled = true
+
+[node name="CoinInventoryHandle" parent="." instance=ExtResource( 9 )]
 
 [connection signal="timeout" from="HitFlashTimer" to="." method="_end_flash_sprite"]

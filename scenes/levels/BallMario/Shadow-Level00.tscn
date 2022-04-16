@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/BallSpawnPoint.tscn" type="PackedScene" id=6]
 
@@ -16,3 +17,12 @@ next_level_path = "res://scenes/levels/Default/Level01.tscn"
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 6 )]
 position = Vector2( 226, 481 )
+
+[node name="Coin" parent="." instance=ExtResource( 2 )]
+position = Vector2( 416, 224 )
+
+[node name="Coin2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 480, 224 )
+
+[node name="Coin3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 544, 224 )

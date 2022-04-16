@@ -10,7 +10,7 @@ onready var vscroll = scroll_container.get_v_scrollbar()
 
 func _ready():
 	var label: Label = $ScrollContainer/VBoxContainer/Names
-	label.text = contributors.get_text()	
+	label.text = contributors.get_text()
 
 
 func _process(delta):

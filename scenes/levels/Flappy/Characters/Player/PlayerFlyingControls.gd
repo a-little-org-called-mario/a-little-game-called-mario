@@ -17,7 +17,7 @@ func _ready():
 
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("jump"):
+	if !died && Input.is_action_just_pressed("jump"):
 		linear_velocity.y = ASCEND_FORCE;
 		angular_velocity = -10.0
 

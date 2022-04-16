@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/dustparticle.png" type="Texture" id=2]
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/platformer/characters/Player.gd" type="Script" id=4]
+[ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=5]
 [ext_resource path="res://scenes/platformer/characters/PlayerAnims.gd" type="Script" id=7]
 [ext_resource path="res://sprites/characters/Gex.png" type="Texture" id=9]
 [ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=10]
@@ -145,5 +146,8 @@ angle_random = 1.0
 scale_amount = 0.75
 color = Color( 1, 1, 1, 0.784314 )
 script = ExtResource( 1 )
+
+[node name="CameraFollower" type="Node" parent="."]
+script = ExtResource( 5 )
 
 [connection signal="timeout" from="HitFlashTimer" to="." method="_end_flash_sprite"]

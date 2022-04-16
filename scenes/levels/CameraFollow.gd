@@ -49,11 +49,10 @@ func _exit_tree() -> void:
 	
 func _get_follow_candidates() -> void:
 	follow_candidates = get_tree().get_nodes_in_group("CameraFCandidates")
-	print(follow_candidates.size())
-	
+
 func _get_camera_candidates() -> Array:
 	return get_tree().get_nodes_in_group("Cameras")
-	
+
 func _find_current_camera() -> void:
 	var camera_candidates = _get_camera_candidates()
 	if camera_candidates.size()>0:

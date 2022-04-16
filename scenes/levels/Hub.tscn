@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/CameraFollow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/doodads/pictureframe/PictureFrame.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/levels/Hub.gd" type="Script" id=6]
+[ext_resource path="res://sprites/Coin_Gems/star.png" type="Texture" id=7]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -19,3 +21,34 @@ portal_scene = ExtResource( 3 )
 position = Vector2( 160, 480 )
 
 [node name="CameraFollow" parent="." instance=ExtResource( 4 )]
+
+[node name="PictureFrame" parent="." instance=ExtResource( 5 )]
+margin_left = 75.0
+margin_top = 299.0
+margin_right = 377.0
+margin_bottom = 411.0
+
+[node name="RichTextLabel" parent="PictureFrame" index="0"]
+bbcode_text = "[ARROWS]  [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+[SPACE]   [wave amp=50 freq=2]JUMP[/wave]
+[SHIFT]   SPRINT
+[CTRL/Z]  THROW COIN"
+text = "[ARROWS]  MOVE
+[SPACE]   JUMP
+[SHIFT]   SPRINT
+[CTRL/Z]  THROW COIN"
+
+[node name="PictureFrame2" parent="." instance=ExtResource( 5 )]
+margin_left = 177.0
+margin_top = 186.0
+margin_right = 275.0
+margin_bottom = 286.0
+
+[node name="RichTextLabel" parent="PictureFrame2" index="0"]
+visible = false
+
+[node name="TextureRect" parent="PictureFrame2" index="1"]
+texture = ExtResource( 7 )
+
+[editable path="PictureFrame"]
+[editable path="PictureFrame2"]

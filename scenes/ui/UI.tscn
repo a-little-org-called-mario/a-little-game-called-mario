@@ -21,6 +21,7 @@ mouse_filter = 2
 theme = ExtResource( 5 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
@@ -58,6 +59,9 @@ B TO FIREBALL
 (WITH POWERUP)"
 fit_content_height = true
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0

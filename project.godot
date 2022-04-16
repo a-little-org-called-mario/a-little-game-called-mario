@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/resources/BaseInventoryHandle.gd"
 }, {
+"base": "Node2D",
+"class": "BouncyMoustache",
+"language": "GDScript",
+"path": "res://scripts/BoucyMoustache.gd"
+}, {
 "base": "Enemy",
 "class": "Bub",
 "language": "GDScript",
@@ -201,6 +206,7 @@ _global_script_class_icons={
 "BallSpawnPoint": "",
 "BaseBox": "",
 "BaseInventoryHandle": "",
+"BouncyMoustache": "",
 "Bub": "",
 "Bus": "",
 "CameraLeanAmount": "",

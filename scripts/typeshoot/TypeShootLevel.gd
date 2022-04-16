@@ -62,12 +62,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_heart_change(data: Dictionary) -> void:
-	if not data.has("value"):
-		return
-
-	_inventory.hearts += data.value
-	if _inventory.hearts <= 0:
-		get_tree().reload_current_scene()
+	if data.has("total") and data.total <= 0:
+		EventBus.emit_signal("player_died")
 
 
 func _on_enemy_typed_out(enemy: TypeShootEnemy) -> void:
@@ -88,7 +84,7 @@ func _on_enemy_exited(enemy: TypeShootEnemy) -> void:
 	_enemies.remove(_enemies.find(enemy))
 
 
-func _remove_pause_action():
+func _remove_pause_action() -> void:
 	# a hack - we need the 'P' key for the game mode
 	var actions = InputMap.get_action_list("pause")
 	for action in actions:

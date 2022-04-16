@@ -4,10 +4,11 @@ extends Node
 onready var player : Player = owner
 onready var sprite : Sprite = player.get_node("BusSprite")
 onready var collision : CollisionShape2D = player.get_node("BusCollision")
+var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
 func _ready() -> void:
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
-	if player.inventory.has_bus:
+	if inventory.has_bus:
 		_activate_bus()
 	else:
 		set_process(false)
@@ -15,7 +16,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	sprite.flip_h = !player.sprite.flip_h
-	if player.inventory.has_bus:
+	if inventory.has_bus:
 		player.powerupspeed = 4
 		player.powerupaccel = 2
 	else:
@@ -25,7 +26,7 @@ func _process(_delta: float) -> void:
 
 func _on_bus_collected(data: Dictionary) -> void:
 	if data.has("collected"):
-		player.inventory.has_bus = data["collected"]
+		inventory.has_bus = data["collected"]
 		_activate_bus()
 
 

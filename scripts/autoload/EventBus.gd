@@ -13,6 +13,13 @@ signal level_completed(data)
 signal level_started(data)
 signal player_died
 
+# The "stream" key will set the background music and
+# the "playing" will set whenever the music is playing
+signal bgm_changed(data)
+
+# Expects a "visible" boolean key
+signal ui_visibility_changed(data)
+
 # Scene Transitions, expects "scene" key
 signal change_scene(data)
 

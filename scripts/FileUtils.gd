@@ -1,5 +1,5 @@
 # Returns a list of non-hidden files inside a given directory.
-static func list_dir(path : String) -> Array:
+static func list_dir(path: String) -> Array:
 	var dir := Directory.new()
 	if dir.open(path) != OK:
 		return []
@@ -14,7 +14,7 @@ static func list_dir(path : String) -> Array:
 
 
 # Returns the content of a file as a json object.
-static func as_json(path : String) -> Dictionary:
+static func as_json(path: String) -> Dictionary:
 	var file := File.new()
 	if file.open(path, File.READ) != OK:
 		return {}

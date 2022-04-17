@@ -357,19 +357,17 @@ func _on_enemy_hit_fireball():
 
 
 func flash_sprite(duration: float = 0.05) -> void:
-	$Sprite.material.set_shader_param("flash_modifier", 1.0)
-	var bus: Sprite = get_node_or_null("BusSprite")
-	if bus != null:
-		bus.material.set_shader_param("flash_modifier", 1.0)
+	var material: ShaderMaterial = sprite.material as ShaderMaterial
+	if material != null:
+		$Sprite.material.set_shader_param("flash_modifier", 1.0)
 	$HitFlashTimer.wait_time = duration
 	$HitFlashTimer.start()
 
 
 func _end_flash_sprite() -> void:
-	$Sprite.material.set_shader_param("flash_modifier", 0.0)
-	var bus: Sprite = get_node_or_null("BusSprite")
-	if bus != null:
-		bus.material.set_shader_param("flash_modifier", 0.0)
+	var material: ShaderMaterial = sprite.material as ShaderMaterial
+	if material != null:
+		material.set_shader_param("flash_modifier", 0.0)
 
 
 func set_hitbox_crouching(value: bool):

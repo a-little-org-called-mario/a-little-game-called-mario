@@ -39,4 +39,6 @@ func _activate_bus() -> void:
 func _update_player() -> void:
 	player.sprite.visible = false
 	player.get_node("CollisionShape2D").set_deferred("disabled", true)
-	player.trail.height = 15
+	var trail: Line2D = player.get_node_or_null("Trail")
+	if trail != null:
+		trail.height = 15

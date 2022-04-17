@@ -33,6 +33,18 @@ tracks/1/keys = {
 } ],
 "times": PoolRealArray( 0 )
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:can_activate_secret")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Toasty" type="Control"]
 anchor_right = 1.0
@@ -41,6 +53,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+target_coin_streak = 2
+can_activate_secret = true
 
 [node name="Waluigi" type="TextureRect" parent="."]
 anchor_left = 1.0

@@ -35,6 +35,7 @@ var powerupspeed = 1
 var powerupaccel = 1
 
 onready var sprite = $Sprite
+onready var sprite_nose = $Sprite/NoseSprite
 onready var anim = $Sprite/Anims
 onready var tween = $Tween
 onready var trail: Line2D = $Trail
@@ -162,6 +163,7 @@ func _physics_process(delta: float) -> void:
 
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
 	sprite.flip_v = gravity.direction.y < 0
+	sprite_nose.flip_v = gravity.direction.y < 0
 
 	var move_and_slide_result = move_and_slide(
 		y_motion.update_motion() + x_motion.update_motion(), Vector2.UP
@@ -240,11 +242,13 @@ func land():
 
 func look_right():
 	sprite.flip_h = false
+	sprite_nose.flip_h = false
 	moustache.position.x = 0  # Moves gorgeous bouncy moustache to the mouth
 
 
 func look_left():
 	sprite.flip_h = true
+	sprite_nose.flip_h = true
 	moustache.position.x = -10  # Moves gorgeous bouncy moustache to the mouth
 
 
@@ -364,13 +368,15 @@ func _on_enemy_hit_fireball():
 
 
 func flash_sprite(duration: float = 0.05) -> void:
-	$Sprite.material.set_shader_param("flash_modifier", 1.0)
+	sprite.material.set_shader_param("flash_modifier", 1.0)
+	sprite_nose.material.set_shader_param("flash_modifier", 1.0)
 	$HitFlashTimer.wait_time = duration
 	$HitFlashTimer.start()
 
 
 func _end_flash_sprite() -> void:
-	$Sprite.material.set_shader_param("flash_modifier", 0.0)
+	sprite.material.set_shader_param("flash_modifier", 0.0)
+	sprite_nose.material.set_shader_param("flash_modifier", 0.0)
 
 
 func set_hitbox_crouching(value: bool):

@@ -10,11 +10,10 @@ import re
 
 CLASS_DOCSTRING_REGEX = re.compile('(?s)\n\n"""\n(.*?)\n\n(.*?)"""\n\n')
 METHOD_REGEX = re.compile("func ([^_].*):")
-MEMBER_REGEX = re.compile("var ([^_][_a-zA-Z0-9]*) ")
+MEMBER_REGEX = re.compile(".*var ([^_][_a-zA-Z0-9]*).*")
 SIGNAL_REGEX = re.compile("signal ([^_].*)")
-DOCUMENTED_ITEM = "### {name}[↪](" +\
-    "https://github.com/a-little-org-called-mario/a-little-game-called-mario" +\
-    "/blob/main/{file}#L{line})\n\n{docstring}"
+GITHUB_REPO = "https://github.com/a-little-org-called-mario/a-little-game-called-mario" 
+DOCUMENTED_ITEM = "### {name}[↪](" + GITHUB_REPO + "/blob/main/{file}#L{line})\n\n{docstring}"
 
 class DocumentedItem():
     """An element in the script that has been documented."""
@@ -38,12 +37,12 @@ def get_documented(content: str, script_file: Path,
             comment = ""
             continue
         if line[0] == "#":
-            comment += line
+            comment += line.replace("#", "") + "\n\n"
         else:
             result = part_regex.match(line)
             if result and comment:
-                documented.append(DocumentedItem(result.group(1),
-                    comment.replace("# ", ""), line_num, script_file))
+                documented.append(DocumentedItem(result.group(1), comment,
+                    line_num, script_file))
             comment = ""
     return documented
 
@@ -80,11 +79,11 @@ def generate_markdown(file: TextIO) -> str | None:
     signals = get_documented(content, script_file, SIGNAL_REGEX)
     members = get_documented(content, script_file, MEMBER_REGEX)
 
-    markdown: list[str] = [f"# {class_name}"]
+    markdown: list[str] = [f"# {class_name}[↪]({GITHUB_REPO}/blob/main/{script_file})"]
     if short_desc:
         markdown.append(short_desc)
     if docstring:
-        markdown += ["## Description", docstring]
+        markdown.append(docstring)
     markdown += [
         *get_document_section("Signals", signals),
         *get_document_section("Members", members),

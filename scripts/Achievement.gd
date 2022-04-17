@@ -4,9 +4,9 @@ class_name Achievement
 """
 An achievement the player can aquire by doing certain tasks.
 
-# Adding Achievements to the Game
+## Adding Achievements to the Game
 
-## Using Existing Achievement Types
+### Using Existing Achievement Types
 
 If you just want to add an achievement of a type that is already there,
 for example "collect a number of coins", create a new resource in the
@@ -14,7 +14,7 @@ for example "collect a number of coins", create a new resource in the
 
 Make sure to add the description to the localization file.
 
-## Adding A New Achievement Type
+### Adding A New Achievement Type
 
 To create a new type of achievement, add a new script that extends the
 `Achievement` class:

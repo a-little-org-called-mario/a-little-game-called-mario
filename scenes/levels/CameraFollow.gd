@@ -31,7 +31,7 @@ var follow_index: int = 0
 func _ready() -> void:
 	_find_current_camera()
 	# If there is no camera (probably because you are running the scene by itself)
-	# create a camera and make it current. The only bad thing ab  
+	# create a camera and make it current. 
 	if camera_reference == null:
 		camera_reference = Camera2D.new()
 		get_tree().root.call_deferred("add_child",camera_reference)

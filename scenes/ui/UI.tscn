@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/ui/LevelCount.gd" type="Script" id=4]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
 [ext_resource path="res://scenes/ui/Instructions.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/Toasty.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/ui/HeartIconContainer.gd" type="Script" id=8]
 [ext_resource path="res://scenes/ui/Heart.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/ui/StarNotification.gd" type="Script" id=10]
@@ -147,6 +148,7 @@ scroll_active = false
 script = ExtResource( 2 )
 
 [node name="Instructions" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
@@ -274,3 +276,5 @@ scroll_active = false
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PlayerDiedPanel"]
 anims/Appear = SubResource( 1 )
 anims/RESET = SubResource( 2 )
+
+[node name="Toasty" parent="UI" instance=ExtResource( 7 )]

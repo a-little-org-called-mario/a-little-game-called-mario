@@ -60,7 +60,6 @@ bounce_count = 5
 
 [node name="EndPortal" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 3232, -96 )
-next_level_path = "res://scenes/title/TitleScreen.tscn"
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -73,7 +72,7 @@ max_speed = 0.0
 
 [node name="proj_id_54" parent="NPCs" instance=ExtResource( 7 )]
 position = Vector2( -2208, 208 )
-frame = 2
+frame = 1
 
 [node name="Decorations" type="Node2D" parent="."]
 

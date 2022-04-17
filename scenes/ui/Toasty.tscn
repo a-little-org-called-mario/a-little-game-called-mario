@@ -49,6 +49,7 @@ tracks/2/keys = {
 [node name="Toasty" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -62,6 +63,7 @@ anchor_bottom = 1.0
 margin_top = -128.0
 margin_right = 128.0
 rect_pivot_offset = Vector2( 0, 128 )
+mouse_filter = 2
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

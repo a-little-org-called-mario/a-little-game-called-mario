@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://scenes/platformer/characters/Bus.gd" type="Script" id=11]
 [ext_resource path="res://sprites/bus.png" type="Texture" id=12]
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=13]
+[ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=14]
+[ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=15]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
 
 [sub_resource type="Curve" id=11]
@@ -132,6 +134,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="AudioStreamRandomPitch" id=14]
+audio_stream = ExtResource( 15 )
 random_pitch = 1.5
 
 [sub_resource type="RectangleShape2D" id=13]
@@ -233,6 +236,7 @@ anims/Run = SubResource( 27 )
 script = ExtResource( 5 )
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
 volume_db = -12.0
 bus = "sfx"
 

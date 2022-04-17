@@ -34,8 +34,8 @@ func crash() -> void:
 	_heart_handle.change_hearts(-1)
 	$CrashAudio.play()
 	
-func _on_heart_change(data: Dictionary) -> void:
-	if data.has("total") and data.total <= 0:
+func _on_heart_change(_delta: int, total: int) -> void:
+	if total <= 0:
 		gameOver()
 	
 func gameOver() -> void:

@@ -10,7 +10,7 @@ func change_hearts(delta: int) -> bool:
 		return false
 
 	inventory.hearts += delta
-	EventBus.emit_signal("heart_changed", {"value": delta, "total": inventory.hearts})
+	EventBus.emit_signal("heart_changed", delta, inventory.hearts)
 	return true
 
 # Try to find an inventory on the node + children and change the hearts. Returns true when successful.

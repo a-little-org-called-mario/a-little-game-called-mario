@@ -61,13 +61,9 @@ func _input(event: InputEvent) -> void:
 		get_tree().set_input_as_handled()
 
 
-func _on_heart_change(data: Dictionary) -> void:
-	if not data.has("value"):
-		return
-
-	_inventory.hearts += data.value
-	if _inventory.hearts <= 0:
-		get_tree().reload_current_scene()
+func _on_heart_change(_delta: int, total: int) -> void:
+	if total <= 0:
+		EventBus.emit_signal("player_died")
 
 
 func _on_enemy_typed_out(enemy: TypeShootEnemy) -> void:

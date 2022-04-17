@@ -333,12 +333,12 @@ func _is_on_floor() -> bool:
 	)
 
 
-func _on_heart_change(data):
-	if data.has("value") and data.value < 0:
+func _on_heart_change(delta: int, total: int):
+	if delta < 0:
 		$HurtSFX.play()
 		flash_sprite()
 
-	if data.has("total") and data.total <= 0:
+	if total <= 0:
 		EventBus.emit_signal("player_died")
 
 

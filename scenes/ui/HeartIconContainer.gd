@@ -1,43 +1,39 @@
 extends GridContainer
 
 
-export(Texture) var heart_texture : Texture
-export(int) var amplitude = 3
-export(float) var frequency = 4
+export(PackedScene) var heart_scene: PackedScene
+export(int) var amplitude: int = 3
+export(float) var frequency: float = 4
 
-var heart_texture_path : String
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
-var time : float = 0.0
-var heart_sprite_size : int = 16 # Magic number because i'm too lazy to get the height programattically
+var time: float = 0.0
+var local_hearts: int = 0
+
 
 func _ready() -> void:
-	EventBus.connect("heart_changed", self, "_on_heart_change")
-	heart_texture_path = heart_texture.resource_path
-	_update_hearts()
+	for heart in get_children():
+		heart.queue_free()
 
 
 func _process(delta: float) -> void:
 	time += delta
-	
+
+	if local_hearts != inventory.hearts:
+		update_hearts()
+
 	for i in get_child_count():
-		var node : TextureRect = get_child(i)
+		var node: Control = get_child(i)
 		var row = int(i / columns)
-		var initial_y_pos = row * (heart_sprite_size * rect_scale.y)
+		var initial_y_pos = row * node.rect_size.y
 		var new_y_pos = initial_y_pos + sin(time * frequency + i) * amplitude
 		
 		node.rect_position.y = new_y_pos
 
 
-func _on_heart_change(_data: Dictionary) -> void:
-	call_deferred("_update_hearts")
-	
-
-func _update_hearts() -> void:
-	for node in get_children():
-		node.queue_free()
-	
-	var count : int = inventory.hearts
-	for _i in range(count):
-		var heart := TextureRect.new()
-		heart.texture = heart_texture
-		add_child(heart)
+func update_hearts() -> void:
+	while local_hearts < inventory.hearts:
+		add_child(heart_scene.instance())
+		local_hearts += 1
+	while local_hearts > inventory.hearts:
+		get_child(local_hearts - 1).get_node("AnimationPlayer").play("Disappear")
+		local_hearts -= 1

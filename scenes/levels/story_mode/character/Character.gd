@@ -15,6 +15,10 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		emit_signal("talked_to")
 
 
+func set_sprite(to):
+	$Sprite.texture = to
+
+
 func get_portrait() -> Texture:
 	return $Sprite.texture
 

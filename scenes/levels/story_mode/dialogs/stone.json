@@ -1,4 +1,5 @@
 {
+	"$schema": "dialog.schema.json",
 	"text": "...",
 	"choices": [
 		{

@@ -1,20 +1,16 @@
-extends Node
+extends Sprite
 
+export(NodePath) var collision_shape: NodePath
 
-onready var player : Player = owner
-onready var sprite : Sprite = player.get_node("BusSprite")
-onready var collision : CollisionShape2D = player.get_node("BusCollision")
+onready var player: Player = owner
+onready var collision: CollisionShape2D = get_node(collision_shape)
 
 func _ready() -> void:
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
-	if player.inventory.has_bus:
-		_activate_bus()
-	else:
-		set_process(false)
+	call_deferred("_activate_bus", player.inventory.has_bus)
 
 
 func _process(_delta: float) -> void:
-	sprite.flip_h = !player.sprite.flip_h
 	if player.inventory.has_bus:
 		player.powerupspeed = 4
 		player.powerupaccel = 2
@@ -26,19 +22,20 @@ func _process(_delta: float) -> void:
 func _on_bus_collected(data: Dictionary) -> void:
 	if data.has("collected"):
 		player.inventory.has_bus = data["collected"]
-		_activate_bus()
+		call_deferred("_activate_bus", player.inventory.has_bus)
 
 
-func _activate_bus() -> void:
-	sprite.visible = true
-	collision.set_deferred("disabled", false)
-	call_deferred("_update_player")
-	set_process(true)
+func _activate_bus(active: bool) -> void:
+	# Sprites
+	visible = active
+	player.sprite.visible = !active
 
+	# Collision
+	collision.disabled = !active
+	player.collision.disabled = active
 
-func _update_player() -> void:
-	player.sprite.visible = false
-	player.get_node("CollisionShape2D").set_deferred("disabled", true)
 	var trail: Line2D = player.get_node_or_null("Trail")
 	if trail != null:
-		trail.height = 15
+		trail.height = 15 if active else 30
+
+	set_process(active)

@@ -65,7 +65,6 @@ def generate_markdown(file: TextIO) -> str | None:
     a pretty markdown page. If no items where documented, returns None
     """
     script_file = Path(file.name)
-    class_name: str = script_file.stem
     short_desc: str = ""
     docstring: str = ""
 
@@ -79,7 +78,7 @@ def generate_markdown(file: TextIO) -> str | None:
     signals = get_documented(content, script_file, SIGNAL_REGEX)
     members = get_documented(content, script_file, MEMBER_REGEX)
 
-    markdown: list[str] = [f"# {class_name}[↪]({GITHUB_REPO}/blob/main/{script_file})"]
+    markdown: list[str] = []
     if short_desc:
         markdown.append(short_desc)
     if docstring:
@@ -88,6 +87,7 @@ def generate_markdown(file: TextIO) -> str | None:
         *get_document_section("Signals", signals),
         *get_document_section("Members", members),
         *get_document_section("Methods", methods),
+        f"[Source Code ↪]({GITHUB_REPO}/blob/main/{script_file})",
     ]
     if any([short_desc, methods, signals, members]):
         return "\n\n".join(markdown)

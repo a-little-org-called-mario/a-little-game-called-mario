@@ -43,9 +43,6 @@ func load_data():
 	if not settings_file.file_exists(settings_name) or settings_file.open(settings_name, File.READ) != OK:
 		# set settings to default values
 		set_to_default()
-		screen_shake = true
-		crt_filter = false
-
 	# access settings.mario and read settings
 	else:
 		while settings_file.get_position() < settings_file.get_len():
@@ -69,14 +66,11 @@ func load_data():
 		settings_file.close()
 		set_to_default()	# catch any settings that were added since the last time cookie was saved
 		settings_loaded = true
-	
 
 	# emit any relevant signals
 	EventBus.emit_signal("crt_filter_toggle", crt_filter)
-	EventBus.emit_signal("volume_changed", "game")
-	EventBus.emit_signal("volume_changed", "music")
-	EventBus.emit_signal("volume_changed", "sfx")
-	EventBus.emit_signal("volume_changed", "voice")
+	for bus in [ "Master", "music", "sfx", "voice" ]:
+		EventBus.emit_signal("volume_changed", bus);
 
 func set_to_default():
 	if camera_lean == -1: camera_lean = CameraLeanAmount.MAX

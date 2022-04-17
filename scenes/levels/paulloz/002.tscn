@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/CameraFollow.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Star/Star.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/platformer/characters/gex/Gex.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 64, 96 )
@@ -30,6 +31,7 @@ follow_vertically = true
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 7 )]
 position = Vector2( 96, 480 )
+player_scene = ExtResource( 10 )
 
 [node name="EndPortal2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 3296, 1184 )
@@ -46,6 +48,7 @@ position = Vector2( 1760, 1888 )
 shape = SubResource( 1 )
 
 [node name="GravityZone3" parent="GravityZones" instance=ExtResource( 5 )]
+modulate = Color( 1, 1, 1, 0.3 )
 position = Vector2( 1952, 1536 )
 gravity_vec = Vector2( 0, 1 )
 shape = SubResource( 1 )
@@ -55,6 +58,7 @@ position = Vector2( 2144, 1888 )
 shape = SubResource( 1 )
 
 [node name="GravityZone5" parent="GravityZones" instance=ExtResource( 5 )]
+modulate = Color( 1, 1, 1, 0.3 )
 position = Vector2( 2336, 928 )
 gravity_vec = Vector2( 0, 1 )
 shape = SubResource( 1 )
@@ -64,11 +68,13 @@ position = Vector2( 2656, 1472 )
 shape = SubResource( 1 )
 
 [node name="GravityZone7" parent="GravityZones" instance=ExtResource( 5 )]
+modulate = Color( 1, 1, 1, 0.3 )
 position = Vector2( 3296, 304 )
 gravity_vec = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="GravityZone9" parent="GravityZones" instance=ExtResource( 5 )]
+modulate = Color( 1, 1, 1, 0.3 )
 position = Vector2( 1440, 416 )
 gravity_vec = Vector2( 0, 1 )
 shape = SubResource( 3 )

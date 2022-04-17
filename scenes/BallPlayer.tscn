@@ -3,8 +3,9 @@
 [ext_resource path="res://scripts/BallPlayer.gd" type="Script" id=1]
 [ext_resource path="res://sprites/ballmario.png" type="Texture" id=2]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scripts/Trail.gd" type="Script" id=4]
+[ext_resource path="res://scenes/platformer/characters/Trail.gd" type="Script" id=4]
 [ext_resource path="res://sprites/flag.jpg" type="Texture" id=5]
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 12.0

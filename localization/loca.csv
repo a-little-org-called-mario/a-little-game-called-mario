@@ -1,5 +1,5 @@
-"keys","de"
-"TRANSLATE ME!","ÜBERSETZE MICH!"
+keys,de
+TRANSLATE ME!,ÜBERSETZE MICH!
 "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
 
 SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
@@ -10,7 +10,7 @@ CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
 
 B TO[wave amp=50 freq=2] FIREBALL [/wave]
 
-(WITH POWERUP)", "UMSCHALT ZUM [wave amp=50 freq=2]SPRINTEN[/wave]
+(WITH POWERUP)","UMSCHALT ZUM [wave amp=50 freq=2]SPRINTEN[/wave]
 
 LEERTASTE ZUM [wave amp=50 freq=2]SPRINGEN[/wave]
 
@@ -19,30 +19,26 @@ LEERTASTE ZUM [wave amp=50 freq=2]SPRINGEN[/wave]
 STRG/Z ZUM [wave amp=50 freq=2]SCHIESSEN[/wave]
 
 B FUER DEN[wave amp=50 freq=2] FEUERBALL [/wave] (MIT POWERUP)"
-"
-[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]","
-[wave amp=50 freq=2]MUENZEN:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"
-"Out of the way!","Aus dem Weg!"
-"It won't move.","Es bewegt sich kein Stück."
-"Open Sesame!","Sesam öffne dich!"
+COINS:,MUENZEN:
+Out of the way!,Aus dem Weg!
+It won't move.,Es bewegt sich kein Stück.
+Open Sesame!,Sesam öffne dich!
 "Oh, another visitor!","Oh, ein anderer Besucher!"
-"Who was here before me?","Wer war vor mir hier?"
-"I don't remember...","Ich kann mich nicht erinnern..."
-"There wase definitly someone here.\nHe wanted to do something... Finish something...","Es war auf jeden Fall jemand hier.\nEr wollte irgendwas... Irgendetwas beenden..."
-"I will find out!","Ich werde es herausfinden!"
-"Can you help me get out of here?","Kannst du mir hier heraushelfen?"
+Who was here before me?,Wer war vor mir hier?
+I don't remember...,Ich kann mich nicht erinnern...
+There wase definitly someone here.\nHe wanted to do something... Finish something...,Es war auf jeden Fall jemand hier.\nEr wollte irgendwas... Irgendetwas beenden...
+I will find out!,Ich werde es herausfinden!
+Can you help me get out of here?,Kannst du mir hier heraushelfen?
 "No, I'm just a ladder. I'm no use if you want to climb out of here...","Nein, ich bin nur eine Leiter. Ich nütze nichts wenn du hier herausklettern willst..."
-"Bye then!","Dann tschüß!"
-"CREDITS","CREDITS"
+Bye then!,Dann tschüß!
+CREDITS,CREDITS
 "
 [wave amp=50 freq=2]HEARTS:[rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]","
 [wave amp=50 freq=2]HERZEN:[rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]"
 "
 [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]","
 [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]%d[/rainbow] [/wave]"
-"
-[wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow] [/wave]","
-[wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow] [/wave]"
+YOU DIED,
 "[wave amp=50 freq=2]YOU GOT THE STAR:
 [rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]","[wave amp=50 freq=2]DU HAST DEN STERN:
 [rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]"
@@ -51,9 +47,18 @@ B FUER DEN[wave amp=50 freq=2] FEUERBALL [/wave] (MIT POWERUP)"
 [rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]","
 [wave amp=50 freq=2]DU HAST SCHON:
 [rainbow freq=0.5 sat=1 val=20]%s[/rainbow] [/wave]"
-"ACHIEVEMENT UNLOCKED: %s","ERRUNGENSCHAFT FREIGESCHALTET: %s"
-"GET ALL THE COINS IN LEVEL 0","SAMMLE ALLE MUENZEN IN LEVEL 0"
-"GET ALL THE COINS IN LEVEL 1","SAMMLE ALLE MUENZEN IN LEVEL 1"
-"GET ALL THE COINS IN LEVEL 2","SAMMLE ALLE MUENZEN IN LEVEL 2"
- "SPACE TO [rainbow freq=0.5 sat=1 val=20]FLY UP[/rainbow]", "LEERTASTE ZUM [rainbow freq=0.5 sat=1 val=20]HOCHFLIEGEN[/rainbow]"
-"IT'S RAINING COINS! YOU SHOT 10 TIMES!","ES REGNET MÜNZEN! DU HAST 10 MAL GESCHOSSEN!"
+ACHIEVEMENT UNLOCKED: %s,ERRUNGENSCHAFT FREIGESCHALTET: %s
+GET ALL THE COINS IN LEVEL 0,SAMMLE ALLE MUENZEN IN LEVEL 0
+GET ALL THE COINS IN LEVEL 1,SAMMLE ALLE MUENZEN IN LEVEL 1
+GET ALL THE COINS IN LEVEL 2,SAMMLE ALLE MUENZEN IN LEVEL 2
+"SPACE TO [rainbow freq=0.5 sat=1 val=20]FLY UP[/rainbow]", "LEERTASTE ZUM [rainbow freq=0.5 sat=1 val=20]HOCHFLIEGEN[/rainbow]"
+"[rainbow freq=0.5 sat=1 val=20]GAME OVER[/rainbow]", "[rainbow freq=0.5 sat=1 val=20]SPIEL IST AUS[/rainbow]"
+"PRESS 'R' TO RESTART", "DRÜCKE 'R', UM NEU ZU STARTEN"
+IT'S RAINING COINS! YOU SHOT 10 TIMES!,ES REGNET MÜNZEN! DU HAST 10 MAL GESCHOSSEN!
+"HEY PILOT. IT'S ME, LIQUID RANDALL.",
+IT LOOKS LIKE SOME NASTY MERGE CONFLICTS ARE BOMBARDING THE REPO PLANET.,
+BUT DON'T SWEAT IT- THE NEW AND IMPROVED MARWING CAN TAKE CARE OF IT.,
+JUST... FLY AROUND A BIT AND SHOOT THINGS.,
+OH! THEY'RE UNMANNED DRONES. IT'S FINE, YOU DON'T HAVE TO FEEL BAD.,
+SO GET TO WORK, MY DARLING.,
+I BELIEVE IN YOU. YOU CAN DO IT.,

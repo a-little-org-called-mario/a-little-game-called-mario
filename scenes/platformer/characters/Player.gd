@@ -37,9 +37,6 @@ var powerupaccel = 1
 onready var sprite = $Sprite
 onready var anim = $Sprite/Anims
 onready var tween = $Tween
-onready var trail: Line2D = $Trail
-onready var run_particles: CPUParticles2D = $RunParticles
-onready var moustache = $BouncyMoustache  # Gorgeous bouncy moustache!
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -87,12 +84,10 @@ func _physics_process(delta: float) -> void:
 		jerk_right(JERK * jerk_modifier)
 		anim.playAnim("Run")
 		# pointing the character in the direction he's running
-		run_particles.emitting = true
 		look_right()
 	elif Input.is_action_pressed("left"):
 		jerk_left(JERK * jerk_modifier)
 		anim.playAnim("Run")
-		run_particles.emitting = true
 		look_left()
 	else:
 		anim.playAnim("Idle")
@@ -104,7 +99,6 @@ func _physics_process(delta: float) -> void:
 			x_motion.set_speed(0)
 			x_motion.set_jerk(0)
 			x_motion.set_accel(0)
-		run_particles.emitting = false
 
 	jump_buffer_timer -= delta
 	if Input.is_action_just_pressed("jump") and not super_jumping:
@@ -152,12 +146,10 @@ func _physics_process(delta: float) -> void:
 			else:
 				gravity_multiplier = 1
 		anim.playAnim("Jump")
-		run_particles.emitting = false
 
 	if crouching and not Input.is_action_pressed("down"):
 		crouching = false
 		set_hitbox_crouching(false)
-		moustache.position.y = 0
 		unsquash()
 
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
@@ -199,7 +191,6 @@ func try_slip(angle: float):
 func crouch():
 	crouching = true
 	set_hitbox_crouching(true)
-	moustache.position.y = 17.5  # Moves gorgeous bouncy moustache lower when rouching
 	squash()
 
 
@@ -240,12 +231,10 @@ func land():
 
 func look_right():
 	sprite.flip_h = false
-	moustache.position.x = 0  # Moves gorgeous bouncy moustache to the mouth
 
 
 func look_left():
 	sprite.flip_h = true
-	moustache.position.x = -10  # Moves gorgeous bouncy moustache to the mouth
 
 
 func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
@@ -259,9 +248,11 @@ func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 		Tween.TRANS_BACK,
 		Tween.EASE_OUT
 	)
-	tween.interpolate_property(
-		trail, "height", trail.height, 20 * squash_modifier, time, Tween.TRANS_BACK, Tween.EASE_OUT
-	)
+	var trail: Line2D = get_node_or_null("Trail")
+	if trail != null:
+		tween.interpolate_property(
+			trail, "height", trail.height, 20 * squash_modifier, time, Tween.TRANS_BACK, Tween.EASE_OUT
+		)
 	tween.start()
 
 
@@ -300,9 +291,11 @@ func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 		Tween.TRANS_BACK,
 		Tween.EASE_OUT
 	)
-	tween.interpolate_property(
-		trail, "height", trail.height, 0, time, Tween.TRANS_BACK, Tween.EASE_OUT
-	)
+	var trail: Line2D = get_node_or_null("Trail")
+	if trail != null:
+		tween.interpolate_property(
+			trail, "height", trail.height, 0, time, Tween.TRANS_BACK, Tween.EASE_OUT
+		)
 	tween.start()
 
 
@@ -320,9 +313,9 @@ func jerk_right(jerk: float):
 
 func reset() -> void:
 	look_right()
-	run_particles.emitting = false
-	run_particles.restart()
-	trail.reset()
+	for child in get_children():
+		if child.has_method("reset"):
+			child.reset()
 	_end_flash_sprite()
 
 
@@ -364,13 +357,17 @@ func _on_enemy_hit_fireball():
 
 
 func flash_sprite(duration: float = 0.05) -> void:
-	$Sprite.material.set_shader_param("flash_modifier", 1.0)
+	var material: ShaderMaterial = sprite.material as ShaderMaterial
+	if material != null:
+		$Sprite.material.set_shader_param("flash_modifier", 1.0)
 	$HitFlashTimer.wait_time = duration
 	$HitFlashTimer.start()
 
 
 func _end_flash_sprite() -> void:
-	$Sprite.material.set_shader_param("flash_modifier", 0.0)
+	var material: ShaderMaterial = sprite.material as ShaderMaterial
+	if material != null:
+		material.set_shader_param("flash_modifier", 0.0)
 
 
 func set_hitbox_crouching(value: bool):

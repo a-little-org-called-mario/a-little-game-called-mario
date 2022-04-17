@@ -1,4 +1,5 @@
 #warning-ignore-all: NARROWING_CONVERSION
+#warning-ignore-all: INTEGER_DIVISION
 extends TileMap
 
 
@@ -20,20 +21,34 @@ func _ready() -> void:
 	var label_position: Vector2 = portal_template.get_node("Label").position
 
 	var levels: Array = _get_all_first_levels_in_dir(levels_directory)
-	for i in range(len(levels)):
+	var n_levels: int = len(levels)
+	for i in range(n_levels):
 		var rect: Rect2 = walls_tilemap.get_used_rect()
 		var base_dest: Vector2 = Vector2(
-			rect.position.x + (rect.size.x if i % 2 else -portal_rect.size.x),
+			rect.position.x + (rect.size.x if i >= n_levels / 2 else -portal_rect.size.x),
 			rect.position.y + rect.size.y - 1.0
 		)
 		for y in range(portal_rect.size.y):
 			for x in range(portal_rect.size.x):
 				var dest_x := base_dest.x + x
 				var dest_y := base_dest.y - y
-				var tile := portal_template.get_cell(portal_rect.position.x + x, portal_rect.position.y + portal_rect.size.y - 1 - y)
+				var tile := portal_template.get_cell(
+					portal_rect.position.x + x,
+					portal_rect.position.y + portal_rect.size.y - 1 - y
+				)
 				walls_tilemap.set_cell(dest_x, dest_y, tile)
 		create_portal(levels[i], map_to_world(base_dest) + portal_position)
 		create_label(levels[i], map_to_world(base_dest) + label_position)
+
+	# Update left/right labels
+	$LeftLabel.bbcode_text = TextUtils.wave("< %s-%s" % [
+		_get_first_letter(levels[(n_levels / 2) - 1]), 
+		_get_first_letter(levels[0])
+	])
+	$RightLabel.bbcode_text = TextUtils.right(TextUtils.wave("%s-%s >" % [
+		_get_first_letter(levels[n_levels / 2]),
+		_get_first_letter(levels[n_levels - 1])
+	]))
 
 	# Fill everything with background tile.
 	# And put walls around the room.
@@ -101,6 +116,10 @@ func _get_dir_name(levelPath: String) -> String:
 	var regex = RegEx.new()
 	regex.compile(".*\/(.*)\/[^\/]+.tscn")
 	return regex.search(levelPath).get_string(1)
+
+
+func _get_first_letter(levelPath: String) -> String:
+	return _get_dir_name(levelPath).substr(0, 1).to_upper()
 
 
 static func _get_all_first_levels_in_dir(path: String) -> Array:

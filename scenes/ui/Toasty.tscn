@@ -53,7 +53,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-target_coin_streak = 2
 can_activate_secret = true
 
 [node name="Waluigi" type="TextureRect" parent="."]

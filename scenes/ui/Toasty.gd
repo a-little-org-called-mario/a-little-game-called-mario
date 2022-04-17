@@ -4,7 +4,7 @@ extends Control
 
 # An homage to Mortal Kombat.
 #
-# Upon collecting X coins in Y seconds, Waluigi appears in the bottom right
+# Upon collecting 10 coins in 2 seconds, Waluigi appears in the bottom right
 # corner of the screen and an audio clip plays saying "toasty" in a high-
 # pitched voice.
 #

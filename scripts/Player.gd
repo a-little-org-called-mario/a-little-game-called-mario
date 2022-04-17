@@ -39,7 +39,7 @@ onready var anim = $Sprite/Anims
 onready var tween = $Tween
 onready var trail: Line2D = $Trail
 onready var run_particles: CPUParticles2D = $RunParticles
-onready var moustache = $BoucyMoustache  # Gorgeous bouncy moustache!
+onready var moustache = $BouncyMoustache  # Gorgeous bouncy moustache!
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -365,14 +365,12 @@ func _on_enemy_hit_fireball():
 
 func flash_sprite(duration: float = 0.05) -> void:
 	$Sprite.material.set_shader_param("flash_modifier", 1.0)
-	$BusSprite.material.set_shader_param("flash_modifier", 1.0)
 	$HitFlashTimer.wait_time = duration
 	$HitFlashTimer.start()
 
 
 func _end_flash_sprite() -> void:
 	$Sprite.material.set_shader_param("flash_modifier", 0.0)
-	$BusSprite.material.set_shader_param("flash_modifier", 0.0)
 
 
 func set_hitbox_crouching(value: bool):

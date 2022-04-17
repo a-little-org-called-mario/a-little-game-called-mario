@@ -1,4 +1,5 @@
 {
+	"$schema": "dialog.schema.json",
 	"text": "Oh, another visitor!",
 	"choices": [
 		{
@@ -14,6 +15,9 @@
 		{
 			"text": "Can you help me get out of here?",
 			"dialog": {
+				"condition": {
+					"occurence": 1
+				},
 				"text": [
 					"No, I'm just a ladder. I'm no use if you want to climb out of here...",
 					"Although I do have something you may find useful.",

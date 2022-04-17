@@ -3,6 +3,23 @@
 	"$id": "https://iznaut.itch.io/a-little-game-called-mario/dialog.schema.json",
 	"title": "Dialog",
 	"description": "A dialog in the game A little game called Mario",
+	"definitions": {
+		"condition": {
+			"type": "object",
+			"properties": {
+				"has_item": {
+					"type": "string",
+					"description": "Checks if the player has a specific item"
+				},
+				"occurence": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "The condition is true if the number of times the player has now seen this dialog matches this number."
+				}
+			},
+			"additionalProperties": false
+		}
+	},
 	"oneOf": [
 		{ "type":"string" },
 		{
@@ -62,14 +79,8 @@
 					"type": "string"
 				},
 				"condition": {
-					"description": "A branch in the dialog",
-					"type": "object",
-					"properties": {
-						"has_item": {
-							"type": "string",
-							"description": "Checks if the player has a specific item"
-						}
-					}
+					"description": "Only reach this dialog if this condition is true.",
+					"$ref": "#/definitions/condition"
 				}
 			},
 			"additionalProperties": false
@@ -79,14 +90,7 @@
 			"properties": {
 				"condition": {
 					"description": "A branch in the dialog",
-					"type": "object",
-					"properties": {
-						"has_item": {
-							"type": "string",
-							"description": "Checks if the player has a specific item"
-						}
-					},
-					"additionalProperties": false
+					"$ref": "#/definitions/condition"
 				},
 				"true": {
 					"description": "The dialog to execute if the condition is true",

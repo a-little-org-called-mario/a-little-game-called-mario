@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "EndPortal",
 "language": "GDScript",
-"path": "res://scripts/EndPortal.gd"
+"path": "res://scenes/EndPortal.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",
@@ -143,11 +143,6 @@ _global_script_classes=[ {
 "class": "PlayerFlying",
 "language": "GDScript",
 "path": "res://scenes/levels/Flappy/Characters/Player/PlayerFlyingControls.gd"
-}, {
-"base": "Resource",
-"class": "PlayerInventory",
-"language": "GDScript",
-"path": "res://scripts/resources/PlayerInventory.gd"
 }, {
 "base": "Area2D",
 "class": "PlayerProjectile",
@@ -242,7 +237,6 @@ _global_script_class_icons={
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",
-"PlayerInventory": "",
 "PlayerProjectile": "",
 "PopcornKernel": "",
 "PopcornPopped": "",

@@ -8,7 +8,7 @@ var is_pie = false
 
 func randomize_me():
 	vel_rotation = rand.randf_range(-2, 2)
-	vel_y = rand.randf_range(1, 2)
+	vel_y = rand.randf_range(50, 150)
 	position.y = 0 + rand.randf_range(-100, 0)
 	position.x = rand.randf_range(32, 1000);
 	
@@ -23,10 +23,10 @@ func randomize_me():
 
 func _physics_process(delta: float):
 	$Sprite.rotation_degrees += vel_rotation
-	var collision = move_and_collide(Vector2(0, vel_y))
+	var collision = move_and_collide(Vector2(0, vel_y * delta))
 	if collision:		
 		var collider = collision.collider as Object	
-		print("Collided with " + collider.name + ", is_pie: " + str(is_pie))
+		# print("Collided with " + collider.name + ", is_pie: " + str(is_pie))
 		if collision.collider as TileMap:
 			randomize_me();
 		elif collision.collider.name == "Player" and is_pie:

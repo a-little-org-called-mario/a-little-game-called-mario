@@ -42,7 +42,7 @@ func move(_delta: float) -> void:
 	if collision:
 		# Player was reached
 		if collision.collider == _target:
-			EventBus.emit_signal("heart_changed", {"value": -1})
+			HeartInventoryHandle.change_hearts_on(_target, -1)
 			queue_free()
 
 

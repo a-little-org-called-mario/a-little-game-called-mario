@@ -17,7 +17,6 @@ const SLIP_RANGE = 16
 const SUPER_JUMP_MAX_TIME = 0.5
 
 var gravity = preload("res://scripts/resources/Gravity.tres")
-var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 var stats = preload("res://scripts/resources/PlayerStats.tres")
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
@@ -335,16 +334,11 @@ func _is_on_floor() -> bool:
 
 
 func _on_heart_change(data):
-	var value := 1
-	if data.has("value"):
-		value = data["value"]
-	inventory.hearts += value
-
-	if value < 0:
+	if data.has("value") and data.value < 0:
 		$HurtSFX.play()
 		flash_sprite()
 
-	if inventory.hearts <= 0:
+	if data.has("total") and data.total <= 0:
 		EventBus.emit_signal("player_died")
 
 

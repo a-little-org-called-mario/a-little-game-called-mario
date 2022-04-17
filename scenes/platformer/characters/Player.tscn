@@ -13,7 +13,6 @@
 [ext_resource path="res://scenes/platformer/characters/Bus.gd" type="Script" id=11]
 [ext_resource path="res://sprites/bus.png" type="Texture" id=12]
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=13]
-[ext_resource path="res://scripts/BoucyMoustache.gd" type="Script" id=16]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
 
 [sub_resource type="Curve" id=11]
@@ -138,6 +137,46 @@ random_pitch = 1.5
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 43.25, 20.1875 )
 
+[sub_resource type="GDScript" id=41]
+script/source = "extends Node2D
+class_name BouncyMoustache
+
+onready var player: Player = owner
+onready var line1 = $DampedSpringJoint2D/point1/Line2D
+onready var segment1 = $DampedSpringJoint2D/point2
+onready var rightSegment = $DampedSpringJoint2D
+onready var curve1:Curve2D = Curve2D.new()
+
+onready var line2 = $DampedSpringJoint2D2/point1/Line2D
+onready var segment2 = $DampedSpringJoint2D2/point2
+onready var leftSegment = $DampedSpringJoint2D2
+onready var curve2:Curve2D = Curve2D.new()
+const vecOffset = Vector2(0, 10)
+
+func _process(_delta):
+	position.x = 0.0 if not player.sprite.flip_h else -10.0
+	position.y = 0.0 if not player.crouching else 17.5
+
+	line1.global_rotation = rightSegment.rotation
+	for _p in range(len(line1.points)):
+		line1.remove_point(0)
+	for _p in range(curve1.get_point_count()):
+		curve1.remove_point(0)
+	curve1.add_point(line1.position, vecOffset, vecOffset)
+	curve1.add_point(segment1.position)
+	line1.points = curve1.get_baked_points()
+
+	line2.global_rotation = leftSegment.rotation
+	for _p in range(len(line2.points)):
+		line2.remove_point(0)
+	for _p in range(curve2.get_point_count()):
+		curve2.remove_point(0)
+	curve2.add_point(line2.position, vecOffset, vecOffset)
+	curve2.add_point(segment2.position)
+	line2.points = curve2.get_baked_points()
+	
+"
+
 [sub_resource type="SphereMesh" id=28]
 
 [sub_resource type="CircleShape2D" id=29]
@@ -147,6 +186,7 @@ radius = 4.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.527273 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=40]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
 
 [sub_resource type="GradientTexture" id=39]
 gradient = SubResource( 40 )
@@ -246,7 +286,7 @@ one_shot = true
 
 [node name="BouncyMoustache" type="Node2D" parent="."]
 material = SubResource( 15 )
-script = ExtResource( 16 )
+script = SubResource( 41 )
 
 [node name="DampedSpringJoint2D" type="PinJoint2D" parent="BouncyMoustache"]
 position = Vector2( 4.136, 3.15 )
@@ -273,7 +313,9 @@ disabled = true
 material = SubResource( 15 )
 width = 13.066
 width_curve = SubResource( 30 )
+default_color = Color( 1, 1, 1, 1 )
 texture = SubResource( 39 )
+texture_mode = 2
 
 [node name="point2" type="RigidBody2D" parent="BouncyMoustache/DampedSpringJoint2D"]
 position = Vector2( 0.150002, 12.635 )
@@ -311,7 +353,9 @@ disabled = true
 material = SubResource( 15 )
 width = 13.066
 width_curve = SubResource( 30 )
+default_color = Color( 1, 1, 1, 1 )
 texture = SubResource( 39 )
+texture_mode = 2
 
 [node name="point2" type="RigidBody2D" parent="BouncyMoustache/DampedSpringJoint2D2"]
 position = Vector2( 0.150002, 12.635 )

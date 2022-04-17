@@ -2,16 +2,19 @@ extends Sprite
 
 export(NodePath) var collision_shape: NodePath
 
+var inventory = preload("res://scripts/resources/PlayerInventory.tres")
+
 onready var player: Player = owner
 onready var collision: CollisionShape2D = get_node(collision_shape)
 
+
 func _ready() -> void:
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
-	call_deferred("_activate_bus", player.inventory.has_bus)
+	call_deferred("_activate_bus", inventory.has_bus)
 
 
 func _process(_delta: float) -> void:
-	if player.inventory.has_bus:
+	if inventory.has_bus:
 		player.powerupspeed = 4
 		player.powerupaccel = 2
 	else:
@@ -21,8 +24,8 @@ func _process(_delta: float) -> void:
 
 func _on_bus_collected(data: Dictionary) -> void:
 	if data.has("collected"):
-		player.inventory.has_bus = data["collected"]
-		call_deferred("_activate_bus", player.inventory.has_bus)
+		inventory.has_bus = data["collected"]
+		call_deferred("_activate_bus", inventory.has_bus)
 
 
 func _activate_bus(active: bool) -> void:

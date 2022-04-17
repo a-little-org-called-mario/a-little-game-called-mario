@@ -173,7 +173,6 @@ trail_length = 30
 shape = SubResource( 1 )
 
 [node name="BusCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 6 )
 scale = Vector2( 1, 1 )
 shape = SubResource( 13 )
@@ -182,9 +181,8 @@ disabled = true
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Bus" type="Sprite" parent="Pivot"]
-visible = false
 material = SubResource( 15 )
-position = Vector2( 7, 13 )
+position = Vector2( 0, 6 )
 scale = Vector2( 0.0602623, 0.0602623 )
 texture = ExtResource( 12 )
 flip_h = true

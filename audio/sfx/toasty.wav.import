@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/toasty.wav-c1c794e1490700823b450a21f101baa8.sample"
+
+[deps]
+
+source_file="res://audio/sfx/toasty.wav"
+dest_files=[ "res://.import/toasty.wav-c1c794e1490700823b450a21f101baa8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

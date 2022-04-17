@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/platformer/characters/Bus.gd" type="Script" id=11]
 [ext_resource path="res://sprites/bus.png" type="Texture" id=12]
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=13]
+[ext_resource path="res://scenes/HeartInventoryHandle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scripts/BoucyMoustache.gd" type="Script" id=16]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
 
@@ -329,5 +330,7 @@ disabled = true
 
 [node name="CameraFCandidate" type="Node" parent="."]
 script = ExtResource( 17 )
+
+[node name="HeartInventoryHandle" parent="." instance=ExtResource( 14 )]
 
 [connection signal="timeout" from="HitFlashTimer" to="." method="_end_flash_sprite"]

@@ -3,6 +3,7 @@ extends Position2D
 
 export(PackedScene) var default_projectile: PackedScene = preload("res://scenes/CoinProjectile.tscn")
 export(PackedScene) var fireball_projectile: PackedScene = preload("res://scenes/powerups/Fireball.tscn")
+var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
 onready var player : Player = owner
 
@@ -16,7 +17,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and CoinInventoryHandle.change_coins_on(player, -1):
 		shoot(default_projectile)
 	#Shoots fireball
-	if event.is_action_pressed("fire") and player.inventory.has_flower:
+	if event.is_action_pressed("fire") and inventory.has_flower:
 		shoot(fireball_projectile)
 
 
@@ -40,4 +41,4 @@ func shoot(projectile_scene: PackedScene) -> void:
 
 func _on_flower_collected(data : Dictionary) -> void:
 	if data.has("collected"):
-		player.inventory.has_flower = data["collected"]
+		inventory.has_flower = data["collected"]

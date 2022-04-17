@@ -25,5 +25,6 @@ jobs:
           rm -rf docs
           cp -r ../docs .
           git add docs
-          git commit -m "Publish documentation to wiki" || true
-          git push || true
+          if git commit -m "Publish documentation to wiki" ; then
+            git push
+          fi

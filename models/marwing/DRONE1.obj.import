@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/DRONE1.obj-d147c709457857907a418276fd578e4f.mesh"
+
+[deps]
+
+files=[ "res://.import/DRONE1.obj-d147c709457857907a418276fd578e4f.mesh" ]
+
+source_file="res://models/marwing/DRONE1.obj"
+dest_files=[ "res://.import/DRONE1.obj-d147c709457857907a418276fd578e4f.mesh", "res://.import/DRONE1.obj-d147c709457857907a418276fd578e4f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

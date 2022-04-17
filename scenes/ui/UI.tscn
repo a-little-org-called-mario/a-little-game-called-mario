@@ -1,16 +1,71 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/AchievementGet.gd" type="Script" id=3]
 [ext_resource path="res://scenes/ui/LevelCount.gd" type="Script" id=4]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
-[ext_resource path="res://scenes/ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
-[ext_resource path="res://scenes/ui/HeartCount.gd" type="Script" id=7]
+[ext_resource path="res://scenes/ui/Instructions.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/Toasty.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/ui/HeartIconContainer.gd" type="Script" id=8]
-[ext_resource path="res://sprites/heart.png" type="Texture" id=9]
+[ext_resource path="res://scenes/ui/Heart.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/ui/StarNotification.gd" type="Script" id=10]
 [ext_resource path="res://scenes/ui/PlayerDied.gd" type="Script" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Appear"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="UI" type="CanvasLayer"]
 
@@ -23,7 +78,77 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 20.0
+margin_right = -10.0
+margin_bottom = 84.0
+
+[node name="HeartIconContainer" type="GridContainer" parent="UI/HBoxContainer"]
+margin_right = 248.0
+margin_bottom = 64.0
+size_flags_vertical = 3
+columns = 10
+script = ExtResource( 8 )
+heart_scene = ExtResource( 9 )
+
+[node name="Heart" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+
+[node name="Heart2" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 36.0
+margin_right = 68.0
+
+[node name="Heart3" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 72.0
+margin_right = 104.0
+
+[node name="Heart4" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 108.0
+margin_right = 140.0
+
+[node name="Heart5" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 144.0
+margin_right = 176.0
+
+[node name="Heart6" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 180.0
+margin_right = 212.0
+
+[node name="Heart7" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 216.0
+margin_right = 248.0
+
+[node name="Spacer" type="Control" parent="UI/HBoxContainer"]
+margin_left = 252.0
+margin_right = 744.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Coins" type="Control" parent="UI/HBoxContainer"]
+margin_left = 748.0
+margin_right = 1004.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 256, 64 )
+
+[node name="CoinCount" type="RichTextLabel" parent="UI/HBoxContainer/Coins"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -128.0
+margin_bottom = -64.0
+rect_min_size = Vector2( 100, 32 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[right][wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow][/wave][/right]"
+text = "COINS:0"
+scroll_active = false
+script = ExtResource( 2 )
+
+[node name="Instructions" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
@@ -70,6 +195,7 @@ __meta__ = {
 }
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -570.0
@@ -87,6 +213,7 @@ LEVEL:1 "
 script = ExtResource( 4 )
 
 [node name="StarNotification" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -692.0
@@ -104,46 +231,8 @@ YOU GOT THE STAR:
 	 1 \""
 script = ExtResource( 10 )
 
-[node name="CoinCount" type="RichTextLabel" parent="UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -247.0
-margin_right = -124.0
-margin_bottom = 50.0
-rect_scale = Vector2( 2, 2 )
-mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 1 )
-bbcode_enabled = true
-bbcode_text = "
-[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
-text = "
-COINS:0 "
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HeartCount" type="RichTextLabel" parent="UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -248.0
-margin_top = 75.0
-margin_right = -125.0
-margin_bottom = 125.0
-rect_scale = Vector2( 2, 2 )
-mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 1 )
-bbcode_enabled = true
-bbcode_text = "
-[wave amp=50 freq=2]HEARTS:[rainbow freq=0.5 sat=1 val=20]3[/rainbow] [/wave]"
-text = "
-HEARTS:3 "
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="AchievementLabel" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
@@ -161,53 +250,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HeartIconContainer" type="GridContainer" parent="UI"]
-margin_left = 777.0
-margin_top = 154.0
-margin_right = 898.0
-margin_bottom = 242.0
-rect_scale = Vector2( 2, 2 )
-columns = 6
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-heart_texture = ExtResource( 9 )
-
-[node name="TextureRect" type="TextureRect" parent="UI/HeartIconContainer"]
-margin_right = 16.0
-margin_bottom = 16.0
-texture = ExtResource( 9 )
-
-[node name="TextureRect2" type="TextureRect" parent="UI/HeartIconContainer"]
-margin_left = 20.0
-margin_right = 36.0
-margin_bottom = 16.0
-texture = ExtResource( 9 )
-
-[node name="TextureRect3" type="TextureRect" parent="UI/HeartIconContainer"]
-margin_left = 40.0
-margin_right = 56.0
-margin_bottom = 16.0
-texture = ExtResource( 9 )
-
 [node name="PlayerDiedPanel" type="Panel" parent="UI"]
+pause_mode = 2
 visible = false
 margin_right = 1032.0
 margin_bottom = 609.0
 script = ExtResource( 11 )
 
 [node name="PlayerDied" type="RichTextLabel" parent="UI/PlayerDiedPanel"]
-anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -638.0
-margin_top = 264.0
-margin_right = -515.0
-margin_bottom = 314.0
+anchor_bottom = 1.0
+margin_top = 303.0
+margin_right = -516.0
+margin_bottom = -303.0
+rect_min_size = Vector2( 516, 18 )
 rect_scale = Vector2( 2, 2 )
+rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "
-[wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow] [/wave]"
-text = "
-YOU DIED "
+bbcode_text = "[center][wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow][/wave][/center]"
+text = "YOU DIED"
+fit_content_height = true
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PlayerDiedPanel"]
+anims/Appear = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[node name="Toasty" parent="UI" instance=ExtResource( 7 )]

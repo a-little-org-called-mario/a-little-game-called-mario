@@ -10,6 +10,59 @@
 radius = 0.586693
 height = 2.11689
 
+[sub_resource type="AtlasTexture" id=5]
+flags = 16
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 16
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 16
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 16
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 16
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 16
+atlas = ExtResource( 5 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 16
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 16
+atlas = ExtResource( 5 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": false,
+"name": "init",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "loop",
+"speed": 6.0
+} ]
+
 [sub_resource type="Animation" id=4]
 resource_name = "die"
 length = 1.20084
@@ -283,62 +336,11 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="AtlasTexture" id=5]
-flags = 16
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 16
-atlas = ExtResource( 5 )
-region = Rect2( 64, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 16
-atlas = ExtResource( 5 )
-region = Rect2( 128, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 16
-atlas = ExtResource( 5 )
-region = Rect2( 192, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 16
-atlas = ExtResource( 5 )
-region = Rect2( 256, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 16
-atlas = ExtResource( 5 )
-region = Rect2( 320, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 16
-atlas = ExtResource( 5 )
-region = Rect2( 256, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 16
-atlas = ExtResource( 5 )
-region = Rect2( 320, 0, 64, 64 )
-
-[sub_resource type="SpriteFrames" id=13]
-animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": false,
-"name": "init",
-"speed": 6.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ) ],
-"loop": true,
-"name": "loop",
-"speed": 6.0
-} ]
-
 [node name="Marwing" type="PathFollow"]
 loop = false
 script = ExtResource( 2 )
+forward_speed = 24.4
+strafe_speed = 7.2
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -7 )
@@ -347,8 +349,9 @@ fov = 60.0
 
 [node name="Mesh" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+visible = false
 mesh = ExtResource( 1 )
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 4 )
 
 [node name="Hitbox" type="Area" parent="Mesh"]
 collision_layer = 256
@@ -358,13 +361,14 @@ collision_mask = 1536
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
+[node name="Explosion" type="AnimatedSprite3D" parent="."]
+transform = Transform( 13.0191, 0, 0, 0, 13.0191, 0, 0, 0, 1.00147, 0, 0, 0 )
+frames = SubResource( 13 )
+animation = "loop"
+frame = 1
+playing = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = SubResource( 4 )
 anims/hurt = SubResource( 3 )
 anims/normal = SubResource( 2 )
-
-[node name="Explosion" type="AnimatedSprite3D" parent="."]
-transform = Transform( 13.0191, 0, 0, 0, 13.0191, 0, 0, 0, 1.00147, 0, 0, 0 )
-visible = false
-frames = SubResource( 13 )
-animation = "loop"

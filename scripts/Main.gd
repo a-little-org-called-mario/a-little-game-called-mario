@@ -76,13 +76,6 @@ func _on_build(data) -> void:
 			level.set_cell(target_tile_x, target_tile_y, 0)
 
 
-func _input(event):
-	if event.is_action_pressed("show_instructions"):
-		$UI/UI/RichTextLabel.visible = true
-	elif event.is_action_released("show_instructions"):
-		$UI/UI/RichTextLabel.visible = false
-
-
 func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: EndPortal) -> void:
 	# Make sure the player can't trigger this function more than once.
 	if entering_portal || not portal.can_enter(body):
@@ -111,17 +104,12 @@ func _finish_level(next_level: PackedScene = null) -> void:
 		level.queue_free()
 		yield(level, "tree_exited")
 	level = new_level
-	if level == hub:
-		for c in level.get_children():
-			if c is SpawnPoint:
-				c.spawn_mario()
-				break
 
 	# Do not forget to hook the new portals
 	_hook_portals()
 
 	#Removing instructions
-	$UI/UI/RichTextLabel.visible = false
+	$UI/UI/Instructions.visible = false
 
 	# Reset entering portal state
 	entering_portal = false

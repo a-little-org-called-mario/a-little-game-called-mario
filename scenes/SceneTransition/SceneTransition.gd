@@ -13,6 +13,6 @@ func _on_change_scene(data):
   animation.play("TransitionOut")
   
 func _on_animation_finished(animation_name):
-  if animation_name == "TransitionOut":
-    get_tree().change_scene(next_scene)
-    animation.play("TransitionIn")
+	if animation_name == "TransitionOut":
+		get_tree().change_scene(next_scene)
+		animation.play("TransitionIn")

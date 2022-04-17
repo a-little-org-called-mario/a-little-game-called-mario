@@ -1,25 +1,28 @@
-# Camera Follow tutorial
-#
-# * Add this script on a level where you want the camera to follow something
-#
-# * Add "CameraFCandidate.gd" script to a child of the thing(s) you want to follow
-#
-# * If there is more than one candidate on your level, use the "cameraF_change_candidate" signal,
-#	that will move to the next available candidate, you can add a int in the parameter to skip candidates
-#
-# * If you have more than one camera on your level, you can send the "cameraF_update_current_camera" signal
-# 	to change the camera to the current camera
-#
-# * You can stop following candidates using the external variable 'following' or using the "cameraF_set_following" signal
-#	the signal receives a bool with the state you want 'following' to be
-#
-# * If you want to move the camera use the "cameraF_move_camera" signal, this signal receives two parameters, x and y. 
-#	don't forget to make following false if you want the camera to stay there
-#
-# * Camera position resets when starting a new level, but if you want to reset it on the same level use "cameraF_reset_camera" 
-#	this will turn false 'following' variable and return the camera to where it started
-
 extends Position2D
+
+"""
+Camera Follow tutorial
+
+* Add this script on a level where you want the camera to follow something
+
+* Add "CameraFCandidate.gd" script to a child of the thing(s) you want to follow
+
+* If there is more than one candidate on your level, use the "cameraF_change_candidate" signal,
+that will move to the next available candidate, you can add a int in the parameter to skip candidates
+
+* If you have more than one camera on your level, you can send the "cameraF_update_current_camera" signal
+to change the camera to the current camera
+
+* You can stop following candidates using the external variable 'following' or using the "cameraF_set_following" signal
+the signal receives a bool with the state you want 'following' to be
+
+* If you want to move the camera use the "cameraF_move_camera" signal, this signal receives two parameters, x and y. 
+don't forget to make following false if you want the camera to stay there
+
+* Camera position resets when starting a new level, but if you want to reset it on the same level use "cameraF_reset_camera" 
+this will turn false 'following' variable and return the camera to where it started
+"""
+
 onready var camera_reference: Camera2D  = null
 onready var follow_candidates: Array = get_tree().get_nodes_in_group("CameraFCandidates")
 export var follow_horizontally: bool = true

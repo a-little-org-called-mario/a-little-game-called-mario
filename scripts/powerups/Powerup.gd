@@ -1,8 +1,12 @@
-#Main class for various powerups
-#To implement other powerups, simply extend this script
-#and implement _on_body_entered to call_deferred("collect", signal_name)
 extends Area2D
 class_name Powerup
+
+"""
+Main class for various powerups
+
+To implement other powerups, simply extend this script
+and implement `_on_body_entered` to `call_deferred("collect", signal_name)`.
+"""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

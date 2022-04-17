@@ -1,25 +1,24 @@
 extends Control
 
-## Toasty.gd
+"""
+An homage to Mortal Kombat.
 
-# An homage to Mortal Kombat.
-#
-# Upon collecting 10 coins in 2 seconds, Gassy Randal appears in the bottom right
-# corner of the screen and an audio clip plays saying "toasty" in a high-
-# pitched voice.
-#
-# To avoid constant or repeated triggers, there's a five minute cooldown timer,
-# the Cooldown node.
-#
-# In Mortal Kombat, if you pressed Down and Start while the "toasty guy" was on
-# the screen, you would be transported to a secret level.
-#
-# As of now, this "toasty guy" doesn't have a secret, but there is a variable
-# that controls whether or not a future secret feature can be activated.
-#
-# TODO: add a button combo that triggers the secret. It would probably go in an
-# _input function or _process.
+Upon collecting 10 coins in 2 seconds, Gassy Randal appears in the bottom right
+corner of the screen and an audio clip plays saying "toasty" in a high-
+pitched voice.
 
+To avoid constant or repeated triggers, there's a five minute cooldown timer,
+the Cooldown node.
+
+In Mortal Kombat, if you pressed Down and Start while the "toasty guy" was on
+the screen, you would be transported to a secret level.
+
+As of now, this "toasty guy" doesn't have a secret, but there is a variable
+that controls whether or not a future secret feature can be activated.
+
+TODO: add a button combo that triggers the secret. It would probably go in an
+_input function or _process.
+"""
 
 # The number of coins to be collected before CoinTimer runs out
 export var target_coin_streak : int = 10

@@ -1,9 +1,14 @@
-# Add this Sript in a child of anything that you want the camera to be able to follow, if there is
-# more than one candidate on your level use the cameraF_change_candidate(step_int) signal to change
-# what is the camera following
 
 extends Node
 
+"""
+CameraFollow Candidate
+
+Add this Sript in a child of anything that you want the camera to be able
+to follow, if there is more than one candidate on your level use the
+`cameraF_change_candidate(step_int)` signal to change what is the camera
+following
+"""
 
 # If I enter the tree I can get followed by camera
 func _enter_tree() -> void:

@@ -1,7 +1,11 @@
-# Offers basic functionality of a box (animation, counter, ...)
-# Extend it and override the 'on_bounce' func to give it a unique behavior.
 extends Node2D
 class_name BaseBox
+
+""""
+Offers basic functionality of a box (animation, counter, ...)
+
+Extend it and override the 'on_bounce' func to give it a unique behavior.
+"""
 
 const bounce_offset = Vector2(0, -12)
 const bounce_duration = 0.1

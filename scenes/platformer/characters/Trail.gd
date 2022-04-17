@@ -4,7 +4,7 @@ export(int) var trail_length = 5
 var positions = []
 var height = 0.0
 
-onready var player: Player = owner
+onready var player: Node2D = owner
 
 
 func _process(_delta):

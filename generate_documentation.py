@@ -1,22 +1,39 @@
 #!/usr/bin/env python
 
+"""
+Script to generate markdown documentation from GDScript files.
+"""
+
 from pathlib import Path
-from typing import Pattern, TextIO
+from typing import Iterable, Pattern, TextIO
 import re
 
 CLASS_DOCSTRING_REGEX = re.compile('(?s)\n\n"""\n(.*?)\n\n(.*?)"""\n\n')
 METHOD_REGEX = re.compile("func ([^_].*):")
 MEMBER_REGEX = re.compile("var ([^_][_a-zA-Z0-9]*) ")
 SIGNAL_REGEX = re.compile("signal ([^_].*)")
+DOCUMENTED_ITEM = "### {name}[↪](" +\
+    "https://github.com/a-little-org-called-mario/a-little-game-called-mario" +\
+    "/blob/main/{file}#L{line})\n\n{docstring}"
 
-def get_documented(content: str, part_regex: Pattern) -> dict[str, str]:
+class DocumentedItem():
+    """An element in the script that has been documented."""
+    def __init__(self, name, docstring, line, file):
+        self.name: str = name
+        self.docstring: str = docstring
+        self.line: int = line
+        self.file: Path = file
+
+
+def get_documented(content: str, script_file: Path,
+        part_regex: Pattern) -> list[DocumentedItem]:
     """Returns a dictionary mapping the item names matched by the
     part_regex to the documentation written in the comments above
     the item.
     """
-    documented = {}
+    documented: list[DocumentedItem] = []
     comment = ""
-    for line in content.split("\n"):
+    for line_num, line in enumerate(content.split("\n"), 1):
         if not line:
             comment = ""
             continue
@@ -25,31 +42,33 @@ def get_documented(content: str, part_regex: Pattern) -> dict[str, str]:
         else:
             result = part_regex.match(line)
             if result and comment:
-                documented[result.group(1)] = comment.replace("# ", "")
+                documented.append(DocumentedItem(result.group(1),
+                    comment.replace("# ", ""), line_num, script_file))
             comment = ""
     return documented
 
 
-def generate_part_markdown(documented: dict[str, str]) -> str:
-    """Returns a formatted version of the given documented items."""
-    return "\n".join(map(
-            lambda item: "### {item}\n\n{docstring}".format(
-                item=item[0], docstring=item[1]
-            ),
-            documented.items()
-    ))
+def get_document_section(name: str, items: list[DocumentedItem]) -> Iterable[str]:
+    """Returns a list of markdown sections that document the given items.
+
+    Also adds a header using the given name. If there are no items,
+    returns an empty array."""
+    if len(items) == 0:
+        return []
+    return [
+        f"## {name}",
+        *map(lambda item: DOCUMENTED_ITEM.format(**vars(item)), items)
+    ]
 
 
 def generate_markdown(file: TextIO) -> str | None:
     """Searches the given script for documented items and returns
     a pretty markdown page. If no items where documented, returns None
     """
-    class_name: str = Path(file.name).stem
+    script_file = Path(file.name)
+    class_name: str = script_file.stem
     short_desc: str = ""
     docstring: str = ""
-    methods: dict[str, str] = {}
-    signals: dict[str, str] = {}
-    members: dict[str, str] = {}
 
     content = file.read()
     
@@ -57,22 +76,22 @@ def generate_markdown(file: TextIO) -> str | None:
     if result:
         short_desc, docstring = result.groups()
 
-    methods = get_documented(content, METHOD_REGEX)
-    signals = get_documented(content, SIGNAL_REGEX)
-    members = get_documented(content, MEMBER_REGEX)
-    markdown = f"# {class_name}\n"
+    methods = get_documented(content, script_file, METHOD_REGEX)
+    signals = get_documented(content, script_file, SIGNAL_REGEX)
+    members = get_documented(content, script_file, MEMBER_REGEX)
+
+    markdown: list[str] = [f"# {class_name}"]
     if short_desc:
-        markdown += f"\n{short_desc}\n"
+        markdown.append(short_desc)
     if docstring:
-        markdown += f"\n## Description\n\n{docstring}\n"
-    if signals:
-        markdown += f"\n## Signals\n\n{generate_part_markdown(signals)}"
-    if members:
-        markdown += f"\n## Members\n\n{generate_part_markdown(members)}"
-    if methods:
-        markdown += f"\n## Methods\n\n{generate_part_markdown(methods)}"
+        markdown += ["## Description", docstring]
+    markdown += [
+        *get_document_section("Signals", signals),
+        *get_document_section("Members", members),
+        *get_document_section("Methods", methods),
+    ]
     if any([short_desc, methods, signals, members]):
-        return markdown 
+        return "\n\n".join(markdown)
 
 
 def main():

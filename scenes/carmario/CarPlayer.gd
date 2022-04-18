@@ -11,13 +11,14 @@ var real_velocity := Vector2()
 var terrain_counter :int= 0
 var upside_down := false
 
+onready var sprite = $Sprite
 var _car_ui :Control
 var health:= MAX_HEALTH setget set_health, get_health
 var distance_traveled:= 0.0
 var felonies := 0
 
 func _ready():
-	$Sprite.connect("animation_finished", self, "_sprite_animation_finished")
+	sprite.connect("animation_finished", self, "_sprite_animation_finished")
 	$AnimationPlayer.connect("animation_finished", self, "_player_animation_finished")
 	var arr= get_tree().get_nodes_in_group("car_ui")
 	if !arr.empty():
@@ -71,7 +72,7 @@ func _physics_process(delta):
 				col.collider.kill(self)
 				felonies+= 1
 			if !upside_down:
-				$Sprite.animation= "angry"
+				sprite.animation= "angry"
 			velocity.y= 0.0
 			self.health-= 10 * max(0.5, range_lerp(velocity.x, 0, MAX_SPEED, 0.5, 1.0))
 		elif col.collider.is_in_group("immovable_object"):
@@ -94,10 +95,14 @@ func _process(_delta):
 	_car_ui.set_health(health / MAX_HEALTH)
 	_car_ui.set_felonies(round(felonies))
 
+func _input(event :InputEvent):
+	if event.is_action_pressed("fire") or event.is_action_pressed("shoot"):
+		$Sprite/Honk.play(range_lerp(health, 0, MAX_HEALTH, 0.75, 1.0))
+
 func set_health(value):
 	health= clamp(value, 0, MAX_HEALTH)
-	if health <= 0 and $Sprite.animation != "car_only":
-		$Sprite.animation= "car_only"
+	if health <= 0 and sprite.animation != "car_only":
+		sprite.animation= "car_only"
 		$Shape.set_deferred("disabled",true)
 		$AnimationPlayer.play("die")
 func get_health() -> float:
@@ -120,8 +125,8 @@ func slip():
 	set_collision_mask_bit(3, false)
 
 func _sprite_animation_finished():
-	if $Sprite.animation == "angry":
-		$Sprite.animation= "idle"
+	if sprite.animation == "angry":
+		sprite.animation= "idle"
 
 func _player_animation_finished(anim):
 	match anim:
@@ -129,9 +134,9 @@ func _player_animation_finished(anim):
 			EventBus.emit_signal("player_died")
 		"flip":
 			upside_down= not upside_down
-			if $Sprite.animation != "car_only" and upside_down:
-				$Sprite.animation= "upside_down" 
-			elif $Sprite.animation == "upside_down" and !upside_down:
-				$Sprite.animation= "idle"
+			if sprite.animation != "car_only" and upside_down:
+				sprite.animation= "upside_down" 
+			elif sprite.animation == "upside_down" and !upside_down:
+				sprite.animation= "idle"
 			set_collision_mask_bit(3, true)
 			felonies+= int(upside_down)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://graphics/sprites/ballluigi.png" type="Texture" id=1]
 [ext_resource path="res://graphics/sprites/carmario/tollbox.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/carmario/TollBooth.gd" type="Script" id=4]
 [ext_resource path="res://audio/sfx/ball_omn.wav" type="AudioStream" id=5]
 [ext_resource path="res://audio/sfx/toll_paid.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/carmario/obstacles/Spill.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 54, 9.5 )
@@ -78,6 +79,7 @@ extents = Vector2( 10, 174.5 )
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 4 )
+chance_of_spill = 0.15
 
 [node name="BoxShape" type="CollisionShape2D" parent="."]
 position = Vector2( -2, -6.5 )
@@ -154,3 +156,10 @@ bus = "sfx"
 [node name="Nope" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 attenuation = 2.0
+
+[node name="Spill" parent="." instance=ExtResource( 7 )]
+visible = false
+position = Vector2( -112, 168 )
+collision_layer = 8
+monitoring = false
+monitorable = false

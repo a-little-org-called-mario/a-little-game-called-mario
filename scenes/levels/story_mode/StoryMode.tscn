@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://sprites/ladder_man.png" type="Texture" id=1]
 [ext_resource path="res://sprites/tiles/foreground/brick.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/levels/story_mode/player/TopDownCamera.gd" type="Script" id=7]
 [ext_resource path="res://scenes/levels/story_mode/StoryMode.gd" type="Script" id=8]
 [ext_resource path="res://scenes/levels/story_mode/dialog/DialogUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=10]
 [ext_resource path="res://scenes/levels/story_mode/items/Inventory.gd" type="Script" id=12]
 [ext_resource path="res://sprites/switch.png" type="Texture" id=13]
 [ext_resource path="res://scenes/levels/story_mode/items/ItemReceivePopup.gd" type="Script" id=14]
@@ -178,6 +179,7 @@ text = "[B] Look at %s"
 [node name="UI" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 10 )
 
 [node name="DialogUI" parent="CanvasLayer/UI" instance=ExtResource( 9 )]
 visible = false

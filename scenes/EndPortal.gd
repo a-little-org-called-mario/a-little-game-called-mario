@@ -47,7 +47,9 @@ func on_portal_enter(node: Node2D) -> AnimationPlayer:
 		sprite.vframes = player_sprite.vframes
 		sprite.frame = player_sprite.frame
 	elif player_sprite as AnimatedSprite:
-		sprite.texture = player_sprite.frames.get_frame(player_sprite.animation, player_sprite.frame)
+		sprite.texture = player_sprite.frames.get_frame(
+			player_sprite.animation, player_sprite.frame
+		)
 		sprite.hframes = 1
 		sprite.vframes = 1
 		sprite.frame = 0

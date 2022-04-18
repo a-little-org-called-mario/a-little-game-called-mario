@@ -1,7 +1,7 @@
 extends Resource
 class_name Achievement
 
-"""
+"""@wiki
 An achievement the player can aquire by doing certain tasks.
 
 ## Adding Achievements to the Game

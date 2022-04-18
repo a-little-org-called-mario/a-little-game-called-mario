@@ -5,10 +5,10 @@ Script to generate markdown documentation from GDScript files.
 """
 
 from pathlib import Path
-from typing import Iterable, Pattern, TextIO
+from typing import Iterable, List, Pattern, TextIO, Union
 import re
 
-CLASS_DOCSTRING_REGEX = re.compile('(?s)\n\n"""\n(.*?)\n\n(.*?)"""\n\n')
+CLASS_DOCSTRING_REGEX = re.compile('(?s)\n\n"""@wiki\n(.*?)\n\n(.*?)"""\n\n')
 METHOD_REGEX = re.compile("func ([^_].*):")
 MEMBER_REGEX = re.compile(".*var ([^_][_a-zA-Z0-9]*).*")
 SIGNAL_REGEX = re.compile("signal ([^_].*)")
@@ -25,12 +25,12 @@ class DocumentedItem():
 
 
 def get_documented(content: str, script_file: Path,
-        part_regex: Pattern) -> list[DocumentedItem]:
+        part_regex: Pattern) -> List[DocumentedItem]:
     """Returns a dictionary mapping the item names matched by the
     part_regex to the documentation written in the comments above
     the item.
     """
-    documented: list[DocumentedItem] = []
+    documented: List[DocumentedItem] = []
     comment = ""
     for line_num, line in enumerate(content.split("\n"), 1):
         if not line:
@@ -47,7 +47,7 @@ def get_documented(content: str, script_file: Path,
     return documented
 
 
-def get_document_section(name: str, items: list[DocumentedItem]) -> Iterable[str]:
+def get_document_section(name: str, items: List[DocumentedItem]) -> Iterable[str]:
     """Returns a list of markdown sections that document the given items.
 
     Also adds a header using the given name. If there are no items,
@@ -60,7 +60,7 @@ def get_document_section(name: str, items: list[DocumentedItem]) -> Iterable[str
     ]
 
 
-def generate_markdown(file: TextIO) -> str | None:
+def generate_markdown(file: TextIO) -> Union[str, None]:
     """Searches the given script for documented items and returns
     a pretty markdown page. If no items where documented, returns None
     """
@@ -78,7 +78,7 @@ def generate_markdown(file: TextIO) -> str | None:
     signals = get_documented(content, script_file, SIGNAL_REGEX)
     members = get_documented(content, script_file, MEMBER_REGEX)
 
-    markdown: list[str] = []
+    markdown: List[str] = []
     if short_desc:
         markdown.append(short_desc)
     if docstring:
@@ -89,7 +89,9 @@ def generate_markdown(file: TextIO) -> str | None:
         *get_document_section("Methods", methods),
         f"[Source Code ↪]({GITHUB_REPO}/blob/main/{script_file})",
     ]
-    if any([short_desc, methods, signals, members]):
+
+    if docstring:
+        # The class has a docstring starting with @wiki, add it.
         return "\n\n".join(markdown)
 
 

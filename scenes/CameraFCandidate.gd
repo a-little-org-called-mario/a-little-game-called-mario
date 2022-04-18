@@ -1,7 +1,7 @@
 
 extends Node
 
-"""
+"""@wiki
 CameraFollow Candidate
 
 Add this Sript in a child of anything that you want the camera to be able

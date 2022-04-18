@@ -1,7 +1,7 @@
 extends Area2D
 class_name Powerup
 
-"""
+"""@wiki
 Main class for various powerups
 
 To implement other powerups, simply extend this script

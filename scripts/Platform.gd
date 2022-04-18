@@ -1,7 +1,7 @@
 extends Enemy
 class_name Platform
 
-"""
+"""@wiki
 Implements a moving Platform enemy type.
 
 This moves in one direction until it collides with a wall, then turns around

@@ -11,9 +11,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
-        with:
-          python-version: '3.10'
       - name: Build documentation
         run: ./generate_documentation.py
       - name: Upload Documentation to Wiki

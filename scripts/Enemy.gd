@@ -1,6 +1,11 @@
-# A basic enemy class to inherit from and create individual enemies.
 extends KinematicBody2D
 class_name Enemy
+
+"""@wiki
+A basic enemy class to inherit from and create individual enemies.
+
+TODO: Add a tutorial on how to create a custom enemy.
+"""
 
 # Emitted when the enemy is moving into a dead state.
 signal dying(killer)

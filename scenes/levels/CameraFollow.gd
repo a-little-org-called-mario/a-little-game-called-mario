@@ -1,6 +1,6 @@
 extends Position2D
 
-"""
+"""@wiki
 Camera Follow tutorial
 
 * Add this script on a level where you want the camera to follow something

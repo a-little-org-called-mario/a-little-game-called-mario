@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -11,9 +11,10 @@
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/platformer/characters/BlockBuilder.gd" type="Script" id=10]
 [ext_resource path="res://scenes/platformer/characters/Bus.gd" type="Script" id=11]
-[ext_resource path="res://sprites/bus.png" type="Texture" id=12]
+[ext_resource path="res://sprites/powerups/Mario Bus driving-Sheet-export.png" type="Texture" id=12]
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=13]
 [ext_resource path="res://scenes/HeartInventoryHandle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sprites/powerups/Mario Bus stationary-Sheet-export-export.png" type="Texture" id=15]
 [ext_resource path="res://scripts/BoucyMoustache.gd" type="Script" id=16]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
 
@@ -137,7 +138,7 @@ tracks/0/keys = {
 random_pitch = 1.5
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 43.25, 20.1875 )
+extents = Vector2( 69, 25 )
 
 [sub_resource type="SphereMesh" id=28]
 
@@ -152,6 +153,43 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.527273 ), 0.0, 0.0, 0, 
 [sub_resource type="GradientTexture" id=39]
 gradient = SubResource( 40 )
 width = 128
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 190, 80 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 12 )
+region = Rect2( 190, 0, 190, 80 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 12 )
+region = Rect2( 380, 0, 190, 80 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 12 )
+region = Rect2( 570, 0, 190, 80 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 175, 82 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 15 )
+region = Rect2( 175, 0, 175, 82 )
+
+[sub_resource type="SpriteFrames" id=41]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "driving",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "standing",
+"speed": 5.0
+} ]
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
@@ -227,17 +265,9 @@ script = ExtResource( 10 )
 [node name="Bus" type="Node" parent="."]
 script = ExtResource( 11 )
 
-[node name="BusSprite" type="Sprite" parent="."]
-visible = false
-material = SubResource( 15 )
-position = Vector2( 7, 13 )
-scale = Vector2( 0.0602623, 0.0602623 )
-texture = ExtResource( 12 )
-flip_h = true
-
 [node name="BusCollision" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 6.75, 11.1875 )
+position = Vector2( 18, 7 )
 shape = SubResource( 13 )
 disabled = true
 
@@ -332,5 +362,12 @@ disabled = true
 script = ExtResource( 17 )
 
 [node name="HeartInventoryHandle" parent="." instance=ExtResource( 14 )]
+
+[node name="BusSprite" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 17, 5 )
+scale = Vector2( 0.767105, 0.725 )
+frames = SubResource( 41 )
+animation = "standing"
 
 [connection signal="timeout" from="HitFlashTimer" to="." method="_end_flash_sprite"]

@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/powerups/Mario Bus stationary-Sheet-export-export.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 65, 29 )
+extents = Vector2( 65, 30 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -48,15 +48,18 @@ animations = [ {
 [node name="Bus" type="Area2D" groups=["powerups"]]
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="oldsprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 3, -1.99997 )
 scale = Vector2( 0.0864198, 0.0864198 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, -3 )
+position = Vector2( 1, -2 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 13, -3 )
+scale = Vector2( 0.860526, 0.875 )
 frames = SubResource( 8 )
 animation = "driving"

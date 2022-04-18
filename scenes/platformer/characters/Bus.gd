@@ -3,7 +3,7 @@ extends Node
 
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 onready var player : Player = owner
-onready var sprite : Sprite = player.get_node("BusSprite")
+onready var sprite : AnimatedSprite = player.get_node("BusSprite")
 onready var collision : CollisionShape2D = player.get_node("BusCollision")
 
 

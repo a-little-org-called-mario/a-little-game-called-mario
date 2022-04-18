@@ -73,7 +73,6 @@ func _update_player(on : bool) -> void:
 func _set_state(newState):
 	if(state == newState):
 		return
-	print(newState)
 	if (newState == busState.RESTING):
 		sprite.animation = "standing"
 		sprite.playing = false

@@ -33,7 +33,7 @@ follow_vertically = true
 position = Vector2( 96, 480 )
 player_scene = ExtResource( 10 )
 
-[node name="EndPortal2" parent="." instance=ExtResource( 4 )]
+[node name="EndPortal" parent="." instance=ExtResource( 4 )]
 position = Vector2( 3296, 1184 )
 
 [node name="GravityZones" type="Node2D" parent="."]

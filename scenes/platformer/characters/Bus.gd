@@ -1,30 +1,29 @@
-extends Node
+extends Sprite
 
+export(NodePath) var collision_shape: NodePath
 
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
+
 onready var player : Player = owner
 onready var sprite : AnimatedSprite = player.get_node("BusSprite")
-onready var collision : CollisionShape2D = player.get_node("BusCollision")
+#onready var collision : CollisionShape2D = player.get_node("BusCollision")
 onready var horn_sound : AudioStreamPlayer = sprite.get_node("Horn")
 onready var resting_sound : AudioStreamPlayer2D = sprite.get_node("brrrrrrrrr")
 onready var moving_sound : AudioStreamPlayer2D = sprite.get_node("moving_sound")
 
 enum busState {RESTING, MOVING};
 var state
+onready var collision: CollisionShape2D = get_node(collision_shape)
 
 
 
 func _ready() -> void:
 	state = busState.RESTING
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
-	if inventory.has_bus:
-		_activate_bus()
-	else:
-		set_process(false)
+	call_deferred("_activate_bus", inventory.has_bus)
 
 
 func _process(_delta: float) -> void:
-	sprite.flip_h = !player.sprite.flip_h
 	if inventory.has_bus:
 		player.powerupspeed = 4
 		player.powerupaccel = 2
@@ -50,25 +49,36 @@ func _process(_delta: float) -> void:
 func _on_bus_collected(data: Dictionary) -> void:
 	if data.has("collected"):
 		inventory.has_bus = data["collected"]
-		_activate_bus()
+		call_deferred("_activate_bus", inventory.has_bus)
 
 
-func _activate_bus() -> void:
-	sprite.visible = true
-	collision.set_deferred("disabled", false)
-	call_deferred("_update_player", true)
-	set_process(true)
 
+#func _activate_bus() -> void:
+#	sprite.visible = true
+#	collision.set_deferred("disabled", false)
+#	call_deferred("_update_player", true)
+#	set_process(true)
+
+func _activate_bus(active: bool) -> void:
+	# Sprites
+	visible = active
+	player.sprite.visible = !active
+
+	# Collision
+	collision.disabled = !active
+	player.collision.disabled = active
+  set_process(active)
+  
+  var trail: Line2D = player.get_node_or_null("Trail")
+	if trail != null:
+		trail.height = 15 if active else 30
 
 func _update_player(on : bool) -> void:
 	
 	player.sprite.visible = !on
 	player.get_node("CollisionShape2D").set_deferred("disabled", on)
 	player.get_node("BouncyMoustache").visible = !on
-	var trail: Line2D = player.get_node_or_null("Trail")
-	if trail != null:
-		trail.height = 15
-
+  
 
 func _set_state(newState):
 	if(state == newState):

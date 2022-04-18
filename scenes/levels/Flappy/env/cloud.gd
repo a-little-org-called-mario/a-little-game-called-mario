@@ -8,9 +8,9 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	$EnterAudio.play()
 
 
-func _on_Area2D_body_exited(body):
+func _on_Area2D_body_exited(_body):
 	$ExitAudio.play()

@@ -1,0 +1,264 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://sprites/mario.png" type="Texture" id=1]
+[ext_resource path="res://scenes/levels/Road.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/carmario/obstacles/Bubstacle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scripts/levels/CarMarioLevel.gd" type="Script" id=5]
+[ext_resource path="res://scenes/carmario/TollBooth.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/carmario/obstacles/Spill.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=9]
+[ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=10]
+[ext_resource path="res://scenes/FollowTrigger.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/levels/story_mode/TopDownPlayer.gd" type="Script" id=12]
+[ext_resource path="res://scenes/carmario/CarSpawn.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=15]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 530, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 322 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 522, 52.5 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 32, 12 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 10 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 13 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+} ]
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = 1
+extra_spacing_bottom = 1
+font_data = ExtResource( 7 )
+
+[node name="Cario1" type="YSort"]
+position = Vector2( 0, -1 )
+script = ExtResource( 5 )
+tilemap = NodePath("Road")
+random_spawns = [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 3 ) ]
+coin_drops = ExtResource( 14 )
+toll_scene = ExtResource( 6 )
+end_portal = NodePath("EndPortal")
+
+[node name="Road" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+collision_layer = 2
+collision_mask = 2
+format = 1
+tile_data = PoolIntArray( -327680, 3, 0, -327679, 3, 0, -327678, 3, 0, -327677, 3, 0, -327676, 3, 0, -327675, 3, 0, -327674, 3, 0, -327673, 3, 0, -327672, 3, 0, -327671, 3, 0, -327670, 3, 0, -327669, 3, 0, -327668, 3, 0, -327667, 3, 0, -327666, 3, 0, -327665, 3, 0, -262144, 3, 0, -262143, 3, 0, -262142, 3, 0, -262141, 3, 0, -262140, 3, 0, -262139, 3, 0, -262138, 3, 0, -262137, 3, 0, -262136, 3, 0, -262135, 3, 0, -262134, 3, 0, -262133, 3, 0, -262132, 3, 0, -262131, 3, 0, -262130, 3, 0, -262129, 3, 0, -196608, 3, 0, -196607, 3, 0, -196606, 3, 0, -196605, 3, 0, -196604, 3, 0, -196603, 3, 0, -196602, 3, 0, -196601, 3, 0, -196600, 3, 0, -196599, 3, 0, -196598, 3, 0, -196597, 3, 0, -196596, 3, 0, -196595, 3, 0, -196594, 3, 0, -196593, 3, 0, -131072, 3, 0, -131071, 3, 0, -131070, 3, 0, -131069, 3, 0, -131068, 3, 0, -131067, 3, 0, -131066, 3, 0, -131065, 3, 0, -131064, 3, 0, -131063, 3, 0, -131062, 3, 0, -131061, 3, 0, -131060, 3, 0, -131059, 3, 0, -131058, 3, 0, -131057, 3, 0, -65536, 3, 0, -65535, 3, 0, -65534, 3, 0, -65533, 3, 0, -65532, 3, 0, -65531, 3, 0, -65530, 3, 0, -65529, 3, 0, -65528, 3, 0, -65527, 3, 0, -65526, 3, 0, -65525, 3, 0, -65524, 3, 0, -65523, 3, 0, -65522, 3, 0, -65521, 3, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 0, 14, 3, 0, 15, 3, 0, 65536, 3, 0, 65537, 3, 0, 65538, 3, 0, 65539, 3, 0, 65540, 3, 0, 65541, 3, 0, 65542, 3, 0, 65543, 3, 0, 65544, 3, 0, 65545, 3, 0, 65546, 3, 0, 65547, 3, 0, 65548, 3, 0, 65549, 3, 0, 65550, 3, 0, 65551, 3, 0, 131072, 2, 0, 131073, 2, 0, 131074, 2, 0, 131075, 2, 0, 131076, 2, 0, 131077, 2, 0, 131078, 2, 0, 131079, 2, 0, 131080, 2, 0, 131081, 2, 0, 131082, 2, 0, 131083, 2, 0, 131084, 2, 0, 131085, 2, 0, 131086, 2, 0, 131087, 2, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 262144, 1, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 1, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 1, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 1, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 393216, 1073741826, 0, 393217, 1073741826, 0, 393218, 1073741826, 0, 393219, 1073741826, 0, 393220, 1073741826, 0, 393221, 1073741826, 0, 393222, 1073741826, 0, 393223, 1073741826, 0, 393224, 1073741826, 0, 393225, 1073741826, 0, 393226, 1073741826, 0, 393227, 1073741826, 0, 393228, 1073741826, 0, 393229, 1073741826, 0, 393230, 1073741826, 0, 393231, 1073741826, 0, 458752, 1073741826, 0, 458753, 1073741826, 0, 458754, 1073741826, 0, 458755, 1073741826, 0, 458756, 1073741826, 0, 458757, 1073741826, 0, 458758, 1073741826, 0, 458759, 1073741826, 0, 458760, 1073741826, 0, 458761, 1073741826, 0, 458762, 1073741826, 0, 458763, 1073741826, 0, 458764, 1073741826, 0, 458765, 1073741826, 0, 458766, 1073741826, 0, 458767, 1073741826, 0, 524288, 3, 0, 524289, 3, 0, 524290, 3, 0, 524291, 3, 0, 524292, 3, 0, 524293, 3, 0, 524294, 3, 0, 524295, 3, 0, 524296, 3, 0, 524297, 3, 0, 524298, 3, 0, 524299, 3, 0, 524300, 3, 0, 524301, 3, 0, 524302, 3, 0, 524303, 3, 0, 589824, 3, 0, 589825, 3, 0, 589826, 3, 0, 589827, 3, 0, 589828, 3, 0, 589829, 3, 0, 589830, 3, 0, 589831, 3, 0, 589832, 3, 0, 589833, 3, 0, 589834, 3, 0, 589835, 3, 0, 589836, 3, 0, 589837, 3, 0, 589838, 3, 0, 589839, 3, 0, 655360, 3, 0, 655361, 3, 0, 655362, 3, 0, 655363, 3, 0, 655364, 3, 0, 655365, 3, 0, 655366, 3, 0, 655367, 3, 0, 655368, 3, 0, 655369, 3, 0, 655370, 3, 0, 655371, 3, 0, 655372, 3, 0, 655373, 3, 0, 655374, 3, 0, 655375, 3, 0, 720896, 3, 0, 720897, 3, 0, 720898, 3, 0, 720899, 3, 0, 720900, 3, 0, 720901, 3, 0, 720902, 3, 0, 720903, 3, 0, 720904, 3, 0, 720905, 3, 0, 720906, 3, 0, 720907, 3, 0, 720908, 3, 0, 720909, 3, 0, 720910, 3, 0, 720911, 3, 0, 786432, 3, 0, 786433, 3, 0, 786434, 3, 0, 786435, 3, 0, 786436, 3, 0, 786437, 3, 0, 786438, 3, 0, 786439, 3, 0, 786440, 3, 0, 786441, 3, 0, 786442, 3, 0, 786443, 3, 0, 786444, 3, 0, 786445, 3, 0, 786446, 3, 0, 786447, 3, 0, 851968, 3, 0, 851969, 3, 0, 851970, 3, 0, 851971, 3, 0, 851972, 3, 0, 851973, 3, 0, 851974, 3, 0, 851975, 3, 0, 851976, 3, 0, 851977, 3, 0, 851978, 3, 0, 851979, 3, 0, 851980, 3, 0, 851981, 3, 0, 851982, 3, 0, 851983, 3, 0, 917504, 3, 0, 917505, 3, 0, 917506, 3, 0, 917507, 3, 0, 917508, 3, 0, 917509, 3, 0, 917510, 3, 0, 917511, 3, 0, 917512, 3, 0, 917513, 3, 0, 917514, 3, 0, 917515, 3, 0, 917516, 3, 0, 917517, 3, 0, 917518, 3, 0, 917519, 3, 0 )
+
+[node name="Corners" type="StaticBody2D" parent="Road"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Road/Corners"]
+position = Vector2( 512, -15 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Road/Corners"]
+position = Vector2( 512, 625 )
+shape = SubResource( 1 )
+
+[node name="PlayerCheck" type="Area2D" parent="Road"]
+position = Vector2( 1032, 0 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Road/PlayerCheck"]
+position = Vector2( 0, 311 )
+shape = SubResource( 2 )
+
+[node name="Grass" type="Area2D" parent="Road" groups=["terrain_grass"]]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Road/Grass"]
+position = Vector2( 522, 48 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Road/Grass"]
+position = Vector2( 520, 573.5 )
+shape = SubResource( 3 )
+
+[node name="Road0" type="TileMap" parent="."]
+position = Vector2( -1024, 0 )
+tile_set = ExtResource( 2 )
+collision_layer = 2
+collision_mask = 2
+format = 1
+tile_data = PoolIntArray( -327680, 3, 0, -327679, 3, 0, -327678, 3, 0, -327677, 3, 0, -327676, 3, 0, -327675, 3, 0, -327674, 3, 0, -327673, 3, 0, -327672, 3, 0, -327671, 3, 0, -327670, 3, 0, -327669, 3, 0, -327668, 3, 0, -327667, 3, 0, -327666, 3, 0, -327665, 3, 0, -262144, 3, 0, -262143, 3, 0, -262142, 3, 0, -262141, 3, 0, -262140, 3, 0, -262139, 3, 0, -262138, 3, 0, -262137, 3, 0, -262136, 3, 0, -262135, 3, 0, -262134, 3, 0, -262133, 3, 0, -262132, 3, 0, -262131, 3, 0, -262130, 3, 0, -262129, 3, 0, -196608, 3, 0, -196607, 3, 0, -196606, 3, 0, -196605, 3, 0, -196604, 3, 0, -196603, 3, 0, -196602, 3, 0, -196601, 3, 0, -196600, 3, 0, -196599, 3, 0, -196598, 3, 0, -196597, 3, 0, -196596, 3, 0, -196595, 3, 0, -196594, 3, 0, -196593, 3, 0, -131072, 3, 0, -131071, 3, 0, -131070, 3, 0, -131069, 3, 0, -131068, 3, 0, -131067, 3, 0, -131066, 3, 0, -131065, 3, 0, -131064, 3, 0, -131063, 3, 0, -131062, 3, 0, -131061, 3, 0, -131060, 3, 0, -131059, 3, 0, -131058, 3, 0, -131057, 3, 0, -65536, 3, 0, -65535, 3, 0, -65534, 3, 0, -65533, 3, 0, -65532, 3, 0, -65531, 3, 0, -65530, 3, 0, -65529, 3, 0, -65528, 3, 0, -65527, 3, 0, -65526, 3, 0, -65525, 3, 0, -65524, 3, 0, -65523, 3, 0, -65522, 3, 0, -65521, 3, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 0, 14, 3, 0, 15, 3, 0, 65536, 3, 0, 65537, 3, 0, 65538, 3, 0, 65539, 3, 0, 65540, 3, 0, 65541, 3, 0, 65542, 3, 0, 65543, 3, 0, 65544, 3, 0, 65545, 3, 0, 65546, 3, 0, 65547, 3, 0, 65548, 3, 0, 65549, 3, 0, 65550, 3, 0, 65551, 3, 0, 131072, 2, 0, 131073, 2, 0, 131074, 2, 0, 131075, 2, 0, 131076, 2, 0, 131077, 2, 0, 131078, 2, 0, 131079, 2, 0, 131080, 2, 0, 131081, 2, 0, 131082, 2, 0, 131083, 2, 0, 131084, 2, 0, 131085, 2, 0, 131086, 2, 0, 131087, 2, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 262144, 1, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 1, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 1, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 1, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 393216, 1073741826, 0, 393217, 1073741826, 0, 393218, 1073741826, 0, 393219, 1073741826, 0, 393220, 1073741826, 0, 393221, 1073741826, 0, 393222, 1073741826, 0, 393223, 1073741826, 0, 393224, 1073741826, 0, 393225, 1073741826, 0, 393226, 1073741826, 0, 393227, 1073741826, 0, 393228, 1073741826, 0, 393229, 1073741826, 0, 393230, 1073741826, 0, 393231, 1073741826, 0, 458752, 1073741826, 0, 458753, 1073741826, 0, 458754, 1073741826, 0, 458755, 1073741826, 0, 458756, 1073741826, 0, 458757, 1073741826, 0, 458758, 1073741826, 0, 458759, 1073741826, 0, 458760, 1073741826, 0, 458761, 1073741826, 0, 458762, 1073741826, 0, 458763, 1073741826, 0, 458764, 1073741826, 0, 458765, 1073741826, 0, 458766, 1073741826, 0, 458767, 1073741826, 0, 524288, 3, 0, 524289, 3, 0, 524290, 3, 0, 524291, 3, 0, 524292, 3, 0, 524293, 3, 0, 524294, 3, 0, 524295, 3, 0, 524296, 3, 0, 524297, 3, 0, 524298, 3, 0, 524299, 3, 0, 524300, 3, 0, 524301, 3, 0, 524302, 3, 0, 524303, 3, 0, 589824, 3, 0, 589825, 3, 0, 589826, 3, 0, 589827, 3, 0, 589828, 3, 0, 589829, 3, 0, 589830, 3, 0, 589831, 3, 0, 589832, 3, 0, 589833, 3, 0, 589834, 3, 0, 589835, 3, 0, 589836, 3, 0, 589837, 3, 0, 589838, 3, 0, 589839, 3, 0, 655360, 3, 0, 655361, 3, 0, 655362, 3, 0, 655363, 3, 0, 655364, 3, 0, 655365, 3, 0, 655366, 3, 0, 655367, 3, 0, 655368, 3, 0, 655369, 3, 0, 655370, 3, 0, 655371, 3, 0, 655372, 3, 0, 655373, 3, 0, 655374, 3, 0, 655375, 3, 0, 720896, 3, 0, 720897, 3, 0, 720898, 3, 0, 720899, 3, 0, 720900, 3, 0, 720901, 3, 0, 720902, 3, 0, 720903, 3, 0, 720904, 3, 0, 720905, 3, 0, 720906, 3, 0, 720907, 3, 0, 720908, 3, 0, 720909, 3, 0, 720910, 3, 0, 720911, 3, 0, 786432, 3, 0, 786433, 3, 0, 786434, 3, 0, 786435, 3, 0, 786436, 3, 0, 786437, 3, 0, 786438, 3, 0, 786439, 3, 0, 786440, 3, 0, 786441, 3, 0, 786442, 3, 0, 786443, 3, 0, 786444, 3, 0, 786445, 3, 0, 786446, 3, 0, 786447, 3, 0, 851968, 3, 0, 851969, 3, 0, 851970, 3, 0, 851971, 3, 0, 851972, 3, 0, 851973, 3, 0, 851974, 3, 0, 851975, 3, 0, 851976, 3, 0, 851977, 3, 0, 851978, 3, 0, 851979, 3, 0, 851980, 3, 0, 851981, 3, 0, 851982, 3, 0, 851983, 3, 0, 917504, 3, 0, 917505, 3, 0, 917506, 3, 0, 917507, 3, 0, 917508, 3, 0, 917509, 3, 0, 917510, 3, 0, 917511, 3, 0, 917512, 3, 0, 917513, 3, 0, 917514, 3, 0, 917515, 3, 0, 917516, 3, 0, 917517, 3, 0, 917518, 3, 0, 917519, 3, 0 )
+
+[node name="Corners" type="StaticBody2D" parent="Road0"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Road0/Corners"]
+position = Vector2( 992, 320 )
+rotation = -1.57079
+shape = SubResource( 1 )
+
+[node name="TopDownPlayer" type="KinematicBody2D" parent="." groups=["Player"]]
+position = Vector2( 96, 337 )
+collision_mask = 7
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopDownPlayer"]
+position = Vector2( 0, 20 )
+shape = SubResource( 16 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TopDownPlayer"]
+material = SubResource( 10 )
+position = Vector2( 0, 32 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 11 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -16 )
+
+[node name="CoinInventoryHandle" parent="TopDownPlayer" instance=ExtResource( 15 )]
+
+[node name="CarSpawn" parent="." instance=ExtResource( 13 )]
+position = Vector2( 656, 425 )
+
+[node name="BoothStart" type="Position2D" parent="."]
+position = Vector2( 576, 129 )
+
+[node name="BoothEnd" type="Position2D" parent="BoothStart"]
+position = Vector2( 0, 384 )
+
+[node name="Spill" parent="." instance=ExtResource( 8 )]
+position = Vector2( 2320, 393 )
+
+[node name="FollowTrigger" parent="." instance=ExtResource( 11 )]
+position = Vector2( 96, 345 )
+
+[node name="BackPortal" parent="." instance=ExtResource( 9 )]
+position = Vector2( 216, 185 )
+
+[node name="Label" type="Label" parent="BackPortal"]
+margin_left = -128.0
+margin_top = -64.0
+margin_right = 100.0
+margin_bottom = -48.0
+custom_fonts/font = ExtResource( 4 )
+text = "TOO YOUNG TO DRIVE:"
+align = 1
+
+[node name="EndPortal" parent="." instance=ExtResource( 9 )]
+position = Vector2( -160, 321 )
+next_level_path = "res://scenes/levels/CarioMart/Cario2.tscn"
+colour = Color( 0.643137, 0.203922, 0.678431, 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Progress" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -120.0
+margin_top = 24.0
+margin_right = 120.0
+margin_bottom = 90.0
+grow_horizontal = 2
+
+[node name="Lap" type="RichTextLabel" parent="CanvasLayer/Progress"]
+margin_right = 240.0
+margin_bottom = 31.0
+rect_clip_content = false
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center][wave amp=50 freq=2]LAPS: 0[/wave][/center]"
+text = "LAPS: 0"
+fit_content_height = true
+scroll_active = false
+
+[node name="Price" type="RichTextLabel" parent="CanvasLayer/Progress"]
+margin_top = 35.0
+margin_right = 240.0
+margin_bottom = 66.0
+rect_clip_content = false
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center][wave amp=50 freq=2]TOLL: 5[/wave][/center]"
+text = "TOLL: 5"
+fit_content_height = true
+scroll_active = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 504.0
+margin_top = 305.0
+margin_right = 808.0
+margin_bottom = 402.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center]DO 10 LAPS AND YOU [wave amp=50 freq=2]MAY[/wave] BE GRANTED ACCESS TO THE [wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]SECRET MEETING[/rainbow][/wave][/center]"
+text = "DO 10 LAPS AND YOU MAY BE GRANTED ACCESS TO THE SECRET MEETING"
+
+[connection signal="body_entered" from="Road/Grass" to="." method="terrain_entered"]
+[connection signal="body_exited" from="Road/Grass" to="." method="terrain_exited"]
+[connection signal="tree_entered" from="CarSpawn" to="CanvasLayer/Progress" method="hide"]
+[connection signal="tree_exited" from="CarSpawn" to="CanvasLayer/Progress" method="show"]

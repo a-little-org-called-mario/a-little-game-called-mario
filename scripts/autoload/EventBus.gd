@@ -3,8 +3,7 @@ extends Node
 
 signal jumping(data)
 signal coin_collected(data)
-signal star_collected(data)
-signal star_collected_again(data)
+signal star_collected(starname, again)
 signal heart_changed(delta, total)
 signal shot()
 signal enemy_killed(data)

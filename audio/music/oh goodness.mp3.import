@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/oh goodness.mp3-cd2ba01ebb3e0c6a69a177f535ad8b80.mp3str"
+
+[deps]
+
+source_file="res://audio/music/oh goodness.mp3"
+dest_files=[ "res://.import/oh goodness.mp3-cd2ba01ebb3e0c6a69a177f535ad8b80.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

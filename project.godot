@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "AxisMotion",
 "language": "GDScript",
-"path": "res://scripts/AxisMotion.gd"
+"path": "res://scenes/platformer/characters/AxisMotion.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "BallPlayer",
@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/powerups/Fireball.gd"
 }, {
+"base": "BaseInventoryHandle",
+"class": "HeartInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/HeartInventoryHandle.gd"
+}, {
 "base": "Area2D",
 "class": "IntralevelPortal",
 "language": "GDScript",
@@ -137,17 +142,12 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scripts/Player.gd"
+"path": "res://scenes/platformer/characters/Player.gd"
 }, {
 "base": "RigidBody2D",
 "class": "PlayerFlying",
 "language": "GDScript",
 "path": "res://scenes/levels/Flappy/Characters/Player/PlayerFlyingControls.gd"
-}, {
-"base": "Resource",
-"class": "PlayerInventory",
-"language": "GDScript",
-"path": "res://scripts/resources/PlayerInventory.gd"
 }, {
 "base": "Area2D",
 "class": "PlayerProjectile",
@@ -235,6 +235,7 @@ _global_script_class_icons={
 "Enemy": "",
 "FireFlower": "",
 "Fireball": "",
+"HeartInventoryHandle": "",
 "IntralevelPortal": "",
 "Luigi": "",
 "MarwingLevel": "",
@@ -242,7 +243,6 @@ _global_script_class_icons={
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",
-"PlayerInventory": "",
 "PlayerProjectile": "",
 "PopcornKernel": "",
 "PopcornPopped": "",

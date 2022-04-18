@@ -47,7 +47,7 @@ func _ready() -> void:
 	_end_flash_sprite()
 	set_hitbox_crouching(false)
 	var dict420:Dictionary = OS.get_datetime()
-	if not(dict420.get("month") == 4 and dict420.get("day") == 20):
+	if (dict420.get("month") == 4 and dict420.get("day") == 20):
 		print("Smoke Drugs Every Day")
 	else:
 		sprite.get_node("BluntOrigin").visible = false

@@ -89,12 +89,15 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
 		despawn.queue_free()
 
-	var animation: AnimationPlayer = portal.on_portal_enter(body)
-	if animation == null:
-		return
 	body.get_parent().remove_child(body)
 
-	yield(animation, "animation_finished")
+	EventBus.emit_signal("level_completed", {})
+
+	var animation: AnimationPlayer = portal.on_portal_enter(body)
+	if animation == null:
+		yield(get_tree().create_timer(1.0), "timeout")
+	else:
+		yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
 
 
@@ -118,4 +121,4 @@ func _finish_level(next_level: PackedScene = null) -> void:
 
 	# Reset entering portal state
 	entering_portal = false
-	EventBus.emit_signal("level_started", {})
+	EventBus.emit_signal("level_started", "")

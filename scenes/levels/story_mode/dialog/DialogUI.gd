@@ -4,6 +4,7 @@ extends Control
 Dialog for displaying interactions with characters.
 """
 
+signal dialog_started
 signal dialog_finished
 # Emitted when the player receives an item during a dialog.
 signal item_received(item)
@@ -22,8 +23,12 @@ var _speaker: Character
 var _current_text: int
 # A dictionary storing how often a certain dialog has been reached.
 var _occurences: Dictionary
+# The name of the dialog that is being checked for issues.
+var _checking: String
 
-const Dialog = preload("Dialog.gd")
+const Dialog = preload("Dialog.gd").Dialog
+const Condition = preload("Dialog.gd").Condition
+const Choice = preload("Dialog.gd").Choice
 const Character = preload("../character/Character.gd")
 const ItemStore = preload("../items/ItemStore.gd")
 const FileUtils = preload("res://scripts/FileUtils.gd")
@@ -39,28 +44,26 @@ onready var _choice_container: VBoxContainer = $ColorRect/MarginContainer/VBoxCo
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 
-func _ready() -> void:
+func init(item_store: ItemStore, inventory: Inventory):
+	_item_store = item_store
+	_inventory = inventory
 	var dialog_dir: String = get_script().resource_path\
 			.get_base_dir().plus_file("../dialogs")
 	for file in FileUtils.list_dir(dialog_dir):
 		var data := FileUtils.as_json(file)
 		if not data:
 			push_error("Couldn't load dialog %s" % [file])
-		_dialogs[file.get_file().get_basename()] = Dialog.new(data)
-
-
-func set_items(to: ItemStore):
-	_item_store = to
-
-
-func set_inventory(to: Inventory):
-	_inventory = to
+		var dialog := Dialog.new(data)
+		_checking = file.get_file()
+		_check_dialog(dialog)
+		_dialogs[file.get_file().get_basename()] = dialog
 
 
 # Start a dialog with optionally a character as speaker.
 func start(dialog: String, speaker: Character = null):
-	assert(_item_store and _inventory, "Inventory and item provider not set.")
+	_assert_ready()
 	assert(dialog in _dialogs, "Dialog %s not found" % dialog)
+	emit_signal("dialog_started")
 	_speaker = speaker
 	_title_label.text = ""
 	_portrait_rect.visible = speaker != null
@@ -77,8 +80,8 @@ func _set_dialog(to: Dialog):
 	if not _dialog:
 		active = false
 		return emit_signal("dialog_finished")
-	if _dialog.has_condition:
-		var condition := _condition_true(_dialog)
+	if _dialog.condition:
+		var condition := _condition_true(_dialog.condition, _dialog)
 		if _dialog.has_branches:
 			return _set_dialog(_dialog.True if condition else _dialog.False)
 		if not condition:
@@ -87,9 +90,11 @@ func _set_dialog(to: Dialog):
 		button.queue_free()
 	for choice in _dialog.choices:
 		var button := Button.new()
-		button.text = choice
-		var dialog: Dialog = _dialog.choices[choice]
-		if not _condition_true(dialog) and not dialog.has_branches:
+		button.text = choice.text
+		var dialog := _evaluate_dialog(choice.dialog)
+		if choice.dialog and not dialog:
+			continue
+		if choice.condition and not _condition_true(choice.condition, choice):
 			continue
 		button.connect("pressed", self, "_on_ChoiceButton_pressed", [dialog])
 		_choice_container.add_child(button)
@@ -118,14 +123,38 @@ func _progress_dialog():
 	_animation_player.play("talking")
 
 
-func _condition_true(dialog: Dialog) -> bool:
-	if not dialog or not dialog.has_condition:
-		return true
-	var item = not dialog.required_item or _inventory.has(_item_store.get(
-			dialog.required_item))
-	var occurence = not dialog.only_at_occurence or\
-			_occurences.get(dialog, 0) == dialog.only_at_occurence - 1
-	return item and occurence
+func _condition_true(condition: Condition, object: Object) -> bool:
+	var checks := []
+	if condition.required_item:
+		var item = _item_store.get(condition.required_item)
+		assert(item, "Couldn't find item %s" % condition.required_item)
+		checks.append(_inventory.has(item))
+	if condition.only_at_occurence:
+		var occurence := condition.only_at_occurence - 1
+		checks.append(_occurences.get(object, 0) == occurence)
+	if condition.custom:
+		assert(not condition.custom or owner.has_method(condition.custom),
+				"Can't find custom condition method '%s' in main script."\
+				% condition.custom)
+		checks.append(owner.call(condition.custom))
+	
+	for check in checks:
+		if check == condition.inverted:
+			return false
+	return true
+
+
+# Returns the dialog that should be displayed when this dialog object is hit.
+func _evaluate_dialog(dialog: Dialog) -> Dialog:
+	if not dialog:
+		return null
+	if dialog.condition:
+		if _condition_true(dialog.condition, dialog):
+			if dialog.True:
+				return dialog.True as Dialog
+		else:
+			return dialog.False as Dialog
+	return dialog
 
 
 # Skip the dialog and return if the dialog needed to be skipped.
@@ -134,8 +163,43 @@ func _skip_dialog() -> bool:
 	return _animation_player.is_playing()
 
 
+# Check this dialog and the contained conditions/dialogs for any issues.
+func _check_dialog(dialog: Dialog):
+	if not dialog:
+		return
+	_check_condition(dialog.condition)
+	for branch in [dialog.True, dialog.False]:
+		_check_dialog(branch)
+	for _choice in dialog.choices:
+		var choice: Choice = _choice
+		_check_condition(choice.condition)
+		_check_dialog(choice.dialog)
+
+
+# Check if the condition is valid.
+func _check_condition(condition: Condition):
+	if not condition:
+		return
+	if condition.required_item:
+		_check_assert(_item_store.get(condition.required_item),
+				"Couldn't find item %s", condition.required_item)
+	if condition.custom:
+		_check_assert(owner.has_method(condition.custom),
+				"Can't find custom condition method '%s' in main script.",
+				condition.custom)
+
+
+# An assert that prepends the dialog name to the message.
+func _check_assert(condition, message: String, format):
+	assert(condition, "Dialog '%s': %s" % [_checking, message % format])
+
+
 func _on_ChoiceButton_pressed(choice: Dialog):
 	_set_dialog(choice)
+
+
+func _assert_ready():
+	assert(_item_store and _inventory, "Inventory and item provider not set.")
 
 
 func _on_ContinueButton_pressed() -> void:

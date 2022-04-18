@@ -15,8 +15,17 @@
 					"type": "integer",
 					"minimum": 1,
 					"description": "The condition is true if the number of times the player has now seen this dialog matches this number."
+				},
+				"custom": {
+					"type": "string",
+					"description": "Check if a custom method returns true."
+				},
+				"inverted": {
+					"type": "boolean",
+					"description": "If the condition should be inverted."
 				}
 			},
+			"minProperties": 1,
 			"additionalProperties": false
 		}
 	},
@@ -39,43 +48,46 @@
 				},
 				"choices": {
 					"description": "The choices the player has the respond.",
-					"oneOf": [
-						{ "type": "string" },
-						{
-							"type": "array",
-							"items": {
-							"oneOf": [
-									{ "type": "string" },
-									{
-										"type": "object",
-										"properties": {
-											"text": {
-												"description": "The text of the choice.",
-												"type": "string"
-											},
-											"dialog": {
-												"$ref": "#"
-											}
-										},
-										"additionalProperties": false,
-										"required": ["text"]
+					"type": "array",
+					"items": {
+						"oneOf": [
+							{ "type": "string" },
+							{
+								"type": "object",
+								"properties": {
+									"text": {
+										"description": "The text of the choice.",
+										"type": "string"
+									},
+									"dialog": {
+										"description": "The dialog triggered by this choice.",
+										"$ref": "#"
+									},
+									"condition": {
+										"description": "The condition that needs to be true to have this option be visible.",
+										"$ref": "#/definitions/condition"
 									}
-								]
-							},
-							"minItems": 1
-						}
-					]
+								},
+								"additionalProperties": false,
+								"required": ["text"]
+							}
+						]
+					},
+					"minItems": 1
 				},
 				"item": {
 					"description": "The item that the character gives the player after the dialog",
+					"minLength": 3,
 					"type": "string"
 				},
 				"event": {
 					"description": "The event that is triggered after the dialog",
+					"minLength": 3,
 					"type": "string"
 				},
 				"set_sprite": {
 					"description": "The the character should appear as after the dialog",
+					"minLength": 3,
 					"type": "string"
 				},
 				"condition": {

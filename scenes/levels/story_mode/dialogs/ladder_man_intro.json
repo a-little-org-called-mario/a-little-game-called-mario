@@ -9,7 +9,7 @@
 					"I don't remember...",
 					"There was definitly someone here.\nHe wanted to do something... Finish something..."
 				],
-				"choices": "I will find out!"
+				"choices": ["I will find out!"]
 			}
 		},
 		{

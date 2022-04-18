@@ -133,8 +133,9 @@ anchor_bottom = 1.0
 [node name="PortraitTextureRect" type="TextureRect" parent="PortraitRect/VBoxContainer"]
 anchor_top = 0.045
 anchor_bottom = 0.045
+margin_top = -9.045
 margin_right = 157.0
-margin_bottom = 189.0
+margin_bottom = 179.955
 size_flags_vertical = 3
 expand = true
 stretch_mode = 6

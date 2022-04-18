@@ -1,20 +1,16 @@
+# Implements the Bub enemy type.
+# This enemy walks forward until it bumps into a wall at which point it
+# reverses direction and continues. Affected by gravity and will fall
+# down stairs and into pits.
+#
+# Bub is a friendly sort and doesn't hurt or damage the player in any
+# way. He'll even give the player a lift if he cares to jump on!
+#
+# Bub wishes all enemies were as nice as him.
+#
+# Bub asset by GrafxKid at https://grafxkid.itch.io/sprite-pack-1
 extends Enemy
 class_name Bub
-
-"""
-Implements the Bub enemy type.
-
-This enemy walks forward until it bumps into a wall at which point it
-reverses direction and continues. Affected by gravity and will fall
-down stairs and into pits.
-
-Bub is a friendly sort and doesn't hurt or damage the player in any
-way. He'll even give the player a lift if he cares to jump on!
-
-Bub wishes all enemies were as nice as him.
-
-Bub asset by GrafxKid at https://grafxkid.itch.io/sprite-pack-1
-"""
 
 # General movement constants and logic borrowed from Player.
 # TODO: Generalize enemy movement into a MovingEnemy class?

@@ -1,13 +1,9 @@
+# Using the Enemy class that someone else made.
+# The Bub enemy is using collision layer 4 and mask 2 so this enemy is as well.
+# Unfortunately, most of the worlds are made as layer 1 so we need to mask 1
+# WallMech so it interacts with most worlds. This should be refactored later.
+# Also reusing the res://scenes/enemies/Bullet.tscn and res://scenes/SimpleExplosion.tscn for now
 extends Enemy
-
-"""
-Using the Enemy class that someone else made.
-
-The Bub enemy is using collision layer 4 and mask 2 so this enemy is as well.
-Unfortunately, most of the worlds are made as layer 1 so we need to mask 1
-WallMech so it interacts with most worlds. This should be refactored later.
-Also reusing the `res://scenes/enemies/Bullet.tscn` and `res://scenes/SimpleExplosion.tscn` for now
-"""
 
 onready var turret_sfx: AudioStreamPlayer2D = $TurretSound
 onready var shoot_timer: Timer = $ShootTimer

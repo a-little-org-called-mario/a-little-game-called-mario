@@ -9,6 +9,7 @@ onready var hub: TileMap = $TileMap
 onready var level: Node = $TileMap
 onready var bgm: AudioStreamPlayer = $Audio/BGM
 onready var ui: CanvasLayer = $UI
+onready var defaultBGMStream : AudioStream = bgm.stream.duplicate()
 
 var completionSound = preload("res://audio/sfx/portal.wav")
 var coinSound = preload("res://audio/sfx/coin.wav")
@@ -33,10 +34,14 @@ func _on_ui_visibility_changed(data):
 
 
 func _bgm_changed(data) -> void:
-	if "playing" in data:
-		bgm.playing = data.playing
-	if "stream" in data:
-		bgm.stream = data.stream
+	if typeof(data) == TYPE_STRING and data == "reset":
+		bgm.stream = defaultBGMStream
+		bgm.playing = true
+	else:
+		if "playing" in data:
+			bgm.playing = data.playing
+		if "stream" in data:
+			bgm.stream = data.stream
 
 
 func _hook_portals() -> void:

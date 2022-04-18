@@ -233,11 +233,12 @@ func jump():
 	EventBus.emit_signal("jumping")
 
 
-func super_jump():
+func super_jump(): 
 	super_jump_timer = 0
 	stats.jump_xp += 1
 	stats.acrobatics += 1
 	tween.stop_all()
+	set_hitbox_crouching(false)
 	stretch(0.2, 0, 1.0, 2.5)
 	y_motion.set_speed(JUMPFORCE * -100)
 	anticipating_jump = false

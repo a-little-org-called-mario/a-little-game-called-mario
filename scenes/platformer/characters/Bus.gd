@@ -5,8 +5,6 @@ export(NodePath) var collision_shape: NodePath
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
 onready var player : Player = owner
-#onready var sprite : AnimatedSprite = player.get_node("BusSprite")
-#onready var collision : CollisionShape2D = player.get_node("BusCollision")
 onready var horn_sound : AudioStreamPlayer = get_node("Horn")
 onready var resting_sound : AudioStreamPlayer2D = get_node("brrrrrrrrr")
 onready var moving_sound : AudioStreamPlayer2D = get_node("moving_sound")
@@ -18,7 +16,6 @@ onready var collision: CollisionShape2D = get_node(collision_shape)
 
 
 func _ready() -> void:
-	#state = busState.RESTING
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
 	call_deferred("_activate_bus", inventory.has_bus)
 
@@ -60,10 +57,15 @@ func _activate_bus(active: bool) -> void:
 	var trail: Line2D = player.get_node_or_null("Trail")
 	if trail != null:
 		trail.height = 15 if active else 30
-	var moustache = get_parent().get_node("BouncyMoustache")
+	var moustache = get_parent().get_node_or_null("BouncyMoustache")
 	if moustache != null:
 		moustache.visible = !active
 	
+	if (!active):
+		player.powerupspeed = 1
+		player.powerupaccel = 1
+		moving_sound.playing = false 
+		resting_sound.playing = false
 
 func _set_state(newState):
 	if(state == newState):

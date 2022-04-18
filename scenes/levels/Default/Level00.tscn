@@ -35,7 +35,8 @@ bounce_count = 2
 position = Vector2( 96, 480 )
 
 [node name="Bus" parent="." instance=ExtResource( 7 )]
-position = Vector2( 252, 469 )
+position = Vector2( 236, 457 )
+scale = Vector2( 1.5, 1.5 )
 
 [node name="GreasySteve" parent="." instance=ExtResource( 5 )]
 position = Vector2( 86, 62 )

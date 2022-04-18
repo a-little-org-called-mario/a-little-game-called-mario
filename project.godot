@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "EndPortal",
 "language": "GDScript",
-"path": "res://scripts/EndPortal.gd"
+"path": "res://scenes/EndPortal.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",

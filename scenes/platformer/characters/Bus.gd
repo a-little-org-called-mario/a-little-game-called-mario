@@ -5,9 +5,15 @@ var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 onready var player : Player = owner
 onready var sprite : AnimatedSprite = player.get_node("BusSprite")
 onready var collision : CollisionShape2D = player.get_node("BusCollision")
+onready var horn_sound : AudioStreamPlayer2D = player.get_node("HurtSFX")
 
+var prev_posion : Vector2
+enum busState {RESTING, MOVING};
+
+var state
 
 func _ready() -> void:
+	state = busState.RESTING
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
 	if inventory.has_bus:
 		_activate_bus()
@@ -23,6 +29,18 @@ func _process(_delta: float) -> void:
 	else:
 		player.powerupspeed = 1
 		player.powerupaccel = 1
+	#print(player.x_motion.get_speed())
+	#print(state)
+	#if player.x_motion.get_speed() <= player.STOPTHRESHOLD and state != busState.RESTING:
+		#_change_state(busState.RESTING)
+	#elif player.x_motion.get_speed() != 0 and state == busState.RESTING:
+	if Input.is_action_pressed("right") or Input.is_action_pressed("left"):
+		_change_state(busState.MOVING)
+	else:
+		_change_state(busState.RESTING) 
+		
+	if Input.is_action_just_pressed("make_sound"):
+		_play_horn();
 
 
 func _on_bus_collected(data: Dictionary) -> void:
@@ -33,6 +51,7 @@ func _on_bus_collected(data: Dictionary) -> void:
 
 func _activate_bus() -> void:
 	sprite.visible = true
+	sprite.playing = true
 	collision.set_deferred("disabled", false)
 	call_deferred("_update_player")
 	set_process(true)
@@ -44,3 +63,15 @@ func _update_player() -> void:
 	var trail: Line2D = player.get_node_or_null("Trail")
 	if trail != null:
 		trail.height = 15
+
+func _change_state(newState):
+	if (newState == busState.RESTING):
+		sprite.animation = "standing"
+		sprite.playing = false
+	if (newState == busState.MOVING):
+		sprite.animation = "driving"
+		sprite.playing = true
+	state = newState
+
+func _play_horn():
+	horn_sound.play()

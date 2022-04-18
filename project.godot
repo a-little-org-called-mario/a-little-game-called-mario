@@ -64,11 +64,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/resources/CoinInventoryHandle.gd"
 }, {
-"base": "PlayerProjectile",
-"class": "CoinProjectile",
-"language": "GDScript",
-"path": "res://scripts/CoinProjectile.gd"
-}, {
 "base": "Achievement",
 "class": "CoinsAchievement",
 "language": "GDScript",
@@ -226,7 +221,6 @@ _global_script_class_icons={
 "Bus": "",
 "CameraLeanAmount": "",
 "CoinInventoryHandle": "",
-"CoinProjectile": "",
 "CoinsAchievement": "",
 "ConeSpotter": "",
 "Contributors": "",
@@ -469,6 +463,11 @@ toggle_inventory={
 show_instructions={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+make_sound={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

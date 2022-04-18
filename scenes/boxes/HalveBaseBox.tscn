@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/boxes/BaseBox.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+extents = Vector2( 32, 14.75 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 4 )
@@ -14,12 +14,14 @@ extents = Vector2( 32, 4 )
 script = ExtResource( 3 )
 
 [node name="box" type="Area2D" parent="."]
+position = Vector2( 0, -17 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="box"]
 shape = SubResource( 1 )
 one_way_collision_margin = 128.0
 
 [node name="Body" type="StaticBody2D" parent="."]
+position = Vector2( 0, -17 )
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
@@ -27,7 +29,7 @@ shape = SubResource( 1 )
 one_way_collision_margin = 128.0
 
 [node name="HitArea" type="Area2D" parent="."]
-position = Vector2( 0, 35 )
+position = Vector2( 0, -1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 position = Vector2( 0, -3 )
@@ -41,5 +43,6 @@ texture = ExtResource( 1 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="MeowStream" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, -14 )
 stream = ExtResource( 2 )
 bus = "sfx"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://audio/music/oh goodness.mp3" type="AudioStream" id=6]
 [ext_resource path="res://scenes/levels/Kaizo/Kaizo.gd" type="Script" id=7]
 [ext_resource path="res://scenes/boxes/SpikeBox.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/boxes/CatBox.tscn" type="PackedScene" id=9]
 
 [node name="TileMap2" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -43,13 +42,10 @@ autoplay = true
 bus = "music"
 
 [node name="SpikeBox" parent="." instance=ExtResource( 8 )]
-position = Vector2( 617, 406 )
+position = Vector2( 608, 98 )
 
 [node name="SpikeBox2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 672, 98 )
 
 [node name="SpikeBox3" parent="." instance=ExtResource( 8 )]
 position = Vector2( 736, 98 )
-
-[node name="CatBox" parent="." instance=ExtResource( 9 )]
-position = Vector2( 732, 390 )

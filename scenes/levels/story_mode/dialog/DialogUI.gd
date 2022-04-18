@@ -159,8 +159,11 @@ func _evaluate_dialog(dialog: Dialog) -> Dialog:
 
 # Skip the dialog and return if the dialog needed to be skipped.
 func _skip_dialog() -> bool:
-	_animation_player.seek(100, true)
-	return _animation_player.is_playing()
+	if _dialog_text_label.visible_characters\
+			< _dialog_text_label.text.length():
+		_animation_player.seek(100, true)
+		return true
+	return false
 
 
 # Check this dialog and the contained conditions/dialogs for any issues.

@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://audio/music/oh goodness.mp3" type="AudioStream" id=6]
 [ext_resource path="res://scenes/levels/Kaizo/Kaizo.gd" type="Script" id=7]
-[ext_resource path="res://sprites/Spikes.png" type="Texture" id=8]
+[ext_resource path="res://scenes/boxes/SpikeBox.tscn" type="PackedScene" id=8]
 
 [node name="TileMap2" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -41,8 +41,11 @@ volume_db = -5.0
 autoplay = true
 bus = "music"
 
-[node name="Spike" type="Node2D" parent="."]
+[node name="SpikeBox" parent="." instance=ExtResource( 8 )]
+position = Vector2( 608, 98 )
 
-[node name="Sprite" type="Sprite" parent="Spike"]
-position = Vector2( 608, 96 )
-texture = ExtResource( 8 )
+[node name="SpikeBox2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 672, 98 )
+
+[node name="SpikeBox3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 736, 98 )

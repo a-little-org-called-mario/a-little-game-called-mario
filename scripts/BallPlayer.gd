@@ -20,23 +20,15 @@ onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.
 onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1.4)
 
 
-func _ready() -> void:
-	EventBus.connect("coin_collected", self, "_on_coin_collected")
-	EventBus.connect("fire_flower_collected", self, "_on_flower_collected")
-
-
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Build"):
 		EventBus.emit_signal("build_block", {"player": self})
 
 	var max_speed_modifier = 1
 	var acceleration_modifier = 1
-	var animationSpeed = 8
 	if Input.is_action_pressed("sprint"):
 		max_speed_modifier = 1.5
 		acceleration_modifier = 3
-		animationSpeed = 60
-	#sprite.frames.set_animation_speed("run", animationSpeed)
 
 	if Input.is_action_pressed("right"):
 		motion.x += ACCEL * acceleration_modifier
@@ -105,16 +97,6 @@ func try_slip(angle: float):
 	return false
 
 
-func _input(_event: InputEvent):
-	# Remove one coin and spawn a projectile
-	# Continus shooting after 0 coins
-	"""
-	if event.is_action_pressed("shoot") and coins > 0:
-		EventBus.emit_signal("coin_collected", { "value": -1, "type": "gold" })
-		shoot(default_projectile)
-	"""
-
-
 # Use this for wallbanging
 func land():
 	squash(0.05)
@@ -137,7 +119,6 @@ func shoot(projectile_scene: PackedScene):
 	projectile.position = $Sprite/ShootOrigin.global_position
 	# Projectile handles movement
 	projectile.start_moving(shoot_dir)
-	emit_signal("shooting")
 """
 
 
@@ -216,9 +197,3 @@ func bounce(strength = 1100):
 	yield(tween, "tween_all_completed")
 	stretch(0.15)
 	motion.y = -strength
-
-
-func _on_coin_collected(data):
-	var value := 1
-	if data.has("value"):
-		value = data["value"]

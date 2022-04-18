@@ -1,0 +1,530 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://sprites/ballmario.png" type="Texture" id=4]
+[ext_resource path="res://scripts/BasicDialogue.gd" type="Script" id=5]
+[ext_resource path="res://audio/sfx/luigi_scream_mario.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/sfx/luigi_death.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/enemies/Luigi.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sprites/Coin_Gems/star.png" type="Texture" id=9]
+[ext_resource path="res://scenes/ConeSpotter.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/FollowTrigger.tscn" type="PackedScene" id=14]
+[ext_resource path="res://audio/sfx/luigi_my_coins.wav" type="AudioStream" id=15]
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 160, 64 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 30, 64 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 30, 32 )
+
+[sub_resource type="GDScript" id=17]
+script/source = "extends Node2D
+
+export (NodePath) onready var cutscene_wall= get_node_or_null(cutscene_wall)
+
+func _ready():
+	$AnimationPlayer.play(\"bounce\")
+	$Kino.auto_advance_dialogue()
+	yield($Kino,\"dialogue_completed\")
+	$AnimationPlayer.play(\"cutscene\")
+	yield($AnimationPlayer, \"animation_finished\")
+	$Label.text= \"AVENGE BALL MARIO!!!\"
+	cutscene_wall.queue_free()
+"
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "bounce"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ), Vector2( 0, 12 ), Vector2( 0, 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2.5, 1.5 ), Vector2( 2, 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "cutscene"
+length = 4.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ), Vector2( 80, -48 ), Vector2( 128, 160 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.2, 1.6, 2, 2.4, 2.8, 3.8, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 1.5, 2.5 ), Vector2( 2.5, 1.5 ), Vector2( 1.5, 2.5 ), Vector2( 2.5, 1.5 ), Vector2( 1.5, 2.5 ), Vector2( 2.5, 1.5 ), Vector2( 3, 1 ), Vector2( 1, 6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 89.9999, 180.0 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Sprite/Mario")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 2.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("Sprite/Noise")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+}, {
+"args": [ 0.0 ],
+"method": "play"
+}, {
+"args": [ 0.0 ],
+"method": "play"
+}, {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2.8, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath("Sprite/Luigi")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="GDScript" id=9]
+script/source = "extends Node2D
+
+func player_spotted(_spotted_by :Node, player :Node):
+	$VisionCone.set_tracking(player)
+"
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VisionCone:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "cone_spin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("VisionCone:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="TileMap" type="TileMap"]
+tile_set = ExtResource( 1 )
+collision_layer = 2
+collision_mask = 2
+format = 1
+tile_data = PoolIntArray( 65523, 2, 0, 65524, 2, 0, 65525, 2, 0, 65526, 2, 0, 65527, 2, 0, 65528, 2, 0, 65529, 2, 0, 65530, 2, 0, 65531, 2, 0, 65532, 2, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 11, 2, 0, 12, 2, 0, 13, 2, 0, 14, 2, 0, 15, 2, 0, 16, 2, 0, 17, 2, 0, 18, 2, 0, 19, 2, 0, 20, 2, 0, 21, 2, 0, 22, 2, 0, 23, 2, 0, 24, 2, 0, 131059, 2, 0, 131060, 2, 0, 131061, 2, 0, 131062, 2, 0, 131063, 2, 0, 131064, 2, 0, 131065, 2, 0, 131066, 2, 0, 131067, 2, 0, 131068, 2, 0, 131069, 2, 0, 131070, 2, 0, 131071, 2, 0, 65536, 2, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 65552, 1, 0, 65553, 1, 0, 65554, 2, 0, 65555, 2, 0, 65556, 2, 0, 65557, 2, 0, 65558, 2, 0, 65559, 2, 0, 65560, 2, 0, 196595, 1, 0, 196596, 1, 0, 196597, 1, 0, 196598, 1, 0, 196599, 1, 0, 196600, 1, 0, 196601, 1, 0, 196602, 1, 0, 196603, 1, 0, 196604, 1, 0, 196605, 1, 0, 196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 1, 0, 131083, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 131087, 1, 0, 131088, 1, 0, 131089, 1, 0, 131090, 2, 0, 131091, 2, 0, 131092, 2, 0, 131093, 2, 0, 131094, 2, 0, 131095, 2, 0, 131096, 2, 0, 262131, 1, 0, 262132, 1, 0, 262133, 1, 0, 262134, 1, 0, 262135, 1, 0, 262136, 1, 0, 262137, 1, 0, 262138, 1, 0, 262139, 1, 0, 262140, 1, 0, 262141, 1, 0, 262142, 1, 0, 262143, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 196620, 1, 0, 196621, 1, 0, 196622, 1, 0, 196623, 1, 0, 196624, 1, 0, 196625, 1, 0, 196626, 2, 0, 196627, 2, 0, 196628, 2, 0, 196629, 2, 0, 196630, 2, 0, 196631, 2, 0, 196632, 2, 0, 327667, 2, 0, 327668, 2, 0, 327669, 2, 0, 327670, 2, 0, 327671, 2, 0, 327672, 2, 0, 327673, 2, 0, 327674, 2, 0, 327675, 2, 0, 327676, 2, 0, 327677, 2, 0, 327678, 2, 0, 327679, 2, 0, 262144, 2, 0, 262145, 2, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 1, 0, 262160, 1, 0, 262161, 1, 0, 262162, 2, 0, 262163, 2, 0, 262164, 2, 0, 262165, 2, 0, 262166, 2, 0, 262167, 2, 0, 262168, 2, 0, 393203, 2, 0, 393204, 2, 0, 393205, 2, 0, 393206, 2, 0, 393207, 2, 0, 393208, 2, 0, 393209, 2, 0, 393210, 2, 0, 393211, 2, 0, 393212, 2, 0, 393213, 2, 0, 393214, 2, 0, 393215, 2, 0, 327680, 2, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 1, 0, 327696, 1, 0, 327697, 1, 0, 327698, 2, 0, 327699, 2, 0, 327700, 2, 0, 327701, 2, 0, 327702, 2, 0, 327703, 2, 0, 327704, 2, 0, 458739, 2, 0, 458740, 2, 0, 458741, 2, 0, 458742, 2, 0, 458743, 2, 0, 458744, 2, 0, 458745, 2, 0, 458746, 2, 0, 458747, 2, 0, 458748, 2, 0, 458749, 2, 0, 458750, 2, 0, 458751, 2, 0, 393216, 2, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 1, 0, 393232, 1, 0, 393233, 1, 0, 393234, 2, 0, 393235, 2, 0, 393236, 2, 0, 393237, 2, 0, 393238, 2, 0, 393239, 2, 0, 393240, 2, 0, 524275, 2, 0, 524276, 2, 0, 524277, 2, 0, 524278, 2, 0, 524279, 2, 0, 524280, 2, 0, 524281, 2, 0, 524282, 2, 0, 524283, 2, 0, 524284, 2, 0, 524285, 2, 0, 524286, 2, 0, 524287, 2, 0, 458752, 2, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 2, 0, 458771, 2, 0, 458772, 2, 0, 458773, 2, 0, 458774, 2, 0, 458775, 2, 0, 458776, 2, 0, 589811, 2, 0, 589812, 2, 0, 589813, 2, 0, 589814, 2, 0, 589815, 2, 0, 589816, 2, 0, 589817, 2, 0, 589818, 2, 0, 589819, 2, 0, 589820, 2, 0, 589821, 2, 0, 589822, 2, 0, 589823, 2, 0, 524288, 2, 0, 524289, 2, 0, 524290, 2, 0, 524291, 2, 0, 524292, 2, 0, 524293, 2, 0, 524294, 2, 0, 524295, 2, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 2, 0, 524300, 2, 0, 524301, 2, 0, 524302, 2, 0, 524303, 2, 0, 524304, 2, 0, 524305, 2, 0, 524306, 2, 0, 524307, 2, 0, 524308, 2, 0, 524309, 2, 0, 524310, 2, 0, 524311, 2, 0, 524312, 2, 0, 655347, 2, 0, 655348, 2, 0, 655349, 2, 0, 655350, 2, 0, 655351, 2, 0, 655352, 2, 0, 655353, 2, 0, 655354, 2, 0, 655355, 2, 0, 655356, 2, 0, 655357, 2, 0, 655358, 2, 0, 655359, 2, 0, 589824, 2, 0, 589825, 2, 0, 589826, 2, 0, 589827, 2, 0, 589828, 2, 0, 589829, 2, 0, 589830, 2, 0, 589831, 2, 0, 589832, 2, 0, 589833, 2, 0, 589834, 2, 0, 589835, 2, 0, 589836, 2, 0, 589837, 2, 0, 589838, 2, 0, 589839, 2, 0, 589840, 2, 0, 589841, 2, 0, 589842, 2, 0, 589843, 2, 0, 589844, 2, 0, 589845, 2, 0, 589846, 2, 0, 589847, 2, 0, 589848, 2, 0 )
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
+position = Vector2( 32, 192 )
+
+[node name="InvisibleWall" type="StaticBody2D" parent="."]
+position = Vector2( -192, 192 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWall"]
+position = Vector2( -96, 0 )
+shape = SubResource( 1 )
+
+[node name="InvisibleWall2" type="StaticBody2D" parent="."]
+position = Vector2( 160, 192 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWall2"]
+position = Vector2( -2, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InvisibleWall2"]
+position = Vector2( -64, -96 )
+shape = SubResource( 7 )
+
+[node name="BallMario" type="Node2D" parent="."]
+position = Vector2( 96, 232 )
+script = SubResource( 17 )
+cutscene_wall = NodePath("../InvisibleWall2")
+
+[node name="Sprite" type="Sprite" parent="BallMario"]
+position = Vector2( 0, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Mario" type="AudioStreamPlayer2D" parent="BallMario/Sprite"]
+stream = ExtResource( 6 )
+volume_db = -6.0
+pitch_scale = 2.0
+attenuation = 2.0
+bus = "sfx"
+
+[node name="Noise" type="AudioStreamPlayer2D" parent="BallMario/Sprite"]
+stream = ExtResource( 7 )
+volume_db = -6.0
+pitch_scale = 2.0
+attenuation = 2.0
+bus = "sfx"
+
+[node name="Luigi" type="AudioStreamPlayer2D" parent="BallMario/Sprite"]
+position = Vector2( -384, 5.33305 )
+stream = ExtResource( 15 )
+attenuation = 2.0
+bus = "sfx"
+
+[node name="Kino" type="RichTextLabel" parent="BallMario"]
+margin_left = -144.0
+margin_top = -88.0
+margin_right = 144.0
+margin_bottom = -32.0
+grow_vertical = 2
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+fit_content_height = true
+scroll_active = false
+script = ExtResource( 5 )
+dialogue = [ "YES!!!", "I'M RICH!!!", "WAHOOO!!!" ]
+auto_display_seconds = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BallMario"]
+anims/RESET = SubResource( 18 )
+anims/bounce = SubResource( 19 )
+anims/cutscene = SubResource( 4 )
+
+[node name="Label" type="Label" parent="BallMario"]
+margin_left = -24.0
+margin_top = -160.0
+margin_right = 168.0
+margin_bottom = -144.0
+custom_fonts/font = ExtResource( 3 )
+text = "CUTSCENE PLAYING"
+
+[node name="Luigi" parent="." instance=ExtResource( 8 )]
+position = Vector2( 608, 352 )
+is_mortal = true
+max_health = 20
+fireball_count = 5
+fireball_cooldown = 6.0
+
+[node name="Star" type="Node2D" parent="."]
+position = Vector2( 616, 104 )
+script = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Star"]
+texture = ExtResource( 9 )
+
+[node name="VisionCone" parent="Star" instance=ExtResource( 10 )]
+cone_length = 640.0
+cone_color = Color( 1, 0.678431, 0, 0.509804 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Star"]
+autoplay = "cone_spin"
+playback_speed = 0.25
+anims/RESET = SubResource( 11 )
+anims/cone_spin = SubResource( 10 )
+
+[node name="CoinBox" parent="." instance=ExtResource( 13 )]
+position = Vector2( 96, 352 )
+bounce_count = 25
+
+[node name="CoinBox2" parent="." instance=ExtResource( 13 )]
+position = Vector2( 1120, 352 )
+bounce_count = 25
+
+[node name="Coins2" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 160, 480 )
+
+[node name="Coin2" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 160, 416 )
+
+[node name="Coin4" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 352, 416 )
+
+[node name="Coin5" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 96, 480 )
+
+[node name="Coin6" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 96, 416 )
+
+[node name="Coin7" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 160, 352 )
+
+[node name="Coin9" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 224, 480 )
+
+[node name="Coin10" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 288, 480 )
+
+[node name="Coin11" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 288, 416 )
+
+[node name="Coin12" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 352, 480 )
+
+[node name="Coin13" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 416, 480 )
+
+[node name="Coin14" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 480, 480 )
+
+[node name="Coin15" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 416, 416 )
+
+[node name="Coin16" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 480, 416 )
+
+[node name="Coin17" parent="Coins2" instance=ExtResource( 12 )]
+position = Vector2( 536, 416 )
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 800, 480 )
+
+[node name="Coin2" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 800, 416 )
+
+[node name="Coin3" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 864, 416 )
+
+[node name="Coin4" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 736, 416 )
+
+[node name="Coin5" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 736, 480 )
+
+[node name="Coin6" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 736, 352 )
+
+[node name="Coin7" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 800, 352 )
+
+[node name="Coin8" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 864, 352 )
+
+[node name="Coin9" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 864, 480 )
+
+[node name="Coin10" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 928, 480 )
+
+[node name="Coin11" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 928, 416 )
+
+[node name="Coin12" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 928, 352 )
+
+[node name="Coin13" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 992, 416 )
+
+[node name="Coin14" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 992, 352 )
+
+[node name="Coin15" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 928, 288 )
+
+[node name="Coin16" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 864, 288 )
+
+[node name="Coin17" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 800, 288 )
+
+[node name="Coin18" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 992, 288 )
+
+[node name="Coin19" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 992, 480 )
+
+[node name="Coin20" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 1056, 480 )
+
+[node name="Coin21" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 1056, 416 )
+
+[node name="Coin22" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 1056, 352 )
+
+[node name="Coin23" parent="Coins" instance=ExtResource( 12 )]
+position = Vector2( 1056, 288 )
+
+[node name="FollowTrigger" parent="." instance=ExtResource( 14 )]
+position = Vector2( 64, 208 )
+
+[node name="EndPortal" parent="." instance=ExtResource( 11 )]
+position = Vector2( 608, 496 )
+
+[node name="TempTiles" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+collision_layer = 2
+collision_mask = 2
+format = 1
+tile_data = PoolIntArray( 393225, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0 )
+
+[connection signal="luigi_defeated" from="Luigi" to="TempTiles" method="queue_free" flags=6]

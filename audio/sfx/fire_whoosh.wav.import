@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fire_whoosh.wav-27d3b6a9bc25a10a8654b35a59f9a0e1.sample"
+
+[deps]
+
+source_file="res://audio/sfx/fire_whoosh.wav"
+dest_files=[ "res://.import/fire_whoosh.wav-27d3b6a9bc25a10a8654b35a59f9a0e1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

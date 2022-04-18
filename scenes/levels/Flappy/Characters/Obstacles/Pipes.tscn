@@ -1,14 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://sprites/pipe-green.png" type="Texture" id=1]
+[ext_resource path="res://sprites/mario_tiles.png" type="Texture" id=1]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Obstacles/Obstacle.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24.5, 159.5 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24, 159 )
+extents = Vector2( 23.75, 159.25 )
 
 [node name="center" type="Node2D"]
 position = Vector2( 500, 300 )
@@ -17,23 +14,185 @@ script = ExtResource( 2 )
 [node name="Coin" parent="." instance=ExtResource( 3 )]
 
 [node name="pipe_top" type="Area2D" parent="."]
-position = Vector2( 0, -200 )
+position = Vector2( 0, -65 )
 
-[node name="pipe" type="Sprite" parent="pipe_top"]
+[node name="pipe_end" type="Sprite" parent="pipe_top"]
 rotation = -3.14159
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 31.7523, 47.9341, 48.3292 )
+
+[node name="pipe" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -38 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe2" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -38 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe3" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -66 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe4" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -94 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe5" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -122 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe6" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -150 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe7" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -178 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe8" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -206 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe9" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -234 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe10" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -262 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe11" type="Sprite" parent="pipe_top"]
+position = Vector2( 0, -290 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pipe_top"]
+position = Vector2( 0.25, -136.25 )
 shape = SubResource( 1 )
 
-[node name="pipe_bottom" type="Area2D" parent="."]
-position = Vector2( 0, 200 )
+[node name="pipe_down" type="Area2D" parent="."]
+position = Vector2( 0, 65 )
+rotation = 3.14159
 
-[node name="pipe" type="Sprite" parent="pipe_bottom"]
+[node name="pipe_end" type="Sprite" parent="pipe_down"]
+rotation = -3.14159
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 31.7523, 47.9341, 48.3292 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pipe_bottom"]
-shape = SubResource( 2 )
+[node name="pipe" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -38 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe2" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -38 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe3" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -66 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe4" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -94 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe5" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -122 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe6" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -150 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe7" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -178 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe8" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -206 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe9" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -234 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe10" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -262 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="pipe11" type="Sprite" parent="pipe_down"]
+position = Vector2( 0, -290 )
+rotation = -3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( -0.0676117, 51.9004, 47.9341, 28.1811 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pipe_down"]
+position = Vector2( 0.25, -136.25 )
+shape = SubResource( 1 )
 
 [connection signal="body_entered" from="pipe_top" to="." method="_on_pipe_body_entered"]
-[connection signal="body_entered" from="pipe_bottom" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="pipe_down" to="." method="_on_pipe_body_entered"]

@@ -4,22 +4,52 @@
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
-[ext_resource path="res://scenes/title/FlappyMarioButton.gd" type="Script" id=5]
-[ext_resource path="res://scenes/title/DanceButton.gd" type="Script" id=6]
-[ext_resource path="res://scenes/title/StartButton.gd" type="Script" id=7]
-[ext_resource path="res://scenes/title/OptionsButton.gd" type="Script" id=8]
-[ext_resource path="res://scenes/title/CreditsButton.gd" type="Script" id=9]
+[ext_resource path="res://audio/sfx/meow.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
-[ext_resource path="res://scenes/title/Contributors.gd" type="Script" id=11]
-[ext_resource path="res://music/dramaticgamemusic.mp3" type="AudioStream" id=12]
-[ext_resource path="res://scenes/title/SokobanButton.gd" type="Script" id=13]
-[ext_resource path="res://scenes/title/MarwingButton.gd" type="Script" id=14]
+[ext_resource path="res://scenes/title/ContributorsLabel.gd" type="Script" id=11]
+[ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
+[ext_resource path="res://scenes/title/TitleScreen.gd" type="Script" id=15]
+[ext_resource path="res://scenes/title/TitleMenuButton.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/title/Mario.gd" type="Script" id=17]
+[ext_resource path="res://sprites/mario.png" type="Texture" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "Idle"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 2.9, 3.1 ), Vector2( 3.1, 2.9 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "Appear"
@@ -100,10 +130,9 @@ font_data = ExtResource( 1 )
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 15 )
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0.7, 0.7, 0.7, 1 )
@@ -122,6 +151,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_right = -20.0
+mouse_filter = 2
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -157,98 +187,94 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="IdleMario" type="Sprite" parent="VBoxContainer"]
+position = Vector2( 92, 134 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 19 )
+offset = Vector2( 0, -17 )
+hframes = 6
+vframes = 2
+script = ExtResource( 17 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/IdleMario"]
+autoplay = "Idle"
+playback_speed = 0.7
+anims/Idle = SubResource( 8 )
+anims/RESET = SubResource( 7 )
+
+[node name="Meow" type="AudioStreamPlayer2D" parent="VBoxContainer/IdleMario"]
+stream = ExtResource( 5 )
+
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 177.0
-margin_top = 362.0
-margin_right = 807.0
-margin_bottom = 518.0
-margin_left = 242.0
+margin_left = 109.0
 margin_top = 258.0
-margin_right = 742.0
-margin_bottom = 414.0
+margin_right = 875.0
+margin_bottom = 478.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_right = 630.0
-margin_bottom = 36.0
+[node name="StartButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
+margin_left = 306.0
+margin_right = 460.0
+margin_bottom = 52.0
 text = "START GAME"
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_lock_": true
-}
+redirect_scene = "res://scenes/Main.tscn"
+focused_by_default = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
-margin_top = 40.0
-margin_right = 630.0
-margin_bottom = 76.0
+margin_top = 56.0
+margin_right = 766.0
+margin_bottom = 108.0
 custom_constants/separation = 46
 alignment = 1
 
-[node name="DanceButton" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 120.0
-margin_bottom = 36.0
+[node name="DanceButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
+margin_right = 154.0
+margin_bottom = 52.0
 text = "DANCE MODE"
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
+redirect_scene = "res://scenes/levels/DDR_01/Level.tscn"
 
-[node name="SokobanButton" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 166.0
-margin_right = 310.0
-margin_bottom = 36.0
+[node name="SokobanButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
+margin_left = 200.0
+margin_right = 378.0
+margin_bottom = 52.0
 text = "SOKOBAN MODE"
-script = ExtResource( 13 )
-__meta__ = {
-"_edit_lock_": true
-}
+redirect_scene = "res://scenes/sokoban/SokobanMain.tscn"
 
-[node name="FlappyMarioButton" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 356.0
-margin_right = 500.0
-margin_bottom = 36.0
+[node name="FlappyMarioButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
+margin_left = 424.0
+margin_right = 602.0
+margin_bottom = 52.0
 text = "FLAPPY MARIO"
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_lock_": true
-}
+redirect_scene = "res://scenes/levels/Flappy/Flappy01.tscn"
 
-[node name="MarwingButton" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 546.0
-margin_right = 630.0
-margin_bottom = 36.0
+[node name="MarwingButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
+margin_left = 648.0
+margin_right = 766.0
+margin_bottom = 52.0
 text = "MARWING"
-script = ExtResource( 14 )
-__meta__ = {
-"_edit_lock_": true
-}
+redirect_scene = "res://scenes/marwing/levels/1-0.tscn"
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 80.0
-margin_right = 630.0
-margin_bottom = 116.0
+[node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
+margin_left = 324.0
+margin_top = 112.0
+margin_right = 442.0
+margin_bottom = 164.0
 disabled = true
-text = "OPTIONSs"
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_lock_": true
-}
+text = "OPTIONS"
 
-[node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 120.0
-margin_right = 630.0
-margin_bottom = 156.0
+[node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
+margin_left = 324.0
+margin_top = 168.0
+margin_right = 442.0
+margin_bottom = 220.0
 text = "CREDITS"
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_lock_": true
-}
+redirect_scene = "res://scenes/Credits.tscn"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 418.0
+margin_top = 482.0
 margin_right = 984.0
-margin_bottom = 538.0
+margin_bottom = 602.0
 alignment = 1
 
 [node name="SmolCreditsLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]

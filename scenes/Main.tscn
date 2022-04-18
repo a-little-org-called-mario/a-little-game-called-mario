@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/levels/Hub.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ScreenShake.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/Camera.gd" type="Script" id=6]
-[ext_resource path="res://music/platformer.mp3" type="AudioStream" id=7]
+[ext_resource path="res://audio/music/platformer.mp3" type="AudioStream" id=7]
 [ext_resource path="res://scenes/Transition/Transition.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/ui/PauseMenu.tscn" type="PackedScene" id=9]
 [ext_resource path="res://shaders/CRT.gdshader" type="Shader" id=10]
@@ -42,7 +42,7 @@ render_target_update_mode = 3
 audio_listener_enable_2d = true
 script = ExtResource( 2 )
 
-[node name="Camera" type="Camera2D" parent="ViewportContainer/Main"]
+[node name="Camera" type="Camera2D" parent="ViewportContainer/Main" groups=["Cameras"]]
 rotating = true
 current = true
 script = ExtResource( 6 )

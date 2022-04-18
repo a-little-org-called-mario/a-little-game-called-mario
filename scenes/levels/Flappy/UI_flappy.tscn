@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/FlappyUi.gd" type="Script" id=3]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
 [ext_resource path="res://scenes/ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
 [ext_resource path="res://scenes/ui/HeartCount.gd" type="Script" id=7]
 
-[node name="UI" type="CanvasLayer"]
+[node name="UI_flappy" type="CanvasLayer"]
+script = ExtResource( 3 )
 
 [node name="UI" type="Control" parent="."]
 margin_right = 1024.0
@@ -43,9 +45,6 @@ bbcode_text = "
 text = "
 HEARTS:3 "
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI"]
 anchor_left = 0.03
@@ -60,28 +59,7 @@ rect_scale = Vector2( 2, 2 )
 custom_constants/line_separation = 0
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
-
-SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
-
-SPACE TO [wave amp=50 freq=2]JUMP[/wave]
-
-CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
-
-B TO[wave amp=50 freq=2] FIREBALL [/wave]
-
-(WITH POWERUP)"
-text = "ARROW KEYS TO MOVE
-
-SHIFT TO SPRINT
-
-SPACE TO JUMP
-
-CONTROL/Z TO SHOOT
-
-B TO FIREBALL 
-
-(WITH POWERUP)"
+bbcode_text = "SPACE TO [rainbow freq=0.5 sat=1 val=20]FLY UP[/rainbow]"
+text = "SPACE TO FLY UP"
 fit_content_height = true
 script = ExtResource( 6 )
-localization_key = "TUTORIAL_MOVEMENT_PLANE"

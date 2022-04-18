@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
+[ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
+[ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/music/oh goodness.mp3" type="AudioStream" id=6]
+[ext_resource path="res://scenes/levels/Kaizo/Kaizo.gd" type="Script" id=7]
+[ext_resource path="res://scenes/boxes/SpikeBox.tscn" type="PackedScene" id=8]
+
+[node name="TileMap2" type="TileMap"]
+tile_set = ExtResource( 1 )
+collision_layer = 2
+format = 1
+tile_data = PoolIntArray( 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 65544, 0, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 0, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 65552, 0, 0, 131080, 0, 0, 131081, 1, 0, 131082, 1, 0, 131083, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 131087, 1, 0, 131088, 0, 0, 196616, 0, 0, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 196620, 0, 0, 196621, 1, 0, 196622, 1, 0, 196623, 1, 0, 196624, 0, 0, 262152, 0, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 262160, 0, 0, 327688, 0, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 393224, 0, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 458760, 0, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 524296, 0, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0 )
+script = ExtResource( 7 )
+
+[node name="EndPortal" parent="." instance=ExtResource( 3 )]
+position = Vector2( 929, 156 )
+
+[node name="SpawnPoint2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 669, 483 )
+
+[node name="Background2" type="Sprite" parent="."]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -433, -225 )
+z_index = -1
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -5.0
+autoplay = true
+bus = "music"
+
+[node name="SpikeBox" parent="." instance=ExtResource( 8 )]
+position = Vector2( 608, 98 )
+
+[node name="SpikeBox2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 672, 98 )
+
+[node name="SpikeBox3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 736, 98 )

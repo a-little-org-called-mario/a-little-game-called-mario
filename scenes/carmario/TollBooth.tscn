@@ -1,0 +1,156 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://graphics/sprites/ballluigi.png" type="Texture" id=1]
+[ext_resource path="res://graphics/sprites/carmario/tollbox.png" type="Texture" id=2]
+[ext_resource path="res://graphics/sprites/carmario/tollbarrier.png" type="Texture" id=3]
+[ext_resource path="res://scenes/carmario/TollBooth.gd" type="Script" id=4]
+[ext_resource path="res://audio/sfx/ball_omn.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/sfx/toll_paid.wav" type="AudioStream" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 54, 9.5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6.5, 184 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Barrier:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Barrier:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Barrier:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, -89.9999 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Barrier:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 20, 176.5 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10, 174.5 )
+
+[node name="TollBooth" type="StaticBody2D" groups=["immovable_object"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 4 )
+
+[node name="BoxShape" type="CollisionShape2D" parent="."]
+position = Vector2( -2, -6.5 )
+shape = SubResource( 1 )
+
+[node name="BarrierShape" type="CollisionShape2D" parent="."]
+position = Vector2( -32.5, 168 )
+shape = SubResource( 5 )
+
+[node name="Box" type="Sprite" parent="."]
+position = Vector2( -2, -27 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="BallLuigi" type="Sprite" parent="."]
+position = Vector2( -2, -67 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="Barrier" type="ColorRect" parent="."]
+margin_left = -40.0
+margin_top = -30.0
+margin_right = -30.0
+margin_bottom = 354.0
+rect_pivot_offset = Vector2( 5, 0 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="Texture" type="TextureRect" parent="Barrier"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/open = SubResource( 2 )
+
+[node name="PayZone" type="Area2D" parent="."]
+position = Vector2( -46, -7 )
+collision_layer = 0
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="PayZone"]
+position = Vector2( -10, 183.5 )
+shape = SubResource( 4 )
+
+[node name="FreeZone" type="Area2D" parent="."]
+position = Vector2( -46, -7 )
+collision_layer = 0
+monitorable = false
+
+[node name="TopShape" type="CollisionShape2D" parent="FreeZone"]
+position = Vector2( -2, -169 )
+shape = SubResource( 6 )
+
+[node name="BottomShape" type="CollisionShape2D" parent="FreeZone"]
+position = Vector2( -2, 527 )
+shape = SubResource( 6 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -64, -10, 420, 20 )
+
+[node name="Paid" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+pitch_scale = 0.8
+attenuation = 2.0
+bus = "sfx"
+
+[node name="Nope" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+attenuation = 2.0

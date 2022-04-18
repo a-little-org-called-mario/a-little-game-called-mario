@@ -1,0 +1,339 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
+[ext_resource path="res://sprites/mario.png" type="Texture" id=2]
+[ext_resource path="res://scenes/platformer/characters/Player.gd" type="Script" id=3]
+[ext_resource path="res://scenes/platformer/characters/Trail.gd" type="Script" id=4]
+[ext_resource path="res://scenes/platformer/characters/PlayerAnims.gd" type="Script" id=5]
+[ext_resource path="res://sprites/dustparticle.png" type="Texture" id=6]
+[ext_resource path="res://sprites/flag.jpg" type="Texture" id=7]
+[ext_resource path="res://scenes/platformer/characters/Shooter.gd" type="Script" id=8]
+[ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/platformer/characters/BlockBuilder.gd" type="Script" id=10]
+[ext_resource path="res://scenes/platformer/characters/Bus.gd" type="Script" id=11]
+[ext_resource path="res://sprites/bus.png" type="Texture" id=12]
+[ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=13]
+[ext_resource path="res://scenes/HeartInventoryHandle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=15]
+[ext_resource path="res://scripts/BoucyMoustache.gd" type="Script" id=16]
+[ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
+[ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=18]
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=12]
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 22, 26 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 43.25, 20.1875 )
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 13 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=24]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "Jump"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "Run"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="SphereMesh" id=28]
+
+[sub_resource type="CircleShape2D" id=29]
+radius = 4.0
+
+[sub_resource type="Curve" id=30]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.527273 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=40]
+
+[sub_resource type="GradientTexture" id=39]
+gradient = SubResource( 40 )
+width = 128
+
+[sub_resource type="AudioStreamRandomPitch" id=14]
+audio_stream = ExtResource( 18 )
+random_pitch = 1.5
+
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
+z_index = 1
+collision_mask = 15
+script = ExtResource( 3 )
+
+[node name="Trail" type="Line2D" parent="."]
+width = 30.0
+width_curve = SubResource( 11 )
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 12 )
+texture = ExtResource( 7 )
+texture_mode = 2
+joint_mode = 2
+end_cap_mode = 2
+script = ExtResource( 4 )
+trail_length = 30
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="BusCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 6 )
+shape = SubResource( 13 )
+disabled = true
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Bus" type="Sprite" parent="Pivot"]
+material = SubResource( 15 )
+position = Vector2( 0, 6 )
+scale = Vector2( 0.0602623, 0.0602623 )
+texture = ExtResource( 12 )
+flip_h = true
+script = ExtResource( 11 )
+collision_shape = NodePath("../../BusCollision")
+
+[node name="Sprite" type="AnimatedSprite" parent="Pivot"]
+material = SubResource( 15 )
+position = Vector2( 0, 26 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 10 )
+offset = Vector2( 0, -16 )
+
+[node name="ShootOrigin" type="Position2D" parent="Pivot/Sprite"]
+position = Vector2( 4, -16 )
+script = ExtResource( 8 )
+
+[node name="Anims" type="AnimationPlayer" parent="Pivot/Sprite"]
+method_call_mode = 1
+anims/Idle = SubResource( 24 )
+anims/Jump = SubResource( 25 )
+anims/RESET = SubResource( 26 )
+anims/Run = SubResource( 27 )
+script = ExtResource( 5 )
+
+[node name="BouncyMoustache" type="Node2D" parent="Pivot"]
+material = SubResource( 15 )
+position = Vector2( 0, -6 )
+script = ExtResource( 16 )
+
+[node name="DampedSpringJoint2D" type="PinJoint2D" parent="Pivot/BouncyMoustache"]
+position = Vector2( 4.136, 3.15 )
+rotation = -1.5708
+node_a = NodePath("point1")
+node_b = NodePath("point2")
+bias = 0.5
+disable_collision = false
+softness = 6.0
+
+[node name="point1" type="StaticBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point1"]
+visible = false
+material = SubResource( 15 )
+scale = Vector2( 4, 4 )
+mesh = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point1"]
+shape = SubResource( 29 )
+disabled = true
+
+[node name="Line2D" type="Line2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point1"]
+material = SubResource( 15 )
+width = 13.066
+width_curve = SubResource( 30 )
+texture = SubResource( 39 )
+
+[node name="point2" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D"]
+position = Vector2( 0.150002, 12.635 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point2"]
+visible = false
+scale = Vector2( 4, 4 )
+mesh = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point2"]
+shape = SubResource( 29 )
+disabled = true
+
+[node name="DampedSpringJoint2D2" type="PinJoint2D" parent="Pivot/BouncyMoustache"]
+position = Vector2( 4.365, 3.15 )
+rotation = 1.5708
+node_a = NodePath("point1")
+node_b = NodePath("point2")
+bias = 0.5
+disable_collision = false
+softness = 6.0
+
+[node name="point1" type="StaticBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point1"]
+visible = false
+scale = Vector2( 4, 4 )
+mesh = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point1"]
+shape = SubResource( 29 )
+disabled = true
+
+[node name="Line2D" type="Line2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point1"]
+material = SubResource( 15 )
+width = 13.066
+width_curve = SubResource( 30 )
+texture = SubResource( 39 )
+
+[node name="point2" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2"]
+position = Vector2( 0.150002, 12.635 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point2"]
+visible = false
+scale = Vector2( 4, 4 )
+mesh = SubResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point2"]
+shape = SubResource( 29 )
+disabled = true
+
+[node name="RunParticles" type="CPUParticles2D" parent="Pivot"]
+position = Vector2( 0, 26 )
+emitting = false
+amount = 6
+lifetime = 0.6
+local_coords = false
+texture = ExtResource( 6 )
+spread = 180.0
+gravity = Vector2( 0, -80 )
+initial_velocity = 40.0
+initial_velocity_random = 0.2
+angular_velocity = 30.0
+angular_velocity_random = 1.0
+angle = 90.0
+angle_random = 1.0
+scale_amount = 0.75
+color = Color( 1, 1, 1, 0.784314 )
+script = ExtResource( 1 )
+
+[node name="HitFlashTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
+volume_db = -12.0
+bus = "sfx"
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 14 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="BlockBuilder" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="CoinInventoryHandle" parent="." instance=ExtResource( 9 )]
+
+[node name="HeartInventoryHandle" parent="." instance=ExtResource( 14 )]
+
+[node name="CameraFCandidate" type="Node" parent="."]
+script = ExtResource( 17 )
+
+[connection signal="timeout" from="HitFlashTimer" to="." method="_end_flash_sprite"]

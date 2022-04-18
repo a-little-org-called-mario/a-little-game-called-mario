@@ -7,22 +7,41 @@ const PROJECTILES_GROUP: String = "Projectiles"
 
 onready var hub: TileMap = $TileMap
 onready var level: Node = $TileMap
+onready var bgm: AudioStreamPlayer = $Audio/BGM
+onready var ui: CanvasLayer = $UI
+onready var defaultBGMStream: AudioStream = bgm.stream.duplicate()
 
-var completionSound = preload("res://sfx/portal.wav")
-var coinSound = preload("res://sfx/coin.wav")
+var completionSound = preload("res://audio/sfx/portal.wav")
+var coinSound = preload("res://audio/sfx/coin.wav")
 
 var entering_portal: bool = false
 
 
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
-	Settings.load_data()
+	EventBus.connect("bgm_changed", self, "_bgm_changed")
+	EventBus.connect("ui_visibility_changed", self, "_on_ui_visibility_changed")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 
 
 func _exit_tree() -> void:
 	EventBus.emit_signal("game_exit")
+
+
+func _on_ui_visibility_changed(data):
+	ui.get_child(0).visible = data.visible
+
+
+func _bgm_changed(data) -> void:
+	if typeof(data) == TYPE_STRING and data == "reset":
+		bgm.stream = defaultBGMStream
+		bgm.playing = true
+	else:
+		if "playing" in data:
+			bgm.playing = data.playing
+		if "stream" in data:
+			bgm.stream = data.stream
 
 
 func _hook_portals() -> void:
@@ -49,9 +68,7 @@ func _on_build(data) -> void:
 		# to the left or right depending on which direction the player sprite
 		# is facing.
 		var player_tile = level.world_to_map(player.position)
-		var target_tile_x = player_tile[0] + 1
-		if player.sprite.flip_h:
-			target_tile_x = player_tile[0] - 1
+		var target_tile_x = player_tile[0] + (1 if player.pivot.scale.x > 0 else -1)
 		var target_tile_y = player_tile[1]
 		var target_cell_v = level.get_cell(target_tile_x, target_tile_y)
 		if target_cell_v == 0:
@@ -72,10 +89,15 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
 		despawn.queue_free()
 
-	var animation = portal.on_portal_enter(body)
 	body.get_parent().remove_child(body)
 
-	yield(animation, "animation_finished")
+	EventBus.emit_signal("level_completed", {})
+
+	var animation: AnimationPlayer = portal.on_portal_enter(body)
+	if animation == null:
+		yield(get_tree().create_timer(1.0), "timeout")
+	else:
+		yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
 
 
@@ -90,18 +112,13 @@ func _finish_level(next_level: PackedScene = null) -> void:
 		level.queue_free()
 		yield(level, "tree_exited")
 	level = new_level
-	if level == hub:
-		for c in level.get_children():
-			if c is SpawnPoint:
-				c.spawn_mario()
-				break
 
 	# Do not forget to hook the new portals
 	_hook_portals()
 
 	#Removing instructions
-	$UI/UI/RichTextLabel.visible = false
+	$UI/UI/Instructions.visible = false
 
 	# Reset entering portal state
 	entering_portal = false
-	EventBus.emit_signal("level_started", {})
+	EventBus.emit_signal("level_started", "")

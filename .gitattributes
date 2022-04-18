@@ -1,0 +1,7 @@
+
+# we want to enforce lf eol
+* text=auto
+
+*.tscn text eol=lf
+*.tres text eol=lf
+*.godot text eol=lf

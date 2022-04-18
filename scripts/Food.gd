@@ -26,7 +26,6 @@ func _physics_process(delta: float):
 	$Sprite.rotation_degrees += vel_rotation
 	var collision = move_and_collide(Vector2(0, vel_y * delta))
 	if collision:
-		var collider = collision.collider as Object
 		if collision.collider as TileMap:
 			randomize_me()
 		elif collision.collider.name == "Player" and is_pie:

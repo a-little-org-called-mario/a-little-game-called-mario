@@ -16,11 +16,14 @@
 [ext_resource path="res://scenes/HeartInventoryHandle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sprites/powerups/Mario Bus stationary-Sheet-export-export.png" type="Texture" id=15]
 [ext_resource path="res://scripts/BoucyMoustache.gd" type="Script" id=16]
+
+[ext_resource path="res://scripts/BouncyMoustache.gd" type="Script" id=16]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
 [ext_resource path="res://audio/music/givehimagun.mp3" type="AudioStream" id=19]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=20]
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=21]
 [ext_resource path="res://audio/sfx/toasty.wav" type="AudioStream" id=22]
+[ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=23]
 
 [sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
@@ -150,6 +153,7 @@ radius = 4.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.527273 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=40]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
 
 [sub_resource type="GradientTexture" id=39]
 gradient = SubResource( 40 )
@@ -271,7 +275,9 @@ disabled = true
 material = SubResource( 15 )
 width = 13.066
 width_curve = SubResource( 30 )
+default_color = Color( 1, 1, 1, 1 )
 texture = SubResource( 39 )
+texture_mode = 2
 
 [node name="point2" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D"]
 position = Vector2( 0.150002, 12.635 )
@@ -309,7 +315,9 @@ disabled = true
 material = SubResource( 15 )
 width = 13.066
 width_curve = SubResource( 30 )
+default_color = Color( 1, 1, 1, 1 )
 texture = SubResource( 39 )
+texture_mode = 2
 
 [node name="point2" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2"]
 position = Vector2( 0.150002, 12.635 )

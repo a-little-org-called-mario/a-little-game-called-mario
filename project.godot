@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "BouncyMoustache",
 "language": "GDScript",
-"path": "res://scripts/BoucyMoustache.gd"
+"path": "res://scripts/BouncyMoustache.gd"
 }, {
 "base": "Enemy",
 "class": "Bub",
@@ -209,6 +209,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/story_mode/Item.gd"
 }, {
+"base": "Object",
+"class": "TextUtils",
+"language": "GDScript",
+"path": "res://scripts/TextUtils.gd"
+}, {
 "base": "Reference",
 "class": "TrackParser",
 "language": "GDScript",
@@ -260,6 +265,7 @@ _global_script_class_icons={
 "SpawnPoint": "",
 "Spotter": "",
 "StoryItem": "",
+"TextUtils": "",
 "TrackParser": "",
 "TypeShootEnemy": ""
 }

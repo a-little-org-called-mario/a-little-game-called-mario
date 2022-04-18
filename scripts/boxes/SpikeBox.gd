@@ -9,5 +9,5 @@ func bounce(body: KinematicBody2D):
 		return
 	
 	audio_meow.play()
-	EventBus.emit_signal("heart_changed", {"value": -inventory.hearts})
-	
+	#EventBus.emit_signal("heart_changed", -inventory.hearts, inventory.hearts)
+	HeartInventoryHandle.change_hearts_on(body, -inventory.hearts)

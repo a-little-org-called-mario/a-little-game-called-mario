@@ -20,8 +20,14 @@ func _ready() -> void:
 	var portal_position: Vector2 = portal_template.get_node("Portal").position
 	var label_position: Vector2 = portal_template.get_node("Label").position
 
-	var levels: Array = _get_all_first_levels_in_dir(levels_directory)
+	var levels: Dictionary = { }
+	for level in _get_all_first_levels_in_dir(levels_directory):
+		levels[_get_dir_name(level).to_upper()] = level
+
 	var n_levels: int = len(levels)
+	var keys: Array = levels.keys()
+	keys.sort()
+
 	for i in range(n_levels):
 		var rect: Rect2 = walls_tilemap.get_used_rect()
 		var base_dest: Vector2 = Vector2(
@@ -37,17 +43,17 @@ func _ready() -> void:
 					portal_rect.position.y + portal_rect.size.y - 1 - y
 				)
 				walls_tilemap.set_cell(dest_x, dest_y, tile)
-		create_portal(levels[i], map_to_world(base_dest) + portal_position)
-		create_label(levels[i], map_to_world(base_dest) + label_position)
+		create_portal(levels[keys[i]], map_to_world(base_dest) + portal_position)
+		create_label(keys[i], map_to_world(base_dest) + label_position)
 
 	# Update left/right labels
 	$LeftLabel.bbcode_text = TextUtils.wave("< %s-%s" % [
-		_get_first_letter(levels[(n_levels / 2) - 1]), 
-		_get_first_letter(levels[0])
+		keys[(n_levels / 2) - 1].substr(0, 1), 
+		keys[0].substr(0, 1)
 	])
 	$RightLabel.bbcode_text = TextUtils.right(TextUtils.wave("%s-%s >" % [
-		_get_first_letter(levels[n_levels / 2]),
-		_get_first_letter(levels[n_levels - 1])
+		keys[n_levels / 2].substr(0, 1),
+		keys[n_levels - 1].substr(0, 1)
 	]))
 
 	# Fill everything with background tile.
@@ -82,11 +88,11 @@ func create_portal(level: String, position: Vector2) -> EndPortal:
 	return portal
 
 
-func create_label(level: String, position: Vector2) -> Label:
+func create_label(text: String, position: Vector2) -> Label:
 	var label: Label = Label.new()
 	label.add_font_override("font", preload("res://scenes/ui/Themes/Default/DefaultFont.tres"))
 	label.uppercase = true
-	label.text = _get_dir_name(level)
+	label.text = text
 	label.set_global_position(position + Vector2(0.0, cell_size.y / 4.0))
 	add_child(label)
 	label.set_global_position(label.rect_global_position - Vector2(label.rect_size.x / 2.0, 0.0))
@@ -116,10 +122,6 @@ func _get_dir_name(levelPath: String) -> String:
 	var regex = RegEx.new()
 	regex.compile(".*\/(.*)\/[^\/]+.tscn")
 	return regex.search(levelPath).get_string(1)
-
-
-func _get_first_letter(levelPath: String) -> String:
-	return _get_dir_name(levelPath).substr(0, 1).to_upper()
 
 
 static func _get_all_first_levels_in_dir(path: String) -> Array:

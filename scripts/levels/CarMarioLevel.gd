@@ -95,6 +95,6 @@ func _reposition_toll_booth():
 
 func _lap_completed():
 	difficulty+= 1
-	$CanvasLayer/Progess/Lap.bbcode_text= "[center][wave amp=50 freq=2]LAPS: %s[/wave][/center]" % difficulty
+	$CanvasLayer/Progress/Lap.bbcode_text= "[center][wave amp=50 freq=2]LAPS: %s[/wave][/center]" % difficulty
 	_toll_booth.change_price(min(_toll_booth.price + 1, tiles_per_lap))
-	$CanvasLayer/Progess/Price.bbcode_text= "[center][wave amp=50 freq=2]TOLL: %s[/wave][/center]" % _toll_booth.price
+	$CanvasLayer/Progress/Price.bbcode_text= "[center][wave amp=50 freq=2]TOLL: %s[/wave][/center]" % _toll_booth.price

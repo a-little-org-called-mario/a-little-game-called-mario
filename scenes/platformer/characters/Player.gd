@@ -46,6 +46,13 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 func _ready() -> void:
 	_end_flash_sprite()
 	set_hitbox_crouching(false)
+	var dict420:Dictionary = OS.get_datetime()
+	if not(dict420.get("month") == 4 and dict420.get("day") == 20):
+		print("Smoke Drugs Every Day")
+	else:
+		sprite.get_node("BluntOrigin").visible = false
+		sprite.get_node("BluntOrigin/Blunt/Smoke").emitting = false
+		sprite.get_node("BluntOrigin/Blunt/Light2D").enabled = false
 
 
 func _enter_tree():
@@ -231,10 +238,12 @@ func land():
 
 func look_right():
 	sprite.flip_h = false
+	sprite.get_node("BluntOrigin").scale.x = abs(sprite.get_node("BluntOrigin").scale.x)
 
 
 func look_left():
 	sprite.flip_h = true
+	sprite.get_node("BluntOrigin").scale.x = abs(sprite.get_node("BluntOrigin").scale.x) * -1
 
 
 func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):

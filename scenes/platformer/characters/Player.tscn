@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://scripts/BoucyMoustache.gd" type="Script" id=16]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
 [ext_resource path="res://audio/sfx/toasty.wav" type="AudioStream" id=18]
+[ext_resource path="res://audio/music/givehimagun.mp3" type="AudioStream" id=19]
+[ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=20]
 
 [sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
@@ -373,6 +375,15 @@ animation = "standing"
 
 [node name="Horn" type="AudioStreamPlayer" parent="BusSprite"]
 stream = ExtResource( 18 )
+bus = "sfx"
+
+[node name="brrrrrrrrr" type="AudioStreamPlayer2D" parent="BusSprite"]
+stream = ExtResource( 20 )
+bus = "sfx"
+
+[node name="moving_sound" type="AudioStreamPlayer2D" parent="BusSprite"]
+stream = ExtResource( 19 )
+volume_db = 1.0
 bus = "sfx"
 
 [connection signal="timeout" from="HitFlashTimer" to="." method="_end_flash_sprite"]

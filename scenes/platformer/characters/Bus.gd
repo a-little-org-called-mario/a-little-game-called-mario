@@ -6,6 +6,8 @@ onready var player : Player = owner
 onready var sprite : AnimatedSprite = player.get_node("BusSprite")
 onready var collision : CollisionShape2D = player.get_node("BusCollision")
 onready var horn_sound : AudioStreamPlayer = sprite.get_node("Horn")
+onready var resting_sound : AudioStreamPlayer2D = sprite.get_node("brrrrrrrrr")
+onready var moving_sound : AudioStreamPlayer2D = sprite.get_node("moving_sound")
 
 enum busState {RESTING, MOVING};
 var state
@@ -32,12 +34,12 @@ func _process(_delta: float) -> void:
 	#print(player.x_motion.get_speed())
 	#print(state)
 	#if player.x_motion.get_speed() <= player.STOPTHRESHOLD and state != busState.RESTING:
-		#_change_state(busState.RESTING)
+		#_set_state(busState.RESTING)
 	#elif player.x_motion.get_speed() != 0 and state == busState.RESTING:
-	if Input.is_action_pressed("right") or Input.is_action_pressed("left"):
-		_change_state(busState.MOVING)
+	if  (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
+		_set_state(busState.MOVING)
 	else:
-		_change_state(busState.RESTING) 
+		_set_state(busState.RESTING) 
 		
 	if Input.is_action_just_pressed("make_sound"):
 		_play_horn();
@@ -68,13 +70,20 @@ func _update_player(on : bool) -> void:
 		trail.height = 15
 
 
-func _change_state(newState):
+func _set_state(newState):
+	if(state == newState):
+		return
+	print(newState)
 	if (newState == busState.RESTING):
 		sprite.animation = "standing"
 		sprite.playing = false
+		resting_sound.playing = true # When more state sounds are added that continuously should play
+		moving_sound.playing = false # make all the sounds an dictionary.
 	if (newState == busState.MOVING):
 		sprite.animation = "driving"
 		sprite.playing = true
+		moving_sound.playing = true
+		resting_sound.playing = false
 	state = newState
 
 func _play_horn():

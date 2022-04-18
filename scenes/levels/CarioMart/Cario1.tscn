@@ -164,7 +164,7 @@ position = Vector2( 0, 384 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="Container" type="VBoxContainer" parent="CanvasLayer"]
+[node name="Progress" type="VBoxContainer" parent="CanvasLayer"]
 visible = false
 anchor_left = 0.5
 anchor_right = 0.5
@@ -174,7 +174,7 @@ margin_right = 120.0
 margin_bottom = 90.0
 grow_horizontal = 2
 
-[node name="Lap" type="RichTextLabel" parent="CanvasLayer/Container"]
+[node name="Lap" type="RichTextLabel" parent="CanvasLayer/Progress"]
 margin_right = 240.0
 margin_bottom = 31.0
 rect_clip_content = false
@@ -185,7 +185,7 @@ text = "LAPS: 0"
 fit_content_height = true
 scroll_active = false
 
-[node name="Price" type="RichTextLabel" parent="CanvasLayer/Container"]
+[node name="Price" type="RichTextLabel" parent="CanvasLayer/Progress"]
 margin_top = 35.0
 margin_right = 240.0
 margin_bottom = 66.0
@@ -261,5 +261,5 @@ text = "DO 10 LAPS AND YOU MAY BE GRANTED ACCESS TO THE SECRET MEETING"
 
 [connection signal="body_entered" from="Road/Grass" to="." method="terrain_entered"]
 [connection signal="body_exited" from="Road/Grass" to="." method="terrain_exited"]
-[connection signal="tree_entered" from="CarSpawn" to="CanvasLayer/Container" method="hide"]
-[connection signal="tree_exited" from="CarSpawn" to="CanvasLayer/Container" method="show"]
+[connection signal="tree_entered" from="CarSpawn" to="CanvasLayer/Progress" method="hide"]
+[connection signal="tree_exited" from="CarSpawn" to="CanvasLayer/Progress" method="show"]

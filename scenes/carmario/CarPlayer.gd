@@ -1,5 +1,4 @@
 extends KinematicBody2D
-class_name CarPlayer
 
 const ACCELERATION :float= 15.0
 const MAX_SPEED :float= 100.0
@@ -13,7 +12,7 @@ var terrain_counter :int= 0
 var upside_down := false
 
 var _car_ui :Control
-var health:= MAX_HEALTH setget set_health
+var health:= MAX_HEALTH setget set_health, get_health
 var distance_traveled:= 0.0
 var felonies := 0
 
@@ -99,8 +98,10 @@ func set_health(value):
 	health= clamp(value, 0, MAX_HEALTH)
 	if health <= 0 and $Sprite.animation != "car_only":
 		$Sprite.animation= "car_only"
-		$CollisionShape2D.set_deferred("disabled",true)
+		$Shape.set_deferred("disabled",true)
 		$AnimationPlayer.play("die")
+func get_health() -> float:
+	return health
 
 func terrain_entered():
 	terrain_counter+= 1

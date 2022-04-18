@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://graphics/sprites/empty_car.png" type="Texture" id=1]
+[ext_resource path="res://graphics/sprites/carmario/empty_car.png" type="Texture" id=1]
 [ext_resource path="res://scenes/carmario/CarSpawn.gd" type="Script" id=2]
 [ext_resource path="res://scenes/carmario/CarPlayer.tscn" type="PackedScene" id=3]
 

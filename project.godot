@@ -59,11 +59,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/CameraLeanAmount.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "CarPlayer",
-"language": "GDScript",
-"path": "res://scripts/CarPlayer.gd"
-}, {
 "base": "BaseInventoryHandle",
 "class": "CoinInventoryHandle",
 "language": "GDScript",
@@ -225,7 +220,6 @@ _global_script_class_icons={
 "Bub": "",
 "Bus": "",
 "CameraLeanAmount": "",
-"CarPlayer": "",
 "CoinInventoryHandle": "",
 "CoinProjectile": "",
 "CoinsAchievement": "",

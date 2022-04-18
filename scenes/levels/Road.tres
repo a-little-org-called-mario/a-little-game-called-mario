@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=2 format=2]
 
-[ext_resource path="res://sprites/tiles/background/road_tileset.png" type="Texture" id=1]
+[ext_resource path="res://graphics/tiles/road_tileset.png" type="Texture" id=1]
 
 [resource]
 0/name = "road_empty"

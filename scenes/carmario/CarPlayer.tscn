@@ -1,10 +1,10 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://graphics/sprites/cario.png" type="Texture" id=1]
+[ext_resource path="res://graphics/sprites/carmario/cario.png" type="Texture" id=1]
 [ext_resource path="res://scenes/carmario/CarPlayer.gd" type="Script" id=2]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=6]
-[ext_resource path="res://graphics/sprites/empty_car.png" type="Texture" id=7]
+[ext_resource path="res://graphics/sprites/carmario/empty_car.png" type="Texture" id=7]
 [ext_resource path="res://audio/sfx/mario_aaaa.wav" type="AudioStream" id=9]
 [ext_resource path="res://audio/sfx/mario_oof.wav" type="AudioStream" id=10]
 [ext_resource path="res://audio/sfx/short_noise.wav" type="AudioStream" id=11]
@@ -307,7 +307,7 @@ tracks/1/keys = {
 collision_mask = 30
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+[node name="Shape" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -30, 12, -42, -3, -42, -27, 42, -27, 42, -6, 27, 12 )
 
 [node name="Trail1" type="Particles2D" parent="."]

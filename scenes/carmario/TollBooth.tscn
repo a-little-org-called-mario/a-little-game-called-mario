@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://graphics/sprites/ballluigi.png" type="Texture" id=1]
-[ext_resource path="res://graphics/sprites/tollbox.png" type="Texture" id=2]
-[ext_resource path="res://graphics/sprites/tollbarrier.png" type="Texture" id=3]
+[ext_resource path="res://graphics/sprites/carmario/tollbox.png" type="Texture" id=2]
+[ext_resource path="res://graphics/sprites/carmario/tollbarrier.png" type="Texture" id=3]
 [ext_resource path="res://scenes/carmario/TollBooth.gd" type="Script" id=4]
 [ext_resource path="res://audio/sfx/ball_omn.wav" type="AudioStream" id=5]
 [ext_resource path="res://audio/sfx/toll_paid.wav" type="AudioStream" id=6]
@@ -79,7 +79,7 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BoxShape" type="CollisionShape2D" parent="."]
 position = Vector2( -2, -6.5 )
 shape = SubResource( 1 )
 
@@ -125,7 +125,7 @@ position = Vector2( -46, -7 )
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PayZone"]
+[node name="Shape" type="CollisionShape2D" parent="PayZone"]
 position = Vector2( -10, 183.5 )
 shape = SubResource( 4 )
 
@@ -134,15 +134,15 @@ position = Vector2( -46, -7 )
 collision_layer = 0
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FreeZone"]
-position = Vector2( -2, 527 )
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="FreeZone"]
+[node name="TopShape" type="CollisionShape2D" parent="FreeZone"]
 position = Vector2( -2, -169 )
 shape = SubResource( 6 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="BottomShape" type="CollisionShape2D" parent="FreeZone"]
+position = Vector2( -2, 527 )
+shape = SubResource( 6 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -64, -10, 420, 20 )
 
 [node name="Paid" type="AudioStreamPlayer2D" parent="."]

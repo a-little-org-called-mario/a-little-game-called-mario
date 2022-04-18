@@ -9,7 +9,7 @@ var toll_paid := false
 func _ready():
 	$PayZone.connect("body_entered",self, "_payzone_entered")
 	$FreeZone.connect("body_entered",self, "_payzone_entered", [true])
-	$VisibilityNotifier2D.connect("screen_exited",self, "_out_of_view")
+	$VisibilityNotifier.connect("screen_exited",self, "_out_of_view")
 
 func _payzone_entered(body, for_free:= false):
 	if body.is_in_group("Player"):
@@ -18,8 +18,8 @@ func _payzone_entered(body, for_free:= false):
 			$PayZone.set_deferred("monitoring", false)
 			$FreeZone.set_deferred("monitoring", false)
 			toll_paid= true
-			if not for_free and body is CarPlayer:
-				body.health+= 25
+			if not for_free and body.has_method("set_health"):
+				body.set_health(body.get_health() + 25)
 				$AnimationPlayer.play("open")
 				$Paid.play()
 			else:

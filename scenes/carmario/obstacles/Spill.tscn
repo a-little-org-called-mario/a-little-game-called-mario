@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://sprites/spill.png" type="Texture" id=1]
-[ext_resource path="res://scripts/carmario/SlipperyObstacle.gd" type="Script" id=2]
+[ext_resource path="res://graphics/sprites/spill.png" type="Texture" id=1]
+[ext_resource path="res://scenes/carmario/obstacles/SlipperyObstacle.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 19.5064

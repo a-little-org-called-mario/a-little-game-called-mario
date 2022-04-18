@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tollbarrier.png-e81899030433631039db3ad8644ec940.stex"
+path="res://.import/road_tileset.png-667fcf6428efc03321bf3267ab0baf6a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tollbarrier.png"
-dest_files=[ "res://.import/tollbarrier.png-e81899030433631039db3ad8644ec940.stex" ]
+source_file="res://graphics/tiles/road_tileset.png"
+dest_files=[ "res://.import/road_tileset.png-667fcf6428efc03321bf3267ab0baf6a.stex" ]
 
 [params]
 

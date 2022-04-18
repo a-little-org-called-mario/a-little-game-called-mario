@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
-[ext_resource path="res://sprites/ballluigi.png" type="Texture" id=4]
+[ext_resource path="res://graphics/sprites/ballluigi.png" type="Texture" id=4]
 [ext_resource path="res://audio/sfx/ball_omn.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/powerups/FireFlower.tscn" type="PackedScene" id=6]
 

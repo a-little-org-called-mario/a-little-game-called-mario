@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spill.png-20ee4c820e18c760d36e44cbf5478c3b.stex"
+path="res://.import/empty_car.png-8b875c4754ed038ee00aad7c0d77d42a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/spill.png"
-dest_files=[ "res://.import/spill.png-20ee4c820e18c760d36e44cbf5478c3b.stex" ]
+source_file="res://graphics/sprites/carmario/empty_car.png"
+dest_files=[ "res://.import/empty_car.png-8b875c4754ed038ee00aad7c0d77d42a.stex" ]
 
 [params]
 

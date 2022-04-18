@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ballluigi.png-b8b93396f79641ba64bf086dc5393a80.stex"
+path="res://.import/tollbarrier.png-02956023585a3df93a991dbc5b4528cc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ballluigi.png"
-dest_files=[ "res://.import/ballluigi.png-b8b93396f79641ba64bf086dc5393a80.stex" ]
+source_file="res://graphics/sprites/carmario/tollbarrier.png"
+dest_files=[ "res://.import/tollbarrier.png-02956023585a3df93a991dbc5b4528cc.stex" ]
 
 [params]
 

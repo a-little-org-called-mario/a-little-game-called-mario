@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://sprites/ballluigi.png" type="Texture" id=1]
-[ext_resource path="res://sprites/tollbox.png" type="Texture" id=2]
-[ext_resource path="res://sprites/tollbarrier.png" type="Texture" id=3]
-[ext_resource path="res://scripts/carmario/TollBooth.gd" type="Script" id=4]
+[ext_resource path="res://graphics/sprites/ballluigi.png" type="Texture" id=1]
+[ext_resource path="res://graphics/sprites/tollbox.png" type="Texture" id=2]
+[ext_resource path="res://graphics/sprites/tollbarrier.png" type="Texture" id=3]
+[ext_resource path="res://scenes/carmario/TollBooth.gd" type="Script" id=4]
 [ext_resource path="res://audio/sfx/ball_omn.wav" type="AudioStream" id=5]
 [ext_resource path="res://audio/sfx/toll_paid.wav" type="AudioStream" id=6]
 

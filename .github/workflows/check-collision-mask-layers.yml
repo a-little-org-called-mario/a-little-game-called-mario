@@ -13,9 +13,10 @@ jobs:
     steps:
       - name: Checkout latest code
         uses: actions/checkout@v2
-      - name: Setup Godot and run checks
+      - name: Setup Godot
         uses: vitorgus/setup-godot@v1
         with:
           godot-version: 3.4.4
           download-templates: false
-          run: godot -v -s collision_mask_check.gd
+      - name: Run Checks
+        run: godot -v -s collision_mask_check.gd

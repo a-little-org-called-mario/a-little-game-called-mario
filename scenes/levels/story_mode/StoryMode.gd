@@ -1,13 +1,9 @@
 extends Node2D
 
-"""@wiki
+"""
 Gamemode in which the story is what matters the most.
 
-## Adding Characters
-
-## Adding Dialogs
-
-## Adding Items
+This script handles starting of dialogs by talking to characters.
 """
 
 var _item_store := ItemStore.new()

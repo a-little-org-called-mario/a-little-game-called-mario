@@ -11,10 +11,11 @@ jobs:
   check_collisions_and_masks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: vitorgus/setup-godot@v1
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+      - name: Setup Godot and run checks
+        uses: vitorgus/setup-godot@v1
         with:
           godot-version: 3.4.4
           download-templates: false
-          run: |
-            godot -v -s collision_mask_check.gd
+          run: godot -v -s collision_mask_check.gd

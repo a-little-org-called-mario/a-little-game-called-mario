@@ -15,20 +15,17 @@ export(int) var price: int
 export(Color) var color: Color = Color.black setget _set_color
 
 onready var next_level: PackedScene = load(next_level_path) if len(next_level_path) > 0 else null
-onready var mario: AnimatedSprite = $Mario
+onready var sprite: Sprite = $PlayerSprite
+onready var animationplayer: AnimationPlayer = $PlayerSprite/AnimationPlayer
 
 
 func _ready() -> void:
-	$Sprite.play()
+	$PortalSprite.play()
 
 	update_portal_color()
 
 	$CoinContainer.visible = price > 0
 	$CoinContainer/CoinLabel.text = str(price)
-
-
-func _enter_tree() -> void:
-	$Mario.visible = false
 
 
 func can_enter(node: Node2D) -> bool:
@@ -38,13 +35,28 @@ func can_enter(node: Node2D) -> bool:
 	return true
 
 
-func on_portal_enter(_node: Node2D) -> AnimatedSprite:
-	mario.visible = true
-	mario.frame = 0
-	mario.play()
+func on_portal_enter(node: Node2D) -> AnimationPlayer:
+	var player: Player = node as Player
+	if not player:
+		return null
+
+	var player_sprite = player.sprite
+	if player_sprite as Sprite:
+		sprite.texture = player_sprite.texture
+		sprite.hframes = player_sprite.hframes
+		sprite.vframes = player_sprite.vframes
+		sprite.frame = player_sprite.frame
+	elif player_sprite as AnimatedSprite:
+		sprite.texture = player_sprite.frames.get_frame(player_sprite.animation, player_sprite.frame)
+		sprite.hframes = 1
+		sprite.vframes = 1
+		sprite.frame = 0
+
+	animationplayer.play("Swirl")
+
 	$PortalSFX.play()
 	EventBus.emit_signal("level_completed", {})
-	return mario
+	return animationplayer
 
 
 func portal_color() -> Color:
@@ -56,11 +68,11 @@ func portal_color() -> Color:
 
 
 func update_portal_color() -> void:
-	var sprite: AnimatedSprite = $Sprite
+	var portalsprite: AnimatedSprite = $PortalSprite
 	var updated_color: Color = portal_color()
-	if sprite.material.get_shader_param("colour") == updated_color:
+	if portalsprite.material.get_shader_param("colour") == updated_color:
 		return
-	sprite.material.set_shader_param("colour", portal_color())
+	portalsprite.material.set_shader_param("colour", portal_color())
 
 
 func _set_next_level_path(path: String) -> void:

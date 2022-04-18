@@ -86,7 +86,9 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
 		despawn.queue_free()
 
-	var animation = portal.on_portal_enter(body)
+	var animation: AnimationPlayer = portal.on_portal_enter(body)
+	if animation == null:
+		return
 	body.get_parent().remove_child(body)
 
 	yield(animation, "animation_finished")

@@ -1,0 +1,21 @@
+name: Collision and Mask checks
+  
+on:
+  pull_request:
+    paths-ignore: # do not build for game-irrelvant changes
+      - 'LICENSE'
+      - 'ACKNOWLEDGEMENTS'
+      - '**.md'
+
+jobs:
+  check_collisions_and_masks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+      - name: Setup Godot and run checks
+        uses: vitorgus/setup-godot@v1
+        with:
+          godot-version: 3.4.4
+          download-templates: false
+          run: godot -v -s collision_mask_check.gd

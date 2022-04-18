@@ -154,7 +154,7 @@ __meta__ = {
 margin_left = 109.0
 margin_top = 258.0
 margin_right = 875.0
-margin_bottom = 534.0
+margin_bottom = 478.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
@@ -200,34 +200,26 @@ margin_bottom = 52.0
 text = "MARWING"
 redirect_scene = "res://scenes/marwing/levels/1-0.tscn"
 
-[node name="TutorialButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 192.0
-margin_top = 112.0
-margin_right = 574.0
-margin_bottom = 164.0
-text = "TUTORIAL LEVEL (DOESN'T WORK)"
-redirect_scene = "res://scenes/Main.tscn"
-
 [node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0
-margin_top = 168.0
+margin_top = 112.0
 margin_right = 442.0
-margin_bottom = 220.0
+margin_bottom = 164.0
 disabled = true
 text = "OPTIONS"
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0
-margin_top = 224.0
+margin_top = 168.0
 margin_right = 442.0
-margin_bottom = 276.0
+margin_bottom = 220.0
 text = "CREDITS"
 redirect_scene = "res://scenes/Credits.tscn"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 538.0
+margin_top = 482.0
 margin_right = 984.0
-margin_bottom = 658.0
+margin_bottom = 602.0
 alignment = 1
 
 [node name="SmolCreditsLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]

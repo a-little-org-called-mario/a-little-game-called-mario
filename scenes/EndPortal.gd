@@ -38,7 +38,11 @@ func can_enter(node: Node2D) -> bool:
 func on_portal_enter(node: Node2D) -> AnimationPlayer:
 	$PortalSFX.play()
 
-	var player_sprite = node.get_node_or_null("Sprite") if not node as Player else (node as Player).sprite
+	var player_sprite = (
+		node.get_node_or_null("Sprite")
+		if not node as Player
+		else (node as Player).sprite
+	)
 
 	if player_sprite as Sprite:
 		sprite.texture = player_sprite.texture

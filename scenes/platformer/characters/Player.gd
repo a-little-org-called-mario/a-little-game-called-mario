@@ -140,7 +140,8 @@ func _physics_process(delta: float) -> void:
 			crouch()
 	else:
 		grounded = false
-		crouching = false
+		if crouching:
+			uncrouch()
 		coyote_timer -= delta
 		# while we're holding the jump button we should jump higher
 		if not super_jumping:
@@ -151,9 +152,7 @@ func _physics_process(delta: float) -> void:
 		anim.playAnim("Jump")
 
 	if crouching and not Input.is_action_pressed("down"):
-		crouching = false
-		set_hitbox_crouching(false)
-		unsquash()
+		uncrouch()
 
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
 	pivot.scale.y = gravity.direction.y
@@ -203,6 +202,12 @@ func crouch():
 	squash()
 
 
+func uncrouch():
+	crouching = false
+	set_hitbox_crouching(false)
+	unsquash()
+
+
 func set_hitbox_crouching(is_crouching: bool):
 	if is_crouching:
 		collision.shape.extents.y = original_collision_extents.y * 0.4
@@ -216,7 +221,7 @@ func jump():
 	stats.jump_xp += 1
 	tween.stop_all()
 	anticipating_jump = true
-	set_hitbox_crouching(false)
+	uncrouch()
 	squash(0.03, 0, 0.5)
 	yield(tween, "tween_all_completed")
 	stretch(0.2, 0, 0.5, 1.2)

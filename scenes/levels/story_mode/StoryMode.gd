@@ -10,7 +10,7 @@ var _item_store := ItemStore.new()
 var _door_cell : Vector2
 
 const ItemStore = preload("items/ItemStore.gd")
-const Dialog = preload("dialog/Dialog.gd")
+const Dialog = preload("res://addons/dialog_importer/dialog.gd")
 const Character = preload("character/Character.gd")
 const DialogUI = preload("dialog/DialogUI.gd")
 const Inventory = preload("items/Inventory.gd")

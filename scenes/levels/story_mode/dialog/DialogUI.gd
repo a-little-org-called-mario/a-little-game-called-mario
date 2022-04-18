@@ -26,9 +26,9 @@ var _occurences: Dictionary
 # The name of the dialog that is being checked for issues.
 var _checking: String
 
-const Dialog = preload("Dialog.gd").Dialog
-const Condition = preload("Dialog.gd").Condition
-const Choice = preload("Dialog.gd").Choice
+const Dialog = preload("res://addons/dialog_importer/dialog.gd")
+const Condition = preload("res://addons/dialog_importer/condition.gd")
+const Choice = preload("res://addons/dialog_importer/choice.gd")
 const Character = preload("../character/Character.gd")
 const ItemStore = preload("../items/ItemStore.gd")
 const FileUtils = preload("res://scripts/FileUtils.gd")
@@ -49,11 +49,11 @@ func init(item_store: ItemStore, inventory: Inventory):
 	_inventory = inventory
 	var dialog_dir: String = get_script().resource_path\
 			.get_base_dir().plus_file("../dialogs")
-	for file in FileUtils.list_dir(dialog_dir):
-		var data := FileUtils.as_json(file)
-		if not data:
-			push_error("Couldn't load dialog %s" % [file])
-		var dialog := Dialog.new(data)
+	for _file in FileUtils.list_dir(dialog_dir):
+		var file: String = _file.replace(".import", "")
+		if not file.ends_with(".json"):
+			continue
+		var dialog = load(file)
 		_checking = file.get_file()
 		_check_dialog(dialog)
 		_dialogs[file.get_file().get_basename()] = dialog

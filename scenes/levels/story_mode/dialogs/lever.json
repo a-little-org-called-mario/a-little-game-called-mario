@@ -1,5 +1,5 @@
 {
-	"$schema": "dialog.schema.json",
+	"$schema": "schema/dialog.schema.json",
 	"text": "A lever",
 	"choices": [
 		{

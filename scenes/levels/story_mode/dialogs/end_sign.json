@@ -1,4 +1,4 @@
 {
-	"$schema": "dialog.schema.json",
+	"$schema": "schema/dialog.schema.json",
 	"text": ["You did it! You completed the story mode demo!", "That's all for now!", "More coming soon TM."]
 }

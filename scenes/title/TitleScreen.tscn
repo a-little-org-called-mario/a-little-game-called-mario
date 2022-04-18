@@ -319,11 +319,10 @@ script = ExtResource( 11 )
 wait_time = 3.0
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioTitle" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 12 )
 volume_db = -20.0
-autoplay = true
 bus = "music"
 
 [connection signal="timeout" from="VBoxContainer/HBoxContainer2/CreditsContainer/Credits/Timer" to="VBoxContainer/HBoxContainer2/CreditsContainer/Credits" method="_on_Timer_timeout"]

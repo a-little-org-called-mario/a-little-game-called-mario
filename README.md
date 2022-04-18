@@ -8,7 +8,7 @@ a bad idea from the mind of [izzy kestrel](https://twitter.com/iznaut), inspired
 
 # 🎮 [play the latest version here](http://play.little-mario.com/) 🎮
 
-[![Screenshot Of A Little Game Called Mario](/.godot_ignore/screenshot.gif)](https://twitter.com/iznaut/status/1508179935977947142)
+[![Screenshot Of A Little Game Called Mario](/.godot_ignore/stealth_screenshot.png)](https://twitter.com/iznaut/status/1508179935977947142)
 
 # 🗣 [join the discord server](http://community.little-mario.com/) (by joining our discord you are agreeing to abide by our [code of conduct](code_of_conduct.md)) 🗣
 

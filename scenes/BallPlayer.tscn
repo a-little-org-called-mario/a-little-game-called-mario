@@ -45,6 +45,7 @@ texture_mode = 2
 joint_mode = 2
 end_cap_mode = 2
 script = ExtResource( 4 )
+textures_directory = "res://textures/trails"
 trail_length = 30
 
 [node name="CoinInventoryHandle" parent="." instance=ExtResource( 3 )]

@@ -21,11 +21,12 @@ static func _get_random_texture_in_dir(path: String):
 			filename = dir.get_next()
 		dir.list_dir_end()
 	else:
-		print(dir.open(path))
+		#print errorcode on fail cause idk how to view in godot's debug
+		#print(dir.open(path))
 		return false
 		
 	if len(textures) > 0:
-		return load(textures[randi() % textures.size()])
+		return ResourceLoader.load(textures[randi() % textures.size()], "Texture")
 	else:
 		return false
 func _ready():

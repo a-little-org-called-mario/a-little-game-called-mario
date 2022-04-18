@@ -30,6 +30,12 @@ var follow_index: int = 0
 
 func _ready() -> void:
 	_find_current_camera()
+	# If there is no camera (probably because you are running the scene by itself)
+	# create a camera and make it current. 
+	if camera_reference == null:
+		camera_reference = Camera2D.new()
+		get_tree().root.call_deferred("add_child",camera_reference)
+		camera_reference.make_current()
 
 func _enter_tree() -> void:
 	EventBus.connect("cameraF_candidate_spawned",self,"_get_follow_candidates")

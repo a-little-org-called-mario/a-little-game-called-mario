@@ -79,10 +79,10 @@ func initCollisionDetection() -> void:
 	$HitArea.connect("body_entered", self, "_on_body_entered")
 
 
-func _on_body_entered(body) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		call_deferred("hitPlayer")
+		call_deferred("hitPlayer", body)
 
 
-func hitPlayer():
-	EventBus.emit_signal("heart_changed", {"value": -1})
+func hitPlayer(body: Node2D) -> void:
+	HeartInventoryHandle.change_hearts_on(body, -1)

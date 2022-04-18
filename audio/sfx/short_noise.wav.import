@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/short_noise.wav-3cc40e39ef776b9b8369db301ff593c8.sample"
+
+[deps]
+
+source_file="res://audio/sfx/short_noise.wav"
+dest_files=[ "res://.import/short_noise.wav-3cc40e39ef776b9b8369db301ff593c8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,2 @@
+- name: Collision and Mask checks
+  uses: Vitorgus/Setup-Godot@v1.0.0

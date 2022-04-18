@@ -5,6 +5,9 @@ func _ready():
 	EventBus.connect("volume_changed", self, "_on_volume_change")
 	for bus in ["Master", "music", "sfx", "voice"]:
 		_on_volume_change(bus)
+	var bgm : AudioStreamPlayer = get_node_or_null("BGM")
+	if !bgm:
+		bgm.playing = true
 
 
 func _on_volume_change(bus: String):

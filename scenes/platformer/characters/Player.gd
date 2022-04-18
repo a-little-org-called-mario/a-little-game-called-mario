@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 			x_motion.set_accel(0)
 
 	jump_buffer_timer -= delta
-	if Input.is_action_just_pressed("jump") and not super_jumping:
+	if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("up") and not super_jumping:
 		# If experienced enough, do a super crouch jump
 		if crouching and stats.acrobatics >= 10:
 			super_jumping = true

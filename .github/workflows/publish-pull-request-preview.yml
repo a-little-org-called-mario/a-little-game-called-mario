@@ -41,11 +41,20 @@ jobs:
       - name: Unzip artifact
         run: unzip pr.zip; rm pr.zip
 
-      - name: Store PR number in ENV
+      - name: Store PR info in ENV
         run: |
-          PR=$(cat pr_number)
-          echo "PR_NUM=$PR" >> $GITHUB_ENV
+          PR_NUMBER=$(cat pr_number)
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
           rm pr_number
+          PR_TITLE=$(cat pr_title)
+          echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
+          rm pr_title
+          PR_SENDER=$(cat pr_sender)
+          echo "PR_SENDER=$PR_SENDER" >> $GITHUB_ENV
+          rm pr_sender
+          PR_ACTION=$(cat pr_action)
+          echo "PR_ACTION=$PR_ACTION" >> $GITHUB_ENV
+          rm pr_action
       
       - name: Netlify preview deploy
         uses: nwtgck/actions-netlify@v1.2
@@ -64,16 +73,34 @@ jobs:
         with:
           script: |
             var fs = require('fs');
-            var issue_number = process.env.PR_NUM
+            var issue_number = process.env.PR_NUMBER
             await github.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue_number,
-              body: '🎉 You can test out this change! ✨👉 ${{steps.netlify-deploy.outputs.deploy-url}} 👈✨'
+              body: '🎉 Please test your changes using this link! ✨👉 ${{steps.netlify-deploy.outputs.deploy-url}} 👈✨'
             });
       - name: Discord notification
+        if: ${{ env.PR_ACTION == 'opened' || env.PR_ACTION == 'reopened' }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '🎉 Test build for latest PR#${{env.PR_NUM}} ✨👉 ${{steps.netlify-deploy.outputs.deploy-url}} 👈✨'
+          args: '🎉 Test build for PR#${{env.PR_NUM}} ✨👉 ${{steps.netlify-deploy.outputs.deploy-url}} 👈✨'
+      - uses: Eomm/why-don-t-you-tweet@v1
+        if: ${{ env.PR_ACTION == 'opened' }}
+        with:
+          tweet-message: |          
+              ✨ proposed change #${{env.PR_NUMBER}} by ${{env.PR_SENDER}} ✨
+              
+              "${{env.PR_TITLE}}"
+
+              🎮 play in your browser: ${{env.BUILD_URL}} 🎮
+              
+              ${{ github.server_url }}/${{ github.repository }}/pull/${{env.PR_NUMBER}}
+        env:
+          BUILD_URL: ${{ steps.netlify-deploy.outputs.deploy-url }}
+          TWITTER_CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+          TWITTER_CONSUMER_API_SECRET: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}

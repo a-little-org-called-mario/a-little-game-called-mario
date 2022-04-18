@@ -20,10 +20,7 @@ func _process(_delta):
 	emit_signal("set_tick", time)
 
 func _on_Music_finished():
-	print("Music Finished")
-	#EventBus.emit_signal("ui_visibility_changed", {"visible": true})
 	EventBus.emit_signal("change_scene", { "scene": "res://scenes/Main.tscn" })
-	#EventBus.emit_signal("bgm_changed", {"playing": true})
 
 func _on_note_hit(score):
 	total_score += score

@@ -36,11 +36,14 @@ func can_enter(node: Node2D) -> bool:
 
 
 func on_portal_enter(node: Node2D) -> AnimationPlayer:
-	var player: Player = node as Player
-	if not player:
-		return null
+	$PortalSFX.play()
 
-	var player_sprite = player.sprite
+	var player_sprite = (
+		node.get_node_or_null("Sprite")
+		if not node as Player
+		else (node as Player).sprite
+	)
+
 	if player_sprite as Sprite:
 		sprite.texture = player_sprite.texture
 		sprite.hframes = player_sprite.hframes
@@ -53,11 +56,11 @@ func on_portal_enter(node: Node2D) -> AnimationPlayer:
 		sprite.hframes = 1
 		sprite.vframes = 1
 		sprite.frame = 0
+	else:
+		return null
 
 	animationplayer.play("Swirl")
 
-	$PortalSFX.play()
-	EventBus.emit_signal("level_completed", {})
 	return animationplayer
 
 

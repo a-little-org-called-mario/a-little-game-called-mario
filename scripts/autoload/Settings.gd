@@ -24,7 +24,7 @@ func save_data():
 		"gfx_screen_shake": screen_shake,
 		"gfx_crt_filter": crt_filter,
 		"sfx_volume_game": volume_game,
-		"sfx_volume_music": volume_music,]
+		"sfx_volume_music": volume_music,
 		"sfx_volume_sfx": volume_sfx,
 		"sfx_volume_voice": volume_voice,
 	}

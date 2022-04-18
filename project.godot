@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "BouncyMoustache",
 "language": "GDScript",
-"path": "res://scripts/BoucyMoustache.gd"
+"path": "res://scripts/BouncyMoustache.gd"
 }, {
 "base": "Enemy",
 "class": "Bub",

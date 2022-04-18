@@ -31,7 +31,7 @@ signal bgm_changed(data)
 
 # UI
 # Expects a "visible" boolean key
-signal ui_visibility_changed(data)
+signal ui_visibility_changed(visible)
 signal game_paused(pause_state)
 
 # Scenes

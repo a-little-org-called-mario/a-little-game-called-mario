@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/ui/PlayerDied.gd" type="Script" id=11]
 [ext_resource path="res://sprites/flag.jpg" type="Texture" id=12]
 [ext_resource path="res://scenes/ui/CarPlayerStats.gd" type="Script" id=13]
+[ext_resource path="res://scenes/ui/UI.gd" type="Script" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Appear"
@@ -76,6 +77,7 @@ margin_right = 1024.0
 margin_bottom = 600.0
 mouse_filter = 2
 theme = ExtResource( 5 )
+script = ExtResource( 14 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 anchor_right = 1.0

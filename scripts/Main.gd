@@ -9,7 +9,6 @@ onready var hub: TileMap = $TileMap
 onready var level_scene: PackedScene = null
 onready var level: Node = $TileMap
 onready var bgm: AudioStreamPlayer = $Audio/BGM
-onready var ui: CanvasLayer = $UI
 onready var defaultBGMStream: AudioStream = bgm.stream.duplicate()
 
 var completionSound = preload("res://audio/sfx/portal.wav")
@@ -21,7 +20,6 @@ var entering_portal: bool = false
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
 	EventBus.connect("bgm_changed", self, "_bgm_changed")
-	EventBus.connect("ui_visibility_changed", self, "_on_ui_visibility_changed")
 	EventBus.connect("restart_level", self, "_restart_level")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
@@ -29,10 +27,6 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	EventBus.emit_signal("game_exit")
-
-
-func _on_ui_visibility_changed(data):
-	ui.get_child(0).visible = data.visible
 
 
 func _bgm_changed(data) -> void:

@@ -10,7 +10,7 @@ var total_score = 0
 
 func _ready():
 	music.play(seekSeconds)
-	EventBus.emit_signal("ui_visibility_changed", {"visible": false})
+	EventBus.emit_signal("ui_visibility_changed", false)
 	EventBus.emit_signal("bgm_changed", {"playing": false})
 
 func _process(_delta):

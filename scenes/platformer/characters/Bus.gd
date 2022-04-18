@@ -5,7 +5,7 @@ var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 onready var player : Player = owner
 onready var sprite : AnimatedSprite = player.get_node("BusSprite")
 onready var collision : CollisionShape2D = player.get_node("BusCollision")
-onready var horn_sound : AudioStreamPlayer2D = player.get_node("HurtSFX")
+onready var horn_sound : AudioStreamPlayer = sprite.get_node("Horn")
 
 var prev_posion : Vector2
 enum busState {RESTING, MOVING};

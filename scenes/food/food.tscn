@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/food.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Food.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 18, 14 )
+
+[node name="Food" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 4.76837e-07, -4.76837e-07 )
+scale = Vector2( 1.4375, 1.4375 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

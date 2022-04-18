@@ -66,10 +66,10 @@ func _activate_bus(active: bool) -> void:
 
 	# Collision
 	collision.disabled = !active
-	player.collision.disabled = active
-  set_process(active)
-  
-  var trail: Line2D = player.get_node_or_null("Trail")
+	player.collision.disabled = active 
+	set_process(active)
+	
+	var trail: Line2D = player.get_node_or_null("Trail")
 	if trail != null:
 		trail.height = 15 if active else 30
 

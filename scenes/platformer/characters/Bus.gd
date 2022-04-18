@@ -55,7 +55,6 @@ func _on_bus_collected(data: Dictionary) -> void:
 
 func _activate_bus() -> void:
 	sprite.visible = true
-	sprite.playing = true
 	collision.set_deferred("disabled", false)
 	call_deferred("_update_player", true)
 	set_process(true)
@@ -65,6 +64,7 @@ func _update_player(on : bool) -> void:
 	
 	player.sprite.visible = !on
 	player.get_node("CollisionShape2D").set_deferred("disabled", on)
+	player.get_node("BouncyMoustache").visible = !on
 	var trail: Line2D = player.get_node_or_null("Trail")
 	if trail != null:
 		trail.height = 15

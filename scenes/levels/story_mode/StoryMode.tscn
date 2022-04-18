@@ -1,20 +1,19 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://sprites/ladder_man.png" type="Texture" id=1]
 [ext_resource path="res://sprites/tiles/foreground/brick.png" type="Texture" id=2]
 [ext_resource path="res://sprites/tiles/background/bg-tile.png" type="Texture" id=3]
-[ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=4]
+[ext_resource path="res://scenes/levels/story_mode/player/TopDownPlayer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/levels/story_mode/character/Character.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=6]
-[ext_resource path="res://scenes/levels/story_mode/TopDownCamera.gd" type="Script" id=7]
+[ext_resource path="res://scenes/levels/story_mode/player/TopDownCamera.gd" type="Script" id=7]
 [ext_resource path="res://scenes/levels/story_mode/StoryMode.gd" type="Script" id=8]
 [ext_resource path="res://scenes/levels/story_mode/dialog/DialogUI.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/levels/story_mode/TopDownPlayer.gd" type="Script" id=10]
-[ext_resource path="res://sprites/mario.png" type="Texture" id=11]
-[ext_resource path="res://scenes/levels/story_mode/Inventory.gd" type="Script" id=12]
+[ext_resource path="res://scenes/levels/story_mode/items/Inventory.gd" type="Script" id=12]
 [ext_resource path="res://sprites/switch.png" type="Texture" id=13]
-[ext_resource path="res://scenes/levels/story_mode/ItemReceivePopup.gd" type="Script" id=14]
+[ext_resource path="res://scenes/levels/story_mode/items/ItemReceivePopup.gd" type="Script" id=14]
 [ext_resource path="res://sprites/signpost.png" type="Texture" id=15]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=16]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -59,65 +58,6 @@ radius = 63.7887
 
 [sub_resource type="CircleShape2D" id=21]
 radius = 104.307
-
-[sub_resource type="ShaderMaterial" id=10]
-shader = ExtResource( 4 )
-shader_param/flash_color = Color( 1, 1, 1, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 11 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 11 )
-region = Rect2( 32, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 11 )
-region = Rect2( 64, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 11 )
-region = Rect2( 96, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 11 )
-region = Rect2( 128, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 11 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=11]
-animations = [ {
-"frames": [ SubResource( 2 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 9 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-} ]
-
-[sub_resource type="CapsuleShape2D" id=12]
-radius = 19.0
-height = 18.0
 
 [node name="StoryMode" type="Node2D"]
 script = ExtResource( 8 )
@@ -229,33 +169,23 @@ margin_right = 36.0
 margin_bottom = 74.0
 text = "[B] Look at %s"
 
-[node name="TopDownPlayer" type="KinematicBody2D" parent="."]
-position = Vector2( 11, 3 )
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TopDownPlayer"]
-material = SubResource( 10 )
-position = Vector2( 0, 32 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 11 )
-animation = "idle"
-playing = true
-offset = Vector2( 0, -16 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopDownPlayer"]
-position = Vector2( 0, 4 )
-shape = SubResource( 12 )
+[node name="TopDownPlayer" parent="." instance=ExtResource( 4 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="DialogUI" parent="CanvasLayer" instance=ExtResource( 9 )]
-visible = false
-inventory_path = NodePath("../Inventory")
+[node name="UI" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 16 )
 
-[node name="Inventory" type="ColorRect" parent="CanvasLayer"]
+[node name="DialogUI" parent="CanvasLayer/UI" instance=ExtResource( 9 )]
+visible = false
+margin_left = -343.0
+margin_top = -229.0
+margin_right = 381.0
+margin_bottom = -28.0
+
+[node name="Inventory" type="ColorRect" parent="CanvasLayer/UI"]
 visible = false
 margin_left = 635.0
 margin_top = 66.0
@@ -264,7 +194,7 @@ margin_bottom = 554.0
 color = Color( 0.0901961, 0.0862745, 0.180392, 1 )
 script = ExtResource( 12 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventory"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/Inventory"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 27.0
@@ -273,26 +203,26 @@ margin_right = -19.0
 margin_bottom = -16.0
 custom_constants/separation = 16
 
-[node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/Inventory/VBoxContainer"]
+[node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/UI/Inventory/VBoxContainer"]
 margin_right = 301.0
-margin_bottom = 131.0
+margin_bottom = 130.0
 size_flags_vertical = 3
 expand = true
 stretch_mode = 6
 
-[node name="ItemNameLabel" type="Label" parent="CanvasLayer/Inventory/VBoxContainer"]
-margin_top = 147.0
+[node name="ItemNameLabel" type="Label" parent="CanvasLayer/UI/Inventory/VBoxContainer"]
+margin_top = 146.0
 margin_right = 301.0
-margin_bottom = 161.0
+margin_bottom = 162.0
 size_flags_vertical = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Inventory/VBoxContainer"]
-margin_top = 177.0
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/UI/Inventory/VBoxContainer"]
+margin_top = 178.0
 margin_right = 301.0
 margin_bottom = 308.0
 size_flags_vertical = 3
 
-[node name="ItemList" type="ItemList" parent="CanvasLayer/Inventory/VBoxContainer"]
+[node name="ItemList" type="ItemList" parent="CanvasLayer/UI/Inventory/VBoxContainer"]
 margin_top = 324.0
 margin_right = 301.0
 margin_bottom = 455.0
@@ -304,7 +234,7 @@ fixed_column_width = 60
 icon_mode = 0
 fixed_icon_size = Vector2( 80, 80 )
 
-[node name="ItemReceivePopup" type="AcceptDialog" parent="CanvasLayer"]
+[node name="ItemReceivePopup" type="AcceptDialog" parent="CanvasLayer/UI"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -317,30 +247,30 @@ popup_exclusive = true
 window_title = "You received an item!"
 script = ExtResource( 14 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ItemReceivePopup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/ItemReceivePopup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = -36.0
+margin_bottom = -52.0
 
-[node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/ItemReceivePopup/VBoxContainer"]
+[node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/UI/ItemReceivePopup/VBoxContainer"]
 margin_right = 318.0
-margin_bottom = 169.0
+margin_bottom = 151.0
 size_flags_vertical = 3
 expand = true
 
-[node name="ItemTitleLabel" type="Label" parent="CanvasLayer/ItemReceivePopup/VBoxContainer"]
-margin_top = 173.0
+[node name="ItemTitleLabel" type="Label" parent="CanvasLayer/UI/ItemReceivePopup/VBoxContainer"]
+margin_top = 155.0
 margin_right = 318.0
-margin_bottom = 187.0
+margin_bottom = 171.0
 align = 1
 
-[connection signal="dialog_finished" from="CanvasLayer/DialogUI" to="." method="_on_DialogUI_dialog_finished"]
-[connection signal="event_occured" from="CanvasLayer/DialogUI" to="." method="_on_DialogUI_event_occured"]
-[connection signal="item_received" from="CanvasLayer/DialogUI" to="." method="_on_DialogUI_item_received"]
-[connection signal="item_selected" from="CanvasLayer/Inventory/VBoxContainer/ItemList" to="CanvasLayer/Inventory" method="_on_ItemList_item_selected"]
+[connection signal="dialog_finished" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_finished"]
+[connection signal="event_occured" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_event_occured"]
+[connection signal="item_received" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_item_received"]
+[connection signal="item_selected" from="CanvasLayer/UI/Inventory/VBoxContainer/ItemList" to="CanvasLayer/UI/Inventory" method="_on_ItemList_item_selected"]
 
 [editable path="Characters/LadderMan"]
 [editable path="Characters/Stone"]

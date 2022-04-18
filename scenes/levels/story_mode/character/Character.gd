@@ -19,6 +19,7 @@ signal talked_to
 export var title : String
 
 # The dialog json file that is shown when talking to this character.
+# warning-ignore:unused_class_variable
 export var dialog : String
 
 onready var _sprite: Sprite = $Sprite

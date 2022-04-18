@@ -202,7 +202,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "StoryItem",
 "language": "GDScript",
-"path": "res://scenes/levels/story_mode/Item.gd"
+"path": "res://scenes/levels/story_mode/items/Item.gd"
 }, {
 "base": "Reference",
 "class": "TrackParser",

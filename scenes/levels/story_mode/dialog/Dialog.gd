@@ -1,15 +1,33 @@
+"""
+A single message of a dialog.
+
+Can have multiple responses the player can choose.
+Can trigger events, give items and change the character sprite.
+It is possible to create branching dialogs with conditions.
+"""
+
 var text: Array
-var choices := {OK = null}
+var choices: Dictionary
+
 var item: String
 var event: String
 var new_sprite: Texture
 
-var has_branches := false
+# If this dialog has a condition that should be evaluated.
 var has_condition := false
+# If the condition applies to this dialog or if there are two possible branches
+# for each outcome.
+var has_branches := false
+
+# The condition is only true if this is the exact occurence this dialog is shown.
 var only_at_occurence := 0
-var True
-var False
-var required_item
+# The condition is only true if the player has this item.
+var required_item: String
+
+# The dialog to execute if the condition is true.
+var True: Reference
+# The dialog to execute if the condition is false.
+var False: Reference
 
 func _init(data) -> void:
 	data = data if data else {}
@@ -21,7 +39,7 @@ func _init(data) -> void:
 		var condition_data = data.condition
 		required_item = condition_data.get("has_item", "")
 		only_at_occurence = condition_data.get("occurence", 0)
-	if "true" in data or "false" in data:
+	if "false" in data:
 		has_branches = true
 		True = get_script().new(data.get("true"))
 		False = get_script().new(data.get("false"))

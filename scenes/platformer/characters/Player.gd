@@ -49,6 +49,13 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 func _ready() -> void:
 	_end_flash_sprite()
 	set_hitbox_crouching(false)
+	var dict420:Dictionary = OS.get_datetime()
+	if (dict420.get("month") == 4 and dict420.get("day") == 20):
+		print("Smoke Drugs Every Day")
+	else:
+		pivot.get_node("Blunt").visible = false
+		pivot.get_node("Blunt/Blunt Fire").enabled = false
+		pivot.get_node("Blunt/Blunt Fire/Blunt Smoke").emitting = false
 
 
 func _enter_tree():

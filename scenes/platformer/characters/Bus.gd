@@ -7,10 +7,10 @@ onready var sprite : AnimatedSprite = player.get_node("BusSprite")
 onready var collision : CollisionShape2D = player.get_node("BusCollision")
 onready var horn_sound : AudioStreamPlayer = sprite.get_node("Horn")
 
-var prev_posion : Vector2
 enum busState {RESTING, MOVING};
-
 var state
+
+
 
 func _ready() -> void:
 	state = busState.RESTING
@@ -41,6 +41,8 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("make_sound"):
 		_play_horn();
+	if Input.is_action_just_released("undo"):
+		exit_bus()
 
 
 func _on_bus_collected(data: Dictionary) -> void:
@@ -53,16 +55,18 @@ func _activate_bus() -> void:
 	sprite.visible = true
 	sprite.playing = true
 	collision.set_deferred("disabled", false)
-	call_deferred("_update_player")
+	call_deferred("_update_player", true)
 	set_process(true)
 
 
-func _update_player() -> void:
-	player.sprite.visible = false
-	player.get_node("CollisionShape2D").set_deferred("disabled", true)
+func _update_player(on : bool) -> void:
+	
+	player.sprite.visible = !on
+	player.get_node("CollisionShape2D").set_deferred("disabled", on)
 	var trail: Line2D = player.get_node_or_null("Trail")
 	if trail != null:
 		trail.height = 15
+
 
 func _change_state(newState):
 	if (newState == busState.RESTING):
@@ -75,3 +79,10 @@ func _change_state(newState):
 
 func _play_horn():
 	horn_sound.play()
+
+func exit_bus():
+	sprite.visible = false
+	sprite.playing = false
+	collision.set_deferred("disabled", true)
+	call_deferred("_update_player", false)
+	set_process(false)

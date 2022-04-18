@@ -1,13 +1,13 @@
 extends Line2D
 
 export(String, DIR) var textures_directory: String
-export(int) var trail_length = 10
+export(int) var trail_length = 5
 var positions = []
 var height = 0.0
 
 onready var parent = get_parent()
 	
-static func _get_random_texture_in_dir(path: String, line_texture: Texture):
+static func _get_random_texture_in_dir(path: String):
 	var dir := Directory.new()
 	var textures := []
 	print(dir.open(path))
@@ -20,15 +20,18 @@ static func _get_random_texture_in_dir(path: String, line_texture: Texture):
 			filename = dir.get_next()
 		dir.list_dir_end()
 	else:
-		 return dir.open(path)
+		print(dir.open(path))
+		return false
 		
 	if len(textures) > 0:
-		randomize()
 		return load(textures[randi() % textures.size()])
 	else:
-		return ""
+		return false
 func _ready():
-	texture = _get_random_texture_in_dir(textures_directory, texture)
+	randomize()
+	var result = _get_random_texture_in_dir(textures_directory)
+	if result:
+		texture = result
 
 func _process(_delta):
 	global_position = Vector2(0, 0)

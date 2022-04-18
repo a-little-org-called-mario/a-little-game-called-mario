@@ -63,9 +63,7 @@ func _on_build(data) -> void:
 		# to the left or right depending on which direction the player sprite
 		# is facing.
 		var player_tile = level.world_to_map(player.position)
-		var target_tile_x = player_tile[0] + 1
-		if player.sprite.flip_h:
-			target_tile_x = player_tile[0] - 1
+		var target_tile_x = player_tile[0] + (1 if player.pivot.scale.x > 0 else -1)
 		var target_tile_y = player_tile[1]
 		var target_cell_v = level.get_cell(target_tile_x, target_tile_y)
 		if target_cell_v == 0:

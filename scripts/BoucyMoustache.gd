@@ -11,10 +11,11 @@ onready var line2 = $DampedSpringJoint2D2/point1/Line2D
 onready var segment22 = $DampedSpringJoint2D2/point2
 onready var leftSegment = $DampedSpringJoint2D2
 
+onready var base_position_y: float = position.y
+
 
 func _process(_delta):
-	position.x = 0.0 if not player.sprite.flip_h else -10.0
-	position.y = 0.0 if not player.crouching else 17.5
+	position.y = base_position_y + (0.0 if not player.crouching else 17.5)
 
 	line1.global_rotation = rightSegment.rotation
 	for _p in range(len(line1.points)):

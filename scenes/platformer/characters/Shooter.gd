@@ -26,7 +26,7 @@ func shoot(projectile_scene: PackedScene) -> void:
 	# Origin is affected by changes to Sprite (ex: squashing)
 	var projectile = projectile_scene.instance()
 	player.get_parent().add_child(projectile)
-	var shoot_dir := Vector2.LEFT if player.sprite.flip_h else Vector2.RIGHT
+	var shoot_dir := Vector2.RIGHT * player.pivot.scale.x
 	# Changes ShootOrigin based on direction
 	if shoot_dir == Vector2.LEFT:
 		set_position(Vector2(-4, -16))

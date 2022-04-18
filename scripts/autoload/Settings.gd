@@ -7,15 +7,15 @@ var settings_name = "user://settings.mario"
 var settings_loaded: bool = false
 
 # graphics settings
-var camera_lean: int
-var screen_shake: bool
-var crt_filter: bool
+var camera_lean: int = -1
+var screen_shake: bool = false
+var crt_filter: bool = false
 
 # sfx settings
-var volume_game: int
-var volume_music: int
-var volume_sfx: int
-
+var volume_game: int = -1
+var volume_music: int = -1
+var volume_sfx: int = -1
+var volume_voice: int = -1
 
 func save_data():
 	# create dictionary of settings data
@@ -25,7 +25,8 @@ func save_data():
 		"gfx_crt_filter": crt_filter,
 		"sfx_volume_game": volume_game,
 		"sfx_volume_music": volume_music,
-		"sfx_volume_sfx": volume_sfx
+		"sfx_volume_sfx": volume_sfx,
+		"sfx_volume_voice": volume_voice,
 	}
 
 	# access settings.mario and write settings to it
@@ -39,19 +40,11 @@ func load_data():
 	var settings_file = File.new()
 
 	# there is no settings.mario :(
-	if not settings_file.file_exists(settings_name):
+	if not settings_file.file_exists(settings_name) or settings_file.open(settings_name, File.READ) != OK:
 		# set settings to default values
-		camera_lean = CameraLeanAmount.OFF
-		screen_shake = true
-		crt_filter = false
-
-		volume_game = 10
-		volume_music = 10
-		volume_sfx = 10
-
+		set_to_default()
 	# access settings.mario and read settings
 	else:
-		settings_file.open(settings_name, File.READ)
 		while settings_file.get_position() < settings_file.get_len():
 			var settings_values = parse_json(settings_file.get_line())
 			for i in settings_values.keys():
@@ -68,12 +61,21 @@ func load_data():
 						volume_music = int(settings_values[i])
 					"sfx_volume_sfx":
 						volume_sfx = int(settings_values[i])
-			settings_file.close()
-			settings_loaded = true
-	
+					"sfx_volume_voice":
+						volume_voice = int(settings_values[i])
+		settings_file.close()
+		set_to_default()	# catch any settings that were added since the last time cookie was saved
+		settings_loaded = true
 
 	# emit any relevant signals
 	EventBus.emit_signal("crt_filter_toggle", crt_filter)
-	EventBus.emit_signal("volume_changed", "game")
-	EventBus.emit_signal("volume_changed", "music")
-	EventBus.emit_signal("volume_changed", "sfx")
+	for bus in [ "Master", "music", "sfx", "voice" ]:
+		EventBus.emit_signal("volume_changed", bus);
+
+func set_to_default():
+	if camera_lean == -1: camera_lean = CameraLeanAmount.MAX
+
+	if volume_game == -1: volume_game = 10
+	if volume_music == -1: volume_music = 10
+	if volume_sfx == -1: volume_sfx = 10
+	if volume_voice == -1: volume_voice = 10

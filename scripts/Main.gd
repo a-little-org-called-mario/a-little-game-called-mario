@@ -7,6 +7,8 @@ const PROJECTILES_GROUP: String = "Projectiles"
 
 onready var hub: TileMap = $TileMap
 onready var level: Node = $TileMap
+onready var bgm: AudioStreamPlayer = $Audio/BGM
+onready var ui: CanvasLayer = $UI
 
 var completionSound = preload("res://audio/sfx/portal.wav")
 var coinSound = preload("res://audio/sfx/coin.wav")
@@ -16,13 +18,25 @@ var entering_portal: bool = false
 
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
-	Settings.load_data()
+	EventBus.connect("bgm_changed", self, "_bgm_changed")
+	EventBus.connect("ui_visibility_changed", self, "_on_ui_visibility_changed")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 
 
 func _exit_tree() -> void:
 	EventBus.emit_signal("game_exit")
+
+
+func _on_ui_visibility_changed(data):
+	ui.get_child(0).visible = data.visible
+
+
+func _bgm_changed(data) -> void:
+	if "playing" in data:
+		bgm.playing = data.playing
+	if "stream" in data:
+		bgm.stream = data.stream
 
 
 func _hook_portals() -> void:
@@ -90,17 +104,12 @@ func _finish_level(next_level: PackedScene = null) -> void:
 		level.queue_free()
 		yield(level, "tree_exited")
 	level = new_level
-	if level == hub:
-		for c in level.get_children():
-			if c is SpawnPoint:
-				c.spawn_mario()
-				break
 
 	# Do not forget to hook the new portals
 	_hook_portals()
 
 	#Removing instructions
-	$UI/UI/RichTextLabel.visible = false
+	$UI/UI/Instructions.visible = false
 
 	# Reset entering portal state
 	entering_portal = false

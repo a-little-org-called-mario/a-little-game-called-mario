@@ -56,12 +56,13 @@ func move(delta: float):
 				and collision.collider is Player
 				and collision.position.y > (position.y + 26)
 			):
-				EventBus.emit_signal("heart_changed", {"value": -5})
+				HeartInventoryHandle.change_hearts_on(collision.collider, -5)
 		CHARGING:
 			move_and_collide(Vector2.UP * RETURN_SPEED * delta)
 			continue
 		CHARGING, KILLING, COOLDOWN:
-			$Sprite.flip_h = player.global_position.x < global_position.x
+			if player.is_inside_tree():
+				$Sprite.flip_h = player.global_position.x < global_position.x
 			$VisionCone.rotation_degrees = 180 * float($Sprite.flip_h)
 
 

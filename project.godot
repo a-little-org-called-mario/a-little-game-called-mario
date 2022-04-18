@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "AxisMotion",
 "language": "GDScript",
-"path": "res://scripts/AxisMotion.gd"
+"path": "res://scenes/platformer/characters/AxisMotion.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "BallPlayer",
@@ -34,6 +34,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/boxes/BaseBox.gd"
 }, {
+"base": "Node2D",
+"class": "BaseInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/BaseInventoryHandle.gd"
+}, {
+"base": "Node2D",
+"class": "BouncyMoustache",
+"language": "GDScript",
+"path": "res://scripts/BoucyMoustache.gd"
+}, {
 "base": "Enemy",
 "class": "Bub",
 "language": "GDScript",
@@ -49,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/CameraLeanAmount.gd"
 }, {
+"base": "BaseInventoryHandle",
+"class": "CoinInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/CoinInventoryHandle.gd"
+}, {
 "base": "PlayerProjectile",
 "class": "CoinProjectile",
 "language": "GDScript",
@@ -63,6 +78,11 @@ _global_script_classes=[ {
 "class": "ConeSpotter",
 "language": "GDScript",
 "path": "res://scripts/ConeSpotter.gd"
+}, {
+"base": "Object",
+"class": "Contributors",
+"language": "GDScript",
+"path": "res://scenes/title/Contributors.gd"
 }, {
 "base": "Area2D",
 "class": "Corncob",
@@ -89,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/powerups/Fireball.gd"
 }, {
+"base": "BaseInventoryHandle",
+"class": "HeartInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/HeartInventoryHandle.gd"
+}, {
 "base": "Area2D",
 "class": "IntralevelPortal",
 "language": "GDScript",
@@ -104,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/marwing/MarwingLevel.gd"
 }, {
+"base": "PathFollow",
+"class": "MarwingShip",
+"language": "GDScript",
+"path": "res://scripts/marwing/Ship.gd"
+}, {
 "base": "Enemy",
 "class": "Platform",
 "language": "GDScript",
@@ -112,7 +142,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scripts/Player.gd"
+"path": "res://scenes/platformer/characters/Player.gd"
 }, {
 "base": "RigidBody2D",
 "class": "PlayerFlying",
@@ -169,10 +199,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Spotter.gd"
 }, {
+"base": "Resource",
+"class": "StoryItem",
+"language": "GDScript",
+"path": "res://scenes/levels/story_mode/Item.gd"
+}, {
 "base": "Reference",
 "class": "TrackParser",
 "language": "GDScript",
 "path": "res://scenes/DDR/TrackParser.gd"
+}, {
+"base": "Enemy",
+"class": "TypeShootEnemy",
+"language": "GDScript",
+"path": "res://scripts/typeshoot/TypeShootEnemy.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
@@ -180,20 +220,26 @@ _global_script_class_icons={
 "BallPlayer": "",
 "BallSpawnPoint": "",
 "BaseBox": "",
+"BaseInventoryHandle": "",
+"BouncyMoustache": "",
 "Bub": "",
 "Bus": "",
 "CameraLeanAmount": "",
+"CoinInventoryHandle": "",
 "CoinProjectile": "",
 "CoinsAchievement": "",
 "ConeSpotter": "",
+"Contributors": "",
 "Corncob": "",
 "EndPortal": "",
 "Enemy": "",
 "FireFlower": "",
 "Fireball": "",
+"HeartInventoryHandle": "",
 "IntralevelPortal": "",
 "Luigi": "",
 "MarwingLevel": "",
+"MarwingShip": "",
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",
@@ -207,7 +253,9 @@ _global_script_class_icons={
 "SokobanLevel": "res://sprites/box.png",
 "SpawnPoint": "",
 "Spotter": "",
-"TrackParser": ""
+"StoryItem": "",
+"TrackParser": "",
+"TypeShootEnemy": ""
 }
 
 [application]
@@ -220,8 +268,8 @@ config/icon="res://sprites/icon.png"
 [autoload]
 
 EventBus="*res://scripts/autoload/EventBus.gd"
-Settings="*res://scripts/autoload/Settings.gd"
 SceneTransition="*res://scenes/SceneTransition/SceneTransition.tscn"
+Settings="*res://scripts/autoload/Settings.gd"
 
 [debug]
 
@@ -418,6 +466,16 @@ click={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+toggle_inventory={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+show_instructions={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -430,8 +488,8 @@ click={
 
 [locale]
 
-translations=PoolStringArray( "res://localization/loca.de.translation", "res://localization/loca.en.translation" )
-locale_filter=[ 1, [ "de", "en" ] ]
+translations=PoolStringArray( "res://localization/loca.de.translation" )
+locale_filter=[ 1, [ "de" ] ]
 
 [physics]
 
@@ -440,5 +498,5 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 2d/snapping/use_gpu_pixel_snap=true
-environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
+environment/default_clear_color=Color( 0.258824, 0.929412, 1, 1 )
 environment/default_environment="res://default_env.tres"

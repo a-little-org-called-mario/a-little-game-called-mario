@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://sprites/mario.png" type="Texture" id=1]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Player/PlayerFlyingControls.gd" type="Script" id=2]
+[ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://audio/sfx/hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/HeartInventoryHandle.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
@@ -18,3 +21,10 @@ vframes = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2.5 )
 shape = SubResource( 1 )
+
+[node name="CrashAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="CoinInventoryHandle" parent="." instance=ExtResource( 3 )]
+
+[node name="HeartInventoryHandle" parent="." instance=ExtResource( 5 )]

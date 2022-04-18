@@ -45,6 +45,7 @@ onready var labels = [
 		get_node("PauseMenu/SFXMenu/GameVolLabel"),
 		get_node("PauseMenu/SFXMenu/MusicVolLabel"),
 		get_node("PauseMenu/SFXMenu/SFXVolLabel"),
+		get_node("PauseMenu/SFXMenu/VoiceVolLabel"),
 	],
 ]
 
@@ -330,13 +331,26 @@ func volume_select(delta: int, label: RichTextLabel):
 				+ (">" if 10 > Settings.volume_sfx else " ")
 				+ "\n"
 			)
+		4:
+			Settings.volume_voice = int(clamp(Settings.volume_voice + delta, 0, 10))
+			label.text = (
+				"\nVOICE VOLUME: "
+				+ ("<" if 0 < Settings.volume_voice else " ")
+				+ "  "
+				+ (" " if 10 > Settings.volume_voice else "")
+				+ str(Settings.volume_voice)
+				+ "  "
+				+ (">" if 10 > Settings.volume_voice else " ")
+				+ "\n"
+			)
 
 	# reapply the wave
 	set_item_style()
 
 	# emit volume change signal, so that Main.gd can modify buses
+	var bus_names = [ "Master", "music", "sfx", "voice" ]
 	EventBus.emit_signal(
-		"volume_changed", "game" if 1 == selected else "music" if 2 == selected else "sfx"
+		"volume_changed", bus_names[selected - 1]
 	)
 
 
@@ -397,4 +411,16 @@ func prepare_labels():
 					+ (">" if 10 > Settings.volume_sfx else " ")
 					+ "\n"
 				)
+			4:
+				label.text = (
+					"\nVOICE VOLUME: "
+					+ ("<" if 0 < Settings.volume_voice else " ")
+					+ "  "
+					+ (" " if 10 > Settings.volume_voice else "")
+					+ str(Settings.volume_voice)
+					+ "  "
+					+ (">" if 10 > Settings.volume_voice else " ")
+					+ "\n"
+				)
+			
 	pass

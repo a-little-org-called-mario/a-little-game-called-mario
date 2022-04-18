@@ -12,6 +12,8 @@ var achievements := {
 # A dictionary containing the completed achievements as keys.
 var completed : Dictionary
 
+const FileUtils = preload("res://scripts/FileUtils.gd")
+
 
 func _ready():
 	EventBus.connect("shot", self, "_on_shot")
@@ -36,12 +38,12 @@ func _on_shot():
 # Load the achievements from the Achievements folder.
 func get_achievements():
 	print("loading achievements")
-	for file in list_dir("res://achievements/level"):
+	for file in FileUtils.list_dir("res://achievements/level"):
 		var level := int(file.get_file())
 		achievements[level] = []
-		for achievement in list_dir(file):
+		for achievement in FileUtils.list_dir(file):
 			achievements[level].append(load(achievement))
-	for file in list_dir("res://achievements/global"):
+	for file in FileUtils.list_dir("res://achievements/global"):
 		achievements.global.append(load(file))
 
 
@@ -69,7 +71,7 @@ func check_achievements():
 func show_completion_message(achievement: Achievement):
 	append_bbcode(
 		"[rainbow][center]"
-		+ tr("ACHIEVEMENT_UNLOCKED") % tr(achievement.description)
+		+ tr("ACHIEVEMENT UNLOCKED: %s") % tr(achievement.description)
 		+ "[/center][/rainbow]"
 	)
 	clear_text_after_seconds()
@@ -89,18 +91,3 @@ func _on_level_completed(_data):
 	coinsSinceStartingLevel = 0
 	currentLevel += 1
 	check_achievements()
-
-
-# Returns a list of non-hidden files inside a given directory.
-static func list_dir(path : String) -> Array:
-	var dir := Directory.new()
-	if dir.open(path) != OK:
-		return []
-	if dir.list_dir_begin(true, true) != OK:
-		return []
-	var files := []
-	var file := dir.get_next()
-	while file:
-		files.append(path.plus_file(file))
-		file = dir.get_next()
-	return files

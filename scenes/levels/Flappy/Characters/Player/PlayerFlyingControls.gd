@@ -5,12 +5,18 @@ const ASCEND_FORCE = -200
 const MAX_ROTATION_UP = -30.0
 const MAX_ROTATION_DOWN = 90.0
 
+var GAMEOVER = preload("../../UI_flappy_gameover.tscn").instance()
+var died = false
+
+onready var _heart_handle = $HeartInventoryHandle
+
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	EventBus.connect("heart_changed", self, "_on_heart_change")
 
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("jump"):
+	if !died && Input.is_action_just_pressed("jump"):
 		linear_velocity.y = ASCEND_FORCE;
 		angular_velocity = -10.0
 
@@ -25,13 +31,13 @@ func _physics_process(_delta: float) -> void:
 			angular_velocity = 0
 
 func crash() -> void:
-	EventBus.emit_signal("heart_changed", {"value": -1})
+	_heart_handle.change_hearts(-1)
+	$CrashAudio.play()
+	
+func _on_heart_change(_delta: int, total: int) -> void:
+	if total <= 0:
+		gameOver()
 	
 func gameOver() -> void:
-	get_tree().reload_current_scene()
-
-func _on_heart_change(_data):
-	var value = get_node("../UI/UI/HeartCount").count
-	#one because this is checked before the hearts counter is actually reduced
-	if value <= 1:
-		gameOver()
+	get_parent().add_child(GAMEOVER)
+	died = true

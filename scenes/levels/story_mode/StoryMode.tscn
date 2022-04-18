@@ -1,0 +1,348 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://sprites/ladder_man.png" type="Texture" id=1]
+[ext_resource path="res://sprites/tiles/foreground/brick.png" type="Texture" id=2]
+[ext_resource path="res://sprites/tiles/background/bg-tile.png" type="Texture" id=3]
+[ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=4]
+[ext_resource path="res://scenes/levels/story_mode/character/Character.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=6]
+[ext_resource path="res://scenes/levels/story_mode/TopDownCamera.gd" type="Script" id=7]
+[ext_resource path="res://scenes/levels/story_mode/StoryMode.gd" type="Script" id=8]
+[ext_resource path="res://scenes/levels/story_mode/dialog/DialogUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/levels/story_mode/TopDownPlayer.gd" type="Script" id=10]
+[ext_resource path="res://sprites/mario.png" type="Texture" id=11]
+[ext_resource path="res://scenes/levels/story_mode/Inventory.gd" type="Script" id=12]
+[ext_resource path="res://sprites/switch.png" type="Texture" id=13]
+[ext_resource path="res://scenes/levels/story_mode/ItemReceivePopup.gd" type="Script" id=14]
+[ext_resource path="res://sprites/signpost.png" type="Texture" id=15]
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 313, -75 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "slide"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 313, -75 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 81, 106.5 )
+
+[sub_resource type="CircleShape2D" id=19]
+radius = 87.2812
+
+[sub_resource type="CircleShape2D" id=20]
+radius = 63.7887
+
+[sub_resource type="CircleShape2D" id=21]
+radius = 104.307
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 4 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 11 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 11 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 11 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 11 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 11 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 11 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=12]
+radius = 19.0
+height = 18.0
+
+[node name="StoryMode" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 313, -75 )
+rotation = -0.22734
+scale = Vector2( 5, 5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3200, 3200 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+autoplay = "slide"
+anims/RESET = SubResource( 13 )
+anims/slide = SubResource( 14 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+collision_layer = 0
+format = 1
+tile_data = PoolIntArray( -2293757, 0, 0, -2293756, 0, 0, -2293755, 0, 0, -2228221, 0, 0, -2228220, 0, 0, -2228219, 0, 0, -2228218, 0, 0, -2228217, 0, 0, -2162684, 0, 0, -2162683, 1, 0, -2162682, 1, 0, -2162681, 0, 0, -2162680, 0, 0, -2097148, 0, 0, -2097147, 0, 0, -2097146, 1, 0, -2097145, 1, 0, -2097144, 0, 0, -2097143, 0, 0, -2031611, 0, 0, -2031610, 1, 0, -2031609, 1, 0, -2031608, 1, 0, -2031607, 0, 0, -1966075, 0, 0, -1966074, 1, 0, -1966073, 1, 0, -1966072, 0, 0, -1966071, 0, 0, -1900540, 0, 0, -1900539, 0, 0, -1900538, 1, 0, -1900537, 1, 0, -1900536, 0, 0, -1835004, 0, 0, -1835003, 1, 0, -1835002, 1, 0, -1835001, 0, 0, -1835000, 0, 0, -1769470, 0, 0, -1769469, 0, 0, -1769468, 1, 0, -1769467, 1, 0, -1769466, 0, 0, -1703934, 0, 0, -1703933, 0, 0, -1703932, 0, 0, -1703931, 0, 0, -1638399, 0, 0, -1638398, 0, 0, -1638397, 1, 0, -1638396, 0, 0, -1572864, 0, 0, -1572863, 0, 0, -1572862, 1, 0, -1572861, 1, 0, -1572860, 0, 0, -1441793, 0, 0, -1507328, 0, 0, -1507327, 1, 0, -1507326, 1, 0, -1507325, 0, 0, -1376257, 0, 0, -1441792, 1, 0, -1441791, 1, 0, -1441790, 0, 0, -1310732, 0, 0, -1310731, 0, 0, -1310730, 0, 0, -1310729, 0, 0, -1310728, 0, 0, -1310727, 0, 0, -1310726, 0, 0, -1310725, 0, 0, -1310724, 0, 0, -1310723, 0, 0, -1310722, 0, 0, -1310721, 1, 0, -1376256, 1, 0, -1376255, 1, 0, -1376254, 0, 0, -1245196, 0, 0, -1245195, 1, 0, -1245194, 1, 0, -1245193, 1, 0, -1245192, 1, 0, -1245191, 1, 0, -1245190, 1, 0, -1245189, 1, 0, -1245188, 1, 0, -1245187, 0, 0, -1245186, 0, 0, -1245185, 1, 0, -1310720, 1, 0, -1310719, 0, 0, -1179660, 0, 0, -1179659, 1, 0, -1179658, 1, 0, -1179657, 1, 0, -1179656, 1, 0, -1179655, 1, 0, -1179654, 1, 0, -1179653, 1, 0, -1179652, 1, 0, -1179651, 0, 0, -1179650, 0, 0, -1179649, 1, 0, -1245184, 1, 0, -1245183, 0, 0, -1114124, 0, 0, -1114123, 1, 0, -1114122, 1, 0, -1114121, 1, 0, -1114120, 1, 0, -1114119, 1, 0, -1114118, 1, 0, -1114117, 1, 0, -1114116, 1, 0, -1114115, 1, 0, -1114114, 0, 0, -1114113, 1, 0, -1179648, 1, 0, -1179647, 1, 0, -1179646, 0, 0, -1179645, 0, 0, -1179644, 0, 0, -1179643, 0, 0, -1179642, 0, 0, -1179641, 0, 0, -1179640, 0, 0, -1179639, 0, 0, -1179638, 0, 0, -1179637, 0, 0, -1179636, 0, 0, -1179635, 0, 0, -1179634, 0, 0, -1048588, 0, 0, -1048587, 1, 0, -1048586, 1, 0, -1048585, 1, 0, -1048584, 1, 0, -1048583, 1, 0, -1048582, 1, 0, -1048581, 1, 0, -1048580, 1, 0, -1048579, 1, 0, -1048578, 1, 0, -1048577, 1, 0, -1114112, 1, 0, -1114111, 1, 0, -1114110, 1, 0, -1114109, 1, 0, -1114108, 1, 0, -1114107, 1, 0, -1114106, 1, 0, -1114105, 1, 0, -1114104, 1, 0, -1114103, 1, 0, -1114102, 1, 0, -1114101, 1, 0, -1114100, 1, 0, -1114099, 1, 0, -1114098, 0, 0, -1114097, 0, 0, -983052, 0, 0, -983051, 1, 0, -983050, 1, 0, -983049, 1, 0, -983048, 1, 0, -983047, 1, 0, -983046, 1, 0, -983045, 1, 0, -983044, 1, 0, -983043, 1, 0, -983042, 1, 0, -983041, 1, 0, -1048576, 1, 0, -1048575, 1, 0, -1048574, 1, 0, -1048573, 1, 0, -1048572, 1, 0, -1048571, 1, 0, -1048570, 1, 0, -1048569, 1, 0, -1048568, 1, 0, -1048567, 1, 0, -1048566, 1, 0, -1048565, 1, 0, -1048564, 1, 0, -1048563, 1, 0, -1048562, 1, 0, -1048561, 0, 0, -1048560, 0, 0, -917516, 0, 0, -917515, 0, 0, -917514, 0, 0, -917513, 0, 0, -917512, 0, 0, -917511, 0, 0, -917510, 0, 0, -917509, 0, 0, -917508, 0, 0, -917507, 0, 0, -917506, 0, 0, -917505, 1, 0, -983040, 1, 0, -983039, 0, 0, -983038, 0, 0, -983037, 0, 0, -983036, 0, 0, -983035, 0, 0, -983034, 0, 0, -983033, 0, 0, -983032, 0, 0, -983031, 1, 0, -983030, 1, 0, -983029, 1, 0, -983028, 1, 0, -983027, 1, 0, -983026, 1, 0, -983025, 1, 0, -983024, 0, 0, -851970, 0, 0, -851969, 1, 0, -917504, 1, 0, -917503, 1, 0, -917502, 0, 0, -917496, 0, 0, -917495, 0, 0, -917494, 0, 0, -917493, 1, 0, -917492, 1, 0, -917491, 1, 0, -917490, 1, 0, -917489, 1, 0, -917488, 0, 0, -917483, 0, 0, -917482, 0, 0, -917481, 0, 0, -917480, 0, 0, -917479, 0, 0, -917478, 0, 0, -917477, 0, 0, -917476, 0, 0, -786435, 0, 0, -786434, 0, 0, -786433, 1, 0, -851968, 1, 0, -851967, 1, 0, -851966, 0, 0, -851958, 0, 0, -851957, 0, 0, -851956, 1, 0, -851955, 1, 0, -851954, 1, 0, -851953, 1, 0, -851952, 0, 0, -851951, 0, 0, -851948, 0, 0, -851947, 0, 0, -851946, 1, 0, -851945, 1, 0, -851944, 1, 0, -851943, 1, 0, -851942, 1, 0, -851941, 1, 0, -851940, 0, 0, -720899, 0, 0, -720898, 1, 0, -720897, 1, 0, -786432, 1, 0, -786431, 0, 0, -786430, 0, 0, -786421, 0, 0, -786420, 0, 0, -786419, 1, 0, -786418, 1, 0, -786417, 1, 0, -786416, 1, 0, -786415, 0, 0, -786414, 0, 0, -786413, 0, 0, -786412, 0, 0, -786411, 1, 0, -786410, 1, 0, -786409, 1, 0, -786408, 1, 0, -786407, 1, 0, -786406, 1, 0, -786405, 1, 0, -786404, 0, 0, -655363, 0, 0, -655362, 1, 0, -655361, 1, 0, -720896, 1, 0, -720895, 0, 0, -720884, 0, 0, -720883, 0, 0, -720882, 0, 0, -720881, 1, 0, -720880, 1, 0, -720879, 1, 0, -720878, 1, 0, -720877, 1, 0, -720876, 0, 0, -720875, 1, 0, -720874, 1, 0, -720873, 1, 0, -720872, 1, 0, -720871, 1, 0, -720870, 1, 0, -720869, 1, 0, -720868, 0, 0, -720867, 0, 0, -589827, 0, 0, -589826, 0, 0, -589825, 1, 0, -655360, 1, 0, -655359, 0, 0, -655346, 0, 0, -655345, 0, 0, -655344, 0, 0, -655343, 0, 0, -655342, 0, 0, -655341, 0, 0, -655340, 0, 0, -655339, 1, 0, -655338, 1, 0, -655337, 1, 0, -655336, 1, 0, -655335, 1, 0, -655334, 1, 0, -655333, 1, 0, -655332, 0, 0, -655331, 0, 0, -524290, 0, 0, -524289, 1, 0, -589824, 1, 0, -589823, 0, 0, -589804, 0, 0, -589803, 0, 0, -589802, 1, 0, -589801, 1, 0, -589800, 1, 0, -589799, 1, 0, -589798, 1, 0, -589797, 1, 0, -589796, 0, 0, -458757, 0, 0, -458756, 0, 0, -458755, 0, 0, -458754, 0, 0, -458753, 1, 0, -524288, 1, 0, -524287, 0, 0, -524286, 0, 0, -524285, 0, 0, -524267, 0, 0, -524266, 0, 0, -524265, 0, 0, -524264, 0, 0, -524263, 0, 0, -524262, 0, 0, -524261, 0, 0, -524260, 0, 0, -393222, 0, 0, -393221, 0, 0, -393220, 1, 0, -393219, 1, 0, -393218, 1, 0, -393217, 1, 0, -458752, 1, 0, -458751, 1, 0, -458750, 1, 0, -458749, 0, 0, -327686, 0, 0, -327685, 1, 0, -327684, 1, 0, -327683, 1, 0, -327682, 1, 0, -327681, 1, 0, -393216, 1, 0, -393215, 1, 0, -393214, 1, 0, -393213, 0, 0, -262150, 0, 0, -262149, 1, 0, -262148, 1, 0, -262147, 1, 0, -262146, 1, 0, -262145, 1, 0, -327680, 1, 0, -327679, 1, 0, -327678, 1, 0, -327677, 0, 0, -196614, 0, 0, -196613, 1, 0, -196612, 1, 0, -196611, 1, 0, -196610, 1, 0, -196609, 1, 0, -262144, 1, 0, -262143, 1, 0, -262142, 1, 0, -262141, 0, 0, -131078, 0, 0, -131077, 1, 0, -131076, 1, 0, -131075, 1, 0, -131074, 1, 0, -131073, 1, 0, -196608, 1, 0, -196607, 1, 0, -196606, 1, 0, -196605, 1, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -65544, 0, 0, -65543, 0, 0, -65542, 0, 0, -65541, 1, 0, -65540, 1, 0, -65539, 1, 0, -65538, 1, 0, -65537, 1, 0, -131072, 1, 0, -131071, 1, 0, -131070, 1, 0, -131069, 1, 0, -131068, 1, 0, -131067, 1, 0, -131066, 0, 0, -131065, 0, 0, -8, 0, 0, -7, 1, 0, -6, 1, 0, -5, 1, 0, -4, 1, 0, -3, 1, 0, -2, 1, 0, -1, 1, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 0, 0, 65528, 0, 0, 65529, 1, 0, 65530, 1, 0, 65531, 1, 0, 65532, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 0, 0, 131064, 0, 0, 131065, 1, 0, 131066, 1, 0, 131067, 1, 0, 131068, 1, 0, 131069, 1, 0, 131070, 1, 0, 131071, 1, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 0, 0, 196600, 0, 0, 196601, 0, 0, 196602, 1, 0, 196603, 1, 0, 196604, 1, 0, 196605, 1, 0, 196606, 1, 0, 196607, 0, 0, 131072, 0, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 0, 0, 262137, 0, 0, 262138, 1, 0, 262139, 1, 0, 262140, 1, 0, 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 0, 0, 327673, 0, 0, 327674, 0, 0, 327675, 0, 0, 327676, 0, 0, 327677, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 7 )
+tracking = NodePath("../TopDownPlayer")
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="LadderMan" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( -591, -1104 )
+dialog = "ladder_man_intro"
+
+[node name="CollisionShape2D" parent="Characters/LadderMan" index="0"]
+position = Vector2( -16, 0 )
+shape = SubResource( 18 )
+
+[node name="Sprite" parent="Characters/LadderMan" index="1"]
+position = Vector2( -43, 2 )
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="TalkToLabel" parent="Characters/LadderMan" index="2"]
+margin_left = -92.0
+margin_top = 125.0
+margin_right = -6.0
+margin_bottom = 139.0
+
+[node name="Stone" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( 255, -1629 )
+title = "Stone"
+dialog = "stone"
+
+[node name="CollisionShape2D" parent="Characters/Stone" index="0"]
+position = Vector2( -13, 29 )
+shape = SubResource( 19 )
+
+[node name="Sprite" parent="Characters/Stone" index="1"]
+position = Vector2( -1.90735e-06, 7 )
+scale = Vector2( 2.1875, 1.21875 )
+texture = ExtResource( 2 )
+
+[node name="TalkToLabel" parent="Characters/Stone" index="2"]
+margin_left = -42.0
+margin_top = 29.0
+margin_right = 44.0
+margin_bottom = 43.0
+
+[node name="Lever" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( -101, -697 )
+title = "Lever"
+dialog = "lever"
+
+[node name="CollisionShape2D" parent="Characters/Lever" index="0"]
+shape = SubResource( 20 )
+
+[node name="Sprite" parent="Characters/Lever" index="1"]
+position = Vector2( 8, 2 )
+scale = Vector2( 0.102757, 0.102757 )
+texture = ExtResource( 13 )
+
+[node name="TalkToLabel" parent="Characters/Lever" index="2"]
+margin_left = -9.0
+margin_top = -54.0
+margin_right = 116.0
+margin_bottom = -40.0
+text = "[B] Interact with %s"
+
+[node name="Sign" parent="Characters" instance=ExtResource( 5 )]
+position = Vector2( 1726, -672 )
+title = "Sign"
+dialog = "end_sign"
+
+[node name="CollisionShape2D" parent="Characters/Sign" index="0"]
+shape = SubResource( 21 )
+
+[node name="Sprite" parent="Characters/Sign" index="1"]
+scale = Vector2( 2.73333, 2.73333 )
+texture = ExtResource( 15 )
+
+[node name="TalkToLabel" parent="Characters/Sign" index="2"]
+margin_left = -54.0
+margin_top = 60.0
+margin_right = 36.0
+margin_bottom = 74.0
+text = "[B] Look at %s"
+
+[node name="TopDownPlayer" type="KinematicBody2D" parent="."]
+position = Vector2( 11, 3 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TopDownPlayer"]
+material = SubResource( 10 )
+position = Vector2( 0, 32 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 11 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopDownPlayer"]
+position = Vector2( 0, 4 )
+shape = SubResource( 12 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogUI" parent="CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+inventory_path = NodePath("../Inventory")
+
+[node name="Inventory" type="ColorRect" parent="CanvasLayer"]
+visible = false
+margin_left = 635.0
+margin_top = 66.0
+margin_right = 982.0
+margin_bottom = 554.0
+color = Color( 0.0901961, 0.0862745, 0.180392, 1 )
+script = ExtResource( 12 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 27.0
+margin_top = 17.0
+margin_right = -19.0
+margin_bottom = -16.0
+custom_constants/separation = 16
+
+[node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/Inventory/VBoxContainer"]
+margin_right = 301.0
+margin_bottom = 131.0
+size_flags_vertical = 3
+expand = true
+stretch_mode = 6
+
+[node name="ItemNameLabel" type="Label" parent="CanvasLayer/Inventory/VBoxContainer"]
+margin_top = 147.0
+margin_right = 301.0
+margin_bottom = 161.0
+size_flags_vertical = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Inventory/VBoxContainer"]
+margin_top = 177.0
+margin_right = 301.0
+margin_bottom = 308.0
+size_flags_vertical = 3
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer/Inventory/VBoxContainer"]
+margin_top = 324.0
+margin_right = 301.0
+margin_bottom = 455.0
+size_flags_vertical = 3
+auto_height = true
+max_columns = 5
+same_column_width = true
+fixed_column_width = 60
+icon_mode = 0
+fixed_icon_size = Vector2( 80, 80 )
+
+[node name="ItemReceivePopup" type="AcceptDialog" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -167.0
+margin_top = -115.5
+margin_right = 167.0
+margin_bottom = 115.5
+popup_exclusive = true
+window_title = "You received an item!"
+script = ExtResource( 14 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ItemReceivePopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+
+[node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/ItemReceivePopup/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 169.0
+size_flags_vertical = 3
+expand = true
+
+[node name="ItemTitleLabel" type="Label" parent="CanvasLayer/ItemReceivePopup/VBoxContainer"]
+margin_top = 173.0
+margin_right = 318.0
+margin_bottom = 187.0
+align = 1
+
+[connection signal="dialog_finished" from="CanvasLayer/DialogUI" to="." method="_on_DialogUI_dialog_finished"]
+[connection signal="event_occured" from="CanvasLayer/DialogUI" to="." method="_on_DialogUI_event_occured"]
+[connection signal="item_received" from="CanvasLayer/DialogUI" to="." method="_on_DialogUI_item_received"]
+[connection signal="item_selected" from="CanvasLayer/Inventory/VBoxContainer/ItemList" to="CanvasLayer/Inventory" method="_on_ItemList_item_selected"]
+
+[editable path="Characters/LadderMan"]
+[editable path="Characters/Stone"]
+[editable path="Characters/Lever"]
+[editable path="Characters/Sign"]

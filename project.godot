@@ -144,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Platform.gd"
 }, {
-"base": "Reference",
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scenes/platformer/characters/Player.gd"
@@ -305,7 +305,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/reference_generator/plugin.cfg", "res://addons/version_checker/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialog_importer/plugin.cfg", "res://addons/version_checker/plugin.cfg" )
 
 [importer_defaults]
 

@@ -33,9 +33,13 @@ var super_jump_timer = 0.0
 var powerupspeed = 1
 var powerupaccel = 1
 
-onready var sprite = $Sprite
-onready var anim = $Sprite/Anims
-onready var tween = $Tween
+onready var pivot: Node2D = $Pivot
+onready var sprite := $Pivot/Sprite
+onready var anim: AnimationPlayer = $Pivot/Sprite/Anims
+onready var tween: Tween = $Tween
+onready var collision: CollisionShape2D = $Collision
+
+onready var original_collision_extents: Vector2 = collision.shape.extents
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -136,7 +140,8 @@ func _physics_process(delta: float) -> void:
 			crouch()
 	else:
 		grounded = false
-		crouching = false
+		if crouching:
+			uncrouch()
 		coyote_timer -= delta
 		# while we're holding the jump button we should jump higher
 		if not super_jumping:
@@ -147,12 +152,10 @@ func _physics_process(delta: float) -> void:
 		anim.playAnim("Jump")
 
 	if crouching and not Input.is_action_pressed("down"):
-		crouching = false
-		set_hitbox_crouching(false)
-		unsquash()
+		uncrouch()
 
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
-	sprite.flip_v = gravity.direction.y < 0
+	pivot.scale.y = gravity.direction.y
 
 	var move_and_slide_result = move_and_slide(
 		y_motion.update_motion() + x_motion.update_motion(), Vector2.UP
@@ -169,11 +172,17 @@ func _physics_process(delta: float) -> void:
 		y_motion.set_motion(move_and_slide_result)
 
 
+func _is_on_floor() -> bool:
+	return (
+		(gravity.direction.y == Vector2.DOWN.y and is_on_floor())
+		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
+	)
+
+
 func try_slip(angle: float):
 	if angle == 0:
 		return false
 	var axis = "x" if is_equal_approx(angle, PI) else "y"
-	# is_equal_approx(abs(collision_angle - PI), PI/2)
 	var original_v = position[axis]  # remember original value on axis
 	# check collisions in nearby positions within SLIP_RANGE
 	for r in range(1, SLIP_RANGE):
@@ -193,11 +202,26 @@ func crouch():
 	squash()
 
 
+func uncrouch():
+	crouching = false
+	set_hitbox_crouching(false)
+	unsquash()
+
+
+func set_hitbox_crouching(is_crouching: bool):
+	if is_crouching:
+		collision.shape.extents.y = original_collision_extents.y * 0.4
+		collision.position.y = (original_collision_extents.y - collision.shape.extents.y) * gravity.direction.y
+	else:
+		collision.shape.extents.y = original_collision_extents.y
+		collision.position.y = 0
+
+
 func jump():
 	stats.jump_xp += 1
 	tween.stop_all()
 	anticipating_jump = true
-	set_hitbox_crouching(false)
+	uncrouch()
 	squash(0.03, 0, 0.5)
 	yield(tween, "tween_all_completed")
 	stretch(0.2, 0, 0.5, 1.2)
@@ -209,11 +233,12 @@ func jump():
 	EventBus.emit_signal("jumping")
 
 
-func super_jump():
+func super_jump(): 
 	super_jump_timer = 0
 	stats.jump_xp += 1
 	stats.acrobatics += 1
 	tween.stop_all()
+	set_hitbox_crouching(false)
 	stretch(0.2, 0, 1.0, 2.5)
 	y_motion.set_speed(JUMPFORCE * -100)
 	anticipating_jump = false
@@ -229,11 +254,11 @@ func land():
 
 
 func look_right():
-	sprite.flip_h = false
+	pivot.scale.x = 1;
 
 
 func look_left():
-	sprite.flip_h = true
+	pivot.scale.x = -1
 
 
 func squash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
@@ -298,6 +323,14 @@ func unsquash(time = 0.1, _returnDelay = 0, squash_modifier = 1.0):
 	tween.start()
 
 
+func bounce(strength = 1100):
+	squash(0.075)
+	yield(tween, "tween_all_completed")
+	stretch(0.15)
+	coyote_timer = 0
+	y_motion.set_speed(-strength)
+
+
 func jerk_left(jerk: float):
 	if x_motion.get_accel() > -MINACCEL:
 		x_motion.set_accel(-MINACCEL)
@@ -316,21 +349,6 @@ func reset() -> void:
 		if child.has_method("reset"):
 			child.reset()
 	_end_flash_sprite()
-
-
-func bounce(strength = 1100):
-	squash(0.075)
-	yield(tween, "tween_all_completed")
-	stretch(0.15)
-	coyote_timer = 0
-	y_motion.set_speed(-strength)
-
-
-func _is_on_floor() -> bool:
-	return (
-		(gravity.direction.y == Vector2.DOWN.y and is_on_floor())
-		or (gravity.direction.y == Vector2.UP.y and is_on_ceiling())
-	)
 
 
 func _on_heart_change(delta: int, total: int):
@@ -353,7 +371,7 @@ func _on_enemy_hit_fireball():
 func flash_sprite(duration: float = 0.05) -> void:
 	var material: ShaderMaterial = sprite.material as ShaderMaterial
 	if material != null:
-		$Sprite.material.set_shader_param("flash_modifier", 1.0)
+		material.set_shader_param("flash_modifier", 1.0)
 	$HitFlashTimer.wait_time = duration
 	$HitFlashTimer.start()
 
@@ -362,12 +380,3 @@ func _end_flash_sprite() -> void:
 	var material: ShaderMaterial = sprite.material as ShaderMaterial
 	if material != null:
 		material.set_shader_param("flash_modifier", 0.0)
-
-
-func set_hitbox_crouching(value: bool):
-	if value:
-		$CollisionShape2D.shape.extents.y = 27 * 0.4
-		$CollisionShape2D.position.y = 21
-	else:
-		$CollisionShape2D.shape.extents.y = 27
-		$CollisionShape2D.position.y = 5

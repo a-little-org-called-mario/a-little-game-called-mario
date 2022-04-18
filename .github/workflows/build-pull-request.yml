@@ -51,11 +51,17 @@ jobs:
       # The next workflow needs access to the PR number to comment on it
       # This is the best way we have to thread that through, sigh.
       # Shoving it into HTML5 lets us upload a single artifact instead of juggling 2
-      - name: Save PR number
+      - name: Save PR metadata
         env:
           PR_NUMBER: ${{ github.event.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_SENDER: ${{ github.event.sender.login }}
+          PR_ACTION: ${{ github.event.action }}
         run: |
           echo $PR_NUMBER > ./HTML5/pr_number
+          echo $PR_TITLE > ./HTML5/pr_title
+          echo $PR_SENDER > ./HTML5/pr_sender
+          echo $PR_ACTION > ./HTML5/pr_action
 
       - uses: actions/upload-artifact@v3
         with:

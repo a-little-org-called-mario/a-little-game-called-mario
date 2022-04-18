@@ -9,6 +9,7 @@ onready var hub: TileMap = $TileMap
 onready var level: Node = $TileMap
 onready var bgm: AudioStreamPlayer = $Audio/BGM
 onready var ui: CanvasLayer = $UI
+onready var defaultBGMStream: AudioStream = bgm.stream.duplicate()
 
 var completionSound = preload("res://audio/sfx/portal.wav")
 var coinSound = preload("res://audio/sfx/coin.wav")
@@ -33,10 +34,14 @@ func _on_ui_visibility_changed(data):
 
 
 func _bgm_changed(data) -> void:
-	if "playing" in data:
-		bgm.playing = data.playing
-	if "stream" in data:
-		bgm.stream = data.stream
+	if typeof(data) == TYPE_STRING and data == "reset":
+		bgm.stream = defaultBGMStream
+		bgm.playing = true
+	else:
+		if "playing" in data:
+			bgm.playing = data.playing
+		if "stream" in data:
+			bgm.stream = data.stream
 
 
 func _hook_portals() -> void:
@@ -63,9 +68,7 @@ func _on_build(data) -> void:
 		# to the left or right depending on which direction the player sprite
 		# is facing.
 		var player_tile = level.world_to_map(player.position)
-		var target_tile_x = player_tile[0] + 1
-		if player.sprite.flip_h:
-			target_tile_x = player_tile[0] - 1
+		var target_tile_x = player_tile[0] + (1 if player.pivot.scale.x > 0 else -1)
 		var target_tile_y = player_tile[1]
 		var target_cell_v = level.get_cell(target_tile_x, target_tile_y)
 		if target_cell_v == 0:
@@ -86,10 +89,15 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 	for despawn in get_tree().get_nodes_in_group(PROJECTILES_GROUP):
 		despawn.queue_free()
 
-	var animation = portal.on_portal_enter(body)
 	body.get_parent().remove_child(body)
 
-	yield(animation, "animation_finished")
+	EventBus.emit_signal("level_completed", {})
+
+	var animation: AnimationPlayer = portal.on_portal_enter(body)
+	if animation == null:
+		yield(get_tree().create_timer(1.0), "timeout")
+	else:
+		yield(animation, "animation_finished")
 	call_deferred("_finish_level", next_level)
 
 
@@ -113,4 +121,4 @@ func _finish_level(next_level: PackedScene = null) -> void:
 
 	# Reset entering portal state
 	entering_portal = false
-	EventBus.emit_signal("level_started", {})
+	EventBus.emit_signal("level_started", "")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/boxes/BaseBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/boxes/HalveBaseBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/Spikes.png" type="Texture" id=2]
 [ext_resource path="res://scripts/boxes/SpikeBox.gd" type="Script" id=3]
 

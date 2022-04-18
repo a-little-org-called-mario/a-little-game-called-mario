@@ -89,7 +89,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Corncob.gd"
 }, {
-"base": "Area2D",
+"base": "Reference",
 "class": "EndPortal",
 "language": "GDScript",
 "path": "res://scenes/EndPortal.gd"
@@ -144,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Platform.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Reference",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scenes/platformer/characters/Player.gd"
@@ -153,6 +153,11 @@ _global_script_classes=[ {
 "class": "PlayerFlying",
 "language": "GDScript",
 "path": "res://scenes/levels/Flappy/Characters/Player/PlayerFlyingControls.gd"
+}, {
+"base": "Resource",
+"class": "PlayerInventory",
+"language": "GDScript",
+"path": "res://scripts/resources/PlayerInventory.gd"
 }, {
 "base": "Area2D",
 "class": "PlayerProjectile",
@@ -254,6 +259,7 @@ _global_script_class_icons={
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",
+"PlayerInventory": "",
 "PlayerProjectile": "",
 "PopcornKernel": "",
 "PopcornPopped": "",
@@ -285,7 +291,12 @@ Settings="*res://scripts/autoload/Settings.gd"
 
 [debug]
 
+gdscript/warnings/unused_class_variable=true
 gdscript/warnings/return_value_discarded=false
+gdscript/warnings/unsafe_property_access=true
+gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
 
 [display]
 
@@ -294,7 +305,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/version_checker/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/reference_generator/plugin.cfg", "res://addons/version_checker/plugin.cfg" )
 
 [importer_defaults]
 

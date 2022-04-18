@@ -56,7 +56,7 @@ func move(delta: float):
 				and collision.collider is Player
 				and collision.position.y > (position.y + 26)
 			):
-				EventBus.emit_signal("heart_changed", {"value": -5})
+				HeartInventoryHandle.change_hearts_on(collision.collider, -5)
 		CHARGING:
 			move_and_collide(Vector2.UP * RETURN_SPEED * delta)
 			continue

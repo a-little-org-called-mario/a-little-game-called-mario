@@ -185,12 +185,12 @@ animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "driving",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [ SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "standing",
-"speed": 5.0
+"speed": 10.0
 } ]
 
 [sub_resource type="AudioStreamRandomPitch" id=14]
@@ -352,7 +352,7 @@ script = ExtResource( 1 )
 position = Vector2( 6, 4 )
 scale = Vector2( 0.767105, 0.725 )
 frames = SubResource( 41 )
-animation = "driving"
+animation = "standing"
 flip_h = true
 script = ExtResource( 11 )
 collision_shape = NodePath("../../BusCollision")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=1]
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=2]
@@ -12,6 +12,12 @@ size = 48
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
+
+[sub_resource type="InputEventAction" id=2]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
 
 [node name="LevelSelect" type="Control"]
 theme = ExtResource( 1 )
@@ -80,10 +86,20 @@ __meta__ = {
 
 [node name="SokobanLevelGrid" type="GridContainer" parent="VBoxContainer"]
 margin_left = 512.0
-margin_top = 360.0
+margin_top = 312.0
 margin_right = 512.0
-margin_bottom = 360.0
+margin_bottom = 437.0
+rect_min_size = Vector2( 0, 125 )
 size_flags_horizontal = 4
 columns = 2
 script = ExtResource( 6 )
 level_button = ExtResource( 5 )
+
+[node name="BackButton" parent="VBoxContainer" instance=ExtResource( 5 )]
+margin_left = 423.0
+margin_top = 441.0
+margin_right = 601.0
+margin_bottom = 493.0
+shortcut = SubResource( 3 )
+text = "BACK TO MENU"
+redirect_scene = "res://scenes/title/TitleScreen.tscn"

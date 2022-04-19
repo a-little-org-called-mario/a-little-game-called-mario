@@ -10,14 +10,14 @@
 					"...",
 					"..."
 				],
-				"choices": "It won't move."
+				"choices": ["It won't move."]
 			}
 		},
 		{
 			"text": "Open Sesame!",
 			"dialog": {
 				"text": "...",
-				"choices": "It won't move."
+				"choices": ["It won't move."]
 			}
 		}
 	]

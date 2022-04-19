@@ -1,10 +1,13 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://graphics/sprites/carmario/cario.png" type="Texture" id=1]
 [ext_resource path="res://scenes/carmario/CarPlayer.gd" type="Script" id=2]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://audio/sfx/car_honk.wav" type="AudioStream" id=4]
+[ext_resource path="res://graphics/sprites/carmario/honk.png" type="Texture" id=5]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=6]
 [ext_resource path="res://graphics/sprites/carmario/empty_car.png" type="Texture" id=7]
+[ext_resource path="res://scenes/carmario/Honk.gd" type="Script" id=8]
 [ext_resource path="res://audio/sfx/mario_aaaa.wav" type="AudioStream" id=9]
 [ext_resource path="res://audio/sfx/mario_oof.wav" type="AudioStream" id=10]
 [ext_resource path="res://audio/sfx/short_noise.wav" type="AudioStream" id=11]
@@ -30,10 +33,6 @@ color_ramp = SubResource( 14 )
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 32, 32 )
@@ -54,16 +53,15 @@ region = Rect2( 32, 32, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 64, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ SubResource( 20 ) ],
 "loop": true,
 "name": "idle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 23 ) ],
-"loop": true,
-"name": "car_only",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ), SubResource( 22 ) ],
@@ -75,7 +73,60 @@ animations = [ {
 "loop": true,
 "name": "upside_down",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 23 ) ],
+"loop": true,
+"name": "car_only",
+"speed": 5.0
 } ]
+
+[sub_resource type="CircleShape2D" id=27]
+radius = 64.0
+
+[sub_resource type="Animation" id=28]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "honk"
+length = 0.44
+tracks/0/type = "method"
+tracks/0/path = NodePath("Sound")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false ]
+}
 
 [sub_resource type="Animation" id=17]
 resource_name = "RESET"
@@ -151,6 +202,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite/Honk/Sprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -340,6 +403,30 @@ frames = SubResource( 6 )
 animation = "idle"
 playing = true
 offset = Vector2( 0, -12 )
+
+[node name="Honk" type="Area2D" parent="Sprite"]
+collision_layer = 256
+collision_mask = 24
+monitorable = false
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="Sprite/Honk"]
+visible = false
+position = Vector2( 20.3333, -6.33333 )
+texture = ExtResource( 5 )
+
+[node name="Shape" type="CollisionShape2D" parent="Sprite/Honk"]
+position = Vector2( 19.1667, -5.66667 )
+shape = SubResource( 27 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite/Honk"]
+anims/RESET = SubResource( 28 )
+anims/honk = SubResource( 25 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="Sprite/Honk"]
+scale = Vector2( 0.333333, 0.333333 )
+stream = ExtResource( 4 )
+bus = "sfx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0

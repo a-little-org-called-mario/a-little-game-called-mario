@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://audio/sfx/ball_omn.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/powerups/FireFlower.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sprites/ballmario.png" type="Texture" id=7]
+[ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Corncob.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -213,7 +216,7 @@ func _ready():
 [node name="Cario2" type="TileMap"]
 tile_set = ExtResource( 1 )
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 65536, 0, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 0, 0, 131072, 0, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 1, 0, 131083, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 131087, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 262144, 0, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 0, 0, 327680, 0, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 0, 0, 393216, 0, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 0, 0, 458752, 0, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 1, 0, 131083, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 131087, 1, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 262144, 0, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 0, 0, 327680, 0, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 0, 0, 393216, 0, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 0, 0, 458752, 0, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0 )
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 192, 448 )
@@ -256,7 +259,7 @@ position = Vector2( 454, 178 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
-[node name="BallLuigi8" type="Sprite" parent="."]
+[node name="BallMario" type="Sprite" parent="."]
 position = Vector2( 519, 178 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 7 )
@@ -267,6 +270,18 @@ anims/RESET = SubResource( 2 )
 anims/flip = SubResource( 1 )
 script = SubResource( 3 )
 pickup = NodePath("../FireFlower")
+
+[node name="PictureFrame" parent="." instance=ExtResource( 10 )]
+margin_left = 368.0
+margin_top = 32.0
+margin_right = 664.0
+margin_bottom = 112.0
+
+[node name="RichTextLabel" parent="PictureFrame" index="0"]
+bbcode_text = "[center]NO AUTOAMTIC WEAPONS
+IN TRADING AREA"
+text = "NO AUTOAMTIC WEAPONS
+IN TRADING AREA"
 
 [node name="Omn" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 554, 491 )
@@ -288,3 +303,50 @@ bus = "sfx"
 
 [node name="FireFlower" parent="." instance=ExtResource( 6 )]
 position = Vector2( 340, 460 )
+
+[node name="Coin" parent="." instance=ExtResource( 8 )]
+position = Vector2( 96, 160 )
+
+[node name="Coin2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 96, 96 )
+
+[node name="Coin3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 160, 160 )
+
+[node name="Coin4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 160, 96 )
+
+[node name="Coin5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 224, 160 )
+
+[node name="Coin6" parent="." instance=ExtResource( 8 )]
+position = Vector2( 224, 96 )
+
+[node name="Coin7" parent="." instance=ExtResource( 8 )]
+position = Vector2( 288, 96 )
+
+[node name="Coin8" parent="." instance=ExtResource( 8 )]
+position = Vector2( 288, 160 )
+
+[node name="Coin9" parent="." instance=ExtResource( 8 )]
+position = Vector2( 352, 160 )
+
+[node name="Corncob" parent="." instance=ExtResource( 9 )]
+position = Vector2( 608, 168 )
+
+[node name="Corncob2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 664, 168 )
+
+[node name="Corncob3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 720, 168 )
+
+[node name="Corncob4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 776, 168 )
+
+[node name="Corncob5" parent="." instance=ExtResource( 9 )]
+position = Vector2( 832, 168 )
+
+[node name="Corncob6" parent="." instance=ExtResource( 9 )]
+position = Vector2( 888, 168 )
+
+[editable path="PictureFrame"]

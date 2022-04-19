@@ -41,6 +41,8 @@ func _ready():
 		_toll_booth.position.y= booth_start.position.y if booth_start else 128
 		_toll_booth.connect("out_of_view", self, "_reposition_toll_booth")
 		_toll_booth.connect("booth_passed", self, "_lap_completed")
+	if has_node("Sponsor") and has_node("Meeting"):
+		reposition_signs()
 
 func new_tile_entered(player, current_map):
 	_player= player
@@ -90,7 +92,7 @@ func randomized_spawn(h_origin :float, scene :PackedScene) -> Node:
 func _reposition_toll_booth():
 	_toll_booth.position.x= (difficulty+1) * tiles_per_lap * map_size + map_size
 	var portal= get_node_or_null(end_portal)
-	if difficulty == 9 and end_portal and has_node(end_portal):
+	if difficulty == (laps_to_win-1) and end_portal and has_node(end_portal):
 		portal.position.x= (difficulty+1) * tiles_per_lap * map_size + map_size + 256
 
 func _lap_completed():
@@ -98,3 +100,7 @@ func _lap_completed():
 	$CanvasLayer/Progress/Lap.bbcode_text= "[center][wave amp=50 freq=2]LAPS: %s[/wave][/center]" % difficulty
 	_toll_booth.change_price(min(_toll_booth.price + 1, tiles_per_lap))
 	$CanvasLayer/Progress/Price.bbcode_text= "[center][wave amp=50 freq=2]TOLL: %s[/wave][/center]" % _toll_booth.price
+
+func reposition_signs():
+	$Sponsor.rect_position.x= (laps_to_win/2.0) * tiles_per_lap * map_size + 256
+	$Meeting.rect_position.x= (laps_to_win) * tiles_per_lap * map_size + 256

@@ -72,6 +72,7 @@ max_speed = 0.0
 
 [node name="proj_id_54" parent="NPCs" instance=ExtResource( 7 )]
 position = Vector2( -2208, 208 )
+frame = 1
 
 [node name="Decorations" type="Node2D" parent="."]
 
@@ -211,14 +212,16 @@ bbcode_text = "HOLD [rainbow freq=0.5 sat=1 val=1]{SPACE}[/rainbow] TO JUMP HIGH
 text = "HOLD {SPACE} TO JUMP HIGHER!"
 
 [node name="Slowmo" parent="Decorations" instance=ExtResource( 8 )]
-margin_left = 848.0
-margin_top = 176.0
-margin_right = 1072.0
-margin_bottom = 288.0
+margin_left = 1891.6
+margin_top = 96.0
+margin_right = 2108.62
+margin_bottom = 171.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="RichTextLabel" parent="Decorations/Slowmo" index="0"]
+margin_bottom = -17.0
 bbcode_text = "HOLD [rainbow freq=0.5 sat=1 val=1]{SPACE}[/rainbow] TO JUMP HIGHER!"
-text = "HOLD {SPACE} TO JUMP HIGHER!"
+text = "HOLD E FOR SLOWMO"
 
 [editable path="Decorations/Jump"]
 [editable path="Decorations/Sprint"]

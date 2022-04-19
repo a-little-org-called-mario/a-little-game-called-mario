@@ -37,7 +37,7 @@ jobs:
               }
             }
             fs.writeFileSync('credits.txt', names);
-      - name: export with Godot Engine and release on GitHub
+      - name: export with Godot Engine
         uses: firebelley/godot-export@v3.0.0
         with:
           create_release: false

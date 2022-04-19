@@ -68,8 +68,8 @@ __meta__ = {
 [node name="CalledMario" type="Label" parent="VBoxContainer"]
 margin_top = 258.0
 margin_right = 1024.0
-margin_bottom = 388.0
-rect_min_size = Vector2( 0, 130 )
+margin_bottom = 308.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "CALLED MARIO"
@@ -80,9 +80,9 @@ __meta__ = {
 
 [node name="SokobanLevelGrid" type="GridContainer" parent="VBoxContainer"]
 margin_left = 512.0
-margin_top = 392.0
+margin_top = 360.0
 margin_right = 512.0
-margin_bottom = 392.0
+margin_bottom = 360.0
 size_flags_horizontal = 4
 columns = 2
 script = ExtResource( 6 )

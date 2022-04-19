@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/platformer/characters/Trail.gd" type="Script" id=4]
 [ext_resource path="res://scenes/platformer/characters/PlayerAnims.gd" type="Script" id=5]
 [ext_resource path="res://sprites/dustparticle.png" type="Texture" id=6]
+[ext_resource path="res://textures/trails/ranbow_flag.jpg" type="Texture" id=7]
 [ext_resource path="res://scenes/platformer/characters/Shooter.gd" type="Script" id=8]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/platformer/characters/BlockBuilder.gd" type="Script" id=10]
@@ -25,8 +26,7 @@
 _data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=12]
-offsets = PoolRealArray( 0, 0.314917, 0.729282 )
-colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22, 26 )
@@ -206,11 +206,13 @@ width = 30.0
 width_curve = SubResource( 11 )
 default_color = Color( 1, 1, 1, 1 )
 gradient = SubResource( 12 )
+texture = ExtResource( 7 )
 texture_mode = 2
 joint_mode = 2
 end_cap_mode = 2
 script = ExtResource( 4 )
 textures_directory = "res://textures/trails"
+trail_length = 30
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

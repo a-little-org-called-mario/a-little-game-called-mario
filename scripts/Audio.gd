@@ -6,7 +6,7 @@ func _ready():
 	for bus in ["Master", "music", "sfx", "voice"]:
 		_on_volume_change(bus)
 	var bgm : AudioStreamPlayer = get_node_or_null("BGM")
-	if !bgm:
+	if bgm:
 		bgm.playing = true
 
 

@@ -153,6 +153,14 @@ colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
 gradient = SubResource( 40 )
 width = 128
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 175, 82 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 15 )
+region = Rect2( 175, 0, 175, 82 )
+
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 190, 80 )
@@ -169,24 +177,16 @@ region = Rect2( 380, 0, 190, 80 )
 atlas = ExtResource( 12 )
 region = Rect2( 570, 0, 190, 80 )
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 0, 175, 82 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 15 )
-region = Rect2( 175, 0, 175, 82 )
-
 [sub_resource type="SpriteFrames" id=41]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "driving",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "standing",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "driving",
 "speed": 10.0
 } ]
 

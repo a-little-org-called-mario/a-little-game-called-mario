@@ -14,8 +14,6 @@ enum busState {RESTING, MOVING};
 var state
 onready var collision: CollisionShape2D = get_node(collision_shape)
 
-#enum directions {LEFT, RIGHT}
-#var direction = directions.RIGHT
 
 func _ready() -> void:
 	EventBus.connect("bus_collected", self, "_on_bus_collected")
@@ -30,10 +28,6 @@ func _process(_delta: float) -> void:
 		player.powerupspeed = 1
 		player.powerupaccel = 1
 		
-	#if direction_pivot.scale.x > 0: 	# x 18 y 6 to right
-	#	_change_collision(directions.RIGHT)
-	#if direction_pivot.scale.x < 0:
-	#	_change_collision(directions.LEFT)
 	
 	if  (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
 		_set_state(busState.MOVING)
@@ -94,15 +88,3 @@ func _play_horn():
 
 func exit_bus():
 	call_deferred("_activate_bus", false)
-
-#func _change_collision(directionNow):
-#	if directionNow == direction:
-#		return
-#	if directionNow == directions.LEFT: 
-#		print(collision.position)
-#		#collision.position.x = collision.position.x + 2
-#	if directionNow == directions.RIGHT: # (-5, 6)
-#		print(collision.position)
-#		#collision.position.x = collision.position.x - 2
-#	direction = directionNow 
-

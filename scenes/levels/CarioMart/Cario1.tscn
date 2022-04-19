@@ -11,7 +11,7 @@
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=9]
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=10]
 [ext_resource path="res://scenes/FollowTrigger.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/levels/story_mode/TopDownPlayer.gd" type="Script" id=12]
+[ext_resource path="res://scenes/levels/story_mode/player/TopDownPlayer.gd" type="Script" id=12]
 [ext_resource path="res://scenes/carmario/CarSpawn.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=15]
@@ -37,10 +37,6 @@ shader_param/flash_modifier = 0.0
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 32, 32 )
@@ -65,6 +61,10 @@ region = Rect2( 96, 32, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 128, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 13 ) ],
@@ -72,15 +72,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "run",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=4]
@@ -208,7 +208,6 @@ align = 1
 [node name="EndPortal" parent="." instance=ExtResource( 9 )]
 position = Vector2( -160, 321 )
 next_level_path = "res://scenes/levels/CarioMart/Cario2.tscn"
-colour = Color( 0.643137, 0.203922, 0.678431, 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0

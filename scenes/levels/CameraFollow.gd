@@ -69,7 +69,9 @@ func _find_current_camera() -> void:
 		camera_reference = null
 
 func _process(_delta: float) -> void:
-	if following and camera_reference and follow_candidates.size()>0 :
+	if following and camera_reference and follow_candidates.size() > 0:
+		if follow_index >= len(follow_candidates):
+			_next_candidate()
 		if follow_horizontally:
 			camera_reference.position.x = lerp(camera_reference.position.x, follow_candidates[follow_index].position.x, follow_speed)
 		if follow_vertically:

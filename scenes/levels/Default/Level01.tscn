@@ -25,12 +25,15 @@ next_level_path = "res://scenes/levels/Default/Level02.tscn"
 
 [node name="Node2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 517, 203 )
+alive = true
 
 [node name="Bub" parent="." instance=ExtResource( 4 )]
 position = Vector2( 190, 38 )
+alive = true
 
 [node name="Bub2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 830, 41 )
+alive = true
 direction = 1
 
 [node name="CoinBox" parent="." instance=ExtResource( 5 )]
@@ -49,5 +52,5 @@ position = Vector2( 1047, 161 )
 
 [node name="Bunny" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2080, 480 )
-frame = 1
+frame = 5
 playing = true

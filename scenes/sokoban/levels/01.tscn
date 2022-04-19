@@ -42,17 +42,20 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 512.0
 margin_top = 40.0
-margin_right = 792.0
-margin_bottom = 168.0
+margin_right = 816.0
+margin_bottom = 184.0
 
 [node name="RichTextLabel" parent="Instructions" index="0"]
+bbcode_enabled = false
 bbcode_text = "
 [ARROWS]    MOVE
 [R]         RESTART
-[BACKSPACE] UNDO"
+[BACKSPACE] UNDO
+[ESC]       MAIN MENU"
 text = "
 [ARROWS]    MOVE
 [R]         RESTART
-[BACKSPACE] UNDO"
+[BACKSPACE] UNDO
+[ESC]       MAIN MENU"
 
 [editable path="Instructions"]

@@ -6,9 +6,9 @@ const COINS_GROUP: String = "Coins"
 const PROJECTILES_GROUP: String = "Projectiles"
 
 onready var hub: TileMap = $TileMap
+onready var level_scene: PackedScene = null
 onready var level: Node = $TileMap
 onready var bgm: AudioStreamPlayer = $Audio/BGM
-onready var ui: CanvasLayer = $UI
 onready var defaultBGMStream: AudioStream = bgm.stream.duplicate()
 
 var completionSound = preload("res://audio/sfx/portal.wav")
@@ -20,17 +20,13 @@ var entering_portal: bool = false
 func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
 	EventBus.connect("bgm_changed", self, "_bgm_changed")
-	EventBus.connect("ui_visibility_changed", self, "_on_ui_visibility_changed")
+	EventBus.connect("restart_level", self, "_restart_level")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 
 
 func _exit_tree() -> void:
 	EventBus.emit_signal("game_exit")
-
-
-func _on_ui_visibility_changed(data):
-	ui.get_child(0).visible = data.visible
 
 
 func _bgm_changed(data) -> void:
@@ -104,14 +100,23 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 func _finish_level(next_level: PackedScene = null) -> void:
 	# Create the new level, insert it into the tree and remove the old one.
 	# If next_level is null, return to the hub
-	var new_level: Node = next_level.instance() if next_level != null else hub
-	add_child_below_node(level, new_level)
-	if level == hub:
-		remove_child(level)
+	level_scene = next_level
+	var new_level: Node = level_scene.instance() if level_scene != null else hub
+
+	if new_level != level:
+		add_child_below_node(level, new_level)
+		if level == hub:
+			remove_child(level)
+		else:
+			level.queue_free()
+			yield(level, "tree_exited")
+		level = new_level
 	else:
-		level.queue_free()
-		yield(level, "tree_exited")
-	level = new_level
+		var idx: int = level.get_index() - 1
+		print("a ", idx)
+		remove_child(level)
+		add_child_below_node(get_child(idx), new_level)
+		print("b")
 
 	# Do not forget to hook the new portals
 	_hook_portals()
@@ -122,3 +127,7 @@ func _finish_level(next_level: PackedScene = null) -> void:
 	# Reset entering portal state
 	entering_portal = false
 	EventBus.emit_signal("level_started", "")
+
+
+func _restart_level() -> void:
+	_finish_level(level_scene)

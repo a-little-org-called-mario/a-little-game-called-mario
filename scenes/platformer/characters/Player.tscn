@@ -172,7 +172,6 @@ joint_mode = 2
 end_cap_mode = 2
 script = ExtResource( 4 )
 textures_directory = "res://textures/trails"
-trail_length = 30
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

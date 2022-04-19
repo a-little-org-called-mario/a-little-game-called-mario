@@ -16,7 +16,7 @@ static func _get_random_texture_in_dir(path: String):
 		dir.list_dir_begin()
 		var filename := dir.get_next()
 		while filename != "":
-			if filename != "." and filename != ".." and !dir.current_is_dir() and (filename.ends_with(".jpg") or filename.ends_with(".png")):
+			if filename != "." and filename != ".." and !dir.current_is_dir() and (filename.ends_with(".jpg.import") or filename.ends_with(".png.import")):
 				textures.append("%s/%s" % [path, filename])
 			filename = dir.get_next()
 		dir.list_dir_end()
@@ -26,7 +26,9 @@ static func _get_random_texture_in_dir(path: String):
 		return false
 		
 	if len(textures) > 0:
-		return ResourceLoader.load(textures[randi() % textures.size()], "Texture")
+		var texturePath = String(textures[randi() % textures.size()])
+		texturePath = texturePath.rstrip(".import")
+		return ResourceLoader.load(texturePath, "Texture")
 	else:
 		return false
 func _ready():

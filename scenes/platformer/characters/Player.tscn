@@ -363,10 +363,12 @@ bus = "sfx"
 
 [node name="brrrrrrrrr" type="AudioStreamPlayer2D" parent="Pivot/BusSprite"]
 stream = ExtResource( 20 )
+stream_paused = true
 bus = "sfx"
 
 [node name="moving_sound" type="AudioStreamPlayer2D" parent="Pivot/BusSprite"]
 stream = ExtResource( 19 )
+stream_paused = true
 bus = "sfx"
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]

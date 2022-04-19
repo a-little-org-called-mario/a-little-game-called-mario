@@ -79,9 +79,11 @@ __meta__ = {
 }
 
 [node name="SokobanLevelGrid" type="GridContainer" parent="VBoxContainer"]
+margin_left = 512.0
 margin_top = 392.0
-margin_right = 1024.0
+margin_right = 512.0
 margin_bottom = 392.0
+size_flags_horizontal = 4
 columns = 2
 script = ExtResource( 6 )
 level_button = ExtResource( 5 )

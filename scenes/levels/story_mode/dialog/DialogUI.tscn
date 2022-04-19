@@ -5,7 +5,7 @@
 [sub_resource type="Animation" id=16]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer/ColorRect/DialogTextLabel:percent_visible")
+tracks/0/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:anchor_top")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -14,10 +14,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ 0.045 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:anchor_top")
+tracks/1/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -26,10 +26,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.045 ]
+"values": [ Vector2( 157, 189 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_size")
+tracks/2/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -38,10 +38,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 157, 189 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_position")
+tracks/3/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -50,10 +50,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ 0.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_rotation")
+tracks/4/path = NodePath("ColorRect/MarginContainer/VBoxContainer/DialogTextLabel:visible_characters")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -61,26 +61,27 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=17]
 resource_name = "talking"
+length = 5.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer/ColorRect/DialogTextLabel:percent_visible")
+tracks/0/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_position")
+tracks/1/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -89,19 +90,19 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ) ]
+"values": [ 0.0, 0.6, 0.0, 0.6, 0.0, 0.6, 0.0, 0.6, 0.0, 0.6, 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("PortraitRect/VBoxContainer/PortraitTextureRect:rect_rotation")
+tracks/2/path = NodePath("ColorRect/MarginContainer/VBoxContainer/DialogTextLabel:visible_characters")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.6, 0.0, 0.6, 0.0, 0.6, 0.0, 0.6, 0.0, 0.6, 0.0 ]
+"values": [ 0, 200 ]
 }
 
 [node name="DialogUI" type="HBoxContainer"]
@@ -114,6 +115,9 @@ margin_top = -220.0
 margin_right = 356.0
 margin_bottom = -19.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -198.0 ]
+}
 
 [node name="PortraitRect" type="ColorRect" parent="."]
 margin_right = 230.0
@@ -129,8 +133,9 @@ anchor_bottom = 1.0
 [node name="PortraitTextureRect" type="TextureRect" parent="PortraitRect/VBoxContainer"]
 anchor_top = 0.045
 anchor_bottom = 0.045
+margin_top = -9.045
 margin_right = 157.0
-margin_bottom = 189.0
+margin_bottom = 179.955
 size_flags_vertical = 3
 expand = true
 stretch_mode = 6
@@ -141,46 +146,76 @@ margin_right = 230.0
 margin_bottom = 201.0
 align = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 margin_left = 234.0
 margin_right = 724.0
 margin_bottom = 201.0
 size_flags_horizontal = 3
-
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
-margin_right = 490.0
-margin_bottom = 197.0
-size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0.0117647, 0.0509804, 0.203922, 1 )
 
-[node name="DialogTextLabel" type="RichTextLabel" parent="VBoxContainer/ColorRect"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-visible_characters = 0
-percent_visible = 0.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 
-[node name="ContinueButton" type="Button" parent="VBoxContainer/ColorRect/DialogTextLabel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 480.0
+margin_bottom = 191.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="DialogTextLabel" type="RichTextLabel" parent="ColorRect/MarginContainer/VBoxContainer"]
+margin_right = 470.0
+margin_bottom = 177.0
+size_flags_vertical = 3
+visible_characters = 0
+percent_visible = 0.2
+fit_content_height = true
+
+[node name="ContinueButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/DialogTextLabel"]
 visible = false
-margin_left = 421.0
-margin_top = 168.0
-margin_right = 474.0
-margin_bottom = 188.0
+anchor_left = 0.792
+anchor_top = 0.736
+anchor_right = 0.9
+anchor_bottom = 0.838
+margin_left = -0.0800171
+margin_top = 0.00799561
+margin_right = -3.05176e-05
+margin_bottom = -0.0860138
 text = "Next"
 
-[node name="PanelContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 201.0
-margin_right = 490.0
-margin_bottom = 201.0
+[node name="FinishButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/DialogTextLabel"]
+visible = false
+anchor_left = 0.784
+anchor_top = 0.751
+anchor_right = 0.912
+anchor_bottom = 0.853
+margin_left = -0.160034
+margin_top = 0.0529938
+margin_right = 0.119965
+margin_bottom = -0.0410156
+text = "OK"
+
+[node name="PanelContainer" type="MarginContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+margin_top = 181.0
+margin_right = 470.0
+margin_bottom = 181.0
 custom_constants/margin_right = 60
 custom_constants/margin_left = 60
 
-[node name="ChoiceContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="ChoiceContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/PanelContainer"]
 margin_left = 60.0
-margin_right = 430.0
+margin_right = 410.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 16 )
 anims/talking = SubResource( 17 )
 
-[connection signal="pressed" from="VBoxContainer/ColorRect/DialogTextLabel/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/DialogTextLabel/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/DialogTextLabel/FinishButton" to="." method="_on_FinishButton_pressed"]

@@ -86,7 +86,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '🎉 Test build for PR#${{env.PR_NUM}} ✨👉 ${{steps.netlify-deploy.outputs.deploy-url}} 👈✨'
+          args: '🎉 Test build for PR#${{env.PR_NUMBER}} ✨👉 ${{steps.netlify-deploy.outputs.deploy-url}} 👈✨'
       - uses: Eomm/why-don-t-you-tweet@v1
         if: ${{ env.PR_ACTION == 'opened' }}
         with:

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/resources/stardepths_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/CameraFollow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/decorations/DecorBasic.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/enemies/DepthBlob.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=7]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -27,10 +29,10 @@ follow_vertically = true
 
 [node name="BasicDecoration" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1168, -288 )
+frame = 2
 
 [node name="BasicDecoration6" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1392, -384 )
-frame = 0
 
 [node name="BasicDecoration8" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1872, -352 )
@@ -50,20 +52,22 @@ frame = 0
 [node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 112, 0 )
 animation = "float_star"
-frame = 2
+frame = 6
 
 [node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 784, 112 )
 animation = "float_star"
-frame = 2
+frame = 6
 
 [node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2608, -448 )
 animation = "float_star"
+frame = 3
 
 [node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 752, -352 )
 animation = "float_star"
+frame = 3
 
 [node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2320, -352 )
@@ -72,7 +76,7 @@ frame = 0
 
 [node name="BasicDecoration7" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1120, -416 )
-frame = 4
+frame = 0
 
 [node name="BasicDecoration2" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1328, -224 )
@@ -96,3 +100,27 @@ frame = 0
 
 [node name="EndPortal" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2848, -384 )
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="DepthBlob" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 2176, -336 )
+
+[node name="DepthBlob4" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 2448, -336 )
+
+[node name="DepthBlob5" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 2448, -496 )
+scale = Vector2( 1, -1 )
+
+[node name="DepthBlob2" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 640, 208 )
+
+[node name="DepthBlob3" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 816, -144 )
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="CoinBox" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 368, -96 )
+bounce_count = 10

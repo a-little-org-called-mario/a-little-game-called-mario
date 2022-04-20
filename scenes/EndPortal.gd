@@ -29,6 +29,8 @@ func _ready() -> void:
 
 
 func can_enter(node: Node2D) -> bool:
+	if not visible:
+		return false
 	if not CoinInventoryHandle.change_coins_on(node, -price):
 		return false
 

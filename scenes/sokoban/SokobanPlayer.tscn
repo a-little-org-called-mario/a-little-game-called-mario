@@ -48,7 +48,7 @@ script = ExtResource( 3 )
 
 [node name="RandalCloud" type="AnimatedSprite" parent="GassyRandal"]
 frames = SubResource( 6 )
-frame = 1
+frame = 3
 speed_scale = 1.25
 playing = true
 
@@ -56,6 +56,7 @@ playing = true
 modulate = Color( 1, 1, 1, 0.439216 )
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 6 )
+frame = 4
 speed_scale = 0.75
 playing = true
 

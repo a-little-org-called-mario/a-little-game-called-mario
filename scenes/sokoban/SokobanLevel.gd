@@ -60,7 +60,7 @@ func _process(delta):
 		undo()
 	elif Input.is_action_just_pressed("restart"):
 		restart()
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("pause"):
 		close_level()
 
 

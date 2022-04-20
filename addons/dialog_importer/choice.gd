@@ -1,5 +1,13 @@
 extends Resource
 
+"""
+A choice presented to the player.
+
+Can trigger another dialog or end the conversation.
+Choices can also have conditions that need to be true
+for them to show up.
+"""
+
 export var text: String
 export var condition: Resource
 export var dialog: Resource

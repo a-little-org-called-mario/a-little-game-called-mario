@@ -32,7 +32,7 @@ func _ready() -> void:
 				[character])
 	for item in $YSort/Items.get_children():
 		item.connect("picked_up", self, "_on_GroundItem_picked_up", [item])
-	_dialog_ui.init(_item_store, _inventory)
+	_dialog_ui.init(_item_store, _inventory, "res://scenes/levels/story_mode/content/dialogs/")
 	_dialog_ui.start(preload("content/dialogs/intro.json"))
 
 

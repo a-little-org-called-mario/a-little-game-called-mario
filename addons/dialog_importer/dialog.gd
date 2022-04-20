@@ -15,6 +15,11 @@ export var item: String
 export var event: String
 export var new_sprite: Texture
 
+# The dialog to jump to.
+export var goto: String
+# The label that can be used with goto.
+export var label: String
+
 export var condition: Resource
 # If the condition applies to this dialog or if there are two possible branches
 # for each outcome.
@@ -32,6 +37,9 @@ func _init(data = {}) -> void:
 	if data is String:
 		text = [data]
 		return
+	if "goto" in data:
+		goto = data.goto
+		return
 	if "condition" in data:
 		condition = Condition.new(data.condition)
 	if "false" in data:
@@ -47,7 +55,8 @@ func _init(data = {}) -> void:
 	else:
 		text = text_data
 	var choice_data = data.get("choices", [])
-	for data in choice_data:
-		choices.append(Choice.new(data))
+	for choice in choice_data:
+		choices.append(Choice.new(choice))
 	item = data.get("item", "")
 	event = data.get("event", "")
+	label = data.get("label", "")

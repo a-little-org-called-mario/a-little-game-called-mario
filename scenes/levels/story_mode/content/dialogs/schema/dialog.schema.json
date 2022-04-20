@@ -90,8 +90,13 @@
 					"minLength": 3,
 					"type": "string"
 				},
+				"label": {
+					"description": "A label that can be used with goto",
+					"type": "string",
+					"minLength": 3
+				},
 				"condition": {
-					"description": "Only reach this dialog if this condition is true.",
+					"description": "Only reach this dialog if this condition is true",
 					"$ref": "#/definitions/condition"
 				}
 			},
@@ -115,6 +120,17 @@
 				}
 			},
 			"required": ["condition", "false"],
+			"additionalProperties": false
+		},
+		{
+			"type": "object",
+			"properties": {
+				"goto": {
+					"description": "Go to the dialog with the defined label",
+					"type": "string",
+					"minLength": 3
+				}
+			},
 			"additionalProperties": false
 		}
 	]

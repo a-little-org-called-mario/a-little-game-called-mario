@@ -16,6 +16,8 @@ signal event_occured(id)
 var active := false
 
 var _dialogs: Dictionary
+# Reached labels inside the current dialog.
+var _labels: Dictionary
 var _inventory: Inventory
 var _item_store: ItemStore
 var _dialog: Dialog
@@ -44,19 +46,20 @@ onready var _choice_container: VBoxContainer = $ColorRect/MarginContainer/VBoxCo
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 
-func init(item_store: ItemStore, inventory: Inventory):
+func init(item_store: ItemStore, inventory: Inventory, dialog_dir: String):
 	_item_store = item_store
 	_inventory = inventory
-	var dialog_dir: String = get_script().resource_path\
-			.get_base_dir().plus_file("../dialogs")
-	for _file in FileUtils.list_dir(dialog_dir):
-		var file: String = _file.replace(".import", "")
-		if not file.ends_with(".json"):
+	for file in FileUtils.list_dir(dialog_dir):
+		if not file.ends_with(".json.import"):
 			continue
+		file = file.replace(".import", "")
 		var dialog = load(file)
-		_checking = file.get_file()
-		_check_dialog(dialog)
 		_dialogs[file.get_file().get_basename()] = dialog
+	for dialog_name in _dialogs:
+		_labels.clear()
+		_gather_labels(_dialogs[dialog_name])
+		_checking = dialog_name
+		_check_dialog(_dialogs[dialog_name])
 
 
 # Start a dialog with optionally a character as speaker.
@@ -69,6 +72,8 @@ func start(dialog: Dialog, speaker: Character = null):
 	if _speaker:
 		_title_label.text = _speaker.character.name
 		_portrait_texture_rect.texture = _speaker.get_portrait()
+	_labels.clear()
+	_gather_labels(dialog)
 	_set_dialog(dialog)
 	active = true
 
@@ -143,6 +148,18 @@ func _condition_true(condition: Condition, object: Object) -> bool:
 	return true
 
 
+func _gather_labels(dialog):
+	if not dialog:
+		return
+	print(dialog.text, dialog.label)
+	if dialog.label:
+		_labels[dialog.label] = dialog
+	for branch in [dialog.True, dialog.False]:
+		_gather_labels(branch)
+	for choice in dialog.choices:
+		_gather_labels(choice.dialog)
+
+
 # Returns the dialog that should be displayed when this dialog object is hit.
 func _evaluate_dialog(dialog: Dialog) -> Dialog:
 	if not dialog:
@@ -153,6 +170,8 @@ func _evaluate_dialog(dialog: Dialog) -> Dialog:
 				return dialog.True as Dialog
 		else:
 			return dialog.False as Dialog
+	if dialog.goto:
+		return _evaluate_dialog(_labels[dialog.goto])
 	return dialog
 
 
@@ -166,10 +185,13 @@ func _skip_dialog() -> bool:
 
 
 # Check this dialog and the contained conditions/dialogs for any issues.
-func _check_dialog(dialog: Dialog):
+func _check_dialog(dialog):
 	if not dialog:
 		return
 	_check_condition(dialog.condition)
+	if dialog.goto:
+		_check_assert(dialog.goto in _labels,
+				"Couldn't find label %s to go to.", dialog.goto)
 	for branch in [dialog.True, dialog.False]:
 		_check_dialog(branch)
 	for _choice in dialog.choices:

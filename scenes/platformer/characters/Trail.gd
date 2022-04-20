@@ -5,11 +5,13 @@ export(int) var trail_length = 5
 var positions = []
 var height = 0.0
 
+onready var parent = get_parent()
 onready var player: Node2D = owner
 	
 static func _get_random_texture_in_dir(path: String):
 	var dir := Directory.new()
 	var textures := []
+	print(dir.open(path))
 	if dir.open(path) == OK:
 		dir.list_dir_begin()
 		var filename := dir.get_next()
@@ -19,6 +21,8 @@ static func _get_random_texture_in_dir(path: String):
 			filename = dir.get_next()
 		dir.list_dir_end()
 	else:
+		#print errorcode on fail cause idk how to view in godot's debug
+		#print(dir.open(path))
 		return false
 		
 	if len(textures) > 0:

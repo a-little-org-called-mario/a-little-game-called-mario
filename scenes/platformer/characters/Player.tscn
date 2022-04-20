@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/platformer/characters/Trail.gd" type="Script" id=4]
 [ext_resource path="res://scenes/platformer/characters/PlayerAnims.gd" type="Script" id=5]
 [ext_resource path="res://sprites/dustparticle.png" type="Texture" id=6]
-[ext_resource path="res://sprites/flag.jpg" type="Texture" id=7]
+[ext_resource path="res://textures/trails/ranbow_flag.jpg" type="Texture" id=7]
 [ext_resource path="res://scenes/platformer/characters/Shooter.gd" type="Script" id=8]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/platformer/characters/BlockBuilder.gd" type="Script" id=10]
@@ -15,12 +15,10 @@
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=13]
 [ext_resource path="res://scenes/HeartInventoryHandle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sprites/powerups/Mario Bus stationary-Sheet-export-export.png" type="Texture" id=15]
-
 [ext_resource path="res://scripts/BouncyMoustache.gd" type="Script" id=16]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
 [ext_resource path="res://audio/music/givehimagun.mp3" type="AudioStream" id=19]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=20]
-[ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=21]
 [ext_resource path="res://audio/sfx/toasty.wav" type="AudioStream" id=22]
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=23]
 
@@ -158,14 +156,6 @@ colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
 gradient = SubResource( 40 )
 width = 128
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 0, 175, 82 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 15 )
-region = Rect2( 175, 0, 175, 82 )
-
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 190, 80 )
@@ -182,16 +172,24 @@ region = Rect2( 380, 0, 190, 80 )
 atlas = ExtResource( 12 )
 region = Rect2( 570, 0, 190, 80 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 175, 82 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 15 )
+region = Rect2( 175, 0, 175, 82 )
+
 [sub_resource type="SpriteFrames" id=41]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "standing",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "driving",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "standing",
 "speed": 5.0
 } ]
 
@@ -213,6 +211,7 @@ texture_mode = 2
 joint_mode = 2
 end_cap_mode = 2
 script = ExtResource( 4 )
+textures_directory = "res://textures/trails"
 trail_length = 30
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -416,7 +415,7 @@ wait_time = 0.05
 one_shot = true
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 21 )
+stream = ExtResource( 23 )
 volume_db = -12.0
 bus = "sfx"
 

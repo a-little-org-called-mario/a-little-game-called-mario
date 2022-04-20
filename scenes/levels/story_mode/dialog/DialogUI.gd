@@ -30,9 +30,9 @@ const Dialog = preload("res://addons/dialog_importer/dialog.gd")
 const Condition = preload("res://addons/dialog_importer/condition.gd")
 const Choice = preload("res://addons/dialog_importer/choice.gd")
 const Character = preload("../character/Character.gd")
-const ItemStore = preload("../items/ItemStore.gd")
+const ItemStore = preload("../item/ItemStore.gd")
 const FileUtils = preload("res://scripts/FileUtils.gd")
-const Inventory = preload("../items/Inventory.gd")
+const Inventory = preload("../item/Inventory.gd")
 
 onready var _dialog_text_label: RichTextLabel = $ColorRect/MarginContainer/VBoxContainer/DialogTextLabel
 onready var _continue_button: Button = $ColorRect/MarginContainer/VBoxContainer/DialogTextLabel/ContinueButton
@@ -60,17 +60,16 @@ func init(item_store: ItemStore, inventory: Inventory):
 
 
 # Start a dialog with optionally a character as speaker.
-func start(dialog: String, speaker: Character = null):
+func start(dialog: Dialog, speaker: Character = null):
 	_assert_ready()
-	assert(dialog in _dialogs, "Dialog %s not found" % dialog)
 	emit_signal("dialog_started")
 	_speaker = speaker
 	_title_label.text = ""
 	_portrait_rect.visible = speaker != null
 	if _speaker:
-		_title_label.text = _speaker.title
+		_title_label.text = _speaker.character.name
 		_portrait_texture_rect.texture = _speaker.get_portrait()
-	_set_dialog(_dialogs[dialog])
+	_set_dialog(dialog)
 	active = true
 
 

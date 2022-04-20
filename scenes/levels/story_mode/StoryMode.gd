@@ -6,16 +6,16 @@ Gamemode in which the story is what matters the most.
 This script handles starting of dialogs by talking to characters.
 """
 
-var _item_store := ItemStore.new()
+var _item_store := ItemStore.new("res://scenes/levels/story_mode/content/items")
 var _door_cell : Vector2
 
-const ItemStore = preload("items/ItemStore.gd")
+const ItemStore = preload("item/ItemStore.gd")
 const Dialog = preload("res://addons/dialog_importer/dialog.gd")
 const Character = preload("character/Character.gd")
 const DialogUI = preload("dialog/DialogUI.gd")
-const Inventory = preload("items/Inventory.gd")
+const Inventory = preload("item/Inventory.gd")
 const TopDownPlayer = preload("player/TopDownPlayer.gd")
-const ItemReceivePopup = preload("items/ItemReceivePopup.gd")
+const ItemReceivePopup = preload("item/ItemReceivePopup.gd")
 
 onready var _player: TopDownPlayer = $TopDownPlayer
 onready var _dialog_ui: DialogUI = $CanvasLayer/UI/DialogUI
@@ -31,7 +31,7 @@ func _ready() -> void:
 		character.connect("talked_to", self, "_on_Character_talked_to",
 				[character])
 	_dialog_ui.init(_item_store, _inventory)
-	_dialog_ui.start("intro")
+	_dialog_ui.start(preload("content/dialogs/intro.json"))
 
 
 func is_door_open():

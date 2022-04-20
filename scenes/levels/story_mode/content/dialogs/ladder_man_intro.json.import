@@ -1,0 +1,13 @@
+[remap]
+
+importer="littlgameemario.dialog"
+type="Resource"
+path="res://.import/ladder_man_intro.json-c25f2eee09a8e0dec1246eb51f9fe828.res"
+
+[deps]
+
+source_file="res://scenes/levels/story_mode/content/dialogs/ladder_man_intro.json"
+dest_files=[ "res://.import/ladder_man_intro.json-c25f2eee09a8e0dec1246eb51f9fe828.res" ]
+
+[params]
+

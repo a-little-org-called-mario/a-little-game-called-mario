@@ -1,0 +1,13 @@
+[remap]
+
+importer="littlgameemario.dialog"
+type="Resource"
+path="res://.import/end_sign.json-6dad8df64f5734f5304d3a1938d9c838.res"
+
+[deps]
+
+source_file="res://scenes/levels/story_mode/content/dialogs/end_sign.json"
+dest_files=[ "res://.import/end_sign.json-6dad8df64f5734f5304d3a1938d9c838.res" ]
+
+[params]
+

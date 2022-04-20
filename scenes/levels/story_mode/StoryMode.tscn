@@ -1,7 +1,7 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://sprites/ladder_man.png" type="Texture" id=1]
-[ext_resource path="res://sprites/tiles/foreground/brick.png" type="Texture" id=2]
+[ext_resource path="res://scenes/levels/story_mode/content/characters/sign.tres" type="Resource" id=1]
+[ext_resource path="res://scenes/levels/story_mode/content/characters/lever.tres" type="Resource" id=2]
 [ext_resource path="res://sprites/tiles/background/bg-tile.png" type="Texture" id=3]
 [ext_resource path="res://scenes/levels/story_mode/player/TopDownPlayer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/levels/story_mode/character/Character.tscn" type="PackedScene" id=5]
@@ -10,10 +10,18 @@
 [ext_resource path="res://scenes/levels/story_mode/StoryMode.gd" type="Script" id=8]
 [ext_resource path="res://scenes/levels/story_mode/dialog/DialogUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=10]
-[ext_resource path="res://scenes/levels/story_mode/items/Inventory.gd" type="Script" id=12]
-[ext_resource path="res://sprites/switch.png" type="Texture" id=13]
-[ext_resource path="res://scenes/levels/story_mode/items/ItemReceivePopup.gd" type="Script" id=14]
+[ext_resource path="res://scenes/levels/story_mode/item/GroundItem.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/levels/story_mode/item/Inventory.gd" type="Script" id=12]
+[ext_resource path="res://scenes/levels/story_mode/content/characters/stone.tres" type="Resource" id=13]
+[ext_resource path="res://scenes/levels/story_mode/item/ItemReceivePopup.gd" type="Script" id=14]
 [ext_resource path="res://sprites/signpost.png" type="Texture" id=15]
+[ext_resource path="res://scenes/levels/story_mode/content/items/grape.tres" type="Resource" id=16]
+[ext_resource path="res://scenes/levels/story_mode/content/dialogs/stone.json" type="Resource" id=17]
+[ext_resource path="res://scenes/levels/story_mode/content/dialogs/end_sign.json" type="Resource" id=18]
+[ext_resource path="res://scenes/levels/story_mode/content/dialogs/ladder_man_intro.json" type="Resource" id=19]
+[ext_resource path="res://scenes/levels/story_mode/content/dialogs/lever.json" type="Resource" id=20]
+[ext_resource path="res://scenes/levels/story_mode/content/characters/ladder_man.tres" type="Resource" id=21]
+[ext_resource path="res://sprites/tiles/foreground/brick.png" type="Texture" id=22]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -46,18 +54,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 313, -75 ) ]
 }
-
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 81, 106.5 )
-
-[sub_resource type="CircleShape2D" id=19]
-radius = 87.2812
-
-[sub_resource type="CircleShape2D" id=20]
-radius = 63.7887
-
-[sub_resource type="CircleShape2D" id=21]
-radius = 104.307
 
 [node name="StoryMode" type="Node2D"]
 script = ExtResource( 8 )
@@ -96,81 +92,45 @@ tracking = NodePath("../TopDownPlayer")
 
 [node name="LadderMan" parent="Characters" instance=ExtResource( 5 )]
 position = Vector2( -591, -1104 )
-dialog = "ladder_man_intro"
-
-[node name="CollisionShape2D" parent="Characters/LadderMan" index="0"]
-position = Vector2( -16, 0 )
-shape = SubResource( 18 )
-
-[node name="Sprite" parent="Characters/LadderMan" index="1"]
-position = Vector2( -43, 2 )
-texture = ExtResource( 1 )
-flip_h = true
-
-[node name="TalkToLabel" parent="Characters/LadderMan" index="2"]
-margin_left = -92.0
-margin_top = 125.0
-margin_right = -6.0
-margin_bottom = 139.0
+character = ExtResource( 21 )
+dialog = ExtResource( 19 )
 
 [node name="Stone" parent="Characters" instance=ExtResource( 5 )]
 position = Vector2( 255, -1629 )
-title = "Stone"
-dialog = "stone"
-
-[node name="CollisionShape2D" parent="Characters/Stone" index="0"]
-position = Vector2( -13, 29 )
-shape = SubResource( 19 )
+character = ExtResource( 13 )
+dialog = ExtResource( 17 )
 
 [node name="Sprite" parent="Characters/Stone" index="1"]
-position = Vector2( -1.90735e-06, 7 )
-scale = Vector2( 2.1875, 1.21875 )
-texture = ExtResource( 2 )
+texture = ExtResource( 22 )
 
 [node name="TalkToLabel" parent="Characters/Stone" index="2"]
-margin_left = -42.0
-margin_top = 29.0
-margin_right = 44.0
-margin_bottom = 43.0
+margin_left = -68.0
+margin_top = 39.0
+margin_right = 18.0
+margin_bottom = 53.0
+text = "Talk to Stone"
 
 [node name="Lever" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( -101, -697 )
-title = "Lever"
-dialog = "lever"
-
-[node name="CollisionShape2D" parent="Characters/Lever" index="0"]
-shape = SubResource( 20 )
-
-[node name="Sprite" parent="Characters/Lever" index="1"]
-position = Vector2( 8, 2 )
-scale = Vector2( 0.102757, 0.102757 )
-texture = ExtResource( 13 )
-
-[node name="TalkToLabel" parent="Characters/Lever" index="2"]
-margin_left = -9.0
-margin_top = -54.0
-margin_right = 116.0
-margin_bottom = -40.0
-text = "[B] Interact with %s"
+position = Vector2( -89, -695 )
+character = ExtResource( 2 )
+dialog = ExtResource( 20 )
 
 [node name="Sign" parent="Characters" instance=ExtResource( 5 )]
 position = Vector2( 1726, -672 )
-title = "Sign"
-dialog = "end_sign"
-
-[node name="CollisionShape2D" parent="Characters/Sign" index="0"]
-shape = SubResource( 21 )
+character = ExtResource( 1 )
+talk_to_text = "Look at %s"
+dialog = ExtResource( 18 )
 
 [node name="Sprite" parent="Characters/Sign" index="1"]
-scale = Vector2( 2.73333, 2.73333 )
+scale = Vector2( 3.46667, 3.46667 )
 texture = ExtResource( 15 )
 
 [node name="TalkToLabel" parent="Characters/Sign" index="2"]
-margin_left = -54.0
-margin_top = 60.0
-margin_right = 36.0
-margin_bottom = 74.0
-text = "[B] Look at %s"
+margin_left = -123.0
+margin_top = 40.0
+margin_right = -37.0
+margin_bottom = 54.0
+text = "Look at Sign"
 
 [node name="TopDownPlayer" parent="." instance=ExtResource( 4 )]
 
@@ -256,7 +216,7 @@ anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = -36.0
+margin_bottom = -52.0
 
 [node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/UI/ItemReceivePopup/VBoxContainer"]
 margin_right = 318.0
@@ -270,13 +230,15 @@ margin_right = 318.0
 margin_bottom = 171.0
 align = 1
 
+[node name="GroundItem" parent="." instance=ExtResource( 11 )]
+position = Vector2( 175, -134 )
+item = ExtResource( 16 )
+
 [connection signal="dialog_finished" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_finished"]
 [connection signal="dialog_started" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_started"]
 [connection signal="event_occured" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_event_occured"]
 [connection signal="item_received" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_item_received"]
 [connection signal="item_selected" from="CanvasLayer/UI/Inventory/VBoxContainer/ItemList" to="CanvasLayer/UI/Inventory" method="_on_ItemList_item_selected"]
 
-[editable path="Characters/LadderMan"]
 [editable path="Characters/Stone"]
-[editable path="Characters/Lever"]
 [editable path="Characters/Sign"]

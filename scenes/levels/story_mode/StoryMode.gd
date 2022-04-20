@@ -17,7 +17,7 @@ const Inventory = preload("item/Inventory.gd")
 const TopDownPlayer = preload("player/TopDownPlayer.gd")
 const ItemReceivePopup = preload("item/ItemReceivePopup.gd")
 
-onready var _player: TopDownPlayer = $TopDownPlayer
+onready var _player: TopDownPlayer = $YSort/TopDownPlayer
 onready var _dialog_ui: DialogUI = $CanvasLayer/UI/DialogUI
 onready var _inventory: Inventory = $CanvasLayer/UI/Inventory
 onready var _item_receive_popup: ItemReceivePopup = $CanvasLayer/UI/ItemReceivePopup
@@ -27,7 +27,7 @@ onready var _door_position: Position2D = $DoorPosition
 
 func _ready() -> void:
 	_door_cell = _tile_map.world_to_map(_door_position.position)
-	for character in $Characters.get_children():
+	for character in $YSort/Characters.get_children():
 		character.connect("talked_to", self, "_on_Character_talked_to",
 				[character])
 	_dialog_ui.init(_item_store, _inventory)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/levels/story_mode/content/characters/sign.tres" type="Resource" id=1]
 [ext_resource path="res://scenes/levels/story_mode/content/characters/lever.tres" type="Resource" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://scenes/levels/story_mode/content/dialogs/lever.json" type="Resource" id=20]
 [ext_resource path="res://scenes/levels/story_mode/content/characters/ladder_man.tres" type="Resource" id=21]
 [ext_resource path="res://sprites/tiles/foreground/brick.png" type="Texture" id=22]
+[ext_resource path="res://sprites/ladder_man.png" type="Texture" id=23]
+[ext_resource path="res://sprites/switch.png" type="Texture" id=24]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -86,53 +88,94 @@ position = Vector2( 1312, -670 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 7 )
-tracking = NodePath("../TopDownPlayer")
+tracking = NodePath("../YSort/TopDownPlayer")
 
-[node name="Characters" type="Node2D" parent="."]
+[node name="YSort" type="YSort" parent="."]
 
-[node name="LadderMan" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( -591, -1104 )
+[node name="Items" type="YSort" parent="YSort"]
+
+[node name="Grape" parent="YSort/Items" instance=ExtResource( 11 )]
+position = Vector2( 175, -134 )
+item = ExtResource( 16 )
+
+[node name="Characters" type="YSort" parent="YSort"]
+
+[node name="LadderMan" parent="YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( -613, -1027 )
 character = ExtResource( 21 )
 dialog = ExtResource( 19 )
 
-[node name="Stone" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( 255, -1629 )
+[node name="CollisionShape2D" parent="YSort/Characters/LadderMan" index="0"]
+position = Vector2( 2, -112 )
+
+[node name="Sprite" parent="YSort/Characters/LadderMan" index="1"]
+position = Vector2( 2, -120 )
+texture = ExtResource( 23 )
+
+[node name="TalkToLabel" parent="YSort/Characters/LadderMan" index="2"]
+margin_left = 39.0
+margin_top = -150.0
+margin_right = 159.0
+margin_bottom = -136.0
+text = "Talk to Ladder Man"
+
+[node name="Stone" parent="YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 221, -1539 )
 character = ExtResource( 13 )
 dialog = ExtResource( 17 )
 
-[node name="Sprite" parent="Characters/Stone" index="1"]
+[node name="Sprite" parent="YSort/Characters/Stone" index="1"]
+position = Vector2( 2, -31 )
 texture = ExtResource( 22 )
 
-[node name="TalkToLabel" parent="Characters/Stone" index="2"]
-margin_left = -68.0
-margin_top = 39.0
-margin_right = 18.0
-margin_bottom = 53.0
+[node name="TalkToLabel" parent="YSort/Characters/Stone" index="2"]
+margin_left = -66.0
+margin_top = 21.0
+margin_right = 20.0
+margin_bottom = 35.0
 text = "Talk to Stone"
 
-[node name="Lever" parent="Characters" instance=ExtResource( 5 )]
+[node name="Lever" parent="YSort/Characters" instance=ExtResource( 5 )]
 position = Vector2( -89, -695 )
 character = ExtResource( 2 )
 dialog = ExtResource( 20 )
 
-[node name="Sign" parent="Characters" instance=ExtResource( 5 )]
-position = Vector2( 1726, -672 )
+[node name="CollisionShape2D" parent="YSort/Characters/Lever" index="0"]
+position = Vector2( -5, -42 )
+
+[node name="Sprite" parent="YSort/Characters/Lever" index="1"]
+position = Vector2( 2, -30 )
+texture = ExtResource( 24 )
+
+[node name="TalkToLabel" parent="YSort/Characters/Lever" index="2"]
+margin_left = 33.0
+margin_top = -35.0
+margin_right = 119.0
+margin_bottom = -21.0
+text = "Talk to Lever"
+
+[node name="Sign" parent="YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 1722, -626 )
 character = ExtResource( 1 )
 talk_to_text = "Look at %s"
 dialog = ExtResource( 18 )
 
-[node name="Sprite" parent="Characters/Sign" index="1"]
+[node name="CollisionShape2D" parent="YSort/Characters/Sign" index="0"]
+position = Vector2( -11, -50 )
+
+[node name="Sprite" parent="YSort/Characters/Sign" index="1"]
+position = Vector2( 0, -65 )
 scale = Vector2( 3.46667, 3.46667 )
 texture = ExtResource( 15 )
 
-[node name="TalkToLabel" parent="Characters/Sign" index="2"]
-margin_left = -123.0
-margin_top = 40.0
-margin_right = -37.0
-margin_bottom = 54.0
+[node name="TalkToLabel" parent="YSort/Characters/Sign" index="2"]
+margin_left = -127.0
+margin_top = -29.0
+margin_right = -41.0
+margin_bottom = -15.0
 text = "Look at Sign"
 
-[node name="TopDownPlayer" parent="." instance=ExtResource( 4 )]
+[node name="TopDownPlayer" parent="YSort" instance=ExtResource( 4 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -230,15 +273,9 @@ margin_right = 318.0
 margin_bottom = 171.0
 align = 1
 
-[node name="GroundItem" parent="." instance=ExtResource( 11 )]
-position = Vector2( 175, -134 )
-item = ExtResource( 16 )
-
-[connection signal="dialog_finished" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_finished"]
-[connection signal="dialog_started" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_started"]
-[connection signal="event_occured" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_event_occured"]
-[connection signal="item_received" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_item_received"]
 [connection signal="item_selected" from="CanvasLayer/UI/Inventory/VBoxContainer/ItemList" to="CanvasLayer/UI/Inventory" method="_on_ItemList_item_selected"]
 
-[editable path="Characters/Stone"]
-[editable path="Characters/Sign"]
+[editable path="YSort/Characters/LadderMan"]
+[editable path="YSort/Characters/Stone"]
+[editable path="YSort/Characters/Lever"]
+[editable path="YSort/Characters/Sign"]

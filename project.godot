@@ -207,12 +207,17 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "StoryItem",
 "language": "GDScript",
-"path": "res://scenes/levels/story_mode/Item.gd"
+"path": "res://scenes/levels/story_mode/items/Item.gd"
 }, {
 "base": "Object",
 "class": "TextUtils",
 "language": "GDScript",
 "path": "res://scripts/TextUtils.gd"
+}, {
+"base": "Button",
+"class": "TitleMenuButton",
+"language": "GDScript",
+"path": "res://scenes/title/TitleMenuButton.gd"
 }, {
 "base": "Reference",
 "class": "TrackParser",
@@ -266,6 +271,7 @@ _global_script_class_icons={
 "Spotter": "",
 "StoryItem": "",
 "TextUtils": "",
+"TitleMenuButton": "",
 "TrackParser": "",
 "TypeShootEnemy": ""
 }
@@ -285,7 +291,12 @@ Settings="*res://scripts/autoload/Settings.gd"
 
 [debug]
 
+gdscript/warnings/unused_class_variable=true
 gdscript/warnings/return_value_discarded=false
+gdscript/warnings/unsafe_property_access=true
+gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
 
 [display]
 
@@ -294,7 +305,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/version_checker/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialog_importer/plugin.cfg", "res://addons/version_checker/plugin.cfg" )
 
 [importer_defaults]
 

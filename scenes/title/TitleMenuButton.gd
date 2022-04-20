@@ -1,5 +1,5 @@
 extends Button
-
+class_name TitleMenuButton
 
 export (String, FILE, "*.tscn") var redirect_scene
 export (bool) var focused_by_default = false

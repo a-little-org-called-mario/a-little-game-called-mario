@@ -4,6 +4,7 @@ signal out_of_view
 signal booth_passed
 
 export (int) var price :int= 5
+export (float) var chance_of_spill :float= 0.25
 var toll_paid := false
 
 func _ready():
@@ -13,6 +14,8 @@ func _ready():
 
 func _payzone_entered(body, for_free:= false):
 	if body.is_in_group("Player"):
+		if !body.get_collision_mask_bit(3):
+			for_free= true
 		if CoinInventoryHandle.change_coins_on(body, -price * int(!for_free)):
 			$BarrierShape.set_deferred("disabled", true)
 			$PayZone.set_deferred("monitoring", false)
@@ -36,6 +39,8 @@ func _out_of_view():
 		$FreeZone.set_deferred("monitoring", true)
 		toll_paid= false
 		$AnimationPlayer.play("RESET")
+		$Spill.visible= randf() < chance_of_spill
+		$Spill.monitoring= $Spill.visible
 
 func change_price(value):
 	price= value

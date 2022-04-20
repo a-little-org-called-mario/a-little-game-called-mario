@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://sprites/mario.png" type="Texture" id=1]
 [ext_resource path="res://scenes/levels/Road.tres" type="TileSet" id=2]
@@ -11,10 +11,12 @@
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=9]
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=10]
 [ext_resource path="res://scenes/FollowTrigger.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/levels/story_mode/TopDownPlayer.gd" type="Script" id=12]
+[ext_resource path="res://scenes/levels/story_mode/player/TopDownPlayer.gd" type="Script" id=12]
 [ext_resource path="res://scenes/carmario/CarSpawn.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sprites/icon.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 530, 32 )
@@ -36,10 +38,6 @@ shader_param/flash_modifier = 0.0
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
@@ -65,6 +63,10 @@ region = Rect2( 96, 32, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 128, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 13 ) ],
@@ -72,15 +74,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "run",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=4]
@@ -206,14 +208,14 @@ text = "TOO YOUNG TO DRIVE:"
 align = 1
 
 [node name="EndPortal" parent="." instance=ExtResource( 9 )]
-position = Vector2( -160, 321 )
+position = Vector2( -176, 385 )
 next_level_path = "res://scenes/levels/CarioMart/Cario2.tscn"
-colour = Color( 0.643137, 0.203922, 0.678431, 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
 
 [node name="Progress" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -120.0
@@ -245,7 +247,73 @@ text = "TOLL: 5"
 fit_content_height = true
 scroll_active = false
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Tutorial" parent="." instance=ExtResource( 16 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 359.0
+margin_top = 16.0
+margin_right = 670.0
+margin_bottom = 129.0
+
+[node name="RichTextLabel" parent="Tutorial" index="0"]
+bbcode_text = "[center]UP/DOWN: STRAFE
+RIGHT: ACCELERATE
+LEFT: BREAKS
+CTRL/B: HONK!"
+text = "UP/DOWN: STRAFE
+RIGHT: ACCELERATE
+LEFT: BREAKS
+CTRL/B: HONK!"
+
+[node name="Tolls" parent="." instance=ExtResource( 16 )]
+anchor_left = 1.0
+anchor_bottom = 0.0
+margin_left = 3072.0
+margin_top = 16.0
+margin_right = 3383.0
+margin_bottom = 129.0
+
+[node name="RichTextLabel" parent="Tolls" index="0"]
+bbcode_text = "[center]THIS ROAD IS MAINTAINED BY YOUR GENEROUS DONATIONS!
+"
+text = "THIS ROAD IS MAINTAINED BY YOUR GENEROUS DONATIONS!
+"
+
+[node name="Sponsor" parent="." instance=ExtResource( 16 )]
+anchor_left = 1.0
+anchor_bottom = 0.0
+margin_left = -354.0
+margin_top = 16.0
+margin_right = -43.0
+margin_bottom = 110.0
+
+[node name="RichTextLabel" parent="Sponsor" index="0"]
+bbcode_text = "[right]HALFWAY THERE!
+SPONSORED BY 
+ICON.PNG"
+text = "HALFWAY THERE!
+SPONSORED BY 
+ICON.PNG"
+
+[node name="TextureRect" parent="Sponsor" index="1"]
+texture = ExtResource( 17 )
+
+[node name="Meeting" parent="." instance=ExtResource( 16 )]
+anchor_left = 1.0
+anchor_bottom = 0.0
+margin_left = -296.0
+margin_top = 16.0
+margin_right = -43.0
+margin_bottom = 110.0
+
+[node name="RichTextLabel" parent="Meeting" index="0"]
+rect_clip_content = false
+bbcode_text = "[center]YOU [wave amp=50 freq=2]MAY[/wave] BE ABOUT TO ENTER:
+THE BALL ROOM"
+text = "YOU MAY BE ABOUT TO ENTER:
+THE BALL ROOM"
+
+[node name="Mision" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 504.0
@@ -262,3 +330,8 @@ text = "DO 10 LAPS AND YOU MAY BE GRANTED ACCESS TO THE SECRET MEETING"
 [connection signal="body_exited" from="Road/Grass" to="." method="terrain_exited"]
 [connection signal="tree_entered" from="CarSpawn" to="CanvasLayer/Progress" method="hide"]
 [connection signal="tree_exited" from="CarSpawn" to="CanvasLayer/Progress" method="show"]
+
+[editable path="Tutorial"]
+[editable path="Tolls"]
+[editable path="Sponsor"]
+[editable path="Meeting"]

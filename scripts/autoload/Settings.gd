@@ -73,8 +73,7 @@ func load_data():
 		EventBus.emit_signal("volume_changed", bus);
 
 func set_to_default():
-	if camera_lean == -1: camera_lean = CameraLeanAmount.MAX
-
+	if camera_lean == -1: camera_lean = CameraLeanAmount.OFF
 	if volume_game == -1: volume_game = 10
 	if volume_music == -1: volume_music = 10
 	if volume_sfx == -1: volume_sfx = 10

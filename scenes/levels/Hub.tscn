@@ -102,5 +102,8 @@ bbcode_text = "[right]N-Z >"
 text = "N-Z >"
 scroll_active = false
 
+[node name="TutorialPortalPos" type="Position2D" parent="."]
+position = Vector2( 96, 160 )
+
 [editable path="Instructions"]
 [editable path="PictureFrameStar"]

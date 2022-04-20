@@ -4,7 +4,7 @@
 [ext_resource path="res://sprites/ballmario.png" type="Texture" id=2]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/platformer/characters/Trail.gd" type="Script" id=4]
-[ext_resource path="res://sprites/flag.jpg" type="Texture" id=5]
+[ext_resource path="res://textures/trails/ranbow_flag.jpg" type="Texture" id=5]
 [ext_resource path="res://scenes/HeartInventoryHandle.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -45,6 +45,7 @@ texture_mode = 2
 joint_mode = 2
 end_cap_mode = 2
 script = ExtResource( 4 )
+textures_directory = "res://textures/trails"
 trail_length = 30
 
 [node name="CoinInventoryHandle" parent="." instance=ExtResource( 3 )]

@@ -28,3 +28,4 @@ visible = false
 position = Vector2( 928, 464 )
 
 [connection signal="dead" from="WallMech" to="." method="_on_WallMech_dead"]
+[connection signal="player_spawned" from="SpawnPoint" to="WallMech" method="_on_SpawnPoint_player_spawned"]

@@ -30,6 +30,8 @@ func _ready() -> void:
 	for character in $YSort/Characters.get_children():
 		character.connect("talked_to", self, "_on_Character_talked_to",
 				[character])
+	for item in $YSort/Items.get_children():
+		item.connect("picked_up", self, "_on_GroundItem_picked_up", [item])
 	_dialog_ui.init(_item_store, _inventory)
 	_dialog_ui.start(preload("content/dialogs/intro.json"))
 
@@ -44,15 +46,23 @@ func _on_Character_talked_to(character: Character) -> void:
 	_dialog_ui.start(character.dialog, character)
 
 
+func _on_GroundItem_picked_up(item):
+	item.queue_free()
+	_give_with_dialog(item.item)
+
+
+func _give_with_dialog(item):
+	_item_receive_popup.show_for(item)
+	yield(_item_receive_popup, "confirmed")
+	_inventory.give(item)
+
+
 func _on_DialogUI_dialog_finished() -> void:
 	_player.can_move = true
 
 
 func _on_DialogUI_item_received(item_id: String) -> void:
-	var item: StoryItem = _item_store.get(item_id)
-	_item_receive_popup.show_for(item)
-	yield(_item_receive_popup, "confirmed")
-	_inventory.give(item)
+	_give_with_dialog(_item_store.get(item_id))
 
 
 func _on_DialogUI_event_occured(event) -> void:

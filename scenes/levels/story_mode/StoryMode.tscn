@@ -136,8 +136,9 @@ margin_bottom = 35.0
 text = "Talk to Stone"
 
 [node name="Lever" parent="YSort/Characters" instance=ExtResource( 5 )]
-position = Vector2( -89, -695 )
+position = Vector2( -89, -676 )
 character = ExtResource( 2 )
+talk_to_text = "Use %s"
 dialog = ExtResource( 20 )
 
 [node name="CollisionShape2D" parent="YSort/Characters/Lever" index="0"]
@@ -152,7 +153,7 @@ margin_left = 33.0
 margin_top = -35.0
 margin_right = 119.0
 margin_bottom = -21.0
-text = "Talk to Lever"
+text = "Use Lever"
 
 [node name="Sign" parent="YSort/Characters" instance=ExtResource( 5 )]
 position = Vector2( 1722, -626 )
@@ -266,6 +267,7 @@ margin_right = 318.0
 margin_bottom = 151.0
 size_flags_vertical = 3
 expand = true
+stretch_mode = 6
 
 [node name="ItemTitleLabel" type="Label" parent="CanvasLayer/UI/ItemReceivePopup/VBoxContainer"]
 margin_top = 155.0
@@ -273,6 +275,10 @@ margin_right = 318.0
 margin_bottom = 171.0
 align = 1
 
+[connection signal="dialog_finished" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_finished"]
+[connection signal="dialog_started" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_started"]
+[connection signal="event_occured" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_event_occured"]
+[connection signal="item_received" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_item_received"]
 [connection signal="item_selected" from="CanvasLayer/UI/Inventory/VBoxContainer/ItemList" to="CanvasLayer/UI/Inventory" method="_on_ItemList_item_selected"]
 
 [editable path="YSort/Characters/LadderMan"]

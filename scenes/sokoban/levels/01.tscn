@@ -51,11 +51,11 @@ bbcode_text = "
 [ARROWS]    MOVE
 [R]         RESTART
 [BACKSPACE] UNDO
-[ESC]       MAIN MENU"
+[ESC/P]     MAIN MENU"
 text = "
 [ARROWS]    MOVE
 [R]         RESTART
 [BACKSPACE] UNDO
-[ESC]       MAIN MENU"
+[ESC/P]     MAIN MENU"
 
 [editable path="Instructions"]

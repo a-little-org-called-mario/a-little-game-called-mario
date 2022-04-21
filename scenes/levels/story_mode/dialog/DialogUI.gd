@@ -114,6 +114,12 @@ func _progress_dialog():
 	_continue_button.visible = not last
 	_choice_container.visible = last
 	_finish_button.visible = _dialog.choices.empty() and last
+	if _finish_button.visible:
+		_finish_button.grab_focus()
+	elif _continue_button.visible:
+		_continue_button.grab_focus()
+	elif _choice_container.get_child_count():
+		_choice_container.get_child(0).grab_focus()
 	if last:
 		_occurences[_dialog] = _occurences.get(_dialog, 0) + 1
 		if _dialog.item:

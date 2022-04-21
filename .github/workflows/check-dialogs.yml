@@ -16,6 +16,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           json_schema: scenes/levels/story_mode/dialogs/schema/dialog.schema.json
-          json_path_pattern: .*dialogs/*.json$
+          json_path_pattern: .*dialogs/.*json$
           send_comment: true
           clear_comments: true

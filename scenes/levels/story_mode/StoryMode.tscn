@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/levels/story_mode/content/characters/sign.tres" type="Resource" id=1]
 [ext_resource path="res://scenes/levels/story_mode/content/characters/lever.tres" type="Resource" id=2]
@@ -24,6 +24,12 @@
 [ext_resource path="res://sprites/tiles/foreground/brick.png" type="Texture" id=22]
 [ext_resource path="res://sprites/ladder_man.png" type="Texture" id=23]
 [ext_resource path="res://sprites/switch.png" type="Texture" id=24]
+[ext_resource path="res://scenes/levels/story_mode/content/characters/donk.tres" type="Resource" id=25]
+[ext_resource path="res://sprites/Wizard dude.png" type="Texture" id=26]
+[ext_resource path="res://scenes/levels/story_mode/content/characters/wizard_dude.tres" type="Resource" id=27]
+[ext_resource path="res://sprites/donk.png" type="Texture" id=28]
+[ext_resource path="res://scenes/levels/story_mode/content/dialogs/donk_wizard.json" type="Resource" id=29]
+[ext_resource path="res://scenes/levels/story_mode/Characters.gd" type="Script" id=30]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -56,6 +62,10 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 313, -75 ) ]
 }
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 28 )
+region = Rect2( 0, 0, 96, 96 )
 
 [node name="StoryMode" type="Node2D"]
 script = ExtResource( 8 )
@@ -99,10 +109,11 @@ position = Vector2( 175, -134 )
 item = ExtResource( 16 )
 
 [node name="Characters" type="YSort" parent="YSort"]
+script = ExtResource( 30 )
 
 [node name="LadderMan" parent="YSort/Characters" instance=ExtResource( 5 )]
 position = Vector2( -613, -1027 )
-character = ExtResource( 21 )
+data = ExtResource( 21 )
 dialog = ExtResource( 19 )
 
 [node name="CollisionShape2D" parent="YSort/Characters/LadderMan" index="0"]
@@ -121,7 +132,7 @@ text = "Talk to Ladder Man"
 
 [node name="Stone" parent="YSort/Characters" instance=ExtResource( 5 )]
 position = Vector2( 221, -1539 )
-character = ExtResource( 13 )
+data = ExtResource( 13 )
 dialog = ExtResource( 17 )
 
 [node name="Sprite" parent="YSort/Characters/Stone" index="1"]
@@ -137,7 +148,7 @@ text = "Talk to Stone"
 
 [node name="Lever" parent="YSort/Characters" instance=ExtResource( 5 )]
 position = Vector2( -89, -676 )
-character = ExtResource( 2 )
+data = ExtResource( 2 )
 talk_to_text = "Use %s"
 dialog = ExtResource( 20 )
 
@@ -157,7 +168,7 @@ text = "Use Lever"
 
 [node name="Sign" parent="YSort/Characters" instance=ExtResource( 5 )]
 position = Vector2( 1722, -626 )
-character = ExtResource( 1 )
+data = ExtResource( 1 )
 talk_to_text = "Look at %s"
 dialog = ExtResource( 18 )
 
@@ -175,6 +186,32 @@ margin_top = -29.0
 margin_right = -41.0
 margin_bottom = -15.0
 text = "Look at Sign"
+
+[node name="Donk" parent="YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 241, -1070 )
+data = ExtResource( 25 )
+talk_to_text = "Talk to weird group"
+dialog = ExtResource( 29 )
+
+[node name="Sprite" parent="YSort/Characters/Donk" index="1"]
+position = Vector2( 0, -45 )
+texture = SubResource( 1 )
+
+[node name="TalkToLabel" parent="YSort/Characters/Donk" index="2"]
+text = "Talk to weird group"
+
+[node name="WizardDude" parent="YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 375, -1068 )
+data = ExtResource( 27 )
+
+[node name="Sprite" parent="YSort/Characters/WizardDude" index="1"]
+position = Vector2( 9.99997, -42.0001 )
+scale = Vector2( 2.91051, 2.91051 )
+texture = ExtResource( 26 )
+
+[node name="TalkToLabel" parent="YSort/Characters/WizardDude" index="2"]
+visible = false
+text = "Talk to Wizard Dude"
 
 [node name="TopDownPlayer" parent="YSort" instance=ExtResource( 4 )]
 
@@ -285,3 +322,5 @@ align = 1
 [editable path="YSort/Characters/Stone"]
 [editable path="YSort/Characters/Lever"]
 [editable path="YSort/Characters/Sign"]
+[editable path="YSort/Characters/Donk"]
+[editable path="YSort/Characters/WizardDude"]

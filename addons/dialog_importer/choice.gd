@@ -14,6 +14,7 @@ export var dialog: Resource
 
 const Condition = preload("res://addons/dialog_importer/condition.gd")
 
+
 func _init(data = "") -> void:
 	if data is String:
 		text = data

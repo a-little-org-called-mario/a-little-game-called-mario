@@ -30,7 +30,11 @@
 		}
 	},
 	"oneOf": [
-		{ "type":"string" },
+		{ "type": "string" },
+		{
+			"type": "array",
+			"items": { "$ref": "#" }
+		},
 		{
 			"type":"object",
 			"properties": {
@@ -95,9 +99,18 @@
 					"type": "string",
 					"minLength": 3
 				},
+				"character": {
+					"type": "string",
+					"minLength": 3,
+					"description": "The id of the character that says the text"
+				},
 				"condition": {
 					"description": "Only reach this dialog if this condition is true",
 					"$ref": "#/definitions/condition"
+				},
+				"next": {
+					"description": "The dialog that is started after this one finished",
+					"$ref": "#"
 				}
 			},
 			"required": ["text"],

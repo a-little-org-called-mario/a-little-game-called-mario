@@ -23,6 +23,7 @@ onready var _inventory: Inventory = $CanvasLayer/UI/Inventory
 onready var _item_receive_popup: ItemReceivePopup = $CanvasLayer/UI/ItemReceivePopup
 onready var _tile_map: TileMap = $TileMap
 onready var _door_position: Position2D = $DoorPosition
+onready var _characters: YSort = $YSort/Characters
 
 
 func _ready() -> void:
@@ -32,8 +33,9 @@ func _ready() -> void:
 				[character])
 	for item in $YSort/Items.get_children():
 		item.connect("picked_up", self, "_on_GroundItem_picked_up", [item])
-	_dialog_ui.init(_item_store, _inventory, "res://scenes/levels/story_mode/content/dialogs/")
-	_dialog_ui.start(preload("content/dialogs/intro.json"))
+	_dialog_ui.init(_item_store, _characters, _inventory,
+			"res://scenes/levels/story_mode/content/dialogs/")
+	#_dialog_ui.start(preload("content/dialogs/intro.json"))
 
 
 func is_door_open():

@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprites/ui/boss_bar2.png" type="Texture" id=1]
+[ext_resource path="res://sprites/ui/boss_bar4.png" type="Texture" id=2]
+[ext_resource path="res://sprites/ui/boss_bar1.png" type="Texture" id=3]
+[ext_resource path="res://sprites/ui/boss_bar3.png" type="Texture" id=4]
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[node name="BossBar" type="CanvasLayer"]
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -300.0
+margin_top = -144.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Name" type="RichTextLabel" parent="VBox"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 60 )
+rect_clip_content = false
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[right][wave]TEST
+NAMENAMENAME"
+text = "TEST
+NAMENAMENAME"
+scroll_active = false
+
+[node name="ProgressRed" type="TextureProgress" parent="VBox"]
+margin_top = 64.0
+margin_right = 300.0
+margin_bottom = 144.0
+value = 75.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 4 )
+
+[node name="Progress" type="TextureProgress" parent="VBox/ProgressRed"]
+margin_right = 216.0
+margin_bottom = 80.0
+value = 50.0
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 1 )

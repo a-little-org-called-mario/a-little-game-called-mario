@@ -8,11 +8,10 @@ onready var player : Player = owner
 onready var horn_sound : AudioStreamPlayer = get_node("Horn")
 onready var resting_sound : AudioStreamPlayer2D = get_node("brrrrrrrrr")
 onready var moving_sound : AudioStreamPlayer2D = get_node("moving_sound")
-onready var direction_pivot : Node2D = player.get_node("Pivot")
+onready var collision: CollisionShape2D = get_node(collision_shape)
 
 enum busState {RESTING, MOVING};
 var state
-onready var collision: CollisionShape2D = get_node(collision_shape)
 
 
 func _ready() -> void:
@@ -21,13 +20,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if inventory.has_bus:
-		player.powerupspeed = 4
-		player.powerupaccel = 2
-	else:
-		player.powerupspeed = 1
-		player.powerupaccel = 1
-		
 	
 	if  (Input.is_action_pressed("right") or Input.is_action_pressed("left")):
 		_set_state(busState.MOVING)
@@ -67,6 +59,9 @@ func _activate_bus(active: bool) -> void:
 		player.powerupaccel = 1
 		moving_sound.playing = false 
 		resting_sound.playing = false
+	else:
+		player.powerupspeed = 4
+		player.powerupaccel = 2
 
 func _set_state(newState):
 	if(state == newState):

@@ -97,8 +97,6 @@ func _set_dialog(to: Dialog):
 		var character: Character = _characters.get_by_id(_dialog.character)
 		assert(character, "Character '%s' not found" % _dialog.character)
 		_set_speaker(character)
-	else:
-		_set_speaker(null)
 	if _dialog.condition:
 		var condition := _condition_true(_dialog.condition, _dialog)
 		if _dialog.has_branches:

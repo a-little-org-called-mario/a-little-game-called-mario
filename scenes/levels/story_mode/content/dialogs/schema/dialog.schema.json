@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/schema",
 	"$id": "https://iznaut.itch.io/a-little-game-called-mario/dialog.schema.json",
 	"title": "Dialog",
-	"description": "A dialog in the game A little game called Mario",
+	"description": "A dialog in the game A little game called Mario. Can be string the character says, a list of chained dialogs or an object.",
 	"definitions": {
 		"condition": {
 			"type": "object",
@@ -51,7 +51,7 @@
 					]
 				},
 				"choices": {
-					"description": "The choices the player has the respond.",
+					"description": "The options the player has the respond. Can be a string if there is only one option or a list of strings or objects.",
 					"type": "array",
 					"items": {
 						"oneOf": [
@@ -68,7 +68,7 @@
 										"$ref": "#"
 									},
 									"condition": {
-										"description": "The condition that needs to be true to have this option be visible.",
+										"description": "The condition that needs to be true for this option to be visible.",
 										"$ref": "#/definitions/condition"
 									}
 								},
@@ -80,7 +80,7 @@
 					"minItems": 1
 				},
 				"item": {
-					"description": "The item that the character gives the player after the dialog",
+					"description": "The item that the character gives the player after the dialog. This is the name of the resource file without the tres extension.",
 					"minLength": 3,
 					"type": "string"
 				},
@@ -90,22 +90,22 @@
 					"type": "string"
 				},
 				"set_sprite": {
-					"description": "The the character should appear as after the dialog",
+					"description": "The texture the character should appear as after the dialog. This should be a path to a texture resource.",
 					"minLength": 3,
 					"type": "string"
 				},
 				"label": {
-					"description": "A label that can be used with goto",
+					"description": "Mark this dialog as this label which can be jumped to from another dialog using goto",
 					"type": "string",
 					"minLength": 3
 				},
 				"character": {
 					"type": "string",
 					"minLength": 3,
-					"description": "The id of the character that says the text"
+					"description": "The id of the character that says the text. This is the file name of the character data resource without extension."
 				},
 				"condition": {
-					"description": "Only reach this dialog if this condition is true",
+					"description": "Make this dialog only reachable if this condition is true",
 					"$ref": "#/definitions/condition"
 				},
 				"next": {
@@ -120,7 +120,7 @@
 			"type": "object",
 			"properties": {
 				"condition": {
-					"description": "A branch in the dialog",
+					"description": "A branch in the dialog. If you specify this",
 					"$ref": "#/definitions/condition"
 				},
 				"true": {
@@ -132,14 +132,14 @@
 					"$ref": "#"
 				}
 			},
-			"required": ["condition", "false"],
+			"required": ["condition", "true", "false"],
 			"additionalProperties": false
 		},
 		{
 			"type": "object",
 			"properties": {
 				"goto": {
-					"description": "Go to the dialog with the defined label",
+					"description": "Go to the dialog with the defined label instead of executing this dialog",
 					"type": "string",
 					"minLength": 3
 				}

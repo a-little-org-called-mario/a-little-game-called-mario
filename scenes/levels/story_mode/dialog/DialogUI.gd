@@ -69,12 +69,12 @@ func init(item_store: ItemStore, characters: Characters, inventory: Inventory,
 # Start a dialog with optionally a character as speaker.
 func start(dialog: Dialog, speaker: Character = null):
 	_assert_ready()
+	active = true
 	emit_signal("dialog_started")
 	_labels.clear()
 	_gather_labels(dialog)
 	_set_dialog(dialog)
 	_set_speaker(speaker)
-	active = true
 
 
 func _set_speaker(speaker: Character):

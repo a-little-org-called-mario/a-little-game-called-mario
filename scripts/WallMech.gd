@@ -53,7 +53,7 @@ func move(_delta: float) -> void:
 
 
 func shoot() -> void:
-	if player: # Calculate shooting_direction based on player position
+	if player:  # Calculate shooting_direction based on player position
 		shoot_direction = position.direction_to(player.position) * Vector2(1, 0)
 	# create bullet and muzzle flashes for each muzzle.
 	for muzzle in muzzles:

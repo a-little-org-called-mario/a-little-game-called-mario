@@ -1,4 +1,6 @@
 class_name MarwingLevel
 extends Spatial
 
-var ignore_camera_follow : bool = true;
+export var act_number: int
+export var level_number: int
+export var level_name: String

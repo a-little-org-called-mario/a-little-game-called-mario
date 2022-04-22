@@ -205,9 +205,14 @@ _global_script_classes=[ {
 "path": "res://scripts/Spotter.gd"
 }, {
 "base": "Resource",
+"class": "StoryCharacterData",
+"language": "GDScript",
+"path": "res://scenes/levels/story_mode/character/CharacterData.gd"
+}, {
+"base": "Resource",
 "class": "StoryItem",
 "language": "GDScript",
-"path": "res://scenes/levels/story_mode/items/Item.gd"
+"path": "res://scenes/levels/story_mode/item/Item.gd"
 }, {
 "base": "Object",
 "class": "TextUtils",
@@ -269,6 +274,7 @@ _global_script_class_icons={
 "SokobanLevel": "res://sprites/box.png",
 "SpawnPoint": "",
 "Spotter": "",
+"StoryCharacterData": "",
 "StoryItem": "",
 "TextUtils": "",
 "TitleMenuButton": "",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/enemies/GreasySteve.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/powerups/Bus.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=8]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -34,7 +35,8 @@ bounce_count = 2
 position = Vector2( 96, 480 )
 
 [node name="Bus" parent="." instance=ExtResource( 7 )]
-position = Vector2( 252, 469 )
+position = Vector2( 236, 457 )
+scale = Vector2( 1.5, 1.5 )
 
 [node name="GreasySteve" parent="." instance=ExtResource( 5 )]
 position = Vector2( 86, 62 )
@@ -42,3 +44,35 @@ is_dripping_grease = false
 
 [node name="GreasySteve2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 734, 39 )
+
+[node name="InstructionsBus" parent="." instance=ExtResource( 8 )]
+margin_left = 49.0
+margin_top = 192.0
+margin_right = 358.0
+margin_bottom = 314.0
+
+[node name="RichTextLabel" parent="InstructionsBus" index="0"]
+bbcode_text = "[wave amp=20 freq=2]BUS CONTROLS:[/wave]
+
+[O KEY]	  [rainbow freq=0.5 sat=1 val=20]HORN[/rainbow]
+[BACKSPACE]  EXIT BUS"
+text = "BUS CONTROLS:
+
+[O KEY]	  HORN
+[BACKSPACE]  EXIT BUS"
+
+[node name="VScrollBar2" type="VScrollBar" parent="InstructionsBus/RichTextLabel" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 68.0
+step = 1.0
+page = 74.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="InstructionsBus/RichTextLabel" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[editable path="InstructionsBus"]

@@ -1,15 +1,15 @@
 extends GridContainer
 
 const SOKOBAN_LEVEL_DIRECTORY = "res://scenes/sokoban/levels/"
+export (PackedScene) var level_button: PackedScene
 
 
 func _ready():
 	var levels := list_sokoban_levels()
-	var level_button: PackedScene = preload("res://scenes/sokoban/SokobanLevelButton.tscn")
 	for i in range(len(levels)):
 		var button := level_button.instance()
-		button.level = i + 1
-		button.level_url = SOKOBAN_LEVEL_DIRECTORY + levels[i]
+		button.text = str(i+1)
+		button.redirect_scene = SOKOBAN_LEVEL_DIRECTORY + levels[i]
 		add_child(button)
 
 

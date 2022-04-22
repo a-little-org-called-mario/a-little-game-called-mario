@@ -1,8 +1,10 @@
 #warning-ignore-all: NARROWING_CONVERSION
+#warning-ignore-all: INTEGER_DIVISION
 extends TileMap
 
 
 const LABEL_POSITION := Vector2(6, 6)
+const TUTORIAL_NAME = "TUTORIAL"
 
 export(String, DIR) var levels_directory: String
 export(PackedScene) var portal_scene: PackedScene
@@ -19,21 +21,54 @@ func _ready() -> void:
 	var portal_position: Vector2 = portal_template.get_node("Portal").position
 	var label_position: Vector2 = portal_template.get_node("Label").position
 
-	var levels: Array = _get_all_first_levels_in_dir(levels_directory)
-	for i in range(len(levels)):
+	var levels: Dictionary = { }
+	var tut_level: Dictionary = { }
+	for level in _get_all_first_levels_in_dir(levels_directory):
+		if _get_dir_name(level).to_upper() != TUTORIAL_NAME:
+			levels[_get_dir_name(level).to_upper()] = level
+		else:
+			tut_level[TUTORIAL_NAME] = level
+
+	# Add tutorial level middle screen
+	if tut_level.size() > 0:
+		var tutorial_portal_pos : Vector2 = $TutorialPortalPos.position
+		create_portal(tut_level[TUTORIAL_NAME], tutorial_portal_pos)
+		var tutorial_label_pos : Vector2 = Vector2(
+			tutorial_portal_pos.x,
+			tutorial_portal_pos.y + portal_rect.size.y + walls_tilemap.cell_size.y / 2)
+		create_label(TUTORIAL_NAME, tutorial_label_pos)
+
+	var n_levels: int = len(levels)
+	var keys: Array = levels.keys()
+	keys.sort()
+
+	for i in range(n_levels):
 		var rect: Rect2 = walls_tilemap.get_used_rect()
 		var base_dest: Vector2 = Vector2(
-			rect.position.x + (rect.size.x if i % 2 else -portal_rect.size.x),
+			rect.position.x + (rect.size.x if i >= n_levels / 2 else -portal_rect.size.x),
 			rect.position.y + rect.size.y - 1.0
 		)
 		for y in range(portal_rect.size.y):
 			for x in range(portal_rect.size.x):
 				var dest_x := base_dest.x + x
 				var dest_y := base_dest.y - y
-				var tile := portal_template.get_cell(portal_rect.position.x + x, portal_rect.position.y + portal_rect.size.y - 1 - y)
+				var tile := portal_template.get_cell(
+					portal_rect.position.x + x,
+					portal_rect.position.y + portal_rect.size.y - 1 - y
+				)
 				walls_tilemap.set_cell(dest_x, dest_y, tile)
-		create_portal(levels[i], map_to_world(base_dest) + portal_position)
-		create_label(levels[i], map_to_world(base_dest) + label_position)
+		create_portal(levels[keys[i]], map_to_world(base_dest) + portal_position)
+		create_label(keys[i], map_to_world(base_dest) + label_position)
+
+	# Update left/right labels
+	$LeftLabel.bbcode_text = TextUtils.wave("< %s-%s" % [
+		keys[(n_levels / 2) - 1].substr(0, 1), 
+		keys[0].substr(0, 1)
+	])
+	$RightLabel.bbcode_text = TextUtils.right(TextUtils.wave("%s-%s >" % [
+		keys[n_levels / 2].substr(0, 1),
+		keys[n_levels - 1].substr(0, 1)
+	]))
 
 	# Fill everything with background tile.
 	# And put walls around the room.
@@ -67,11 +102,11 @@ func create_portal(level: String, position: Vector2) -> EndPortal:
 	return portal
 
 
-func create_label(level: String, position: Vector2) -> Label:
+func create_label(text: String, position: Vector2) -> Label:
 	var label: Label = Label.new()
 	label.add_font_override("font", preload("res://scenes/ui/Themes/Default/DefaultFont.tres"))
 	label.uppercase = true
-	label.text = _get_dir_name(level)
+	label.text = text
 	label.set_global_position(position + Vector2(0.0, cell_size.y / 4.0))
 	add_child(label)
 	label.set_global_position(label.rect_global_position - Vector2(label.rect_size.x / 2.0, 0.0))

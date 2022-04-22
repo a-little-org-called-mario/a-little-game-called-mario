@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/CameraFollow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/levels/Hub.gd" type="Script" id=6]
+[ext_resource path="res://sprites/Coin_Gems/star.png" type="Texture" id=7]
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=8]
 
 [node name="Hub" type="TileMap"]
 tile_set = ExtResource( 1 )
 collision_layer = 2
+collision_mask = 9
 format = 1
 script = ExtResource( 6 )
 levels_directory = "res://scenes/levels"
@@ -30,6 +34,8 @@ position = Vector2( 128, -128 )
 
 [node name="Walls" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
+collision_layer = 2
+collision_mask = 9
 format = 1
 tile_data = PoolIntArray( -851967, 1, 0, -65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 131071, 0, 0, 65536, 0, 0, 65538, 0, 0, 65539, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0 )
 
@@ -38,3 +44,66 @@ position = Vector2( 96, -128 )
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 96, -128 )
+
+[node name="Instructions" parent="." instance=ExtResource( 5 )]
+margin_left = -270.0
+margin_top = -196.0
+margin_right = 39.0
+margin_bottom = -74.0
+
+[node name="RichTextLabel" parent="Instructions" index="0"]
+bbcode_text = "[ARROWS]   [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+[SPACE]    [wave amp=50 freq=2]JUMP[/wave]
+[SHIFT]    [SPRINT]
+[CTRL/Z]   THROW COIN"
+text = "[ARROWS]   MOVE
+[SPACE]    JUMP
+[SHIFT]    [SPRINT]
+[CTRL/Z]   THROW COIN"
+
+[node name="PictureFrameStar" parent="." instance=ExtResource( 5 )]
+margin_left = 138.0
+margin_top = -184.0
+margin_right = 490.0
+margin_bottom = -83.0
+
+[node name="RichTextLabel" parent="PictureFrameStar" index="0"]
+bbcode_text = "     HOLD JUMP TO GO
+	 HIGHER AND PRESS IT 
+	 TWICE TO DOUBLE JUMP"
+text = "     HOLD JUMP TO GO
+	 HIGHER AND PRESS IT 
+	 TWICE TO DOUBLE JUMP"
+
+[node name="TextureRect" parent="PictureFrameStar" index="1"]
+texture = ExtResource( 7 )
+
+[node name="LeftLabel" type="RichTextLabel" parent="."]
+margin_left = -64.0
+margin_top = 160.0
+margin_right = 64.0
+margin_bottom = 176.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "< A-M"
+text = "< A-M"
+scroll_active = false
+
+[node name="RightLabel" type="RichTextLabel" parent="."]
+margin_left = 128.0
+margin_top = 160.0
+margin_right = 256.0
+margin_bottom = 176.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[right]N-Z >"
+text = "N-Z >"
+scroll_active = false
+
+[node name="TutorialPortalPos" type="Position2D" parent="."]
+position = Vector2( 96, 160 )
+
+[editable path="Instructions"]
+[editable path="PictureFrameStar"]

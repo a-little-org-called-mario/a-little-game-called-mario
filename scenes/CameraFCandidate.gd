@@ -14,3 +14,4 @@ func _enter_tree() -> void:
 # If I exit the tree I can no longer get followed by camera
 func _exit_tree() -> void:
 	get_parent().remove_from_group("CameraFCandidates")
+	EventBus.emit_signal("cameraF_candidate_spawned")

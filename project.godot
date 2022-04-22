@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "AxisMotion",
 "language": "GDScript",
-"path": "res://scripts/AxisMotion.gd"
+"path": "res://scenes/platformer/characters/AxisMotion.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "BallPlayer",
@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "BouncyMoustache",
 "language": "GDScript",
-"path": "res://scripts/BoucyMoustache.gd"
+"path": "res://scripts/BouncyMoustache.gd"
 }, {
 "base": "Enemy",
 "class": "Bub",
@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "EndPortal",
 "language": "GDScript",
-"path": "res://scripts/EndPortal.gd"
+"path": "res://scenes/EndPortal.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",
@@ -108,6 +108,16 @@ _global_script_classes=[ {
 "class": "Fireball",
 "language": "GDScript",
 "path": "res://scripts/powerups/Fireball.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Food",
+"language": "GDScript",
+"path": "res://scripts/Food.gd"
+}, {
+"base": "BaseInventoryHandle",
+"class": "HeartInventoryHandle",
+"language": "GDScript",
+"path": "res://scripts/resources/HeartInventoryHandle.gd"
 }, {
 "base": "Area2D",
 "class": "IntralevelPortal",
@@ -137,7 +147,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scripts/Player.gd"
+"path": "res://scenes/platformer/characters/Player.gd"
 }, {
 "base": "RigidBody2D",
 "class": "PlayerFlying",
@@ -197,7 +207,17 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "StoryItem",
 "language": "GDScript",
-"path": "res://scenes/levels/story_mode/Item.gd"
+"path": "res://scenes/levels/story_mode/items/Item.gd"
+}, {
+"base": "Object",
+"class": "TextUtils",
+"language": "GDScript",
+"path": "res://scripts/TextUtils.gd"
+}, {
+"base": "Button",
+"class": "TitleMenuButton",
+"language": "GDScript",
+"path": "res://scenes/title/TitleMenuButton.gd"
 }, {
 "base": "Reference",
 "class": "TrackParser",
@@ -230,6 +250,8 @@ _global_script_class_icons={
 "Enemy": "",
 "FireFlower": "",
 "Fireball": "",
+"Food": "",
+"HeartInventoryHandle": "",
 "IntralevelPortal": "",
 "Luigi": "",
 "MarwingLevel": "",
@@ -248,6 +270,8 @@ _global_script_class_icons={
 "SpawnPoint": "",
 "Spotter": "",
 "StoryItem": "",
+"TextUtils": "",
+"TitleMenuButton": "",
 "TrackParser": "",
 "TypeShootEnemy": ""
 }
@@ -267,7 +291,12 @@ Settings="*res://scripts/autoload/Settings.gd"
 
 [debug]
 
+gdscript/warnings/unused_class_variable=true
 gdscript/warnings/return_value_discarded=false
+gdscript/warnings/unsafe_property_access=true
+gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
 
 [display]
 
@@ -276,7 +305,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/version_checker/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialog_importer/plugin.cfg", "res://addons/version_checker/plugin.cfg" )
 
 [importer_defaults]
 
@@ -455,6 +484,11 @@ marwing_right={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
  ]
 }
+click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 toggle_inventory={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
@@ -470,6 +504,11 @@ battle_moves_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":73,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+make_sound={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
@@ -494,5 +533,5 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 2d/snapping/use_gpu_pixel_snap=true
-environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
+environment/default_clear_color=Color( 0.258824, 0.929412, 1, 1 )
 environment/default_environment="res://default_env.tres"

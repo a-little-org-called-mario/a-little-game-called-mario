@@ -12,7 +12,7 @@ func _ready():
 	EventBus.connect("jumping", self, "trigger_small_shake")
 	EventBus.connect("enemy_killed", self, "trigger_small_shake")
 	EventBus.connect("level_started", self, "return_to_center")
-	EventBus.connect("heart_changed", self, "on_heart_changed")
+	EventBus.connect("heart_changed", self, "_on_heart_changed")
 	position = get_viewport_rect().size / 2
 
 
@@ -57,10 +57,6 @@ func return_to_center(_data) -> void:
 	position = get_viewport_rect().size / 2
 
 
-func on_heart_changed(data) -> void:
-	var value := 1
-	if data.has("value"):
-		value = data["value"]
-
-	if value < 0:
+func _on_heart_changed(delta: int, _total: int) -> void:
+	if delta < 0:
 		trigger_medium_shake()

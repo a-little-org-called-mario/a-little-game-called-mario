@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=1]
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=3]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=4]
+[ext_resource path="res://scenes/title/TitleMenuButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/sokoban/SokobanLevelGrid.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
@@ -11,6 +12,12 @@ size = 48
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
+
+[sub_resource type="InputEventAction" id=2]
+action = "ui_cancel"
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
 
 [node name="LevelSelect" type="Control"]
 theme = ExtResource( 1 )
@@ -67,8 +74,8 @@ __meta__ = {
 [node name="CalledMario" type="Label" parent="VBoxContainer"]
 margin_top = 258.0
 margin_right = 1024.0
-margin_bottom = 388.0
-rect_min_size = Vector2( 0, 130 )
+margin_bottom = 308.0
+rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "CALLED MARIO"
@@ -78,8 +85,21 @@ __meta__ = {
 }
 
 [node name="SokobanLevelGrid" type="GridContainer" parent="VBoxContainer"]
-margin_top = 392.0
-margin_right = 1024.0
-margin_bottom = 392.0
+margin_left = 512.0
+margin_top = 312.0
+margin_right = 512.0
+margin_bottom = 437.0
+rect_min_size = Vector2( 0, 125 )
+size_flags_horizontal = 4
 columns = 2
 script = ExtResource( 6 )
+level_button = ExtResource( 5 )
+
+[node name="BackButton" parent="VBoxContainer" instance=ExtResource( 5 )]
+margin_left = 423.0
+margin_top = 441.0
+margin_right = 601.0
+margin_bottom = 493.0
+shortcut = SubResource( 3 )
+text = "BACK TO MENU"
+redirect_scene = "res://scenes/title/TitleScreen.tscn"

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gassysokoban.mp3-7cea7661988cccaf60cd3611ee7e0602.mp3str"
+
+[deps]
+
+source_file="res://audio/music/gassysokoban.mp3"
+dest_files=[ "res://.import/gassysokoban.mp3-7cea7661988cccaf60cd3611ee7e0602.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

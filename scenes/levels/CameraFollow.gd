@@ -30,6 +30,12 @@ var follow_index: int = 0
 
 func _ready() -> void:
 	_find_current_camera()
+	# If there is no camera (probably because you are running the scene by itself)
+	# create a camera and make it current. 
+	if camera_reference == null:
+		camera_reference = Camera2D.new()
+		get_tree().root.call_deferred("add_child",camera_reference)
+		camera_reference.make_current()
 
 func _enter_tree() -> void:
 	EventBus.connect("cameraF_candidate_spawned",self,"_get_follow_candidates")
@@ -49,11 +55,10 @@ func _exit_tree() -> void:
 	
 func _get_follow_candidates() -> void:
 	follow_candidates = get_tree().get_nodes_in_group("CameraFCandidates")
-	print(follow_candidates.size())
-	
+
 func _get_camera_candidates() -> Array:
 	return get_tree().get_nodes_in_group("Cameras")
-	
+
 func _find_current_camera() -> void:
 	var camera_candidates = _get_camera_candidates()
 	if camera_candidates.size()>0:
@@ -64,7 +69,9 @@ func _find_current_camera() -> void:
 		camera_reference = null
 
 func _process(_delta: float) -> void:
-	if following and camera_reference and follow_candidates.size()>0 :
+	if following and camera_reference and follow_candidates.size() > 0:
+		if follow_index >= len(follow_candidates):
+			_next_candidate()
 		if follow_horizontally:
 			camera_reference.position.x = lerp(camera_reference.position.x, follow_candidates[follow_index].position.x, follow_speed)
 		if follow_vertically:

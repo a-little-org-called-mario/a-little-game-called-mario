@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
@@ -6,10 +6,14 @@
 [ext_resource path="res://scenes/ui/LevelCount.gd" type="Script" id=4]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
 [ext_resource path="res://scenes/ui/Instructions.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/Toasty.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/ui/HeartIconContainer.gd" type="Script" id=8]
 [ext_resource path="res://scenes/ui/Heart.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/ui/StarNotification.gd" type="Script" id=10]
 [ext_resource path="res://scenes/ui/PlayerDied.gd" type="Script" id=11]
+[ext_resource path="res://textures/trails/ranbow_flag.jpg" type="Texture" id=12]
+[ext_resource path="res://scenes/ui/CarPlayerStats.gd" type="Script" id=13]
+[ext_resource path="res://scenes/ui/UI.gd" type="Script" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Appear"
@@ -73,9 +77,7 @@ margin_right = 1024.0
 margin_bottom = 600.0
 mouse_filter = 2
 theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 14 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 anchor_right = 1.0
@@ -146,7 +148,103 @@ text = "COINS:0"
 scroll_active = false
 script = ExtResource( 2 )
 
+[node name="CarPlayerStats" type="VBoxContainer" parent="UI" groups=["car_ui"]]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -184.0
+margin_top = 80.0
+margin_right = -28.0
+margin_bottom = 164.0
+script = ExtResource( 13 )
+
+[node name="HealthTitle" type="Label" parent="UI/CarPlayerStats"]
+margin_right = 156.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "CLOUT"
+align = 1
+
+[node name="Health" type="ColorRect" parent="UI/CarPlayerStats"]
+margin_top = 20.0
+margin_right = 156.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 104, 24 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="Value" type="TextureRect" parent="UI/CarPlayerStats/Health"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+texture = ExtResource( 12 )
+expand = true
+
+[node name="Speed" type="HBoxContainer" parent="UI/CarPlayerStats"]
+margin_top = 48.0
+margin_right = 156.0
+margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="UI/CarPlayerStats/Speed"]
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "SPEED:"
+
+[node name="Value" type="Label" parent="UI/CarPlayerStats/Speed"]
+margin_left = 108.0
+margin_right = 156.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "FAST"
+align = 2
+
+[node name="Distance" type="HBoxContainer" parent="UI/CarPlayerStats"]
+margin_top = 68.0
+margin_right = 156.0
+margin_bottom = 84.0
+
+[node name="Label" type="Label" parent="UI/CarPlayerStats/Distance"]
+margin_right = 116.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "DISTANCE:"
+
+[node name="Value" type="Label" parent="UI/CarPlayerStats/Distance"]
+margin_left = 120.0
+margin_right = 156.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "FAR"
+align = 2
+
+[node name="Felonies" type="HBoxContainer" parent="UI/CarPlayerStats"]
+visible = false
+margin_top = 88.0
+margin_right = 156.0
+margin_bottom = 104.0
+
+[node name="Label" type="Label" parent="UI/CarPlayerStats/Felonies"]
+margin_right = 140.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "FELONIES:"
+
+[node name="Value" type="Label" parent="UI/CarPlayerStats/Felonies"]
+margin_left = 144.0
+margin_right = 156.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "?"
+align = 2
+
 [node name="Instructions" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
@@ -274,3 +372,5 @@ scroll_active = false
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PlayerDiedPanel"]
 anims/Appear = SubResource( 1 )
 anims/RESET = SubResource( 2 )
+
+[node name="Toasty" parent="UI" instance=ExtResource( 7 )]

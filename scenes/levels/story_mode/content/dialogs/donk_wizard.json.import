@@ -1,0 +1,13 @@
+[remap]
+
+importer="littlgameemario.dialog"
+type="Resource"
+path="res://.import/donk_wizard.json-14b2d332eacaf4f19d803314e991abb2.res"
+
+[deps]
+
+source_file="res://scenes/levels/story_mode/content/dialogs/donk_wizard.json"
+dest_files=[ "res://.import/donk_wizard.json-14b2d332eacaf4f19d803314e991abb2.res" ]
+
+[params]
+

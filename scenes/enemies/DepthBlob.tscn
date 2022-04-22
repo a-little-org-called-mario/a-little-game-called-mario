@@ -45,7 +45,7 @@ shape = SubResource( 6 )
 [node name="Sprite" parent="." index="1"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 5 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionPolygon2D" parent="KillTrigger" index="0"]

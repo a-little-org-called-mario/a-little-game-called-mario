@@ -5,8 +5,8 @@ var deathTime = -1
 var killerName = ""
 
 
-func _process(delta):
-	handle_dying()
+func ai(delta):
+	before_death()
 
 
 func _on_KillTrigger_body_entered(body):
@@ -24,7 +24,7 @@ func kill(killer):
 	deathTime = 30
 
 
-func handle_dying():
+func before_death():
 	if deathTime >= 0:
 		deathTime -= 1
 		if deathTime == 0:

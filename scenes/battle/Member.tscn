@@ -1,0 +1,233 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=1]
+[ext_resource path="res://sprites/battle/plumber_battle.png" type="Texture" id=2]
+[ext_resource path="res://scripts/PlayerAnims.gd" type="Script" id=3]
+[ext_resource path="res://scripts/battle/Member.gd" type="Script" id=4]
+[ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=6]
+[ext_resource path="res://sprites/dustparticle.png" type="Texture" id=7]
+[ext_resource path="res://sprites/flag.jpg" type="Texture" id=8]
+[ext_resource path="res://scripts/Trail.gd" type="Script" id=9]
+
+[sub_resource type="Curve" id=32]
+_data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=33]
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 1 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 192, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=30]
+animations = [ {
+"frames": [ SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=26]
+resource_name = "PlumberIdle"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "PlumberJump"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "PlumberRun"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="AudioStreamRandomPitch" id=31]
+audio_stream = ExtResource( 5 )
+random_pitch = 1.5
+
+[sub_resource type="RectangleShape2D" id=34]
+extents = Vector2( 11, 22 )
+
+[node name="Member" type="KinematicBody2D"]
+collision_mask = 31
+script = ExtResource( 4 )
+
+[node name="Trail" type="Line2D" parent="."]
+width = 30.0
+width_curve = SubResource( 32 )
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 33 )
+texture = ExtResource( 8 )
+texture_mode = 2
+joint_mode = 2
+end_cap_mode = 2
+script = ExtResource( 9 )
+trail_length = 30
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+material = SubResource( 24 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 30 )
+offset = Vector2( 0, -16 )
+
+[node name="Anims" type="AnimationPlayer" parent="Sprite"]
+method_call_mode = 1
+anims/PlumberIdle = SubResource( 26 )
+anims/PlumberJump = SubResource( 27 )
+anims/PlumberRun = SubResource( 29 )
+anims/RESET = SubResource( 28 )
+script = ExtResource( 3 )
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -12.0
+bus = "sfx"
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 31 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="RunParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 30 )
+amount = 6
+lifetime = 0.6
+local_coords = false
+texture = ExtResource( 7 )
+spread = 180.0
+gravity = Vector2( 0, -80 )
+initial_velocity = 40.0
+initial_velocity_random = 0.2
+angular_velocity = 30.0
+angular_velocity_random = 1.0
+angle = 90.0
+angle_random = 1.0
+scale_amount = 0.75
+color = Color( 1, 1, 1, 0.784314 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 10 )
+scale = Vector2( 1.25, 1 )
+shape = SubResource( 34 )

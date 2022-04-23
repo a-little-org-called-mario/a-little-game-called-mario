@@ -270,6 +270,8 @@ mesh = ExtResource( 2 )
 material/0 = SubResource( 1 )
 
 [node name="Hitbox" type="Area" parent="Mesh"]
+collision_layer = 512
+collision_mask = 5376
 
 [node name="Shape" type="CollisionShape" parent="Mesh/Hitbox"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -279,6 +281,7 @@ shape = SubResource( 13 )
 transform = Transform( 13.0191, 0, 0, 0, 13.0191, 0, 0, 0, 1.00147, 0, 0, 0 )
 frames = SubResource( 14 )
 animation = "loop"
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

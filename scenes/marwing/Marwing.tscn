@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://models/marwing/MARWING.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/marwing/Marwing.gd" type="Script" id=2]
 [ext_resource path="res://models/marwing/MARWING_mat.tres" type="Material" id=3]
 [ext_resource path="res://models/marwing/MARWING_hurtmat.tres" type="Material" id=4]
 [ext_resource path="res://sprites/marwing/EXPLODE1.png" type="Texture" id=5]
+[ext_resource path="res://sprites/marwing/PLAYER_CROSSHAIR1.png" type="Texture" id=6]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.586693
@@ -349,13 +350,12 @@ fov = 60.0
 
 [node name="Mesh" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
-visible = false
 mesh = ExtResource( 1 )
-material/0 = ExtResource( 4 )
+material/0 = ExtResource( 3 )
 
 [node name="Hitbox" type="Area" parent="Mesh"]
 collision_layer = 256
-collision_mask = 1536
+collision_mask = 31232
 
 [node name="Shape" type="CollisionShape" parent="Mesh/Hitbox"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -363,12 +363,15 @@ shape = SubResource( 1 )
 
 [node name="Explosion" type="AnimatedSprite3D" parent="."]
 transform = Transform( 13.0191, 0, 0, 0, 13.0191, 0, 0, 0, 1.00147, 0, 0, 0 )
+visible = false
 frames = SubResource( 13 )
 animation = "loop"
-frame = 1
-playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = SubResource( 4 )
 anims/hurt = SubResource( 3 )
 anims/normal = SubResource( 2 )
+
+[node name="Crosshair" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5 )
+texture = ExtResource( 6 )

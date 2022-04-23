@@ -526,6 +526,13 @@ make_sound={
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="Enemy Projectile"
 2d_physics/layer_9="Player Projectile"
+3d_physics/layer_9="Marwing - Player Ship"
+3d_physics/layer_10="Marwing - Enemy Ship"
+3d_physics/layer_11="Marwing - Player Projectile"
+3d_physics/layer_12="Marwing - Enemy Projectile"
+3d_physics/layer_13="Marwing - Obstacle"
+3d_physics/layer_14="Marwing - Powerup"
+3d_physics/layer_15="Marwing - Level Trigger"
 
 [locale]
 

@@ -1,0 +1,21 @@
+name: Check Dialog JSON files
+
+on:
+  pull_request:
+    paths:
+      - '**/dialogs/**.json'
+
+jobs:
+  build_game:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Latest Code
+        uses: actions/checkout@v2.3.1
+      - name: Validate JSON
+        uses: snapcart/json-schema-validator@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          json_schema: scenes/levels/story_mode/dialogs/schema/dialog.schema.json
+          json_path_pattern: .*dialogs/.*json$
+          send_comment: true
+          clear_comments: true

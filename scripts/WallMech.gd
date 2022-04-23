@@ -120,5 +120,6 @@ func _on_ShootDelayTimer_timeout() -> void:
 	shoot()
 
 
+#warning-ignore:SHADOWED_VARIABLE
 func _on_SpawnPoint_player_spawned(player):
 	self.player = player

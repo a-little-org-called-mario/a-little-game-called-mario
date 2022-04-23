@@ -37,7 +37,6 @@ func _on_shot():
 
 # Load the achievements from the Achievements folder.
 func get_achievements():
-	print("loading achievements")
 	for file in FileUtils.list_dir("res://achievements/level"):
 		var level := int(file.get_file())
 		achievements[level] = []

@@ -2,8 +2,6 @@ extends Node2D
 
 export (NodePath) var tilemap
 export (Array, PackedScene) var random_spawns:= []
-export (float) var spawn_timer:= 1.25
-export (float) var timer_variance:= 0.5
 export (float) var tiles_per_lap:= 8
 export (PackedScene) var coin_drops
 export (PackedScene) var toll_scene

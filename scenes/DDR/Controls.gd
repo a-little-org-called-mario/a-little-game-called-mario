@@ -5,9 +5,6 @@ var poses = [ "down", "up", "left", "right" ]
 export(NodePath) var playerActorPath
 onready var playerActor = get_node(playerActorPath)
 
-export(NodePath) var playerTrackPath
-onready var playerTrack = get_node(playerTrackPath)
-
 
 func _process(_delta):
 	for pose in poses:

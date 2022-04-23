@@ -1,3 +1,4 @@
+#warning-ignore-all:UNUSED_CLASS_VARIABLE
 extends Resource
 
 export var strength : int = 100

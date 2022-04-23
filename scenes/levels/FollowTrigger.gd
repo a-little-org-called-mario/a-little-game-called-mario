@@ -9,11 +9,10 @@ func _ready():
 func _on_body_entered(_body):
 	if triggered:
 		return
-		
+
 	if not _body.is_in_group("Player"):
 		return
-		
+
 	triggered = true
-	print("triggered")
-	
+
 	get_node("..").call_deferred("add_child", follow_scene.instance())

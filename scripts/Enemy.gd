@@ -16,6 +16,8 @@ export(bool) var alive = true
 var _dying = false
 
 onready var _collision := $CollisionShape2D
+# This is used from outside
+#warning-ignore:UNUSED_CLASS_VARIABLE
 onready var _sprite := $Sprite
 
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Credits.gd" type="Script" id=1]
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/sokoban/sokoban_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://graphics/credits/GodotLogo.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -24,16 +25,16 @@ scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 1012.0
-margin_bottom = 1308.0
+margin_bottom = 1678.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer"]
+[node name="Spacer - 1" type="Control" parent="ScrollContainer/VBoxContainer"]
 margin_right = 1012.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 0, 600 )
 
-[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer"]
+[node name="Credits" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 604.0
 margin_right = 1012.0
 margin_bottom = 625.0
@@ -43,7 +44,7 @@ text = "CREDITS"
 align = 1
 uppercase = true
 
-[node name="Control3" type="Control" parent="ScrollContainer/VBoxContainer"]
+[node name="Spacer - 2" type="Control" parent="ScrollContainer/VBoxContainer"]
 margin_top = 629.0
 margin_right = 1012.0
 margin_bottom = 669.0
@@ -58,10 +59,25 @@ text = "CREDITSSS
 "
 align = 1
 
-[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer"]
+[node name="Spacer - 3" type="Control" parent="ScrollContainer/VBoxContainer"]
 margin_top = 708.0
 margin_right = 1012.0
-margin_bottom = 1308.0
+margin_bottom = 908.0
+rect_min_size = Vector2( 0, 200 )
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+margin_top = 912.0
+margin_right = 1012.0
+margin_bottom = 1074.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 6
+
+[node name="Spacer - 4" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 1078.0
+margin_right = 1012.0
+margin_bottom = 1678.0
 rect_min_size = Vector2( 0, 600 )
 size_flags_vertical = 3
 

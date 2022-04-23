@@ -342,6 +342,8 @@ loop = false
 script = ExtResource( 2 )
 forward_speed = 24.4
 strafe_speed = 7.2
+crosshair_range = Vector2( 8, 5 )
+crosshair_speed = 22.2
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -7 )

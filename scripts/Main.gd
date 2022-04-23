@@ -22,6 +22,7 @@ func _ready() -> void:
 	EventBus.connect("ui_visibility_changed", self, "_on_ui_visibility_changed")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
+	randomize()
 
 
 func _exit_tree() -> void:

@@ -479,6 +479,7 @@ show_instructions={
 2d_physics/layer_3="Portals"
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="Enemy Projectile"
+2d_physics/layer_6="Boss"
 2d_physics/layer_9="Player Projectile"
 
 [locale]

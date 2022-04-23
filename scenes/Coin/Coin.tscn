@@ -6,8 +6,8 @@
 [ext_resource path="res://scenes/Coin/Coin.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 9.0
-height = 6.0
+radius = 26.0
+height = 9.0
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2

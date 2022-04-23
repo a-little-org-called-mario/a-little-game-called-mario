@@ -5,15 +5,17 @@
 [ext_resource path="res://scripts/bosses/Boss.gd" type="Script" id=3]
 
 [node name="Boss" instance=ExtResource( 1 )]
-collision_mask = 257
+collision_layer = 32
+collision_mask = 256
 script = ExtResource( 3 )
+health = 100
 
 [node name="Sprite" parent="." index="1"]
 scale = Vector2( 2, 2 )
 
 [node name="KillTrigger" parent="." index="2"]
-collision_layer = 8
-collision_mask = 257
+collision_layer = 32
+collision_mask = 256
 
 [node name="SquishParticles" parent="." index="3"]
 visible = false

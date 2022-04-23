@@ -5,19 +5,29 @@ export var health = 30
 export var phase = 0
 export var direction = -1
 
+var coinScene = preload("res://scenes/Coin/FallingCoin.tscn")
+
 var attackerName = ""
 
 var flashTime = 0
+var attackTimer = 0
+var posOrigin = Vector2(0, 0)
+var posOffset = Vector2(0, 0)
 
 signal health_change(oldHealth, newHealth)
 signal set_health(maxHealth)
+signal display_warning(id, time)
 
 
 func _ready():
 	emit_signal("set_health", health)
+	posOrigin = position
+	set_collide_layers()
+	ready_animation()
 
 
 func ai(delta):
+	position = posOrigin + posOffset
 	flash()
 	handle_direction()
 	boss_ai(delta)
@@ -68,4 +78,25 @@ func flash():
 
 func handle_direction():
 	_sprite.scale.x = 2 * direction
+	
+
+# change collision layers/masks here
+func set_collide_layers():
+	pass
+	
+
+# set animation stuff
+func ready_animation():
+	pass
+
+
+# instance a coin
+func spawn_coin(offset = Vector2(0, 0)):
+	var coin = coinScene.instance()
+	get_parent().add_child(coin)
+	coin.global_position = position + offset
+
+
+func small_shake():
+	EventBus.emit_signal("small_screen_shake")
 

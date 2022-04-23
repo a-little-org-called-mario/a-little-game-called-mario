@@ -38,7 +38,7 @@ func _physics_process (dt: float):
 		queue_free();
 
 # note (jam): this is written as a function only so that it can be called in AnimationPlayer call method tracks
-func set_invulnerable (inv: ool = false):
+func set_invulnerable (inv: bool = false):
 	invulnerable = inv;
 
 func shoot (target: Vector3):

@@ -32,7 +32,7 @@ text = "KILL WALLMECH
 
 [node name="CoinBox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 160, 352 )
-bounce_count = 6
+bounce_count = 10
 
 [node name="WallMech" parent="." instance=ExtResource( 4 )]
 position = Vector2( 483, 258 )

@@ -13,6 +13,8 @@ func ready ():
 
 func _physics_process (dt: float):
 	translation = translation + (dt * speed * direction);
+
+	# handle range - if bullet has traveled for too long, get rid of it
 	current_range = current_range + (dt * speed);
 	if current_range > max_range: destroy();
 

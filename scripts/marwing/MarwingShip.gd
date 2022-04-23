@@ -48,6 +48,7 @@ func _physics_process (dt: float):
 func set_invulnerable (inv: bool = false):
 	invulnerable = inv;
 
+# Should never be explicitly called - only a response to the FireTimer's "timeout" signal
 func allow_fire ():
 	can_fire = true;
 
@@ -59,6 +60,6 @@ func shoot (origin: Vector3, dir: Vector3):
 	var inst = proj.instance();
 	inst.translation = origin;
 	inst.direction = dir;
-	add_child(inst);
+	add_child(inst);	# note (jam):   this is really bad actually. bullets probably shouldn't be parented to a ship and affected by their movement along a path
 	can_fire = false;
 	fire_timer.start(1 / fire_rate);

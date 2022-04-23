@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/CharTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/levels/CharsLevels/LevelChar00.gd" type="Script" id=6]
 [ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/enemies/FireMech.tscn" type="PackedScene" id=8]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -49,8 +50,12 @@ wait_time = 30.0
 one_shot = true
 autostart = true
 
-[connection signal="dead" from="WallMech" to="." method="_on_WallMech_dead"]
-[connection signal="player_spawned" from="SpawnPoint" to="WallMech" method="_on_SpawnPoint_player_spawned"]
+[node name="FireMech" parent="." instance=ExtResource( 8 )]
+position = Vector2( 800, 128 )
+
+[connection signal="dead" from="WallMech" to="." method="_on_enemy_dead"]
+[connection signal="player_spawned" from="SpawnPoint" to="FireMech" method="_on_SpawnPoint_player_spawned"]
 [connection signal="timeout" from="PortalTimer" to="." method="_on_PortalTimer_timeout"]
+[connection signal="dead" from="FireMech" to="." method="_on_enemy_dead"]
 
 [editable path="PictureFrame"]

@@ -15,7 +15,6 @@ var _moving: bool = true
 var _motion = Vector2.ZERO
 var _col: KinematicCollision2D
 var muzzles: Array = []
-var player: Player = null
 
 # Exported vars for level designers
 # For reference, Vector2.LEFT = (-1, 0) Vector2.DOWN = (0 ,1)
@@ -53,8 +52,6 @@ func move(_delta: float) -> void:
 
 
 func shoot() -> void:
-	if player:  # Calculate shooting_direction based on player position
-		shoot_direction = position.direction_to(player.position) * Vector2(1, 0)
 	# create bullet and muzzle flashes for each muzzle.
 	for muzzle in muzzles:
 		var bullet = bullet_scene.instance()
@@ -118,8 +115,3 @@ func _on_MoveTimer_timeout() -> void:
 
 func _on_ShootDelayTimer_timeout() -> void:
 	shoot()
-
-
-#warning-ignore:SHADOWED_VARIABLE
-func _on_SpawnPoint_player_spawned(player):
-	self.player = player

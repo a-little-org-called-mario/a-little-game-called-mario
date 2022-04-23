@@ -378,3 +378,5 @@ anims/normal = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5 )
 pixel_size = 0.015
 texture = ExtResource( 6 )
+
+[node name="FireTimer" type="Timer" parent="."]

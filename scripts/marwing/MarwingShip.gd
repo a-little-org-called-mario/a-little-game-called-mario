@@ -20,9 +20,16 @@ var can_move: bool = true;                                     # whether or not 
 var can_strafe: bool = true;                                   # whether or not the ship can move perpendicular to the path
 var invulnerable: bool = true;                                 # whether or not the ship can take damage
 
+# Projectile information
+export var projectile: PackedScene;
+onready var fallback_projectile: PackedScene = preload("res://scenes/marwing/projectiles/DefaultProj.tscn");
+onready var fire_timer: Timer = get_node("FireTimer");
+var can_fire: bool = true;
+
 func _ready ():
 	$AnimationPlayer.play("normal");
 	hp = max_hp;
+	fire_timer.connect("timeout",self,"allow_fire");
 
 func _physics_process (dt: float):
 	# move the ship along the path based on speed and direction
@@ -41,5 +48,17 @@ func _physics_process (dt: float):
 func set_invulnerable (inv: bool = false):
 	invulnerable = inv;
 
-func shoot (target: Vector3):
-	pass;
+func allow_fire ():
+	can_fire = true;
+
+func shoot (origin: Vector3, dir: Vector3):
+	if not can_fire:
+		return;
+
+	var proj: PackedScene = projectile if projectile != null else fallback_projectile;
+	var inst = proj.instance();
+	inst.translation = origin;
+	inst.direction = dir;
+	add_child(inst);
+	can_fire = false;
+	fire_timer.start(1 / fire_rate);

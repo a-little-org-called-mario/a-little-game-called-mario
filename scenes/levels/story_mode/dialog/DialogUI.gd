@@ -16,6 +16,8 @@ signal event_occured(id)
 var active := false
 
 var _dialogs: Dictionary
+# Reached labels inside the current dialog.
+var _labels: Dictionary
 var _inventory: Inventory
 var _item_store: ItemStore
 var _dialog: Dialog
@@ -25,14 +27,16 @@ var _current_text: int
 var _occurences: Dictionary
 # The name of the dialog that is being checked for issues.
 var _checking: String
+var _characters: Characters
 
 const Dialog = preload("res://addons/dialog_importer/dialog.gd")
 const Condition = preload("res://addons/dialog_importer/condition.gd")
 const Choice = preload("res://addons/dialog_importer/choice.gd")
 const Character = preload("../character/Character.gd")
-const ItemStore = preload("../items/ItemStore.gd")
+const ItemStore = preload("../item/ItemStore.gd")
 const FileUtils = preload("res://scripts/FileUtils.gd")
-const Inventory = preload("../items/Inventory.gd")
+const Inventory = preload("../item/Inventory.gd")
+const Characters = preload("res://scenes/levels/story_mode/Characters.gd")
 
 onready var _dialog_text_label: RichTextLabel = $ColorRect/MarginContainer/VBoxContainer/DialogTextLabel
 onready var _continue_button: Button = $ColorRect/MarginContainer/VBoxContainer/DialogTextLabel/ContinueButton
@@ -44,34 +48,43 @@ onready var _choice_container: VBoxContainer = $ColorRect/MarginContainer/VBoxCo
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 
-func init(item_store: ItemStore, inventory: Inventory):
+func init(item_store: ItemStore, characters: Characters, inventory: Inventory,
+		dialog_dir: String):
 	_item_store = item_store
 	_inventory = inventory
-	var dialog_dir: String = get_script().resource_path\
-			.get_base_dir().plus_file("../dialogs")
-	for _file in FileUtils.list_dir(dialog_dir):
-		var file: String = _file.replace(".import", "")
-		if not file.ends_with(".json"):
+	_characters = characters
+	for file in FileUtils.list_dir(dialog_dir):
+		if not file.ends_with(".json.import"):
 			continue
+		file = file.replace(".import", "")
 		var dialog = load(file)
-		_checking = file.get_file()
-		_check_dialog(dialog)
 		_dialogs[file.get_file().get_basename()] = dialog
+	for dialog_name in _dialogs:
+		_labels.clear()
+		_gather_labels(_dialogs[dialog_name])
+		_checking = dialog_name
+		_check_dialog(_dialogs[dialog_name])
 
 
 # Start a dialog with optionally a character as speaker.
-func start(dialog: String, speaker: Character = null):
+func start(dialog: Dialog, speaker: Character = null):
 	_assert_ready()
-	assert(dialog in _dialogs, "Dialog %s not found" % dialog)
-	emit_signal("dialog_started")
-	_speaker = speaker
-	_title_label.text = ""
-	_portrait_rect.visible = speaker != null
-	if _speaker:
-		_title_label.text = _speaker.title
-		_portrait_texture_rect.texture = _speaker.get_portrait()
-	_set_dialog(_dialogs[dialog])
 	active = true
+	emit_signal("dialog_started")
+	_labels.clear()
+	_gather_labels(dialog)
+	_set_dialog(dialog)
+	_set_speaker(speaker)
+
+
+func _set_speaker(speaker: Character):
+	_speaker = speaker
+	if not speaker:
+		_portrait_texture_rect.texture = null
+		_title_label.text = ""
+		return
+	_title_label.text = _speaker.data.name
+	_portrait_texture_rect.texture = _speaker.get_portrait()
 
 
 func _set_dialog(to: Dialog):
@@ -80,6 +93,10 @@ func _set_dialog(to: Dialog):
 	if not _dialog:
 		active = false
 		return emit_signal("dialog_finished")
+	if _dialog.character:
+		var character: Character = _characters.get_by_id(_dialog.character)
+		assert(character, "Character '%s' not found" % _dialog.character)
+		_set_speaker(character)
 	if _dialog.condition:
 		var condition := _condition_true(_dialog.condition, _dialog)
 		if _dialog.has_branches:
@@ -110,6 +127,12 @@ func _progress_dialog():
 	_continue_button.visible = not last
 	_choice_container.visible = last
 	_finish_button.visible = _dialog.choices.empty() and last
+	if _finish_button.visible:
+		_finish_button.grab_focus()
+	elif _continue_button.visible:
+		_continue_button.grab_focus()
+	elif _choice_container.get_child_count():
+		_choice_container.get_child(0).grab_focus()
 	if last:
 		_occurences[_dialog] = _occurences.get(_dialog, 0) + 1
 		if _dialog.item:
@@ -137,11 +160,21 @@ func _condition_true(condition: Condition, object: Object) -> bool:
 				"Can't find custom condition method '%s' in main script."\
 				% condition.custom)
 		checks.append(owner.call(condition.custom))
-	
 	for check in checks:
 		if check == condition.inverted:
 			return false
 	return true
+
+
+func _gather_labels(dialog):
+	if not dialog:
+		return
+	if dialog.label:
+		_labels[dialog.label] = dialog
+	for branch in [dialog.True, dialog.False]:
+		_gather_labels(branch)
+	for choice in dialog.choices:
+		_gather_labels(choice.dialog)
 
 
 # Returns the dialog that should be displayed when this dialog object is hit.
@@ -154,6 +187,8 @@ func _evaluate_dialog(dialog: Dialog) -> Dialog:
 				return dialog.True as Dialog
 		else:
 			return dialog.False as Dialog
+	if dialog.goto:
+		return _evaluate_dialog(_labels[dialog.goto])
 	return dialog
 
 
@@ -167,10 +202,13 @@ func _skip_dialog() -> bool:
 
 
 # Check this dialog and the contained conditions/dialogs for any issues.
-func _check_dialog(dialog: Dialog):
+func _check_dialog(dialog):
 	if not dialog:
 		return
 	_check_condition(dialog.condition)
+	if dialog.goto:
+		_check_assert(dialog.goto in _labels,
+				"Couldn't find label %s to go to.", dialog.goto)
 	for branch in [dialog.True, dialog.False]:
 		_check_dialog(branch)
 	for _choice in dialog.choices:
@@ -212,4 +250,4 @@ func _on_ContinueButton_pressed() -> void:
 
 func _on_FinishButton_pressed() -> void:
 	if not _skip_dialog():
-		_set_dialog(null)
+		_set_dialog(_dialog.next)

@@ -1,6 +1,7 @@
 {
 	"$schema": "schema/dialog.schema.json",
 	"text": "Oh, another visitor!",
+	"label": "start",
 	"choices": [
 		{
 			"text": "Who was here before me?",
@@ -9,7 +10,15 @@
 					"I don't remember...",
 					"There was definitly someone here.\nHe wanted to do something... Finish something..."
 				],
-				"choices": ["I will find out!"]
+				"choices": [
+					"I will find out!",
+					{
+						"text": "Tell me more about this place.",
+						"dialog": {
+							"goto": "start"
+						}
+					}
+				]
 			}
 		},
 		{

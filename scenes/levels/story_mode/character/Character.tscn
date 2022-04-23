@@ -1,21 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/levels/story_mode/character/Character.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 158.382
 
 [node name="Character" type="Area2D"]
 collision_layer = 0
 script = ExtResource( 1 )
-title = "Ladder Man"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, -67 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 2, -40 )
 
 [node name="TalkToLabel" type="Label" parent="."]
-margin_left = -145.0
-margin_top = -9.0
-margin_right = -59.0
-margin_bottom = 5.0
+margin_left = 28.0
+margin_top = -134.0
+margin_right = 114.0
+margin_bottom = -120.0
 text = "[B] Talk to %s"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

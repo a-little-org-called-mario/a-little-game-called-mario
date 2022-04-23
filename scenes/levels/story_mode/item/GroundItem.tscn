@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/food.png" type="Texture" id=1]
+[ext_resource path="res://scenes/levels/story_mode/item/GroundItem.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="CircleShape2D" id=23]
+radius = 60.0083
+
+[node name="GroundItem" type="Area2D"]
+collision_layer = 0
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
+texture = SubResource( 22 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 0 )
+shape = SubResource( 23 )
+
+[node name="PickupLabel" type="Label" parent="."]
+margin_left = -34.0
+margin_top = -51.0
+margin_right = 35.0
+margin_bottom = -37.0
+text = "Pick up %s"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,13 @@
+[remap]
+
+importer="littlgameemario.dialog"
+type="Resource"
+path="res://.import/stone.json-61cc1af64df49f6655af10ff60304dc4.res"
+
+[deps]
+
+source_file="res://scenes/levels/story_mode/content/dialogs/stone.json"
+dest_files=[ "res://.import/stone.json-61cc1af64df49f6655af10ff60304dc4.res" ]
+
+[params]
+

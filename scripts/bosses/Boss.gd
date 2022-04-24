@@ -1,16 +1,19 @@
 extends Enemy
 
 
-export var health = 30
+export var health = 100
 export var phase = 0
 export var direction = -1
 
 var coinScene = preload("res://scenes/Coin/FallingCoin.tscn")
 
 var attackerName = ""
-
+var maxHealth = 100
 var flashTime = 0
 var attackTimer = 0
+var canChangePhase = false
+
+# probably not neeeded
 var posOrigin = Vector2(0, 0)
 var posOffset = Vector2(0, 0)
 
@@ -21,13 +24,13 @@ signal display_warning(id, time)
 
 func _ready():
 	emit_signal("set_health", health)
-	posOrigin = position
 	set_collide_layers()
 	ready_animation()
+	maxHealth = health
 
 
 func ai(delta):
-	position = posOrigin + posOffset
+	# position = posOrigin + posOffset
 	flash()
 	handle_direction()
 	boss_ai(delta)
@@ -77,7 +80,7 @@ func flash():
 
 
 func handle_direction():
-	_sprite.scale.x = 2 * direction
+	scale.x = direction
 	
 
 # change collision layers/masks here
@@ -91,12 +94,19 @@ func ready_animation():
 
 
 # instance a coin
-func spawn_coin(offset = Vector2(0, 0)):
+func spawn_coin(offset = Vector2(0, 0), selfRelative = true):
 	var coin = coinScene.instance()
 	get_parent().add_child(coin)
-	coin.global_position = position + offset
+	if selfRelative:
+		coin.global_position = global_position + offset
+	else:
+		coin.global_position = offset
 
 
 func small_shake():
 	EventBus.emit_signal("small_screen_shake")
+
+
+func large_shake():
+	EventBus.emit_signal("large_screen_shake")
 

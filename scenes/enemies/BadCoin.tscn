@@ -36,8 +36,8 @@ animations = [ {
 extents = Vector2( 15, 15 )
 
 [sub_resource type="CapsuleShape2D" id=8]
-radius = 18.0
-height = 8.0
+radius = 14.0
+height = 6.0
 
 [node name="BadCoin" type="KinematicBody2D"]
 position = Vector2( 0, -24 )
@@ -48,7 +48,7 @@ script = ExtResource( 3 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

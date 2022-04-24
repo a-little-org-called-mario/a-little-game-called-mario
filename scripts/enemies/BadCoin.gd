@@ -6,7 +6,7 @@ extends KinematicBody2D
 
 var velocity = Vector2(0, -200)
 var acceleration = Vector2(0.98, 10)
-export var lifeTime = 240
+export var lifeTime = 180
 export var randVeloX = true
 
 

@@ -7,7 +7,7 @@ export var type = "basic"
 var duration = 0
 
 # should be a setting that should toggle the flashing on and off
-var flashSetting = "none"
+var flashSetting = "flash"
 
 
 func _ready():
@@ -26,4 +26,3 @@ func _on_display_warning(id, time):
 	if groupId == id:
 		duration = time
 		visible = true
-

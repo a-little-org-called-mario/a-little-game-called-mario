@@ -15,8 +15,11 @@ tile_data = PoolIntArray( -327684, 0, 0, -327683, 0, 1, -327682, 0, 1, -327681, 
 [node name="SpawnPoint" parent="." instance=ExtResource( 3 )]
 position = Vector2( 192, 320 )
 
-[node name="MegaBoss" parent="." groups=["enemy"] instance=ExtResource( 2 )]
+[node name="BossNode2D" type="Node2D" parent="."]
 position = Vector2( 864, 336 )
+
+[node name="MegaBoss" parent="BossNode2D" groups=["enemy"] instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
 collision_layer = 8
 collision_mask = 257
 
@@ -26,4 +29,39 @@ collision_mask = 257
 position = Vector2( 512, 360 )
 type = "horizontal"
 
-[connection signal="display_warning" from="MegaBoss" to="Warnings/Warning" method="_on_display_warning"]
+[node name="Warning2" parent="Warnings" instance=ExtResource( 4 )]
+position = Vector2( 512, 248 )
+groupId = 1
+type = "vertical"
+
+[node name="Warning3" parent="Warnings" instance=ExtResource( 4 )]
+position = Vector2( 96, 248 )
+groupId = 2
+type = "vertical"
+
+[node name="Warning4" parent="Warnings" instance=ExtResource( 4 )]
+position = Vector2( 928, 248 )
+groupId = 2
+type = "vertical"
+
+[node name="Warning5" parent="Warnings" instance=ExtResource( 4 )]
+position = Vector2( 304, 248 )
+groupId = 3
+type = "vertical"
+
+[node name="Warning7" parent="Warnings" instance=ExtResource( 4 )]
+position = Vector2( 304, 248 )
+groupId = 3
+type = "vertical"
+
+[node name="Warning6" parent="Warnings" instance=ExtResource( 4 )]
+position = Vector2( 720, 248 )
+groupId = 3
+type = "vertical"
+
+[connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning" method="_on_display_warning"]
+[connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning2" method="_on_display_warning"]
+[connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning3" method="_on_display_warning"]
+[connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning4" method="_on_display_warning"]
+[connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning5" method="_on_display_warning"]
+[connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning6" method="_on_display_warning"]

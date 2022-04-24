@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
 [ext_resource path="res://audio/sfx/meow.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/cheats/CheatCodeDetector.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
 [ext_resource path="res://scenes/title/Contributors.gd" type="Script" id=11]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
@@ -255,7 +256,6 @@ margin_bottom = 52.0
 text = "MARWING"
 redirect_scene = "res://scenes/marwing/levels/1-0.tscn"
 
-
 [node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0
 margin_top = 112.0
@@ -263,7 +263,6 @@ margin_right = 442.0
 margin_bottom = 164.0
 disabled = true
 text = "OPTIONS"
-
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0
@@ -327,5 +326,8 @@ stream = ExtResource( 12 )
 volume_db = -20.0
 autoplay = true
 bus = "music"
+
+[node name="CheatCodeDetector" parent="." instance=ExtResource( 6 )]
+redirect_scene = "res://scenes/cheats/CheatsScreen.tscn"
 
 [connection signal="timeout" from="VBoxContainer/HBoxContainer2/CreditsContainer/Credits/Timer" to="VBoxContainer/HBoxContainer2/CreditsContainer/Credits" method="_on_Timer_timeout"]

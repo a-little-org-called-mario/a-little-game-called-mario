@@ -1,12 +1,15 @@
 extends Button
-class_name TitleMenuButton
+class_name CheatMenuButton
 
-export (String, FILE, "*.tscn") var redirect_scene
+export (String) var cheat_name
 export (bool) var focused_by_default = false
 
-var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
 var selected_icon = self.icon
+
+
+
+signal toggle_cheat(name)
 
 
 func _ready():
@@ -17,14 +20,16 @@ func _ready():
 	self.connect("focus_exited", self, "_on_focus_exited")
 	
 	self.icon = null
+	
+	self.pressed = !CheatsInfo.enabled_cheats.has(cheat_name)
 
 	if focused_by_default:
 		grab_focus()
 
-func _on_pressed():
-	if CheatsInfo.code_entered == false:
-		inventory.reset()
-		EventBus.emit_signal("change_scene", { "scene": redirect_scene })
+
+func _on_pressed(): #It feels wrong that I use the pressed signal to send another signal to a node to activate a cheat, but idk if there's a better way
+	$ActivateCode.play()
+	CheatsInfo.toggle_cheat(cheat_name)
 
 
 func _on_focus_entered():

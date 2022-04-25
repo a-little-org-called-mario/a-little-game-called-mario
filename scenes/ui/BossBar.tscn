@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://sprites/ui/boss_bar2.png" type="Texture" id=1]
+[ext_resource path="res://sprites/ui/boss_bar4.png" type="Texture" id=2]
+[ext_resource path="res://sprites/ui/boss_bar1.png" type="Texture" id=3]
+[ext_resource path="res://sprites/ui/boss_bar3.png" type="Texture" id=4]
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://scripts/ui/BossBar.gd" type="Script" id=6]
+[ext_resource path="res://audio/sfx/enemies/boss_heal.wav" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[node name="BossBar" type="CanvasLayer"]
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": "please send help i hate ui it gives me metaphorical headaches"
+}
+
+[node name="Name" type="RichTextLabel" parent="."]
+margin_left = 720.0
+margin_top = 454.0
+margin_right = 1020.0
+margin_bottom = 514.0
+rect_min_size = Vector2( 300, 60 )
+rect_clip_content = false
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[right][wave]TEST
+NAMENAMENAME"
+text = "TEST
+NAMENAMENAME"
+scroll_active = false
+
+[node name="ProgressRed" type="TextureProgress" parent="."]
+margin_left = 804.0
+margin_top = 516.0
+margin_right = 1020.0
+margin_bottom = 596.0
+step = 0.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Progress" type="TextureProgress" parent="ProgressRed"]
+margin_right = 216.0
+margin_bottom = 80.0
+step = 0.0
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="ProgressRed/Progress"]
+
+[node name="BossHealSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+bus = "sfx"

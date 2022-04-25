@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scripts/decorations/Warning.gd" type="Script" id=1]
+[ext_resource path="res://sprites/decorations/warning.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 128, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "basic_flash",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 6 ) ],
+"loop": true,
+"name": "vertical_none",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "basic_none",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "horizontal_none",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "vertical_flash",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "horizontal_flash",
+"speed": 10.0
+} ]
+
+[node name="Warning" type="AnimatedSprite"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 10 )
+animation = "basic_none"
+playing = true
+script = ExtResource( 1 )

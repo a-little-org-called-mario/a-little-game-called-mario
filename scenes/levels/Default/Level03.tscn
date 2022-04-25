@@ -44,6 +44,7 @@ next_level_path = "res://scenes/levels/Default/Level04.tscn"
 position = Vector2( 377, 289 )
 
 [node name="Randall will remember that" type="Label" parent="."]
+visible = false
 margin_left = 214.0
 margin_top = 208.0
 margin_right = 546.0

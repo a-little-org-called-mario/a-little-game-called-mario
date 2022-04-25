@@ -4,10 +4,10 @@ extends "res://scripts/WallMech.gd"
 var player: Player = null
 
 
-func shoot() -> void:
+func ai(delta: float) -> void:
 	if player:  # Calculate shooting_direction based on player position
 		shoot_direction = position.direction_to(player.position) * Vector2(1, 0)
-	.shoot()
+	.ai(delta)
 
 
 #warning-ignore:SHADOWED_VARIABLE

@@ -36,7 +36,7 @@ func _parse_line(line):
 	
 	var parts = line.split(' ')
 	if len(parts) < 2:
-		print("line (" + index + "): " + line + " is incorrect")
+		printerr("line (" + index + "): " + line + " is incorrect")
 		return
 	
 	var tick = 0

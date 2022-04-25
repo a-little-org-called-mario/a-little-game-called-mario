@@ -2,8 +2,6 @@ extends StaticBody2D
 
 export var id: String
 
-var _gravity := preload("res://scripts/resources/Gravity.tres")
-
 onready var _raycast: RayCast2D = $Ray
 
 

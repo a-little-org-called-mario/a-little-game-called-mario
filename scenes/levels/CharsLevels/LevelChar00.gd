@@ -1,6 +1,6 @@
 extends TileMap
 
-func _on_WallMech_dead(killer):
+func _on_WallMech_dead(_killer):
 	$EndPortal.show()
 
 

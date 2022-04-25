@@ -9,7 +9,6 @@
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scripts/QuickText.gd" type="Script" id=9]
 
-
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 8 )
 
@@ -46,16 +45,20 @@ position = Vector2( 377, 289 )
 
 [node name="Randall will remember that" type="Label" parent="."]
 visible = false
-margin_left = 12.0
-margin_top = -40.0
-margin_right = 407.0
-margin_bottom = 90.0
+margin_left = 214.0
+margin_top = 208.0
+margin_right = 546.0
+margin_bottom = 258.0
 rect_min_size = Vector2( 100, 50 )
 size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 1 )
 text = "RANDALL WILL REMEMBER THAT."
+align = 1
 valign = 1
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="tree_exited" from="Coin3" to="Randall will remember that" method="reveal"]

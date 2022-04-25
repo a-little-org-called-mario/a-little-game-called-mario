@@ -95,7 +95,7 @@ tracks/1/keys = {
 
 [node name="CoinProjectile" type="Area2D" groups=["PlayerProjectile", "Projectiles"]]
 collision_layer = 256
-collision_mask = 10
+collision_mask = 42
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -107,7 +107,7 @@ rotation = 1.5708
 scale = Vector2( 1.5, 2 )
 frames = SubResource( 10 )
 animation = "spin"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="."]

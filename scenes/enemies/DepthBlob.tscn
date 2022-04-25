@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/enemies/depth_blob.png" type="Texture" id=2]
+[ext_resource path="res://scripts/enemies/DepthBlob.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 16, 27.5 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 30.0
+
+[node name="DepthBlob" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 2, 20.5 )
+z_index = 1
+shape = SubResource( 6 )
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="CollisionPolygon2D" parent="KillTrigger" index="0"]
+position = Vector2( 1, 10 )
+scale = Vector2( 1, 1.5 )
+shape = SubResource( 7 )
+
+[node name="SquishParticles" parent="." index="3"]
+emitting = false
+
+[node name="DeathParticles" type="CPUParticles2D" parent="." index="4"]
+emitting = false
+amount = 24
+one_shot = true
+explosiveness = 0.8
+direction = Vector2( 0, -1 )
+spread = 135.0
+gravity = Vector2( 0, 100 )
+initial_velocity = 150.0
+linear_accel = -20.0
+scale_amount = 5.0

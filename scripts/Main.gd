@@ -23,6 +23,7 @@ func _ready() -> void:
 	EventBus.connect("restart_level", self, "_restart_level")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
+	randomize()
 
 
 func _exit_tree() -> void:

@@ -6,9 +6,6 @@ const MAXSPEED = 600
 const ACCEL = 50
 const SLIP_RANGE = 16
 
-export(PackedScene) var default_projectile: PackedScene = preload("res://scenes/CoinProjectile.tscn")
-export(PackedScene) var fireball_projectile: PackedScene = preload("res://scenes/powerups/Fireball.tscn")
-
 var motion = Vector2()
 
 onready var sprite = $Sprite

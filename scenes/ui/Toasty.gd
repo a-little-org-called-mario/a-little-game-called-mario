@@ -55,7 +55,6 @@ func trigger_toasty() -> void:
 func activate_secret() -> void:
 	if not can_activate_secret:
 		return
-	print('secret activated')
 
 
 func _on_coin_collected(_data) -> void:

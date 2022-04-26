@@ -107,10 +107,10 @@ shape = SubResource( 1 )
 [node name="Muzzles" type="Node2D" parent="."]
 
 [node name="0" type="Position2D" parent="Muzzles"]
-position = Vector2( -18, -32 )
+position = Vector2( 0, -32 )
 
 [node name="1" type="Position2D" parent="Muzzles"]
-position = Vector2( -18, 32 )
+position = Vector2( 0, 32 )
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 3.0

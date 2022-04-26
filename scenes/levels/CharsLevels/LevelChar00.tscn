@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/levels/CharTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/boxes/GreedyCoinBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/WallMech.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/levels/CharsLevels/LevelChar00.gd" type="Script" id=6]
@@ -31,7 +31,7 @@ text = "KILL WALLMECH
 [Z] THROW COIN
 "
 
-[node name="CoinBox" parent="." instance=ExtResource( 3 )]
+[node name="GreedyCoinBox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 160, 352 )
 bounce_count = 10
 

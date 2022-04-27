@@ -4,6 +4,7 @@ extends Area2D
 # Use this to teleport the player to a Vector2 on the current level
 export var teleport_to: Vector2
 
+
 func _ready():
 	$Sprite.play()
 	connect("body_entered", self, "_on_portal_enter")

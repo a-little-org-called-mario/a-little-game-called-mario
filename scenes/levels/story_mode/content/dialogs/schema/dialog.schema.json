@@ -89,11 +89,6 @@
 					"minLength": 3,
 					"type": "string"
 				},
-				"set_sprite": {
-					"description": "The texture the character should appear as after the dialog. This should be a path to a texture resource.",
-					"minLength": 3,
-					"type": "string"
-				},
 				"label": {
 					"description": "Mark this dialog as this label which can be jumped to from another dialog using goto",
 					"type": "string",

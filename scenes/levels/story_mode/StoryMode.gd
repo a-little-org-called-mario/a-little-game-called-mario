@@ -24,6 +24,10 @@ onready var _item_receive_popup: ItemReceivePopup = $CanvasLayer/UI/ItemReceiveP
 onready var _tile_map: TileMap = $TileMap
 onready var _door_position: Position2D = $DoorPosition
 onready var _characters: YSort = $YSort/Characters
+onready var _cut_scene_player: AnimationPlayer = $CutScenePlayer
+onready var _cut_scene_focus: Position2D = $CutSceneFocus
+onready var _cut_scene_camera: Camera2D = $CutSceneCamera
+onready var _room_camera: Camera2D = $RoomCamera
 
 
 func _ready() -> void:
@@ -39,6 +43,10 @@ func _ready() -> void:
 
 func is_door_open():
 	return _tile_map.get_cellv(_door_cell) == 1
+
+
+func open_door():
+	_tile_map.set_cellv(_door_cell, 1)
 
 
 func _on_Character_talked_to(character: Character) -> void:
@@ -67,8 +75,13 @@ func _on_DialogUI_item_received(item_id: String) -> void:
 
 
 func _on_DialogUI_event_occured(event) -> void:
-	if event == "open_door":
-		_tile_map.set_cellv(_door_cell, 1)
+	if _cut_scene_player.has_animation(event):
+		_cut_scene_focus.position = _room_camera.position
+		_cut_scene_camera.position = _room_camera.position
+		_cut_scene_player.play(event)
+		_cut_scene_camera.make_current()
+		yield(_cut_scene_player, "animation_finished")
+		_room_camera.make_current()
 
 
 func _on_DialogUI_dialog_started() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/levels/story_mode/content/characters/sign.tres" type="Resource" id=1]
 [ext_resource path="res://scenes/levels/story_mode/content/characters/lever.tres" type="Resource" id=2]
@@ -30,6 +30,9 @@
 [ext_resource path="res://sprites/donk.png" type="Texture" id=28]
 [ext_resource path="res://scenes/levels/story_mode/content/dialogs/donk_wizard.json" type="Resource" id=29]
 [ext_resource path="res://scenes/levels/story_mode/Characters.gd" type="Script" id=30]
+[ext_resource path="res://sprites/tile.png" type="Texture" id=31]
+[ext_resource path="res://scenes/levels/story_mode/CutSceneCamera.gd" type="Script" id=32]
+[ext_resource path="res://sprites/switch_down.png" type="Texture" id=33]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -67,6 +70,98 @@ tracks/0/keys = {
 atlas = ExtResource( 28 )
 region = Rect2( 0, 0, 96, 96 )
 
+[sub_resource type="Animation" id=16]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1312, -672 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("YSort/Characters/Lever/Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 24 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CutSceneFocus:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.001 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "open_door"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.6, 1.69, 1.78, 1.9, 1.99, 2.11, 2.2, 2.22, 3.06 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1312, -673 ), Vector2( 1310, -670 ), Vector2( 1313, -672 ), Vector2( 1313, -675 ), Vector2( 1310, -674 ), Vector2( 1313, -673 ), Vector2( 1315, -676 ), Vector2( 1312, -676 ), Vector2( 1312, -736 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CutSceneFocus:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 1223, -672 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "open_door"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("YSort/Characters/Lever/Sprite:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.31 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 33 ) ]
+}
+
 [node name="StoryMode" type="Node2D"]
 script = ExtResource( 8 )
 
@@ -95,7 +190,7 @@ tile_data = PoolIntArray( -2293757, 0, 0, -2293756, 0, 0, -2293755, 0, 0, -22282
 [node name="DoorPosition" type="Position2D" parent="."]
 position = Vector2( 1312, -670 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="RoomCamera" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 7 )
 tracking = NodePath("../YSort/TopDownPlayer")
@@ -214,6 +309,20 @@ visible = false
 text = "Talk to Wizard Dude"
 
 [node name="TopDownPlayer" parent="YSort" instance=ExtResource( 4 )]
+
+[node name="Door" type="Sprite" parent="."]
+position = Vector2( 1312, -672 )
+scale = Vector2( 1.08026, 1.08026 )
+texture = ExtResource( 31 )
+
+[node name="CutSceneCamera" type="Camera2D" parent="."]
+script = ExtResource( 32 )
+
+[node name="CutSceneFocus" type="Position2D" parent="."]
+
+[node name="CutScenePlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 16 )
+anims/open_door = SubResource( 17 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

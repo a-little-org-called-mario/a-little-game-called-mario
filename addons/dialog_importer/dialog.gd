@@ -15,7 +15,6 @@ export var next: Resource
 export var character: String
 export var item: String
 export var event: String
-export var new_sprite: Texture
 
 # The dialog to jump to.
 export var goto: String
@@ -59,8 +58,6 @@ func _init(data = {}) -> void:
 		return
 	if "next" in data:
 		next = get_script().new(data.next)
-	if "set_sprite" in data:
-		new_sprite = load("res://sprites/%s.png" % data.set_sprite)
 	var text_data = data.get("text", "")
 	if text_data is String:
 		text = [text_data]

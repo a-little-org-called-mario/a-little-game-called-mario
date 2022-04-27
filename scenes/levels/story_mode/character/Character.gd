@@ -38,11 +38,6 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		emit_signal("talked_to")
 
 
-# Changes how the NPC looks.
-func set_sprite(to):
-	_sprite.texture = to
-
-
 # Returns the current texture of the NPC.
 func get_portrait() -> Texture:
 	return _sprite.texture

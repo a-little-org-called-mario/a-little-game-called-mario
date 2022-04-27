@@ -7,9 +7,6 @@ export var item: Resource setget _set_item
 
 var _pickup_text := "Pick up %s"
 
-onready var _pickup_label: Label = $PickupLabel
-onready var _sprite: Sprite = $Sprite
-
 func _ready() -> void:
 	$PickupLabel.visible = Engine.is_editor_hint()
 
@@ -25,9 +22,9 @@ func _set_item(to: StoryItem):
 	$Sprite.texture = to.texture
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	$PickupLabel.show()
 
 
-func _on_body_exited(body: Node) -> void:
+func _on_body_exited(_body: Node) -> void:
 	$PickupLabel.hide()

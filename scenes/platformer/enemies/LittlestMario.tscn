@@ -2,7 +2,7 @@
 
 [ext_resource path="res://sprites/mario.png" type="Texture" id=1]
 [ext_resource path="res://audio/sfx/mario_oof.wav" type="AudioStream" id=2]
-[ext_resource path="res://scenes/enemies/LittlestMario.gd" type="Script" id=3]
+[ext_resource path="res://scenes/platformer/enemies/LittlestMario.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 10, 13 )

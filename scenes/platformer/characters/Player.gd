@@ -49,7 +49,6 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 func _ready() -> void:
 	_end_flash_sprite()
 	set_hitbox_crouching(false)
-	isFunnyDay()
 
 
 func _enter_tree():
@@ -382,12 +381,3 @@ func _end_flash_sprite() -> void:
 	var material: ShaderMaterial = sprite.material as ShaderMaterial
 	if material != null:
 		material.set_shader_param("flash_modifier", 0.0)
-
-func isFunnyDay() -> void:
-	var dict420:Dictionary = OS.get_datetime()
-	if (dict420.get("month") == 4 and dict420.get("day") == 20):
-		print("Smoke Drugs Every Day")
-	else:
-		pivot.get_node("Blunt").visible = false
-		pivot.get_node("Blunt/Blunt Fire").enabled = false
-		pivot.get_node("Blunt/Blunt Fire/Blunt Smoke").emitting = false

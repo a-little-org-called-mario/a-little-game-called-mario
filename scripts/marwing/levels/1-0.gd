@@ -43,6 +43,10 @@ func _ready ():
 	$DialogueBox.popup()
 	$DialogueBox.start_line(0)
 
+	act_number = 1
+	level_number = 0
+	name = "Introduction"
+
 func _process (dt: float):
 	# Maintains an infinite looping path which will be broken when we exit the dialogue
 	if 1 == $Path/Marwing.unit_offset: $Path/Marwing.unit_offset = 0;

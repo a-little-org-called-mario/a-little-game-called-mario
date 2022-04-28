@@ -14,6 +14,8 @@ export(String, FILE) var next_level_path: String setget _set_next_level_path
 export(int) var price: int
 export(Color) var color: Color = Color.black setget _set_color
 
+# This is used from outside this class
+#warning-ignore:UNUSED_CLASS_VARIABLE
 onready var next_level: PackedScene = load(next_level_path) if len(next_level_path) > 0 else null
 onready var sprite: Sprite = $PlayerSprite
 onready var animationplayer: AnimationPlayer = $PlayerSprite/AnimationPlayer
@@ -29,6 +31,8 @@ func _ready() -> void:
 
 
 func can_enter(node: Node2D) -> bool:
+	if not visible:
+		return false
 	if not CoinInventoryHandle.change_coins_on(node, -price):
 		return false
 

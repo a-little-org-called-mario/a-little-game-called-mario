@@ -1,21 +1,61 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/levels/CharTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/boxes/GreedyCoinBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/WallMech.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/levels/CharsLevels/LevelChar00.gd" type="Script" id=6]
+[ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/enemies/FireMech.tscn" type="PackedScene" id=8]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
 format = 1
 tile_data = PoolIntArray( -1, 1, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 1, 0, -65528, 1, 0, -65527, 1, 0, -65526, 1, 0, -65525, 1, 0, -65524, 1, 0, -65523, 1, 0, -65522, 1, 0, -65521, 1, 0, -65520, 1, 0, 65535, 2, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 2, 0, 131071, 2, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 2, 0, 196607, 2, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131087, 0, 0, 131088, 2, 0, 262143, 2, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 3, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 2, 0, 327679, 2, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 2, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 262160, 2, 0, 393215, 2, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 3, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 2, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 2, 0, 458751, 2, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 2, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 2, 0, 393226, 1, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 2, 0, 524287, 2, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 2, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 2, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 2, 0, 589823, 1, 0, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 524304, 1, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0 )
+script = ExtResource( 6 )
 
-[node name="CoinBox" parent="." instance=ExtResource( 3 )]
+[node name="PictureFrame" parent="." instance=ExtResource( 7 )]
+margin_left = 48.0
+margin_top = 176.0
+margin_right = 272.0
+margin_bottom = 272.0
+
+[node name="RichTextLabel" parent="PictureFrame" index="0"]
+bbcode_text = "KILL WALLMECH
+
+[Z] THROW COIN
+"
+text = "KILL WALLMECH
+
+[Z] THROW COIN
+"
+
+[node name="GreedyCoinBox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 160, 352 )
-bounce_count = 6
+bounce_count = 10
 
 [node name="WallMech" parent="." instance=ExtResource( 4 )]
 position = Vector2( 483, 258 )
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 56, 457 )
+
+[node name="EndPortal" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 928, 464 )
+
+[node name="PortalTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="FireMech" parent="." instance=ExtResource( 8 )]
+position = Vector2( 800, 128 )
+
+[connection signal="dead" from="WallMech" to="." method="_on_enemy_dead"]
+[connection signal="player_spawned" from="SpawnPoint" to="FireMech" method="_on_SpawnPoint_player_spawned"]
+[connection signal="timeout" from="PortalTimer" to="." method="_on_PortalTimer_timeout"]
+[connection signal="dead" from="FireMech" to="." method="_on_enemy_dead"]
+
+[editable path="PictureFrame"]

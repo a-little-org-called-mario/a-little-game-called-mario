@@ -1,7 +1,5 @@
 extends Node2D
 
-export var next_level: PackedScene
-
 onready var scoreLabel = $Score
 onready var music = $Music
 export(int) var TimeMultiplier = 1000

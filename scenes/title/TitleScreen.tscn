@@ -5,8 +5,8 @@
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
 [ext_resource path="res://audio/sfx/meow.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/title/ContributorsLabel.gd" type="Script" id=6]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
-[ext_resource path="res://scenes/title/ContributorsLabel.gd" type="Script" id=11]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/TitleScreen.gd" type="Script" id=15]
 [ext_resource path="res://scenes/title/TitleMenuButton.tscn" type="PackedScene" id=16]
@@ -274,6 +274,7 @@ margin_bottom = 52.0
 text = "MARWING"
 redirect_scene = "res://scenes/marwing/levels/1-0.tscn"
 
+
 [node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0
 margin_top = 112.0
@@ -281,6 +282,7 @@ margin_right = 442.0
 margin_bottom = 164.0
 disabled = true
 text = "OPTIONS"
+
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0
@@ -332,7 +334,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
-script = ExtResource( 11 )
+script = ExtResource( 6 )
 
 [node name="Timer" type="Timer" parent="VBoxContainer/HBoxContainer2/CreditsContainer/Credits"]
 wait_time = 3.0

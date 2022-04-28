@@ -11,9 +11,6 @@ onready var level: Node = $TileMap
 onready var bgm: AudioStreamPlayer = $Audio/BGM
 onready var defaultBGMStream: AudioStream = bgm.stream.duplicate()
 
-var completionSound = preload("res://audio/sfx/portal.wav")
-var coinSound = preload("res://audio/sfx/coin.wav")
-
 var entering_portal: bool = false
 
 
@@ -23,6 +20,7 @@ func _ready() -> void:
 	EventBus.connect("restart_level", self, "_restart_level")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
+	randomize()
 
 
 func _exit_tree() -> void:
@@ -113,10 +111,8 @@ func _finish_level(next_level: PackedScene = null) -> void:
 		level = new_level
 	else:
 		var idx: int = level.get_index() - 1
-		print("a ", idx)
 		remove_child(level)
 		add_child_below_node(get_child(idx), new_level)
-		print("b")
 
 	# Do not forget to hook the new portals
 	_hook_portals()

@@ -42,6 +42,7 @@ func _ready() -> void:
 func ai(_delta: float) -> void:
 	if _col:
 		move_direction = move_direction * Vector2(-1, -1)
+	$Sprite.set_flip_h(shoot_direction.x > 0)
 
 
 # This is function from Enemy.gd that we're overwriting

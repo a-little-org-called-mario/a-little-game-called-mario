@@ -16,6 +16,7 @@ on:
 
 jobs:
   build_game:
+    if: ${{ (github.event.action == 'synchronize' && github.event.label.name != 'skip preview') || github.event.action != 'synchronize' }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout latest code

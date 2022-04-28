@@ -4,6 +4,8 @@ onready var audio_meow = $MeowStream
 onready var audio_coin = $CoinStream
 onready var animation = $Sprite/AnimationPlayer
 
+signal collected
+
 func _ready() -> void:
 	self.connect("body_entered", self, "_on_body_entered")
 
@@ -17,4 +19,5 @@ func collect(body: Node2D) -> void:
 		animation.play("Collect")
 		monitoring = false
 		yield(animation, "animation_finished")
+		emit_signal("collected")
 		queue_free()

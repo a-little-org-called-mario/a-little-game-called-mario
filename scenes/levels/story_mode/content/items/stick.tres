@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/levels/story_mode/item/Item.gd" type="Script" id=1]
+[ext_resource path="res://sprites/fork.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Stick"
+description = "Just a useless stick."
+texture = ExtResource( 2 )

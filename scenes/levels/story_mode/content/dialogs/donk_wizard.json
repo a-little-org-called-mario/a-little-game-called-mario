@@ -1,0 +1,23 @@
+{
+	"$schema": "schema/dialog.schema.json",
+	"text": ["Hey, look, someone finally came!"],
+	"character": "donk",
+	"next": [
+		{
+			"text": ["**whoo arree youu?**"],
+			"character": "wizard_dude"
+		},
+		{
+			"text": ["Please, that's a bit rude. Let's introduce ourselves first, shall we? I am Donk, and this fella' here is the Wizard. Dude."],
+			"character": "donk"
+		},
+		{
+			"text": ["**wheere doo yoou waant to gooo?**"],
+			"character": "wizard_dude",
+			"choices": [
+				"I don't know, to be honest.",
+				"That's none of your business!"
+			]
+		}
+	]
+}

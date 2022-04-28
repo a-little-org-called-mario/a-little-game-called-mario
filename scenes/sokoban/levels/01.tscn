@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/sokoban/sokoban_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://audio/music/gassysokoban.mp3" type="AudioStream" id=2]
 [ext_resource path="res://scenes/sokoban/SokobanLevel.gd" type="Script" id=3]
 [ext_resource path="res://scenes/sokoban/SokobanPlayer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/sokoban/SokobanTouch.tscn" type="PackedScene" id=6]
 
 [node name="SokobanLevel" type="Node2D"]
 script = ExtResource( 3 )
@@ -51,11 +52,14 @@ bbcode_text = "
 [ARROWS]    MOVE
 [R]         RESTART
 [BACKSPACE] UNDO
-[ESC]       MAIN MENU"
+[ESC/P]     MAIN MENU"
 text = "
 [ARROWS]    MOVE
 [R]         RESTART
 [BACKSPACE] UNDO
-[ESC]       MAIN MENU"
+[ESC/P]     MAIN MENU"
+
+[node name="SokobanTouch" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [editable path="Instructions"]

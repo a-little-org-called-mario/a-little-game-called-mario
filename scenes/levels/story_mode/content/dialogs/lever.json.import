@@ -1,0 +1,13 @@
+[remap]
+
+importer="littlgameemario.dialog"
+type="Resource"
+path="res://.import/lever.json-4b8b043da322d2ca5dffa4563010e90b.res"
+
+[deps]
+
+source_file="res://scenes/levels/story_mode/content/dialogs/lever.json"
+dest_files=[ "res://.import/lever.json-4b8b043da322d2ca5dffa4563010e90b.res" ]
+
+[params]
+

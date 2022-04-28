@@ -4,7 +4,6 @@ extends TileMap
 export var enemy_scene: PackedScene
 export var fireball_scene: PackedScene
 
-onready var _inventory = preload("res://scripts/resources/PlayerInventory.tres")
 onready var _contributors: Contributors = preload("res://scenes/title/Contributors.gd").new()
 onready var _player: Node2D = $TypeShootPlayer
 onready var _spawn_timer: Timer = $SpawnTimer

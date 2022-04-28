@@ -1,0 +1,44 @@
+{
+	"$schema": "schema/dialog.schema.json",
+	"text": "Oh, another visitor!",
+	"label": "start",
+	"choices": [
+		{
+			"text": "Who was here before me?",
+			"dialog": {
+				"text": [
+					"I don't remember...",
+					"There was definitly someone here.\nHe wanted to do something... Finish something..."
+				],
+				"choices": [
+					"I will find out!",
+					{
+						"text": "Tell me more about this place.",
+						"dialog": {
+							"goto": "start"
+						}
+					}
+				]
+			}
+		},
+		{
+			"text": "Can you help me get out of here?",
+			"dialog": {
+				"condition": {
+					"occurence": 1
+				},
+				"text": [
+					"No, I'm just a ladder. I'm no use if you want to climb out of here...",
+					"Although I do have something you may find useful.",
+					"Here, take this!",
+					"(Press [E] to open the inventory.)"
+				],
+				"choices": [
+					"Wow, that won't help me at all.",
+					"Thank you so much!"
+				],
+				"item": "stick"
+			}
+		}
+	]
+}

@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ui/battle/MoveButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/battle/Moves.gd" type="Script" id=2]
+
+[node name="Moves" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -72.0
+margin_right = -16.0
+margin_bottom = -8.0
+
+[node name="HBox" type="HBoxContainer" parent="Control"]
+rect_min_size = Vector2( 992, 0 )
+alignment = 1
+
+[node name="MoveButton1" parent="Control/HBox" instance=ExtResource( 1 )]
+margin_left = 328.0
+margin_right = 392.0
+focus_neighbour_left = NodePath("../MoveButton5")
+focus_neighbour_right = NodePath("../MoveButton2")
+
+[node name="MoveButton2" parent="Control/HBox" instance=ExtResource( 1 )]
+margin_left = 396.0
+margin_right = 460.0
+focus_neighbour_left = NodePath("../MoveButton1")
+focus_neighbour_right = NodePath("../MoveButton3")
+movePositon = 1
+
+[node name="MoveButton3" parent="Control/HBox" instance=ExtResource( 1 )]
+focus_neighbour_left = NodePath("../MoveButton2")
+focus_neighbour_right = NodePath("../MoveButton4")
+movePositon = 2
+
+[node name="MoveButton4" parent="Control/HBox" instance=ExtResource( 1 )]
+margin_left = 532.0
+margin_right = 596.0
+focus_neighbour_left = NodePath("../MoveButton3")
+focus_neighbour_right = NodePath("../MoveButton5")
+movePositon = 3
+
+[node name="MoveButton5" parent="Control/HBox" instance=ExtResource( 1 )]
+margin_left = 600.0
+margin_right = 664.0
+focus_neighbour_left = NodePath("../MoveButton4")
+focus_neighbour_right = NodePath(".")
+movePositon = 4

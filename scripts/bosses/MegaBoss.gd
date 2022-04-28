@@ -2,6 +2,7 @@ extends "res://scripts/bosses/Boss.gd"
 
 
 var badCoinScene = preload("res://scenes/enemies/BadCoin.tscn")
+var luigiEnemyScene = preload("res://scenes/enemies/Luigi.tscn")
 
 onready var _anim_play := $AnimationPlayer
 onready var _att_play := $AttackPlayer
@@ -86,11 +87,19 @@ func phase_3():
 	rotate_pivot(4)
 	
 	if attackTimer == 60:
+		laugh()
 		start_ball()
-	elif attackTimer == 120:
+	elif attackTimer == 150:
 		dash()
-	elif attackTimer == 360:
+	elif attackTimer == 390:
 		dash()
+	elif attackTimer == 540:
+		laugh()
+		end_ball()
+	elif attackTimer == 570:
+		#spawn_luigi_enemy(Vector2(512, 80)
+		pass
+	
 
 
 func jump():
@@ -124,8 +133,16 @@ func float_idle():
 	_anim_play.play("float")
 
 
+func laugh():
+	_anim_play.play("laugh")
+
+
 func start_ball():
 	_att_play.play("ballStart")
+
+
+func end_ball():
+	_att_play.play("ballEnd")
 
 
 func set_collide_layers():
@@ -144,6 +161,13 @@ func spawn_bad_coin(instPos = Vector2(0, 0)):
 		var bad = badCoinScene.instance()
 		get_parent().add_child(bad)
 		bad.global_position = instPos
+
+
+func spawn_luigi_enemy(instPos = Vector2(0, 0)):
+	var john = luigiEnemyScene.instance()
+	get_parent().add_child(john)
+	john.global_position = instPos
+
 
 
 func emit_warnings(warnId, warnTime):

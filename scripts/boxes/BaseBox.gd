@@ -3,6 +3,8 @@
 extends Node2D
 class_name BaseBox
 
+signal bounced()
+
 const bounce_offset = Vector2(0, -12)
 const bounce_duration = 0.1
 
@@ -33,6 +35,7 @@ func bounce(body: KinematicBody2D):
 	sprite.visible = true
 	tween.interpolate_property(sprite, "position", sprite.position, bounce_offset, bounce_duration / 2)
 	tween.start()
+	emit_signal("bounced")
 	
 	yield(tween, "tween_all_completed")
 	audio_meow.play()

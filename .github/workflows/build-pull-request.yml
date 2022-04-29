@@ -16,6 +16,7 @@ on:
 
 jobs:
   build_game:
+    if: ${{ (github.event.action == 'synchronize' && github.event.label.name != 'skip preview') || github.event.action != 'synchronize' }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout latest code
@@ -24,20 +25,10 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            var fs = require('fs');
-            var response = await github.repos.listContributors({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              per_page: 100
-            });
-            var names = '';
-            for (const contributor of response.data) {
-              if (contributor.type == 'User') {
-                names += contributor.login + '\n';
-              }
-            }
-            fs.writeFileSync('credits.txt', names);
-      - name: export with Godot Engine and release on GitHub
+            const path = require('path');
+            const script = require(path.resolve('.github/workflows/update-credits.js'));
+            await script(github, context)
+      - name: export with Godot Engine
         uses: firebelley/godot-export@v3.0.0
         with:
           create_release: false
@@ -51,11 +42,17 @@ jobs:
       # The next workflow needs access to the PR number to comment on it
       # This is the best way we have to thread that through, sigh.
       # Shoving it into HTML5 lets us upload a single artifact instead of juggling 2
-      - name: Save PR number
+      - name: Save PR metadata
         env:
           PR_NUMBER: ${{ github.event.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_SENDER: ${{ github.event.sender.login }}
+          PR_ACTION: ${{ github.event.action }}
         run: |
           echo $PR_NUMBER > ./HTML5/pr_number
+          echo $PR_TITLE > ./HTML5/pr_title
+          echo $PR_SENDER > ./HTML5/pr_sender
+          echo $PR_ACTION > ./HTML5/pr_action
 
       - uses: actions/upload-artifact@v3
         with:

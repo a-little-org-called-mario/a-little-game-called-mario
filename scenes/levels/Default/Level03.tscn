@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/platformer/characters/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/enemies/GassyRandal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=7]
@@ -45,16 +45,20 @@ position = Vector2( 377, 289 )
 
 [node name="Randall will remember that" type="Label" parent="."]
 visible = false
-margin_left = 12.0
-margin_top = -40.0
-margin_right = 407.0
-margin_bottom = 90.0
+margin_left = 214.0
+margin_top = 208.0
+margin_right = 546.0
+margin_bottom = 258.0
 rect_min_size = Vector2( 100, 50 )
 size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 1 )
 text = "RANDALL WILL REMEMBER THAT."
+align = 1
 valign = 1
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="tree_exited" from="Coin3" to="Randall will remember that" method="reveal"]

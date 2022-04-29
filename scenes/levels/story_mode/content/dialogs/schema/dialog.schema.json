@@ -1,0 +1,150 @@
+{
+	"$schema": "http://json-schema.org/schema",
+	"$id": "https://iznaut.itch.io/a-little-game-called-mario/dialog.schema.json",
+	"title": "Dialog",
+	"description": "A dialog in the game A little game called Mario. Can be string the character says, a list of chained dialogs or an object.",
+	"definitions": {
+		"condition": {
+			"type": "object",
+			"properties": {
+				"has_item": {
+					"type": "string",
+					"description": "Checks if the player has a specific item"
+				},
+				"occurence": {
+					"type": "integer",
+					"minimum": 1,
+					"description": "The condition is true if the number of times the player has now seen this dialog matches this number."
+				},
+				"custom": {
+					"type": "string",
+					"description": "Check if a custom method returns true."
+				},
+				"inverted": {
+					"type": "boolean",
+					"description": "If the condition should be inverted."
+				}
+			},
+			"minProperties": 1,
+			"additionalProperties": false
+		}
+	},
+	"oneOf": [
+		{ "type": "string" },
+		{
+			"type": "array",
+			"items": { "$ref": "#" }
+		},
+		{
+			"type":"object",
+			"properties": {
+				"$schema": { "type": "string" },
+				"text": {
+					"description": "The message the character says. Can contain an array of messages that will be displayed on after the other.",
+					"oneOf": [
+						{ "type": "string" },
+						{
+							"type": "array",
+							"items": { "type": "string" },
+							"minItems": 1
+						}
+					]
+				},
+				"choices": {
+					"description": "The options the player has the respond. Can be a string if there is only one option or a list of strings or objects.",
+					"type": "array",
+					"items": {
+						"oneOf": [
+							{ "type": "string" },
+							{
+								"type": "object",
+								"properties": {
+									"text": {
+										"description": "The text of the choice.",
+										"type": "string"
+									},
+									"dialog": {
+										"description": "The dialog triggered by this choice.",
+										"$ref": "#"
+									},
+									"condition": {
+										"description": "The condition that needs to be true for this option to be visible.",
+										"$ref": "#/definitions/condition"
+									}
+								},
+								"additionalProperties": false,
+								"required": ["text"]
+							}
+						]
+					},
+					"minItems": 1
+				},
+				"item": {
+					"description": "The item that the character gives the player after the dialog. This is the name of the resource file without the tres extension.",
+					"minLength": 3,
+					"type": "string"
+				},
+				"event": {
+					"description": "The event that is triggered after the dialog",
+					"minLength": 3,
+					"type": "string"
+				},
+				"set_sprite": {
+					"description": "The texture the character should appear as after the dialog. This should be a path to a texture resource.",
+					"minLength": 3,
+					"type": "string"
+				},
+				"label": {
+					"description": "Mark this dialog as this label which can be jumped to from another dialog using goto",
+					"type": "string",
+					"minLength": 3
+				},
+				"character": {
+					"type": "string",
+					"minLength": 3,
+					"description": "The id of the character that says the text. This is the file name of the character data resource without extension."
+				},
+				"condition": {
+					"description": "Make this dialog only reachable if this condition is true",
+					"$ref": "#/definitions/condition"
+				},
+				"next": {
+					"description": "The dialog that is started after this one finished",
+					"$ref": "#"
+				}
+			},
+			"required": ["text"],
+			"additionalProperties": false
+		},
+		{
+			"type": "object",
+			"properties": {
+				"condition": {
+					"description": "A branch in the dialog. If you specify this",
+					"$ref": "#/definitions/condition"
+				},
+				"true": {
+					"description": "The dialog to execute if the condition is true",
+					"$ref": "#"
+				},
+				"false": {
+					"description": "The dialog to execute if the condition is false",
+					"$ref": "#"
+				}
+			},
+			"required": ["condition", "true", "false"],
+			"additionalProperties": false
+		},
+		{
+			"type": "object",
+			"properties": {
+				"goto": {
+					"description": "Go to the dialog with the defined label instead of executing this dialog",
+					"type": "string",
+					"minLength": 3
+				}
+			},
+			"additionalProperties": false
+		}
+	]
+}

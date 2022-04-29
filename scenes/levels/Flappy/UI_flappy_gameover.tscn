@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/levels/Flappy/UI_flappy_gameover.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
+[ext_resource path="res://scenes/ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="UI" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+theme = ExtResource( 5 )
+
+[node name="GAMEOVER" type="RichTextLabel" parent="UI"]
+anchor_left = 0.03
+anchor_top = 0.05
+anchor_right = 0.481
+anchor_bottom = 0.217
+margin_left = 343.28
+margin_top = 206.0
+margin_right = 202.456
+margin_bottom = 281.8
+rect_scale = Vector2( 2, 2 )
+custom_constants/line_separation = 0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[rainbow freq=0.5 sat=1 val=20]GAME OVER[/rainbow]"
+text = "GAME OVER"
+fit_content_height = true
+script = ExtResource( 6 )
+
+[node name="RESTART" type="RichTextLabel" parent="UI"]
+anchor_left = 0.03
+anchor_top = 0.05
+anchor_right = 0.481
+anchor_bottom = 0.217
+margin_left = 236.28
+margin_top = 287.0
+margin_right = 95.456
+margin_bottom = 362.8
+rect_scale = Vector2( 2, 2 )
+custom_constants/line_separation = 0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "PRESS 'R' TO RESTART"
+text = "PRESS 'R' TO RESTART"
+fit_content_height = true
+script = ExtResource( 6 )

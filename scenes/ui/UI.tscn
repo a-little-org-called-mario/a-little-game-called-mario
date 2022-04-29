@@ -1,24 +1,250 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/AchievementGet.gd" type="Script" id=3]
 [ext_resource path="res://scenes/ui/LevelCount.gd" type="Script" id=4]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
-[ext_resource path="res://scenes/ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
-[ext_resource path="res://scenes/ui/HeartCount.gd" type="Script" id=7]
+[ext_resource path="res://scenes/ui/Instructions.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/Toasty.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/ui/HeartIconContainer.gd" type="Script" id=8]
+[ext_resource path="res://scenes/ui/Heart.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/ui/StarNotification.gd" type="Script" id=10]
+[ext_resource path="res://scenes/ui/PlayerDied.gd" type="Script" id=11]
+[ext_resource path="res://textures/trails/ranbow_flag.jpg" type="Texture" id=12]
+[ext_resource path="res://scenes/ui/CarPlayerStats.gd" type="Script" id=13]
+[ext_resource path="res://scenes/ui/UI.gd" type="Script" id=14]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Appear"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="UI" type="CanvasLayer"]
 
 [node name="UI" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
+mouse_filter = 2
 theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 14 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 20.0
+margin_right = -10.0
+margin_bottom = 84.0
+
+[node name="HeartIconContainer" type="GridContainer" parent="UI/HBoxContainer"]
+margin_right = 248.0
+margin_bottom = 64.0
+size_flags_vertical = 3
+columns = 10
+script = ExtResource( 8 )
+heart_scene = ExtResource( 9 )
+
+[node name="Heart" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+
+[node name="Heart2" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 36.0
+margin_right = 68.0
+
+[node name="Heart3" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 72.0
+margin_right = 104.0
+
+[node name="Heart4" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 108.0
+margin_right = 140.0
+
+[node name="Heart5" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 144.0
+margin_right = 176.0
+
+[node name="Heart6" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 180.0
+margin_right = 212.0
+
+[node name="Heart7" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_left = 216.0
+margin_right = 248.0
+
+[node name="Spacer" type="Control" parent="UI/HBoxContainer"]
+margin_left = 252.0
+margin_right = 744.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Coins" type="Control" parent="UI/HBoxContainer"]
+margin_left = 748.0
+margin_right = 1004.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 256, 64 )
+
+[node name="CoinCount" type="RichTextLabel" parent="UI/HBoxContainer/Coins"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -128.0
+margin_bottom = -64.0
+rect_min_size = Vector2( 100, 32 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[right][wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow][/wave][/right]"
+text = "COINS:0"
+scroll_active = false
+script = ExtResource( 2 )
+
+[node name="CarPlayerStats" type="VBoxContainer" parent="UI" groups=["car_ui"]]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -184.0
+margin_top = 80.0
+margin_right = -28.0
+margin_bottom = 164.0
+script = ExtResource( 13 )
+
+[node name="HealthTitle" type="Label" parent="UI/CarPlayerStats"]
+margin_right = 156.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "CLOUT"
+align = 1
+
+[node name="Health" type="ColorRect" parent="UI/CarPlayerStats"]
+margin_top = 20.0
+margin_right = 156.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 104, 24 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="Value" type="TextureRect" parent="UI/CarPlayerStats/Health"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+texture = ExtResource( 12 )
+expand = true
+
+[node name="Speed" type="HBoxContainer" parent="UI/CarPlayerStats"]
+margin_top = 48.0
+margin_right = 156.0
+margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="UI/CarPlayerStats/Speed"]
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "SPEED:"
+
+[node name="Value" type="Label" parent="UI/CarPlayerStats/Speed"]
+margin_left = 108.0
+margin_right = 156.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "FAST"
+align = 2
+
+[node name="Distance" type="HBoxContainer" parent="UI/CarPlayerStats"]
+margin_top = 68.0
+margin_right = 156.0
+margin_bottom = 84.0
+
+[node name="Label" type="Label" parent="UI/CarPlayerStats/Distance"]
+margin_right = 116.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "DISTANCE:"
+
+[node name="Value" type="Label" parent="UI/CarPlayerStats/Distance"]
+margin_left = 120.0
+margin_right = 156.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "FAR"
+align = 2
+
+[node name="Felonies" type="HBoxContainer" parent="UI/CarPlayerStats"]
+visible = false
+margin_top = 88.0
+margin_right = 156.0
+margin_bottom = 104.0
+
+[node name="Label" type="Label" parent="UI/CarPlayerStats/Felonies"]
+margin_right = 140.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "FELONIES:"
+
+[node name="Value" type="Label" parent="UI/CarPlayerStats/Felonies"]
+margin_left = 144.0
+margin_right = 156.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "?"
+align = 2
+
+[node name="Instructions" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
@@ -28,6 +254,7 @@ margin_top = -20.0
 margin_right = -93.544
 margin_bottom = 55.8
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_constants/line_separation = 0
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
@@ -41,23 +268,30 @@ CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
 
 B TO[wave amp=50 freq=2] FIREBALL [/wave]
 
-(WITH POWERUP)"
-text = "ARROW KEYS TO [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
+(WITH POWERUP)
 
-SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
+TAB TO SHOW/HIDE CONTROLS"
+text = "ARROW KEYS TO MOVE
 
-SPACE TO [wave amp=50 freq=2]JUMP[/wave]
+SHIFT TO SPRINT
 
-CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
+SPACE TO JUMP
 
-B TO[wave amp=50 freq=2] FIREBALL [/wave]
+CONTROL/Z TO SHOOT
 
-(WITH POWERUP)"
+B TO FIREBALL 
+
+(WITH POWERUP)
+
+TAB TO SHOW/HIDE CONTROLS"
 fit_content_height = true
 script = ExtResource( 6 )
-localization_key = "TUTORIAL_MOVEMENT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LevelCount" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -570.0
@@ -65,52 +299,36 @@ margin_top = 258.0
 margin_right = -447.0
 margin_bottom = 308.0
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "
 [wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
 text = "
-[wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
+LEVEL:1 "
 script = ExtResource( 4 )
 
-[node name="CoinCount" type="RichTextLabel" parent="UI"]
+[node name="StarNotification" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -247.0
-margin_right = -124.0
-margin_bottom = 50.0
+margin_left = -692.0
+margin_top = 145.0
+margin_right = -392.0
+margin_bottom = 245.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "
-[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
-text = "
-[wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0[/rainbow] [/wave]"
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HeartCount" type="RichTextLabel" parent="UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -248.0
-margin_top = 75.0
-margin_right = -125.0
-margin_bottom = 125.0
-rect_scale = Vector2( 2, 2 )
-custom_fonts/normal_font = ExtResource( 1 )
-bbcode_enabled = true
-bbcode_text = "
-[wave amp=50 freq=2]HEARTS:[rainbow freq=0.5 sat=1 val=20]3[/rainbow] [/wave]"
-text = "
-HEARTS:3 "
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+bbcode_text = " 
+[wave amp=50 freq=2]YOU GOT THE STAR:
+	 [rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]\""
+text = " 
+YOU GOT THE STAR:
+	 1 \""
+script = ExtResource( 10 )
 
 [node name="AchievementLabel" type="RichTextLabel" parent="UI"]
+visible = false
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.481
@@ -120,6 +338,39 @@ margin_top = 479.0
 margin_right = 22.456
 margin_bottom = 423.8
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerDiedPanel" type="Panel" parent="UI"]
+pause_mode = 2
+visible = false
+margin_right = 1032.0
+margin_bottom = 609.0
+script = ExtResource( 11 )
+
+[node name="PlayerDied" type="RichTextLabel" parent="UI/PlayerDiedPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 303.0
+margin_right = -516.0
+margin_bottom = -303.0
+rect_min_size = Vector2( 516, 18 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow][/wave][/center]"
+text = "YOU DIED"
+fit_content_height = true
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PlayerDiedPanel"]
+anims/Appear = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[node name="Toasty" parent="UI" instance=ExtResource( 7 )]

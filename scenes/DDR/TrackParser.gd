@@ -5,6 +5,7 @@ var last_tick = 0
 var index = 0
 var notes = []
 
+#warning-ignore: SHADOWED_VARIABLE
 static func parse(fileName):
 	var parser = load("res://scenes/DDR/TrackParser.gd").new(fileName)
 	return parser._parse()
@@ -35,7 +36,7 @@ func _parse_line(line):
 	
 	var parts = line.split(' ')
 	if len(parts) < 2:
-		print("line (" + index + "): " + line + " is incorrect")
+		printerr("line (" + index + "): " + line + " is incorrect")
 		return
 	
 	var tick = 0

@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/picture-frame.png" type="Texture" id=1]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=2]
+
+[node name="PictureFrame" type="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+__meta__ = {
+"_editor_description_": "Click Expand Children and edit the BBCode of the RichTextLabel and/or the Texture of the TextureRect"
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
+theme = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "TEXT"
+text = "TEXT"
+fit_content_height = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0

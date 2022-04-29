@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://models/marwing/10_WATER.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/marwing/levels/1-0.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/PauseMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/marwing/Marwing.tscn" type="PackedScene" id=4]
+[ext_resource path="res://textures/marwing/WORLD1.tres" type="Environment" id=5]
+[ext_resource path="res://models/marwing/10_WATER.tres" type="Material" id=6]
+[ext_resource path="res://scenes/marwing/DialogueBox.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.000298113, 0.000109732, -2.55853e-05, 0, 0, 0, 0, 0, 0, -179.435, -0.14266, -0.0173095 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[node name="Level" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 5 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
+
+[node name="Water1" type="MeshInstance" parent="."]
+transform = Transform( -1.31134e-07, 0, 3, 0, 0.1, 0, -3, 0, -1.31134e-07, 0, -5, 0 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="Water2" type="MeshInstance" parent="."]
+transform = Transform( -1.31134e-07, 0, 3, 0, 0.1, 0, -3, 0, -1.31134e-07, 0, -5, 180 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 6 )
+
+[node name="Path" type="Path" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+curve = SubResource( 1 )
+
+[node name="Marwing" parent="Path" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000298113, 0.000109732, -2.55853e-05 )
+
+[node name="DialogueBox" parent="." instance=ExtResource( 7 )]

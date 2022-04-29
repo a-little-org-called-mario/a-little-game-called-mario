@@ -1,0 +1,35 @@
+{
+	"$schema": "schema/dialog.schema.json",
+	"text": "A lever",
+	"choices": [
+		{
+			"text": "Look at it",
+			"dialog": "Looks a little rusty..."
+		},
+		{
+			"text": "Flip it",
+			"condition": {
+				"inverted": true,
+				"custom": "is_door_open"
+			},
+			"dialog": {
+				"condition": {
+					"has_item": "stick"
+				},
+				"true": {
+					"text": [
+						"Let's see if this stick can help",
+						"Hrrnngh...",
+						"Hrrrrnnnghh...",
+						"*CLICK*",
+						"That sounded like it worked!"
+					],
+					"event": "open_door",
+					"set_sprite": "switch_down",
+					"choices": ["I hear something open..."]
+				},
+				"false": "It's brocken..."
+			}
+		}
+	]
+}

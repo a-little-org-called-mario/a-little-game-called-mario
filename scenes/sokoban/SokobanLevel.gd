@@ -60,12 +60,21 @@ func _process(delta):
 		undo()
 	elif Input.is_action_just_pressed("restart"):
 		restart()
+	if Input.is_action_just_pressed("pause"):
+		close_level()
+
+
+func close_level():
+	EventBus.emit_signal("change_scene", {"scene": "res://scenes/sokoban/SokobanMain.tscn"})
+
 
 func win():
-	EventBus.emit_signal("change_scene", {"scene": "res://scenes/sokoban/SokobanMain.tscn"})
+	close_level()
+
 
 func restart():
 	get_tree().reload_current_scene()
+
 
 func undo():
 	if UndoArray.size() > 0: #Can Undo

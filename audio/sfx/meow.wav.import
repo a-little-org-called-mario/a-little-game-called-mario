@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/meow.wav-53008fcc11b1cf172066e909065fdbb4.sample"
+
+[deps]
+
+source_file="res://audio/sfx/meow.wav"
+dest_files=[ "res://.import/meow.wav-53008fcc11b1cf172066e909065fdbb4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dramaticgamemusic.mp3-3278f57578b8f04610f20cb8be2a7419.mp3str"
+
+[deps]
+
+source_file="res://audio/music/dramaticgamemusic.mp3"
+dest_files=[ "res://.import/dramaticgamemusic.mp3-3278f57578b8f04610f20cb8be2a7419.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

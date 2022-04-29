@@ -2,6 +2,8 @@ extends RichTextLabel
 
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
+const FORMAT: String = "[right][wave amp=50 freq=2]%s[rainbow freq=0.5 sat=1 val=20]%d[/rainbow][/wave][/right]"
+
 
 func _ready():
 	EventBus.connect("coin_collected", self, "_on_coin_collected")
@@ -13,4 +15,4 @@ func _on_coin_collected(_data):
 
 
 func update_coin_count():
-	bbcode_text = tr("UI_COINS") % inventory.coins
+	bbcode_text = FORMAT % [tr("COINS:"), inventory.coins]

@@ -8,29 +8,21 @@ const FileUtils = preload("res://scripts/FileUtils.gd")
 
 func _ready():
 	Settings.load_data()
-	if true:
+	if randi()%5 == 4:
 		alternate_title_screen()
 
 func alternate_title_screen():
 	#This function assumes that there is a matching number of sprites, labels, and sfx, and that the Mario Label, IdleMario Sprite, and Meow SFX are present in-scene, with the following paths. 
-	
 	if(label_texts.size() > 0):
 		var screen_index = randi() % label_texts.size()
-		
-		var mario_sprite = get_node("VBoxContainer/IdleMario")		
+		var mario_sprite = get_node("VBoxContainer/IdleMario")
+		var size=mario_sprite.texture.get_size()
 		
 		mario_sprite.texture = ResourceLoader.load(sprite_paths[screen_index].rstrip(".import"), "Texture")
-		mario_sprite.hframes = 1
-		mario_sprite.vframes = 1
-		
-		get_node("VBoxContainer/IdleMario/AnimationPlayer").stop()
-		
-		var size=mario_sprite.texture.get_size()
 		var sizeto=mario_sprite.texture.get_size()
+		
 		var scale_factor = sizeto/size if sizeto < size else size/sizeto
 		mario_sprite.scale=scale_factor
-		
-		#get_node("VBoxContainer/IdleMario/AnimationPlayer").play()
 		
 		var mario_label = get_node("VBoxContainer/Mario")
 		mario_label.text = label_texts[screen_index]
@@ -38,6 +30,4 @@ func alternate_title_screen():
 		var on_click_sfx = get_node("VBoxContainer/IdleMario/Meow")
 		on_click_sfx.stream = ResourceLoader.load(sfx_paths[screen_index])
 	else:
-		print("No alt title screens found")
-
-#func import_trim(path: String):
+		return false

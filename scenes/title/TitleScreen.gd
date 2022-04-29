@@ -1,29 +1,43 @@
 extends Control
 #export(int) var alternate_screen_chance
-export(Array, String) var alt_sprite_paths = ["res://sprites/large-gassy-randal.png"]
-export(Array, String) var alt_label_texts
-export(Array, String) var alt_sound_effect_paths
+export(Array, String) var sprite_paths
+export(Array, String) var label_texts
+export(Array, String) var sfx_paths
+
+const FileUtils = preload("res://scripts/FileUtils.gd")
 
 func _ready():
-	#randomize()
 	Settings.load_data()
 	if true:
 		alternate_title_screen()
 
 func alternate_title_screen():
 	#This function assumes that there is a matching number of sprites, labels, and sfx, and that the Mario Label, IdleMario Sprite, and Meow SFX are present in-scene, with the following paths. 
-	if(alt_label_texts.size() > 0):
-		var alt_title_screen_index = randi() % alt_label_texts.size()
+	
+	if(label_texts.size() > 0):
+		var screen_index = randi() % label_texts.size()
 		
-		var mario_sprite = get_node("VBoxContainer/IdleMario")
-		mario_sprite.texture = ResourceLoader.load(alt_sprite_paths[alt_title_screen_index])
+		var mario_sprite = get_node("VBoxContainer/IdleMario")		
+		
+		mario_sprite.texture = ResourceLoader.load(sprite_paths[screen_index].rstrip(".import"), "Texture")
+		mario_sprite.hframes = 1
+		mario_sprite.vframes = 1
+		
+		get_node("VBoxContainer/IdleMario/AnimationPlayer").stop()
+		
+		var size=mario_sprite.texture.get_size()
+		var sizeto=mario_sprite.texture.get_size()
+		var scale_factor = sizeto/size if sizeto < size else size/sizeto
+		mario_sprite.scale=scale_factor
+		
+		#get_node("VBoxContainer/IdleMario/AnimationPlayer").play()
+		
 		var mario_label = get_node("VBoxContainer/Mario")
-		mario_label.text = alt_label_texts[alt_title_screen_index]
+		mario_label.text = label_texts[screen_index]
 		mario_label.bbcode_text = "\n[center][wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1]" + mario_label.text + "[/rainbow]"
 		var on_click_sfx = get_node("VBoxContainer/IdleMario/Meow")
-		on_click_sfx.stream = ResourceLoader.load(alt_sound_effect_paths[alt_title_screen_index])
+		on_click_sfx.stream = ResourceLoader.load(sfx_paths[screen_index])
 	else:
 		print("No alt title screens found")
 
 #func import_trim(path: String):
-	

@@ -25,7 +25,6 @@
 						"That sounded like it worked!"
 					],
 					"event": "open_door",
-					"set_sprite": "switch_down",
 					"choices": ["I hear something open..."]
 				},
 				"false": "It's brocken..."

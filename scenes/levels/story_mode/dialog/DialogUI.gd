@@ -43,7 +43,6 @@ onready var _continue_button: Button = $ColorRect/MarginContainer/VBoxContainer/
 onready var _finish_button: Button = $ColorRect/MarginContainer/VBoxContainer/DialogTextLabel/FinishButton
 onready var _title_label: Label = $PortraitRect/VBoxContainer/TitleLabel
 onready var _portrait_texture_rect: TextureRect = $PortraitRect/VBoxContainer/PortraitTextureRect
-onready var _portrait_rect: ColorRect = $PortraitRect
 onready var _choice_container: VBoxContainer = $ColorRect/MarginContainer/VBoxContainer/PanelContainer/ChoiceContainer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -139,9 +138,6 @@ func _progress_dialog():
 			emit_signal("item_received", _dialog.item)
 		if _dialog.event:
 			emit_signal("event_occured", _dialog.event)
-		if _dialog.new_sprite:
-			assert(_speaker, "Can't change sprite in dialog without speaker.")
-			_speaker.set_sprite(_dialog.new_sprite)
 	_animation_player.stop()
 	_animation_player.play("talking")
 

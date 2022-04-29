@@ -159,6 +159,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/PlayerProjectile.gd"
 }, {
+"base": "Control",
+"class": "PopLabel",
+"language": "GDScript",
+"path": "res://scenes/PopLabel.gd"
+}, {
 "base": "RigidBody2D",
 "class": "PopcornKernel",
 "language": "GDScript",
@@ -265,6 +270,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerFlying": "",
 "PlayerProjectile": "",
+"PopLabel": "",
 "PopcornKernel": "",
 "PopcornPopped": "",
 "Powerup": "",

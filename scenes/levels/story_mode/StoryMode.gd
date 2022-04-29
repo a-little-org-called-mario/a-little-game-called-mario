@@ -76,11 +76,13 @@ func _on_DialogUI_item_received(item_id: String) -> void:
 
 func _on_DialogUI_event_occured(event) -> void:
 	if _cut_scene_player.has_animation(event):
+		_player.can_move = false
 		_cut_scene_focus.position = _room_camera.position
 		_cut_scene_camera.position = _room_camera.position
 		_cut_scene_player.play(event)
 		_cut_scene_camera.make_current()
 		yield(_cut_scene_player, "animation_finished")
+		_player.can_move = true
 		_room_camera.make_current()
 
 

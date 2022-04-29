@@ -5,14 +5,14 @@ signal picked_up
 
 export var item: Resource setget _set_item
 
-var _pickup_text := "Pick up %s"
+var _pickup_text := "[Q] Pick up %s"
 
 func _ready() -> void:
 	$PickupLabel.visible = Engine.is_editor_hint()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("fire") and get_overlapping_bodies():
+	if event.is_action_pressed("interact") and get_overlapping_bodies():
 		emit_signal("picked_up")
 
 

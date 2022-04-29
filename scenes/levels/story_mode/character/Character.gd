@@ -34,13 +34,8 @@ func _get_configuration_warning() -> String:
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
-	if event.is_action_pressed("fire") and get_overlapping_bodies():
+	if event.is_action_pressed("interact") and get_overlapping_bodies():
 		emit_signal("talked_to")
-
-
-# Changes how the NPC looks.
-func set_sprite(to):
-	_sprite.texture = to
 
 
 # Returns the current texture of the NPC.
@@ -59,7 +54,7 @@ func _set_data(to: StoryCharacterData):
 func _set_talk_to_text(to):
 	talk_to_text = to
 	if data:
-		var text: String = tr(talk_to_text)
+		var text: String = "[Q] %s" % tr(talk_to_text)
 		if "%s" in text:
 			text = text % data.name
 		$TalkToLabel.text = text

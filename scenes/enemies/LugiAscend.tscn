@@ -16,7 +16,6 @@ animations = [ {
 } ]
 
 [node name="LuigiAscend" type="AnimatedSprite"]
-position = Vector2( 282, 82 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 script = ExtResource( 2 )

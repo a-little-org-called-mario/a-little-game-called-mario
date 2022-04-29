@@ -1,10 +1,11 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scenes/bosses/Boss.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/bosses/mega_lawrence_boss.png" type="Texture" id=2]
 [ext_resource path="res://scripts/bosses/MegaBoss.gd" type="Script" id=3]
 [ext_resource path="res://scripts/enemies/BasicHitbox.gd" type="Script" id=4]
 [ext_resource path="res://sprites/projectiles/mega_lawrence_projectiles.png" type="Texture" id=5]
+[ext_resource path="res://scenes/enemies/LugiAscend.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=46]
 extents = Vector2( 42, 40 )
@@ -100,6 +101,22 @@ region = Rect2( 160, 320, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 240, 320, 80, 80 )
 
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 80, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 240, 160, 80, 80 )
+
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 80, 80, 80 )
@@ -120,22 +137,6 @@ region = Rect2( 800, 240, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 880, 240, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 2 )
-region = Rect2( 80, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 2 )
-region = Rect2( 160, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 2 )
-region = Rect2( 240, 160, 80, 80 )
-
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ), SubResource( 23 ), SubResource( 24 ) ],
@@ -153,6 +154,11 @@ animations = [ {
 "name": "float",
 "speed": 10.0
 }, {
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
+"loop": false,
+"name": "cannon",
+"speed": 10.0
+}, {
 "frames": [ SubResource( 29 ) ],
 "loop": true,
 "name": "jump",
@@ -161,11 +167,6 @@ animations = [ {
 "frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "laugh",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
-"loop": false,
-"name": "cannon",
 "speed": 10.0
 } ]
 
@@ -779,6 +780,56 @@ tracks/5/keys = {
 "values": [ 3 ]
 }
 
+[sub_resource type="Animation" id=57]
+resource_name = "ascend1"
+length = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("LuigiAscend")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_ascend"
+} ]
+}
+
+[sub_resource type="Animation" id=58]
+resource_name = "ascend2"
+length = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("LuigiAscend")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_ascend"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("LuigiAscend2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_ascend"
+} ]
+}
+
 [sub_resource type="Animation" id=44]
 resource_name = "badcoins"
 length = 3.2
@@ -1026,6 +1077,8 @@ anims/laugh = SubResource( 56 )
 anims/transform = SubResource( 45 )
 
 [node name="AttackPlayer" type="AnimationPlayer" parent="." index="7"]
+anims/ascend1 = SubResource( 57 )
+anims/ascend2 = SubResource( 58 )
 anims/badcoins = SubResource( 44 )
 anims/ballEnd = SubResource( 55 )
 anims/ballStart = SubResource( 52 )
@@ -1075,5 +1128,10 @@ playing = true
 [node name="Collision" type="CollisionShape2D" parent="Pivot/SpinBall" index="1"]
 position = Vector2( 0, -6 )
 shape = SubResource( 51 )
+
+[node name="LuigiAscend" parent="." index="10" instance=ExtResource( 6 )]
+visible = false
+
+[node name="LuigiAscend2" parent="." index="11" instance=ExtResource( 6 )]
 
 [editable path="BossBar"]

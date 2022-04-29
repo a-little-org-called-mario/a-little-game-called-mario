@@ -21,6 +21,8 @@ func boss_ai(delta):
 		phase_2()
 	elif phase == 3:
 		phase_3()
+	elif phase == 4:
+		phase_4()
 
 
 func phase_0():
@@ -96,10 +98,32 @@ func phase_3():
 	elif attackTimer == 540:
 		laugh()
 		end_ball()
+		
 	elif attackTimer == 570:
-		#spawn_luigi_enemy(Vector2(512, 80)
-		pass
-	
+		ascend_projs(1)
+	elif attackTimer == 660:
+		ascend_projs(1)
+	elif attackTimer == 750:
+		ascend_projs(2)
+		
+	elif attackTimer == 840:
+		laugh()
+		badCoins()
+		
+	elif attackTimer == 1140:
+		laugh()
+		spawn_luigi_enemy(Vector2(512, 80))
+		
+	elif attackTimer == 1260:
+		laugh()
+		start_ball()
+		phase = 4
+
+
+func phase_4():
+	attackTimer += 1
+	rotate_pivot(6)
+
 
 
 func jump():
@@ -143,6 +167,10 @@ func start_ball():
 
 func end_ball():
 	_att_play.play("ballEnd")
+
+
+func ascend_projs(count = 1):
+	_att_play.play("ascend" + str(count))
 
 
 func set_collide_layers():

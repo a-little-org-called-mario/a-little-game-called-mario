@@ -6,9 +6,6 @@ func change_hearts(delta: int) -> bool:
 	if delta == 0:
 		return true
 
-	if inventory.hearts + delta < 0:
-		return false
-
 	inventory.hearts += delta
 	EventBus.emit_signal("heart_changed", delta, inventory.hearts)
 	return true

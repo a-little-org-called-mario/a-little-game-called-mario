@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/enemies/WallMech.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/enemies/FireMech.gd" type="Script" id=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Fire Mech.png-dda746b091d8eba3a6d35c572455979d.stex"
+
+[node name="FireMech" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+move_direction = Vector2( 0, -1 )
+health = 4
+time_between_shots = 2
+
+[node name="Sprite" parent="." index="0"]
+texture = SubResource( 1 )
+
+[node name="ShootTimer" parent="." index="3"]
+wait_time = 2.0

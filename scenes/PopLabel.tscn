@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/PopLabel.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=2]
+
+[node name="PopLabel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -1.0
+margin_right = 1.0
+margin_bottom = 16.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 2 )
+align = 1
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0

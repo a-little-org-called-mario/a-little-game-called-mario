@@ -9,6 +9,7 @@ onready var _att_play := $AttackPlayer
 onready var _pivot = $Pivot
 
 var canSpawnBad = true
+var luigiSpawned = false
 var pivRotation = 0
 
 
@@ -106,23 +107,43 @@ func phase_3():
 	elif attackTimer == 750:
 		ascend_projs(2)
 		
-	elif attackTimer == 840:
+	elif attackTimer == 870:
 		laugh()
 		badCoins()
 		
-	elif attackTimer == 1140:
-		laugh()
-		spawn_luigi_enemy(Vector2(512, 80))
-		
-	elif attackTimer == 1260:
+	elif attackTimer == 1230:
 		laugh()
 		start_ball()
 		phase = 4
+		attackTimer = 0
 
 
 func phase_4():
 	attackTimer += 1
 	rotate_pivot(6)
+	
+	if attackTimer == 60:
+		dash()
+	
+	elif attackTimer == 120:
+		ascend_projs(1)
+	elif attackTimer == 210:
+		ascend_projs(2)
+	elif attackTimer == 300:
+		ascend_projs(2)
+
+	elif attackTimer == 390:
+		dash()
+	elif attackTimer == 540:
+		dash()
+	
+	elif attackTimer == 810 and not luigiSpawned:
+		luigiSpawned = true
+		spawn_luigi_enemy(Vector2(512, 80))
+		laugh()
+	
+	elif attackTimer == 900:
+		attackTimer = 0
 
 
 
@@ -193,9 +214,10 @@ func spawn_bad_coin(instPos = Vector2(0, 0)):
 
 func spawn_luigi_enemy(instPos = Vector2(0, 0)):
 	var john = luigiEnemyScene.instance()
+	connect("dying", john, "_on_boss_death")
 	get_parent().add_child(john)
 	john.global_position = instPos
-
+	john.fireball_count = 4
 
 
 func emit_warnings(warnId, warnTime):
@@ -203,7 +225,8 @@ func emit_warnings(warnId, warnTime):
 
 
 func reset_health():
-	emit_signal("health_change", health, maxHealth)
+	maxHealth = 18
+	emit_signal("set_health", maxHealth)
 	health = maxHealth
 	canSpawnBad = true
 

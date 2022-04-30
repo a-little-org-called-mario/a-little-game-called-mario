@@ -21,7 +21,6 @@ position = Vector2( 864, 336 )
 [node name="MegaBoss" parent="BossNode2D" instance=ExtResource( 2 )]
 collision_layer = 8
 collision_mask = 257
-phase = 2
 
 [node name="Warnings" type="Node" parent="."]
 

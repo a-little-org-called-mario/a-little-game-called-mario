@@ -101,22 +101,6 @@ region = Rect2( 160, 320, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 240, 320, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 2 )
-region = Rect2( 80, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 2 )
-region = Rect2( 160, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 2 )
-region = Rect2( 240, 160, 80, 80 )
-
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 80, 80, 80 )
@@ -137,6 +121,22 @@ region = Rect2( 800, 240, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 880, 240, 80, 80 )
 
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 80, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 240, 160, 80, 80 )
+
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ), SubResource( 23 ), SubResource( 24 ) ],
@@ -154,11 +154,6 @@ animations = [ {
 "name": "float",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
-"loop": false,
-"name": "cannon",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 29 ) ],
 "loop": true,
 "name": "jump",
@@ -167,6 +162,11 @@ animations = [ {
 "frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "laugh",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
+"loop": false,
+"name": "cannon",
 "speed": 10.0
 } ]
 
@@ -1041,7 +1041,7 @@ extents = Vector2( 8, 14 )
 
 [node name="MegaBoss" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-health = 35
+health = 30
 direction = 1
 
 [node name="CollisionHead" type="CollisionShape2D" parent="." index="0"]

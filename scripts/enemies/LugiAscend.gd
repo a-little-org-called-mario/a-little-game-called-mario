@@ -6,19 +6,22 @@ const ASCEND_HEIGHT = 800
 
 var projScene = preload("res://scenes/enemies/Bullet.tscn")
 
-var projCount = 8
+var projCount = 5
 var doAscend = -1
 var doShoot = false
+var storePos = Vector2()
 
 
 func _ready():
 	visible = false
+	storePos = global_position
 
 
 func _process(delta):
+	global_position = storePos
 	if doAscend > 0:
 		doAscend -= ASCEND_SPEED
-		global_position.y -= ASCEND_SPEED
+		storePos.y -= ASCEND_SPEED
 	elif doShoot:
 		doShoot = false
 		shoot()
@@ -36,5 +39,5 @@ func shoot():
 func set_ascend():
 	visible = true
 	doAscend = ASCEND_HEIGHT
-	global_position = Vector2(rand_range(100, 924), 700)
+	storePos = Vector2(rand_range(100, 924), 700)
 	doShoot = true

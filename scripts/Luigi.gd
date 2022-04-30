@@ -162,3 +162,14 @@ func _handle_dying(_killer):
 	$Healthbar.hide()
 	yield($AnimationPlayer, "animation_finished")
 	emit_signal("luigi_defeated")
+
+
+func _on_boss_death(killer):
+	print("bgdhlskjh wow wow")
+	is_mortal = true
+	health = 0
+	state = DYING
+	$VisionCone.disable_spoting()
+	disable_collision()
+	.kill(killer)
+

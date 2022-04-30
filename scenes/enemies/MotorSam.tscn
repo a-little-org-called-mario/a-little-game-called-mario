@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://sprites/enemies/Motor Sam.png" type="Texture" id=1]
+[ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/enemies/MotorSam.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 56, 26 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 48, 4 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0.0864197, 0.563636 ), 0.0, 0.0, 0, 0, Vector2( 0.588477, 0.344318 ), -1.67586, -1.67586, 0, 0, Vector2( 0.983539, 0.1625 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "rearup"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 33.0, 33.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -20 ), Vector2( 0, -20 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "turn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 1, 1 ) ]
+}
+
+[node name="MotorSam" instance=ExtResource( 2 )]
+position = Vector2( 0, -32 )
+collision_mask = 322
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, 6 )
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="1"]
+frames = SubResource( 2 )
+
+[node name="KillTrigger" parent="." index="2"]
+visible = false
+position = Vector2( 0, -16 )
+monitoring = false
+monitorable = false
+
+[node name="CollisionPolygon2D" parent="KillTrigger" index="0"]
+position = Vector2( 0, -4 )
+shape = SubResource( 3 )
+
+[node name="SquishParticles" parent="." index="3"]
+emitting = false
+amount = 20
+one_shot = true
+speed_scale = 0.43
+explosiveness = 1.0
+randomness = 1.0
+flag_align_y = true
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, 5500 )
+initial_velocity = 1000.0
+initial_velocity_random = 0.19
+scale_amount = 20.0
+scale_amount_curve = SubResource( 4 )
+color = Color( 0.447059, 0.364706, 0.792157, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+anims/RESET = SubResource( 5 )
+anims/rearup = SubResource( 6 )
+anims/turn = SubResource( 7 )
+
+[node name="RayCastPlayer" type="RayCast2D" parent="." index="5"]
+position = Vector2( 0, 12 )
+enabled = true
+cast_to = Vector2( -300, 0 )
+collision_mask = 66
+collide_with_areas = true

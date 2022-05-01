@@ -1056,7 +1056,7 @@ shape = SubResource( 6 )
 
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 5 )
-animation = "laugh"
+animation = "idle"
 
 [node name="Name" parent="BossBar" index="0"]
 bbcode_text = "[right][wave]MEGA

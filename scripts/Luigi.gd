@@ -165,7 +165,6 @@ func _handle_dying(_killer):
 
 
 func _on_boss_death(killer):
-	print("bgdhlskjh wow wow")
 	is_mortal = true
 	health = 0
 	state = DYING

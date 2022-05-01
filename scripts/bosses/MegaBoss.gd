@@ -225,8 +225,9 @@ func emit_warnings(warnId, warnTime):
 
 
 func reset_health():
-	maxHealth = 18
+	$BossBar/ProgressRed/Progress.value = 1
 	emit_signal("set_health", maxHealth)
+	maxHealth = 18
 	health = maxHealth
 	canSpawnBad = true
 

@@ -1122,7 +1122,6 @@ script = ExtResource( 4 )
 [node name="Sprite" type="AnimatedSprite" parent="Pivot/SpinBall" index="0"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 50 )
-frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="Pivot/SpinBall" index="1"]

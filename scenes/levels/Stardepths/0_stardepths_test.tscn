@@ -85,22 +85,22 @@ frame = 0
 [node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 112, 0 )
 animation = "float_star"
-frame = 0
+frame = 2
 
 [node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 784, 112 )
 animation = "float_star"
-frame = 0
+frame = 2
 
 [node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2648, -448 )
 animation = "float_star"
-frame = 3
+frame = 4
 
 [node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 752, -352 )
 animation = "float_star"
-frame = 3
+frame = 4
 
 [node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2320, -352 )

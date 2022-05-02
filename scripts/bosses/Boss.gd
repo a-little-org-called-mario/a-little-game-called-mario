@@ -31,7 +31,7 @@ func _ready():
 	maxHealth = health
 
 
-func ai(delta):
+func move(delta):
 	# position = posOrigin + posOffset
 	flash()
 	handle_direction()
@@ -39,7 +39,7 @@ func ai(delta):
 		boss_ai(delta)
 	else:
 		visible = false
-		_boss_bar.visible = false
+		_boss_bar.change_visible(false)
 		
 
 
@@ -121,5 +121,5 @@ func large_shake():
 func set_active():
 	active = true
 	visible = true
-	_boss_bar.visible = true
+	_boss_bar.change_visible(true)
 

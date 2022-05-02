@@ -48,18 +48,18 @@ position = Vector2( 96, -128 )
 [node name="Instructions" parent="." instance=ExtResource( 5 )]
 margin_left = -270.0
 margin_top = -196.0
-margin_right = 39.0
+margin_right = 57.0
 margin_bottom = -74.0
 
 [node name="RichTextLabel" parent="Instructions" index="0"]
-bbcode_text = "[ARROWS]   [rainbow freq=0.5 sat=1 val=20]MOVE[/rainbow]
-[SPACE]    [wave amp=50 freq=2]JUMP[/wave]
-[SHIFT]    [SPRINT]
-[CTRL/Z]   THROW COIN"
-text = "[ARROWS]   MOVE
-[SPACE]    JUMP
-[SHIFT]    [SPRINT]
-[CTRL/Z]   THROW COIN"
+bbcode_text = "[ARROWS]   [rainbow freq=0.5 sat=1 val=20]  MOVE[/rainbow]
+[SPACE]    [rainbow freq=0.5 sat=1 val=20]  JUMP[/rainbow]
+[SHIFT]      [rainbow freq=0.5 sat=1 val=20]SPRINT[/rainbow]
+[CTRL/Z/O]   [rainbow freq=0.5 sat=1 val=20]THROW COIN[/rainbow]"
+text = "[ARROWS]     MOVE
+[SPACE]      JUMP
+[SHIFT]      SPRINT
+[CTRL/Z/O]   THROW COIN"
 
 [node name="PictureFrameStar" parent="." instance=ExtResource( 5 )]
 margin_left = 138.0

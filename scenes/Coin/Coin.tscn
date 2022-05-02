@@ -210,6 +210,7 @@ tracks/4/keys = {
 }
 
 [node name="Coin" type="Area2D"]
+collision_layer = 0
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -225,7 +226,6 @@ bus = "sfx"
 
 [node name="Particles2D" type="Particles2D" parent="."]
 scale = Vector2( 3, 3 )
-emitting = false
 amount = 6
 process_material = SubResource( 3 )
 

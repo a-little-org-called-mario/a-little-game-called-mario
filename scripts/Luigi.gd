@@ -171,4 +171,3 @@ func _on_boss_death(killer):
 	$VisionCone.disable_spoting()
 	disable_collision()
 	.kill(killer)
-

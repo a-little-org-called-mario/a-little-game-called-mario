@@ -267,6 +267,7 @@ script = ExtResource( 8 )
 position = Vector2( 313, -75 )
 rotation = -0.22734
 scale = Vector2( 5, 5 )
+z_index = -1
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3200, 3200 )
@@ -280,6 +281,7 @@ anims/RESET = SubResource( 13 )
 anims/slide = SubResource( 14 )
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -1
 tile_set = ExtResource( 6 )
 collision_layer = 2
 format = 1
@@ -418,6 +420,8 @@ dialog = ExtResource( 35 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="YSort/Characters/Sora"]
 position = Vector2( 0, -32 )
+z_index = -1
+emitting = false
 amount = 16
 local_coords = false
 texture = ExtResource( 40 )

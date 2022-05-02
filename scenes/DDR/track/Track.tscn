@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/DDR/track/ddr.png" type="Texture" id=1]
 [ext_resource path="res://scenes/DDR/track/Track.gd" type="Script" id=2]
@@ -39,6 +39,34 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "hit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -102,6 +130,34 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "hit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
 [sub_resource type="Animation" id=4]
 resource_name = "pressed"
 length = 0.1
@@ -163,6 +219,34 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
+[sub_resource type="Animation" id=15]
+resource_name = "hit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
 [sub_resource type="Animation" id=6]
 resource_name = "pressed"
 length = 0.1
@@ -211,6 +295,46 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "hit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "pressed"
@@ -256,6 +380,7 @@ hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Right"]
 anims/RESET = SubResource( 1 )
+anims/hit = SubResource( 13 )
 anims/pressed = SubResource( 2 )
 
 [node name="Left" type="Sprite" parent="."]
@@ -267,6 +392,7 @@ hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Left"]
 anims/RESET = SubResource( 3 )
+anims/hit = SubResource( 14 )
 anims/pressed = SubResource( 4 )
 
 [node name="Down" type="Sprite" parent="."]
@@ -278,6 +404,7 @@ hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Down"]
 anims/RESET = SubResource( 5 )
+anims/hit = SubResource( 15 )
 anims/pressed = SubResource( 6 )
 
 [node name="Up" type="Sprite" parent="."]
@@ -288,4 +415,5 @@ hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Up"]
 anims/RESET = SubResource( 7 )
+anims/hit = SubResource( 16 )
 anims/pressed = SubResource( 8 )

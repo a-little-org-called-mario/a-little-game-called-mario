@@ -1,0 +1,85 @@
+name: Collision and Mask checks
+
+env:
+  COLLISIONS_CAUGHT: ""
+  COLLISIONS: 0
+  FILES_CHANGED: ""
+  FILES_WITH_PROBLEMS_PATH: ""
+  FILES_WITH_PROBLEMS_COUNT: 0
+  
+  
+on:
+  pull_request:
+    paths-ignore: # do not build for game-irrelevant changes
+      - 'LICENSE'
+      - 'ACKNOWLEDGEMENTS'
+      - '**.md'
+jobs:
+  check_collisions_and_masks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+      - name: Setup Godot
+        uses: vitorgus/setup-godot@v1
+        with:
+          godot-version: 3.4.4
+          download-templates: false
+          
+      - name: Run Checks
+        run: |
+          godot -s collision_mask_check.gd | grep -i "collision" >> collisions-caught.txt
+          COLC=$(realpath collisions-caught.txt)
+          COL=$(wc -l collisions-caught.txt | awk '{print $1}')
+          echo "COLLISIONS=$COL" >> $GITHUB_ENV
+          echo "COLLISIONS_CAUGHT=$COLC" >> $GITHUB_ENV
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v18.7
+
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file" >> files-changed.txt
+          done
+          FC=$(realpath files-changed.txt)
+          echo "FILES_CHANGED=$FC" >> $GITHUB_ENV
+          
+      - name: Determine if PR files have collisions
+        if: ${{ env.COLLISIONS != 0 }}
+        run: |
+          for FILE in $(cat $FILES_CHANGED)
+          do
+            grep -F $FILE $COLLISIONS_CAUGHT >> files-with-problems.txt || true
+          done
+          FWPP=$(realpath files-with-problems.txt)
+          echo "FILES_WITH_PROBLEMS_PATH=$FWPP" >> $GITHUB_ENV
+          FWPC=$(wc -l $FWPP | awk '{print $1}')
+          echo "FILES_WITH_PROBLEMS_COUNT=$FWPC" >> $GITHUB_ENV
+          
+      - name: Comment on PR if collisions are found
+        if: ${{ env.FILES_WITH_PROBLEMS_COUNT != 0 }}
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            var fs = require('fs');
+            var issue_number = process.env.PR_NUMBER;
+            var fp = process.env.FILES_WITH_PROBLEMS_PATH
+            var col = fs.readFileSync(fp, 'utf-8');
+            var text1 = 'Collisions have been found. Please address the following:\n ';
+            var comment = text1.concat(col);
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: comment
+              });
+      - name: Fail Action if needed
+        if: ${{ env.FILES_WITH_PROBLEMS_COUNT != 0 }}
+        run: |
+            echo "Failing because there are committed files with bad collision layers and/or masks."
+            exit 2
+        

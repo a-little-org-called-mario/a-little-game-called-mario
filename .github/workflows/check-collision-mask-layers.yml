@@ -28,7 +28,7 @@ jobs:
           
       - name: Run Checks
         run: |
-          godot -s collision_mask_check.gd | grep -i "collision" >> collisions-caught.txt
+          godot -s scripts/tools/collision_mask_check.gd | grep -i "collision" >> collisions-caught.txt
           COLC=$(realpath collisions-caught.txt)
           COL=$(wc -l collisions-caught.txt | awk '{print $1}')
           echo "COLLISIONS=$COL" >> $GITHUB_ENV

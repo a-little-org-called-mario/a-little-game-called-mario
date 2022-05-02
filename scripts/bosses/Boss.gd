@@ -1,6 +1,7 @@
 extends Enemy
 
 
+export var active = true
 export var health = 100
 export var phase = 0
 export var direction = -1
@@ -12,6 +13,7 @@ var maxHealth = 100
 var flashTime = 0
 var attackTimer = 0
 var canChangePhase = false
+onready var _boss_bar = $BossBar
 
 # probably not neeeded
 var posOrigin = Vector2(0, 0)
@@ -33,7 +35,12 @@ func ai(delta):
 	# position = posOrigin + posOffset
 	flash()
 	handle_direction()
-	boss_ai(delta)
+	if active:
+		boss_ai(delta)
+	else:
+		visible = false
+		_boss_bar.visible = false
+		
 
 
 # when attacked
@@ -109,4 +116,10 @@ func small_shake():
 
 func large_shake():
 	EventBus.emit_signal("large_screen_shake")
+
+
+func set_active():
+	active = true
+	visible = true
+	_boss_bar.visible = true
 

@@ -2,12 +2,14 @@ extends "res://scripts/bosses/Boss.gd"
 
 
 var badCoinScene = preload("res://scenes/enemies/BadCoin.tscn")
+var luigiEnemyScene = preload("res://scenes/enemies/Luigi.tscn")
 
 onready var _anim_play := $AnimationPlayer
 onready var _att_play := $AttackPlayer
 onready var _pivot = $Pivot
 
 var canSpawnBad = true
+var luigiSpawned = false
 var pivRotation = 0
 
 
@@ -20,6 +22,8 @@ func boss_ai(delta):
 		phase_2()
 	elif phase == 3:
 		phase_3()
+	elif phase == 4:
+		phase_4()
 
 
 func phase_0():
@@ -86,11 +90,61 @@ func phase_3():
 	rotate_pivot(4)
 	
 	if attackTimer == 60:
+		laugh()
 		start_ball()
+	elif attackTimer == 150:
+		dash()
+	elif attackTimer == 390:
+		dash()
+	elif attackTimer == 540:
+		laugh()
+		end_ball()
+		
+	elif attackTimer == 570:
+		ascend_projs(1)
+	elif attackTimer == 660:
+		ascend_projs(1)
+	elif attackTimer == 750:
+		ascend_projs(2)
+		
+	elif attackTimer == 870:
+		laugh()
+		badCoins()
+		
+	elif attackTimer == 1230:
+		laugh()
+		start_ball()
+		phase = 4
+		attackTimer = 0
+
+
+func phase_4():
+	attackTimer += 1
+	rotate_pivot(6)
+	
+	if attackTimer == 60:
+		dash()
+	
 	elif attackTimer == 120:
+		ascend_projs(1)
+	elif attackTimer == 210:
+		ascend_projs(2)
+	elif attackTimer == 300:
+		ascend_projs(2)
+
+	elif attackTimer == 390:
 		dash()
-	elif attackTimer == 360:
+	elif attackTimer == 540:
 		dash()
+	
+	elif attackTimer == 810 and not luigiSpawned:
+		luigiSpawned = true
+		spawn_luigi_enemy(Vector2(512, 80))
+		laugh()
+	
+	elif attackTimer == 900:
+		attackTimer = 0
+
 
 
 func jump():
@@ -124,8 +178,20 @@ func float_idle():
 	_anim_play.play("float")
 
 
+func laugh():
+	_anim_play.play("laugh")
+
+
 func start_ball():
 	_att_play.play("ballStart")
+
+
+func end_ball():
+	_att_play.play("ballEnd")
+
+
+func ascend_projs(count = 1):
+	_att_play.play("ascend" + str(count))
 
 
 func set_collide_layers():
@@ -146,12 +212,22 @@ func spawn_bad_coin(instPos = Vector2(0, 0)):
 		bad.global_position = instPos
 
 
+func spawn_luigi_enemy(instPos = Vector2(0, 0)):
+	var john = luigiEnemyScene.instance()
+	connect("dying", john, "_on_boss_death")
+	get_parent().add_child(john)
+	john.global_position = instPos
+	john.fireball_count = 4
+
+
 func emit_warnings(warnId, warnTime):
 	emit_signal("display_warning", warnId, warnTime)
 
 
 func reset_health():
-	emit_signal("health_change", health, maxHealth)
+	$BossBar/ProgressRed/Progress.value = 1
+	emit_signal("set_health", maxHealth)
+	maxHealth = 18
 	health = maxHealth
 	canSpawnBad = true
 

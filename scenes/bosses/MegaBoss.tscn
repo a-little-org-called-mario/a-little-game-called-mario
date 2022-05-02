@@ -1,10 +1,11 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scenes/bosses/Boss.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/bosses/mega_lawrence_boss.png" type="Texture" id=2]
 [ext_resource path="res://scripts/bosses/MegaBoss.gd" type="Script" id=3]
 [ext_resource path="res://scripts/enemies/BasicHitbox.gd" type="Script" id=4]
 [ext_resource path="res://sprites/projectiles/mega_lawrence_projectiles.png" type="Texture" id=5]
+[ext_resource path="res://scenes/enemies/LugiAscend.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=46]
 extents = Vector2( 42, 40 )
@@ -100,6 +101,10 @@ region = Rect2( 160, 320, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 240, 320, 80, 80 )
 
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 80, 80, 80 )
+
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 2 )
 region = Rect2( 1040, 240, 80, 80 )
@@ -132,10 +137,6 @@ region = Rect2( 160, 160, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 240, 160, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 80, 80, 80 )
-
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ), SubResource( 23 ), SubResource( 24 ) ],
@@ -153,6 +154,11 @@ animations = [ {
 "name": "float",
 "speed": 10.0
 }, {
+"frames": [ SubResource( 29 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "laugh",
@@ -162,11 +168,6 @@ animations = [ {
 "loop": false,
 "name": "cannon",
 "speed": 10.0
-}, {
-"frames": [ SubResource( 29 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=53]
@@ -192,8 +193,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 1.1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1, 1.1, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ 0, 40 ],
 "method": "emit_warnings"
@@ -206,6 +207,9 @@ tracks/1/keys = {
 }, {
 "args": [ Vector2( 384, 306 ), false ],
 "method": "spawn_coin"
+}, {
+"args": [  ],
+"method": "float_idle"
 } ]
 }
 tracks/2/type = "value"
@@ -244,8 +248,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 1.1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1, 1.1, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ 0, 40 ],
 "method": "emit_warnings"
@@ -258,6 +262,9 @@ tracks/1/keys = {
 }, {
 "args": [ Vector2( 640, 306 ), false ],
 "method": "spawn_coin"
+}, {
+"args": [  ],
+"method": "float_idle"
 } ]
 }
 tracks/2/type = "value"
@@ -644,6 +651,48 @@ tracks/5/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=56]
+resource_name = "laugh"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "laugh" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 2, 3, 2, 3, 2, 1, 0 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "float_idle"
+} ]
+}
+
 [sub_resource type="Animation" id=45]
 resource_name = "transform"
 length = 2.8
@@ -731,6 +780,56 @@ tracks/5/keys = {
 "values": [ 3 ]
 }
 
+[sub_resource type="Animation" id=57]
+resource_name = "ascend1"
+length = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("LuigiAscend")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_ascend"
+} ]
+}
+
+[sub_resource type="Animation" id=58]
+resource_name = "ascend2"
+length = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("LuigiAscend")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_ascend"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("LuigiAscend2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_ascend"
+} ]
+}
+
 [sub_resource type="Animation" id=44]
 resource_name = "badcoins"
 length = 3.2
@@ -812,6 +911,59 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=55]
+resource_name = "ballEnd"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/SpinBall:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pivot/SpinBall:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pivot/Line2D:width")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 6.0, 0.0 ]
+}
+
 [sub_resource type="Animation" id=52]
 resource_name = "ballStart"
 length = 0.4
@@ -888,9 +1040,9 @@ animations = [ {
 extents = Vector2( 8, 14 )
 
 [node name="MegaBoss" instance=ExtResource( 1 )]
-position = Vector2( -1037.33, 0 )
 script = ExtResource( 3 )
-health = 35
+health = 30
+direction = 1
 
 [node name="CollisionHead" type="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, -14 )
@@ -904,7 +1056,7 @@ shape = SubResource( 6 )
 
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 5 )
-animation = "jump"
+animation = "idle"
 
 [node name="Name" parent="BossBar" index="0"]
 bbcode_text = "[right][wave]MEGA
@@ -921,10 +1073,14 @@ anims/idle = SubResource( 39 )
 anims/jumpLeft = SubResource( 40 )
 anims/jumpRight = SubResource( 41 )
 anims/laser = SubResource( 43 )
+anims/laugh = SubResource( 56 )
 anims/transform = SubResource( 45 )
 
 [node name="AttackPlayer" type="AnimationPlayer" parent="." index="7"]
+anims/ascend1 = SubResource( 57 )
+anims/ascend2 = SubResource( 58 )
 anims/badcoins = SubResource( 44 )
+anims/ballEnd = SubResource( 55 )
 anims/ballStart = SubResource( 52 )
 
 [node name="Laser" type="Area2D" parent="." index="8"]
@@ -949,16 +1105,16 @@ rotation = 1.5708
 shape = SubResource( 42 )
 
 [node name="Pivot" type="Node2D" parent="." index="9"]
-visible = false
 position = Vector2( -2, -8 )
 
 [node name="Line2D" type="Line2D" parent="Pivot" index="0"]
 z_index = -1
 points = PoolVector2Array( 0, 0, 0, 64 )
-width = 6.0
+width = 0.0
 default_color = Color( 0.972549, 0.972549, 0.952941, 1 )
 
 [node name="SpinBall" type="Area2D" parent="Pivot" index="1"]
+visible = false
 position = Vector2( 0, 64 )
 monitoring = false
 script = ExtResource( 4 )
@@ -966,11 +1122,15 @@ script = ExtResource( 4 )
 [node name="Sprite" type="AnimatedSprite" parent="Pivot/SpinBall" index="0"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 50 )
-frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="Pivot/SpinBall" index="1"]
 position = Vector2( 0, -6 )
 shape = SubResource( 51 )
+
+[node name="LuigiAscend" parent="." index="10" instance=ExtResource( 6 )]
+visible = false
+
+[node name="LuigiAscend2" parent="." index="11" instance=ExtResource( 6 )]
 
 [editable path="BossBar"]

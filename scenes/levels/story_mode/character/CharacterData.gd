@@ -1,5 +1,6 @@
 extends Resource
 class_name StoryCharacterData
+# warning-ignore-all:unused_class_variable
 
 """
 Resource describing a character.

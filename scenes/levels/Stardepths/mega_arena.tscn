@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/resources/stardepths_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/bosses/MegaBoss.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/decorations/Warning.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/decorations/DecorBasic.tscn" type="PackedScene" id=5]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -18,8 +19,7 @@ position = Vector2( 192, 320 )
 [node name="BossNode2D" type="Node2D" parent="."]
 position = Vector2( 864, 336 )
 
-[node name="MegaBoss" parent="BossNode2D" groups=["enemy"] instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
+[node name="MegaBoss" parent="BossNode2D" instance=ExtResource( 2 )]
 collision_layer = 8
 collision_mask = 257
 
@@ -58,6 +58,19 @@ type = "vertical"
 position = Vector2( 720, 248 )
 groupId = 3
 type = "vertical"
+
+[node name="Decorations" type="Node2D" parent="."]
+z_index = -2
+
+[node name="BasicDecoration" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 64, 352 )
+animation = "star_tree_t"
+frame = 0
+
+[node name="BasicDecoration2" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 960, 352 )
+animation = "star_tree_s"
+frame = 0
 
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning" method="_on_display_warning"]
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning2" method="_on_display_warning"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -6,7 +6,8 @@
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
 [ext_resource path="res://audio/sfx/meow.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/title/ContributorsLabel.gd" type="Script" id=6]
-[ext_resource path="res://sprites/title_sprites/title_mario.png" type="Texture" id=7]
+[ext_resource path="res://scripts/Audio.gd" type="Script" id=7]
+[ext_resource path="res://sprites/title_sprites/title_mario.png" type="Texture" id=8]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/TitleScreen.gd" type="Script" id=15]
@@ -135,7 +136,7 @@ theme = ExtResource( 3 )
 script = ExtResource( 15 )
 sprite_paths = [ "res://sprites/large-gassy-randal.png", "res://sprites/title_sprites/title_bub.png" ]
 label_texts = [ "GASSY RANDAL", "BUBS" ]
-sfx_paths = [ "res://audio/sfx/toasty.wav", "res://audio/sfx/buh.wav" ]
+sfx_paths = [ "res://audio/sfx/toasty.wav", "res://audio/sfx/mario_aaaa.wav" ]
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0.7, 0.7, 0.7, 1 )
@@ -197,7 +198,7 @@ __meta__ = {
 [node name="IdleMario" type="Sprite" parent="VBoxContainer"]
 position = Vector2( 77, 102 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 offset = Vector2( 0, -10 )
 script = ExtResource( 17 )
 
@@ -326,7 +327,10 @@ script = ExtResource( 6 )
 wait_time = 3.0
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="BGM" type="AudioStreamPlayer" parent="Audio"]
 pause_mode = 2
 stream = ExtResource( 12 )
 volume_db = -20.0

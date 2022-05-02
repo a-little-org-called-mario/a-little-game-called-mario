@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/levels/story_mode/content/characters/sign.tres" type="Resource" id=1]
 [ext_resource path="res://scenes/levels/story_mode/content/characters/lever.tres" type="Resource" id=2]
@@ -33,6 +33,13 @@
 [ext_resource path="res://sprites/tile.png" type="Texture" id=31]
 [ext_resource path="res://scenes/levels/story_mode/CutSceneCamera.gd" type="Script" id=32]
 [ext_resource path="res://sprites/switch_down.png" type="Texture" id=33]
+[ext_resource path="res://scenes/levels/story_mode/content/characters/sorer.tres" type="Resource" id=34]
+[ext_resource path="res://scenes/levels/story_mode/content/dialogs/sorer.json" type="Resource" id=35]
+[ext_resource path="res://audio/sfx/sorer_dash.wav" type="AudioStream" id=36]
+[ext_resource path="res://sprites/characters/sorer.png" type="Texture" id=37]
+[ext_resource path="res://scenes/levels/story_mode/sorer_anim.gd" type="Script" id=38]
+[ext_resource path="res://scenes/levels/story_mode/sora_coll.gd" type="Script" id=39]
+[ext_resource path="res://sprites/characters/sorer_afterimage.png" type="Texture" id=40]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -69,6 +76,90 @@ tracks/0/keys = {
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 28 )
 region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="Animation" id=18]
+resource_name = "DashAway"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath("AudioStreamPlayer2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, -500 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CPUParticles2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, -500 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "Idle"
+
+[sub_resource type="Gradient" id=20]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=16]
 tracks/0/type = "value"
@@ -313,6 +404,49 @@ texture = ExtResource( 26 )
 visible = false
 text = "[Q] Talk to Wizard Dude"
 
+[node name="Sora" parent="YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 861, -1056 )
+data = ExtResource( 34 )
+dialog = ExtResource( 35 )
+
+[node name="CollisionShape2D" parent="YSort/Characters/Sora" index="0"]
+script = ExtResource( 39 )
+
+[node name="Sprite" parent="YSort/Characters/Sora" index="1"]
+position = Vector2( 0, -32 )
+scale = Vector2( 2, 2 )
+z_index = 1
+texture = ExtResource( 37 )
+
+[node name="TalkToLabel" parent="YSort/Characters/Sora" index="2"]
+margin_left = -47.0
+margin_top = -80.0
+margin_right = 49.0
+margin_bottom = -66.0
+text = "[Q] Talk to Sora"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/Characters/Sora"]
+autoplay = "Idle"
+anims/DashAway = SubResource( 18 )
+anims/Idle = SubResource( 19 )
+script = ExtResource( 38 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="YSort/Characters/Sora"]
+stream = ExtResource( 36 )
+volume_db = -1.01
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="YSort/Characters/Sora"]
+position = Vector2( 0, -32 )
+emitting = false
+amount = 16
+local_coords = false
+texture = ExtResource( 40 )
+direction = Vector2( 0, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+scale_amount = 2.0
+color_ramp = SubResource( 20 )
+
 [node name="TopDownPlayer" parent="YSort" instance=ExtResource( 4 )]
 
 [node name="CutSceneCamera" type="Camera2D" parent="."]
@@ -424,6 +558,8 @@ align = 1
 [connection signal="dialog_finished" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_finished"]
 [connection signal="dialog_started" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_dialog_started"]
 [connection signal="event_occured" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_event_occured"]
+[connection signal="event_occured" from="CanvasLayer/UI/DialogUI" to="YSort/Characters/Sora/CollisionShape2D" method="_on_DialogUI_event_occured"]
+[connection signal="event_occured" from="CanvasLayer/UI/DialogUI" to="YSort/Characters/Sora/AnimationPlayer" method="_on_DialogUI_event_occured"]
 [connection signal="item_received" from="CanvasLayer/UI/DialogUI" to="." method="_on_DialogUI_item_received"]
 [connection signal="item_selected" from="CanvasLayer/UI/Inventory/VBoxContainer/ItemList" to="CanvasLayer/UI/Inventory" method="_on_ItemList_item_selected"]
 
@@ -433,3 +569,4 @@ align = 1
 [editable path="YSort/Characters/Sign"]
 [editable path="YSort/Characters/Donk"]
 [editable path="YSort/Characters/WizardDude"]
+[editable path="YSort/Characters/Sora"]

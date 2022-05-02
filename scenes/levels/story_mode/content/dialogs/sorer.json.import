@@ -1,0 +1,13 @@
+[remap]
+
+importer="littlgameemario.dialog"
+type="Resource"
+path="res://.import/sorer.json-d001335019c87232ea8471cdb0531fb1.res"
+
+[deps]
+
+source_file="res://scenes/levels/story_mode/content/dialogs/sorer.json"
+dest_files=[ "res://.import/sorer.json-d001335019c87232ea8471cdb0531fb1.res" ]
+
+[params]
+

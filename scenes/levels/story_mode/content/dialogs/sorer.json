@@ -4,16 +4,13 @@
 	"character": "sorer",
 	"next": [
 		{
-			"text": ["please go buy my hit game sora on steam"],
-			"character": "sorer"
+			"text": ["please go buy my hit game sora on steam"]
 		},
 		{
-			"text": ["i also appear in 100% orange juice and acceleration of suguri 2"],
-			"character": "sorer"
+			"text": ["i also appear in 100% orange juice and acceleration of suguri 2"]
 		},
 		{
 			"text": ["ok i go now bye bye"],
-			"character": "sorer",
 			"event": "sora_fly"
 		}
 	]

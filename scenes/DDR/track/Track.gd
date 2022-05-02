@@ -38,6 +38,16 @@ func set_tick(tick):
 		var note_tick = note["tick"]
 		if last_tick < note_tick and note_tick <= tick:
 			_set_pose(note["pose"])
+			if not player_track:
+				match note["pose"]:
+					"up":
+						$Up/AnimationPlayer.play("pressed")
+					"down":
+						$Down/AnimationPlayer.play("pressed")
+					"left":
+						$Left/AnimationPlayer.play("pressed")
+					"right":
+						$Right/AnimationPlayer.play("pressed")
 		if last_tick + spawn_delay < note_tick and note_tick <= tick + spawn_delay:
 			_spawn_note(i, note["pose"], note_tick)
 		if last_tick < note_tick + max_hit_delta and note_tick + max_hit_delta <= tick:

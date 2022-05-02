@@ -416,23 +416,6 @@ position = Vector2( -162, -1259 )
 data = ExtResource( 34 )
 dialog = ExtResource( 35 )
 
-[node name="Sprite" parent="YSort/Characters/Sora" index="1"]
-position = Vector2( 0, -32 )
-scale = Vector2( 2, 2 )
-z_index = 1
-texture = ExtResource( 37 )
-
-[node name="TalkToLabel" parent="YSort/Characters/Sora" index="2"]
-margin_left = -47.0
-margin_top = -80.0
-margin_right = 49.0
-margin_bottom = -66.0
-text = "[Q] Talk to Sora"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="YSort/Characters/Sora"]
-stream = ExtResource( 36 )
-volume_db = -1.01
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="YSort/Characters/Sora"]
 position = Vector2( 0, -32 )
 amount = 16
@@ -444,7 +427,24 @@ gravity = Vector2( 0, 0 )
 scale_amount = 2.0
 color_ramp = SubResource( 20 )
 
+[node name="Sprite" parent="YSort/Characters/Sora" index="2"]
+position = Vector2( 0, -32 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 37 )
+
+[node name="TalkToLabel" parent="YSort/Characters/Sora" index="3"]
+margin_left = -47.0
+margin_top = -80.0
+margin_right = 49.0
+margin_bottom = -66.0
+text = "[Q] Talk to Sora"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="YSort/Characters/Sora"]
+stream = ExtResource( 36 )
+volume_db = -1.01
+
 [node name="TopDownPlayer" parent="YSort" instance=ExtResource( 4 )]
+z_as_relative = false
 
 [node name="CutSceneCamera" type="Camera2D" parent="."]
 script = ExtResource( 32 )

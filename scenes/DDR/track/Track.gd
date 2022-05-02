@@ -68,7 +68,6 @@ func _spawn_note(index, pose, note_tick):
 	node.init_tick = note_tick - spawn_delay
 	node.target_tick = note_tick
 	node.target_pos = position.y
-	node.index = index
 	
 	connect("set_tick", node, "set_tick")
 	add_child(node)

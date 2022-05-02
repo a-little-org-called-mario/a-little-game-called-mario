@@ -505,7 +505,7 @@ visible = false
 text = "[Q] Talk to Wizard Dude"
 
 [node name="Sora" parent="YSort/Characters" instance=ExtResource( 5 )]
-position = Vector2( 861, -1056 )
+position = Vector2( -162, -1259 )
 data = ExtResource( 34 )
 dialog = ExtResource( 35 )
 

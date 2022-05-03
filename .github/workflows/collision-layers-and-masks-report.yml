@@ -1,0 +1,62 @@
+name: Report collision layers and masks warnings
+
+on:
+  workflow_run:
+    workflows: ["Check collision layers and masks"]
+    types:
+      - completed
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download report artifact
+        uses: actions/github-script@v3.1.0
+        with:
+          script: |
+            var artifacts = await github.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{ github.event.workflow_run.id }},
+            });
+            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "layers-and-masks"
+            })[0];
+            var download = await github.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            var fs = require('fs');
+            fs.writeFileSync('${{ github.workspace }}/layers-and-masks.zip', Buffer.from(download.data));
+
+      - name: Unzip artifact
+        run: unzip -d layers-and-masks layers-and-masks.zip && rm layers-and-masks.zip
+
+      - name: Store PR and report info in ENV
+        run: |
+          PR_NUMBER=$(cat layers-and-masks/pr_number)
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+          REPORT_EXISTS=$(test -s layers-and-masks/report; echo $?)
+          echo "REPORT_EXISTS=$REPORT_EXISTS" >> $GITHUB_ENV
+
+      - name: Comment on the PR
+        if: ${{ env.REPORT_EXISTS == 0 }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            var fs = require('fs');
+            var wikiUrl = '${{ github.server_url }}/${{ github.repository }}/wiki/Coding-tips-and-best-practices#collision-layers-and-masks=';
+            var report = fs.readFileSync('layers-and-masks/report', 'utf-8');
+            var body = '👀 There seem to be misconfigured collision properties in this PR. '+
+                       'Check out the [wiki](' + wikiUrl + ') for more information.\n\n' +
+                       '| File | Node | Type |  |\n|-|-|-|-|\n' + report;
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: process.env.PR_NUMBER,
+              body: body,
+            });
+
+

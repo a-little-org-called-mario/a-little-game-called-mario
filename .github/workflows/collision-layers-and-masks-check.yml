@@ -1,0 +1,51 @@
+name: Check collision layers and masks
+
+on:
+  pull_request:
+    paths-ignore: # do not build for game-irrelevant changes
+      - 'LICENSE'
+      - 'ACKNOWLEDGEMENTS'
+      - '**.md'
+jobs:
+  check_collision_layers_and_masks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+
+      - name: Setup Godot
+        uses: vitorgus/setup-godot@v1
+        with:
+          godot-version: 3.4.4
+          download-templates: false
+          
+      - name: Run checks on collision_layer and collision_mask
+        run: |
+          mkdir layers-and-masks
+          godot --script "scripts/tools/check_collision_layers_and_masks.gd" --quit | grep -i "collision" >> layers-and-masks/all
+          WARNINGS=$(wc -l layers-and-masks/all | awk '{print $1}')
+          echo "WARNINGS=$WARNINGS" >> $GITHUB_ENV
+          echo 
+
+      - name: Retrieve PR files
+        if: ${{ env.WARNINGS != 0 }}
+        id: changed-files
+        uses: tj-actions/changed-files@v18.7
+
+      - name: Determine if PR files have raised warnings
+        if: ${{ env.WARNINGS != 0 }}
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            grep -F "$file" layers-and-masks/all >> layers-and-masks/report || true
+          done
+
+      - name: Save PR metadata
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          echo $PR_NUMBER > ./layers-and-masks/pr_number
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: layers-and-masks
+          path: layers-and-masks

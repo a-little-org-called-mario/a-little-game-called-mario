@@ -114,5 +114,4 @@ func find_bits(node_name, node_type, file, collision_domain, section) -> void:
 			bit_num = line.split(" = ", false, 2)[1].to_int()
 			break
 	if bit_num % 2 != 0:
-		print("%s: the %s for %s \"%s\" is set to %d, it is probably misconfigured."
-			% [file, collision_domain, node_type, node_name, bit_num])
+		print("|%s|%s|%s|%s is set to %d|" % [file, node_name, node_type, collision_domain, bit_num])

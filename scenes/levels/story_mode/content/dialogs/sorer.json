@@ -1,0 +1,17 @@
+{
+	"$schema": "schema/dialog.schema.json",
+	"text": ["hi my name is sora from sora :D"],
+	"character": "sorer",
+	"next": [
+		{
+			"text": ["please go buy my hit game sora on steam"]
+		},
+		{
+			"text": ["i also appear in 100% orange juice and acceleration of suguri 2"]
+		},
+		{
+			"text": ["ok i go now bye bye"],
+			"event": "sora_fly"
+		}
+	]
+}

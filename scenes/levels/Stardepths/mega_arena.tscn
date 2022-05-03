@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/resources/stardepths_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/bosses/MegaBoss.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/decorations/Warning.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/decorations/DecorBasic.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/objects/StatsGate.tscn" type="PackedScene" id=6]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -73,22 +72,9 @@ position = Vector2( 960, 352 )
 animation = "star_tree_s"
 frame = 0
 
-[node name="Objects" type="Node2D" parent="."]
-
-[node name="StatsGate" parent="Objects" instance=ExtResource( 6 )]
-visible = false
-position = Vector2( 512, 300 )
-scale = Vector2( 30, 4 )
-monitoring = false
-setting = "coin"
-resetValue = 0
-active = false
-doOnce = true
-
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning" method="_on_display_warning"]
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning2" method="_on_display_warning"]
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning3" method="_on_display_warning"]
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning4" method="_on_display_warning"]
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning5" method="_on_display_warning"]
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning6" method="_on_display_warning"]
-[connection signal="head_phase" from="BossNode2D/MegaBoss" to="Objects/StatsGate" method="activate"]

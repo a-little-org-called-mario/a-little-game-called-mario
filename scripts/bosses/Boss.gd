@@ -101,9 +101,10 @@ func ready_animation():
 
 
 # instance a coin
-func spawn_coin(offset = Vector2(0, 0), selfRelative = true):
+func spawn_coin(offset = Vector2(0, 0), selfRelative = true, value = 1):
 	var coin = coinScene.instance()
 	get_parent().add_child(coin)
+	coin.value = value
 	if selfRelative:
 		coin.global_position = global_position + offset
 	else:

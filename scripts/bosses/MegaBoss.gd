@@ -1,6 +1,9 @@
 extends "res://scripts/bosses/Boss.gd"
 
 
+# the sequel
+export var healthTwo = 45
+
 var badCoinScene = preload("res://scenes/enemies/BadCoin.tscn")
 var luigiEnemyScene = preload("res://scenes/enemies/Luigi.tscn")
 
@@ -31,7 +34,7 @@ func boss_ai(delta):
 func phase_0():
 	attackTimer += 1
 	
-	if health <= 20:
+	if health <= 65:
 		if _anim_play.current_animation == "idle":
 			phase = 1
 			attackTimer = 0
@@ -228,7 +231,7 @@ func emit_warnings(warnId, warnTime):
 
 func reset_health():
 	$BossBar/ProgressRed/Progress.value = 1
-	maxHealth = 18
+	maxHealth = healthTwo
 	emit_signal("set_health", maxHealth)
 	health = maxHealth
 	canSpawnBad = true

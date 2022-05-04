@@ -134,6 +134,9 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource( 3 )
 script = ExtResource( 15 )
+sprite_paths = [ "res://sprites/large-gassy-randal.png", "res://sprites/title_sprites/title_bub.png" ]
+label_texts = [ "GASSY RANDAL", "BUBS" ]
+sfx_paths = [ "res://audio/sfx/toasty.wav", "res://audio/sfx/mario_aaaa.wav" ]
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0.7, 0.7, 0.7, 1 )

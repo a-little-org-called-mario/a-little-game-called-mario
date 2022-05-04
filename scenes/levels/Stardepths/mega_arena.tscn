@@ -19,7 +19,7 @@ position = Vector2( 192, 320 )
 [node name="BossNode2D" type="Node2D" parent="."]
 position = Vector2( 864, 336 )
 
-[node name="MegaBoss" parent="BossNode2D" instance=ExtResource( 2 )]
+[node name="MegaBoss" parent="BossNode2D" groups=["enemy"] instance=ExtResource( 2 )]
 collision_layer = 8
 collision_mask = 257
 

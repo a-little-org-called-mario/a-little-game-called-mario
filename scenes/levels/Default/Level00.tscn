@@ -20,12 +20,15 @@ next_level_path = "res://scenes/levels/Default/Level01.tscn"
 
 [node name="Coin" parent="." instance=ExtResource( 4 )]
 position = Vector2( 736, 345 )
+value = 2
 
 [node name="Coin2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 864, 346 )
+value = 3
 
 [node name="Coin3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 735, 152 )
+value = 5
 
 [node name="CoinBox" parent="." instance=ExtResource( 2 )]
 position = Vector2( 864, 224 )

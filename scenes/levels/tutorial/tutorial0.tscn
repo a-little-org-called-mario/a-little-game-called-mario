@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://sprites/decorations/tutorial_signs1.png" type="Texture" id=10]
 [ext_resource path="res://sprites/decorations/tutorial_signs3.png" type="Texture" id=11]
 [ext_resource path="res://sprites/decorations/tutorial_signs4.png" type="Texture" id=12]
+[ext_resource path="res://scenes/boxes/GreedyCoinBox.tscn" type="PackedScene" id=13]
 
 [sub_resource type="AnimatedTexture" id=1]
 frames = 2
@@ -54,12 +55,12 @@ position = Vector2( 2784, -160 )
 bounce_count = 10
 start_invisible = true
 
-[node name="CoinBox2" parent="Objects" instance=ExtResource( 4 )]
-position = Vector2( 2720, -160 )
-bounce_count = 5
-
 [node name="EndPortal" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 3232, -96 )
+
+[node name="GreedyCoinBox" parent="Objects" instance=ExtResource( 13 )]
+position = Vector2( 2720, -160 )
+bounce_count = 5
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -72,7 +73,7 @@ max_speed = 0.0
 
 [node name="proj_id_54" parent="NPCs" instance=ExtResource( 7 )]
 position = Vector2( -2208, 208 )
-frame = 1
+frame = 3
 
 [node name="Decorations" type="Node2D" parent="."]
 
@@ -198,8 +199,8 @@ margin_right = 2640.0
 margin_bottom = -80.0
 
 [node name="RichTextLabel" parent="Decorations/Shoot" index="0"]
-bbcode_text = "PRESS [rainbow freq=0.5 sat=1 val=1]{CTRL}[/rainbow] OR [rainbow freq=0.5 sat=1 val=1]{Z}[/rainbow] TO SHOOT COLLECTED COINS!"
-text = "PRESS {CTRL} OR {Z} TO SHOOT COLLECTED COINS!"
+bbcode_text = "PRESS [rainbow freq=0.5 sat=1 val=1]{CTRL}[/rainbow], [rainbow freq=0.5 sat=1 val=1]{Z}[/rainbow] OR [rainbow freq=0.5 sat=1 val=1]{O}[/rainbow] TO SHOOT COLLECTED COINS!"
+text = "PRESS {CTRL}, {Z} OR {O} TO SHOOT COLLECTED COINS!"
 
 [node name="HoldJump" parent="Decorations" instance=ExtResource( 8 )]
 margin_left = 592.0

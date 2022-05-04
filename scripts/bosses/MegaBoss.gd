@@ -1,6 +1,9 @@
 extends "res://scripts/bosses/Boss.gd"
 
 
+# the sequel
+export var healthTwo = 45
+
 var badCoinScene = preload("res://scenes/enemies/BadCoin.tscn")
 var luigiEnemyScene = preload("res://scenes/enemies/Luigi.tscn")
 
@@ -11,6 +14,8 @@ onready var _pivot = $Pivot
 var canSpawnBad = true
 var luigiSpawned = false
 var pivRotation = 0
+
+signal head_phase
 
 
 func boss_ai(delta):
@@ -29,7 +34,7 @@ func boss_ai(delta):
 func phase_0():
 	attackTimer += 1
 	
-	if health <= 20:
+	if health <= 65:
 		if _anim_play.current_animation == "idle":
 			phase = 1
 			attackTimer = 0
@@ -215,8 +220,8 @@ func spawn_bad_coin(instPos = Vector2(0, 0)):
 func spawn_luigi_enemy(instPos = Vector2(0, 0)):
 	var john = luigiEnemyScene.instance()
 	connect("dying", john, "_on_boss_death")
-	get_parent().add_child(john)
-	john.global_position = instPos
+	get_parent().get_parent().add_child(john)
+	john.position = instPos
 	john.fireball_count = 4
 
 
@@ -226,10 +231,11 @@ func emit_warnings(warnId, warnTime):
 
 func reset_health():
 	$BossBar/ProgressRed/Progress.value = 1
+	maxHealth = healthTwo
 	emit_signal("set_health", maxHealth)
-	maxHealth = 18
 	health = maxHealth
 	canSpawnBad = true
+	emit_signal("head_phase")
 
 
 func rotate_pivot(pivSpeed):

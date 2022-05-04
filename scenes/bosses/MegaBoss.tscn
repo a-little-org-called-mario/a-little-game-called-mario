@@ -193,19 +193,25 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 1.1, 1.2, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.95, 1, 1.1, 1.2, 1.25, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ 0, 40 ],
 "method": "emit_warnings"
 }, {
+"args": [ Vector2( 768, 306 ), false ],
+"method": "spawn_coin"
+}, {
 "args": [ Vector2( 640, 306 ), false ],
 "method": "spawn_coin"
 }, {
-"args": [ Vector2( 512, 306 ), false ],
+"args": [ Vector2( 512, 306 ), false, 5 ],
 "method": "spawn_coin"
 }, {
 "args": [ Vector2( 384, 306 ), false ],
+"method": "spawn_coin"
+}, {
+"args": [ Vector2( 256, 306 ), false ],
 "method": "spawn_coin"
 }, {
 "args": [  ],
@@ -248,19 +254,25 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 1.1, 1.2, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.95, 1, 1.1, 1.2, 1.25, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ 0, 40 ],
 "method": "emit_warnings"
 }, {
+"args": [ Vector2( 256, 306 ), false ],
+"method": "spawn_coin"
+}, {
 "args": [ Vector2( 384, 306 ), false ],
 "method": "spawn_coin"
 }, {
-"args": [ Vector2( 512, 306 ), false ],
+"args": [ Vector2( 512, 306 ), false, 5 ],
 "method": "spawn_coin"
 }, {
 "args": [ Vector2( 640, 306 ), false ],
+"method": "spawn_coin"
+}, {
+"args": [ Vector2( 768, 306 ), false ],
 "method": "spawn_coin"
 }, {
 "args": [  ],
@@ -847,17 +859,17 @@ tracks/0/keys = {
 "args": [ Vector2( 512, 80 ) ],
 "method": "spawn_bad_coin"
 }, {
-"args": [ Vector2( 512, 80 ) ],
-"method": "spawn_bad_coin"
+"args": [ Vector2( 512, 80 ), false, 3 ],
+"method": "spawn_coin"
 }, {
-"args": [ Vector2( 512, 80 ), false ],
+"args": [ Vector2( 512, 80 ), false, 3 ],
 "method": "spawn_coin"
 }, {
 "args": [ Vector2( 304, 80 ) ],
 "method": "spawn_bad_coin"
 }, {
-"args": [ Vector2( 304, 80 ) ],
-"method": "spawn_bad_coin"
+"args": [ Vector2( 304, 80 ), false, 3 ],
+"method": "spawn_coin"
 }, {
 "args": [ Vector2( 304, 80 ), false ],
 "method": "spawn_coin"
@@ -865,8 +877,8 @@ tracks/0/keys = {
 "args": [ Vector2( 96, 80 ) ],
 "method": "spawn_bad_coin"
 }, {
-"args": [ Vector2( 96, 80 ) ],
-"method": "spawn_bad_coin"
+"args": [ Vector2( 96, 80 ), false ],
+"method": "spawn_coin"
 }, {
 "args": [ Vector2( 96, 80 ), false ],
 "method": "spawn_coin"
@@ -891,8 +903,8 @@ tracks/1/keys = {
 "args": [ Vector2( 720, 80 ) ],
 "method": "spawn_bad_coin"
 }, {
-"args": [ Vector2( 720, 80 ) ],
-"method": "spawn_bad_coin"
+"args": [ Vector2( 720, 80 ), false, 3 ],
+"method": "spawn_coin"
 }, {
 "args": [ Vector2( 720, 80 ), false ],
 "method": "spawn_coin"
@@ -903,8 +915,8 @@ tracks/1/keys = {
 "args": [ Vector2( 928, 80 ) ],
 "method": "spawn_bad_coin"
 }, {
-"args": [ Vector2( 928, 80 ) ],
-"method": "spawn_bad_coin"
+"args": [ Vector2( 928, 80 ), false ],
+"method": "spawn_coin"
 }, {
 "args": [ Vector2( 928, 80 ), false ],
 "method": "spawn_coin"
@@ -1040,9 +1052,10 @@ animations = [ {
 extents = Vector2( 8, 14 )
 
 [node name="MegaBoss" instance=ExtResource( 1 )]
+position = Vector2( -704, 0 )
 script = ExtResource( 3 )
-health = 30
-direction = 1
+health = 90
+healthTwo = 55
 
 [node name="CollisionHead" type="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, -14 )
@@ -1116,12 +1129,14 @@ default_color = Color( 0.972549, 0.972549, 0.952941, 1 )
 [node name="SpinBall" type="Area2D" parent="Pivot" index="1"]
 visible = false
 position = Vector2( 0, 64 )
+collision_layer = 16
 monitoring = false
 script = ExtResource( 4 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Pivot/SpinBall" index="0"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 50 )
+frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="Pivot/SpinBall" index="1"]
@@ -1132,5 +1147,6 @@ shape = SubResource( 51 )
 visible = false
 
 [node name="LuigiAscend2" parent="." index="11" instance=ExtResource( 6 )]
+visible = false
 
 [editable path="BossBar"]

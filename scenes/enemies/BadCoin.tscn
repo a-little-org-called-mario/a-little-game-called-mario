@@ -41,7 +41,7 @@ height = 6.0
 
 [node name="BadCoin" type="KinematicBody2D"]
 position = Vector2( 0, -24 )
-collision_layer = 16
+collision_layer = 0
 collision_mask = 2
 script = ExtResource( 3 )
 

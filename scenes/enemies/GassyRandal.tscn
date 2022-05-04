@@ -40,6 +40,8 @@ animations = [ {
 extents = Vector2( 14.8297, 17.6709 )
 
 [node name="GassyRandal" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="RandalCloud" type="AnimatedSprite" parent="."]

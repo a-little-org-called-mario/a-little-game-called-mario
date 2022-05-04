@@ -1100,6 +1100,7 @@ anims/ballStart = SubResource( 52 )
 visible = false
 position = Vector2( 60, 21 )
 collision_layer = 24
+collision_mask = 64
 monitoring = false
 script = ExtResource( 4 )
 __meta__ = {
@@ -1130,6 +1131,7 @@ default_color = Color( 0.972549, 0.972549, 0.952941, 1 )
 visible = false
 position = Vector2( 0, 64 )
 collision_layer = 16
+collision_mask = 64
 monitoring = false
 script = ExtResource( 4 )
 

@@ -150,6 +150,7 @@ region = Rect2( 0, 0, 16, 16 )
 [node name="EndPortal" type="Area2D" groups=["EndPortals"]]
 position = Vector2( 416, 224 )
 collision_layer = 4
+collision_mask = 64
 script = ExtResource( 2 )
 
 [node name="PortalSprite" type="AnimatedSprite" parent="."]

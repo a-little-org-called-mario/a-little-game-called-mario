@@ -7,6 +7,8 @@
 radius = 19.5064
 
 [node name="Spill" type="Area2D" groups=["slippery"]]
+collision_layer = 0
+collision_mask = 64
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

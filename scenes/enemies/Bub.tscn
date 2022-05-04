@@ -332,7 +332,7 @@ collision_mask = 2
 position = Vector2( 0, -32 )
 enabled = true
 cast_to = Vector2( -28, 0 )
-collision_mask = 3
+collision_mask = 66
 
 [node name="Tween" type="Tween" parent="." index="5"]
 

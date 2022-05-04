@@ -618,6 +618,7 @@ bounce_count = 5
 [node name="GexDialogue" type="Area2D" parent="."]
 position = Vector2( 928, 352 )
 collision_layer = 0
+collision_mask = 64
 monitorable = false
 script = ExtResource( 23 )
 dialogue_node = NodePath("Dialogue")
@@ -836,6 +837,7 @@ position = Vector2( 1216, 856 )
 [node name="EvilRoom" type="Area2D" parent="."]
 position = Vector2( 3296, 323 )
 collision_layer = 0
+collision_mask = 64
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EvilRoom"]
@@ -1039,6 +1041,7 @@ trigger_area = NodePath("../BusTrigger")
 [node name="BusTrigger" type="Area2D" parent="."]
 position = Vector2( 1416, -171 )
 collision_layer = 0
+collision_mask = 64
 
 [node name="Shape" type="CollisionShape2D" parent="BusTrigger"]
 shape = SubResource( 42 )

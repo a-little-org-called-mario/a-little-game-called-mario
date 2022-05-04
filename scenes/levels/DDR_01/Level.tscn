@@ -28,7 +28,6 @@ bus = "music"
 [node name="Controls" type="Node" parent="."]
 script = ExtResource( 3 )
 playerActorPath = NodePath("../Player")
-playerTrackPath = NodePath("../RightTrack")
 
 [node name="LeftTrack" parent="." instance=ExtResource( 5 )]
 scale = Vector2( 2, 2 )

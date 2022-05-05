@@ -36,10 +36,13 @@ var powerupaccel = 1
 onready var pivot: Node2D = $Pivot
 onready var sprite := $Pivot/Sprite
 onready var anim: AnimationPlayer = $Pivot/Sprite/Anims
+onready var effect_anim: AnimationPlayer = $Pivot/Sprite/EffectAnims
 onready var tween: Tween = $Tween
 onready var collision: CollisionShape2D = $Collision
+onready var hitbox: Area2D = $Hitbox
 
 onready var original_collision_extents: Vector2 = collision.shape.extents
+
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -369,15 +372,13 @@ func _on_enemy_hit_fireball():
 	stats.intelligence += 1
 
 
-func flash_sprite(duration: float = 0.05) -> void:
-	var material: ShaderMaterial = sprite.material as ShaderMaterial
-	if material != null:
-		material.set_shader_param("flash_modifier", 1.0)
-	$HitFlashTimer.wait_time = duration
-	$HitFlashTimer.start()
+func flash_sprite() -> void:
+	effect_anim.play("Hurt")
+	hitbox.set_deferred('monitoring', false)
+	yield(effect_anim, "animation_finished")
+	_end_flash_sprite()
 
 
 func _end_flash_sprite() -> void:
-	var material: ShaderMaterial = sprite.material as ShaderMaterial
-	if material != null:
-		material.set_shader_param("flash_modifier", 0.0)
+	effect_anim.stop()
+	hitbox.set_deferred('monitoring', true)

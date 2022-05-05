@@ -10,8 +10,8 @@ bounce = 0.8
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="PopcornKernel" type="RigidBody2D"]
-collision_layer = 16
-collision_mask = 2
+collision_layer = 0
+collision_mask = 66
 physics_material_override = SubResource( 2 )
 gravity_scale = 5.0
 script = ExtResource( 2 )

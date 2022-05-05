@@ -1052,10 +1052,9 @@ animations = [ {
 extents = Vector2( 8, 14 )
 
 [node name="MegaBoss" instance=ExtResource( 1 )]
-position = Vector2( -704, 0 )
 script = ExtResource( 3 )
-health = 90
-healthTwo = 55
+health = 85
+healthTwo = 60
 
 [node name="CollisionHead" type="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, -14 )
@@ -1072,10 +1071,12 @@ frames = SubResource( 5 )
 animation = "idle"
 
 [node name="Name" parent="BossBar" index="0"]
-bbcode_text = "[right][wave]MEGA
-LAWRENCE"
-text = "MEGA
-LAWRENCE"
+visible = false
+bbcode_text = "[right][wave]MEGA LAWRENCE"
+text = "MEGA LAWRENCE"
+
+[node name="ProgressRed" parent="BossBar" index="1"]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 autoplay = "idle"

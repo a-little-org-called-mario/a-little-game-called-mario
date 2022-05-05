@@ -222,7 +222,7 @@ func spawn_luigi_enemy(instPos = Vector2(0, 0)):
 	connect("dying", john, "_on_boss_death")
 	get_parent().get_parent().add_child(john)
 	john.position = instPos
-	john.fireball_count = 4
+	john.fireball_count = 3
 
 
 func emit_warnings(warnId, warnTime):
@@ -241,4 +241,9 @@ func reset_health():
 func rotate_pivot(pivSpeed):
 	pivRotation += pivSpeed
 	_pivot.rotation_degrees = pivRotation * direction
+
+
+func _on_animate_finished(paNa, anId):
+	if paNa == "MegaBoss":
+		set_active()
 

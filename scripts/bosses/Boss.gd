@@ -13,6 +13,7 @@ var maxHealth = 100
 var flashTime = 0
 var attackTimer = 0
 var canChangePhase = false
+var startedBar = false
 onready var _boss_bar = $BossBar
 
 # probably not neeeded
@@ -25,7 +26,8 @@ signal display_warning(id, time)
 
 
 func _ready():
-	emit_signal("set_health", health)
+	if active:
+		emit_signal("set_health", health)
 	set_collide_layers()
 	ready_animation()
 	maxHealth = health
@@ -45,12 +47,13 @@ func move(delta):
 
 # when attacked
 func kill(attacker, damage = 1):
-	emit_signal("health_change", health, health - damage)
-	health -= damage
-	attackerName = attacker
-	flashTime = 2
-	if health <= 0:
-		no_health()
+	if active:
+		emit_signal("health_change", health, health - damage)
+		health -= damage
+		attackerName = attacker
+		flashTime = 2
+		if health <= 0:
+			no_health()
 
 
 # when hp drops to 0 or below
@@ -123,4 +126,6 @@ func set_active():
 	active = true
 	visible = true
 	_boss_bar.change_visible(true)
+	if not startedBar:
+		emit_signal("set_health", health)
 

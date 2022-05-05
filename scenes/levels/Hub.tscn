@@ -12,7 +12,7 @@
 [node name="Hub" type="TileMap"]
 tile_set = ExtResource( 1 )
 collision_layer = 2
-collision_mask = 9
+collision_mask = 72
 format = 1
 script = ExtResource( 6 )
 levels_directory = "res://scenes/levels"
@@ -23,6 +23,8 @@ portal_template_path = NodePath("PortalTemplate")
 [node name="PortalTemplate" type="TileMap" parent="."]
 position = Vector2( -3456, 2560 )
 tile_set = ExtResource( 1 )
+collision_layer = 0
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -196607, 0, 0, -196606, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0 )
 
@@ -35,7 +37,7 @@ position = Vector2( 128, -128 )
 [node name="Walls" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 collision_layer = 2
-collision_mask = 9
+collision_mask = 72
 format = 1
 tile_data = PoolIntArray( -851967, 1, 0, -65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 131071, 0, 0, 65536, 0, 0, 65538, 0, 0, 65539, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0 )
 

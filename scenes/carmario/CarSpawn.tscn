@@ -9,6 +9,7 @@ extents = Vector2( 32, 13 )
 
 [node name="CarSpawn" type="Area2D"]
 collision_layer = 0
+collision_mask = 64
 script = ExtResource( 2 )
 car_player = ExtResource( 3 )
 

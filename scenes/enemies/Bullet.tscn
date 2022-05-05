@@ -8,7 +8,7 @@ extents = Vector2( 13, 9 )
 
 [node name="BubBullet" type="Area2D"]
 collision_layer = 16
-collision_mask = 3
+collision_mask = 66
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

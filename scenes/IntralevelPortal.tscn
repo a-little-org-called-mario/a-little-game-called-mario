@@ -34,6 +34,7 @@ extents = Vector2( 32, 32 )
 [node name="IntralevelPortal" type="Area2D"]
 modulate = Color( 0, 1, 0.180392, 1 )
 collision_layer = 4
+collision_mask = 64
 audio_bus_override = true
 script = ExtResource( 4 )
 

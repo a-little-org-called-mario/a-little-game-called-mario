@@ -976,6 +976,7 @@ anims/bounce = SubResource( 22 )
 [node name="EndTrigger" type="Area2D" parent="."]
 position = Vector2( 3912, 480 )
 collision_layer = 0
+collision_mask = 64
 script = ExtResource( 13 )
 dialogue_node = NodePath("../BallMario2/Kino")
 
@@ -985,6 +986,8 @@ shape = SubResource( 16 )
 
 [node name="StartTrigger" type="Area2D" parent="."]
 position = Vector2( 160, 336 )
+collision_layer = 0
+collision_mask = 64
 script = ExtResource( 13 )
 dialogue_node = NodePath("../BallMario/Kino")
 

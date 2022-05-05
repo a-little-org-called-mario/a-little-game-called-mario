@@ -124,6 +124,7 @@ shape = SubResource( 1 )
 [node name="PlayerCheck" type="Area2D" parent="Road"]
 position = Vector2( 1032, 0 )
 collision_layer = 0
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Road/PlayerCheck"]
 position = Vector2( 0, 311 )
@@ -131,6 +132,7 @@ shape = SubResource( 2 )
 
 [node name="Grass" type="Area2D" parent="Road" groups=["terrain_grass"]]
 collision_layer = 0
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Road/Grass"]
 position = Vector2( 522, 48 )
@@ -159,7 +161,8 @@ shape = SubResource( 1 )
 
 [node name="TopDownPlayer" type="KinematicBody2D" parent="." groups=["Player"]]
 position = Vector2( 96, 337 )
-collision_mask = 7
+collision_layer = 64
+collision_mask = 6
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_group_": true

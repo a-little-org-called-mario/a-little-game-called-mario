@@ -1,62 +1,80 @@
 class_name SMParser
 
-# note(jamspoon): this can & should be refactored some day. this is a mess
-
 var track_file: String
-var chart: SMChart
+var track_dir: String
 
-static func parse (file: String) -> SMChart:
-	var parser = load("res://scenes/DDR/SMParser.gd").new(file)
+static func parse (sm_path: String) -> SMChart:
+	var parser = load("res://scenes/DDR/_SMParser.gd").new(sm_path)
 	return parser._parse()
 
 func _init (file: String):
 	track_file = file
-	chart = SMChart.new()
+	track_dir = file.trim_suffix(file.split("/")[-1])
 
 func _parse () -> SMChart:
+	var chart: SMChart = SMChart.new()
+
 	var f: File = File.new()
 	f.open(track_file, File.READ)
 
-	var index: int = 0
-	var head_data: bool = true
-	var line: String 
-	while !f.eof_reached():        
-		if head_data:
-			line = f.get_line().strip_edges()
+	var data: String
+	var in_header: bool = true
 
-			# if empty, we've reached the end of the head section
-			if 0 == len(line):
-				head_data = false
-				line = ""
+	while !f.eof_reached():
+		if in_header:
+			# If we're in the header tag,
+			# go line-by-line and apply metadata appropriately
+
+			data = f.get_line().strip_edges()
+
+			# Due to how .sm files are formatted, an empty line
+			# indicates that we've reached the end of the header
+			if 0 == len(data):
+				in_header = false
 				continue
-			# if this head tag is multiline
-			while !line.ends_with(";"):
-				line += f.get_line().strip_edges()
 
-			# we should have a nice and happy line by now
-			parse_head(line)
+			# If this specific header tag is multiline,
+			# keep appending until we hit the end of the tag
+			while ';' != data[-1]:
+				data += f.get_line().strip_edges()
+
+			parse_header_tag(data, chart)
 		else:
-			line += f.get_line().strip_edges() + "\n"
+			# Since we're no longer in the header tag,
+			# copy the rest of the file stream into data
+
+			data += f.get_line().strip_edges() + "\n"
+
+	# Parse all available chart lists
+	parse_chart_lists(data, chart)
 
 	f.close()
 
-	parse_charts(line)
-
 	return chart
 
-func parse_head (line: String):
-	var split = line.split(":", true, 1)
-	var tag: String = split[0].trim_prefix("#")
-	var value: String = split[1].trim_suffix(";")
-	match split[0].substr(1):
-		"TITLE": chart.title = value
-		"SUBTITLE": chart.subtitle = value
-		"ARTIST": chart.artist = value
-		"TITLETRANSLIT": chart.title_translit = value
-		"SUBTITLETRANSLIT": chart.subtitle_translit = value
-		"ARTISTTRANSLIT": chart.artist_translit = value
-		"GENRE": chart.genre = value
-		"CREDIT": chart.credit = value
+func parse_header_tag (tag: String, chart: SMChart):
+	var kvpair = tag.split(":", true, 1)
+	var key: String = kvpair[0].trim_prefix("#")
+	var value: String = kvpair[1].trim_suffix(";")
+#   var rel_path: String = track_dir + value    # Commented out for now, read NOTE below for explanation
+
+	match key:
+		"TITLE":
+			chart.title = value
+		"SUBTITLE":
+			chart.subtitle = value
+		"ARTIST":
+			chart.artist = value
+		"TITLETRANSLIT":
+			chart.title_translit = value
+		"SUBTITLETRANSLIT":
+			chart.subtitle_translit = value
+		"ARTISTTRANSLIT":
+			chart.artist_translit = value
+		"GENRE":
+			chart.genre = value
+		"CREDIT":
+			chart.credit = value
 		"LYRICSPATH":
 			chart.lyrics = value
 		"CDTITLE":
@@ -70,96 +88,119 @@ func parse_head (line: String):
 		"SELECTABLE":
 			chart.selectable = "YES" == value
 		"BPMS":
-			var bpms = value.split(",")
-			for i in range(bpms.size()):
-				var s = bpms[i].split("=")
-				chart.bpm.push_back(Vector2(float(s[0]),float(s[1])))
+			if 0 < len(value):
+				var pairs = value.split(",")
+				for pair in len(pairs):
+					var kv = pairs[pair].split("=")
+					chart.bpm.push_back( { "beat": float(kv[0]), "bpm": float(kv[1]) } )
 		"STOPS":
-			if 0 < len(value): 
-				var stops = value.split(",")
-				for i in range(stops.size()):
-					var s = stops[i].split("=",false,1)
-					chart.stops.append(Vector2(float(s[0]),float(s[1])))
+			if 0 < len(value):
+				var pairs = value.split(",")
+				for pair in len(pairs):
+					var kv = pairs[pair].split("=")
+					chart.stops.push_back( { "beat": float(kv[0]), "seconds": float(kv[1]) } )
 
-		# note(jamspoon): right now these are expecting the .sm file music / image paths to
-		#                 be absolute paths (i.e. res://....)
-		#			      there may be a more elegant way to handle this & work in relative paths
+		# NOTE(jamspoon): Right now, this parser is configured to expect absolute paths - 
+		#                 Godot's runtime loading and relative paths don't really mix.
+		#                 There's an alternative, though - uncomment the variable
+		#                 declaration for `rel_path` above, replace the following
+		#                 references to `value` with `rel_path`, and the ResourceLoader
+		#                 should look instead in the same directory as the .sm file.
+		#                 Ultimately, this comes down to how we want to store .sm charts:
+		#                   - If we want to keep the organization structure we have now,
+		#                     where audio is in its own directory, sprites in their own, etc,
+		#                     then leave everything as is.
+		#                   - If, for easier exporting and loading of external .sm files,
+		#                     we want to put unique directories for each song in a DDR
+		#                     subdirectory, organization based on file type be damned,
+		#                     then make the aforementioned changes and we'll be ready to rock.
+		#                 I just don't want the responsibility of making that choice lmao
+		#                 so I'll leave it to everyone else.
 		"BANNER":
 			if 0 < len(value) && ResourceLoader.exists(value):
-				chart.banner = ResourceLoader.load(value, "Texture")
+				chart.banner = ResourceLoader.load(value)
 		"BACKGROUND":
 			if 0 < len(value) && ResourceLoader.exists(value):
-				chart.background = ResourceLoader.load(value, "Texture")
+				chart.background = ResourceLoader.load(value)
 		"MUSIC":
 			if 0 < len(value) && ResourceLoader.exists(value):
-				chart.music = ResourceLoader.load(value, "AudioStream")
+				chart.music = ResourceLoader.load(value)
+		_: pass
 	return
 
-func parse_charts (chart_data: String):
-	for c in range(chart_data.count("\n\n")):
-		var data = chart_data.split("\n\n")[c].split(":",true)
+func parse_chart_lists (all_lists: String, chart: SMChart):
+	for c in all_lists.count("\n\n"):
+		var data = all_lists.split("\n\n")[c].split(":",true)
 		var list: SMChartList = SMChartList.new()
 
-		# data[0] is an unimportant "#NOTES:" tag, so we will ignore!
+		# Handle non-note data first
+
+		# data[0] is unimportant formatting, so we can just ignore!
 		list.chart_type = data[1].strip_edges()
 		list.description = data[2].strip_edges()
 		list.difficulty = data[3].strip_edges()
 		list.meter = int(data[4].strip_edges())
 
-		var groove = data[5].strip_edges().split(",")
-		for g in range(groove.size()):
-			list.groove_radar.append(float(groove[g]))
+		var grooves = data[5].strip_edges().split(",")
+		for g in len(grooves):
+			list.groove_radar.push_back(float(grooves[g]))
 
-		# note(jamspoon): so from here, i'm exporting actual note data the same way TrackParser.gd does:
-		# as an array of { "tick": int, "pose": String }s. hopefully that should make it pretty
-		# easy to plug and play with the current ddr system?
+		# Handle note data
+		# We're exporting note data here identically to how TrackParser.gd does
+
 		var measures = data[6].split(",")
-		var curr_offset: int = chart.offset * 1000 # offset, in millisec
-		var bpm: float = chart.bpm[0].y
-		for m in range(measures.size()):
+		var bpm: float = chart.bpm[0].bpm
+		var tick: int = int(chart.offset * 1000) # converting to millisec
+		for m in len(measures):
 			var measure: String = measures[m].trim_prefix("\n")
-
-			# first, calculate the millisecond length of an individual note
-
-			# because .sm files support multiple bpms per song, make sure that we're calculating based on the right one
-			if 1 == chart.bpm.size(): bpm = chart.bpm[0].y
-			else:
-				for b in range(chart.bpm.size()):
-					if curr_offset / 1000 <= chart.bpm[b].x:
-						bpm = chart.bpm[b - 1].y
-						break
-			var note_count: int = measure.count("\n") # how many notes are in this "measure"
-			var note_length: int = 240000 / (note_count * bpm) # there are always 4 beats in a measure, and we want to convert from minutes to millisec
 			
-			# second, iterate over each note in the measure and add to list
-			# note(jamspoon): right NOW, DDR only has standard notes implemented
-			#				  if there comes a day when other sm notes are added, might be wise
-			#                 to turn this into a match statement instead of an if
+			# First, let's calculate how long, in milliseconds, a note currently is
 
-			for n in range(note_count):
+			# Because .sm files suport multiple BPMs per song,
+			# make sure we're calculating based on the current one.
+			if 1 == len(chart.bpm): bpm = chart.bpm[0].bpm
+			else:
+				for b in len(chart.bpm):
+					# We're reverse searching through this array,
+					# looking for the first beat we're ahead of.
+					if tick / 1000 > chart.bpm[-b - 1].beat:
+						bpm = chart.bpm[-b - 1].bpm
+						break
+
+			var note_count: int = measure.count("\n")           # How many notes are in this measure
+			var note_length: int = 240000 / (bpm * note_count)  # There are always 4 beats in a measure, and we're converting from
+																# beats-per-minute to beats-per-millisecond
+
+			# Second, let's iterate over each note in the measure and add it to the list.
+			# NOTE(jamspoon): Right now, Little Mario's DDR mode only has standard,
+			#                 press notes implemented. If there comes a day when other
+			#                 note types are added to this game, it'll be necessary to
+			#                 replace these `if '0' !=` statements with match statements.
+			for n in note_count:
 				var note: String = measure.split("\n")[n].strip_edges()
 
-				# if this is a double chart
+				# Double chart
 				if 8 == len(note):
-					if '0' != note[0]: list.left_notes.append( { "tick": curr_offset, "pose": "left" } )
-					if '0' != note[1]: list.left_notes.append( { "tick": curr_offset, "pose": "down" } )
-					if '0' != note[2]: list.left_notes.append( { "tick": curr_offset, "pose": "up" } )
-					if '0' != note[3]: list.left_notes.append( { "tick": curr_offset, "pose": "right" } )
-					if '0' != note[4]: list.right_notes.append( { "tick": curr_offset, "pose": "left" } )
-					if '0' != note[5]: list.right_notes.append( { "tick": curr_offset, "pose": "down" } )
-					if '0' != note[6]: list.right_notes.append( { "tick": curr_offset, "pose": "up" } )
-					if '0' != note[7]: list.right_notes.append( { "tick": curr_offset, "pose": "right" } )
+					if '0' != note[0]: list.left_notes.append( { "tick": tick, "pose": "left" } )
+					if '0' != note[1]: list.left_notes.append( { "tick": tick, "pose": "down" } )
+					if '0' != note[2]: list.left_notes.append( { "tick": tick, "pose": "up" } )
+					if '0' != note[3]: list.left_notes.append( { "tick": tick, "pose": "right" } )
+					if '0' != note[4]: list.right_notes.append( { "tick": tick, "pose": "left" } )
+					if '0' != note[5]: list.right_notes.append( { "tick": tick, "pose": "down" } )
+					if '0' != note[6]: list.right_notes.append( { "tick": tick, "pose": "up" } )
+					if '0' != note[7]: list.right_notes.append( { "tick": tick, "pose": "right" } )
 
-				# if this is a single chart
-				# note(jamspoon): putting single player charts in the right track, since it's the non-lawrence track
-				else:
-					if '0' != note[0]: list.right_notes.append( { "tick": curr_offset, "pose": "left" } )
-					if '0' != note[1]: list.right_notes.append( { "tick": curr_offset, "pose": "down" } )
-					if '0' != note[2]: list.right_notes.append( { "tick": curr_offset, "pose": "up" } )
-					if '0' != note[3]: list.right_notes.append( { "tick": curr_offset, "pose": "right" } )
+				# Single chart
+				# NOTE(jamspoon): I'm putting single notes in the right track list, since
+				#                 that's traditonally the Little Mario DDR player track.
+				elif 4 == len(note):
+					if '0' != note[0]: list.right_notes.append( { "tick": tick, "pose": "left" } )
+					if '0' != note[1]: list.right_notes.append( { "tick": tick, "pose": "down" } )
+					if '0' != note[2]: list.right_notes.append( { "tick": tick, "pose": "up" } )
+					if '0' != note[3]: list.right_notes.append( { "tick": tick, "pose": "right" } )
 
-				# add the current note length to the offset after each note
-				curr_offset += note_length
-		
+				# Apply the current note length to the running tick after each note
+				tick += note_length
+
 		chart.chart_lists.push_back(list)
 	return

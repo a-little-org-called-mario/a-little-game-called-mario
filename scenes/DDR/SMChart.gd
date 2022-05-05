@@ -16,8 +16,8 @@ var lyrics: String = ""     # likely never to be used
 var cd_title: String
 var music: AudioStream
 var offset: float
-var bpm = []                    # just storing Vector2s for these, (x = beat y = bpm)
-var stops = []                  # ^, (x - beat, y - seconds)
+var bpm = []                    # array of { beat: float, bpm: float }
+var stops = []                  #          { beat: float, seconds: float}
 var sample_start: float
 var sample_length: float
 var selectable: bool

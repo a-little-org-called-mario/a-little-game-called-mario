@@ -7,6 +7,7 @@ export var phase = 0
 export var direction = -1
 
 var coinScene = preload("res://scenes/Coin/FallingCoin.tscn")
+var popcornScene = preload("res://scenes/PopcornKernel.tscn")
 
 var attackerName = ""
 var maxHealth = 100
@@ -112,6 +113,17 @@ func spawn_coin(offset = Vector2(0, 0), selfRelative = true, value = 1):
 		coin.global_position = global_position + offset
 	else:
 		coin.global_position = offset
+
+# instance the popcorn (not yummy)
+func spawn_popcorn(offset = Vector2(0, 0), selfRelative = false, number = 1):
+	for i in range(number):
+		var pop = popcornScene.instance()
+		get_parent().add_child(pop)
+		if selfRelative:
+			pop.global_position = global_position + offset
+		else:
+			pop.global_position = offset
+
 
 
 func small_shake():

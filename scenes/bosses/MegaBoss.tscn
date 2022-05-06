@@ -640,7 +640,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.9, 1.5 ),
+"times": PoolRealArray( 0, 0.9, 1.45 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -1054,6 +1054,7 @@ extents = Vector2( 8, 14 )
 [node name="MegaBoss" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 health = 85
+direction = 1
 healthTwo = 60
 
 [node name="CollisionHead" type="CollisionShape2D" parent="." index="0"]
@@ -1068,7 +1069,7 @@ shape = SubResource( 6 )
 
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 5 )
-animation = "idle"
+animation = "cannon"
 
 [node name="Name" parent="BossBar" index="0"]
 visible = false
@@ -1139,7 +1140,6 @@ script = ExtResource( 4 )
 [node name="Sprite" type="AnimatedSprite" parent="Pivot/SpinBall" index="0"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 50 )
-frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="Pivot/SpinBall" index="1"]

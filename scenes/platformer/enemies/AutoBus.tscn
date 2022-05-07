@@ -91,7 +91,7 @@ extents = Vector2( 76, 36 )
 
 [node name="Bus" type="KinematicBody2D"]
 collision_layer = 8
-collision_mask = 11
+collision_mask = 74
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -120,7 +120,7 @@ bus = "sfx"
 
 [node name="KillArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 9
+collision_mask = 72
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea"]

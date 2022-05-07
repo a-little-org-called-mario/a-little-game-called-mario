@@ -125,6 +125,7 @@ anims/open = SubResource( 2 )
 [node name="PayZone" type="Area2D" parent="."]
 position = Vector2( -46, -7 )
 collision_layer = 0
+collision_mask = 64
 monitorable = false
 
 [node name="Shape" type="CollisionShape2D" parent="PayZone"]
@@ -134,6 +135,7 @@ shape = SubResource( 4 )
 [node name="FreeZone" type="Area2D" parent="."]
 position = Vector2( -46, -7 )
 collision_layer = 0
+collision_mask = 64
 monitorable = false
 
 [node name="TopShape" type="CollisionShape2D" parent="FreeZone"]

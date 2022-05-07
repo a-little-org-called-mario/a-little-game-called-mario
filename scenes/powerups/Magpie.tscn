@@ -310,6 +310,8 @@ animations = [ {
 extents = Vector2( 32, 28 )
 
 [node name="Magpie" type="Area2D" groups=["powerups"]]
+collision_layer = 0
+collision_mask = 64
 script = ExtResource( 3 )
 
 [node name="PieSprite" type="AnimatedSprite" parent="."]

@@ -178,6 +178,8 @@ anims/bounce = SubResource( 19 )
 
 [node name="DialogueTrigger" type="Area2D" parent="."]
 position = Vector2( 448, 472 )
+collision_layer = 0
+collision_mask = 64
 script = ExtResource( 9 )
 dialogue_node = NodePath("../BallMario/Kino")
 

@@ -4,6 +4,7 @@
 
 [node name="VisionCone" type="Area2D"]
 collision_layer = 0
+collision_mask = 64
 monitorable = false
 script = ExtResource( 1 )
 

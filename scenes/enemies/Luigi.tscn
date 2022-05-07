@@ -339,7 +339,6 @@ report_to_node = NodePath("..")
 cone_color = Color( 1, 0, 0, 1 )
 
 [node name="DeathZone" type="Particles2D" parent="."]
-emitting = false
 amount = 24
 process_material = SubResource( 15 )
 

@@ -7,6 +7,11 @@ onready var _hp_bar := $ProgressRed/Progress
 onready var _hp_bar_red := $ProgressRed
 onready var _tween := $ProgressRed/Progress/Tween
 onready var _heal := $BossHealSFX
+onready var _name := $Name
+
+
+func _ready():
+	EventBus.connect("player_died", self, "_on_player_died")
 
 
 func _on_set_health(maxHealth):
@@ -27,4 +32,13 @@ func _on_health_change(oldHealth, newHealth):
 		_tween.interpolate_property(_hp_bar, "value", oldHealth, newHealth, CHANGE_DURATION, Tween.TRANS_CUBIC, Tween.EASE_OUT, 0.1)
 		_heal.play()
 	_tween.start()
+
+
+func _on_player_died():
+	change_visible(false)
+
+
+func change_visible(vis = false):
+	_name.visible = vis
+	_hp_bar_red.visible = vis
 

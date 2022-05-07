@@ -25,6 +25,8 @@ _data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0
 colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [node name="BallPlayer" type="KinematicBody2D"]
+collision_layer = 64
+collision_mask = 30
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

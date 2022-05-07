@@ -38,6 +38,15 @@ func set_tick(tick):
 		var note_tick = note["tick"]
 		if last_tick < note_tick and note_tick <= tick:
 			_set_pose(note["pose"])
+			match note["pose"]:
+				"up":
+					$Up/AnimationPlayer.play("hit")
+				"down":
+					$Down/AnimationPlayer.play("hit")
+				"left":
+					$Left/AnimationPlayer.play("hit")
+				"right":
+					$Right/AnimationPlayer.play("hit")
 		if last_tick + spawn_delay < note_tick and note_tick <= tick + spawn_delay:
 			_spawn_note(i, note["pose"], note_tick)
 		if last_tick < note_tick + max_hit_delta and note_tick + max_hit_delta <= tick:
@@ -68,7 +77,6 @@ func _spawn_note(index, pose, note_tick):
 	node.init_tick = note_tick - spawn_delay
 	node.target_tick = note_tick
 	node.target_pos = position.y
-	node.index = index
 	
 	connect("set_tick", node, "set_tick")
 	add_child(node)

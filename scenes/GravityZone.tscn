@@ -14,6 +14,7 @@ shader_param/direction = -1.0
 modulate = Color( 1, 1, 1, 0.6 )
 position = Vector2( 224, 352 )
 collision_layer = 4
+collision_mask = 64
 gravity_vec = Vector2( 0, -1 )
 script = ExtResource( 1 )
 

@@ -197,7 +197,7 @@ __meta__ = {
 
 [node name="IdleMario" type="Sprite" parent="VBoxContainer"]
 position = Vector2( 77, 102 )
-scale = Vector2( 1, 1 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 8 )
 offset = Vector2( 0, -10 )
 script = ExtResource( 17 )

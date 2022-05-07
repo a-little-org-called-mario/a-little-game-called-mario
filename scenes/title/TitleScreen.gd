@@ -25,7 +25,7 @@ func alternate_title_screen():
 		var mario_label = get_node("VBoxContainer/Mario")
 		mario_label.text = label_texts[screen_index]
 		mario_label.bbcode_text = "\n" + TextUtils.center(TextUtils.wave(TextUtils.rainbow(mario_label.text)))
-		var on_click_sfx = get_node("VBoxContainer/IdleMario/Meow")=
+		var on_click_sfx = get_node("VBoxContainer/IdleMario/Meow")
 		on_click_sfx.stream = ResourceLoader.load(sfx_paths[screen_index])
 	else:
 		return false

@@ -15,7 +15,7 @@ func _ready():
 	var result = FileUtils._getFilePathsFromImport(textures_directory, ".png", ".jpg")
 	var finalPath = result[randi() % result.size()]
 	if result:
-		ResourceLoader.load(finalPath, "Texture")
+		texture = ResourceLoader.load(finalPath, "Texture")
 
 func _process(_delta):
 	global_position = Vector2(0, 0)

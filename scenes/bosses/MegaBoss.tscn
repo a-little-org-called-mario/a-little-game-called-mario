@@ -101,9 +101,21 @@ region = Rect2( 160, 320, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 240, 320, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 80, 80, 80 )
+region = Rect2( 0, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 80, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 160, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 240, 160, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 2 )
@@ -121,21 +133,9 @@ region = Rect2( 800, 240, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 880, 240, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 2 )
-region = Rect2( 80, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 2 )
-region = Rect2( 160, 160, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 2 )
-region = Rect2( 240, 160, 80, 80 )
+region = Rect2( 0, 80, 80, 80 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -154,20 +154,20 @@ animations = [ {
 "name": "float",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 29 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
+"loop": false,
+"name": "cannon",
+"speed": 10.0
 }, {
 "frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "laugh",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
-"loop": false,
-"name": "cannon",
-"speed": 10.0
+"frames": [ SubResource( 29 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=53]
@@ -1053,7 +1053,7 @@ extents = Vector2( 8, 14 )
 
 [node name="MegaBoss" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-health = 85
+health = 75
 direction = 1
 healthTwo = 60
 
@@ -1140,6 +1140,7 @@ script = ExtResource( 4 )
 [node name="Sprite" type="AnimatedSprite" parent="Pivot/SpinBall" index="0"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 50 )
+frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="Pivot/SpinBall" index="1"]

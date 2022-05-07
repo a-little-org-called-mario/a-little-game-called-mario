@@ -34,7 +34,7 @@ func boss_ai(delta):
 func phase_0():
 	attackTimer += 1
 	
-	if health <= 65:
+	if health <= 55:
 		if _anim_play.current_animation == "idle":
 			phase = 1
 			attackTimer = 0

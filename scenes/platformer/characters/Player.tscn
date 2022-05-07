@@ -201,7 +201,8 @@ random_pitch = 1.5
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
-collision_mask = 15
+collision_layer = 64
+collision_mask = 30
 script = ExtResource( 3 )
 
 [node name="Trail" type="Line2D" parent="."]
@@ -256,6 +257,8 @@ disable_collision = false
 softness = 6.0
 
 [node name="point1" type="StaticBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point1"]
 visible = false
@@ -277,6 +280,8 @@ texture_mode = 2
 
 [node name="point2" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D"]
 position = Vector2( 0.150002, 12.635 )
+collision_layer = 0
+collision_mask = 0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point2"]
 visible = false
@@ -297,6 +302,8 @@ disable_collision = false
 softness = 6.0
 
 [node name="point1" type="StaticBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point1"]
 visible = false
@@ -317,6 +324,8 @@ texture_mode = 2
 
 [node name="point2" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2"]
 position = Vector2( 0.150002, 12.635 )
+collision_layer = 0
+collision_mask = 0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point2"]
 visible = false

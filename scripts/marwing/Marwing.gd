@@ -50,11 +50,7 @@ func _physics_process (dt: float):
 		crosshair.translation.y = crosshair_pos.y;
 
 		if Input.is_action_pressed("marwing_shoot"):
-			# note (jam): this aim direction second parameter is held together by scotch tape and bubblegum
-			#             currently, the projectile direction is a bandaid attempt - ideally, bullets should probably come from
-			#             the center of the crosshair. right now, we're just calculating a basic direction vector between crosshair and ship mesh,
-			#             and then biasing it to fit the entire screen. it's consistent, but it's not accurate
-			shoot(mesh.translation,(crosshair.translation-mesh.translation)*Vector3(1,1,5));
+			shoot(mesh.translation,crosshair.translation-mesh.translation);
 
 ## Calculates how much weight a given input should have on the ship's strafe offset by factoring in strafe speed and input strength.
 #  @input_name        the input to check for

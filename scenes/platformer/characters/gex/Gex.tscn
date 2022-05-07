@@ -90,7 +90,8 @@ random_pitch = 1.5
 
 [node name="Gex" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
-collision_mask = 15
+collision_layer = 64
+collision_mask = 14
 script = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]

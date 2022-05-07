@@ -22,6 +22,8 @@ animations = [ {
 } ]
 
 [node name="Donk" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -45 )

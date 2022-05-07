@@ -1,6 +1,7 @@
 extends Enemy
 
 
+export var active = true
 export var health = 100
 export var phase = 0
 export var direction = -1
@@ -12,6 +13,7 @@ var maxHealth = 100
 var flashTime = 0
 var attackTimer = 0
 var canChangePhase = false
+onready var _boss_bar = $BossBar
 
 # probably not neeeded
 var posOrigin = Vector2(0, 0)
@@ -29,11 +31,16 @@ func _ready():
 	maxHealth = health
 
 
-func ai(delta):
+func move(delta):
 	# position = posOrigin + posOffset
 	flash()
 	handle_direction()
-	boss_ai(delta)
+	if active:
+		boss_ai(delta)
+	else:
+		visible = false
+		_boss_bar.change_visible(false)
+		
 
 
 # when attacked
@@ -94,9 +101,10 @@ func ready_animation():
 
 
 # instance a coin
-func spawn_coin(offset = Vector2(0, 0), selfRelative = true):
+func spawn_coin(offset = Vector2(0, 0), selfRelative = true, value = 1):
 	var coin = coinScene.instance()
 	get_parent().add_child(coin)
+	coin.value = value
 	if selfRelative:
 		coin.global_position = global_position + offset
 	else:
@@ -109,4 +117,10 @@ func small_shake():
 
 func large_shake():
 	EventBus.emit_signal("large_screen_shake")
+
+
+func set_active():
+	active = true
+	visible = true
+	_boss_bar.change_visible(true)
 

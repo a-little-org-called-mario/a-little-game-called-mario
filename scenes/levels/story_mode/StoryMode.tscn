@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/levels/story_mode/content/characters/sign.tres" type="Resource" id=1]
 [ext_resource path="res://scenes/levels/story_mode/content/characters/lever.tres" type="Resource" id=2]
@@ -33,6 +33,11 @@
 [ext_resource path="res://sprites/tile.png" type="Texture" id=31]
 [ext_resource path="res://scenes/levels/story_mode/CutSceneCamera.gd" type="Script" id=32]
 [ext_resource path="res://sprites/switch_down.png" type="Texture" id=33]
+[ext_resource path="res://scenes/levels/story_mode/content/characters/sorer.tres" type="Resource" id=34]
+[ext_resource path="res://scenes/levels/story_mode/content/dialogs/sorer.json" type="Resource" id=35]
+[ext_resource path="res://audio/sfx/sorer_dash.wav" type="AudioStream" id=36]
+[ext_resource path="res://sprites/characters/sorer.png" type="Texture" id=37]
+[ext_resource path="res://sprites/characters/sorer_afterimage.png" type="Texture" id=40]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -69,6 +74,9 @@ tracks/0/keys = {
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 28 )
 region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="Gradient" id=20]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=16]
 tracks/0/type = "value"
@@ -162,6 +170,96 @@ tracks/3/keys = {
 "values": [ ExtResource( 33 ) ]
 }
 
+[sub_resource type="Animation" id=21]
+resource_name = "sora_fly"
+length = 0.75
+tracks/0/type = "method"
+tracks/0/path = NodePath("YSort/Characters/Sora/AudioStreamPlayer2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("YSort/Characters/Sora/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, -500 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("YSort/Characters/Sora/Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("YSort/Characters/Sora/Sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("YSort/Characters/Sora/CPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("YSort/Characters/Sora/CPUParticles2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, -500 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("YSort/Characters/Sora/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [node name="StoryMode" type="Node2D"]
 script = ExtResource( 8 )
 
@@ -169,6 +267,7 @@ script = ExtResource( 8 )
 position = Vector2( 313, -75 )
 rotation = -0.22734
 scale = Vector2( 5, 5 )
+z_index = -1
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3200, 3200 )
@@ -182,6 +281,7 @@ anims/RESET = SubResource( 13 )
 anims/slide = SubResource( 14 )
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -1
 tile_set = ExtResource( 6 )
 collision_layer = 2
 format = 1
@@ -313,7 +413,42 @@ texture = ExtResource( 26 )
 visible = false
 text = "[Q] Talk to Wizard Dude"
 
+[node name="Sora" parent="YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( -162, -1259 )
+data = ExtResource( 34 )
+dialog = ExtResource( 35 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="YSort/Characters/Sora"]
+position = Vector2( 0, -32 )
+z_index = -1
+emitting = false
+amount = 16
+local_coords = false
+texture = ExtResource( 40 )
+direction = Vector2( 0, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+scale_amount = 2.0
+color_ramp = SubResource( 20 )
+
+[node name="Sprite" parent="YSort/Characters/Sora" index="2"]
+position = Vector2( 0, -32 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 37 )
+
+[node name="TalkToLabel" parent="YSort/Characters/Sora" index="3"]
+margin_left = -47.0
+margin_top = -80.0
+margin_right = 49.0
+margin_bottom = -66.0
+text = "[Q] Talk to Sora"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="YSort/Characters/Sora"]
+stream = ExtResource( 36 )
+volume_db = -1.01
+
 [node name="TopDownPlayer" parent="YSort" instance=ExtResource( 4 )]
+z_as_relative = false
 
 [node name="CutSceneCamera" type="Camera2D" parent="."]
 script = ExtResource( 32 )
@@ -323,6 +458,7 @@ script = ExtResource( 32 )
 [node name="CutScenePlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 16 )
 anims/open_door = SubResource( 17 )
+anims/sora_fly = SubResource( 21 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -433,3 +569,4 @@ align = 1
 [editable path="YSort/Characters/Sign"]
 [editable path="YSort/Characters/Donk"]
 [editable path="YSort/Characters/WizardDude"]
+[editable path="YSort/Characters/Sora"]

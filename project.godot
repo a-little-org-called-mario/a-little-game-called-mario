@@ -537,7 +537,7 @@ toggle_inventory={
 }
 show_instructions={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":79,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777218,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
@@ -561,12 +561,13 @@ interact={
 
 [layer_names]
 
-2d_physics/layer_1="Player"
+2d_physics/layer_1="DO NOT USE"
 2d_physics/layer_2="World"
 2d_physics/layer_3="Portals"
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="Enemy Projectile"
 2d_physics/layer_6="Boss"
+2d_physics/layer_7="Player"
 2d_physics/layer_9="Player Projectile"
 3d_physics/layer_9="Marwing - Player Ship"
 3d_physics/layer_10="Marwing - Enemy Ship"
@@ -587,6 +588,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_clear_color=Color( 0.258824, 0.929412, 1, 1 )
 environment/default_environment="res://default_env.tres"

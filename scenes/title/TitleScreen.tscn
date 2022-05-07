@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -6,12 +6,13 @@
 [ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
 [ext_resource path="res://audio/sfx/meow.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/title/ContributorsLabel.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Audio.gd" type="Script" id=7]
+[ext_resource path="res://sprites/title_sprites/title_mario.png" type="Texture" id=8]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/TitleScreen.gd" type="Script" id=15]
 [ext_resource path="res://scenes/title/TitleMenuButton.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/title/Mario.gd" type="Script" id=17]
-[ext_resource path="res://sprites/mario.png" type="Texture" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -33,7 +34,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 3, 3 ), Vector2( 2.9, 3.1 ), Vector2( 3.1, 2.9 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 0.967, 1.033 ), Vector2( 1.033, 0.967 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -133,6 +134,9 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource( 3 )
 script = ExtResource( 15 )
+sprite_paths = [ "res://sprites/large-gassy-randal.png", "res://sprites/title_sprites/title_bub.png" ]
+label_texts = [ "GASSY RANDAL", "BUBS" ]
+sfx_paths = [ "res://audio/sfx/toasty.wav", "res://audio/sfx/mario_aaaa.wav" ]
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0.7, 0.7, 0.7, 1 )
@@ -158,7 +162,7 @@ __meta__ = {
 }
 
 [node name="ALittleGameCalled" type="Label" parent="VBoxContainer"]
-margin_right = 984.0
+margin_right = 1000.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 0, 130 )
 size_flags_horizontal = 3
@@ -171,29 +175,31 @@ __meta__ = {
 }
 
 [node name="Mario" type="RichTextLabel" parent="VBoxContainer"]
-margin_left = 397.0
 margin_top = 134.0
-margin_right = 587.0
+margin_right = 1000.0
 margin_bottom = 254.0
-rect_min_size = Vector2( 190, 120 )
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1000, 120 )
 size_flags_horizontal = 6
+size_flags_vertical = 4
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "
-[wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1]MARIO[/rainbow]"
+[center][wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1]MARIO[/rainbow]"
 text = "
 MARIO"
+fit_content_height = true
+scroll_active = false
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="IdleMario" type="Sprite" parent="VBoxContainer"]
-position = Vector2( 92, 134 )
+position = Vector2( 77, 102 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 19 )
-offset = Vector2( 0, -17 )
-hframes = 6
-vframes = 2
+texture = ExtResource( 8 )
+offset = Vector2( 0, -10 )
 script = ExtResource( 17 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/IdleMario"]
@@ -203,12 +209,14 @@ anims/Idle = SubResource( 8 )
 anims/RESET = SubResource( 7 )
 
 [node name="Meow" type="AudioStreamPlayer2D" parent="VBoxContainer/IdleMario"]
+position = Vector2( 2, 6.66666 )
+scale = Vector2( 3, 3 )
 stream = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 109.0
+margin_left = 117.0
 margin_top = 258.0
-margin_right = 875.0
+margin_right = 883.0
 margin_bottom = 478.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -255,7 +263,6 @@ margin_bottom = 52.0
 text = "MARWING"
 redirect_scene = "res://scenes/marwing/levels/1-0.tscn"
 
-
 [node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0
 margin_top = 112.0
@@ -263,7 +270,6 @@ margin_right = 442.0
 margin_bottom = 164.0
 disabled = true
 text = "OPTIONS"
-
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0
@@ -275,14 +281,14 @@ redirect_scene = "res://scenes/Credits.tscn"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 482.0
-margin_right = 984.0
+margin_right = 1000.0
 margin_bottom = 602.0
 alignment = 1
 
 [node name="SmolCreditsLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]
 visible = false
-margin_left = 30.0
-margin_right = 150.0
+margin_left = 38.0
+margin_right = 158.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 120, 40 )
 size_flags_vertical = 5
@@ -298,8 +304,8 @@ anims/Init = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 
 [node name="CreditsContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 92.0
-margin_right = 892.0
+margin_left = 100.0
+margin_right = 900.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 800, 0 )
 size_flags_vertical = 8
@@ -321,7 +327,10 @@ script = ExtResource( 6 )
 wait_time = 3.0
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="BGM" type="AudioStreamPlayer" parent="Audio"]
 pause_mode = 2
 stream = ExtResource( 12 )
 volume_db = -20.0

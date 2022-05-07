@@ -14,6 +14,8 @@ extents = Vector2( 32, 4 )
 script = ExtResource( 2 )
 
 [node name="box" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="box"]
 shape = SubResource( 1 )
@@ -21,6 +23,7 @@ one_way_collision_margin = 128.0
 
 [node name="Body" type="StaticBody2D" parent="."]
 collision_layer = 2
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource( 1 )
@@ -28,6 +31,8 @@ one_way_collision_margin = 128.0
 
 [node name="HitArea" type="Area2D" parent="."]
 position = Vector2( 0, 35 )
+collision_layer = 0
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 position = Vector2( 0, -3 )

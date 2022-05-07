@@ -68,6 +68,8 @@ animations = [ {
 } ]
 
 [node name="GreasySteve" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="RandalCloud" type="AnimatedSprite" parent="."]

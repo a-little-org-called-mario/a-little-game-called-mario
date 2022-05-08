@@ -40,8 +40,10 @@ onready var effect_anim: AnimationPlayer = $Pivot/Sprite/EffectAnims
 onready var tween: Tween = $Tween
 onready var collision: CollisionShape2D = $Collision
 onready var hitbox: Area2D = $Hitbox
+onready var hitbox_collision: CollisionShape2D = $Hitbox/CollisionShape2D
 
 onready var original_collision_extents: Vector2 = collision.shape.extents
+onready var original_hitbox_extents: Vector2 = hitbox_collision.shape.extents
 
 
 onready var original_scale = sprite.scale
@@ -51,7 +53,7 @@ onready var stretch_scale = Vector2(original_scale.x * 0.4, original_scale.y * 1
 
 func _ready() -> void:
 	_end_flash_sprite()
-	set_hitbox_crouching(false)
+	uncrouch()
 
 
 func _enter_tree():
@@ -201,23 +203,26 @@ func try_slip(angle: float):
 
 func crouch():
 	crouching = true
-	set_hitbox_crouching(true)
+	set_hitbox_crouching(collision, original_collision_extents)
+	set_hitbox_crouching(hitbox_collision, original_hitbox_extents)
 	squash()
 
 
 func uncrouch():
 	crouching = false
-	set_hitbox_crouching(false)
+	set_hitbox_uncrouch(collision, original_collision_extents)
+	set_hitbox_uncrouch(hitbox_collision, original_hitbox_extents)
 	unsquash()
 
 
-func set_hitbox_crouching(is_crouching: bool):
-	if is_crouching:
-		collision.shape.extents.y = original_collision_extents.y * 0.4
-		collision.position.y = (original_collision_extents.y - collision.shape.extents.y) * gravity.direction.y
-	else:
-		collision.shape.extents.y = original_collision_extents.y
-		collision.position.y = 0
+func set_hitbox_crouching(col, original_extents):
+	col.shape.extents.y = original_extents.y * 0.4
+	col.position.y = (original_extents.y - col.shape.extents.y) * gravity.direction.y
+
+
+func set_hitbox_uncrouch(col, original_extents):
+	col.shape.extents.y = original_extents.y
+	col.position.y = 0
 
 
 func jump():
@@ -241,7 +246,7 @@ func super_jump():
 	stats.jump_xp += 1
 	stats.acrobatics += 1
 	tween.stop_all()
-	set_hitbox_crouching(false)
+	uncrouch()
 	stretch(0.2, 0, 1.0, 2.5)
 	y_motion.set_speed(JUMPFORCE * -100)
 	anticipating_jump = false

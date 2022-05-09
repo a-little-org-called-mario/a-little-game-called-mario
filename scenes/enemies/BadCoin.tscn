@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://sprites/Coin_Gems/BadCoin.png" type="Texture" id=1]
-[ext_resource path="res://scripts/enemies/BasicHitbox.gd" type="Script" id=2]
 [ext_resource path="res://scripts/enemies/BadCoin.gd" type="Script" id=3]
 
 [sub_resource type="AtlasTexture" id=9]
@@ -48,6 +47,7 @@ script = ExtResource( 3 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
+frame = 4
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -57,10 +57,9 @@ shape = SubResource( 7 )
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 24
 collision_mask = 64
-script = ExtResource( 2 )
 
 [node name="Collision" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, 2 )
 shape = SubResource( 8 )
 
-[connection signal="dealt_damage" from="Hitbox" to="." method="_on_dealt_damage"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

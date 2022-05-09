@@ -38,8 +38,6 @@ func _handle_movement():
 
 
 func _body_entered(body):
-	# If body is the player then lose health
-	HeartInventoryHandle.change_hearts_on(body, -1)
 	destroy()
 
 

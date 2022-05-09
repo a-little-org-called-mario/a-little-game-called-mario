@@ -278,8 +278,8 @@ scale_curve = SubResource( 17 )
 color_ramp = SubResource( 14 )
 
 [node name="Luigi" type="KinematicBody2D" groups=["enemy"]]
-collision_layer = 8
-collision_mask = 2
+collision_layer = 0
+collision_mask = 66
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

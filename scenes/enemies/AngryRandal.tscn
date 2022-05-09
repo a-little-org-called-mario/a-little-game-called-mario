@@ -4,6 +4,9 @@
 [ext_resource path="res://scripts/AngryRandal.gd" type="Script" id=2]
 [ext_resource path="res://sprites/angry-randal.png" type="Texture" id=3]
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 14.8297, 17.6709 )
+
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
@@ -37,16 +40,17 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 14.8297, 17.6709 )
-
 [node name="AngryRandal" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 64
 script = ExtResource( 2 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
+
 [node name="RandalCloud" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
+frame = 4
 speed_scale = 1.25
 playing = true
 
@@ -54,7 +58,6 @@ playing = true
 modulate = Color( 1, 1, 1, 0.439216 )
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 6 )
-frame = 3
 speed_scale = 0.75
 playing = true
 
@@ -86,13 +89,6 @@ one_shot = true
 [node name="SwoopTimer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
-
-[node name="HitArea" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 64
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-shape = SubResource( 7 )
 
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_BlinkTimer_timeout"]
 [connection signal="timeout" from="OpenTimer" to="." method="_on_OpenTimer_timeout"]

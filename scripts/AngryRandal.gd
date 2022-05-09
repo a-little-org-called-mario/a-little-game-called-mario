@@ -2,7 +2,6 @@
 
 extends "res://scripts/GassyRandal.gd"
 
-
 export var moveDuration = 2
 export var waitTimeBetweenSwoops = 20
 
@@ -71,4 +70,3 @@ func stopSwooping() -> void:
 func randalVibe():
 	if not swooping:
 		.randalVibe()
-

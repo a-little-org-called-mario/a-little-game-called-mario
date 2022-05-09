@@ -6,12 +6,12 @@ onready var player: Player = owner
 onready var line1 = $DampedSpringJoint2D/point1/Line2D
 onready var segment1 = $DampedSpringJoint2D/point2
 onready var rightSegment = $DampedSpringJoint2D
-onready var curve1:Curve2D = Curve2D.new()
+onready var curve1: Curve2D = Curve2D.new()
 
 onready var line2 = $DampedSpringJoint2D2/point1/Line2D
 onready var segment2 = $DampedSpringJoint2D2/point2
 onready var leftSegment = $DampedSpringJoint2D2
-onready var curve2:Curve2D = Curve2D.new()
+onready var curve2: Curve2D = Curve2D.new()
 
 onready var base_position_y: float = position.y
 const vecOffset = Vector2(0, 10)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/pistol.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/enemies/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/SimpleExplosion.tscn" type="PackedScene" id=6]
 [ext_resource path="res://audio/sfx/pop-gun.wav" type="AudioStream" id=7]
+[ext_resource path="res://sprites/projectiles/ombsti_bomb.png" type="Texture" id=8]
+[ext_resource path="res://audio/sfx/effects/explode_small.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 26, 24 )
@@ -133,6 +135,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=23]
 resource_name = "die"
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 2
@@ -229,6 +232,30 @@ tracks/7/keys = {
 "update": 0,
 "values": [ Vector2( 4, 4 ), Vector2( 0, 0 ) ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Boom:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Boom:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=33]
 resource_name = "move"
@@ -293,6 +320,58 @@ _data = [ Vector2( 0, 0.634091 ), 0.0, 0.0, 0, 0, Vector2( 0.769608, 0.7875 ), -
 audio_stream = ExtResource( 7 )
 random_pitch = 1.5
 
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 8 )
+region = Rect2( 64, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 8 )
+region = Rect2( 128, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 8 )
+region = Rect2( 192, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 8 )
+region = Rect2( 256, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 8 )
+region = Rect2( 320, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 8 )
+region = Rect2( 384, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 8 )
+region = Rect2( 448, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 8 )
+region = Rect2( 512, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 8 )
+region = Rect2( 576, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 8 )
+region = Rect2( 640, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 8 )
+region = Rect2( 704, 0, 64, 48 )
+
+[sub_resource type="SpriteFrames" id=49]
+animations = [ {
+"frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
 [node name="Bub" instance=ExtResource( 1 )]
 collision_mask = 330
 script = ExtResource( 3 )
@@ -317,7 +396,8 @@ position = Vector2( -12, 1.5 )
 
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 3 )
-animation = "die"
+animation = "idle"
+frame = 1
 playing = true
 offset = Vector2( 0, -32 )
 
@@ -365,4 +445,15 @@ color = Color( 0.0705882, 0.592157, 0.760784, 1 )
 [node name="PopGun" type="AudioStreamPlayer" parent="." index="9"]
 stream = SubResource( 37 )
 volume_db = -10.0
+bus = "sfx"
+
+[node name="Boom" type="AnimatedSprite" parent="." index="10"]
+visible = false
+position = Vector2( 0, -32 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 49 )
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="." index="11"]
+stream = ExtResource( 9 )
+volume_db = 2.0
 bus = "sfx"

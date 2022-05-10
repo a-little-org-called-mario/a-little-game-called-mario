@@ -43,6 +43,7 @@ onready var _muzzle := $GunAnchor/Sprite/Muzzle
 onready var sprite := $Sprite
 onready var tween := $Tween
 onready var pop_gun_sfx := $PopGun
+onready var explode_sfx := $Explode
 
 onready var original_scale = sprite.scale
 onready var squash_scale = Vector2(original_scale.x * 1.4, original_scale.y * 0.4)
@@ -115,6 +116,7 @@ func _handle_dying(_killer):
 		EventBus.emit_signal("enemy_hit_fireball")
 	_animation_player.play("die")
 	$SquishParticles.emitting = true
+	explode_sfx.play()
 	yield(_animation_player, "animation_finished")
 
 
@@ -130,8 +132,9 @@ func fire_bullet():
 
 	# instance muzzle flash
 	var flash = muzzle_flash_scene.instance()
-	get_tree().root.add_child(flash)
-	flash.global_position = _muzzle.global_position
+	get_parent().add_child(flash)
+	flash.scale = scale
+	flash.position = _muzzle.global_position
 
 	pop_gun_sfx.play()
 

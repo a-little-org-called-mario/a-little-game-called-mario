@@ -19,6 +19,10 @@ region = Rect2( 64, 0, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 64, 64 )
 
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 64, 64, 64 )
@@ -43,10 +47,6 @@ region = Rect2( 256, 64, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 320, 64, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 64, 64 )
-
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ SubResource( 30 ), SubResource( 31 ) ],
@@ -54,15 +54,15 @@ animations = [ {
 "name": "idle",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "move",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 32 ) ],
 "loop": true,
 "name": "die",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "move",
+"speed": 10.0
 } ]
 
 [sub_resource type="Animation" id=34]
@@ -294,8 +294,7 @@ audio_stream = ExtResource( 7 )
 random_pitch = 1.5
 
 [node name="Bub" instance=ExtResource( 1 )]
-collision_layer = 0
-collision_mask = 322
+collision_mask = 330
 script = ExtResource( 3 )
 bullet_scene = ExtResource( 5 )
 muzzle_flash_scene = ExtResource( 6 )
@@ -318,8 +317,7 @@ position = Vector2( -12, 1.5 )
 
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 3 )
-animation = "idle"
-frame = 1
+animation = "die"
 playing = true
 offset = Vector2( 0, -32 )
 

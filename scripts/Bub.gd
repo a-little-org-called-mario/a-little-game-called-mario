@@ -33,6 +33,8 @@ var _motion = Vector2.ZERO
 var _moving = true
 var _shooting_cooldown = 0
 
+var damage = 0
+
 onready var _animation_player := $AnimationPlayer
 onready var _ray_walking := $RayCastWalking
 onready var _ray_shooting := $RayCastShooting

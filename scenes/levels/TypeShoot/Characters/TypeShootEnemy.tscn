@@ -11,6 +11,7 @@ extents = Vector2( 16, 10 )
 font_data = ExtResource( 2 )
 
 [node name="TypeShootEnemy" instance=ExtResource( 1 )]
+collision_mask = 322
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="0"]

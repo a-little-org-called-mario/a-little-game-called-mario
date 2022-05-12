@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -25,6 +25,9 @@
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=23]
 [ext_resource path="res://scenes/platformer/characters/Blunt.gd" type="Script" id=24]
 [ext_resource path="res://scenes/Hitbox.tscn" type="PackedScene" id=25]
+[ext_resource path="res://audio/sfx/metal_scrape.wav" type="AudioStream" id=26]
+[ext_resource path="res://graphics/sprites/vfx/spark_star.png" type="Texture" id=27]
+[ext_resource path="res://scenes/platformer/characters/SkidParticles.gd" type="Script" id=28]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
@@ -75,9 +78,13 @@ region = Rect2( 128, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 160, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 47 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -145,6 +152,21 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6, 7 ]
 }
 
+[sub_resource type="Animation" id=45]
+resource_name = "Skid"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
 [sub_resource type="Animation" id=42]
 resource_name = "Hurt"
 length = 1.5
@@ -191,13 +213,9 @@ colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
 gradient = SubResource( 40 )
 width = 128
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 0, 175, 82 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 15 )
-region = Rect2( 175, 0, 175, 82 )
+[sub_resource type="Gradient" id=46]
+offsets = PoolRealArray( 0.471669, 1 )
+colors = PoolColorArray( 1, 0.54902, 0, 1, 0.946289, 0.107197, 0.107197, 0 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 12 )
@@ -215,16 +233,24 @@ region = Rect2( 380, 0, 190, 80 )
 atlas = ExtResource( 12 )
 region = Rect2( 570, 0, 190, 80 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 175, 82 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 15 )
+region = Rect2( 175, 0, 175, 82 )
+
 [sub_resource type="SpriteFrames" id=41]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "standing",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "driving",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "standing",
 "speed": 5.0
 } ]
 
@@ -281,6 +307,7 @@ anims/Idle = SubResource( 24 )
 anims/Jump = SubResource( 25 )
 anims/RESET = SubResource( 26 )
 anims/Run = SubResource( 27 )
+anims/Skid = SubResource( 45 )
 script = ExtResource( 5 )
 
 [node name="EffectAnims" type="AnimationPlayer" parent="Pivot/Sprite"]
@@ -400,6 +427,25 @@ scale_amount = 0.75
 color = Color( 1, 1, 1, 0.784314 )
 script = ExtResource( 1 )
 
+[node name="SkidParticles" type="CPUParticles2D" parent="Pivot"]
+position = Vector2( -4, 26 )
+emitting = false
+amount = 20
+lifetime = 0.5
+local_coords = false
+texture = ExtResource( 27 )
+direction = Vector2( -2, -1 )
+spread = 20.0
+gravity = Vector2( 0, 2000 )
+initial_velocity = 1000.0
+initial_velocity_random = 0.1
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+angle = 180.0
+angle_random = 1.0
+color_ramp = SubResource( 46 )
+script = ExtResource( 28 )
+
 [node name="Blunt" type="Sprite" parent="Pivot"]
 position = Vector2( 14, 0 )
 scale = Vector2( 2, 2 )
@@ -431,6 +477,7 @@ color = Color( 0.69, 0.69, 0.69, 0.784314 )
 script = ExtResource( 1 )
 
 [node name="BusSprite" type="AnimatedSprite" parent="Pivot"]
+visible = false
 position = Vector2( 0, 4 )
 scale = Vector2( 0.767105, 0.725 )
 frames = SubResource( 41 )
@@ -487,6 +534,12 @@ bus = "sfx"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 14 )
+
+[node name="SkidSFX" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, 26 )
+scale = Vector2( 2, 2 )
+stream = ExtResource( 26 )
+bus = "sfx"
 
 [node name="Tween" type="Tween" parent="."]
 

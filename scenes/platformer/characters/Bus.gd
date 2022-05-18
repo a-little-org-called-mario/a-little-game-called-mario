@@ -74,7 +74,7 @@ func _set_state(newState):
 		animation = "standing"
 		playing = false
 		resting_sound.playing = true # When more state sounds are added that continuously should play
-		moving_sound.playing = false # make all the sounds an dictionary.
+		moving_sound.playing = false # make all the sounds a dictionary.
 	if (newState == busState.MOVING):
 		animation = "driving"
 		playing = true

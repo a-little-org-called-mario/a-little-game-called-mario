@@ -52,6 +52,9 @@ signal cameraF_set_following()
 signal cameraF_move_camera_to(x, y)
 signal cameraF_change_candidate(step_int)
 
+# Camera limits
+signal cameraL_enter_set_area(id)
+
 # Settings
 signal crt_filter_toggle(data)
 signal volume_changed(data)

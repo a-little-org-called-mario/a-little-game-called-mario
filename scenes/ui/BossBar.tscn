@@ -21,27 +21,25 @@ __meta__ = {
 }
 
 [node name="Name" type="RichTextLabel" parent="."]
-margin_left = 720.0
-margin_top = 454.0
-margin_right = 1020.0
-margin_bottom = 514.0
+margin_left = 600.0
+margin_top = 480.0
+margin_right = 1012.0
+margin_bottom = 540.0
 rect_min_size = Vector2( 300, 60 )
 rect_clip_content = false
 size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[right][wave]TEST
-NAMENAMENAME"
-text = "TEST
-NAMENAMENAME"
+bbcode_text = "[right][wave]TEST NAMENAMENAME"
+text = "TEST NAMENAMENAME"
 scroll_active = false
 
 [node name="ProgressRed" type="TextureProgress" parent="."]
-margin_left = 804.0
-margin_top = 516.0
-margin_right = 1020.0
-margin_bottom = 596.0
+margin_left = 600.0
+margin_top = 512.0
+margin_right = 1016.0
+margin_bottom = 592.0
 step = 0.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 4 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -13,6 +13,14 @@
 [ext_resource path="res://sprites/decorations/tutorial_signs3.png" type="Texture" id=11]
 [ext_resource path="res://sprites/decorations/tutorial_signs4.png" type="Texture" id=12]
 [ext_resource path="res://scenes/boxes/GreedyCoinBox.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/objects/CameraLimits.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/objects/LimitSetArea.tscn" type="PackedScene" id=15]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 549, 152 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 48, 48 )
 
 [sub_resource type="AnimatedTexture" id=1]
 frames = 2
@@ -45,8 +53,36 @@ tile_data = PoolIntArray( -524274, 0, 0, -524273, 0, 0, -524272, 0, 0, -524271, 
 [node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 155, 470 )
 
-[node name="CameraFollow" parent="." instance=ExtResource( 3 )]
+[node name="Camera" type="Node" parent="."]
+
+[node name="CameraFollow" parent="Camera" instance=ExtResource( 3 )]
 follow_vertically = true
+
+[node name="CameraLimits" parent="Camera" instance=ExtResource( 14 )]
+topLeft = Vector2( 0, -448 )
+bottomRight = Vector2( 3632, 600 )
+doLimitsReset = false
+
+[node name="CameraLimits2" parent="Camera" instance=ExtResource( 14 )]
+topLeft = Vector2( -2560, -192 )
+bottomRight = Vector2( 368, 408 )
+limitID = 1
+doLimitsReset = false
+
+[node name="LimitSetArea" parent="Camera" instance=ExtResource( 15 )]
+position = Vector2( 64, 224 )
+
+[node name="Collision" parent="Camera/LimitSetArea" index="0"]
+position = Vector2( 539, 136 )
+shape = SubResource( 4 )
+
+[node name="LimitSetArea2" parent="Camera" instance=ExtResource( 15 )]
+position = Vector2( 80, 80 )
+limitID = 1
+
+[node name="Collision" parent="Camera/LimitSetArea2" index="0"]
+position = Vector2( 32, 32 )
+shape = SubResource( 5 )
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -73,7 +109,7 @@ max_speed = 0.0
 
 [node name="proj_id_54" parent="NPCs" instance=ExtResource( 7 )]
 position = Vector2( -2208, 208 )
-frame = 3
+frame = 2
 
 [node name="Decorations" type="Node2D" parent="."]
 
@@ -212,6 +248,8 @@ margin_bottom = 288.0
 bbcode_text = "HOLD [rainbow freq=0.5 sat=1 val=1]{SPACE}[/rainbow] TO JUMP HIGHER!"
 text = "HOLD {SPACE} TO JUMP HIGHER!"
 
+[editable path="Camera/LimitSetArea"]
+[editable path="Camera/LimitSetArea2"]
 [editable path="Decorations/Jump"]
 [editable path="Decorations/Sprint"]
 [editable path="Decorations/JumpPic1"]

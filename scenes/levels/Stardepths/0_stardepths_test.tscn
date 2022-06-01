@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/resources/stardepths_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -10,6 +10,14 @@
 [ext_resource path="res://scenes/objects/StatsGate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/boxes/GreedyCoinBox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/objects/CameraLimits.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/objects/LimitSetArea.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13, 128 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 13, 128 )
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -22,11 +30,35 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Camera" type="Node" parent="."]
+
+[node name="CameraFollow" parent="Camera" instance=ExtResource( 3 )]
+follow_vertically = true
+
+[node name="CameraLimits" parent="Camera" instance=ExtResource( 11 )]
+topLeft = Vector2( -80, -618 )
+bottomRight = Vector2( 1718, 500 )
+
+[node name="CameraLimits2" parent="Camera" instance=ExtResource( 11 )]
+topLeft = Vector2( 1718, -702 )
+bottomRight = Vector2( 3100, -100 )
+limitID = 1
+
+[node name="LimitSetArea" parent="Camera" instance=ExtResource( 12 )]
+position = Vector2( 1704, -416 )
+
+[node name="Collision" parent="Camera/LimitSetArea" index="0"]
+shape = SubResource( 1 )
+
+[node name="LimitSetArea2" parent="Camera" instance=ExtResource( 12 )]
+position = Vector2( 1736, -416 )
+limitID = 1
+
+[node name="Collision" parent="Camera/LimitSetArea2" index="0"]
+shape = SubResource( 2 )
+
 [node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 68, 44 )
-
-[node name="CameraFollow" parent="." instance=ExtResource( 3 )]
-follow_vertically = true
 
 [node name="EndPortal" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2848, -384 )
@@ -88,10 +120,11 @@ position = Vector2( 312, 0 )
 
 [node name="BasicDecoration" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1168, -288 )
-frame = 2
+frame = 3
 
 [node name="BasicDecoration6" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1392, -384 )
+frame = 2
 
 [node name="BasicDecoration8" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1872, -352 )
@@ -111,22 +144,22 @@ frame = 0
 [node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 112, 0 )
 animation = "float_star"
-frame = 4
+frame = 5
 
 [node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 784, 112 )
 animation = "float_star"
-frame = 4
+frame = 5
 
 [node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2648, -448 )
 animation = "float_star"
-frame = 7
+frame = 0
 
 [node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 752, -352 )
 animation = "float_star"
-frame = 7
+frame = 0
 
 [node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2320, -352 )
@@ -135,7 +168,6 @@ frame = 0
 
 [node name="BasicDecoration7" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1120, -416 )
-frame = 0
 
 [node name="BasicDecoration2" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1328, -224 )
@@ -156,3 +188,6 @@ frame = 0
 position = Vector2( 2064, -352 )
 animation = "star_tree_2a"
 frame = 0
+
+[editable path="Camera/LimitSetArea"]
+[editable path="Camera/LimitSetArea2"]

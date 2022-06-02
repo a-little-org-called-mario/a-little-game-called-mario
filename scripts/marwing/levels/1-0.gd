@@ -14,22 +14,22 @@ func _ready ():
 			"portrait": "res://sprites/marwing/DIALOGUE_ICON--LRANDALL.png"
 		},
 		{
-			"text":	"BUT DON'T SWEAT IT- THE NEW AND IMPROVED MARWING CAN TAKE CARE OF IT.",
+			"text":	"BUT DON'T SWEAT IT, LITTLE BUDDY- THE NEW AND IMPROVED MARWING CAN, UH, TAKE CARE OF IT.",
 			"audio": "res://audio/voice/marwing/en/MW1-0_LR3.wav",
 			"portrait": "res://sprites/marwing/DIALOGUE_ICON--LRANDALL.png"
 		},
 		{
-			"text":	"JUST... FLY AROUND A BIT AND SHOOT THINGS.",
+			"text":	"JUST UH... FLY AROUND A BIT AND SHOOT SOME THINGS.",
 			"audio": "res://audio/voice/marwing/en/MW1-0_LR4.wav",
 			"portrait": "res://sprites/marwing/DIALOGUE_ICON--LRANDALL.png"
 		},
 		{
-			"text":	"OH! THEY'RE UNMANNED DRONES. IT'S FINE, YOU DON'T HAVE TO FEEL BAD.",
+			"text":	"OH! UH, THEY'RE, UH, UNMANNED DRONES, BY THE WAY. IT'S FINE, YOU DON'T HAVE TO FEEL BAD. I MEAN I APPRECIATE YOUR KIND HEART OR UH, CONSCIENCE, YOUR MORTAL FIBER, IT'S FINE. YOU CAN-YOU CAN JUST SHOOT, JUST, JUST SHOOT IT AWAY, IT'S FINE. IT'S OK, JUST SHOOT, AND... PEW-PEW PEW PEW-PEW! IT'S GOOD, IT'S ALL GOOD, IT'S ALL GOOD.",
 			"audio": "res://audio/voice/marwing/en/MW1-0_LR5.wav",
 			"portrait": "res://sprites/marwing/DIALOGUE_ICON--LRANDALL.png"
 		},
 		{
-			"text":	"SO GET TO WORK, MY DARLING.",
+			"text":	"SO, UH, GET TO WORK, MY DARLING.",
 			"audio": "res://audio/voice/marwing/en/MW1-0_LR6.wav",
 			"portrait": "res://sprites/marwing/DIALOGUE_ICON--LRANDALL.png"
 		},

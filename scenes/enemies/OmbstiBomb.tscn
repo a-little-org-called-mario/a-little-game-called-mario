@@ -28,4 +28,4 @@ frames = SubResource( 2 )
 animation = "normal"
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 8, 10, -8, 10, 0, -8 )
+polygon = PoolVector2Array( 7, 10, -7, 10, 0, -8 )

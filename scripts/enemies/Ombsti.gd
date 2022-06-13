@@ -10,10 +10,18 @@ export var heldItem = "bomb"
 export var numberThrown = 2
 export var veloMin = Vector2(150, -250)
 export var veloMax = Vector2(450, -650)
-export var delay = 60
+export var delay = 70
 
 onready var _ani_play = $AnimationPlayer
 onready var _thr_os = $ThrownOffset
+
+
+func _enter_tree():
+	EventBus.connect("player_attacked",self,"_on_attacked")
+
+
+func _exit_tree():
+	EventBus.disconnect("player_attacked",self,"_on_attacked")
 
 
 func ai(delta):
@@ -46,6 +54,7 @@ func throw():
 	if alive:
 		for i in numberThrown:
 			var thrown = thrownItem.instance()
+			thrown.throwerName = name
 			thrown.direction = direction
 			thrown.velocity = Vector2(rand_range(veloMin.x, veloMax.x) * direction, rand_range(veloMin.y, veloMax.y))
 			get_parent().add_child(thrown)
@@ -58,6 +67,14 @@ func start_throw():
 
 
 func set_idle():
-	_ani_play.play("idle")
-	delayTimer = 0
+	if _ani_play.current_animation != "celebrate":
+		_ani_play.play("idle")
+		delayTimer = 0
+
+
+func _on_attacked(enemyName):
+	if enemyName == name:
+		_ani_play.play("celebrate")
+		delayTimer = delay / 2
+
 

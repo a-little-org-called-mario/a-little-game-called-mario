@@ -92,6 +92,32 @@ extents = Vector2( 10, 22 )
 
 [sub_resource type="Animation" id=23]
 resource_name = "celebrate"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "celebrate" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "idle"
@@ -214,7 +240,7 @@ shape = SubResource( 3 )
 [node name="Sprite" parent="." index="1"]
 position = Vector2( 0, -48 )
 frames = SubResource( 2 )
-animation = "idle"
+animation = "celebrate"
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, -22 )

@@ -52,8 +52,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 9, 9 )
+[sub_resource type="CircleShape2D" id=14]
 
 [sub_resource type="Animation" id=13]
 resource_name = "explode"

@@ -2,9 +2,7 @@ extends Enemy
 
 
 export var health = 5
-export var alwaysActive = false
 
-var active = false
 var flashTime = 0
 
 onready var _act_area = $ActiveArea
@@ -12,8 +10,6 @@ onready var _act_area = $ActiveArea
 
 func _ready():
 	_act_area.visible = true
-	if alwaysActive:
-		active = true
 	h_e_ready()
 
 
@@ -34,7 +30,7 @@ func h_e_move(delta):
 
 # when attacked
 func kill(attacker, damage = 1):
-	if active:
+	if alive:
 		emit_signal("health_change", health, health - damage)
 		health -= damage
 		flashTime = 2
@@ -67,11 +63,22 @@ func flash():
 
 func _on_ActiveArea_body_entered(body):
 	if body is Player:
-		active = true
+		alive = true
 		activate()
 
 
 # called when ActiveArea is entered
 func activate():
+	pass
+
+
+func _on_ActiveArea_body_exited(body):
+	if body is Player:
+		alive = false
+		deactivate()
+
+
+# called when ActiveArea is left
+func deactivate():
 	pass
 

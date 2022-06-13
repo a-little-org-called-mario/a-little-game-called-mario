@@ -4,9 +4,18 @@ extends "res://scripts/enemies/HeatlhEnemy.gd"
 var direction = 1
 var playerLocation = Vector2(0, 0)
 
+export(PackedScene) var thrownItem
+export var heldItem = "bomb"
+export var numberThrown = 1
+export var veloMin = Vector2(150, -250)
+export var veloMax = Vector2(450, -650)
+
+onready var _ani_play = $AnimationPlayer
+onready var _thr_os = $ThrownOffset
+
 
 func ai(delta):
-	get_player_location()
+	check_player()
 	set_direction()
 
 
@@ -18,8 +27,28 @@ func set_direction():
 	scale.x = direction
 
 
-func get_player_location():
+func check_player():
+	pass
 	for i in _act_area.get_overlapping_bodies():
 		if i is Player:
 			playerLocation = i.position
+
+
+func throw():
+	if alive:
+		for i in numberThrown:
+			var thrown = thrownItem.instance()
+			thrown.direction = direction
+			thrown.velocity = Vector2(rand_range(veloMin.x, veloMax.x) * direction, rand_range(veloMin.y, veloMax.y))
+			thrown.global_position.x = global_position.x + (_thr_os.position.x * direction)
+			thrown.global_position.y = global_position.y + _thr_os.position.y
+			get_parent().add_child(thrown)
+
+
+func start_throw():
+	_ani_play.play("throw")
+
+
+func set_idle():
+	_ani_play.play("idle")
 

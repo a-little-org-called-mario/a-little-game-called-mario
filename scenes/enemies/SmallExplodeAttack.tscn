@@ -1,0 +1,132 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://audio/sfx/effects/explode_small.wav" type="AudioStream" id=1]
+[ext_resource path="res://sprites/projectiles/ombsti_bomb.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 640, 0, 64, 48 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 9, 9 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "explode"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:monitorable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Explode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
+} ]
+}
+
+[node name="SmallExplode" type="Area2D"]
+scale = Vector2( 2, 2 )
+collision_layer = 16
+collision_mask = 0
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 12 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "explode"
+anims/explode = SubResource( 13 )
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = 2.0
+bus = "sfx"

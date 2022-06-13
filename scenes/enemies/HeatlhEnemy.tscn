@@ -4,12 +4,14 @@
 [ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1024, 600 )
+extents = Vector2( 612, 300 )
 
 [node name="HeatlhEnemy" instance=ExtResource( 2 )]
+scale = Vector2( 2, 2 )
 collision_layer = 0
 collision_mask = 256
 script = ExtResource( 1 )
+alive = false
 
 [node name="SquishParticles" parent="." index="3"]
 visible = false
@@ -29,3 +31,4 @@ collision_mask = 66
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 
 [connection signal="body_entered" from="ActiveArea" to="." method="_on_ActiveArea_body_entered"]
+[connection signal="body_exited" from="ActiveArea" to="." method="_on_ActiveArea_body_exited"]

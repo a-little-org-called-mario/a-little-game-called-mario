@@ -107,7 +107,8 @@ position = Vector2( 640, 208 )
 position = Vector2( 816, -144 )
 
 [node name="Ombsti" parent="Enemies" groups=["enemy"] instance=ExtResource( 13 )]
-position = Vector2( -872, 160 )
+position = Vector2( -744, 160 )
+alive = true
 
 [node name="Objects" type="Node" parent="."]
 
@@ -171,22 +172,22 @@ frame = 0
 [node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 104, 8 )
 animation = "float_star"
-frame = 0
+frame = 6
 
 [node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 784, 112 )
 animation = "float_star"
-frame = 0
+frame = 6
 
 [node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2648, -448 )
 animation = "float_star"
-frame = 3
+frame = 6
 
 [node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 752, -352 )
 animation = "float_star"
-frame = 3
+frame = 6
 
 [node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2320, -352 )

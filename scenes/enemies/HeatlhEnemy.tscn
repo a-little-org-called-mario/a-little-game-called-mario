@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1024, 600 )
 
-[node name="HeatlhEnemy" instance=ExtResource( 2 )]
+[node name="HealthEnemy" instance=ExtResource( 2 )]
 collision_layer = 0
 collision_mask = 256
 script = ExtResource( 1 )

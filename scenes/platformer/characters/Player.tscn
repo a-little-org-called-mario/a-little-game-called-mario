@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -471,9 +471,6 @@ angle_random = 1.0
 scale_amount = 0.75
 color = Color( 1, 1, 1, 0.784314 )
 script = ExtResource( 1 )
-
-[node name="BlockBuilder" type="Node" parent="."]
-script = ExtResource( 10 )
 
 [node name="BusCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )

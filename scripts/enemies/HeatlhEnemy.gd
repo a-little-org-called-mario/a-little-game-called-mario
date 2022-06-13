@@ -31,7 +31,6 @@ func h_e_move(delta):
 # when attacked
 func kill(attacker, damage = 1):
 	if alive:
-		emit_signal("health_change", health, health - damage)
 		health -= damage
 		flashTime = 2
 		if health <= 0:

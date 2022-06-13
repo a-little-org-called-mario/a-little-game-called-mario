@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/enemies/HeatlhEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/enemies/ombsti.png" type="Texture" id=2]
@@ -7,7 +7,11 @@
 [ext_resource path="res://sprites/enemies/ombsti_bomb_small.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 9, 13 )
+extents = Vector2( 18, 26 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 48 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
@@ -65,12 +69,13 @@ region = Rect2( 320, 48, 64, 48 )
 atlas = ExtResource( 2 )
 region = Rect2( 384, 48, 64, 48 )
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 48 )
-
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "throw",
@@ -80,18 +85,17 @@ animations = [ {
 "loop": true,
 "name": "celebrate",
 "speed": 10.0
-}, {
-"frames": [ SubResource( 1 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 5, 11 )
+extents = Vector2( 10, 22 )
+
+[sub_resource type="Animation" id=23]
+resource_name = "celebrate"
 
 [sub_resource type="Animation" id=20]
 resource_name = "idle"
+length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
 tracks/0/interp = 1
@@ -104,19 +108,17 @@ tracks/0/keys = {
 "update": 1,
 "values": [ "idle" ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
+tracks/1/type = "value"
+tracks/1/path = NodePath("HeldSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "start_throw"
-} ]
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=17]
@@ -164,6 +166,30 @@ tracks/2/keys = {
 "method": "set_idle"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("HeldSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.05, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HeldSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -28, -18 ), Vector2( -30, -20 ) ]
+}
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 5 )
@@ -180,23 +206,23 @@ animations = [ {
 [node name="Ombsti" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 thrownItem = ExtResource( 4 )
-numberThrown = 3
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 0, -12 )
+position = Vector2( 0, -24 )
 shape = SubResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -48 )
 frames = SubResource( 2 )
 animation = "idle"
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 0, -11 )
+position = Vector2( 0, -22 )
 shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 autoplay = "idle"
+anims/celebrate = SubResource( 23 )
 anims/idle = SubResource( 20 )
 anims/throw = SubResource( 17 )
 
@@ -204,5 +230,8 @@ anims/throw = SubResource( 17 )
 position = Vector2( 26, -34 )
 
 [node name="HeldSprite" type="AnimatedSprite" parent="." index="8"]
+visible = false
+position = Vector2( -28, -18 )
+scale = Vector2( 2, 2 )
 frames = SubResource( 22 )
 animation = "normal"

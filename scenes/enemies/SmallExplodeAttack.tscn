@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://audio/sfx/effects/explode_small.wav" type="AudioStream" id=1]
 [ext_resource path="res://sprites/projectiles/ombsti_bomb.png" type="Texture" id=2]
+[ext_resource path="res://scripts/enemies/SetDamage.gd" type="Script" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -115,6 +116,8 @@ tracks/3/keys = {
 scale = Vector2( 2, 2 )
 collision_layer = 16
 collision_mask = 0
+script = ExtResource( 3 )
+damage = 2
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 12 )

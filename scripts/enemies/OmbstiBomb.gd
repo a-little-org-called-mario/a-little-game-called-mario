@@ -6,7 +6,7 @@ const GRAV = 20
 export var bombType = "normal"
 export(PackedScene) var exploScene
 
-var velocity = Vector2(200, -600)
+var velocity = Vector2(0, 0)
 
 var direction = 1
 
@@ -14,7 +14,7 @@ onready var _sprite = $Sprite
 
 
 func _physics_process(delta):
-	_sprite.scale.x = direction
+	scale.y = direction
 	_sprite.rotation_degrees += (velocity.x / 20)
 	
 	velocity.y += GRAV

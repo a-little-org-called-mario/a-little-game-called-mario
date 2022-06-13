@@ -106,8 +106,8 @@ position = Vector2( 640, 208 )
 [node name="DepthBlob3" parent="Enemies" instance=ExtResource( 6 )]
 position = Vector2( 816, -144 )
 
-[node name="Ombsti" parent="Enemies" groups=["enemy"] instance=ExtResource( 13 )]
-position = Vector2( -744, 160 )
+[node name="Ombsti" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( -736, 160 )
 alive = true
 
 [node name="Objects" type="Node" parent="."]
@@ -148,11 +148,10 @@ position = Vector2( 312, 0 )
 
 [node name="BasicDecoration" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1168, -288 )
-frame = 3
 
 [node name="BasicDecoration6" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1392, -384 )
-frame = 2
+frame = 0
 
 [node name="BasicDecoration8" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1872, -352 )
@@ -172,22 +171,22 @@ frame = 0
 [node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 104, 8 )
 animation = "float_star"
-frame = 6
+frame = 0
 
 [node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 784, 112 )
 animation = "float_star"
-frame = 6
+frame = 0
 
 [node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2648, -448 )
 animation = "float_star"
-frame = 6
+frame = 0
 
 [node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 752, -352 )
 animation = "float_star"
-frame = 6
+frame = 0
 
 [node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2320, -352 )
@@ -196,6 +195,7 @@ frame = 0
 
 [node name="BasicDecoration7" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1120, -416 )
+frame = 4
 
 [node name="BasicDecoration2" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1328, -224 )

@@ -33,8 +33,14 @@ func kill(attacker, damage = 1):
 	if alive:
 		health -= damage
 		flashTime = 2
+		hurt()
 		if health <= 0:
 			no_health(attacker)
+
+
+# when this enemy is attacked
+func hurt():
+	pass
 
 
 # when hp drops to 0 or below

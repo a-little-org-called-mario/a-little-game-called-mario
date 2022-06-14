@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/enemies/HeatlhEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/enemies/ombsti.png" type="Texture" id=2]
 [ext_resource path="res://scripts/enemies/Ombsti.gd" type="Script" id=3]
 [ext_resource path="res://scenes/enemies/OmbstiBomb.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sprites/enemies/ombsti_bomb_small.png" type="Texture" id=5]
+[ext_resource path="res://audio/sfx/enemies/generic_hit.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 18, 26 )
@@ -12,6 +13,14 @@ extents = Vector2( 18, 26 )
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 48, 64, 48 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
@@ -61,14 +70,6 @@ region = Rect2( 704, 0, 64, 48 )
 atlas = ExtResource( 2 )
 region = Rect2( 768, 0, 64, 48 )
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 2 )
-region = Rect2( 320, 48, 64, 48 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 2 )
-region = Rect2( 384, 48, 64, 48 )
-
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ SubResource( 1 ) ],
@@ -76,15 +77,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
-"loop": true,
-"name": "throw",
-"speed": 20.0
-}, {
 "frames": [ SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
 "name": "celebrate",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "throw",
+"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -261,3 +262,8 @@ position = Vector2( -28, -18 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 22 )
 animation = "normal"
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource( 6 )
+volume_db = -6.0
+bus = "sfx"

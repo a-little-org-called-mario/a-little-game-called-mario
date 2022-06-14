@@ -14,6 +14,7 @@ export var delay = 70
 
 onready var _ani_play = $AnimationPlayer
 onready var _thr_os = $ThrownOffset
+onready var _hit = $HitSFX
 
 
 func _enter_tree():
@@ -77,4 +78,7 @@ func _on_attacked(enemyName):
 		_ani_play.play("celebrate")
 		delayTimer = delay / 2
 
+
+func hurt():
+	_hit.play()
 

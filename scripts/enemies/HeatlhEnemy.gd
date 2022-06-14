@@ -34,8 +34,8 @@ func kill(attacker, damage = 1):
 		health -= damage
 		flashTime = 2
 		hurt()
-		if health <= 0:
-			no_health(attacker)
+	if health <= 0:
+		no_health(attacker)
 
 
 # when this enemy is attacked

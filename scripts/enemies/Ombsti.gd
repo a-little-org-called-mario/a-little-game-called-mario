@@ -6,6 +6,7 @@ var playerLocation = Vector2(0, 0)
 var delayTimer = 0
 
 export(PackedScene) var thrownItem
+export(PackedScene) var deathScene
 export var heldItem = "bomb"
 export var numberThrown = 2
 export var veloMin = Vector2(150, -250)
@@ -15,6 +16,7 @@ export var delay = 70
 onready var _ani_play = $AnimationPlayer
 onready var _thr_os = $ThrownOffset
 onready var _hit = $HitSFX
+onready var _hitbox_col = $Hitbox/Collision
 
 
 func _enter_tree():
@@ -45,7 +47,6 @@ func set_direction():
 
 
 func check_player():
-	pass
 	for i in _act_area.get_overlapping_bodies():
 		if i is Player:
 			playerLocation = i.position
@@ -81,4 +82,12 @@ func _on_attacked(enemyName):
 
 func hurt():
 	_hit.play()
+
+
+func _handle_dying(killer):
+	_hitbox_col.set_deferred("disabled", true)
+	var onDeath = deathScene.instance()
+	get_parent().add_child(onDeath)
+	onDeath.global_position.x = global_position.x
+	onDeath.global_position.y = global_position.y - 24
 

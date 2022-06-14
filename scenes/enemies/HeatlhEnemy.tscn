@@ -23,14 +23,14 @@ visible = false
 collision_layer = 0
 collision_mask = 64
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveArea" index="0"]
+[node name="Collision" type="CollisionShape2D" parent="ActiveArea" index="0"]
 shape = SubResource( 1 )
 
 [node name="Hitbox" type="KinematicBody2D" parent="." index="5"]
 collision_layer = 16
 collision_mask = 66
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+[node name="Collision" type="CollisionShape2D" parent="Hitbox" index="0"]
 
 [connection signal="body_entered" from="ActiveArea" to="." method="_on_ActiveArea_body_entered"]
 [connection signal="body_exited" from="ActiveArea" to="." method="_on_ActiveArea_body_exited"]

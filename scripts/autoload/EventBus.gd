@@ -18,6 +18,7 @@ signal star_collected(starname, again)
 signal enemy_hit_coin()
 signal enemy_hit_fireball()
 signal enemy_killed()
+signal player_attacked(enemy)
 signal player_spotted(spotted_by, player)
 
 # Levels

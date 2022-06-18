@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/sokoban/sokoban_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://audio/music/gassysokoban.mp3" type="AudioStream" id=2]
@@ -6,10 +6,25 @@
 [ext_resource path="res://scenes/sokoban/SokobanPlayer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/sokoban/SokobanTouch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/title/Background.gd" type="Script" id=7]
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=8]
 
 [node name="SokobanLevel" type="Node2D"]
 script = ExtResource( 3 )
 total_boxes = 6
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -433, -225 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Ground" type="TileMap" parent="." groups=["ground"]]
 tile_set = ExtResource( 1 )

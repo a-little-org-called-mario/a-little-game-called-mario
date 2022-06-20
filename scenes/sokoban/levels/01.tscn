@@ -38,12 +38,10 @@ __meta__ = {
 }
 
 [node name="Boxes" type="TileMap" parent="." groups=["boxes"]]
-scale = Vector2( 1.28, 1.28 )
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 50, 50 )
 collision_layer = 2
 format = 1
-tile_data = PoolIntArray( 131075, 8, 0, 262148, 8, 0, 393217, 8, 0, 393219, 8, 0, 393220, 8, 0, 393221, 8, 0 )
+tile_data = PoolIntArray( 131075, 0, 0, 262148, 0, 0, 393217, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0 )
 __meta__ = {
 "_edit_lock_": true
 }

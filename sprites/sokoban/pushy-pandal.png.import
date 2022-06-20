@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pushy-pandal.png-22117ae4729bff90af9a079a7702d3df.stex"
+path="res://.import/pushy-pandal.png-5f67924b475225c3629d41b46d2bab73.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pushy-pandal.png"
-dest_files=[ "res://.import/pushy-pandal.png-22117ae4729bff90af9a079a7702d3df.stex" ]
+source_file="res://sprites/sokoban/pushy-pandal.png"
+dest_files=[ "res://.import/pushy-pandal.png-5f67924b475225c3629d41b46d2bab73.stex" ]
 
 [params]
 

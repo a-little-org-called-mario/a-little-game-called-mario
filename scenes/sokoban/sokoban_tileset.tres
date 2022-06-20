@@ -1,10 +1,6 @@
-[gd_resource type="TileSet" load_steps=6 format=2]
+[gd_resource type="TileSet" load_steps=4 format=2]
 
-[ext_resource path="res://sprites/box.png" type="Texture" id=3]
 [ext_resource path="res://sprites/Sokoban tileset.png" type="Texture" id=5]
-
-[sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 0, 0, 50, 0, 50, 50, 0, 50 )
@@ -13,27 +9,6 @@ points = PoolVector2Array( 0, 0, 50, 0, 50, 50, 0, 50 )
 points = PoolVector2Array( 50, 50, 0, 50, 0, 0, 50, 0 )
 
 [resource]
-0/name = "Box"
-0/texture = ExtResource( 3 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 64, 64 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 3 )
-0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 3 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-0/z_index = 0
 5/name = "Wall"
 5/texture = ExtResource( 5 )
 5/tex_offset = Vector2( 0, 0 )

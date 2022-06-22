@@ -37,6 +37,8 @@ animations = [ {
 } ]
 
 [node name="SokobanPlayer" type="KinematicBody2D"]
+collision_layer = 64
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -46,8 +46,6 @@ collision_mask = 0
 format = 1
 
 [node name="SokobanPlayer" parent="Grid" instance=ExtResource( 5 )]
-collision_layer = 0
-collision_mask = 2
 
 [node name="SokobanTouch" parent="." instance=ExtResource( 6 )]
 visible = false

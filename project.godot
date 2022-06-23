@@ -214,7 +214,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/sokoban/SokobanLevel.gd"
 }, {
-"base": "Node2D",
+"base": "KinematicBody2D",
 "class": "SokobanPlayer",
 "language": "GDScript",
 "path": "res://scenes/sokoban/SokobanPlayer.gd"

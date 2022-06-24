@@ -4,6 +4,8 @@ extends KinematicBody2D
 # This signal is emited from Shooter.gd
 #warning-ignore: UNUSED_SIGNAL
 signal shooting
+signal crouched
+signal uncrouched
 
 const MAXSPEED = 350
 const CROUCH_MAXSPEED = MAXSPEED / 3
@@ -207,6 +209,7 @@ func crouch():
 	set_hitbox_crouching(collision, original_collision_extents)
 	set_hitbox_crouching(hitbox_collision, original_hitbox_extents)
 	squash()
+	emit_signal("crouched")
 
 
 func uncrouch():
@@ -214,6 +217,7 @@ func uncrouch():
 	set_hitbox_uncrouch(collision, original_collision_extents)
 	set_hitbox_uncrouch(hitbox_collision, original_hitbox_extents)
 	unsquash()
+	emit_signal("uncrouched")
 
 
 func set_hitbox_crouching(col, original_extents):

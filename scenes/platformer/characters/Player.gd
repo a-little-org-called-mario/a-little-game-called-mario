@@ -6,6 +6,7 @@ extends KinematicBody2D
 signal shooting
 
 const MAXSPEED = 350
+const CROUCH_MAXSPEED = MAXSPEED / 3
 const JUMPFORCE = 1100
 const MAXACCEL = 50
 const MINACCEL = 0.25 * MAXACCEL
@@ -71,7 +72,7 @@ func _exit_tree():
 
 func _physics_process(delta: float) -> void:
 	# set these each loop in case of changes in gravity or acceleration modifiers
-	x_motion.max_speed = MAXSPEED
+	x_motion.max_speed = MAXSPEED if not crouching else CROUCH_MAXSPEED
 	x_motion.max_accel = MAXACCEL
 	y_motion.set_axis(gravity.direction)
 	y_motion.max_accel = gravity.strength

@@ -5,6 +5,9 @@
 [ext_resource path="res://scenes/sokoban/SokobanGassyRandal.gd" type="Script" id=3]
 [ext_resource path="res://sprites/sokoban/pushy-pandal.png" type="Texture" id=4]
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 32, 32 )
+
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 64, 64 )
@@ -33,18 +36,19 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 32, 32 )
-
-[node name="SokobanPlayer" type="Node2D"]
+[node name="SokobanPlayer" type="KinematicBody2D"]
+collision_layer = 64
+collision_mask = 2
 script = ExtResource( 2 )
 
-[node name="GassyRandal" type="KinematicBody2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
+
+[node name="GassyRandal" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
 [node name="RandalCloud" type="AnimatedSprite" parent="GassyRandal"]
 frames = SubResource( 6 )
-frame = 3
 speed_scale = 1.25
 playing = true
 
@@ -64,9 +68,6 @@ region_enabled = true
 region_rect = Rect2( 0, 64, 64, 64 )
 region_filter_clip = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GassyRandal"]
-shape = SubResource( 7 )
-
 [node name="BlinkTimer" type="Timer" parent="GassyRandal"]
 wait_time = 1.558
 one_shot = true
@@ -75,10 +76,6 @@ autostart = true
 [node name="OpenTimer" type="Timer" parent="GassyRandal"]
 wait_time = 0.065
 one_shot = true
-
-[node name="MovementRaycast" type="RayCast2D" parent="."]
-cast_to = Vector2( 64, 0 )
-collision_mask = 2
 
 [connection signal="timeout" from="GassyRandal/BlinkTimer" to="GassyRandal" method="_on_BlinkTimer_timeout"]
 [connection signal="timeout" from="GassyRandal/OpenTimer" to="GassyRandal" method="_on_OpenTimer_timeout"]

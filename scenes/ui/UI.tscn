@@ -264,7 +264,7 @@ SHIFT TO [wave amp=50 freq=2]SPRINT[/wave]
 
 SPACE TO [wave amp=50 freq=2]JUMP[/wave]
 
-CONTROL/Z TO [wave amp=50 freq=2]SHOOT[/wave]
+CONTROL/Z/O TO [wave amp=50 freq=2]SHOOT[/wave]
 
 B TO[wave amp=50 freq=2] FIREBALL [/wave]
 
@@ -277,7 +277,7 @@ SHIFT TO SPRINT
 
 SPACE TO JUMP
 
-CONTROL/Z TO SHOOT
+CONTROL/Z/O TO SHOOT
 
 B TO FIREBALL 
 

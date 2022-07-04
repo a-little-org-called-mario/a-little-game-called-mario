@@ -22,22 +22,31 @@ static func as_json(path: String) -> Dictionary:
 	file.close()
 	return parse_json(text)
 
-static func _getFilePathsFromImport( path: String, extension1: String, extension2: String = "null"):
+
+static func _getFilePathsFromImport(path: String, extension1: String, extension2: String = "null"):
 	var dir := Directory.new()
 	var foundFiles := []
 	if dir.open(path) == OK:
 		dir.list_dir_begin()
 		var filename := dir.get_next()
 		while filename != "":
-			if filename != "." and filename != ".." and !dir.current_is_dir() and (filename.ends_with(extension1 + ".import") or filename.ends_with(extension2 + ".import")):
+			if (
+				filename != "."
+				and filename != ".."
+				and !dir.current_is_dir()
+				and (
+					filename.ends_with(extension1 + ".import")
+					or filename.ends_with(extension2 + ".import")
+				)
+			):
 				foundFiles.append(("%s/%s" % [path, filename]).rstrip(".import"))
 			filename = dir.get_next()
 		dir.list_dir_end()
 	else:
 		return false
-		
+
 	if len(foundFiles) < 1:
 		return false
-		
+
 	else:
 		return foundFiles

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sorer_dash.wav-277680d0c7a2eb7ef6d56a0a54466349.sample"
+
+[deps]
+
+source_file="res://audio/sfx/sorer_dash.wav"
+dest_files=[ "res://.import/sorer_dash.wav-277680d0c7a2eb7ef6d56a0a54466349.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

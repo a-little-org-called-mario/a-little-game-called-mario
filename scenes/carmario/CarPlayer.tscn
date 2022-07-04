@@ -367,6 +367,7 @@ tracks/1/keys = {
 }
 
 [node name="Cario" type="KinematicBody2D" groups=["Player"]]
+collision_layer = 64
 collision_mask = 30
 script = ExtResource( 2 )
 

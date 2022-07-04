@@ -111,7 +111,7 @@ tracks/3/keys = {
 
 [node name="LittlestMario" type="KinematicBody2D" groups=["enemy"]]
 collision_layer = 8
-collision_mask = 11
+collision_mask = 74
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

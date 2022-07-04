@@ -145,6 +145,7 @@ tracks/3/keys = {
 position = Vector2( 608, 480 )
 scale = Vector2( 2, 2 )
 collision_layer = 2
+collision_mask = 64
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -154,6 +155,7 @@ hframes = 2
 [node name="Ray" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, -16 )
+collision_mask = 64
 
 [node name="ExtendedCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )

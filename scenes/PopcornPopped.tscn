@@ -34,7 +34,7 @@ scale_curve = SubResource( 6 )
 color_ramp = SubResource( 4 )
 
 [node name="PopcornPopped" type="RigidBody2D"]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 74
 gravity_scale = 5.0
 contacts_reported = 5
@@ -50,7 +50,6 @@ scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-emitting = false
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0

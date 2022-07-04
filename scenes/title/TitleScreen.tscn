@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/title/ContributorsLabel.gd" type="Script" id=6]
 [ext_resource path="res://scripts/Audio.gd" type="Script" id=7]
 [ext_resource path="res://sprites/title_sprites/title_mario.png" type="Texture" id=8]
+[ext_resource path="res://audio/sfx/woem.wav" type="AudioStream" id=9]
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/TitleScreen.gd" type="Script" id=15]
@@ -212,6 +213,11 @@ anims/RESET = SubResource( 7 )
 position = Vector2( 2, 6.66666 )
 scale = Vector2( 3, 3 )
 stream = ExtResource( 5 )
+
+[node name="Woem" type="AudioStreamPlayer2D" parent="VBoxContainer/IdleMario"]
+position = Vector2( 2, 6.66666 )
+scale = Vector2( 3, 3 )
+stream = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_left = 117.0

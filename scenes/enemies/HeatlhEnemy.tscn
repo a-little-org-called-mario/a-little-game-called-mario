@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/enemies/HeatlhEnemy.gd" type="Script" id=1]
+[ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1024, 600 )
+
+[node name="HealthEnemy" instance=ExtResource( 2 )]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource( 1 )
+alive = false
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2( 2, 2 )
+
+[node name="SquishParticles" parent="." index="3"]
+visible = false
+
+[node name="ActiveArea" type="Area2D" parent="." index="4"]
+visible = false
+collision_layer = 0
+collision_mask = 64
+
+[node name="Collision" type="CollisionShape2D" parent="ActiveArea" index="0"]
+shape = SubResource( 1 )
+
+[node name="Hitbox" type="KinematicBody2D" parent="." index="5"]
+collision_layer = 16
+collision_mask = 66
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox" index="0"]
+
+[connection signal="body_entered" from="ActiveArea" to="." method="_on_ActiveArea_body_entered"]
+[connection signal="body_exited" from="ActiveArea" to="." method="_on_ActiveArea_body_exited"]

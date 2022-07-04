@@ -22,7 +22,7 @@ script = ExtResource( 2 )
 position = Vector2( 8, 456 )
 scale = Vector2( 1.5, 1.5 )
 normal = SubResource( 1 )
-action = "ui_left"
+action = "left"
 visibility_mode = 1
 
 [node name="Right" type="TouchScreenButton" parent="."]
@@ -30,7 +30,7 @@ position = Vector2( 224, 528 )
 rotation = 3.14159
 scale = Vector2( 1.5, 1.5 )
 normal = SubResource( 1 )
-action = "ui_right"
+action = "right"
 visibility_mode = 1
 
 [node name="Up" type="TouchScreenButton" parent="."]
@@ -38,14 +38,14 @@ position = Vector2( 152, 392 )
 rotation = 1.5708
 scale = Vector2( 1.5, 1.5 )
 normal = SubResource( 1 )
-action = "ui_up"
+action = "up"
 visibility_mode = 1
 
 [node name="Exit" type="TouchScreenButton" parent="."]
 position = Vector2( 16, 16 )
 scale = Vector2( 1.5, 1.5 )
 normal = SubResource( 5 )
-action = "ui_cancel"
+action = "pause"
 visibility_mode = 1
 
 [node name="Undo" type="TouchScreenButton" parent="."]
@@ -60,5 +60,5 @@ position = Vector2( 80, 592 )
 rotation = -1.5708
 scale = Vector2( 1.5, 1.5 )
 normal = SubResource( 1 )
-action = "ui_down"
+action = "down"
 visibility_mode = 1

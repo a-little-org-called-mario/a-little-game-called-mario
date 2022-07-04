@@ -91,8 +91,8 @@ tracks/0/keys = {
 }
 
 [node name="WallMech" type="KinematicBody2D" groups=["enemy"]]
-collision_layer = 8
-collision_mask = 66
+collision_layer = 0
+collision_mask = 322
 script = ExtResource( 3 )
 bullet_scene = ExtResource( 2 )
 muzzle_flash_scene = ExtResource( 4 )

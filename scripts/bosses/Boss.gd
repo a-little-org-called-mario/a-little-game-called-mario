@@ -7,12 +7,14 @@ export var phase = 0
 export var direction = -1
 
 var coinScene = preload("res://scenes/Coin/FallingCoin.tscn")
+var popcornScene = preload("res://scenes/PopcornKernel.tscn")
 
 var attackerName = ""
 var maxHealth = 100
 var flashTime = 0
 var attackTimer = 0
 var canChangePhase = false
+var startedBar = false
 onready var _boss_bar = $BossBar
 
 # probably not neeeded
@@ -25,7 +27,8 @@ signal display_warning(id, time)
 
 
 func _ready():
-	emit_signal("set_health", health)
+	if active:
+		emit_signal("set_health", health)
 	set_collide_layers()
 	ready_animation()
 	maxHealth = health
@@ -45,12 +48,13 @@ func move(delta):
 
 # when attacked
 func kill(attacker, damage = 1):
-	emit_signal("health_change", health, health - damage)
-	health -= damage
-	attackerName = attacker
-	flashTime = 2
-	if health <= 0:
-		no_health()
+	if active:
+		emit_signal("health_change", health, health - damage)
+		health -= damage
+		attackerName = attacker
+		flashTime = 2
+		if health <= 0:
+			no_health()
 
 
 # when hp drops to 0 or below
@@ -110,6 +114,17 @@ func spawn_coin(offset = Vector2(0, 0), selfRelative = true, value = 1):
 	else:
 		coin.global_position = offset
 
+# instance the popcorn (not yummy)
+func spawn_popcorn(offset = Vector2(0, 0), selfRelative = false, number = 1):
+	for i in range(number):
+		var pop = popcornScene.instance()
+		get_parent().add_child(pop)
+		if selfRelative:
+			pop.global_position = global_position + offset
+		else:
+			pop.global_position = offset
+
+
 
 func small_shake():
 	EventBus.emit_signal("small_screen_shake")
@@ -123,4 +138,6 @@ func set_active():
 	active = true
 	visible = true
 	_boss_bar.change_visible(true)
+	if not startedBar:
+		emit_signal("set_health", health)
 

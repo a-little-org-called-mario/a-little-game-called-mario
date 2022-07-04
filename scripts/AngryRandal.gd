@@ -2,8 +2,6 @@
 
 extends "res://scripts/GassyRandal.gd"
 
-onready var hitArea = $HitArea
-
 export var moveDuration = 2
 export var waitTimeBetweenSwoops = 20
 
@@ -17,7 +15,6 @@ var swoopTo := []
 func _ready():
 	initSwoopTimer()
 	initSwoopTargetLocations()
-	initCollisionDetection()
 
 
 func initSwoopTimer() -> void:
@@ -73,16 +70,3 @@ func stopSwooping() -> void:
 func randalVibe():
 	if not swooping:
 		.randalVibe()
-
-
-func initCollisionDetection() -> void:
-	$HitArea.connect("body_entered", self, "_on_body_entered")
-
-
-func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
-		call_deferred("hitPlayer", body)
-
-
-func hitPlayer(body: Node2D) -> void:
-	HeartInventoryHandle.change_hearts_on(body, -1)

@@ -35,6 +35,7 @@ animations = [ {
 radius = 30.0
 
 [node name="DepthBlob" instance=ExtResource( 1 )]
+collision_layer = 0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="0"]

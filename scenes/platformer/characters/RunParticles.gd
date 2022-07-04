@@ -1,7 +1,12 @@
 extends CPUParticles2D
 
 
+export var running_amount: int = 6
+export var crouch_amount: int = 2
+
+
 const EMISSION_THRESHOLD: float = 50.0
+
 
 onready var player: Player = owner
 
@@ -14,3 +19,10 @@ func reset() -> void:
 	emitting = false
 	restart()
 
+
+func _on_Player_crouched():
+	self.amount = crouch_amount
+
+
+func _on_Player_uncrouched():
+	self.amount = running_amount

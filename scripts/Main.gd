@@ -11,6 +11,9 @@ onready var level: Node = $TileMap
 onready var bgm: AudioStreamPlayer = $Audio/BGM
 onready var defaultBGMStream: AudioStream = bgm.stream.duplicate()
 
+onready var inventory: Resource = preload("res://scripts/resources/PlayerInventory.tres")
+onready var reset_inventory: Resource = inventory.duplicate()
+
 var entering_portal: bool = false
 
 
@@ -113,17 +116,17 @@ func _finish_level(next_level: PackedScene = null) -> void:
 		var idx: int = level.get_index() - 1
 		remove_child(level)
 		add_child_below_node(get_child(idx), new_level)
-
 	# Do not forget to hook the new portals
 	_hook_portals()
-
+	#Update reset state of inventory
+	reset_inventory = inventory.duplicate()
 	#Removing instructions
 	$UI/UI/Instructions.visible = false
-
 	# Reset entering portal state
 	entering_portal = false
 	EventBus.emit_signal("level_started", "")
 
 
 func _restart_level() -> void:
+	inventory.reset_to(reset_inventory)
 	_finish_level(level_scene)

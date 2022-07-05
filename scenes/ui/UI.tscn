@@ -369,6 +369,18 @@ text = "YOU DIED"
 fit_content_height = true
 scroll_active = false
 
+[node name="SkipLabel" type="Label" parent="UI/PlayerDiedPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -516.0
+margin_top = -49.0
+margin_right = 516.0
+margin_bottom = -33.0
+text = "(space or click to skip)"
+align = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PlayerDiedPanel"]
 anims/Appear = SubResource( 1 )
 anims/RESET = SubResource( 2 )

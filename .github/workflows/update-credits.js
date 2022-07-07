@@ -13,11 +13,26 @@ module.exports = async (github, context) => {
     if (response.data.length == 0) {
       break;
     }
-    for (const contributor of response.data) {
-      if (contributor.type == 'User') {
-        names += contributor.login + '\n';
-      }
-    }
+
+    const nameStrings = await Promise.all(
+      response.data
+        .filter(contributor => contributor.type === 'User')
+        .map(async contributor => {
+          const res = await github.users.getByUsername({
+            username: contributor.login,
+          });
+
+          const { name, login } = res.data;
+
+          if (!name) {
+            return `${login}\n`;
+          }
+
+          return `${name} (${login})\n`;
+        })
+    );
+
+    nameStrings.forEach(name => names += name);
   }
 
   fs.writeFileSync('credits.txt', names);

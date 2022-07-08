@@ -6,16 +6,13 @@ export(int) var trail_length = 5
 var positions = []
 var height = 0.0
 
-onready var parent = get_parent()
 onready var player: Node2D = owner
-	
 
 func _ready():
-	randomize()
 	var result = FileUtils._getFilePathsFromImport(textures_directory, ".png", ".jpg")
 	var finalPath = result[randi() % result.size()]
 	if result:
-		ResourceLoader.load(finalPath, "Texture")
+		texture = ResourceLoader.load(finalPath, "Texture")
 
 func _process(_delta):
 	global_position = Vector2(0, 0)

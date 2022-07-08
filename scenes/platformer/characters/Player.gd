@@ -4,8 +4,11 @@ extends KinematicBody2D
 # This signal is emited from Shooter.gd
 #warning-ignore: UNUSED_SIGNAL
 signal shooting
+signal crouched
+signal uncrouched
 
 const MAXSPEED = 350
+const CROUCH_MAXSPEED = MAXSPEED / 3
 const JUMPFORCE = 1100
 const MAXACCEL = 50
 const MINACCEL = 0.25 * MAXACCEL
@@ -74,7 +77,7 @@ func _exit_tree():
 
 func _physics_process(delta: float) -> void:
 	# set these each loop in case of changes in gravity or acceleration modifiers
-	x_motion.max_speed = MAXSPEED
+	x_motion.max_speed = MAXSPEED if not crouching else CROUCH_MAXSPEED
 	x_motion.max_accel = MAXACCEL
 	y_motion.set_axis(gravity.direction)
 	y_motion.max_accel = gravity.strength
@@ -233,6 +236,7 @@ func crouch():
 	set_hitbox_crouching(collision, original_collision_extents)
 	set_hitbox_crouching(hitbox_collision, original_hitbox_extents)
 	squash()
+	emit_signal("crouched")
 
 
 func uncrouch():
@@ -240,6 +244,7 @@ func uncrouch():
 	set_hitbox_uncrouch(collision, original_collision_extents)
 	set_hitbox_uncrouch(hitbox_collision, original_hitbox_extents)
 	unsquash()
+	emit_signal("uncrouched")
 
 
 func set_hitbox_crouching(col, original_extents):

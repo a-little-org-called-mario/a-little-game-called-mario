@@ -6,7 +6,7 @@ const ASCEND_HEIGHT = 800
 
 var projScene = preload("res://scenes/enemies/Bullet.tscn")
 
-var projCount = 5
+var projCount = 4
 var doAscend = -1
 var doShoot = false
 var storePos = Vector2()

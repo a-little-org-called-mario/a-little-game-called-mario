@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/objects/LimitSetArea.gd" type="Script" id=1]
+
+[node name="LimitSetArea" type="Area2D"]
+collision_layer = 2
+collision_mask = 64
+monitorable = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Collision" type="CollisionShape2D" parent="."]

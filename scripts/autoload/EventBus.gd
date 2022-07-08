@@ -18,6 +18,7 @@ signal star_collected(starname, again)
 signal enemy_hit_coin()
 signal enemy_hit_fireball()
 signal enemy_killed()
+signal player_attacked(enemy)
 signal player_spotted(spotted_by, player)
 
 # Levels
@@ -51,6 +52,9 @@ signal cameraF_reset_camera()
 signal cameraF_set_following()
 signal cameraF_move_camera_to(x, y)
 signal cameraF_change_candidate(step_int)
+
+# Camera limits
+signal cameraL_enter_set_area(id)
 
 # Settings
 signal crt_filter_toggle(data)

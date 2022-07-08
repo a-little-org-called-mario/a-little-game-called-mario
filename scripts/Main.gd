@@ -124,7 +124,10 @@ func _finish_level(next_level: PackedScene = null) -> void:
 	$UI/UI/Instructions.visible = false
 	# Reset entering portal state
 	entering_portal = false
-	EventBus.emit_signal("level_started", "")
+	if new_level == hub:
+		EventBus.emit_signal("hub_entered")
+	else:
+		EventBus.emit_signal("level_started", "")
 
 
 func _restart_level() -> void:

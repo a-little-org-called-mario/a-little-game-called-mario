@@ -28,6 +28,10 @@ module.exports = async (github, context) => {
             return `${login}\n`;
           }
 
+          if (name.toLowerCase() === login.toLowerCase()) {
+            return `${name}\n`;
+          }
+
           return `${name} (${login})\n`;
         })
     );

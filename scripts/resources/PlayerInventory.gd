@@ -14,3 +14,12 @@ func reset() -> void:
 	has_flower = false
 	has_bus = false
 	stars = {}
+
+func reset_to(inventory: Resource):
+	EventBus.emit_signal("heart_changed", inventory.hearts-hearts, inventory.hearts)
+	EventBus.emit_signal("coin_collected", {"value": 0, "total": inventory.coins, "type": "coin"})
+	coins = inventory.coins
+	hearts = inventory.hearts
+	has_flower = inventory.has_flower
+	has_bus = inventory.has_bus
+	stars = inventory.stars

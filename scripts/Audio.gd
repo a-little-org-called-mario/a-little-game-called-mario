@@ -3,14 +3,14 @@ extends Node
 
 func _ready():
 	EventBus.connect("volume_changed", self, "_on_volume_change")
-	for bus in ["Master", "music", "sfx", "voice"]:
+	for bus in ["Main", "music", "sfx", "voice"]:
 		_on_volume_change(bus)
 
 
 func _on_volume_change(bus: String):
 	var volume: int = 0
 	match bus:
-		"Master":
+		"Main":
 			volume = Settings.volume_game
 		"music":
 			volume = Settings.volume_music

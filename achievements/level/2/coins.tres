@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource( 1 )
 description = "ACHIEVEMENT_COINS_LEVEL2"
-coinsRequired = 5
+coinsRequired = 8

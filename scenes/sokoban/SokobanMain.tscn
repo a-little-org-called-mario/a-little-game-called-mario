@@ -102,6 +102,7 @@ margin_left = 423.0
 margin_top = 441.0
 margin_right = 601.0
 margin_bottom = 493.0
+shortcut_in_tooltip = false
 shortcut = SubResource( 3 )
 text = "BACK TO MENU"
 redirect_scene = "res://scenes/title/TitleScreen.tscn"

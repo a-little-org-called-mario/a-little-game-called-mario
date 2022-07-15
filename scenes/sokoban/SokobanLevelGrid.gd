@@ -11,6 +11,14 @@ func _ready():
 		button.text = str(i+1)
 		button.redirect_scene = SOKOBAN_LEVEL_DIRECTORY + levels[i]
 		add_child(button)
+	self._focus_first_button()
+
+
+func _focus_first_button():
+	for child in get_children():
+		if child is Button:
+			child.grab_focus()
+			break
 
 
 static func list_sokoban_levels() -> Array:

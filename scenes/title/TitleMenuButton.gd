@@ -6,6 +6,7 @@ export (bool) var focused_by_default = false
 
 
 var selected_icon = self.icon
+var unselected_icon = ImageTexture.new()
 
 
 func _ready():
@@ -15,7 +16,12 @@ func _ready():
 	self.connect("focus_entered", self, "_on_focus_entered")
 	self.connect("focus_exited", self, "_on_focus_exited")
 	
-	self.icon = null
+	# Copy of image with transparent color
+	var img = selected_icon.get_data()
+	img.fill(Color(0,0,0,0))
+	unselected_icon.create_from_image(img)
+
+	self.icon = unselected_icon
 
 	if focused_by_default:
 		grab_focus()
@@ -30,4 +36,4 @@ func _on_focus_entered():
 
 
 func _on_focus_exited():
-	icon = null
+	icon = unselected_icon

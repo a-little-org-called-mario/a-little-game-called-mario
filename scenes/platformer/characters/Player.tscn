@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -18,8 +18,8 @@
 [ext_resource path="res://scripts/BouncyMoustache.gd" type="Script" id=16]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=17]
 [ext_resource path="res://sprites/fireball.png" type="Texture" id=18]
-[ext_resource path="res://audio/music/givehimagun.mp3" type="AudioStream" id=19]
-[ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=20]
+[ext_resource path="res://audio/sfx/bus/engine_drive_sound.wav" type="AudioStream" id=19]
+[ext_resource path="res://audio/sfx/bus/engine_idle_sound.wav" type="AudioStream" id=20]
 [ext_resource path="res://sprites/blunt.png" type="Texture" id=21]
 [ext_resource path="res://audio/sfx/toasty.wav" type="AudioStream" id=22]
 [ext_resource path="res://audio/sfx/jump.wav" type="AudioStream" id=23]

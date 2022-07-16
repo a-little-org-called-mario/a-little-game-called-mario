@@ -98,7 +98,7 @@ func _physics_process(delta: float) -> void:
 
 
 		# skids until a little before you're moving in the opposite direction to give a run up.
-		skidding_force = SKIDTHRESHOLD - (x_motion.max_speed * 1.2)
+		skidding_force = (SKIDTHRESHOLD * powerupspeed) - (x_motion.max_speed * 1.2)
 		jerk_modifier = 3
 		animationSpeed = 6
 	anim.playback_speed = animationSpeed
@@ -135,7 +135,7 @@ func _physics_process(delta: float) -> void:
 	if skidding:
 		anim.playAnim("Skid")
 	
-	$SkidSFX.volume_db = abs(x_motion.get_speed()) * 0.02
+	$SkidSFX.volume_db = clamp(abs(x_motion.get_speed()) * 0.02, 0, 10)
 	$SkidSFX.playing = skidding
 		
 	jump_buffer_timer -= delta

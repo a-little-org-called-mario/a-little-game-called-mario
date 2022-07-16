@@ -467,6 +467,7 @@ script = ExtResource( 1 )
 
 [node name="BusSprite" type="AnimatedSprite" parent="Pivot"]
 visible = false
+material = SubResource( 15 )
 position = Vector2( 0, 4 )
 scale = Vector2( 0.767105, 0.725 )
 frames = SubResource( 41 )

@@ -1,6 +1,7 @@
 extends AnimatedSprite
 
 export(NodePath) var collision_shape: NodePath
+export(NodePath) onready var hitbox_collision = get_node(hitbox_collision) as CollisionShape2D
 
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
@@ -44,6 +45,7 @@ func _activate_bus(active: bool) -> void:
 
 	# Collision
 	collision.disabled = !active
+	hitbox_collision.disabled = !active	
 	player.collision.disabled = active 
 	set_process(active)
 	inventory.has_bus = active # does nothing if already active.
@@ -69,12 +71,12 @@ func _set_state(newState):
 	if (newState == busState.RESTING):
 		animation = "standing"
 		playing = true
-		resting_sound.playing = true # When more state sounds are added that continuously should play
+		resting_sound.play(resting_sound.get_playback_position()) # When more state sounds are added that continuously should play
 		moving_sound.playing = false # make all the sounds a dictionary.
 	if (newState == busState.MOVING):
 		animation = "driving"
 		playing = true
-		moving_sound.playing = true
+		moving_sound.play(moving_sound.get_playback_position())
 		resting_sound.playing = false
 	state = newState
 

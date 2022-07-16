@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/engine_drive_sound.wav-57f5ee3e9a4a50fa326133b77a6d44b4.sample"
+
+[deps]
+
+source_file="res://audio/sfx/bus/engine_drive_sound.wav"
+dest_files=[ "res://.import/engine_drive_sound.wav-57f5ee3e9a4a50fa326133b77a6d44b4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -31,6 +31,9 @@
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
+
+[sub_resource type="RectangleShape2D" id=48]
+extents = Vector2( 56, 25 )
 
 [sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 0 ), 0.0, 2.49311, 0, 0, Vector2( 1, 1 ), 0.329092, 0.0, 0, 0 ]
@@ -272,6 +275,11 @@ collision_mask = 24
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 44 )
 
+[node name="BusCollisionShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 7 )
+shape = SubResource( 48 )
+disabled = true
+
 [node name="Trail" type="Line2D" parent="."]
 width = 30.0
 width_curve = SubResource( 11 )
@@ -466,6 +474,7 @@ animation = "standing"
 flip_h = true
 script = ExtResource( 11 )
 collision_shape = NodePath("../../BusCollision")
+hitbox_collision = NodePath("../../Hitbox/BusCollisionShape")
 
 [node name="Horn" type="AudioStreamPlayer" parent="Pivot/BusSprite"]
 stream = ExtResource( 22 )

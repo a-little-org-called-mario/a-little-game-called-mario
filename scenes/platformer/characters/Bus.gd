@@ -1,6 +1,7 @@
 extends AnimatedSprite
 
 export(NodePath) var collision_shape: NodePath
+export(NodePath) onready var hitbox_collision = get_node(hitbox_collision) as CollisionShape2D
 
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
 
@@ -44,6 +45,7 @@ func _activate_bus(active: bool) -> void:
 
 	# Collision
 	collision.disabled = !active
+	hitbox_collision.disabled = !active	
 	player.collision.disabled = active 
 	set_process(active)
 	inventory.has_bus = active # does nothing if already active.

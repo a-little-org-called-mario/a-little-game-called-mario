@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mario_hurt.wav-a9bab00f169f0b1a996954f4b85c0add.sample"
+
+[deps]
+
+source_file="res://audio/sfx/mario_hurt.wav"
+dest_files=[ "res://.import/mario_hurt.wav-a9bab00f169f0b1a996954f4b85c0add.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

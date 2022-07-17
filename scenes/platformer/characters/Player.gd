@@ -398,6 +398,8 @@ func _on_heart_change(delta: int, total: int):
 		flash_sprite()
 
 	if total <= 0:
+		if crouching:
+			uncrouch()
 		EventBus.emit_signal("player_died")
 
 

@@ -28,6 +28,7 @@
 [ext_resource path="res://audio/sfx/metal_scrape.wav" type="AudioStream" id=26]
 [ext_resource path="res://graphics/sprites/vfx/spark_star.png" type="Texture" id=27]
 [ext_resource path="res://scenes/platformer/characters/SkidParticles.gd" type="Script" id=28]
+[ext_resource path="res://audio/sfx/mario_hurt.wav" type="AudioStream" id=29]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
@@ -220,6 +221,14 @@ width = 128
 offsets = PoolRealArray( 0.471669, 1 )
 colors = PoolColorArray( 1, 0.54902, 0, 1, 0.946289, 0.107197, 0.107197, 0 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 175, 82 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 15 )
+region = Rect2( 175, 0, 175, 82 )
+
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 190, 80 )
@@ -236,32 +245,21 @@ region = Rect2( 380, 0, 190, 80 )
 atlas = ExtResource( 12 )
 region = Rect2( 570, 0, 190, 80 )
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 0, 175, 82 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 15 )
-region = Rect2( 175, 0, 175, 82 )
-
 [sub_resource type="SpriteFrames" id=41]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "driving",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "standing",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "driving",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 55, 24 )
-
-[sub_resource type="AudioStreamRandomPitch" id=14]
-random_pitch = 1.5
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
@@ -521,7 +519,7 @@ volume_db = -12.0
 bus = "sfx"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource( 14 )
+stream = ExtResource( 29 )
 
 [node name="SkidSFX" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0, 26 )

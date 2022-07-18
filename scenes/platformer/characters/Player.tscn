@@ -28,6 +28,7 @@
 [ext_resource path="res://audio/sfx/metal_scrape.wav" type="AudioStream" id=26]
 [ext_resource path="res://graphics/sprites/vfx/spark_star.png" type="Texture" id=27]
 [ext_resource path="res://scenes/platformer/characters/SkidParticles.gd" type="Script" id=28]
+[ext_resource path="res://audio/sfx/mario_hurt.wav" type="AudioStream" id=29]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
@@ -259,9 +260,6 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 55, 24 )
-
-[sub_resource type="AudioStreamRandomPitch" id=14]
-random_pitch = 1.5
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
@@ -521,7 +519,7 @@ volume_db = -12.0
 bus = "sfx"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource( 14 )
+stream = ExtResource( 29 )
 
 [node name="SkidSFX" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0, 26 )

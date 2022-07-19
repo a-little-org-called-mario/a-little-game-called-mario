@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://graphics/sprites/ballluigi.png" type="Texture" id=1]
 [ext_resource path="res://graphics/sprites/carmario/tollbox.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://audio/sfx/ball_omn.wav" type="AudioStream" id=5]
 [ext_resource path="res://audio/sfx/toll_paid.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/carmario/obstacles/Spill.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 54, 9.5 )
@@ -39,6 +40,57 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NoCoinsLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("NoCoinsLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "no_coins"
+tracks/0/type = "value"
+tracks/0/path = NodePath("NoCoinsLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("NoCoinsLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -100,6 +152,16 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 flip_h = true
 
+[node name="NoCoinsLabel" type="Label" parent="."]
+visible = false
+margin_left = -8.0
+margin_top = 32.0
+margin_right = 184.0
+margin_bottom = 48.0
+theme = ExtResource( 8 )
+custom_colors/font_color = Color( 0.819608, 0, 0, 1 )
+text = "Not enough coins"
+
 [node name="Barrier" type="ColorRect" parent="."]
 margin_left = -40.0
 margin_top = -30.0
@@ -120,6 +182,7 @@ stretch_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
+anims/no_coins = SubResource( 7 )
 anims/open = SubResource( 2 )
 
 [node name="PayZone" type="Area2D" parent="."]

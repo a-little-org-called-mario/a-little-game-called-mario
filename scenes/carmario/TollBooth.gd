@@ -29,6 +29,7 @@ func _payzone_entered(body, for_free:= false):
 				$Nope.play()
 			emit_signal("booth_passed")
 		else:
+			$AnimationPlayer.play("no_coins")
 			$Nope.play()
 
 func _out_of_view():

@@ -69,7 +69,7 @@ func load_data():
 
 	# emit any relevant signals
 	EventBus.emit_signal("crt_filter_toggle", crt_filter)
-	for bus in [ "Master", "music", "sfx", "voice" ]:
+	for bus in [ "Main", "music", "sfx", "voice" ]:
 		EventBus.emit_signal("volume_changed", bus);
 
 func set_to_default():

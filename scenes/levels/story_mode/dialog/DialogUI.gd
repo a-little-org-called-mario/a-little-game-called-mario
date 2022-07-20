@@ -103,6 +103,7 @@ func _set_dialog(to: Dialog):
 		if not condition:
 			return _set_dialog(null)
 	for button in _choice_container.get_children():
+		_choice_container.remove_child(button)
 		button.queue_free()
 	for choice in _dialog.choices:
 		var button := Button.new()

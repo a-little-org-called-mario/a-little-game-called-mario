@@ -220,16 +220,15 @@ scale = Vector2( 3, 3 )
 stream = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 329.0
+margin_left = 423.0
 margin_top = 258.0
-margin_right = 671.0
+margin_right = 577.0
 margin_bottom = 478.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="StartButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 94.0
-margin_right = 248.0
+margin_right = 154.0
 margin_bottom = 52.0
 text = "START GAME"
 redirect_scene = "res://scenes/Main.tscn"
@@ -237,36 +236,30 @@ focused_by_default = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
 margin_top = 56.0
-margin_right = 342.0
+margin_right = 154.0
 margin_bottom = 108.0
 custom_constants/separation = 46
 alignment = 1
 
-[node name="SokobanButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
-margin_right = 178.0
-margin_bottom = 52.0
-text = "SOKOBAN MODE"
-redirect_scene = "res://scenes/sokoban/SokobanMain.tscn"
-
 [node name="MarwingButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
-margin_left = 224.0
-margin_right = 342.0
+margin_left = 18.0
+margin_right = 136.0
 margin_bottom = 52.0
 text = "MARWING"
 redirect_scene = "res://scenes/marwing/levels/1-0.tscn"
 
 [node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 112.0
+margin_left = 18.0
 margin_top = 112.0
-margin_right = 230.0
+margin_right = 136.0
 margin_bottom = 164.0
 disabled = true
 text = "OPTIONS"
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 112.0
+margin_left = 18.0
 margin_top = 168.0
-margin_right = 230.0
+margin_right = 136.0
 margin_bottom = 220.0
 text = "CREDITS"
 redirect_scene = "res://scenes/Credits.tscn"

@@ -1,6 +1,6 @@
 extends GridContainer
 
-const SOKOBAN_LEVEL_DIRECTORY = "res://scenes/sokoban/levels/"
+export (String, DIR) var sokoban_level_directory
 export (PackedScene) var level_button: PackedScene
 
 
@@ -9,7 +9,7 @@ func _ready():
 	for i in range(len(levels)):
 		var button := level_button.instance()
 		button.text = str(i+1)
-		button.redirect_scene = SOKOBAN_LEVEL_DIRECTORY + levels[i]
+		button.redirect_scene = sokoban_level_directory + '/' + levels[i]
 		add_child(button)
 	self._focus_first_button()
 
@@ -21,10 +21,10 @@ func _focus_first_button():
 			break
 
 
-static func list_sokoban_levels() -> Array:
+func list_sokoban_levels() -> Array:
 	var levels := []
 	var dir := Directory.new()
-	if dir.open(SOKOBAN_LEVEL_DIRECTORY) == OK:
+	if dir.open(sokoban_level_directory) == OK:
 		dir.list_dir_begin(true)
 		var filename := dir.get_next()
 		while filename != "":

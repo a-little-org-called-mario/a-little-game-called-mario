@@ -220,16 +220,16 @@ scale = Vector2( 3, 3 )
 stream = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 117.0
+margin_left = 217.0
 margin_top = 258.0
-margin_right = 883.0
+margin_right = 783.0
 margin_bottom = 478.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="StartButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 306.0
-margin_right = 460.0
+margin_left = 206.0
+margin_right = 360.0
 margin_bottom = 52.0
 text = "START GAME"
 redirect_scene = "res://scenes/Main.tscn"
@@ -237,50 +237,43 @@ focused_by_default = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
 margin_top = 56.0
-margin_right = 766.0
+margin_right = 566.0
 margin_bottom = 108.0
 custom_constants/separation = 46
 alignment = 1
 
-[node name="DanceButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
-margin_right = 154.0
-margin_bottom = 52.0
-text = "DANCE MODE"
-redirect_scene = "res://scenes/levels/DDR_01/Level.tscn"
-
 [node name="SokobanButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
-margin_left = 200.0
-margin_right = 378.0
+margin_right = 178.0
 margin_bottom = 52.0
 text = "SOKOBAN MODE"
 redirect_scene = "res://scenes/sokoban/SokobanMain.tscn"
 
 [node name="FlappyMarioButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
-margin_left = 424.0
-margin_right = 602.0
+margin_left = 224.0
+margin_right = 402.0
 margin_bottom = 52.0
 text = "FLAPPY MARIO"
 redirect_scene = "res://scenes/levels/Flappy/Flappy01.tscn"
 
 [node name="MarwingButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
-margin_left = 648.0
-margin_right = 766.0
+margin_left = 448.0
+margin_right = 566.0
 margin_bottom = 52.0
 text = "MARWING"
 redirect_scene = "res://scenes/marwing/levels/1-0.tscn"
 
 [node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 324.0
+margin_left = 224.0
 margin_top = 112.0
-margin_right = 442.0
+margin_right = 342.0
 margin_bottom = 164.0
 disabled = true
 text = "OPTIONS"
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 324.0
+margin_left = 224.0
 margin_top = 168.0
-margin_right = 442.0
+margin_right = 342.0
 margin_bottom = 220.0
 text = "CREDITS"
 redirect_scene = "res://scenes/Credits.tscn"

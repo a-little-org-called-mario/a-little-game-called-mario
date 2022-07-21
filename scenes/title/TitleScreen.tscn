@@ -223,7 +223,7 @@ stream = ExtResource( 9 )
 margin_left = 423.0
 margin_top = 258.0
 margin_right = 577.0
-margin_bottom = 478.0
+margin_bottom = 426.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
@@ -237,37 +237,30 @@ focused_by_default = true
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
 margin_top = 56.0
 margin_right = 154.0
-margin_bottom = 108.0
+margin_bottom = 56.0
 custom_constants/separation = 46
 alignment = 1
 
-[node name="MarwingButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
-margin_left = 18.0
-margin_right = 136.0
-margin_bottom = 52.0
-text = "MARWING"
-redirect_scene = "res://scenes/marwing/levels/1-0.tscn"
-
 [node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 18.0
-margin_top = 112.0
+margin_top = 60.0
 margin_right = 136.0
-margin_bottom = 164.0
+margin_bottom = 112.0
 disabled = true
 text = "OPTIONS"
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 18.0
-margin_top = 168.0
+margin_top = 116.0
 margin_right = 136.0
-margin_bottom = 220.0
+margin_bottom = 168.0
 text = "CREDITS"
 redirect_scene = "res://scenes/Credits.tscn"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 482.0
+margin_top = 430.0
 margin_right = 1000.0
-margin_bottom = 602.0
+margin_bottom = 550.0
 alignment = 1
 
 [node name="SmolCreditsLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]

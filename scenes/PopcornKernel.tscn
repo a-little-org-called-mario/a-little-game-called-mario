@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/PopcornKernel.gd" type="Script" id=2]
 
 [sub_resource type="PhysicsMaterial" id=2]
-friction = 0.4
+friction = 0.0
 bounce = 0.8
 
 [sub_resource type="CircleShape2D" id=1]
@@ -14,6 +14,7 @@ collision_layer = 0
 collision_mask = 66
 physics_material_override = SubResource( 2 )
 gravity_scale = 5.0
+continuous_cd = 1
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

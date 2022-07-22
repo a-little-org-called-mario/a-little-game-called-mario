@@ -274,8 +274,8 @@ margin_left = 324.0
 margin_top = 112.0
 margin_right = 442.0
 margin_bottom = 164.0
-disabled = true
 text = "OPTIONS"
+redirect_scene = "res://scenes/ui/OptionsMenu.tscn"
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_left = 324.0

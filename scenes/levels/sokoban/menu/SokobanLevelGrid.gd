@@ -6,9 +6,9 @@ export (PackedScene) var level_button: PackedScene
 
 func _ready():
 	var levels := list_sokoban_levels()
-	for i in range(len(levels)):
+	for i in range(1, len(levels)):
 		var button := level_button.instance()
-		button.text = str(i+1)
+		button.text = str(i)
 		button.redirect_scene = sokoban_level_directory + '/' + levels[i]
 		add_child(button)
 	self._focus_first_button()

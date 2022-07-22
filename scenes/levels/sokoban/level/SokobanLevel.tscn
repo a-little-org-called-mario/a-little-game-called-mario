@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/levels/sokoban/level/SokobanTouch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://audio/music/gassysokoban.mp3" type="AudioStream" id=7]
 [ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/levels/sokoban/menu/SokobanMain.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/levels/sokoban/00_menu.tscn" type="PackedScene" id=9]
 
 [node name="SokobanLevel" type="Node2D"]
 script = ExtResource( 1 )

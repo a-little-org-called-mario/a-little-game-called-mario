@@ -212,12 +212,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "SokobanLevel",
 "language": "GDScript",
-"path": "res://scenes/sokoban/SokobanLevel.gd"
+"path": "res://scenes/levels/sokoban/level/SokobanLevel.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "SokobanPlayer",
 "language": "GDScript",
-"path": "res://scenes/sokoban/SokobanPlayer.gd"
+"path": "res://scenes/levels/sokoban/character/SokobanPlayer.gd"
 }, {
 "base": "Position2D",
 "class": "SpawnPoint",

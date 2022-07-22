@@ -1,11 +1,12 @@
 extends RigidBody2D
 class_name PlayerFlying
 
+signal game_over
+
 const ASCEND_FORCE = -200
 const MAX_ROTATION_UP = -30.0
 const MAX_ROTATION_DOWN = 90.0
 
-var GAMEOVER = preload("../../UI_flappy_gameover.tscn").instance()
 var died = false
 
 onready var _heart_handle = $HeartInventoryHandle
@@ -37,7 +38,8 @@ func crash() -> void:
 func _on_heart_change(_delta: int, total: int) -> void:
 	if total <= 0:
 		gameOver()
-	
+		_heart_handle.call_deferred("change_hearts", 3)
+
 func gameOver() -> void:
-	get_parent().add_child(GAMEOVER)
 	died = true
+	emit_signal("game_over")

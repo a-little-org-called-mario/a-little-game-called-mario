@@ -1,0 +1,227 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/ui/Themes/menuFontSettings.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/ui/OptionsMenu.gd" type="Script" id=2]
+[ext_resource path="res://scenes/title/Background.gd" type="Script" id=3]
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=4]
+
+[node name="OptionsMenu" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -433, -225 )
+texture = ExtResource( 4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="OptionsLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -185.0
+margin_right = 100.0
+margin_bottom = -105.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave amp=50 freq=2]OPTIONS[/wave]
+"
+text = "
+OPTIONS
+"
+scroll_active = false
+
+[node name="MainMenu" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.0
+margin_top = -94.0
+margin_right = 175.0
+margin_bottom = 94.0
+
+[node name="GFXLabel" type="RichTextLabel" parent="MainMenu"]
+margin_right = 450.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 450, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+GRAPHICS SETTINGS
+"
+scroll_active = false
+
+[node name="SFXLabel" type="RichTextLabel" parent="MainMenu"]
+margin_top = 64.0
+margin_right = 450.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 450, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+AUDIO SETTINGS
+"
+scroll_active = false
+
+[node name="TitleLabel" type="RichTextLabel" parent="MainMenu"]
+margin_top = 128.0
+margin_right = 450.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 450, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+BACK TO TITLE"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GFXMenu" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.0
+margin_top = -94.0
+margin_right = 325.0
+margin_bottom = 158.0
+
+[node name="BackLabel" type="RichTextLabel" parent="GFXMenu"]
+margin_right = 550.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+BACK TO MAIN
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CamLeanLabel" type="RichTextLabel" parent="GFXMenu"]
+margin_top = 64.0
+margin_right = 550.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+CAMERA LEAN: <  OFF  >
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShakeLabel" type="RichTextLabel" parent="GFXMenu"]
+margin_top = 128.0
+margin_right = 550.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+SCREEN SHAKE: ON
+"
+scroll_active = false
+
+[node name="CRTLabel" type="RichTextLabel" parent="GFXMenu"]
+margin_top = 192.0
+margin_right = 550.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+CRT FILTER: OFF
+"
+scroll_active = false
+
+[node name="SFXMenu" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.0
+margin_top = -94.0
+margin_right = 325.0
+margin_bottom = 222.0
+
+[node name="BackLabel" type="RichTextLabel" parent="SFXMenu"]
+margin_right = 550.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+BACK TO MAIN
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameVolLabel" type="RichTextLabel" parent="SFXMenu"]
+margin_top = 64.0
+margin_right = 550.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+GAME VOLUME: <  10  >
+"
+scroll_active = false
+
+[node name="MusicVolLabel" type="RichTextLabel" parent="SFXMenu"]
+margin_top = 128.0
+margin_right = 550.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+MUSIC VOLUME: <  10  >
+"
+scroll_active = false
+
+[node name="SFXVolLabel" type="RichTextLabel" parent="SFXMenu"]
+margin_top = 192.0
+margin_right = 550.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+SFX VOLUME: <  10  >
+"
+scroll_active = false
+
+[node name="VoiceVolLabel" type="RichTextLabel" parent="SFXMenu"]
+margin_top = 256.0
+margin_right = 550.0
+margin_bottom = 316.0
+rect_min_size = Vector2( 550, 60 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+text = "
+VOICE VOLUME: <  10  >
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

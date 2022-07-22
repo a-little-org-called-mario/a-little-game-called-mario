@@ -29,6 +29,6 @@ Button/styles/pressed = SubResource( 5 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 Label/constants/shadow_offset_x = 2
 Label/constants/shadow_offset_y = 2
-Label/fonts/font = null
+Label/fonts/font = ExtResource( 1 )
 RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 RichTextLabel/constants/shadow_offset_y = 3

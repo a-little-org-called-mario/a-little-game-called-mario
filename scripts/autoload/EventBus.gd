@@ -24,6 +24,8 @@ signal player_spotted(spotted_by, player)
 # Levels
 signal level_completed(data)
 signal level_started(name)
+signal level_changed(to)
+signal level_exited()
 signal hub_entered()
 signal restart_level()
 

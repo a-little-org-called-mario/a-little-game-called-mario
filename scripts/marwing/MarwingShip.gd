@@ -22,7 +22,7 @@ var invulnerable: bool = true;                                 # whether or not 
 
 # Projectile information
 export var projectile: PackedScene;
-onready var fallback_projectile: PackedScene = preload("res://scenes/marwing/projectiles/DefaultProj.tscn");
+onready var fallback_projectile: PackedScene = preload("res://scenes/levels/marwing/projectiles/DefaultProj.tscn");
 onready var fire_timer: Timer = get_node("FireTimer");
 var can_fire: bool = true;
 

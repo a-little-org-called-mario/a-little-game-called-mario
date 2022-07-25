@@ -54,7 +54,6 @@ playing = true
 modulate = Color( 1, 1, 1, 0.439216 )
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 6 )
-frame = 4
 speed_scale = 0.75
 playing = true
 

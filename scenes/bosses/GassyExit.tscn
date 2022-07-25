@@ -1,0 +1,113 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scripts/cutscene/GassyExit.gd" type="Script" id=1]
+[ext_resource path="res://sprites/gassy-randal.png" type="Texture" id=2]
+[ext_resource path="res://audio/sfx/enemies/boss_death.wav" type="AudioStream" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="Curve" id=9]
+min_value = -300.0
+max_value = 200.0
+_data = [ Vector2( 0, -300 ), 0.0, 0.0, 0, 0, Vector2( 1, -74.0909 ), 476.279, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.992187, 0 ), -2.81212, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0.592275, 1 )
+colors = PoolColorArray( 0.207843, 0.882353, 0.141176, 1, 1, 1, 1, 0 )
+
+[node name="GassyExit" type="AnimatedSprite"]
+frames = SubResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Cloud" type="AnimatedSprite" parent="."]
+scale = Vector2( 1.25, 1.25 )
+z_index = -1
+frames = SubResource( 8 )
+frame = 4
+playing = true
+
+[node name="Cloud2" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.501961 )
+scale = Vector2( 1.5, 1.5 )
+z_index = -2
+frames = SubResource( 8 )
+frame = 1
+speed_scale = 0.5
+playing = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="DeathPart" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 40
+lifetime = 1.25
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.95
+lifetime_randomness = 0.1
+local_coords = false
+direction = Vector2( 0, -1 )
+spread = 80.0
+gravity = Vector2( 0, 200 )
+initial_velocity = 450.0
+initial_velocity_random = 0.5
+angular_velocity = 180.0
+angular_velocity_random = 1.0
+linear_accel_curve = SubResource( 9 )
+scale_amount = 16.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 11 )
+color_ramp = SubResource( 10 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[node name="BossDeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "sfx"

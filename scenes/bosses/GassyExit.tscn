@@ -78,7 +78,7 @@ modulate = Color( 1, 1, 1, 0.501961 )
 scale = Vector2( 1.5, 1.5 )
 z_index = -2
 frames = SubResource( 8 )
-frame = 1
+frame = 4
 speed_scale = 0.5
 playing = true
 
@@ -111,3 +111,5 @@ hue_variation_random = 1.0
 [node name="BossDeathSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 bus = "sfx"
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]

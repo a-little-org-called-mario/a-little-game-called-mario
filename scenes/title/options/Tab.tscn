@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/corncob.png" type="Texture" id=1]
+[ext_resource path="res://scenes/title/options/Tab.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=3]
+
+[node name="Tab" type="Control"]
+margin_right = 120.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 150, 0 )
+focus_mode = 2
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.25098, 0.243137, 0.282353, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 149.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 32.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 36.0
+margin_top = 12.0
+margin_right = 72.0
+margin_bottom = 28.0
+theme = ExtResource( 3 )
+text = "Tab"

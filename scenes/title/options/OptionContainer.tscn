@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/title/options/OptionContainer.gd" type="Script" id=2]
+[ext_resource path="res://sprites/corncob.png" type="Texture" id=3]
+
+[node name="OptionContainer" type="HBoxContainer"]
+rect_min_size = Vector2( 0, 40 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 32.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_vertical = 4
+texture = ExtResource( 3 )
+
+[node name="OptionLabel" type="Label" parent="."]
+margin_left = 36.0
+margin_right = 186.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 150, 40 )
+text = "OPTION NAME"
+valign = 1
+uppercase = true
+
+[node name="OptionSlider" type="HSlider" parent="."]
+margin_left = 190.0
+margin_right = 590.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 400, 40 )
+mouse_filter = 1
+max_value = 10.0
+value = 10.0
+
+[node name="ValueLabel" type="Label" parent="."]
+margin_left = 594.0
+margin_right = 618.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+text = "10"
+align = 1
+valign = 1
+
+[connection signal="value_changed" from="OptionSlider" to="." method="_on_OptionSlider_value_changed"]

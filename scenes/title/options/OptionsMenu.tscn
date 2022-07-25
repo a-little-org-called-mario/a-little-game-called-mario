@@ -1,0 +1,299 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=2]
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=3]
+[ext_resource path="res://scenes/title/Background.gd" type="Script" id=4]
+[ext_resource path="res://scenes/title/TitleMenuButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/title/options/OptionContainer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/title/options/Tab.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/title/options/CustomTabContainer.gd" type="Script" id=8]
+[ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=9]
+[ext_resource path="res://scripts/Audio.gd" type="Script" id=10]
+[ext_resource path="res://sprites/corncob.png" type="Texture" id=11]
+[ext_resource path="res://scenes/title/options/CameraLeanContainer.gd" type="Script" id=12]
+[ext_resource path="res://scenes/title/options/OptionsMenu.gd" type="Script" id=13]
+[ext_resource path="res://scenes/title/options/ScreenShakeContainer.gd" type="Script" id=14]
+[ext_resource path="res://scenes/title/options/CRTFilterContainer.gd" type="Script" id=15]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.243137, 0.231373, 0.27451, 1 )
+
+[sub_resource type="InputEventAction" id=7]
+action = "pause"
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 7 )
+
+[node name="OptionsMenu" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+script = ExtResource( 13 )
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -433, -225 )
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ALittleMenuCalled" type="Label" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "A LITTLE MENU CALLED"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Settings" type="RichTextLabel" parent="VBoxContainer"]
+margin_left = 12.0
+margin_top = 64.0
+margin_right = 1012.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1000, 60 )
+rect_clip_content = false
+size_flags_horizontal = 6
+size_flags_vertical = 4
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1]SETTINGS[/rainbow]"
+text = "SETTINGS"
+fit_content_height = true
+scroll_active = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CustomTabContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -326.5
+margin_top = -109.0
+margin_right = 326.5
+margin_bottom = 109.0
+custom_constants/separation = 0
+script = ExtResource( 8 )
+
+[node name="Tabs" type="HBoxContainer" parent="CustomTabContainer"]
+margin_right = 700.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+alignment = 1
+
+[node name="AudioTab" parent="CustomTabContainer/Tabs" instance=ExtResource( 7 )]
+margin_left = 198.0
+margin_right = 348.0
+focus_next = NodePath("../GraphicsTab")
+focus_previous = NodePath("../GraphicsTab")
+text = "AUDIO"
+
+[node name="GraphicsTab" parent="CustomTabContainer/Tabs" instance=ExtResource( 7 )]
+margin_left = 352.0
+margin_right = 502.0
+focus_next = NodePath("../AudioTab")
+focus_previous = NodePath(".")
+text = "GRAPHICS"
+
+[node name="Panel" type="Panel" parent="CustomTabContainer"]
+margin_top = 40.0
+margin_right = 700.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 700, 200 )
+custom_styles/panel = SubResource( 6 )
+
+[node name="AudioSettings" type="VBoxContainer" parent="CustomTabContainer/Panel"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 654.0
+margin_bottom = 192.0
+
+[node name="GameContainer" parent="CustomTabContainer/Panel/AudioSettings" instance=ExtResource( 6 )]
+margin_right = 634.0
+margin_bottom = 40.0
+name_label = "GAME VOLUME"
+value_label_nodepath = NodePath("ValueLabel")
+
+[node name="OptionSlider" parent="CustomTabContainer/Panel/AudioSettings/GameContainer" index="2"]
+focus_neighbour_top = NodePath("../../../../Tabs/AudioTab")
+
+[node name="MusicContainer" parent="CustomTabContainer/Panel/AudioSettings" instance=ExtResource( 6 )]
+margin_top = 44.0
+margin_right = 634.0
+margin_bottom = 84.0
+name_label = "MUSIC VOLUME"
+value_label_nodepath = NodePath("ValueLabel")
+
+[node name="SFXContainer" parent="CustomTabContainer/Panel/AudioSettings" instance=ExtResource( 6 )]
+margin_top = 88.0
+margin_right = 634.0
+margin_bottom = 128.0
+name_label = "SFX VOLUME"
+value_label_nodepath = NodePath("ValueLabel")
+
+[node name="VoiceContainer" parent="CustomTabContainer/Panel/AudioSettings" instance=ExtResource( 6 )]
+margin_top = 132.0
+margin_right = 634.0
+margin_bottom = 172.0
+name_label = "VOICE VOLUME"
+value_label_nodepath = NodePath("ValueLabel")
+
+[node name="GraphicsSettings" type="VBoxContainer" parent="CustomTabContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -50.0
+margin_bottom = -60.0
+
+[node name="CameraLeanContainer" parent="CustomTabContainer/Panel/GraphicsSettings" instance=ExtResource( 6 )]
+margin_right = 630.0
+margin_bottom = 40.0
+script = ExtResource( 12 )
+name_label = "CAMERA LEAN"
+value_label_nodepath = NodePath("ValueLabel")
+value_label_mapping = {
+0: "OFF",
+1: "MIN",
+2: "MAX"
+}
+
+[node name="OptionSlider" parent="CustomTabContainer/Panel/GraphicsSettings/CameraLeanContainer" index="2"]
+focus_neighbour_top = NodePath("../../../../Tabs/GraphicsTab")
+
+[node name="ScreenShakeContainer" type="HBoxContainer" parent="CustomTabContainer/Panel/GraphicsSettings"]
+margin_top = 44.0
+margin_right = 630.0
+margin_bottom = 84.0
+theme = ExtResource( 2 )
+script = ExtResource( 14 )
+
+[node name="TextureRect" type="TextureRect" parent="CustomTabContainer/Panel/GraphicsSettings/ScreenShakeContainer"]
+margin_right = 32.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 32, 40 )
+texture = ExtResource( 11 )
+
+[node name="OptionLabel" type="Label" parent="CustomTabContainer/Panel/GraphicsSettings/ScreenShakeContainer"]
+margin_left = 36.0
+margin_right = 186.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 150, 40 )
+text = "SCREEN SHAKE"
+valign = 1
+
+[node name="ValueCheckBox" type="CheckBox" parent="CustomTabContainer/Panel/GraphicsSettings/ScreenShakeContainer"]
+margin_left = 190.0
+margin_right = 590.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 400, 40 )
+mouse_filter = 1
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+text = "OFF"
+
+[node name="CRTFilterContainer" type="HBoxContainer" parent="CustomTabContainer/Panel/GraphicsSettings"]
+margin_top = 88.0
+margin_right = 630.0
+margin_bottom = 128.0
+theme = ExtResource( 2 )
+script = ExtResource( 15 )
+
+[node name="TextureRect" type="TextureRect" parent="CustomTabContainer/Panel/GraphicsSettings/CRTFilterContainer"]
+margin_right = 32.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 32, 40 )
+texture = ExtResource( 11 )
+
+[node name="OptionLabel" type="Label" parent="CustomTabContainer/Panel/GraphicsSettings/CRTFilterContainer"]
+margin_left = 36.0
+margin_right = 186.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 150, 40 )
+text = "CRT FILTER"
+valign = 1
+
+[node name="ValueCheckBox" type="CheckBox" parent="CustomTabContainer/Panel/GraphicsSettings/CRTFilterContainer"]
+margin_left = 190.0
+margin_right = 590.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 400, 40 )
+mouse_filter = 1
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+text = "OFF"
+
+[node name="BackMenuButton" parent="." instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -83.0
+margin_top = -173.0
+margin_right = 107.0
+margin_bottom = -101.0
+shortcut_in_tooltip = false
+shortcut = SubResource( 8 )
+text = "Back to title"
+redirect_scene = "res://scenes/title/TitleScreen.tscn"
+
+[node name="Audio" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="BGM" type="AudioStreamPlayer" parent="Audio"]
+pause_mode = 2
+stream = ExtResource( 9 )
+volume_db = -20.0
+autoplay = true
+bus = "music"
+
+[connection signal="focus_entered" from="CustomTabContainer/Tabs/AudioTab" to="CustomTabContainer" method="_on_AudioTab_focus_entered"]
+[connection signal="focus_entered" from="CustomTabContainer/Tabs/GraphicsTab" to="CustomTabContainer" method="_on_GraphicsTab_focus_entered"]
+[connection signal="value_changed" from="CustomTabContainer/Panel/AudioSettings/GameContainer" to="." method="_on_GameContainer_value_changed"]
+[connection signal="value_changed" from="CustomTabContainer/Panel/AudioSettings/MusicContainer" to="." method="_on_MusicContainer_value_changed"]
+[connection signal="value_changed" from="CustomTabContainer/Panel/AudioSettings/SFXContainer" to="." method="_on_SFXContainer_value_changed"]
+[connection signal="value_changed" from="CustomTabContainer/Panel/AudioSettings/VoiceContainer" to="." method="_on_VoiceContainer_value_changed"]
+[connection signal="pressed" from="CustomTabContainer/Panel/GraphicsSettings/ScreenShakeContainer/ValueCheckBox" to="CustomTabContainer/Panel/GraphicsSettings/ScreenShakeContainer" method="_on_ValueCheckBox_pressed"]
+[connection signal="pressed" from="CustomTabContainer/Panel/GraphicsSettings/CRTFilterContainer/ValueCheckBox" to="CustomTabContainer/Panel/GraphicsSettings/CRTFilterContainer" method="_on_ValueCheckBox_pressed"]
+[connection signal="pressed" from="BackMenuButton" to="." method="_on_BackMenuButton_pressed"]
+
+[editable path="CustomTabContainer/Panel/AudioSettings/GameContainer"]
+[editable path="CustomTabContainer/Panel/AudioSettings/MusicContainer"]
+[editable path="CustomTabContainer/Panel/AudioSettings/SFXContainer"]
+[editable path="CustomTabContainer/Panel/AudioSettings/VoiceContainer"]
+[editable path="CustomTabContainer/Panel/GraphicsSettings/CameraLeanContainer"]

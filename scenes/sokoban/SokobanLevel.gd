@@ -5,7 +5,7 @@ class_name SokobanLevel, "res://sprites/box.png"
 signal box_moved(from_pos, to_pos)
 
 
-export(PackedScene) var level_select_menu
+export(String, FILE, "*.tscn") var main_menu
 
 export(NodePath) onready var ground = get_node(ground) as TileMap
 export(String) onready var hole_tile = ground.tile_set.find_tile_by_name(hole_tile) as int
@@ -36,7 +36,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("undo"):
 		undo()
 	elif Input.is_action_just_pressed("restart"):
-		EventBus.emit_signal("restart_level")
+		restart()
+	if Input.is_action_just_pressed("pause"):
+		close_level()
 
 
 func move_player(move_direction: Vector2):
@@ -115,7 +117,7 @@ func _commit_current_move() -> void:
 
 
 func close_level():
-	EventBus.emit_signal("level_changed", level_select_menu)
+	EventBus.emit_signal("change_scene", {"scene": main_menu})
 
 
 func win():

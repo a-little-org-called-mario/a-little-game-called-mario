@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=11 format=2]
 
-[ext_resource path="res://sprites/sokoban/SokobanBox.png" type="Texture" id=1]
+[ext_resource path="res://sprites/sokoban/SokobanBG.png" type="Texture" id=1]
 [ext_resource path="res://sprites/sokoban/SokobanWall.png" type="Texture" id=2]
-[ext_resource path="res://sprites/sokoban/Volcano tiles.png" type="Texture" id=3]
+[ext_resource path="res://sprites/sokoban/SokobanBox.png" type="Texture" id=3]
 [ext_resource path="res://sprites/sokoban/SokobanHole.png" type="Texture" id=4]
-[ext_resource path="res://sprites/sokoban/SokobanBG.png" type="Texture" id=5]
+[ext_resource path="res://sprites/sokoban/Volcano tiles.png" type="Texture" id=5]
 [ext_resource path="res://sprites/sokoban/Volcano tiles background.png" type="Texture" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
@@ -21,7 +21,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 
 [resource]
 5/name = "Box"
-5/texture = ExtResource( 1 )
+5/texture = ExtResource( 3 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 0, 0, 64, 64 )
@@ -42,7 +42,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 5/z_index = 0
 6/name = "Background"
-6/texture = ExtResource( 5 )
+6/texture = ExtResource( 1 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 0, 0, 64, 64 )
@@ -91,7 +91,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 8/shapes = [  ]
 8/z_index = 0
 9/name = "VHole"
-9/texture = ExtResource( 3 )
+9/texture = ExtResource( 5 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 0, 0, 50, 50 )
@@ -105,7 +105,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 9/shapes = [  ]
 9/z_index = 0
 10/name = "VWallRound"
-10/texture = ExtResource( 3 )
+10/texture = ExtResource( 5 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
 10/region = Rect2( 52, 0, 50, 50 )
@@ -126,7 +126,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 10/z_index = 0
 11/name = "VWall"
-11/texture = ExtResource( 3 )
+11/texture = ExtResource( 5 )
 11/tex_offset = Vector2( 0, 0 )
 11/modulate = Color( 1, 1, 1, 1 )
 11/region = Rect2( 104, 0, 50, 50 )

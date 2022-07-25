@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/levels/sokoban/level/SokobanLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/sokoban/SokobanLevel.tscn" type="PackedScene" id=1]
 
 [node name="SokobanLevel" instance=ExtResource( 1 )]
 

@@ -1,27 +1,18 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/levels/Flappy/env/env_spawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Player/PlayerFlying.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Obstacles/ObstacleSpawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scenes/levels/Flappy/UI_flappy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/levels/Flappy/deathBounds.gd" type="Script" id=5]
-[ext_resource path="res://scenes/ui/scripts/TranslatedRichTextLabel.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/PauseMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/levels/Flappy/Characters/Obstacles/Pipes.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/levels/Flappy/env/cloud.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/levels/Flappy/Flappy01.gd" type="Script" id=9]
-[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 125, 28 )
 
 [node name="World" type="Node2D"]
-script = ExtResource( 9 )
-gameover_ui_nodepath = NodePath("UI/GameOver")
-
-[node name="SkyBackground" type="ColorRect" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
-color = Color( 0.258824, 0.929412, 1, 1 )
 
 [node name="object_spawner" parent="." instance=ExtResource( 3 )]
 wait_time = 1.5
@@ -29,77 +20,9 @@ wait_time = 1.5
 [node name="Player_RigidBody" parent="." instance=ExtResource( 2 )]
 position = Vector2( 109, 303 )
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" parent="." instance=ExtResource( 4 )]
 
-[node name="ControlText" type="Control" parent="UI"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -400.0
-margin_top = -40.0
-margin_right = -36.0
-
-[node name="HideControlTimer" type="Timer" parent="UI/ControlText"]
-wait_time = 3.0
-one_shot = true
-autostart = true
-
-[node name="ControlTextLabel" type="RichTextLabel" parent="UI/ControlText"]
-margin_right = 180.0
-margin_bottom = 16.0
-rect_scale = Vector2( 2, 2 )
-custom_constants/line_separation = 0
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode_enabled = true
-bbcode_text = "SPACE TO [rainbow freq=0.5 sat=1 val=20]FLY UP[/rainbow]"
-text = "SPACE TO FLY UP"
-fit_content_height = true
-script = ExtResource( 6 )
-
-[node name="GameOver" type="Control" parent="UI"]
-visible = false
-margin_right = 1024.0
-margin_bottom = 600.0
-theme = ExtResource( 10 )
-
-[node name="GAMEOVER" type="RichTextLabel" parent="UI/GameOver"]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -92.0
-margin_right = -512.0
-margin_bottom = -60.0
-rect_scale = Vector2( 2, 2 )
-custom_constants/line_separation = 0
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode_enabled = true
-bbcode_text = "[rainbow freq=0.5 sat=1 val=20][center]GAME OVER[/center][/rainbow]"
-text = "GAME OVER"
-fit_content_height = true
-script = ExtResource( 6 )
-
-[node name="RESTART" type="RichTextLabel" parent="UI/GameOver"]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = 28.0
-margin_right = -512.0
-margin_bottom = 92.0
-rect_scale = Vector2( 2, 2 )
-custom_constants/line_separation = 0
-custom_fonts/normal_font = ExtResource( 4 )
-bbcode_enabled = true
-bbcode_text = "[center]PRESS 'R' TO RESTART[/center]
-
-
-[center]PRESS 'BACKSPACE' TO RETURN TO HUB[/center]"
-text = "PRESS 'R' TO RESTART
-
-
-PRESS 'BACKSPACE' TO RETURN TO HUB"
-fit_content_height = true
-script = ExtResource( 6 )
+[node name="PauseMenu" parent="." instance=ExtResource( 6 )]
 
 [node name="deathBounds" type="Area2D" parent="."]
 script = ExtResource( 5 )
@@ -160,7 +83,5 @@ position = Vector2( 504, 473 )
 scale = Vector2( 3, 3 )
 SPEED = -170
 
-[connection signal="game_over" from="Player_RigidBody" to="." method="_on_Player_game_over"]
-[connection signal="timeout" from="UI/ControlText/HideControlTimer" to="UI/ControlText/ControlTextLabel" method="hide"]
 [connection signal="body_entered" from="deathBounds" to="deathBounds" method="_on_deathBounds_body_entered"]
 [connection signal="timeout" from="env_spawner" to="env_spawner" method="_on_env_spawner_timeout"]

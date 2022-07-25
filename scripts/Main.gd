@@ -21,8 +21,6 @@ func _ready() -> void:
 	EventBus.connect("build_block", self, "_on_build")
 	EventBus.connect("bgm_changed", self, "_bgm_changed")
 	EventBus.connect("restart_level", self, "_restart_level")
-	EventBus.connect("level_exited", self, "_finish_level")
-	EventBus.connect("level_changed", self, "_finish_level")
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 	randomize()

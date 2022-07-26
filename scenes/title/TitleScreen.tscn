@@ -220,46 +220,40 @@ scale = Vector2( 3, 3 )
 stream = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 375.0
+margin_left = 411.0
 margin_top = 258.0
-margin_right = 625.0
+margin_right = 589.0
 margin_bottom = 478.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="StartButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 48.0
-margin_right = 202.0
+margin_left = 12.0
+margin_right = 166.0
 margin_bottom = 52.0
 text = "START GAME"
 redirect_scene = "res://scenes/Main.tscn"
 focused_by_default = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="LevelSelectButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_top = 56.0
-margin_right = 250.0
+margin_right = 178.0
 margin_bottom = 108.0
-custom_constants/separation = 46
-alignment = 1
-
-[node name="ModeMovesButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 16 )]
-margin_right = 250.0
-margin_bottom = 52.0
-disabled = true
-text = "modes moved to hub"
+text = "Level Select"
+redirect_scene = "res://scenes/title/levelselect/LevelSelect.tscn"
 
 [node name="OptionsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 66.0
+margin_left = 30.0
 margin_top = 112.0
-margin_right = 184.0
+margin_right = 148.0
 margin_bottom = 164.0
 text = "OPTIONS"
 redirect_scene = "res://scenes/title/options/OptionsMenu.tscn"
 
 [node name="CreditsButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
-margin_left = 66.0
+margin_left = 30.0
 margin_top = 168.0
-margin_right = 184.0
+margin_right = 148.0
 margin_bottom = 220.0
 text = "CREDITS"
 redirect_scene = "res://scenes/Credits.tscn"

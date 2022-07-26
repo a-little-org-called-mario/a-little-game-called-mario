@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/powerups/FireFlower.gd" type="Script" id=1]
 [ext_resource path="res://sprites/jacob_face.jpg" type="Texture" id=2]
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.5, 43 )
@@ -38,3 +39,8 @@ B TO SHOOT FIREBALL "
 text = "
 B TO SHOOT FIREBALL "
 fit_content_height = true
+
+[node name="NotesNewTrigger" parent="." instance=ExtResource( 4 )]
+pageName = "Fire Flower"
+pageDesc = "Ah yes, the Inflamus imitatus, such a wonderful yet rare plant. Consumption lets lizards like me shoot magical fireballs. To avoid being eaten, the plant uses complex light manipulation to take the appearnce of a human head."
+pageSprite = "fire_flower"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -8,33 +8,69 @@
 [ext_resource path="res://scenes/ui/Themes/NoteBox.tres" type="StyleBox" id=6]
 [ext_resource path="res://sprites/ui/notes/tutorial_pic.png" type="Texture" id=7]
 [ext_resource path="res://sprites/ui/notes/bubpic.png" type="Texture" id=8]
+[ext_resource path="res://sprites/Grapeburst  Pie-Sheet.png" type="Texture" id=9]
+[ext_resource path="res://sprites/ballmario.png" type="Texture" id=10]
+[ext_resource path="res://sprites/powerups/Mario Bus driving-Sheet-export.png" type="Texture" id=11]
+[ext_resource path="res://sprites/jacob_face.jpg" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 1 )
 
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 8 )
-region = Rect2( 0, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 190, 80 )
 
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 8 )
-region = Rect2( 16, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 11 )
+region = Rect2( 190, 0, 190, 80 )
 
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 8 )
-region = Rect2( 32, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 11 )
+region = Rect2( 380, 0, 190, 80 )
 
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 8 )
-region = Rect2( 48, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 11 )
+region = Rect2( 570, 0, 190, 80 )
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 8 )
-region = Rect2( 64, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 40, 40 )
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 8 )
-region = Rect2( 80, 16, 16, 16 )
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 9 )
+region = Rect2( 80, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 9 )
+region = Rect2( 120, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 9 )
+region = Rect2( 80, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 9 )
+region = Rect2( 120, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 80, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 80, 40, 40 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
@@ -60,11 +96,50 @@ region = Rect2( 128, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 160, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 8 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 8 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 8 )
+region = Rect2( 64, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 8 )
+region = Rect2( 80, 16, 16, 16 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ ExtResource( 12 ) ],
 "loop": true,
-"name": "bub",
+"name": "fire_flower",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "ball_mario",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "bus",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "grapeburst_pie",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 5 ) ],
@@ -72,14 +147,19 @@ animations = [ {
 "name": "blug",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "little_mario",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "tutorial",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
-"name": "little_mario",
+"name": "bub",
 "speed": 10.0
 } ]
 
@@ -175,8 +255,7 @@ pause_mode = 2
 position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-animation = "bub"
-frame = 3
+animation = "bus"
 playing = true
 
 [node name="Center" type="CenterContainer" parent="Hbox/VBox"]

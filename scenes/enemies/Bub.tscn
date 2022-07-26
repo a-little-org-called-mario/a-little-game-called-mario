@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/pistol.png" type="Texture" id=2]
@@ -373,6 +373,9 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=50]
+extents = Vector2( 192, 96 )
+
 [node name="Bub" instance=ExtResource( 1 )]
 collision_mask = 330
 script = ExtResource( 3 )
@@ -398,7 +401,6 @@ position = Vector2( -12, 1.5 )
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 3 )
 animation = "idle"
-frame = 1
 playing = true
 offset = Vector2( 0, -32 )
 
@@ -463,3 +465,8 @@ bus = "sfx"
 pageName = "Bub"
 pageDesc = "These little people are called Bubs. if you see a Bub with a gun, it's probably a ruthless mercenary hired by a mysterious man known as \"Bubs\". The lack of arms will heavily disadvantage a Bub in basketball."
 pageSprite = "bub"
+
+[node name="Collision" parent="NotesNewTrigger" index="0"]
+shape = SubResource( 50 )
+
+[editable path="NotesNewTrigger"]

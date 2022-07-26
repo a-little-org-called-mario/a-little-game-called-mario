@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/pistol.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://audio/sfx/pop-gun.wav" type="AudioStream" id=7]
 [ext_resource path="res://sprites/projectiles/ombsti_bomb.png" type="Texture" id=8]
 [ext_resource path="res://audio/sfx/effects/explode_small.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 26, 24 )
@@ -20,10 +21,6 @@ region = Rect2( 64, 0, 64, 64 )
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 4 )
@@ -49,6 +46,10 @@ region = Rect2( 256, 64, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 320, 64, 64, 64 )
 
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ SubResource( 30 ), SubResource( 31 ) ],
@@ -56,15 +57,15 @@ animations = [ {
 "name": "idle",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 32 ) ],
-"loop": true,
-"name": "die",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
 "loop": true,
 "name": "move",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 32 ) ],
+"loop": true,
+"name": "die",
+"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=34]
@@ -457,3 +458,8 @@ frames = SubResource( 49 )
 stream = ExtResource( 9 )
 volume_db = 2.0
 bus = "sfx"
+
+[node name="NotesNewTrigger" parent="." index="12" instance=ExtResource( 10 )]
+pageName = "Bub"
+pageDesc = "These little people are called Bubs. if you see a Bub with a gun, it's probably a ruthless mercenary hired by a mysterious man known as \"Bubs\". The lack of arms will heavily disadvantage a Bub in basketball."
+pageSprite = "bub"

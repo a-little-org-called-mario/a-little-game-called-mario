@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/title/options/tabs/Tab.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=2]
+[ext_resource path="res://sprites/corncob.png" type="Texture" id=3]
+
+[node name="Tab" type="Control"]
+modulate = Color( 0.66, 0.66, 0.66, 1 )
+anchor_right = 0.146
+anchor_bottom = 0.067
+margin_right = -29.504
+margin_bottom = -0.200001
+rect_min_size = Vector2( 150, 0 )
+focus_mode = 2
+script = ExtResource( 1 )
+texture_nodepath = NodePath("HBoxContainer/TextureRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.25098, 0.243137, 0.282353, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 32.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 40.0
+margin_top = 12.0
+margin_right = 150.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme = ExtResource( 2 )
+text = "TAB"
+clip_text = true
+
+[connection signal="focus_entered" from="." to="." method="show_icon"]
+[connection signal="focus_exited" from="." to="." method="hide_icon"]

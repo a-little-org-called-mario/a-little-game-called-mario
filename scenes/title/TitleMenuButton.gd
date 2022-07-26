@@ -11,10 +11,11 @@ var unselected_icon = ImageTexture.new()
 
 func _ready():
 	# Signals can be found here: https://docs.godotengine.org/en/stable/classes/class_basebutton.html
-	self.connect("mouse_entered", self, "grab_focus")
 	self.connect("pressed", self, "_on_pressed")
 	self.connect("focus_entered", self, "_on_focus_entered")
 	self.connect("focus_exited", self, "_on_focus_exited")
+	self.connect("mouse_entered", self, "grab_focus")
+	self.connect("mouse_exited", self, "release_focus")
 	
 	# Copy of image with transparent color
 	var img = selected_icon.get_data()
@@ -37,3 +38,4 @@ func _on_focus_entered():
 
 func _on_focus_exited():
 	icon = unselected_icon
+

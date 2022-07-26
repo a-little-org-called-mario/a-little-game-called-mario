@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/title/options/controls/SliderOption.gd" type="Script" id=1]
+[ext_resource path="res://scenes/title/options/controls/BaseOption.tscn" type="PackedScene" id=2]
+
+[node name="SliderOption" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+control_nodepath = NodePath("Slider")
+
+[node name="Slider" type="HSlider" parent="." index="2"]
+margin_left = 190.0
+margin_right = 590.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 400, 40 )
+max_value = 10.0
+value = 10.0
+
+[node name="ValueLabel" parent="." index="3"]
+margin_left = 594.0
+margin_right = 618.0
+text = "10"
+
+[connection signal="value_changed" from="Slider" to="." method="_on_value_changed"]

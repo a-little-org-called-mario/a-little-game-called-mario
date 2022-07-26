@@ -14,6 +14,8 @@ onready var _sprite = $Sprite
 
 
 func _physics_process(delta):
+	_sprite.animation = bombType
+	
 	scale.y = direction
 	_sprite.rotation_degrees += (velocity.x / 20)
 	

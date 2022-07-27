@@ -44,6 +44,9 @@ render_target_update_mode = 3
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
 script = ExtResource( 2 )
+hub = ExtResource( 4 )
+level_scene = ExtResource( 4 )
+level = NodePath("Level")
 
 [node name="Camera" type="Camera2D" parent="ViewportContainer/Main" groups=["Cameras"]]
 rotating = true
@@ -52,7 +55,7 @@ script = ExtResource( 6 )
 
 [node name="ScreenShake" parent="ViewportContainer/Main/Camera" instance=ExtResource( 5 )]
 
-[node name="TileMap" parent="ViewportContainer/Main" instance=ExtResource( 4 )]
+[node name="Level" type="Node2D" parent="ViewportContainer/Main"]
 
 [node name="UI" parent="ViewportContainer/Main" instance=ExtResource( 3 )]
 

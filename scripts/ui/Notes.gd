@@ -4,7 +4,8 @@ extends CanvasLayer
 var pages = {
 	"Little Mario" : {
 		"desc":"Hey, that's me, Little Mario! This is where I make notes about my adventures! As I meet new people and make new discoveries, I'm going to make sure to write all about them here!", 
-		"sprite":"little_mario"
+		"sprite":"little_mario",
+		"scale":Vector2(2, 2)
 	}
 }
 
@@ -46,8 +47,8 @@ func remove_pages():
 		node.queue_free()
 
 
-func add_page(name, desc, sprite):
-	pages[name] = {"desc": desc, "sprite" : sprite}
+func add_page(name, desc, sprite, spriteScale):
+	pages[name] = {"desc": desc, "sprite" : sprite, "scale" : spriteScale}
 	add_button(name)
 
 
@@ -72,7 +73,7 @@ func reset_focus():
 			buttons[i].focus_neighbour_bottom = buttons[i+1].get_path()
 
 
-func _on_note_added(name, desc, sprite):
+func _on_note_added(name, desc, sprite, spriteScale):
 	# prevent duplicates
 	var found = false
 	for page in pages.keys():
@@ -81,7 +82,7 @@ func _on_note_added(name, desc, sprite):
 	
 	# add a new page
 	if not found:
-		add_page(name, desc, sprite)
+		add_page(name, desc, sprite, spriteScale)
 		reset_focus()
 
 
@@ -90,4 +91,5 @@ func _on_page_changed(pageName):
 	_name.text = pageName
 	_desc.text = pageInfo.desc
 	_sprite.animation = pageInfo.sprite
+	_sprite.scale = pageInfo.scale
 

@@ -19,7 +19,7 @@ func _ready():
 	$Hbox.visible = false
 	EventBus.connect("note_added", self, "_on_note_added")
 	remove_pages()
-	add_button()
+	add_button("Little Mario")
 	_on_page_changed(0)
 
 
@@ -46,11 +46,12 @@ func remove_pages():
 func add_page(name, desc, sprite):
 	var newPage = {"name":name, "desc":desc, "sprite":sprite}
 	pages.append(newPage)
+	add_button(name)
 
 
-func add_button():
+func add_button(name):
 	var button = noteButton.instance()
-	button.text = pages[nextPageID].name
+	button.text = name
 	button.pageID = nextPageID
 	button.connect("page_changed", self, "_on_page_changed")
 	_list.add_child(button)
@@ -80,7 +81,6 @@ func _on_note_added(name, desc, sprite):
 	# add a new page
 	if not found:
 		add_page(name, desc, sprite)
-		add_button()
 		reset_focus()
 
 

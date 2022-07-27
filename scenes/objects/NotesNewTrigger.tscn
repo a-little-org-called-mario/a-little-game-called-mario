@@ -9,6 +9,9 @@ extents = Vector2( 64, 64 )
 collision_layer = 0
 collision_mask = 64
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Go to res://scenes/ui/Notes.tscn to add new animations."
+}
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

@@ -29,6 +29,7 @@ shader_param/maskDark = 0.5
 shader_param/maskLight = 1.5
 
 [node name="Root" type="Node"]
+pause_mode = 2
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 material = SubResource( 2 )
@@ -36,6 +37,7 @@ margin_right = 1024.0
 margin_bottom = 600.0
 
 [node name="Main" type="Viewport" parent="ViewportContainer"]
+pause_mode = 1
 size = Vector2( 1024, 600 )
 handle_input_locally = false
 render_target_update_mode = 3
@@ -54,13 +56,9 @@ script = ExtResource( 6 )
 
 [node name="UI" parent="ViewportContainer/Main" instance=ExtResource( 3 )]
 
-[node name="PauseMenu" parent="ViewportContainer/Main" instance=ExtResource( 9 )]
-
 [node name="Transition" parent="ViewportContainer/Main" instance=ExtResource( 8 )]
 
 [node name="TouchInputs" parent="ViewportContainer/Main" instance=ExtResource( 11 )]
-
-[node name="Notes" parent="ViewportContainer/Main" instance=ExtResource( 13 )]
 
 [node name="Audio" type="Node" parent="ViewportContainer/Main"]
 pause_mode = 2
@@ -75,3 +73,10 @@ bus = "music"
 [node name="CRT" type="Node" parent="ViewportContainer/Main"]
 script = ExtResource( 12 )
 container_path = NodePath("../..")
+
+[node name="Unpausable" type="Node2D" parent="ViewportContainer/Main"]
+pause_mode = 2
+
+[node name="PauseMenu" parent="ViewportContainer/Main/Unpausable" instance=ExtResource( 9 )]
+
+[node name="Notes" parent="ViewportContainer/Main/Unpausable" instance=ExtResource( 13 )]

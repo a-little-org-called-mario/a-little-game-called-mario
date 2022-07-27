@@ -9,13 +9,13 @@ signal page_changed(pageName)
 
 func _process(delta):
 	var focusOwner = get_focus_owner()
-	change_focus(focusOwner)
+	#change_focus(focusOwner)
 	emit_current_focus(focusOwner)
 	
 
 
 func change_focus(fOwner):
-	# forcing the focus to change
+	# forcing the focus to change (unused)
 	if fOwner == self and canChangeFocus:
 		
 		if Input.is_action_just_pressed("ui_up"):

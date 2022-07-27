@@ -1,13 +1,7 @@
 extends CanvasLayer
 
 
-var pages = {
-	"Little Mario" : {
-		"desc":"Hey, that's me, Little Mario! This is where I make notes about my adventures! As I meet new people and make new discoveries, I'm going to make sure to write all about them here!", 
-		"sprite":"little_mario",
-		"scale":Vector2(2, 2)
-	}
-}
+var pages = {}
 
 var noteButton = preload("res://scenes/ui/NotesButton.tscn")
 var nextPageID = 0
@@ -23,8 +17,6 @@ func _ready():
 	$Hbox.visible = false
 	EventBus.connect("note_added", self, "_on_note_added")
 	remove_pages()
-	add_button("Little Mario")
-	_on_page_changed("Little Mario")
 
 
 func _process(delta):

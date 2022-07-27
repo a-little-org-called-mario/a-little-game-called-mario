@@ -105,6 +105,11 @@ pageName = "Tutorial"
 pageDesc = "This is the tutorial level! Not sure what that exactly means but, hey, it sounds important!"
 pageSprite = "tutorial"
 
+[node name="NotesNewTrigger2" parent="Objects" instance=ExtResource( 16 )]
+position = Vector2( 155, 448 )
+pageName = "Little Mario"
+pageDesc = "Hey, that's me, Little Mario! This is where I make notes about my adventures! As I meet new people and make new discoveries, I'm going to make sure to write all about them here!"
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Bub" parent="Enemies" instance=ExtResource( 5 )]

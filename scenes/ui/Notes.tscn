@@ -127,15 +127,15 @@ animations = [ {
 "name": "bus",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 12 ) ],
-"loop": true,
-"name": "fire_flower",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "little_mario",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "fire_flower",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
@@ -256,7 +256,7 @@ position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "bus"
-frame = 3
+frame = 1
 playing = true
 __meta__ = {
 "_editor_description_": "The animation played by this node is the \"Page Sprite\" set using a NotesNewTrigger."

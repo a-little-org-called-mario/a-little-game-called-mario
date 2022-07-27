@@ -61,10 +61,7 @@ func add_button(name):
 
 func _on_note_added(name, desc, sprite, spriteScale):
 	# prevent duplicates
-	var found = false
-	for page in pages.keys():
-		if page == name:
-			found = true
+	var found = pages.has(name)
 	
 	# add a new page
 	if not found:

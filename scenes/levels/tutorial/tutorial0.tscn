@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/boxes/GreedyCoinBox.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/objects/CameraLimits.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/objects/LimitSetArea.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 549, 152 )
@@ -97,6 +98,17 @@ position = Vector2( 3232, -96 )
 [node name="GreedyCoinBox" parent="Objects" instance=ExtResource( 13 )]
 position = Vector2( 2720, -160 )
 bounce_count = 5
+
+[node name="NotesNewTrigger" parent="Objects" instance=ExtResource( 16 )]
+position = Vector2( 3232, -96 )
+pageName = "Tutorial"
+pageDesc = "This is the tutorial level! Not sure what that exactly means but, hey, it sounds important!"
+pageSprite = "tutorial"
+
+[node name="NotesNewTrigger2" parent="Objects" instance=ExtResource( 16 )]
+position = Vector2( 155, 448 )
+pageName = "Little Mario"
+pageDesc = "Hey, that's me, Little Mario! This is where I make notes about my adventures! As I meet new people and make new discoveries, I'm going to make sure to write all about them here!"
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -238,6 +250,16 @@ margin_bottom = -80.0
 bbcode_text = "PRESS [rainbow freq=0.5 sat=1 val=1]{CTRL}[/rainbow], [rainbow freq=0.5 sat=1 val=1]{Z}[/rainbow] OR [rainbow freq=0.5 sat=1 val=1]{O}[/rainbow] TO SHOOT COLLECTED COINS!"
 text = "PRESS {CTRL}, {Z} OR {O} TO SHOOT COLLECTED COINS!"
 
+[node name="Notes" parent="Decorations" instance=ExtResource( 8 )]
+margin_left = 3112.0
+margin_top = -288.0
+margin_right = 3352.0
+margin_bottom = -192.0
+
+[node name="RichTextLabel" parent="Decorations/Notes" index="0"]
+bbcode_text = "PRESS [rainbow freq=0.5 sat=1 val=1]{N}[/rainbow] TO OPEN LITTLE MARIO'S NOTES!"
+text = "PRESS {N} TO OPEN LITTLE MARIO'S NOTES!"
+
 [node name="HoldJump" parent="Decorations" instance=ExtResource( 8 )]
 margin_left = 592.0
 margin_top = 176.0
@@ -257,4 +279,5 @@ text = "HOLD {SPACE} TO JUMP HIGHER!"
 [editable path="Decorations/DoubleJump"]
 [editable path="Decorations/SprintJump"]
 [editable path="Decorations/Shoot"]
+[editable path="Decorations/Notes"]
 [editable path="Decorations/HoldJump"]

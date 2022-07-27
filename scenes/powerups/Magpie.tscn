@@ -1,8 +1,9 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://sprites/Grapeburst  Pie-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://sprites/Boom pie-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://scripts/powerups/Magpie.gd" type="Script" id=3]
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -318,7 +319,7 @@ script = ExtResource( 3 )
 position = Vector2( 1.66893e-06, -8 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 65 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="ExplosionSprite" type="AnimatedSprite" parent="."]
@@ -331,3 +332,8 @@ animation = "expansion"
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
 shape = SubResource( 67 )
+
+[node name="NotesNewTrigger" parent="." instance=ExtResource( 4 )]
+pageName = "Grapeburst Pie"
+pageDesc = "A hyper-reactive pie. My power level is not yet over 9000 and thus I cannot eat it; contact results in a lethal explosion. I've heard that, if one can overcome this power level threshold, it is possible to eat this pie, revealing it is tastier than anything else in this world."
+pageSprite = "grapeburst_pie"

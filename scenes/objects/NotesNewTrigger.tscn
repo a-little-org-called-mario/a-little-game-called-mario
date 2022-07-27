@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/objects/NotesNewTrigger.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 64 )
+
+[node name="NotesNewTrigger" type="Area2D"]
+collision_layer = 0
+collision_mask = 64
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Go to res://scenes/ui/Notes.tscn to add new animations."
+}
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

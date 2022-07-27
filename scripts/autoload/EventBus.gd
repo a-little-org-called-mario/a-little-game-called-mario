@@ -66,3 +66,6 @@ signal volume_changed(data)
 # Environmental
 signal big_button_pressed(button_id)
 signal show_all_portals()
+
+# Notes
+signal note_added(name, desc, sprite, spriteScale)

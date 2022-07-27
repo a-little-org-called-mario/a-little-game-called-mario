@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/ui/TextTrigger.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/NPCs/blug.png" type="Texture" id=2]
 [ext_resource path="res://scripts/friends/Blug.gd" type="Script" id=3]
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 512 )
@@ -22,3 +23,8 @@ texture = ExtResource( 2 )
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 1 )
+
+[node name="NotesNewTrigger" parent="." instance=ExtResource( 4 )]
+pageName = "blug"
+pageDesc = "blug"
+pageSprite = "blug"

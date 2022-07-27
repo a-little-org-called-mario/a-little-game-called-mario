@@ -24,18 +24,18 @@ func _ready():
 
 
 func _process(delta):
-	toggle_visible()
+	if Input.is_action_just_pressed("show_notes"):
+		toggle_visible()
 
 
 func toggle_visible():
-	if Input.is_action_just_pressed("show_notes"):
-		if _hbox.visible:
-			_hbox.visible = false
-			get_tree().paused = false
-		elif get_tree().paused == false:
-			_hbox.visible = true
-			_list.get_child(0).grab_focus()
-			get_tree().paused = true
+	if _hbox.visible:
+		_hbox.visible = false
+		get_tree().paused = false
+	elif get_tree().paused == false:
+		_hbox.visible = true
+		_list.get_child(0).grab_focus()
+		get_tree().paused = true
 
 
 func remove_pages():

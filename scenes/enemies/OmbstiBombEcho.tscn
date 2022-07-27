@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/enemies/OmbstiBomb.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/enemies/SmallExplodeAttackEcho.tscn" type="PackedScene" id=2]
+
+[node name="OmbstiBombEcho" instance=ExtResource( 1 )]
+bombType = "echo"
+exploScene = ExtResource( 2 )

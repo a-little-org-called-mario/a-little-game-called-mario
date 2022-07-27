@@ -6,6 +6,7 @@ export var healthTwo = 45
 
 var badCoinScene = preload("res://scenes/enemies/BadCoin.tscn")
 var luigiEnemyScene = preload("res://scenes/enemies/Luigi.tscn")
+var gassyExitScene = preload("res://scenes/bosses/GassyExit.tscn")
 
 onready var _anim_play := $AnimationPlayer
 onready var _att_play := $AttackPlayer
@@ -246,4 +247,11 @@ func rotate_pivot(pivSpeed):
 func _on_animate_finished(paNa, anId):
 	if paNa == "MegaBoss":
 		set_active()
+
+
+func _handle_dying(_killer):
+	var gassy = gassyExitScene.instance()
+	get_parent().get_parent().add_child(gassy)
+	connect("dead", gassy, "_on_boss_dead")
+	gassy.global_position = global_position
 

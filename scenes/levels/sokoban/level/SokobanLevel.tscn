@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/levels/sokoban/level/SokobanLevel.gd" type="Script" id=1]
+[ext_resource path="res://scenes/levels/sokoban/level/sokoban_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/title/Background.gd" type="Script" id=3]
+[ext_resource path="res://sprites/bg-tile.png" type="Texture" id=4]
+[ext_resource path="res://scenes/levels/sokoban/character/SokobanPlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/levels/sokoban/level/SokobanTouch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/music/gassysokoban.mp3" type="AudioStream" id=7]
+[ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/levels/sokoban/00_menu.tscn" type="PackedScene" id=9]
+
+[node name="SokobanLevel" type="Node2D"]
+script = ExtResource( 1 )
+level_select_menu = ExtResource( 9 )
+ground = NodePath("Grid/Ground")
+hole_tile = "Hole"
+boxes = NodePath("Grid/Boxes")
+box_tile = "Box"
+player = NodePath("Grid/SokobanPlayer")
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -433, -225 )
+scale = Vector2( 1.25, 1.25 )
+texture = ExtResource( 4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Grid" type="Node2D" parent="."]
+
+[node name="Ground" type="TileMap" parent="Grid"]
+tile_set = ExtResource( 2 )
+collision_layer = 2
+collision_mask = 0
+format = 1
+
+[node name="Boxes" type="TileMap" parent="Grid"]
+tile_set = ExtResource( 2 )
+collision_layer = 2
+collision_mask = 0
+format = 1
+
+[node name="SokobanPlayer" parent="Grid" instance=ExtResource( 5 )]
+
+[node name="SokobanTouch" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -12.134
+autoplay = true
+bus = "music"
+
+[node name="Instructions" parent="." instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 688.0
+margin_top = 32.0
+margin_right = 992.0
+margin_bottom = 176.0
+
+[node name="RichTextLabel" parent="Instructions" index="0"]
+bbcode_enabled = false
+bbcode_text = "
+[ARROWS]    MOVE
+[R]         RESTART
+[BACKSPACE] UNDO
+[ESC/P]     MAIN MENU"
+text = "
+[ARROWS]    MOVE
+[R]         RESTART
+[BACKSPACE] UNDO
+[ESC/P]     MAIN MENU"
+
+[node name="VScrollBar2" type="VScrollBar" parent="Instructions/RichTextLabel" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 85.0
+step = 1.0
+page = 96.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Instructions/RichTextLabel" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[connection signal="box_moved" from="." to="." method="_on_box_moved"]
+[connection signal="player_moved" from="Grid/SokobanPlayer" to="." method="move_player"]
+
+[editable path="Instructions"]

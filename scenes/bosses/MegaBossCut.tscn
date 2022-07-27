@@ -37,6 +37,11 @@ animations = [ {
 "loop": false,
 "name": "default",
 "speed": 10.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "gassy",
+"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=9]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/title/options/controls/CheckboxOption.gd" type="Script" id=1]
+[ext_resource path="res://scenes/title/options/controls/BaseOption.tscn" type="PackedScene" id=2]
+
+[node name="CheckboxOption" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+value_label_mapping = {
+false: "OFF",
+true: "ON"
+}
+control_nodepath = NodePath("CheckBox")
+
+[node name="CheckBox" type="CheckBox" parent="." index="2"]
+margin_left = 190.0
+margin_right = 220.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 40 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+
+[node name="ValueLabel" parent="." index="3"]
+margin_left = 224.0
+margin_right = 260.0
+text = "OFF"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="toggled" from="CheckBox" to="." method="_on_value_changed"]

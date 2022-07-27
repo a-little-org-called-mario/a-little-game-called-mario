@@ -1,0 +1,58 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/enemies/SmallExplodeAttack.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/projectiles/ombsti_bomb.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 2 )
+region = Rect2( 512, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 2 )
+region = Rect2( 576, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 640, 48, 64, 48 )
+
+[sub_resource type="SpriteFrames" id=35]
+animations = [ {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="SmallExplodeEcho" instance=ExtResource( 1 )]
+damage = 3
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 35 )

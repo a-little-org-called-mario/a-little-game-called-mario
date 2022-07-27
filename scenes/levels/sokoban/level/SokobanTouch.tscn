@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/touch_input.png" type="Texture" id=1]
+[ext_resource path="res://scenes/levels/sokoban/level/SokobanTouch.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 0, 48, 48 )
+
+[node name="SokobanTouch" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2( 8, 456 )
+scale = Vector2( 1.5, 1.5 )
+normal = SubResource( 1 )
+action = "left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2( 224, 528 )
+rotation = 3.14159
+scale = Vector2( 1.5, 1.5 )
+normal = SubResource( 1 )
+action = "right"
+visibility_mode = 1
+
+[node name="Up" type="TouchScreenButton" parent="."]
+position = Vector2( 152, 392 )
+rotation = 1.5708
+scale = Vector2( 1.5, 1.5 )
+normal = SubResource( 1 )
+action = "up"
+visibility_mode = 1
+
+[node name="Exit" type="TouchScreenButton" parent="."]
+position = Vector2( 16, 16 )
+scale = Vector2( 1.5, 1.5 )
+normal = SubResource( 5 )
+action = "pause"
+visibility_mode = 1
+
+[node name="Undo" type="TouchScreenButton" parent="."]
+position = Vector2( 840, 456 )
+scale = Vector2( 1.5, 1.5 )
+normal = SubResource( 4 )
+action = "undo"
+visibility_mode = 1
+
+[node name="Down" type="TouchScreenButton" parent="."]
+position = Vector2( 80, 592 )
+rotation = -1.5708
+scale = Vector2( 1.5, 1.5 )
+normal = SubResource( 1 )
+action = "down"
+visibility_mode = 1

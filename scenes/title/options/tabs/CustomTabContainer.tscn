@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/title/options/tabs/CustomTabContainer.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.243137, 0.231373, 0.27451, 1 )
+
+[node name="CustomTabContainer" type="VBoxContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -350.0
+margin_top = -120.0
+margin_right = 350.0
+margin_bottom = 120.0
+custom_constants/separation = 0
+script = ExtResource( 1 )
+tabs_nodepath = NodePath("Tabs")
+panels_nodepath = NodePath("Panel")
+
+[node name="Tabs" type="HBoxContainer" parent="."]
+margin_right = 700.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+margin_top = 40.0
+margin_right = 700.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 700, 200 )
+custom_styles/panel = SubResource( 6 )

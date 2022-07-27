@@ -51,4 +51,5 @@ func _process (dt: float):
 	# Maintains an infinite looping path which will be broken when we exit the dialogue
 	if 1 == $Path/Marwing.unit_offset: $Path/Marwing.unit_offset = 0;
 	if $DialogueBox.done:
-		pass # this is where eventually we'll yield and then move to the next level
+		# this is where eventually we'll yield and then move to the next level
+		EventBus.emit_signal("level_exited")

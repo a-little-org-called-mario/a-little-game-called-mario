@@ -3,7 +3,7 @@ extends CanvasLayer
 
 var pages = {}
 
-var noteButton = preload("res://scenes/ui/NotesButton.tscn")
+export (PackedScene) var noteButton
 
 onready var _list := $Hbox/Scroll/VBox
 onready var _sprite := $Hbox/VBox/Panel/Sprite

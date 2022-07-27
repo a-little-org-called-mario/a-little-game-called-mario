@@ -177,6 +177,7 @@ font_data = ExtResource( 1 )
 pause_mode = 2
 layer = 2
 script = ExtResource( 3 )
+noteButton = ExtResource( 4 )
 
 [node name="Hbox" type="HBoxContainer" parent="."]
 pause_mode = 2
@@ -256,7 +257,7 @@ position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "bus"
-frame = 2
+frame = 3
 playing = true
 __meta__ = {
 "_editor_description_": "The animation played by this node is the \"Page Sprite\" set using a NotesNewTrigger."

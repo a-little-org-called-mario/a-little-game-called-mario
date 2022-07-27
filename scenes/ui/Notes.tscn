@@ -257,7 +257,6 @@ position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "bus"
-frame = 3
 playing = true
 __meta__ = {
 "_editor_description_": "The animation played by this node is the \"Page Sprite\" set using a NotesNewTrigger."

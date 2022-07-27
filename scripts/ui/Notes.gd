@@ -40,7 +40,6 @@ func remove_pages():
 
 func add_page(name, desc, sprite, spriteScale):
 	pages[name] = {"desc": desc, "sprite" : sprite, "scale" : spriteScale}
-	add_button(name)
 
 
 func add_button(name):
@@ -51,12 +50,9 @@ func add_button(name):
 
 
 func _on_note_added(name, desc, sprite, spriteScale):
-	# prevent duplicates
-	var found = pages.has(name)
-	
-	# add a new page
-	if not found:
-		add_page(name, desc, sprite, spriteScale)
+	if not pages.has(name):
+		add_button(name)
+	add_page(name, desc, sprite, spriteScale)
 
 
 func _on_page_changed(pageName):

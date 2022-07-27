@@ -32,46 +32,6 @@ region = Rect2( 380, 0, 190, 80 )
 atlas = ExtResource( 11 )
 region = Rect2( 570, 0, 190, 80 )
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 9 )
-region = Rect2( 40, 0, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 9 )
-region = Rect2( 80, 0, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 9 )
-region = Rect2( 120, 0, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 40, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 9 )
-region = Rect2( 40, 40, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 9 )
-region = Rect2( 80, 40, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 9 )
-region = Rect2( 120, 40, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 80, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 9 )
-region = Rect2( 40, 80, 40, 40 )
-
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 32, 32, 32 )
@@ -120,6 +80,46 @@ region = Rect2( 64, 16, 16, 16 )
 atlas = ExtResource( 8 )
 region = Rect2( 80, 16, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 9 )
+region = Rect2( 80, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 9 )
+region = Rect2( 120, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 9 )
+region = Rect2( 80, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 9 )
+region = Rect2( 120, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 80, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 80, 40, 40 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
@@ -132,19 +132,9 @@ animations = [ {
 "name": "fire_flower",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
-"loop": true,
-"name": "grapeburst_pie",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "little_mario",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
-"loop": true,
-"name": "bub",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 5 ) ],
@@ -152,15 +142,25 @@ animations = [ {
 "name": "blug",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "ball_mario",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "tutorial",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
-"name": "ball_mario",
-"speed": 5.0
+"name": "bub",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "grapeburst_pie",
+"speed": 10.0
 } ]
 
 [sub_resource type="DynamicFont" id=3]
@@ -256,7 +256,6 @@ position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "bus"
-frame = 1
 playing = true
 __meta__ = {
 "_editor_description_": "The animation played by this node is the \"Page Sprite\" set using a NotesNewTrigger."

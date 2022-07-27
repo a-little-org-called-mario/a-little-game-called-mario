@@ -25,3 +25,5 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 3 )
 text = "Little Mario"
 script = ExtResource( 2 )
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]

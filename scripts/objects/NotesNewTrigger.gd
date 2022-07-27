@@ -1,8 +1,8 @@
 extends Area2D
 
 
-export var pageName = "blank"
-export var pageDesc = "blank blank more blank blank blank change this etc"
+export (String) var pageName = "blank"
+export (String, MULTILINE) var pageDesc = "blank blank more blank blank blank change this etc"
 export var pageSprite = "little_mario"
 
 

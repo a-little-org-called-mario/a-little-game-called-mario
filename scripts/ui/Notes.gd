@@ -4,7 +4,6 @@ extends CanvasLayer
 var pages = {}
 
 var noteButton = preload("res://scenes/ui/NotesButton.tscn")
-var nextPageID = 0
 
 onready var _list := $Hbox/Scroll/VBox
 onready var _sprite := $Hbox/VBox/Panel/Sprite

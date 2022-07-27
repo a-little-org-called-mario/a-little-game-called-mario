@@ -5,7 +5,7 @@ var pageID = 0
 var canChangeFocus = true
 
 
-signal change_page(pageID)
+signal page_changed(pageID)
 
 
 func _process(delta):
@@ -36,5 +36,5 @@ func change_focus(fOwner):
 func emit_current_focus(fOwner):
 	# tell Notes what page to display
 	if fOwner == self:
-		emit_signal("change_page", pageID)
+		emit_signal("page_changed", pageID)
 

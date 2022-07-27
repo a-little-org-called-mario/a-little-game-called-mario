@@ -17,10 +17,10 @@ onready var _hbox := $Hbox
 
 func _ready():
 	$Hbox.visible = false
-	EventBus.connect("add_to_notes", self, "_on_add_to_notes")
+	EventBus.connect("note_added", self, "_on_note_added")
 	remove_pages()
 	add_button()
-	_on_change_page(0)
+	_on_page_changed(0)
 
 
 func _process(delta):
@@ -52,7 +52,7 @@ func add_button():
 	var button = noteButton.instance()
 	button.text = pages[nextPageID].name
 	button.pageID = nextPageID
-	button.connect("change_page", self, "_on_change_page")
+	button.connect("page_changed", self, "_on_page_changed")
 	_list.add_child(button)
 	nextPageID += 1
 
@@ -70,7 +70,7 @@ func reset_focus():
 			buttons[i].focus_neighbour_bottom = buttons[i+1].get_path()
 
 
-func _on_add_to_notes(name, desc, sprite):
+func _on_note_added(name, desc, sprite):
 	# prevent duplicates
 	var found = false
 	for page in pages:
@@ -84,7 +84,7 @@ func _on_add_to_notes(name, desc, sprite):
 		reset_focus()
 
 
-func _on_change_page(pageID):
+func _on_page_changed(pageID):
 	_name.text = pages[pageID].name
 	_desc.text = pages[pageID].desc
 	_sprite.animation = pages[pageID].sprite

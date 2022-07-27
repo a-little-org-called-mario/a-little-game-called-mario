@@ -122,6 +122,11 @@ region = Rect2( 80, 16, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "bus",
+"speed": 15.0
+}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "fire_flower",
@@ -132,24 +137,19 @@ animations = [ {
 "name": "ball_mario",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
-"loop": true,
-"name": "bus",
-"speed": 15.0
-}, {
 "frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": true,
 "name": "grapeburst_pie",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "blug",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "little_mario",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "bub",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 7 ) ],
@@ -157,10 +157,10 @@ animations = [ {
 "name": "tutorial",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "bub",
-"speed": 10.0
+"name": "blug",
+"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=3]
@@ -256,6 +256,7 @@ position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "bus"
+frame = 2
 playing = true
 
 [node name="Center" type="CenterContainer" parent="Hbox/VBox"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/SpawnPoint.gd" type="Script" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://scripts/BasicDialogue.gd" type="Script" id=7]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/DialogueTrigger.gd" type="Script" id=9]
-
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=10]
 
 [sub_resource type="GDScript" id=17]
 script/source = "extends Node2D
@@ -118,6 +118,9 @@ tracks/2/keys = {
 "values": [ 0.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 256, 64 )
+
 [sub_resource type="CircleShape2D" id=6]
 radius = 40.0
 
@@ -176,6 +179,14 @@ autoplay = "bounce"
 anims/RESET = SubResource( 18 )
 anims/bounce = SubResource( 19 )
 
+[node name="NotesNewTrigger" parent="BallMario" instance=ExtResource( 10 )]
+pageName = "Ball Mario"
+pageDesc = "A mischievous basketball-shaped person. Despite his coin allergy, he always seems to be seeking ways to get more money. Something about his appearance seems kind of... familiar?"
+pageSprite = "ball_mario"
+
+[node name="Collision" parent="BallMario/NotesNewTrigger" index="0"]
+shape = SubResource( 20 )
+
 [node name="DialogueTrigger" type="Area2D" parent="."]
 position = Vector2( 448, 472 )
 collision_layer = 0
@@ -210,3 +221,5 @@ margin_bottom = 392.0
 custom_fonts/font = ExtResource( 3 )
 text = "NAH"
 align = 1
+
+[editable path="BallMario/NotesNewTrigger"]

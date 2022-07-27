@@ -256,7 +256,6 @@ position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "bus"
-frame = 2
 playing = true
 
 [node name="Center" type="CenterContainer" parent="Hbox/VBox"]

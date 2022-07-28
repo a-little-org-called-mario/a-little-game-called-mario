@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -15,7 +15,7 @@
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/FollowTrigger.tscn" type="PackedScene" id=14]
 [ext_resource path="res://audio/sfx/luigi_my_coins.wav" type="AudioStream" id=15]
-
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 64 )
@@ -236,6 +236,9 @@ tracks/6/keys = {
 } ]
 }
 
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 512, 128 )
+
 [sub_resource type="GDScript" id=9]
 script/source = "extends Node2D
 
@@ -370,6 +373,14 @@ is_mortal = true
 max_health = 20
 fireball_count = 5
 fireball_cooldown = 6.0
+
+[node name="NotesNewTrigger" parent="Luigi" instance=ExtResource( 16 )]
+pageName = "Mega Lawrence"
+pageDesc = "That's my brother, Mega Lawrence! We don't get along very well. He exploited workers to become extremely wealthy, going completely against the core values of our family."
+pageSprite = "mega_lawrence"
+
+[node name="Collision" parent="Luigi/NotesNewTrigger" index="0"]
+shape = SubResource( 20 )
 
 [node name="Star" type="Node2D" parent="."]
 position = Vector2( 616, 104 )
@@ -528,3 +539,5 @@ format = 1
 tile_data = PoolIntArray( 393225, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0 )
 
 [connection signal="luigi_defeated" from="Luigi" to="TempTiles" method="queue_free" flags=6]
+
+[editable path="Luigi/NotesNewTrigger"]

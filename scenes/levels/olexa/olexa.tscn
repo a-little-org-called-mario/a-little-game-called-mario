@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -7,9 +7,13 @@
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/BasicDialogue.gd" type="Script" id=7]
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 45, 63 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 256, 64 )
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -25,7 +29,6 @@ collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -13, -3 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="WizardDude" type="Sprite" parent="Area2D"]
@@ -42,14 +45,23 @@ grow_vertical = 2
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 5 )
 bbcode_enabled = true
-visible_characters = 992
-percent_visible = 9.10092
 tab_size = 10
 text = "HELLO MOUSTACHIO MAN. LEGENDS SAY THAT ONCE YOU JUMP IN THIS ROOM 100000 tTIMES SOMETHING MAY OR MAY NOT HAPPEN."
 fit_content_height = true
 custom_effects = [ null ]
 script = ExtResource( 7 )
 dialogue = [ "Hey, Mario", "I heard Luigi has some fat cash in his mansion", "You up for a stealth mission?" ]
+
+[node name="NotesNewTrigger" parent="Area2D" instance=ExtResource( 8 )]
+pageName = "Axelo"
+pageDesc = "After breaking a promise made in a random Descard server, Axelo was sent to this world for eternity as punishment.
+
+Well known on OurTube and Witch."
+pageSprite = "axelo"
+pageSpriteScale = Vector2( 3, 3 )
+
+[node name="Collision" parent="Area2D/NotesNewTrigger" index="0"]
+shape = SubResource( 2 )
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
 position = Vector2( 71, 374 )
@@ -63,3 +75,5 @@ position = Vector2( 35, 5 )
 
 [node name="EndPortal" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 733, 326 )
+
+[editable path="Area2D/NotesNewTrigger"]

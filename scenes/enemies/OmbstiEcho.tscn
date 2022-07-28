@@ -117,3 +117,10 @@ frames = SubResource( 27 )
 
 [node name="HeldSprite" parent="." index="8"]
 frames = SubResource( 42 )
+
+[node name="NotesNewTrigger" parent="." index="10"]
+pageName = "Echo Ombsti"
+pageDesc = "A copy of an Ombsti that has no soul. Capable of feeling nothing but rage, they seek out destruction at every moment."
+pageSprite = "echo_ombsti"
+
+[editable path="NotesNewTrigger"]

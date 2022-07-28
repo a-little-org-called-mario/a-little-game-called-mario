@@ -5,8 +5,8 @@ export (String, FILE, "*.tscn") var redirect_scene
 export (bool) var focused_by_default = false
 
 
-var selected_icon = self.icon
-var unselected_icon = ImageTexture.new()
+onready var selected_icon = self.icon
+onready var unselected_icon = ImageTexture.new() if selected_icon else null
 
 
 func _ready():
@@ -18,9 +18,10 @@ func _ready():
 	self.connect("mouse_exited", self, "release_focus")
 	
 	# Copy of image with transparent color
-	var img = selected_icon.get_data()
-	img.fill(Color(0,0,0,0))
-	unselected_icon.create_from_image(img)
+	if selected_icon:
+		var img = selected_icon.get_data()
+		img.fill(Color(0,0,0,0))
+		unselected_icon.create_from_image(img)
 
 	self.icon = unselected_icon
 

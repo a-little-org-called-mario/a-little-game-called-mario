@@ -108,7 +108,9 @@ pageSprite = "tutorial"
 [node name="NotesNewTrigger2" parent="Objects" instance=ExtResource( 16 )]
 position = Vector2( 155, 448 )
 pageName = "Little Mario"
-pageDesc = "Hey, that's me, Little Mario! This is where I make notes about my adventures! As I meet new people and make new discoveries, I'm going to make sure to write all about them here!"
+pageDesc = "Hey, that's me, Little Mario!
+
+This is where I make notes about my adventures! As I meet new people and make new discoveries, I'm going to make sure to write all about them here!"
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -121,7 +123,7 @@ max_speed = 0.0
 
 [node name="proj_id_54" parent="NPCs" instance=ExtResource( 7 )]
 position = Vector2( -2208, 208 )
-frame = 1
+frame = 2
 
 [node name="Decorations" type="Node2D" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Corncob.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -350,5 +351,13 @@ position = Vector2( 832, 168 )
 
 [node name="Corncob6" parent="." instance=ExtResource( 9 )]
 position = Vector2( 888, 168 )
+
+[node name="NotesNewTrigger" parent="." instance=ExtResource( 11 )]
+position = Vector2( 192, 448 )
+pageName = "Cario Mart"
+pageDesc = "This was an intense finale. Perfect for my favourite show!
+
+I hope no one noticed I don't have a driving licence."
+pageSprite = "cario_mart"
 
 [editable path="PictureFrame"]

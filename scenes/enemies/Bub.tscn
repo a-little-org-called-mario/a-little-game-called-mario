@@ -401,6 +401,7 @@ position = Vector2( -12, 1.5 )
 [node name="Sprite" parent="." index="2"]
 frames = SubResource( 3 )
 animation = "idle"
+frame = 1
 playing = true
 offset = Vector2( 0, -32 )
 
@@ -463,7 +464,9 @@ bus = "sfx"
 
 [node name="NotesNewTrigger" parent="." index="12" instance=ExtResource( 10 )]
 pageName = "Bub"
-pageDesc = "These little people are called Bubs. if you see a Bub with a gun, it's probably a ruthless mercenary hired by a mysterious man known as \"Bubs\". The lack of arms will heavily disadvantage a Bub in basketball."
+pageDesc = "These little people are called Bubs. if you see a Bub with a gun, it's probably a ruthless mercenary hired by a mysterious man known as \"Bubs\".
+
+The lack of arms will heavily disadvantage a Bub in basketball."
 pageSprite = "bub"
 pageSpriteScale = Vector2( 3, 3 )
 

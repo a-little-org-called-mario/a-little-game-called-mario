@@ -115,7 +115,9 @@ position = Vector2( -128, 192 )
 [node name="NotesNewTrigger" parent="." instance=ExtResource( 10 )]
 position = Vector2( 96, -128 )
 pageName = "Little Mario"
-pageDesc = "Hey, that's me, Little Mario! This is where I make notes about my adventures! As I meet new people and make new discoveries, I'm going to make sure to write all about them here!"
+pageDesc = "Hey, that's me, Little Mario!
+
+This is where I make notes about my adventures! As I meet new people and make new discoveries, I'm going to make sure to write all about them here!"
 
 [editable path="Instructions"]
 [editable path="PictureFrameStar"]

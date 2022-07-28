@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/cutscene/GassyExit.gd" type="Script" id=1]
 [ext_resource path="res://sprites/gassy-randal.png" type="Texture" id=2]
 [ext_resource path="res://audio/sfx/enemies/boss_death.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -62,6 +63,9 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.992187, 0 ), -2.81212, 0.0
 offsets = PoolRealArray( 0.592275, 1 )
 colors = PoolColorArray( 0.207843, 0.882353, 0.141176, 1, 1, 1, 1, 0 )
 
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 768, 512 )
+
 [node name="GassyExit" type="AnimatedSprite"]
 frames = SubResource( 2 )
 script = ExtResource( 1 )
@@ -70,7 +74,7 @@ script = ExtResource( 1 )
 scale = Vector2( 1.25, 1.25 )
 z_index = -1
 frames = SubResource( 8 )
-frame = 4
+frame = 1
 playing = true
 
 [node name="Cloud2" type="AnimatedSprite" parent="."]
@@ -112,4 +116,15 @@ hue_variation_random = 1.0
 stream = ExtResource( 3 )
 bus = "sfx"
 
+[node name="NotesNewTrigger" parent="." instance=ExtResource( 4 )]
+pageName = "Mega Lawrence 2"
+pageDesc = "The real Mega Lawrence was killed in the Great Chaos. Gassy Randall found his dead body and stole its DNA. Taking on his appearnce, Gassy Randall took control over Lawrence's companies and used his riches for his own evil schemes."
+pageSprite = "mega_lawrence_2"
+
+[node name="Collision" parent="NotesNewTrigger" index="0"]
+position = Vector2( -768, 0 )
+shape = SubResource( 12 )
+
 [connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]
+
+[editable path="NotesNewTrigger"]

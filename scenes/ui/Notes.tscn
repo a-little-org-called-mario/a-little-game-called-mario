@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -12,8 +12,15 @@
 [ext_resource path="res://sprites/ballmario.png" type="Texture" id=10]
 [ext_resource path="res://sprites/powerups/Mario Bus driving-Sheet-export.png" type="Texture" id=11]
 [ext_resource path="res://sprites/jacob_face.jpg" type="Texture" id=12]
+[ext_resource path="res://sprites/enemies/ombsti.png" type="Texture" id=13]
 [ext_resource path="res://scenes/ui/Themes/NoteBoxPress.tres" type="StyleBox" id=14]
 [ext_resource path="res://scenes/ui/Themes/NoteBoxFocus.tres" type="StyleBox" id=15]
+[ext_resource path="res://sprites/Coin_Gems/MonedaD.png" type="Texture" id=16]
+[ext_resource path="res://sprites/enemies/ombsti_echo.png" type="Texture" id=17]
+[ext_resource path="res://sprites/luigi.png" type="Texture" id=18]
+[ext_resource path="res://sprites/bosses/mega_lawrence_boss.png" type="Texture" id=19]
+[ext_resource path="res://sprites/Wizard dude.png" type="Texture" id=20]
+[ext_resource path="res://graphics/sprites/carmario/cario.png" type="Texture" id=21]
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 1 )
@@ -33,6 +40,118 @@ region = Rect2( 380, 0, 190, 80 )
 [sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 11 )
 region = Rect2( 570, 0, 190, 80 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 21 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 21 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 21 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 19 )
+region = Rect2( 80, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 19 )
+region = Rect2( 160, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 19 )
+region = Rect2( 240, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 31, 31 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 9 )
+region = Rect2( 80, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 9 )
+region = Rect2( 120, 0, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 9 )
+region = Rect2( 80, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 9 )
+region = Rect2( 120, 40, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 80, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 9 )
+region = Rect2( 40, 80, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 48, 64, 48 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 18 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 18 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 18 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 18 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 18 )
+region = Rect2( 160, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
@@ -82,45 +201,25 @@ region = Rect2( 64, 16, 16, 16 )
 atlas = ExtResource( 8 )
 region = Rect2( 80, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 40, 40 )
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 9 )
-region = Rect2( 40, 0, 40, 40 )
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 16 )
+region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 9 )
-region = Rect2( 80, 0, 40, 40 )
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 16 )
+region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 9 )
-region = Rect2( 120, 0, 40, 40 )
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 16 )
+region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 40, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 9 )
-region = Rect2( 40, 40, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 9 )
-region = Rect2( 80, 40, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 9 )
-region = Rect2( 120, 40, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 80, 40, 40 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 9 )
-region = Rect2( 40, 80, 40, 40 )
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 16 )
+region = Rect2( 64, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -128,6 +227,46 @@ animations = [ {
 "loop": true,
 "name": "bus",
 "speed": 15.0
+}, {
+"frames": [ SubResource( 54 ), SubResource( 55 ), SubResource( 56 ) ],
+"loop": true,
+"name": "cario_mart",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ) ],
+"loop": true,
+"name": "mega_lawrence_2",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "ombsti",
+"speed": 3.0
+}, {
+"frames": [ SubResource( 49 ) ],
+"loop": true,
+"name": "axelo",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "grapeburst_pie",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "ball_mario",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 36 ), SubResource( 37 ) ],
+"loop": true,
+"name": "echo_ombsti",
+"speed": 2.0
+}, {
+"frames": [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ) ],
+"loop": true,
+"name": "mega_lawrence",
+"speed": 10.0
 }, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
@@ -144,25 +283,20 @@ animations = [ {
 "name": "blug",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
-"name": "ball_mario",
-"speed": 5.0
+"name": "bub",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "tutorial",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 38 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
 "loop": true,
-"name": "bub",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
-"loop": true,
-"name": "grapeburst_pie",
-"speed": 10.0
+"name": "coin",
+"speed": 8.0
 } ]
 
 [sub_resource type="DynamicFont" id=3]
@@ -217,8 +351,6 @@ rect_min_size = Vector2( 256, 0 )
 [node name="Button" parent="Hbox/Scroll/VBox" instance=ExtResource( 4 )]
 margin_right = 256.0
 margin_bottom = 23.0
-custom_colors/font_color_focus = Color( 0.133333, 0.137255, 0.223529, 1 )
-custom_colors/font_color_hover = Color( 0.235294, 0.419608, 0.588235, 1 )
 
 [node name="Button2" type="Button" parent="Hbox/Scroll/VBox"]
 margin_top = 27.0
@@ -267,8 +399,8 @@ pause_mode = 2
 position = Vector2( 256, 128 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
-animation = "bus"
-frame = 1
+animation = "cario_mart"
+frame = 2
 playing = true
 __meta__ = {
 "_editor_description_": "The animation played by this node is the \"Page Sprite\" set using a NotesNewTrigger."

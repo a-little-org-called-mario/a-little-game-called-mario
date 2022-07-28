@@ -181,7 +181,9 @@ anims/bounce = SubResource( 19 )
 
 [node name="NotesNewTrigger" parent="BallMario" instance=ExtResource( 10 )]
 pageName = "Ball Mario"
-pageDesc = "A mischievous basketball-shaped person. Despite his coin allergy, he always seems to be seeking ways to get more money. Something about his appearance seems kind of... familiar?"
+pageDesc = "A mischievous basketball-shaped person. Despite his coin allergy, he always seems to be seeking ways to get more money.
+
+Something about his appearance seems kind of... familiar?"
 pageSprite = "ball_mario"
 
 [node name="Collision" parent="BallMario/NotesNewTrigger" index="0"]

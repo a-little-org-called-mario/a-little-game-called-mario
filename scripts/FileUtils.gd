@@ -58,6 +58,16 @@ static func get_dir_name(levelPath: String) -> String:
 	return regex.search(levelPath).get_string(1)
 
 
+static func get_level_metadata(level_path: String) -> LevelMetadata:
+	var metadata_path = level_path.rsplit('/', true, 1)[0] + '/metadata/metadata.tres'
+	if ResourceLoader.exists(metadata_path):
+		var metadata = ResourceLoader.load(metadata_path) as LevelMetadata
+		if not metadata.first_level_path:
+			metadata.first_level_path = level_path
+		return metadata
+	return LevelMetadata.new(level_path)
+
+
 static func get_all_first_levels_in_dir(path: String) -> Array:
 	var levels := []
 	var dir := Directory.new()

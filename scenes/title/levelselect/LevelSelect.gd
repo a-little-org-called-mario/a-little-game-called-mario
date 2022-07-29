@@ -12,13 +12,13 @@ func _ready():
 
 
 func _on_StartButton_pressed():
-	var next_level = null
+	var metadata: LevelMetadata = null
 	for level in level_list.get_selected_items():
-		next_level = level_list.get_item_metadata(level)
+		metadata = level_list.get_item_metadata(level)
 		break
-	if not next_level:
+	if not metadata:
 		return
-	_start_level(next_level)
+	_start_level(metadata.first_level_path)
 
 
 func _start_level(next_level):
@@ -35,5 +35,5 @@ func _exit_to_menu():
 
 
 func _on_LevelList_item_activated(index):
-	var next_level = level_list.get_item_metadata(index)
-	_start_level(next_level)
+	var metadata: LevelMetadata = level_list.get_item_metadata(index)
+	_start_level(metadata.first_level_path)

@@ -12,6 +12,9 @@ custom_constants/vseparation = 15
 script = ExtResource( 2 )
 level_directory = "res://scenes/levels"
 icon = ExtResource( 3 )
+tag_colors = {
+"game mode": Color( 0.27451, 0.705882, 0.470588, 1 )
+}
 
 [connection signal="item_selected" from="." to="." method="_on_item_selected"]
 [connection signal="tree_entered" from="." to="." method="grab_focus"]

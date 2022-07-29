@@ -16,6 +16,12 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.75, 0.75, 0.75, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.94, 0.94, 0.94, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -115,7 +121,11 @@ __meta__ = {
 anchor_left = 0.046875
 anchor_top = 0.24
 anchor_right = 0.6875
-anchor_bottom = 0.853333
+anchor_bottom = 0.96
+focus_neighbour_left = NodePath("../BackButton")
+focus_neighbour_right = NodePath("../StartButton")
+focus_next = NodePath("../StartButton")
+focus_previous = NodePath("../BackButton")
 
 [node name="StartButton" type="Button" parent="Menu"]
 anchor_left = 1.0
@@ -127,11 +137,13 @@ margin_top = -72.0
 margin_right = -64.0
 margin_bottom = -22.0
 rect_min_size = Vector2( 192, 40 )
+focus_neighbour_left = NodePath("../LevelList")
 theme = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 0.8, 0.8, 0.8, 1 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 3 )
 custom_styles/normal = SubResource( 2 )
 text = "Start"
 
@@ -140,6 +152,7 @@ margin_left = 24.0
 margin_top = 40.0
 margin_right = 190.0
 margin_bottom = 92.0
+focus_neighbour_right = NodePath("../LevelList")
 shortcut_in_tooltip = false
 shortcut = SubResource( 6 )
 text = "< BACK"
@@ -147,4 +160,5 @@ icon = null
 redirect_scene = "res://scenes/title/TitleScreen.tscn"
 
 [connection signal="item_activated" from="Menu/LevelList" to="." method="_on_LevelList_item_activated"]
+[connection signal="tree_entered" from="Menu/LevelList" to="Menu/LevelList" method="grab_focus"]
 [connection signal="pressed" from="Menu/StartButton" to="." method="_on_StartButton_pressed"]

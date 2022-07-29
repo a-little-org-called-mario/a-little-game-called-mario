@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/title/levelselect/LevelList.gd" type="Script" id=2]
+[ext_resource path="res://sprites/corncob.png" type="Texture" id=3]
 
 [node name="LevelList" type="ItemList"]
 anchor_right = 1.0
@@ -10,3 +11,7 @@ theme = ExtResource( 1 )
 custom_constants/vseparation = 15
 script = ExtResource( 2 )
 level_directory = "res://scenes/levels"
+icon = ExtResource( 3 )
+
+[connection signal="item_selected" from="." to="." method="_on_item_selected"]
+[connection signal="tree_entered" from="." to="." method="grab_focus"]

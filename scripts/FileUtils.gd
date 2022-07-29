@@ -105,3 +105,22 @@ static func get_first_level_in_dir(path: String) -> String:
 		return levels[0]
 	else:
 		return ""
+
+
+static func get_all_levels_in_dir(path: String) -> Array:
+	var result := []
+	var levels_dir := Directory.new()
+	if levels_dir.open(path) != OK:
+		return result
+	levels_dir.list_dir_begin()
+	var dir := levels_dir.get_next()
+	while dir != "":
+		if dir != "." and dir != ".." and levels_dir.current_is_dir():
+			var levels = list_dir("%s/%s" % [path, dir])
+			for level in levels:
+				if level.ends_with(".tscn"):
+					result.append(level)
+		dir = levels_dir.get_next()
+	levels_dir.list_dir_end()
+	result.sort()
+	return result

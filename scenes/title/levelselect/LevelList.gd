@@ -6,20 +6,30 @@ export (String, DIR) var level_directory
 export (Texture) var icon
 export (Dictionary) var tag_colors
 
-onready var levels = FileUtils.get_all_first_levels_in_dir(level_directory)
-var last_item_selected = -1
+onready var secret: bool = Input.is_action_pressed("secret_button")
+var levels: Array = []
+var last_item_selected: int = -1
 
 
 func _ready():
-	_set_items(levels)
+	if secret:
+		levels = FileUtils.get_all_levels_in_dir(level_directory)
+	else: 
+		levels = FileUtils.get_all_first_levels_in_dir(level_directory)
+	_set_items(levels, secret)
 
 
-func _set_items(level_paths: Array) -> void:
+func _set_items(level_paths: Array, secret: bool = false) -> void:
 	self.clear()
 	var i = 0
 	for level_path in level_paths:
-		self.add_item(FileUtils.get_dir_name(level_path))
-		var metadata = FileUtils.get_level_metadata(level_path)
+		var level_name: String = FileUtils.get_dir_name(level_path)
+		if secret:
+			level_name += "/%s" % level_path.rsplit("/", true, 1)[1].replace(".tscn", "")
+		self.add_item(level_name)
+		var metadata: LevelMetadata = FileUtils.get_level_metadata(level_path)
+		if secret:
+			metadata.first_level_path = level_path
 		self.set_item_metadata(i, metadata)
 		i += 1
 

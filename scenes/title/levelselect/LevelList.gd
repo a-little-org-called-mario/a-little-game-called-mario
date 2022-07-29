@@ -22,9 +22,6 @@ func _set_items(level_paths: Array) -> void:
 		var metadata = FileUtils.get_level_metadata(level_path)
 		self.set_item_metadata(i, metadata)
 		i += 1
-	if len(level_paths) > 0:
-		self.select(0)
-		emit_signal("item_selected", 0)
 
 
 func set_item_metadata(idx: int, metadata) -> void:
@@ -35,7 +32,7 @@ func set_item_metadata(idx: int, metadata) -> void:
 
 
 func _set_item_tag(idx: int, tag: String):
-	var color = tag_colors.get(tag)
+	var color = tag_colors.get(tag, tag_colors.get("default"))
 	if color:
 		self.set_item_custom_fg_color(idx, color)
 

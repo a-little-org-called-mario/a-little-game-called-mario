@@ -51,8 +51,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
 root = ExtResource( 5 )
-level_list = NodePath("Menu/LevelList")
+level_list = NodePath("Menu/VBoxContainer/HBoxContainer/LevelList")
 menu = NodePath("Menu")
+description = NodePath("Menu/VBoxContainer/HBoxContainer/VBoxContainer/Panel/DescriptionRichLabel")
+preview_image = NodePath("Menu/VBoxContainer/HBoxContainer/VBoxContainer/Panel/PreviewTextureRect")
+tags = NodePath("Menu/VBoxContainer/HBoxContainer/VBoxContainer/Panel/TagsRichLabel")
 
 [node name="Menu" type="Control" parent="."]
 anchor_right = 1.0
@@ -117,28 +120,74 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="LevelList" parent="Menu" instance=ExtResource( 6 )]
-anchor_left = 0.046875
-anchor_top = 0.24
-anchor_right = 0.687
-anchor_bottom = 0.96
-margin_right = 0.511963
-focus_neighbour_left = NodePath("../BackButton")
-focus_neighbour_right = NodePath("../StartButton")
-focus_next = NodePath("../StartButton")
-focus_previous = NodePath("../BackButton")
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/VBoxContainer"]
+margin_top = 128.0
+margin_right = 1024.0
+margin_bottom = 578.0
+alignment = 1
 
-[node name="StartButton" type="Button" parent="Menu"]
-anchor_left = 1.0
+[node name="LevelList" parent="Menu/VBoxContainer/HBoxContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 10.0
+margin_right = 660.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 650, 450 )
+focus_neighbour_left = NodePath("../../../BackButton")
+focus_neighbour_right = NodePath("../VBoxContainer/StartButton")
+focus_next = NodePath("../VBoxContainer/StartButton")
+focus_previous = NodePath("../../../BackButton")
+tag_colors = {
+"game mode": Color( 0.27451, 0.705882, 0.470588, 1 )
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/VBoxContainer/HBoxContainer"]
+margin_left = 664.0
+margin_right = 1014.0
+margin_bottom = 450.0
+alignment = 1
+
+[node name="Panel" type="Panel" parent="Menu/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 3.0
+margin_right = 350.0
+margin_bottom = 403.0
+rect_min_size = Vector2( 350, 400 )
+
+[node name="PreviewTextureRect" type="TextureRect" parent="Menu/VBoxContainer/HBoxContainer/VBoxContainer/Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -125.0
+margin_right = 125.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 250, 150 )
+expand = true
+stretch_mode = 6
+
+[node name="DescriptionRichLabel" type="RichTextLabel" parent="Menu/VBoxContainer/HBoxContainer/VBoxContainer/Panel"]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -256.0
-margin_top = -72.0
-margin_right = -64.0
-margin_bottom = -22.0
+margin_left = -167.0
+margin_top = -171.0
+margin_right = 169.0
+margin_bottom = -3.0
+
+[node name="TagsRichLabel" type="Label" parent="Menu/VBoxContainer/HBoxContainer/VBoxContainer/Panel"]
+anchor_top = 0.512
+anchor_right = 1.0
+anchor_bottom = 0.512
+margin_top = -31.8
+margin_bottom = 32.2
+rect_min_size = Vector2( 350, 64 )
+align = 1
+
+[node name="StartButton" type="Button" parent="Menu/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 407.0
+margin_right = 350.0
+margin_bottom = 447.0
 rect_min_size = Vector2( 192, 40 )
-focus_neighbour_left = NodePath("../LevelList")
+focus_neighbour_left = NodePath("../../LevelList")
 theme = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 0.8, 0.8, 0.8, 1 )
@@ -153,12 +202,13 @@ margin_left = 24.0
 margin_top = 40.0
 margin_right = 190.0
 margin_bottom = 92.0
-focus_neighbour_right = NodePath("../LevelList")
+focus_neighbour_right = NodePath("../VBoxContainer/HBoxContainer/LevelList")
 shortcut_in_tooltip = false
 shortcut = SubResource( 6 )
 text = "< BACK"
 icon = null
 redirect_scene = "res://scenes/title/TitleScreen.tscn"
 
-[connection signal="item_activated" from="Menu/LevelList" to="." method="_on_LevelList_item_activated"]
-[connection signal="pressed" from="Menu/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="item_activated" from="Menu/VBoxContainer/HBoxContainer/LevelList" to="." method="_on_LevelList_item_activated"]
+[connection signal="item_selected" from="Menu/VBoxContainer/HBoxContainer/LevelList" to="." method="_on_LevelList_item_selected"]
+[connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]

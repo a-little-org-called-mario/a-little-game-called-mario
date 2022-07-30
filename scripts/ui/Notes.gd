@@ -3,6 +3,8 @@ extends CanvasLayer
 
 var pages = {}
 
+const notes_file_name = "user://notes.mario"
+
 export (PackedScene) var noteButton
 
 onready var _list := $Hbox/Scroll/VBox
@@ -18,6 +20,7 @@ func _ready():
 	$Exit.visible = false
 	EventBus.connect("note_added", self, "_on_note_added")
 	remove_pages()
+	load_notes()
 
 
 func _process(delta):
@@ -45,6 +48,7 @@ func remove_pages():
 
 func add_page(name, desc, sprite, spriteScale):
 	pages[name] = {"desc": desc, "sprite" : sprite, "scale" : spriteScale}
+	save_notes()
 
 
 func add_button(name):
@@ -71,3 +75,34 @@ func _on_page_changed(pageName):
 func _on_Exit_pressed():
 	toggle_visible()
 
+func save_notes():
+	var notes_file = File.new()
+	notes_file.open(notes_file_name, File.WRITE)
+	notes_file.store_line(to_json(pages))
+	notes_file.close()
+
+func load_notes():
+	var notes_file = File.new()
+
+	# there is no notes.mario :(
+	if not notes_file.file_exists(notes_file_name) or notes_file.open(notes_file_name, File.READ) != OK:
+		return
+	# access notes.mario and read saved notes
+	
+	var all_pages = parse_json(notes_file.get_line())
+	for page_name in all_pages.keys():
+		var page = all_pages[page_name]
+
+		# NOTE(jam): godot's json parsing can convert vector2 TO string, but not the other way around
+		var scale_str: String = page.scale
+		scale_str.erase(0, 1)
+		scale_str.erase(scale_str.length() - 1, 1)
+		var scale_arr = scale_str.split(", ")
+
+		_on_note_added(page_name, page.desc, page.sprite, Vector2(scale_arr[0], scale_arr[1]))
+
+func delete_all_notes():
+	pages = {}
+	remove_pages()
+	save_notes() # NOTE (jam): should be less hassle to overwrite file with an empty json object
+				 # than deleting the cookie and then later recreating the cookie and so on

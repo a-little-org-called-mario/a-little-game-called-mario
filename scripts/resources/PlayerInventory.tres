@@ -7,6 +7,7 @@ script = ExtResource( 1 )
 coins = 0
 hearts = 3
 has_flower = false
+flower_amount = 5
 has_bus = false
 stars = {
 }

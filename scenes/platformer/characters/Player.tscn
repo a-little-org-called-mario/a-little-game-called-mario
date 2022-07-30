@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://graphics/sprites/vfx/spark_star.png" type="Texture" id=27]
 [ext_resource path="res://scenes/platformer/characters/SkidParticles.gd" type="Script" id=28]
 [ext_resource path="res://audio/sfx/mario_hurt.wav" type="AudioStream" id=29]
+[ext_resource path="res://scenes/platformer/characters/RestTimer.tscn" type="PackedScene" id=30]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
@@ -538,5 +539,7 @@ script = ExtResource( 10 )
 
 [node name="CameraFCandidate" type="Node" parent="."]
 script = ExtResource( 17 )
+
+[node name="RestTimer" parent="." instance=ExtResource( 30 )]
 
 [editable path="Hitbox"]

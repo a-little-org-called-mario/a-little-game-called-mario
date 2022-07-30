@@ -89,6 +89,7 @@ func load_notes():
 					   # this might not be the best way to handle failure
 	# access notes.mario and read saved notes
 	else:
+		remove_pages()
 		var all_pages = parse_json(notes_file.get_line())
 		for page_name in all_pages.keys():
 			var page = all_pages[page_name]

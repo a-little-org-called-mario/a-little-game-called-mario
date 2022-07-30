@@ -3,7 +3,7 @@ extends CanvasLayer
 
 var pages = {}
 
-var notes_file_name = "user://notes.mario"
+const notes_file_name = "user://notes.mario"
 
 export (PackedScene) var noteButton
 
@@ -19,6 +19,7 @@ func _ready():
 	$Hbox.visible = false
 	$Exit.visible = false
 	EventBus.connect("note_added", self, "_on_note_added")
+	remove_pages()
 	load_notes()
 
 
@@ -85,22 +86,20 @@ func load_notes():
 
 	# there is no notes.mario :(
 	if not notes_file.file_exists(notes_file_name) or notes_file.open(notes_file_name, File.READ) != OK:
-		remove_pages() # NOTE (jam): depending on if load_notes gets called anywhere other than _ready,
-					   # this might not be the best way to handle failure
+		return
 	# access notes.mario and read saved notes
-	else:
-		remove_pages()
-		var all_pages = parse_json(notes_file.get_line())
-		for page_name in all_pages.keys():
-			var page = all_pages[page_name]
+	
+	var all_pages = parse_json(notes_file.get_line())
+	for page_name in all_pages.keys():
+		var page = all_pages[page_name]
 
-			# NOTE(jam): godot's json parsing can convert vector2 TO string, but not the other way around
-			var scale_str: String = page.scale
-			scale_str.erase(0, 1)
-			scale_str.erase(scale_str.length() - 1, 1)
-			var scale_arr = scale_str.split(", ")
+		# NOTE(jam): godot's json parsing can convert vector2 TO string, but not the other way around
+		var scale_str: String = page.scale
+		scale_str.erase(0, 1)
+		scale_str.erase(scale_str.length() - 1, 1)
+		var scale_arr = scale_str.split(", ")
 
-			_on_note_added(page_name, page.desc, page.sprite, Vector2(scale_arr[0], scale_arr[1]))
+		_on_note_added(page_name, page.desc, page.sprite, Vector2(scale_arr[0], scale_arr[1]))
 
 func delete_all_notes():
 	pages = {}

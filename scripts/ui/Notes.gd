@@ -103,6 +103,7 @@ func load_notes():
 			_on_note_added(page_name, page.desc, page.sprite, Vector2(scale_arr[0], scale_arr[1]))
 
 func delete_all_notes():
+	pages = {}
 	remove_pages()
 	save_notes() # NOTE (jam): should be less hassle to overwrite file with an empty json object
 				 # than deleting the cookie and then later recreating the cookie and so on

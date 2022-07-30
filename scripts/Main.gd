@@ -41,6 +41,7 @@ func _bgm_changed(data) -> void:
 			bgm.playing = data.playing
 		if "stream" in data:
 			bgm.stream = data.stream
+			bgm.play()
 
 
 func _hook_portals() -> void:

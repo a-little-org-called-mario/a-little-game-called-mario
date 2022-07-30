@@ -14,11 +14,11 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	# Remove one coin and spawn a projectile
 	# Continus shooting after 0 coins
-	if event.is_action_pressed("shoot") and CoinInventoryHandle.change_coins_on(player, -1):
-		shoot(default_projectile)
-	#Shoots fireball
-	if event.is_action_pressed("fire") and inventory.has_flower:
-		shoot(fireball_projectile)
+	if event.is_action_pressed("shoot"):
+		if inventory.has_flower:
+			shoot(fireball_projectile)
+		elif CoinInventoryHandle.change_coins_on(player, -1):
+			shoot(default_projectile)
 
 
 func shoot(projectile_scene: PackedScene) -> void:

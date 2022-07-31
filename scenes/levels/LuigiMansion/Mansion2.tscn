@@ -369,6 +369,7 @@ text = "CUTSCENE PLAYING"
 
 [node name="Luigi" parent="." instance=ExtResource( 8 )]
 position = Vector2( 608, 352 )
+collision_mask = 322
 is_mortal = true
 max_health = 20
 fireball_count = 5

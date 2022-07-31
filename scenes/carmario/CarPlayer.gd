@@ -96,7 +96,7 @@ func _process(_delta):
 	_car_ui.set_felonies(round(felonies))
 
 func _input(event :InputEvent):
-	if event.is_action_pressed("fire") or event.is_action_pressed("shoot"):
+	if event.is_action_pressed("shoot"):
 		$Sprite/Honk.play(range_lerp(health, 0, MAX_HEALTH, 0.75, 1.0))
 
 func set_health(value):

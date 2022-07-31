@@ -12,7 +12,9 @@ func _on_body_entered(_body):
 	#In a subclass, use the same code but put the signal name instead of ""
 	call_deferred("collect", "")
 
-func collect(signal_name: String):
-	EventBus.emit_signal(signal_name, {"collected": true})
+
+func collect(signal_name: String, data := {}):
+	data["collected"] = true
+	EventBus.emit_signal(signal_name, data)
 	monitoring = false
 	queue_free()

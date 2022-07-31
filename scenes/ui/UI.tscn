@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://textures/trails/ranbow_flag.jpg" type="Texture" id=12]
 [ext_resource path="res://scenes/ui/CarPlayerStats.gd" type="Script" id=13]
 [ext_resource path="res://scenes/ui/UI.gd" type="Script" id=14]
+[ext_resource path="res://scenes/powerups/FireFlowerUI.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Appear"
@@ -88,7 +89,7 @@ margin_bottom = 84.0
 
 [node name="HeartIconContainer" type="GridContainer" parent="UI/HBoxContainer"]
 margin_right = 248.0
-margin_bottom = 64.0
+margin_bottom = 100.0
 size_flags_vertical = 3
 columns = 10
 script = ExtResource( 8 )
@@ -123,17 +124,22 @@ margin_right = 248.0
 [node name="Spacer" type="Control" parent="UI/HBoxContainer"]
 margin_left = 252.0
 margin_right = 744.0
-margin_bottom = 64.0
+margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Coins" type="Control" parent="UI/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
 margin_left = 748.0
 margin_right = 1004.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 256, 64 )
+margin_bottom = 100.0
+alignment = 2
 
-[node name="CoinCount" type="RichTextLabel" parent="UI/HBoxContainer/Coins"]
+[node name="Coins" type="Control" parent="UI/HBoxContainer/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 256, 32 )
+
+[node name="CoinCount" type="RichTextLabel" parent="UI/HBoxContainer/VBoxContainer/Coins"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -128.0
@@ -147,6 +153,19 @@ bbcode_text = "[right][wave amp=50 freq=2]COINS:[rainbow freq=0.5 sat=1 val=20]0
 text = "COINS:0"
 scroll_active = false
 script = ExtResource( 2 )
+
+[node name="PowerupsContainer" type="HBoxContainer" parent="UI/HBoxContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 256.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 64 )
+theme = ExtResource( 5 )
+alignment = 2
+
+[node name="FireFlower" parent="UI/HBoxContainer/VBoxContainer/PowerupsContainer" instance=ExtResource( 16 )]
+modulate = Color( 1, 1, 1, 0.870588 )
+margin_left = 192.0
+margin_right = 256.0
 
 [node name="CarPlayerStats" type="VBoxContainer" parent="UI" groups=["car_ui"]]
 visible = false

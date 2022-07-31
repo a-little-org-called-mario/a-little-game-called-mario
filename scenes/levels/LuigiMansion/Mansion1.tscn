@@ -927,6 +927,7 @@ rotation = 1.57079
 report_to_group = "squad1"
 cone_width = 64.0
 cone_color = Color( 1, 0, 0, 1 )
+cone_stops_at_tile = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VisionCone"]
 autoplay = "scroll"

@@ -13,12 +13,19 @@ visible = false
 self_modulate = Color( 1, 1, 1, 0.368627 )
 polygon = PoolVector2Array( 0, 0, 256, 64, 256, -64 )
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = -64.0
+margin_right = 256.0
+margin_bottom = 64.0
+rect_clip_content = true
+
+[node name="Polygon2D" type="Polygon2D" parent="TextureRect"]
 self_modulate = Color( 1, 1, 1, 0.12549 )
+position = Vector2( 0, 64 )
 polygon = PoolVector2Array( 0, 0, 256, -64, 256, 64 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 4, 0 )
 enabled = true
-cast_to = Vector2( 0, 0 )
-collision_mask = 2
+cast_to = Vector2( 256, 0 )
+collision_mask = 66

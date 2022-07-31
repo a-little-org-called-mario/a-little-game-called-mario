@@ -13,6 +13,7 @@ export(bool) var only_extremes: bool = true
 # Assing anything to this variable to automatically look towards it
 export(NodePath) var tracked_node setget set_tracking
 
+export(bool) var cone_stops_at_tile: bool = false
 
 func handle_setup():
 	set_physics_process(false)
@@ -23,15 +24,15 @@ func handle_setup():
 	cone.append(Vector2(cone_length, -cone_width * 0.5))
 	# Assing the points to the collision shape and the polygon displaying thingie
 	$CollisionPolygon2D.polygon = cone
-	$Polygon2D.polygon = cone
+	$TextureRect/Polygon2D.polygon = cone
 	# Make cone less annoying by reducing opacity
 	# Then assing the color to every vertex
 	cone_color.a *= 0.33
-	$Polygon2D.vertex_colors = [cone_color, cone_color, cone_color]
+	$TextureRect/Polygon2D.vertex_colors = [cone_color, cone_color, cone_color]
 	if only_extremes:
-		$Polygon2D.vertex_colors[0].a = 0.0
+		$TextureRect/Polygon2D.vertex_colors[0].a = 0.0
 	# Polygon2D was made semi-transparent to be less annoying while making levels
-	$Polygon2D.self_modulate = Color.white
+	$TextureRect/Polygon2D.self_modulate = Color.white
 
 	if tracked_node:
 		set_tracking(get_node_or_null(tracked_node))
@@ -42,7 +43,19 @@ func handle_setup():
 func check_valid_detection(body) -> bool:
 	$RayCast2D.cast_to = $RayCast2D.to_local(body.global_position)
 	$RayCast2D.force_raycast_update()
-	return not $RayCast2D.is_colliding()
+	var collider = $RayCast2D.get_collider()
+	$RayCast2D.cast_to = Vector2(cone_length, 0)  # To reset to default position after check
+	return collider is Player
+
+
+func _process(delta: float) -> void:
+	if cone_stops_at_tile:
+		var collider = $RayCast2D.get_collider()
+		var point: Vector2 = $RayCast2D.get_collision_point()
+		if collider is TileMap:
+			$TextureRect.rect_size.x = (point - position).y
+		else:
+			$TextureRect.rect_size.x = cone_length
 
 
 # physics process is enabled only while there's something to track

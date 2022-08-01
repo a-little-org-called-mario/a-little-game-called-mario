@@ -140,6 +140,9 @@ margin_bottom = 40.0
 [node name="OptionLabel" parent="CustomTabContainer/Panel/AudioSettings/GameVolume" index="1"]
 text = "GAME VOLUME"
 
+[node name="Slider" parent="CustomTabContainer/Panel/AudioSettings/GameVolume" index="2"]
+focus_neighbour_top = NodePath("../../../../Tabs/AudioTab")
+
 [node name="MusicVolume" parent="CustomTabContainer/Panel/AudioSettings" instance=ExtResource( 12 )]
 margin_top = 44.0
 margin_right = 680.0
@@ -189,6 +192,7 @@ value_label_mapping = {
 text = "CAMERA LEAN"
 
 [node name="Slider" parent="CustomTabContainer/Panel/GraphicsSettings/CameraLean" index="2"]
+focus_neighbour_top = NodePath("../../../../Tabs/GraphicsTab")
 max_value = 2.0
 value = 0.0
 tick_count = 3

@@ -10,6 +10,8 @@
 radius = 15.0
 
 [node name="Player_RigidBody" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 1536
 gravity_scale = 5.0
 script = ExtResource( 2 )
 

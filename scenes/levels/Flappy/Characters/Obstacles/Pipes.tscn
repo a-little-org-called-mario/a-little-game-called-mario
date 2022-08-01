@@ -12,9 +12,13 @@ position = Vector2( 500, 300 )
 script = ExtResource( 2 )
 
 [node name="Coin" parent="." instance=ExtResource( 3 )]
+collision_layer = 1024
+collision_mask = 0
 
 [node name="pipe_top" type="Area2D" parent="."]
 position = Vector2( 0, -65 )
+collision_layer = 512
+collision_mask = 0
 
 [node name="pipe_end" type="Sprite" parent="pipe_top"]
 rotation = -3.14159
@@ -106,6 +110,8 @@ shape = SubResource( 1 )
 [node name="pipe_down" type="Area2D" parent="."]
 position = Vector2( 0, 65 )
 rotation = 3.14159
+collision_layer = 512
+collision_mask = 0
 
 [node name="pipe_end" type="Sprite" parent="pipe_down"]
 rotation = -3.14159

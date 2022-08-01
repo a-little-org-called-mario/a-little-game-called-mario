@@ -102,6 +102,8 @@ fit_content_height = true
 script = ExtResource( 6 )
 
 [node name="deathBounds" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="deathBounds"]

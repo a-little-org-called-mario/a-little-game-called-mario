@@ -15,7 +15,6 @@ func _ready():
 	self.connect("focus_entered", self, "_on_focus_entered")
 	self.connect("focus_exited", self, "_on_focus_exited")
 	self.connect("mouse_entered", self, "grab_focus")
-	self.connect("mouse_exited", self, "release_focus")
 	
 	# Copy of image with transparent color
 	var img = selected_icon.get_data()

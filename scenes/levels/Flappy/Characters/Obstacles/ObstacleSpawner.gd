@@ -11,3 +11,4 @@ func _on_Timer_timeout():
 	get_parent().add_child(pipes)
 	pipes.position.x = 1200
 	pipes.position.y = rand_range(240, 360)
+	pipes.z_index = 1

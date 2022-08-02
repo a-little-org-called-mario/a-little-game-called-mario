@@ -8,10 +8,12 @@
 [node name="Cloud" type="Sprite"]
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 144, 47, 64, 32 )
+region_rect = Rect2( 144, 47, 64, 33 )
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2( 0, -1 )

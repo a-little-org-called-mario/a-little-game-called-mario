@@ -28,6 +28,7 @@ wait_time = 1.5
 
 [node name="Player_RigidBody" parent="." instance=ExtResource( 2 )]
 position = Vector2( 109, 303 )
+z_index = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -120,18 +121,22 @@ script = ExtResource( 1 )
 
 [node name="preset_pipes" parent="." instance=ExtResource( 7 )]
 position = Vector2( 571, 286 )
+z_index = 1
 
 [node name="preset_pipes2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 755, 241 )
+z_index = 1
 
 [node name="preset_pipes3" parent="." instance=ExtResource( 7 )]
 position = Vector2( 954, 296 )
+z_index = 1
 
 [node name="Cloud" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1208, 307 )
 scale = Vector2( 4, 4 )
-region_rect = Rect2( 144, 47, 64, 33.2776 )
+z_index = 2
 SPEED = -120
+player_can_enter_exit_cloud = true
 
 [node name="Cloud2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 863, 63 )
@@ -141,11 +146,20 @@ SPEED = -140
 [node name="Cloud3" parent="." instance=ExtResource( 8 )]
 position = Vector2( 931, 78 )
 scale = Vector2( 3, 3 )
+z_index = 2
+player_can_enter_exit_cloud = true
 
 [node name="Cloud4" parent="." instance=ExtResource( 8 )]
 position = Vector2( 724, 403 )
 scale = Vector2( 2, 2 )
 SPEED = -180
+
+[node name="Cloud5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 504, 473 )
+scale = Vector2( 3, 3 )
+z_index = 2
+SPEED = -170
+player_can_enter_exit_cloud = true
 
 [node name="Cloud6" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1379, 151 )
@@ -154,13 +168,7 @@ SPEED = -240
 
 [node name="Cloud7" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1408, 141 )
-region_rect = Rect2( 1866, -504, 0, 0 )
 SPEED = -150
-
-[node name="Cloud5" parent="." instance=ExtResource( 8 )]
-position = Vector2( 504, 473 )
-scale = Vector2( 3, 3 )
-SPEED = -170
 
 [connection signal="game_over" from="Player_RigidBody" to="." method="_on_Player_game_over"]
 [connection signal="timeout" from="UI/ControlText/HideControlTimer" to="UI/ControlText/ControlTextLabel" method="hide"]

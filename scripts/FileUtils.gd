@@ -59,7 +59,7 @@ static func get_dir_name(levelPath: String) -> String:
 
 
 static func get_level_metadata(level_path: String) -> LevelMetadata:
-	var metadata_path = level_path.rsplit('/', true, 1)[0] + '/metadata/metadata.tres'
+	var metadata_path = level_path.rsplit("/", true, 1)[0] + "/metadata/metadata.tres"
 	if ResourceLoader.exists(metadata_path):
 		var metadata = ResourceLoader.load(metadata_path) as LevelMetadata
 		if not metadata.first_level_path:
@@ -93,8 +93,12 @@ static func get_first_level_in_dir(path: String) -> String:
 		dir.list_dir_begin()
 		var filename := dir.get_next()
 		while filename != "":
-			if filename != "." and filename != ".." and !dir.current_is_dir() and filename.ends_with(".tscn"):
-
+			if (
+				filename != "."
+				and filename != ".."
+				and !dir.current_is_dir()
+				and filename.ends_with(".tscn")
+			):
 				levels.append("%s/%s" % [path, filename])
 			filename = dir.get_next()
 		dir.list_dir_end()

@@ -5,9 +5,9 @@ const ENDPORTALS_GROUP: String = "EndPortals"
 const COINS_GROUP: String = "Coins"
 const PROJECTILES_GROUP: String = "Projectiles"
 
-export (PackedScene) onready var hub = hub.instance()
-export (PackedScene) var level_scene: PackedScene = null
-export (NodePath) onready var level = get_node(level) as Node
+export(PackedScene) onready var hub = hub.instance()
+export(PackedScene) var level_scene: PackedScene = null
+export(NodePath) onready var level = get_node(level) as Node
 onready var bgm: AudioStreamPlayer = $Audio/BGM
 onready var defaultBGMStream: AudioStream = bgm.stream.duplicate()
 

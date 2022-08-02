@@ -5,6 +5,7 @@ extends TileMap
 
 const LABEL_POSITION := Vector2(6, 6)
 const TUTORIAL_NAME = "TUTORIAL"
+const FileUtils = preload("res://scripts/FileUtils.gd")
 
 export(String, DIR) var levels_directory: String
 export(PackedScene) var portal_scene: PackedScene
@@ -23,9 +24,10 @@ func _ready() -> void:
 
 	var levels: Dictionary = { }
 	var tut_level: Dictionary = { }
-	for level in _get_all_first_levels_in_dir(levels_directory):
-		if _get_dir_name(level).to_upper() != TUTORIAL_NAME:
-			levels[_get_dir_name(level).to_upper()] = level
+	for level in FileUtils.get_all_first_levels_in_dir(levels_directory):
+		var level_name = FileUtils.get_dir_name(level).to_upper()
+		if level_name != TUTORIAL_NAME:
+			levels[level_name] = level
 		else:
 			tut_level[TUTORIAL_NAME] = level
 
@@ -130,48 +132,3 @@ func _unset_camera_limits() -> void:
 		camera.limit_bottom = 10000000
 		camera.limit_left = -10000000
 		camera.limit_right = 10000000
-
-
-func _get_dir_name(levelPath: String) -> String:
-	var regex = RegEx.new()
-	regex.compile(".*\/(.*)\/[^\/]+.tscn")
-	return regex.search(levelPath).get_string(1)
-
-
-static func _get_all_first_levels_in_dir(path: String) -> Array:
-	var levels := []
-	var dir := Directory.new()
-	if dir.open(path) == OK:
-		dir.list_dir_begin()
-		var filename := dir.get_next()
-		while filename != "":
-			if filename != "." and filename != ".." and dir.current_is_dir():
-				var level := _get_first_level_in_dir("%s/%s" % [path, filename])
-				if len(level) > 0:
-					levels.append(level)
-			filename = dir.get_next()
-		dir.list_dir_end()
-
-	levels.sort()
-	return levels
-
-
-static func _get_first_level_in_dir(path: String) -> String:
-	var dir := Directory.new()
-	var levels := []
-	if dir.open(path) == OK:
-		dir.list_dir_begin()
-		var filename := dir.get_next()
-		while filename != "":
-			if filename != "." and filename != ".." and !dir.current_is_dir() and filename.ends_with(".tscn"):
-
-				levels.append("%s/%s" % [path, filename])
-			filename = dir.get_next()
-		dir.list_dir_end()
-	# note[apple]: Directory order is not the same on all platforms. On Linux, for some reason,
-	# not sorting the list means that the last level gets returned first
-	if len(levels) > 0:
-		levels.sort()
-		return levels[0]
-	else:
-		return ""

@@ -5,9 +5,9 @@ const ENDPORTALS_GROUP: String = "EndPortals"
 const COINS_GROUP: String = "Coins"
 const PROJECTILES_GROUP: String = "Projectiles"
 
-onready var hub: TileMap = $TileMap
-onready var level_scene: PackedScene = null
-onready var level: Node = $TileMap
+export (PackedScene) onready var hub = hub.instance()
+export (PackedScene) var level_scene: PackedScene = null
+export (NodePath) onready var level = get_node(level) as Node
 onready var bgm: AudioStreamPlayer = $Audio/BGM
 onready var defaultBGMStream: AudioStream = bgm.stream.duplicate()
 
@@ -23,6 +23,8 @@ func _ready() -> void:
 	EventBus.connect("restart_level", self, "_restart_level")
 	EventBus.connect("level_exited", self, "_finish_level")
 	EventBus.connect("level_changed", self, "_finish_level")
+	Settings.load_data()
+	_replace_level(level_scene.instance() if level_scene else hub)
 	_hook_portals()
 	VisualServer.set_default_clear_color(Color.black)
 	randomize()
@@ -107,19 +109,7 @@ func _finish_level(next_level: PackedScene = null) -> void:
 	# If next_level is null, return to the hub
 	level_scene = next_level
 	var new_level: Node = level_scene.instance() if level_scene != null else hub
-
-	if new_level != level:
-		add_child_below_node(level, new_level)
-		if level == hub:
-			remove_child(level)
-		else:
-			level.queue_free()
-			yield(level, "tree_exited")
-		level = new_level
-	else:
-		var idx: int = level.get_index() - 1
-		remove_child(level)
-		add_child_below_node(get_child(idx), new_level)
+	_replace_level(new_level)
 	# Do not forget to hook the new portals
 	_hook_portals()
 	#Update reset state of inventory
@@ -132,6 +122,21 @@ func _finish_level(next_level: PackedScene = null) -> void:
 		EventBus.emit_signal("hub_entered")
 	else:
 		EventBus.emit_signal("level_started", "")
+
+
+func _replace_level(new_level: Node):
+	if new_level != level:
+		add_child_below_node(level, new_level)
+		if level == hub:
+			remove_child(level)
+		else:
+			level.queue_free()
+			yield(level, "tree_exited")
+		level = new_level
+	else:
+		var idx: int = level.get_index() - 1
+		remove_child(level)
+		add_child_below_node(get_child(idx), new_level)
 
 
 func _restart_level() -> void:

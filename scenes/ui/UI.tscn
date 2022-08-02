@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/AchievementGet.gd" type="Script" id=3]
-[ext_resource path="res://scenes/ui/LevelCount.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ui/LevelCount.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=5]
 [ext_resource path="res://scenes/ui/Instructions.gd" type="Script" id=6]
 [ext_resource path="res://scenes/ui/Toasty.tscn" type="PackedScene" id=7]
@@ -290,23 +290,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelCount" type="RichTextLabel" parent="UI"]
-visible = false
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -570.0
-margin_top = 258.0
-margin_right = -447.0
-margin_bottom = 308.0
-rect_scale = Vector2( 2, 2 )
-mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 1 )
-bbcode_enabled = true
-bbcode_text = "
-[wave amp=50 freq=2]LEVEL:[rainbow freq=0.5 sat=1 val=20]1[/rainbow] [/wave]"
-text = "
-LEVEL:1 "
-script = ExtResource( 4 )
+[node name="LevelCount" parent="UI" instance=ExtResource( 4 )]
 
 [node name="StarNotification" type="RichTextLabel" parent="UI"]
 visible = false

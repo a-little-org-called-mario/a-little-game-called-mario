@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/levels/LevelMetadata.gd" type="Script" id=1]
+[ext_resource path="res://sprites/sokoban/SokobanBox.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+first_level_path = "res://scenes/levels/sokoban/00_menu.tscn"
+tags = [ "game mode" ]
+short_description = ""
+description = "Push boxes to get them to right place"
+preview_image = ExtResource( 2 )

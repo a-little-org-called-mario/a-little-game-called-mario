@@ -16,6 +16,10 @@ export(NodePath) var tracked_node setget set_tracking
 export(bool) var cone_stops_at_tile: bool = false
 
 
+func _ready():
+	$TextureRect.rect_size.x = cone_length
+
+
 func handle_setup():
 	set_physics_process(false)
 	# Create a triangle using the values set by the exported variables

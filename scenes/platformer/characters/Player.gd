@@ -9,7 +9,7 @@ signal uncrouched
 
 const MAXSPEED = 350
 const CROUCH_MAXSPEED = MAXSPEED / 3
-const JUMPFORCE = 1100
+const JUMPFORCE = 1120
 const MAXACCEL = 50
 const MINACCEL = 0.25 * MAXACCEL
 const JERK = 0.25

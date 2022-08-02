@@ -123,7 +123,6 @@ max_speed = 0.0
 
 [node name="proj_id_54" parent="NPCs" instance=ExtResource( 7 )]
 position = Vector2( -2208, 208 )
-frame = 2
 
 [node name="Decorations" type="Node2D" parent="."]
 
@@ -172,9 +171,9 @@ rect_scale = Vector2( 2, 2 )
 texture = SubResource( 3 )
 
 [node name="JumpPic1" parent="Decorations" instance=ExtResource( 8 )]
-margin_left = 1264.0
+margin_left = 1328.0
 margin_top = 336.0
-margin_right = 1360.0
+margin_right = 1424.0
 margin_bottom = 448.0
 
 [node name="RichTextLabel" parent="Decorations/JumpPic1" index="0"]
@@ -194,9 +193,9 @@ rect_scale = Vector2( 2, 2 )
 texture = SubResource( 1 )
 
 [node name="JumpPic2" parent="Decorations" instance=ExtResource( 8 )]
-margin_left = 1264.0
+margin_left = 1328.0
 margin_top = 208.0
-margin_right = 1360.0
+margin_right = 1424.0
 margin_bottom = 320.0
 
 [node name="RichTextLabel" parent="Decorations/JumpPic2" index="0"]
@@ -216,9 +215,9 @@ rect_scale = Vector2( 2, 2 )
 texture = SubResource( 2 )
 
 [node name="DoubleJump" parent="Decorations" instance=ExtResource( 8 )]
-margin_left = 1392.0
+margin_left = 1432.0
 margin_top = 272.0
-margin_right = 1616.0
+margin_right = 1656.0
 margin_bottom = 368.0
 
 [node name="RichTextLabel" parent="Decorations/DoubleJump" index="0"]

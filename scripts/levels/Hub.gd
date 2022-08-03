@@ -23,22 +23,11 @@ func _ready() -> void:
 	var label_position: Vector2 = portal_template.get_node("Label").position
 
 	var levels: Dictionary = { }
-	var tut_level: Dictionary = { }
 	for level in FileUtils.get_all_first_levels_in_dir(levels_directory):
 		var level_name = FileUtils.get_dir_name(level).to_upper()
-		if level_name != TUTORIAL_NAME:
-			levels[level_name] = level
-		else:
-			tut_level[TUTORIAL_NAME] = level
-
-	# Add tutorial level middle screen
-	if tut_level.size() > 0:
-		var tutorial_portal_pos : Vector2 = $TutorialPortalPos.position
-		create_portal(tut_level[TUTORIAL_NAME], tutorial_portal_pos)
-		var tutorial_label_pos : Vector2 = Vector2(
-			tutorial_portal_pos.x,
-			tutorial_portal_pos.y + portal_rect.size.y + walls_tilemap.cell_size.y / 2)
-		create_label(TUTORIAL_NAME, tutorial_label_pos)
+		if level_name == TUTORIAL_NAME:
+			continue
+		levels[level_name] = level
 
 	var n_levels: int = len(levels)
 	var keys: Array = levels.keys()

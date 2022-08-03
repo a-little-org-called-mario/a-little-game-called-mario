@@ -7,26 +7,22 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
+	self.set_process_input(false)
 	EventBus.connect("player_died", self, "_on_player_died")
 
 
-func _process(_delta: float) -> void:
-	if not self.visible:
-		return
+func _input(event) -> void:
 	for skip_action in SKIP_ACTIONS:
 		if Input.is_action_just_pressed(skip_action):
-			animation_player.emit_signal("animation_finished")
-			break
+			self.set_process_input(false)
+			self.hide()
+			get_tree().paused = false
+			get_tree().reload_current_scene()
 
 
 func _on_player_died():
 	$PlayerDied.bbcode_text = FORMAT % tr("YOU DIED")
-
 	get_tree().paused = true
 	animation_player.play("Appear")
-
 	yield(animation_player, "animation_finished")
-
-	self.hide()
-	get_tree().paused = false
-	get_tree().reload_current_scene()
+	self.set_process_input(true)

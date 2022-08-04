@@ -33,11 +33,13 @@ func toggle_visible():
 		_hbox.visible = false
 		_exit.visible = false
 		get_tree().paused = false
+		EventBus.emit_signal("notes_closed")
 	elif get_tree().paused == false:
 		_hbox.visible = true
 		_exit.visible = true
 		if _list.get_child_count() > 0:
 			_list.get_child(0).grab_focus()
+		EventBus.emit_signal("notes_opened")
 		get_tree().paused = true
 
 
@@ -58,9 +60,11 @@ func add_button(name):
 	_list.add_child(button)
 
 
-func _on_note_added(name, desc, sprite, spriteScale):
+func _on_note_added(name, desc, sprite, spriteScale, from_load: bool = false) -> void:
 	if not pages.has(name):
 		add_button(name)
+		if not from_load:
+			EventBus.emit_signal("notes_updated")
 	add_page(name, desc, sprite, spriteScale)
 
 
@@ -99,7 +103,11 @@ func load_notes():
 		scale_str.erase(scale_str.length() - 1, 1)
 		var scale_arr = scale_str.split(", ")
 
-		_on_note_added(page_name, page.desc, page.sprite, Vector2(scale_arr[0], scale_arr[1]))
+		_on_note_added(
+			page_name, page.desc, page.sprite,
+			Vector2(scale_arr[0], scale_arr[1]),
+			true
+		)
 
 func delete_all_notes():
 	pages = {}

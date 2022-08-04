@@ -71,3 +71,6 @@ signal show_all_portals()
 
 # Notes
 signal note_added(name, desc, sprite, spriteScale)
+signal notes_opened()
+signal notes_closed()
+signal notes_updated()

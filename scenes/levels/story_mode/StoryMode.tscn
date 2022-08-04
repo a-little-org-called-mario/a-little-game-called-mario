@@ -492,6 +492,11 @@ margin_right = -19.0
 margin_bottom = -16.0
 custom_constants/separation = 16
 
+[node name="TitleLabel" type="Label" parent="CanvasLayer/UI/Inventory/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 16.0
+text = "Inventory"
+
 [node name="ItemTextureRect" type="TextureRect" parent="CanvasLayer/UI/Inventory/VBoxContainer"]
 margin_right = 301.0
 margin_bottom = 130.0
@@ -522,6 +527,11 @@ same_column_width = true
 fixed_column_width = 60
 icon_mode = 0
 fixed_icon_size = Vector2( 80, 80 )
+
+[node name="CloseLabel" type="Label" parent="CanvasLayer/UI/Inventory/VBoxContainer"]
+margin_right = 108.0
+margin_bottom = 16.0
+text = "Press E to close"
 
 [node name="ItemReceivePopup" type="AcceptDialog" parent="CanvasLayer/UI"]
 anchor_left = 0.5

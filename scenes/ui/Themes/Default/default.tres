@@ -36,3 +36,4 @@ TooltipLabel/colors/font_color = Color( 1, 1, 1, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 TooltipLabel/constants/shadow_offset_x = 0
 TooltipLabel/constants/shadow_offset_y = 0
+WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )

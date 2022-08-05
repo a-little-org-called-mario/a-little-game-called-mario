@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/levels/LevelMetadata.gd" type="Script" id=1]
+[ext_resource path="res://scenes/levels/Kaizo/metadata/preview.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+first_level_path = "res://scenes/levels/Kaizo/Kaizo.tscn"
+tags = [ "challenge" ]
+short_description = " "
+description = "Impossible jump challenge"
+preview_image = ExtResource( 2 )

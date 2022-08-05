@@ -23,7 +23,7 @@ func _ready():
 	load_notes()
 
 
-func _process(delta):
+func _unhandled_key_input(event):
 	if Input.is_action_just_pressed("show_notes") or (Input.is_action_just_pressed("pause") and _hbox.visible):
 		toggle_visible()
 

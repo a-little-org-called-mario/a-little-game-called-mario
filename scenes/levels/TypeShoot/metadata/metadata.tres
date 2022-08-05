@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/levels/LevelMetadata.gd" type="Script" id=1]
+[ext_resource path="res://scenes/levels/TypeShoot/metadata/preview.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+first_level_path = "res://scenes/levels/TypeShoot/TypeShoot00.tscn"
+tags = [ "game mode" ]
+short_description = " "
+description = "The only weapon you have is your ability to type 'n' shoot"
+preview_image = ExtResource( 2 )

@@ -13,6 +13,7 @@ var main_scene = null
 
 func _ready():
 	EventBus.connect("hub_entered", self, "_exit_to_menu")
+	level_list.grab_focus()
 
 
 func _on_StartButton_pressed():
@@ -51,4 +52,3 @@ func _on_LevelList_item_selected(index: int) -> void:
 	if len(metadata.tags) > 0:
 		tags_text = "[ %s ]" % PoolStringArray(metadata.tags).join(" ")
 	tags.text = tags_text
-	

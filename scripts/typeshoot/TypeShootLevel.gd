@@ -62,7 +62,8 @@ func _input(event: InputEvent) -> void:
 
 func _on_heart_change(_delta: int, total: int) -> void:
 	if total <= 0:
-		EventBus.emit_signal("player_died")
+		HeartInventoryHandle.change_hearts_on(_player, 3)
+		EventBus.emit_signal("level_exited")
 
 
 func _on_enemy_typed_out(enemy: TypeShootEnemy) -> void:

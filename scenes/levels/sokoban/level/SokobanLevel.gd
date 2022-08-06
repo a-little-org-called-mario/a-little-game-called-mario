@@ -32,6 +32,10 @@ var current_move := {
 }
 
 
+func _ready():
+	EventBus.emit_signal("bgm_changed", {"playing": false})
+
+
 func _process(delta):
 	if Input.is_action_just_pressed("undo"):
 		undo()
@@ -115,6 +119,7 @@ func _commit_current_move() -> void:
 
 
 func close_level():
+	EventBus.emit_signal("bgm_changed", "reset")
 	EventBus.emit_signal("level_changed", level_select_menu)
 
 

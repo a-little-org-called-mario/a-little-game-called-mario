@@ -18,7 +18,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "Appear"
-length = 5.0
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -381,7 +381,7 @@ margin_left = -516.0
 margin_top = -49.0
 margin_right = 516.0
 margin_bottom = -33.0
-text = "(space or click to skip)"
+text = "(space or click to continue)"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PlayerDiedPanel"]

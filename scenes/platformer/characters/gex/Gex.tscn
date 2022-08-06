@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/dustparticle.png" type="Texture" id=2]
@@ -12,12 +12,19 @@
 [ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=10]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=11]
 [ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=12]
+[ext_resource path="res://audio/sfx/metal_scrape.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/platformer/characters/SkidParticles.gd" type="Script" id=14]
+[ext_resource path="res://graphics/sprites/vfx/spark_star.png" type="Texture" id=15]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18, 26 )
+
+[sub_resource type="Gradient" id=45]
+offsets = PoolRealArray( 0.471669, 1 )
+colors = PoolColorArray( 1, 0.54902, 0, 1, 0.946289, 0.107197, 0.107197, 0 )
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = ExtResource( 12 )
@@ -161,6 +168,25 @@ scale_amount = 0.75
 color = Color( 1, 1, 1, 0.784314 )
 script = ExtResource( 1 )
 
+[node name="SkidParticles" type="CPUParticles2D" parent="Pivot"]
+position = Vector2( -4, 26 )
+emitting = false
+amount = 20
+lifetime = 0.5
+local_coords = false
+texture = ExtResource( 15 )
+direction = Vector2( -2, -1 )
+spread = 20.0
+gravity = Vector2( 0, 2000 )
+initial_velocity = 1000.0
+initial_velocity_random = 0.1
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+angle = 180.0
+angle_random = 1.0
+color_ramp = SubResource( 45 )
+script = ExtResource( 14 )
+
 [node name="Sprite" type="Sprite" parent="Pivot"]
 material = SubResource( 15 )
 position = Vector2( -2, 20 )
@@ -191,6 +217,13 @@ bus = "sfx"
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
 visible = false
 stream = SubResource( 14 )
+
+[node name="SkidSFX" type="AudioStreamPlayer2D" parent="."]
+visible = false
+position = Vector2( 0, 26 )
+scale = Vector2( 2, 2 )
+stream = ExtResource( 13 )
+bus = "sfx"
 
 [node name="Tween" type="Tween" parent="."]
 

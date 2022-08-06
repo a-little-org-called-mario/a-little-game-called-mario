@@ -12,6 +12,7 @@ radius = 60.0083
 
 [node name="GroundItem" type="Area2D"]
 collision_layer = 0
+collision_mask = 64
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

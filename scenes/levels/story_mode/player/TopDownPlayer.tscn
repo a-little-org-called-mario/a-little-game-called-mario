@@ -64,6 +64,8 @@ radius = 4.0
 height = 24.0
 
 [node name="TopDownPlayer" type="KinematicBody2D"]
+collision_layer = 64
+collision_mask = 2
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true

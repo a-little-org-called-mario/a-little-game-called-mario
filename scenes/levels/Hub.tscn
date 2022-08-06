@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=8]
 [ext_resource path="res://scenes/friends/Blug.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/objects/NotesNewTrigger.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=11]
 
 [node name="Hub" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -106,8 +107,21 @@ bbcode_text = "[right]N-Z >"
 text = "N-Z >"
 scroll_active = false
 
-[node name="TutorialPortalPos" type="Position2D" parent="."]
+[node name="EndPortal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96, 160 )
+next_level_path = "res://scenes/levels/tutorial/tutorial0.tscn"
+
+[node name="TutorialLabel" type="Label" parent="EndPortal"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -48.0
+margin_top = 48.0
+margin_right = 48.0
+margin_bottom = 64.0
+theme = ExtResource( 11 )
+text = "TUTORIAL"
 
 [node name="Blug" parent="." instance=ExtResource( 9 )]
 position = Vector2( -128, 192 )

@@ -12,6 +12,8 @@ signal shot()
 signal bus_collected(data)
 signal coin_collected(data)
 signal fire_flower_collected(data)
+signal fire_flower_refilled(amount)
+signal fire_flower_changed(new_value)
 signal star_collected(starname, again)
 
 # Enemies

@@ -64,7 +64,7 @@ func on_portal_enter(node: Node2D) -> AnimationPlayer:
 		return null
 
 	animationplayer.play("Swirl")
-
+	node.queue_free()
 	return animationplayer
 
 

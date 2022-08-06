@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/platformer/characters/RestTimer.gd" type="Script" id=1]
+
+[node name="RestTimer" type="Timer"]
+wait_time = 1.5
+one_shot = true
+autostart = true
+script = ExtResource( 1 )
+fire_flower_refill = NodePath("FireFlowerRefillTimer")
+
+[node name="FireFlowerRefillTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="timeout" from="." to="." method="_on_RestTimer_timeout"]
+[connection signal="timeout" from="FireFlowerRefillTimer" to="." method="_on_FireFlowerRefillTimer_timeout"]

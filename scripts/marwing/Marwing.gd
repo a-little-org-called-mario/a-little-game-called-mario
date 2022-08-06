@@ -1,15 +1,49 @@
 extends MarwingShip
 
-export var crosshair_range : Vector2;
-export var crosshair_speed: float;
+export(Vector2) var crosshair_range: Vector2;
+export(float, 0.1, 2, 0.1) var joypad_sensitivity: float = 0.5
+export(float, 0.01, 0.08, 0.01) var mouse_sensitivity: float = 0.04
 var crosshair_pos: Vector2 = Vector2.ZERO;
+var initial_crosshair_pos: Vector2 = Vector2.ZERO
 
 onready var camera: Camera = get_node("Camera");
 onready var mesh: MeshInstance = get_node("Mesh");
 onready var crosshair: Sprite3D = get_node("Crosshair");
 
+
 func _ready ():
+	initial_crosshair_pos.x = crosshair.translation.x
+	initial_crosshair_pos.y = crosshair.translation.y
 	camera.set_current(true);
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _input(event) -> void:
+	var mouse_motion := event as InputEventMouseMotion
+	if mouse_motion:
+		crosshair_pos.x -= mouse_motion.relative.x * mouse_sensitivity
+		crosshair_pos.y -= mouse_motion.relative.y * mouse_sensitivity
+
+
+func _process(delta):
+	crosshair_pos += Input.get_vector(
+		"marwing_aimright", "marwing_aimleft",
+		"marwing_aimdown", "marwing_aimup"
+	) * joypad_sensitivity
+
+	crosshair_pos.x = clamp(
+		crosshair_pos.x,
+		-crosshair_range.x + initial_crosshair_pos.x,
+		crosshair_range.x + initial_crosshair_pos.x
+	)
+	crosshair_pos.y = clamp(
+		crosshair_pos.y,
+		-crosshair_range.y + initial_crosshair_pos.y,
+		crosshair_range.y + initial_crosshair_pos.y
+	)
+	crosshair.translation.x = crosshair_pos.x
+	crosshair.translation.y = crosshair_pos.y
+
 
 func _physics_process (dt: float):
 	# handle strafing based on player inputs
@@ -39,18 +73,9 @@ func _physics_process (dt: float):
 
 	# handle aiming & shooting
 	if can_shoot:
-		crosshair_pos.x = clamp(
-			crosshair_pos.x - delta_aim("marwing_aimright", dt) + delta_aim("marwing_aimleft", dt),
-			-crosshair_range.x, crosshair_range.x);
-		crosshair.translation.x = crosshair_pos.x;
-
-		crosshair_pos.y = clamp(
-			crosshair_pos.y - delta_aim("marwing_aimdown", dt) + delta_aim("marwing_aimup", dt),
-			-crosshair_range.y, crosshair_range.y);
-		crosshair.translation.y = crosshair_pos.y;
-
 		if Input.is_action_pressed("marwing_shoot"):
-			shoot(mesh.translation,crosshair.translation-mesh.translation);
+			shoot(mesh.translation, crosshair.translation-mesh.translation);
+
 
 ## Calculates how much weight a given input should have on the ship's strafe offset by factoring in strafe speed and input strength.
 #  @input_name        the input to check for
@@ -58,9 +83,4 @@ func _physics_process (dt: float):
 func delta_strafe (input_name: String,dt: float) -> float:
 	if Input.is_action_pressed(input_name):
 		return dt * strafe_speed * Input.get_action_strength(input_name);
-	return float(0);
-
-func delta_aim (input_name: String,dt: float) -> float:
-	if Input.is_action_pressed(input_name):
-		return dt * crosshair_speed * Input.get_action_strength(input_name);
 	return float(0);

@@ -342,8 +342,7 @@ loop = false
 script = ExtResource( 2 )
 forward_speed = 24.4
 strafe_speed = 7.2
-crosshair_range = Vector2( 12.5, 7 )
-crosshair_speed = 26.8
+crosshair_range = Vector2( 12.5, 4.5 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -5 )
@@ -375,7 +374,7 @@ anims/hurt = SubResource( 3 )
 anims/normal = SubResource( 2 )
 
 [node name="Crosshair" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4.5 )
 pixel_size = 0.015
 texture = ExtResource( 6 )
 

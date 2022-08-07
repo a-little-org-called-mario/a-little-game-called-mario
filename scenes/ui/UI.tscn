@@ -14,7 +14,9 @@
 [ext_resource path="res://textures/trails/ranbow_flag.jpg" type="Texture" id=12]
 [ext_resource path="res://scenes/ui/CarPlayerStats.gd" type="Script" id=13]
 [ext_resource path="res://scenes/ui/UI.gd" type="Script" id=14]
+[ext_resource path="res://scenes/ui/notepad/Notepad.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/ui/powerups/fire_flower/FireFlowerUI.tscn" type="PackedScene" id=16]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Appear"
@@ -348,6 +350,11 @@ text = "
 fit_content_height = true
 scroll_active = false
 script = ExtResource( 3 )
+
+[node name="Notepad" parent="UI" instance=ExtResource( 15 )]
+pause_mode = 2
+margin_top = 96.0
+margin_bottom = 160.0
 
 [node name="PlayerDiedPanel" type="Panel" parent="UI"]
 pause_mode = 2

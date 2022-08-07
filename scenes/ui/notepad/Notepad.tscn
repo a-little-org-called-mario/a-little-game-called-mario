@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/ui/notes/notepad/notepad_new.png" type="Texture" id=1]
+[ext_resource path="res://sprites/ui/notes/notepad/notepad_opened.png" type="Texture" id=2]
+[ext_resource path="res://sprites/ui/notes/notepad/notepad_closed.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=4]
+[ext_resource path="res://scenes/ui/notepad/Notepad.gd" type="Script" id=5]
+
+[node name="Notepad" type="Control"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+theme = ExtResource( 4 )
+script = ExtResource( 5 )
+notepad = NodePath("TextureButton")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -23.325
+margin_top = -33.5765
+margin_right = 24.675
+margin_bottom = 14.4235
+rect_rotation = 9.0
+focus_mode = 0
+mouse_filter = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+button_mask = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+texture_disabled = ExtResource( 1 )
+
+[node name="KeyLabel" type="Label" parent="."]
+margin_left = 31.0
+margin_top = 41.0
+margin_right = 55.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 24, 16 )
+rect_rotation = 2.0
+text = "N"

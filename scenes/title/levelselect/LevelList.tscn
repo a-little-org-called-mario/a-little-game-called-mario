@@ -16,5 +16,5 @@ tag_colors = {
 "default": Color( 0.27451, 0.705882, 0.470588, 1 )
 }
 
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="item_selected" from="." to="." method="_on_item_selected"]
-[connection signal="tree_entered" from="." to="." method="grab_focus"]

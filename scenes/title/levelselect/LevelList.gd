@@ -7,15 +7,14 @@ export (Texture) var icon
 export (Dictionary) var tag_colors
 
 onready var secret: bool = Input.is_action_pressed("secret_button")
-var levels: Array = []
-var last_item_selected: int = -1
+onready var levels: Array = (
+	FileUtils.get_all_levels_in_dir(level_directory) if secret
+	else FileUtils.get_all_first_levels_in_dir(level_directory)
+)
+onready var last_item_selected: int = 0 if len(levels) else -1
 
 
 func _ready():
-	if secret:
-		levels = FileUtils.get_all_levels_in_dir(level_directory)
-	else: 
-		levels = FileUtils.get_all_first_levels_in_dir(level_directory)
 	_set_items(levels, secret)
 
 
@@ -49,6 +48,17 @@ func _set_item_tag(idx: int, tag: String):
 
 func _on_item_selected(index):
 	if last_item_selected > -1:
-		set_item_icon(last_item_selected, null)
-	set_item_icon(index, icon)
+		self.set_item_icon(last_item_selected, null)
+	self.set_item_icon(index, icon)
 	last_item_selected = index
+
+
+func _on_focus_entered():
+	if last_item_selected > -1:
+		self.select(last_item_selected)
+		self.emit_signal("item_selected", last_item_selected)
+
+
+func unselect_active_item():
+	self.unselect(last_item_selected)
+	self.set_item_icon(last_item_selected, null)

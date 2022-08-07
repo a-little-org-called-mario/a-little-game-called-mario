@@ -212,9 +212,10 @@ focus_neighbour_right = NodePath("../VBoxContainer/HBoxContainer/LevelList")
 shortcut_in_tooltip = false
 shortcut = SubResource( 6 )
 text = "< BACK"
-icon = null
+align = 0
 redirect_scene = "res://scenes/title/TitleScreen.tscn"
 
 [connection signal="item_activated" from="Menu/VBoxContainer/HBoxContainer/LevelList" to="." method="_on_LevelList_item_activated"]
 [connection signal="item_selected" from="Menu/VBoxContainer/HBoxContainer/LevelList" to="." method="_on_LevelList_item_selected"]
 [connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="focus_entered" from="Menu/BackButton" to="Menu/VBoxContainer/HBoxContainer/LevelList" method="unselect_active_item"]

@@ -419,5 +419,5 @@ func flash_sprite() -> void:
 
 
 func _end_flash_sprite() -> void:
-	effect_anim.stop()
+	effect_anim.play("RESET")
 	hitbox.set_deferred('monitoring', true)

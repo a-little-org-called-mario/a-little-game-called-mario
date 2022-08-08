@@ -25,8 +25,10 @@ func _process(delta: float) -> void:
 		var row = int(i / columns)
 		var initial_y_pos = row * node.rect_size.y
 		var new_y_pos = initial_y_pos + sin(time * frequency + i) * amplitude
-		
 		node.rect_position.y = new_y_pos
+
+	if time >= amplitude/frequency*2:
+		time = 0
 
 
 func _on_heart_changed(delta: int, hearts: int) -> void:

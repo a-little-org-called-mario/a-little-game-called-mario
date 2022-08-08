@@ -2,13 +2,15 @@
 extends BaseInventoryHandle
 class_name HeartInventoryHandle
 
+
 func change_hearts(delta: int) -> bool:
+	delta = clamp(delta, -inventory.hearts, inventory.max_hearts - inventory.hearts)
 	if delta == 0:
 		return true
-
 	inventory.hearts += delta
 	EventBus.emit_signal("heart_changed", delta, inventory.hearts)
 	return true
+
 
 # Try to find an inventory on the node + children and change the hearts. Returns true when successful.
 static func change_hearts_on(node: Node2D, heart_delta: int) -> bool:

@@ -6,7 +6,8 @@ class_name PlayerInventory
 const MAX_FLOWER: int = 5
 
 export var coins: int
-export var hearts: int
+export var hearts: int setget set_hearts
+export (int, 13, 39, 1) var max_hearts: int = 26
 export var has_flower: bool
 export (int, 0, 5) var flower_amount: int = MAX_FLOWER setget set_flower_amount
 export var has_bus: bool
@@ -29,18 +30,19 @@ func duplicate(subresources: bool = false):
 
 func reset() -> void:
 	coins = 0
-	hearts = 3
+	self.hearts = 3
 	self.flower_amount = MAX_FLOWER
 	has_flower = false
 	has_bus = false
 	stars = {}
 
 
-func reset_to(inventory: Resource):
+func reset_to(inventory: PlayerInventory):
 	EventBus.emit_signal("heart_changed", inventory.hearts-hearts, inventory.hearts)
 	EventBus.emit_signal("coin_collected", {"value": 0, "total": inventory.coins, "type": "coin"})
 	coins = inventory.coins
-	hearts = inventory.hearts
+	self.max_hearts = inventory.max_hearts
+	self.hearts = inventory.hearts
 	self.flower_amount = inventory.flower_amount
 	has_flower = inventory.has_flower
 	has_bus = inventory.has_bus
@@ -64,3 +66,7 @@ func _on_shot() -> void:
 func set_flower_amount(value: int) -> void:
 	flower_amount = clamp(value, 0, MAX_FLOWER)
 	EventBus.emit_signal("fire_flower_changed", flower_amount)
+
+
+func set_hearts(value: int) -> void:
+	hearts = clamp(value, 0, self.max_hearts)

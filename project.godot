@@ -219,6 +219,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ScreenShake.gd"
 }, {
+"base": "RichTextLabel",
+"class": "ScrollRichLabel",
+"language": "GDScript",
+"path": "res://scripts/ScrollRichLabel.gd"
+}, {
 "base": "Camera2D",
 "class": "ShakingCamera",
 "language": "GDScript",
@@ -327,6 +332,7 @@ _global_script_class_icons={
 "SMChartList": "",
 "SMParser": "",
 "ScreenShake": "",
+"ScrollRichLabel": "",
 "ShakingCamera": "",
 "ShootAchievement": "",
 "SliderOption": "",

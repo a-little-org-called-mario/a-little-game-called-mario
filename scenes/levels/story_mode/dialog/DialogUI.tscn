@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/levels/story_mode/dialog/DialogUI.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/buttons/BaseMenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/corncob.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/buttons/BaseMenuButton.gd" type="Script" id=4]
 
 [sub_resource type="Animation" id=16]
 length = 0.001
@@ -118,6 +121,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ -198.0 ]
 }
+dialog_button = ExtResource( 2 )
 
 [node name="PortraitRect" type="ColorRect" parent="."]
 margin_right = 230.0
@@ -150,6 +154,7 @@ align = 1
 margin_left = 234.0
 margin_right = 724.0
 margin_bottom = 201.0
+rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0.0117647, 0.0509804, 0.203922, 1 )
@@ -157,6 +162,7 @@ color = Color( 0.0117647, 0.0509804, 0.203922, 1 )
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -189,6 +195,8 @@ margin_top = 0.00799561
 margin_right = -3.05176e-05
 margin_bottom = -0.0860138
 text = "Next"
+icon = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="FinishButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/DialogTextLabel"]
 visible = false
@@ -201,17 +209,13 @@ margin_top = 0.0529938
 margin_right = 0.119965
 margin_bottom = -0.0410156
 text = "OK"
+icon = ExtResource( 3 )
+script = ExtResource( 4 )
 
-[node name="PanelContainer" type="MarginContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="ChoiceContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 margin_top = 181.0
 margin_right = 470.0
 margin_bottom = 181.0
-custom_constants/margin_right = 60
-custom_constants/margin_left = 60
-
-[node name="ChoiceContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/PanelContainer"]
-margin_left = 60.0
-margin_right = 410.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 16 )

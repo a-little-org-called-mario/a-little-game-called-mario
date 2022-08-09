@@ -62,3 +62,9 @@ func _on_focus_entered():
 func unselect_active_item():
 	self.unselect(last_item_selected)
 	self.set_item_icon(last_item_selected, null)
+
+
+func _on_empty_space_selected():
+	var idx: int = self.get_item_at_position(get_local_mouse_position())
+	self.select(idx)
+	self.emit_signal("item_selected", idx)

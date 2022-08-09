@@ -18,3 +18,4 @@ tag_colors = {
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="item_selected" from="." to="." method="_on_item_selected"]
+[connection signal="nothing_selected" from="." to="." method="_on_empty_space_selected"]

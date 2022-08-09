@@ -14,6 +14,7 @@ var main_scene = null
 func _ready():
 	EventBus.connect("hub_entered", self, "_exit_to_menu")
 	level_list.grab_focus()
+	level_list.connect("tree_entered", level_list, "grab_focus")
 
 
 func _on_StartButton_pressed():

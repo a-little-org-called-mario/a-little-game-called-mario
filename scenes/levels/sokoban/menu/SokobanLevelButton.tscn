@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/title/TitleMenuButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/buttons/RedirectMenuButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/levels/sokoban/menu/SokobanLevelButton.gd" type="Script" id=2]
 
 [node name="SokobanLevelButton" instance=ExtResource( 1 )]

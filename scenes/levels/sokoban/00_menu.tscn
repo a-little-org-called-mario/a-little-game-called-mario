@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/levels/sokoban/menu/SokobanLevelButton.gd" type="Script" id=4]
 [ext_resource path="res://scenes/levels/sokoban/menu/SokobanLevelGrid.gd" type="Script" id=5]
-[ext_resource path="res://scenes/title/TitleMenuButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/ui/buttons/RedirectMenuButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/levels/sokoban/menu/SokobanLevelButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sprites/bg-tile.png" type="Texture" id=8]
 
@@ -104,6 +104,5 @@ margin_left = 429.0
 margin_top = 441.0
 margin_right = 595.0
 margin_bottom = 493.0
-shortcut_in_tooltip = false
 text = "BACK TO HUB"
 script = ExtResource( 4 )

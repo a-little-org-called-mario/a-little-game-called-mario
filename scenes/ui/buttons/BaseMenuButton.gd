@@ -1,16 +1,13 @@
 extends Button
-class_name TitleMenuButton
+class_name BaseMenuButton
 
-export (String, FILE, "*.tscn") var redirect_scene
 export (bool) var focused_by_default = false
-
 
 onready var selected_icon = self.icon
 onready var unselected_icon = ImageTexture.new() if selected_icon else null
 
 
 func _ready():
-	# Signals can be found here: https://docs.godotengine.org/en/stable/classes/class_basebutton.html
 	self.connect("pressed", self, "_on_pressed")
 	self.connect("focus_entered", self, "_on_focus_entered")
 	self.connect("focus_exited", self, "_on_focus_exited")
@@ -29,7 +26,7 @@ func _ready():
 
 
 func _on_pressed():
-	EventBus.emit_signal("change_scene", { "scene": redirect_scene })
+	pass
 
 
 func _on_focus_entered():
@@ -38,4 +35,3 @@ func _on_focus_entered():
 
 func _on_focus_exited():
 	icon = unselected_icon
-

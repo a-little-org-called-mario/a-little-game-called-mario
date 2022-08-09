@@ -12,7 +12,7 @@
 [ext_resource path="res://scenes/title/CreditsContainer.gd" type="Script" id=10]
 [ext_resource path="res://audio/music/dramaticgamemusic.mp3" type="AudioStream" id=12]
 [ext_resource path="res://scenes/title/TitleScreen.gd" type="Script" id=15]
-[ext_resource path="res://scenes/title/TitleMenuButton.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/ui/buttons/RedirectMenuButton.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/title/Mario.gd" type="Script" id=17]
 
 [sub_resource type="DynamicFont" id=1]
@@ -232,8 +232,8 @@ margin_left = 12.0
 margin_right = 166.0
 margin_bottom = 52.0
 text = "START GAME"
-redirect_scene = "res://scenes/Main.tscn"
 focused_by_default = true
+redirect_scene = "res://scenes/Main.tscn"
 
 [node name="LevelSelectButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 16 )]
 margin_top = 56.0

@@ -338,6 +338,7 @@ func volume_select(delta: int, label: RichTextLabel):
 				+ (">" if 10 > Settings.volume_sfx else " ")
 				+ "\n"
 			)
+			$"PauseMenu/SFXMenu/SFX Player".play()
 		4:
 			Settings.volume_voice = int(clamp(Settings.volume_voice + delta, 0, 10))
 			label.text = (
@@ -350,6 +351,7 @@ func volume_select(delta: int, label: RichTextLabel):
 				+ (">" if 10 > Settings.volume_voice else " ")
 				+ "\n"
 			)
+			$"PauseMenu/SFXMenu/Voice Player".play()
 
 	# reapply the wave
 	set_item_style()

@@ -31,11 +31,15 @@ func _on_MusicVolume_value_changed(value) -> void:
 
 
 func _on_SFXVolume_value_changed(value) -> void:
+	if (value != Settings.volume_sfx):
+		$Audio/SFX.play()
 	Settings.volume_sfx = value
 	EventBus.emit_signal("volume_changed", "sfx")
 
 
 func _on_VoiceVolume_value_changed(value) -> void:
+	if (value != Settings.volume_voice):
+		$Audio/Voice.play()
 	Settings.volume_voice = value
 	EventBus.emit_signal("volume_changed", "voice")
 

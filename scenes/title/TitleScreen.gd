@@ -8,6 +8,7 @@ const FileUtils = preload("res://scripts/FileUtils.gd")
 const TextUtils = preload("res://scripts/TextUtils.gd")
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Settings.load_data()
 	if randf() < (1.0 / 5.0):
 		alternate_title_screen()

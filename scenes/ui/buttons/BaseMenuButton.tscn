@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/ui/buttons/BaseMenuButton.gd" type="Script" id=2]
+[ext_resource path="res://sprites/corncob.png" type="Texture" id=3]
+
+[node name="BaseMenuButton" type="Button"]
+margin_right = 166.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 166, 52 )
+theme = ExtResource( 1 )
+shortcut_in_tooltip = false
+text = "BUTTON TEXT"
+icon = ExtResource( 3 )
+align = 0
+script = ExtResource( 2 )
+focused_by_default = true

@@ -6,8 +6,8 @@ https://github.com/godotengine/godot/issues/62043
 extends RichTextLabel
 class_name ScrollRichLabel
 
-export (float) var scroll_value: float = 0.0 setget set_scroll_value
-export (float) var percent_scroll: float = 0.0 setget set_percent_scroll
+export(float) var scroll_value: float = 0.0 setget set_scroll_value
+export(float) var percent_scroll: float = 0.0 setget set_percent_scroll
 
 onready var scroll_bar: VScrollBar = get_v_scroll()
 onready var real_max_value: int = get_content_height()

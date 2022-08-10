@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://scripts/Audio.gd" type="Script" id=10]
 [ext_resource path="res://scenes/title/options/controls/SliderOption.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/title/options/OptionsMenu.gd" type="Script" id=13]
+[ext_resource path="res://audio/sfx/coin.wav" type="AudioStream" id=14]
+[ext_resource path="res://audio/voice/marwing/en/MW1-0_LR1.wav" type="AudioStream" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -205,10 +207,6 @@ text = "OFF"
 margin_top = 44.0
 margin_right = 680.0
 margin_bottom = 84.0
-value_label_mapping = {
-false: "OFF",
-true: "ON"
-}
 
 [node name="OptionLabel" parent="CustomTabContainer/Panel/GraphicsSettings/ScreenShake" index="1"]
 text = "SCREEN SHAKE"
@@ -217,10 +215,6 @@ text = "SCREEN SHAKE"
 margin_top = 88.0
 margin_right = 680.0
 margin_bottom = 128.0
-value_label_mapping = {
-false: "OFF",
-true: "ON"
-}
 
 [node name="OptionLabel" parent="CustomTabContainer/Panel/GraphicsSettings/CRTFilter" index="1"]
 text = "CRT FILTER"
@@ -234,7 +228,6 @@ margin_left = -83.0
 margin_top = -173.0
 margin_right = 107.0
 margin_bottom = -101.0
-shortcut_in_tooltip = false
 shortcut = SubResource( 8 )
 text = "Back to title"
 redirect_scene = "res://scenes/title/TitleScreen.tscn"
@@ -248,6 +241,14 @@ stream = ExtResource( 9 )
 volume_db = -20.0
 autoplay = true
 bus = "music"
+
+[node name="SFX" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 14 )
+bus = "sfx"
+
+[node name="Voice" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 16 )
+bus = "voice"
 
 [connection signal="value_changed" from="CustomTabContainer/Panel/AudioSettings/GameVolume" to="." method="_on_GameVolume_value_changed"]
 [connection signal="value_changed" from="CustomTabContainer/Panel/AudioSettings/MusicVolume" to="." method="_on_MusicVolume_value_changed"]

@@ -265,7 +265,6 @@ strafe_speed = 1.0
 move_forward = false
 
 [node name="Mesh" type="MeshInstance" parent="."]
-visible = false
 mesh = ExtResource( 2 )
 material/0 = SubResource( 1 )
 
@@ -279,10 +278,13 @@ shape = SubResource( 13 )
 
 [node name="Explosion" type="AnimatedSprite3D" parent="."]
 transform = Transform( 13.0191, 0, 0, 0, 13.0191, 0, 0, 0, 1.00147, 0, 0, 0 )
+visible = false
 frames = SubResource( 14 )
 animation = "loop"
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "normal"
 anims/die = SubResource( 16 )
 anims/normal = SubResource( 15 )

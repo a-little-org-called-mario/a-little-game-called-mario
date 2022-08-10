@@ -369,6 +369,7 @@ frames = SubResource( 13 )
 animation = "loop"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "normal"
 anims/die = SubResource( 4 )
 anims/hurt = SubResource( 3 )
 anims/normal = SubResource( 2 )

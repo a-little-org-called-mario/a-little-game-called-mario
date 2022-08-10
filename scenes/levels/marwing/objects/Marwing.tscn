@@ -345,7 +345,7 @@ strafe_speed = 7.2
 crosshair_range = Vector2( 12.5, 4.5 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -5 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -5 )
 current = true
 fov = 80.0
 

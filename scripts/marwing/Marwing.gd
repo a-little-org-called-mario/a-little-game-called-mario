@@ -4,7 +4,7 @@ export(Vector2) var crosshair_range: Vector2;
 export(float, 0.1, 2, 0.1) var joypad_sensitivity: float = 0.5
 export(float, 0.01, 0.08, 0.01) var mouse_sensitivity: float = 0.04
 var crosshair_pos: Vector2 = Vector2.ZERO;
-var initial_crosshair_pos: Vector2 = Vector2.ZERO
+var initial_crosshair_pos: Vector3 = Vector3.ZERO
 
 onready var camera: Camera = get_node("Camera");
 onready var mesh: MeshInstance = get_node("Mesh");
@@ -12,8 +12,7 @@ onready var crosshair: Sprite3D = get_node("Crosshair");
 
 
 func _ready ():
-	initial_crosshair_pos.x = crosshair.translation.x
-	initial_crosshair_pos.y = crosshair.translation.y
+	initial_crosshair_pos = crosshair.translation
 	camera.set_current(true);
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -74,7 +73,7 @@ func _physics_process (dt: float):
 	# handle aiming & shooting
 	if can_shoot:
 		if Input.is_action_pressed("marwing_shoot"):
-			shoot(mesh.translation, crosshair.translation-mesh.translation);
+			shoot(mesh.translation, crosshair.translation - camera.translation);
 
 
 ## Calculates how much weight a given input should have on the ship's strafe offset by factoring in strafe speed and input strength.

@@ -60,10 +60,11 @@ extents = Vector2( 31, 31 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 1024, 598 )
 
-[node name="Starspine" type="KinematicBody2D"]
+[node name="Starspine" type="KinematicBody2D" groups=["enemy"]]
 collision_layer = 10
 collision_mask = 322
 script = ExtResource( 2 )
+hurt_flash_color = Color( 1, 0.501961, 0.501961, 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
@@ -71,6 +72,7 @@ animation = "idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 9 )
 
 [node name="ActiveArea" type="Area2D" parent="."]
@@ -80,6 +82,7 @@ visible = false
 shape = SubResource( 10 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 position = Vector2( 2.14577e-06, 2.14577e-06 )
 scale = Vector2( 4.8, 4.8 )
 process_parent = true
@@ -89,4 +92,11 @@ physics_process_parent = true
 enabled = true
 collision_mask = 66
 
+[node name="SleepTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HurtFlashTimer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="Sprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="SleepTimer" to="." method="_on_SleepTimer_timeout"]
+[connection signal="timeout" from="HurtFlashTimer" to="." method="_on_HurtFlashTimer_timeout"]

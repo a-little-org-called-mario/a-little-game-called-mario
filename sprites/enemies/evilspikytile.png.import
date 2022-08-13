@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/evilspikytile(96x96).png-9b945cb2eae775c33d6f48e94788918b.stex"
+path="res://.import/evilspikytile.png-b0caba82c1d78f831dd4a1e3af23136a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemies/evilspikytile(96x96).png"
-dest_files=[ "res://.import/evilspikytile(96x96).png-9b945cb2eae775c33d6f48e94788918b.stex" ]
+source_file="res://sprites/enemies/evilspikytile.png"
+dest_files=[ "res://.import/evilspikytile.png-b0caba82c1d78f831dd4a1e3af23136a.stex" ]
 
 [params]
 

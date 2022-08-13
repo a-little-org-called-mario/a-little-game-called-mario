@@ -12,6 +12,10 @@ signal item_received(item)
 # The event is then handled by the main script.
 signal event_occured(id)
 
+
+export(PackedScene) var dialog_button
+
+
 # True if the player is currently in a dialog.
 var active := false
 
@@ -43,7 +47,7 @@ onready var _continue_button: Button = $ColorRect/MarginContainer/VBoxContainer/
 onready var _finish_button: Button = $ColorRect/MarginContainer/VBoxContainer/DialogTextLabel/FinishButton
 onready var _title_label: Label = $PortraitRect/VBoxContainer/TitleLabel
 onready var _portrait_texture_rect: TextureRect = $PortraitRect/VBoxContainer/PortraitTextureRect
-onready var _choice_container: VBoxContainer = $ColorRect/MarginContainer/VBoxContainer/PanelContainer/ChoiceContainer
+onready var _choice_container: VBoxContainer = $ColorRect/MarginContainer/VBoxContainer/ChoiceContainer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 
@@ -106,7 +110,7 @@ func _set_dialog(to: Dialog):
 		_choice_container.remove_child(button)
 		button.queue_free()
 	for choice in _dialog.choices:
-		var button := Button.new()
+		var button := dialog_button.instance() as BaseMenuButton
 		button.text = choice.text
 		var dialog := _evaluate_dialog(choice.dialog)
 		if choice.dialog and not dialog:

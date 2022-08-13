@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/resources/BaseInventoryHandle.gd"
 }, {
+"base": "Button",
+"class": "BaseMenuButton",
+"language": "GDScript",
+"path": "res://scenes/ui/buttons/BaseMenuButton.gd"
+}, {
 "base": "HBoxContainer",
 "class": "BaseOption",
 "language": "GDScript",
@@ -149,6 +154,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/marwing/MarwingLevel.gd"
 }, {
+"base": "Area",
+"class": "MarwingProjectile",
+"language": "GDScript",
+"path": "res://scripts/marwing/MarwingProjectile.gd"
+}, {
 "base": "PathFollow",
 "class": "MarwingShip",
 "language": "GDScript",
@@ -199,6 +209,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/powerups/Powerup.gd"
 }, {
+"base": "BaseMenuButton",
+"class": "RedirectMenuButton",
+"language": "GDScript",
+"path": "res://scenes/ui/buttons/RedirectMenuButton.gd"
+}, {
 "base": "Reference",
 "class": "SMChart",
 "language": "GDScript",
@@ -218,6 +233,11 @@ _global_script_classes=[ {
 "class": "ScreenShake",
 "language": "GDScript",
 "path": "res://scripts/ScreenShake.gd"
+}, {
+"base": "RichTextLabel",
+"class": "ScrollRichLabel",
+"language": "GDScript",
+"path": "res://scripts/ScrollRichLabel.gd"
 }, {
 "base": "Camera2D",
 "class": "ShakingCamera",
@@ -269,11 +289,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/TextUtils.gd"
 }, {
-"base": "Button",
-"class": "TitleMenuButton",
-"language": "GDScript",
-"path": "res://scenes/title/TitleMenuButton.gd"
-}, {
 "base": "Reference",
 "class": "TrackParser",
 "language": "GDScript",
@@ -291,6 +306,7 @@ _global_script_class_icons={
 "BallSpawnPoint": "",
 "BaseBox": "",
 "BaseInventoryHandle": "",
+"BaseMenuButton": "",
 "BaseOption": "",
 "BouncyMoustache": "",
 "Bub": "",
@@ -313,6 +329,7 @@ _global_script_class_icons={
 "LevelMetadata": "",
 "Luigi": "",
 "MarwingLevel": "",
+"MarwingProjectile": "",
 "MarwingShip": "",
 "Platform": "",
 "Player": "",
@@ -323,10 +340,12 @@ _global_script_class_icons={
 "PopcornKernel": "",
 "PopcornPopped": "",
 "Powerup": "",
+"RedirectMenuButton": "",
 "SMChart": "",
 "SMChartList": "",
 "SMParser": "",
 "ScreenShake": "",
+"ScrollRichLabel": "",
 "ShakingCamera": "",
 "ShootAchievement": "",
 "SliderOption": "",
@@ -337,7 +356,6 @@ _global_script_class_icons={
 "StoryCharacterData": "",
 "StoryItem": "",
 "TextUtils": "",
-"TitleMenuButton": "",
 "TrackParser": "",
 "TypeShootEnemy": ""
 }
@@ -571,6 +589,7 @@ marwing_shoot={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":6,"axis_value":1.0,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":7,"axis_value":1.0,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 click={

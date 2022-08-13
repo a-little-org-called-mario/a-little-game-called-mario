@@ -36,7 +36,7 @@ func _physics_process (dt: float):
 	if can_move: offset = offset + (dt * forward_speed * (1 if move_forward else -1));
 
 	# toggle death animation when hp hits zero, then remove node from scene
-	if 0 == hp:
+	if hp <= 0 and not invulnerable:
 		can_move = false;
 		can_strafe = false;
 		can_shoot = false;

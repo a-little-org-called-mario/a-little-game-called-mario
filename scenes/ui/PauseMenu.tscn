@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/ui/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://audio/voice/marwing/en/MW1-0_LR1.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/sfx/coin.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -231,9 +233,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -5.0
 margin_right = -5.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BackLabel" type="RichTextLabel" parent="PauseMenu/SFXMenu"]
 anchor_left = 0.355
@@ -317,6 +316,11 @@ bbcode_enabled = true
 text = "
 VOICE VOLUME: <  10  >
 "
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="SFX Player" type="AudioStreamPlayer" parent="PauseMenu/SFXMenu"]
+stream = ExtResource( 4 )
+bus = "sfx"
+
+[node name="Voice Player" type="AudioStreamPlayer" parent="PauseMenu/SFXMenu"]
+stream = ExtResource( 3 )
+bus = "voice"

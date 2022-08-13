@@ -105,6 +105,8 @@ func _on_endportal_body_entered(body: Node2D, next_level: PackedScene, portal: E
 
 
 func _finish_level(next_level: PackedScene = null) -> void:
+	# Set mouse mode as vissible by default, level can change it
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# Create the new level, insert it into the tree and remove the old one.
 	# If next_level is null, return to the hub
 	level_scene = next_level

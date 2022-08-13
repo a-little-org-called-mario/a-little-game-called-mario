@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://scenes/ui/UI.gd" type="Script" id=14]
 [ext_resource path="res://scenes/ui/notepad/Notepad.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/ui/powerups/fire_flower/FireFlowerUI.tscn" type="PackedScene" id=16]
-
 
 [sub_resource type="Animation" id=1]
 resource_name = "Appear"
@@ -90,41 +89,49 @@ margin_right = -10.0
 margin_bottom = 84.0
 
 [node name="HeartIconContainer" type="GridContainer" parent="UI/HBoxContainer"]
-margin_right = 248.0
+margin_right = 192.0
 margin_bottom = 100.0
 size_flags_vertical = 3
-columns = 10
+columns = 13
 script = ExtResource( 8 )
 heart_scene = ExtResource( 9 )
 
 [node name="Heart" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
+margin_right = 24.0
+margin_bottom = 24.0
 
 [node name="Heart2" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
-margin_left = 36.0
-margin_right = 68.0
+margin_left = 28.0
+margin_right = 52.0
+margin_bottom = 24.0
 
 [node name="Heart3" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
-margin_left = 72.0
-margin_right = 104.0
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 24.0
 
 [node name="Heart4" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
-margin_left = 108.0
-margin_right = 140.0
+margin_left = 84.0
+margin_right = 108.0
+margin_bottom = 24.0
 
 [node name="Heart5" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
-margin_left = 144.0
-margin_right = 176.0
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
 
 [node name="Heart6" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
-margin_left = 180.0
-margin_right = 212.0
+margin_left = 140.0
+margin_right = 164.0
+margin_bottom = 24.0
 
 [node name="Heart7" parent="UI/HBoxContainer/HeartIconContainer" instance=ExtResource( 9 )]
-margin_left = 216.0
-margin_right = 248.0
+margin_left = 168.0
+margin_right = 192.0
+margin_bottom = 24.0
 
 [node name="Spacer" type="Control" parent="UI/HBoxContainer"]
-margin_left = 252.0
+margin_left = 196.0
 margin_right = 744.0
 margin_bottom = 100.0
 size_flags_horizontal = 3

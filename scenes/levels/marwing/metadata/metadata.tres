@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/levels/LevelMetadata.gd" type="Script" id=1]
+[ext_resource path="res://scenes/levels/marwing/metadata/preview.jpg" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+first_level_path = "res://scenes/levels/marwing/1-0.tscn"
+tags = [ "game mode" ]
+short_description = " "
+description = "Take control of new improved marwing to save the REPO planet from MERGE CONFLICTS"
+preview_image = ExtResource( 2 )

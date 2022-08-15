@@ -32,14 +32,7 @@ func _damage(dmg: int, killer: Object) -> void:
 	
 	health = health - dmg
 	if health <= 0:
-		EventBus.emit_signal("enemy_killed")
-		emit_signal("dying", killer)
-		var res = _handle_dying(killer)
-		if res is GDScriptFunctionState:
-			yield(res, "completed")
-		alive = false
-		emit_signal("dead", killer)
-		queue_free()
+		.kill(killer)
 
 
 func move(_delta):

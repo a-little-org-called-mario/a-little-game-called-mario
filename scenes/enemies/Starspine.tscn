@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://sprites/enemies/evilspikytile.png" type="Texture" id=1]
+[ext_resource path="res://scenes/enemies/Starspine.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "active",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
+"name": "sleep",
+"speed": 3.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": false,
+"name": "wake",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 31, 31 )
+
+[node name="Starspine" type="KinematicBody2D" groups=["enemy"]]
+collision_layer = 10
+collision_mask = 322
+script = ExtResource( 2 )
+hurt_flash_color = Color( 1, 0.501961, 0.501961, 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+animation = "idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 9 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+position = Vector2( 2.14577e-06, 2.14577e-06 )
+scale = Vector2( 4.8, 4.8 )
+process_parent = true
+physics_process_parent = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 66
+
+[node name="SleepTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HurtFlashTimer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="Sprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="SleepTimer" to="." method="_on_SleepTimer_timeout"]
+[connection signal="timeout" from="HurtFlashTimer" to="." method="_on_HurtFlashTimer_timeout"]

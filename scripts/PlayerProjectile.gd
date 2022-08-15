@@ -31,7 +31,7 @@ func _physics_process(_delta: float):
 	if _active:
 		_handle_movement()
 		if look_at_direction and _direction != Vector2():
-			look_at(position + _direction)
+			look_at(global_position + _direction)
 
 
 # Override to do anything else than move in a straight line

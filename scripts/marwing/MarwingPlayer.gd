@@ -1,4 +1,4 @@
-extends MarwingShip
+extends MarwingShipBase
 
 export(Vector2) var crosshair_range: Vector2;
 export(float, 0.1, 2, 0.1) var joypad_sensitivity: float = 0.5
@@ -73,7 +73,7 @@ func _physics_process (dt: float):
 	# handle aiming & shooting
 	if can_shoot:
 		if Input.is_action_pressed("marwing_shoot"):
-			shoot(mesh.translation, crosshair.translation - camera.translation);
+			shoot(mesh.translation , crosshair.translation - camera.translation);
 
 
 ## Calculates how much weight a given input should have on the ship's strafe offset by factoring in strafe speed and input strength.

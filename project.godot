@@ -160,9 +160,9 @@ _global_script_classes=[ {
 "path": "res://scripts/marwing/MarwingProjectile.gd"
 }, {
 "base": "PathFollow",
-"class": "MarwingShip",
+"class": "MarwingShipBase",
 "language": "GDScript",
-"path": "res://scripts/marwing/MarwingShip.gd"
+"path": "res://scripts/marwing/MarwingShipBase.gd"
 }, {
 "base": "Enemy",
 "class": "Platform",
@@ -330,7 +330,7 @@ _global_script_class_icons={
 "Luigi": "",
 "MarwingLevel": "",
 "MarwingProjectile": "",
-"MarwingShip": "",
+"MarwingShipBase": "",
 "Platform": "",
 "Player": "",
 "PlayerFlying": "",

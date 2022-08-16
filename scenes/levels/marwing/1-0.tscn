@@ -2,12 +2,12 @@
 
 [ext_resource path="res://models/marwing/10_WATER.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/marwing/levels/1-0.gd" type="Script" id=2]
-[ext_resource path="res://scenes/levels/marwing/objects/Drone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/levels/marwing/objects/MarwingDrone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/levels/marwing/objects/Marwing.tscn" type="PackedScene" id=4]
 [ext_resource path="res://textures/marwing/WORLD1.tres" type="Environment" id=5]
 [ext_resource path="res://models/marwing/10_WATER.tres" type="Material" id=6]
 [ext_resource path="res://scenes/levels/marwing/objects/DialogueBox.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scripts/marwing/SpawnDroneTimer.gd" type="Script" id=8]
+[ext_resource path="res://scripts/marwing/MarwingDroneSpawner.gd" type="Script" id=8]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -31,7 +31,7 @@ transform = Transform( -1.31134e-07, 0, 3, 0, 0.1, 0, -3, 0, -1.31134e-07, 0, -5
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 6 )
 
-[node name="SpawnDroneTimer" type="Timer" parent="."]
+[node name="DroneSpawner" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 script = ExtResource( 8 )
@@ -46,3 +46,4 @@ curve = SubResource( 1 )
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000298113, 0.000109732, -2.55853e-05 )
 
 [node name="DialogueBox" parent="." instance=ExtResource( 7 )]
+visible = true

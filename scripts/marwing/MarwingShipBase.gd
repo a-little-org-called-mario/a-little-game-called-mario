@@ -1,11 +1,12 @@
 extends PathFollow
-class_name MarwingShip
+class_name MarwingShipBase
 
 # Max stats block
 export var max_hp: int = 100;                                   # the maximum amount of health the ship has
 export var fire_rate: float = 8.5;                             # how many times, per second, the ship can fire
 export var forward_speed: float = 16.6;                        # the speed at which the ship moves along the path, in units per second
 export var strafe_speed: float = 5.2;                          # the speed at which the ship can move perpendicular to the path, in units/sec
+export var bullet_speed: float = 2.5;
 export var max_perpen: Vector2 = Vector2(2.7, 1.8);            # how far from the path the ship can go, in relative horizontal and vertical units
 
 # Dynamic stats block
@@ -36,13 +37,14 @@ func _physics_process (dt: float):
 	if can_move: offset = offset + (dt * forward_speed * (1 if move_forward else -1));
 
 	# toggle death animation when hp hits zero, then remove node from scene
-	if hp <= 0 and not invulnerable:
-		can_move = false;
-		can_strafe = false;
-		can_shoot = false;
-		$AnimationPlayer.play("die");
-		yield($AnimationPlayer,"animation_finished");
-		queue_free();
+	if not (hp <= 0 and not invulnerable):
+		return
+	can_move = false;
+	can_strafe = false;
+	can_shoot = false;
+	$AnimationPlayer.play("die");
+	yield($AnimationPlayer,"animation_finished");
+	queue_free();
 
 # note (jam): this is written as a function only so that it can be called in AnimationPlayer call method tracks
 func set_invulnerable (inv: bool = false):
@@ -55,11 +57,13 @@ func allow_fire ():
 func shoot (origin: Vector3, dir: Vector3):
 	if not can_fire:
 		return;
+	if projectile == null:
+		print("Warning! MarwingShipBase projectile set to null!")
 
 	var proj: PackedScene = projectile if projectile != null else fallback_projectile;
 	var inst = proj.instance();
 	inst.translation = origin;
-	inst.direction = dir;
+	inst.direction = dir.normalized()*bullet_speed;
 	add_child(inst);	# note (jam):   this is really bad actually. bullets probably shouldn't be parented to a ship and affected by their movement along a path
 	can_fire = false;
 	fire_timer.start(1 / fire_rate);

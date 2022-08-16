@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://textures/marwing/DRONE1.png" type="Texture" id=1]
-[ext_resource path="res://models/marwing/DRONE1.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://models/marwing/DRONE1.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/marwing/MarwingDrone.gd" type="Script" id=2]
 [ext_resource path="res://sprites/marwing/EXPLODE1.png" type="Texture" id=3]
-[ext_resource path="res://scripts/marwing/Enemy.gd" type="Script" id=4]
+[ext_resource path="res://textures/marwing/DRONE1.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
-albedo_texture = ExtResource( 1 )
+albedo_texture = ExtResource( 4 )
 
 [sub_resource type="CylinderShape" id=13]
 radius = 1.1
@@ -257,15 +257,16 @@ tracks/5/keys = {
 }
 
 [node name="Drone" type="PathFollow"]
-loop = false
-script = ExtResource( 4 )
+v_offset = 6.0
+script = ExtResource( 2 )
+max_hp = 20
 fire_rate = 1.2
 forward_speed = 12.1
 strafe_speed = 1.0
 move_forward = false
 
 [node name="Mesh" type="MeshInstance" parent="."]
-mesh = ExtResource( 2 )
+mesh = ExtResource( 1 )
 material/0 = SubResource( 1 )
 
 [node name="Hitbox" type="Area" parent="Mesh"]
@@ -281,6 +282,7 @@ transform = Transform( 13.0191, 0, 0, 0, 13.0191, 0, 0, 0, 1.00147, 0, 0, 0 )
 visible = false
 frames = SubResource( 14 )
 animation = "loop"
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

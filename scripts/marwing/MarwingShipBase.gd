@@ -44,8 +44,7 @@ func _physics_process (dt: float):
 	can_shoot = false;
 	$AnimationPlayer.play("die");
 	yield($AnimationPlayer,"animation_finished");
-	queue_free();
-
+	set_process(false)
 # note (jam): this is written as a function only so that it can be called in AnimationPlayer call method tracks
 func set_invulnerable (inv: bool = false):
 	invulnerable = inv;

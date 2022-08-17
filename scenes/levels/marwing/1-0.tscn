@@ -35,8 +35,9 @@ material/0 = ExtResource( 6 )
 wait_time = 5.0
 autostart = true
 script = ExtResource( 8 )
-path = NodePath("../Path")
+spawn_point_path = NodePath("../Path/Marwing/Spatial")
 drone_scene = ExtResource( 3 )
+path = NodePath("../Path")
 
 [node name="Path" type="Path" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
@@ -44,6 +45,9 @@ curve = SubResource( 1 )
 
 [node name="Marwing" parent="Path" instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000298113, 0.000109732, -2.55853e-05 )
+
+[node name="Spatial" type="Spatial" parent="Path/Marwing"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 348.608 )
 
 [node name="DialogueBox" parent="." instance=ExtResource( 7 )]
 visible = true

@@ -291,5 +291,8 @@ anims/die = SubResource( 16 )
 anims/normal = SubResource( 15 )
 
 [node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.201
+autostart = true
 
 [connection signal="area_entered" from="Mesh/Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]

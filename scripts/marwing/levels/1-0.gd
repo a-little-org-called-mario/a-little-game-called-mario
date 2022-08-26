@@ -40,7 +40,7 @@ func _ready ():
 		},
 	]
 	yield(get_tree().create_timer(0.5),"timeout")
-	$DialogueBox.popup()
+	$DialogueBox.show()
 	$DialogueBox.start_line(0)
 
 	act_number = 1

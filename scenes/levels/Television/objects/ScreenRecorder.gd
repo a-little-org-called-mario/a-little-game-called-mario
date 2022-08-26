@@ -1,10 +1,8 @@
 extends TextureRect
 
-export(float) var delay = 1.0/60.0
 export var id = "PlayButton"
 
 var frames = []
-var last_step = 0
 var recording = false
 var playing = false
 var pos = 0
@@ -24,7 +22,6 @@ func react(button_id: String) -> void:
 
 func _enter_tree():
 	frames = []
-	last_step = 0
 	recording = true
 	playing = false
 	self.visible = false
@@ -33,21 +30,17 @@ func _enter_tree():
 
 func _exit_tree():
 	frames = []
-	last_step = 0
 	recording = false
 	playing = false
 	pos = 0
 
 
-func _physics_process(delta: float) -> void:
+func _on_Timer_timeout():
 	if recording:
-		last_step += delta
-		if last_step > delay:
-			last_step -= delay;
-			var current_frame = get_viewport().get_texture().get_data()
-			var tex = ImageTexture.new()
-			tex.create_from_image(current_frame)
-			frames.push_back(tex)
+		var current_frame = get_viewport().get_texture().get_data()
+		var tex = ImageTexture.new()
+		tex.create_from_image(current_frame)
+		frames.push_back(tex)
 	elif playing:
 		if pos >=0 && pos < frames.size():
 			self.texture = frames[pos]

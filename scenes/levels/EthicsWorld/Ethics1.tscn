@@ -452,48 +452,78 @@ teleport_to = Vector2( 22, -2.672 )
 
 [node name="Bub" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 1104, 1640 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub2" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 1264, 1640 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub3" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 1464, 1640 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub4" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 1648, 1640 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub5" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 1800, 1640 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub6" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 944, 1640 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub7" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 1312, 1184 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub8" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 1456, 1184 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub9" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 2472, 432 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub10" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 2592, 432 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub11" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 2720, 432 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub12" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 2848, 432 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub13" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 2976, 432 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub14" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 3264, 1072 )
+max_speed = 150.0
+direction = -1
 
 [node name="Bub15" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 3392, 1072 )
+max_speed = 150.0
+direction = -1
 
 [node name="Luigi" parent="Enemies" instance=ExtResource( 8 )]
 position = Vector2( 3616, -32 )
@@ -509,6 +539,8 @@ position = Vector2( 3328, -160 )
 
 [node name="Bub16" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 3904, 440 )
+max_speed = 150.0
+direction = -1
 
 [node name="Spikes" type="Node" parent="."]
 
@@ -630,7 +662,7 @@ shape = SubResource( 47 )
 [node name="Gex" type="AnimatedSprite" parent="GexDialogue"]
 scale = Vector2( 2, 2 )
 frames = SubResource( 13 )
-frame = 1
+frame = 3
 playing = true
 flip_h = true
 

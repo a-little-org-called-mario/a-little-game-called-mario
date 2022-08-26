@@ -2,16 +2,8 @@ extends StaticBody2D
 
 export var id: String
 
-onready var _raycast: RayCast2D = $Ray
 
-
-func _physics_process(_delta: float) -> void:
-	if _raycast.is_colliding():
-		press()
-
-
-func press() -> void:
-	set_physics_process(false)
+func press(_body) -> void:
 	$AnimationPlayer.play("Press")
 
 

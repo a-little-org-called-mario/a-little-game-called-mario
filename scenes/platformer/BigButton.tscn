@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/tiles/awesome new tiles.png" type="Texture" id=1]
 [ext_resource path="res://scenes/platformer/BigButton.gd" type="Script" id=2]
@@ -9,10 +9,13 @@ atlas = ExtResource( 1 )
 region = Rect2( 21, 143, 64, 32 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 12, 13 )
+extents = Vector2( 13, 13 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 12, 4 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 13, 0.999999 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Press"
@@ -30,19 +33,19 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Ray:enabled")
+tracks/1/path = NodePath("ExtendedCollision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ExtendedCollision:disabled")
+tracks/2/path = NodePath("PressedCollision:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -51,10 +54,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("PressedCollision:disabled")
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -62,36 +65,36 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "actual_press"
 } ]
 }
-tracks/5/type = "audio"
-tracks/5/path = NodePath("AudioStreamPlayer")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "clips": [ {
 "end_offset": 0.45,
 "start_offset": 0.02,
 "stream": ExtResource( 3 )
 } ],
 "times": PoolRealArray( 0 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("PressArea/PressCollision:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -109,7 +112,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Ray:enabled")
+tracks/1/path = NodePath("ExtendedCollision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -118,10 +121,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ExtendedCollision:disabled")
+tracks/2/path = NodePath("PressedCollision:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -130,10 +133,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("PressedCollision:disabled")
+tracks/3/path = NodePath("PressArea/PressCollision:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -141,8 +144,8 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
+"update": 1,
+"values": [ false ]
 }
 
 [node name="BigButton" type="StaticBody2D"]
@@ -156,11 +159,6 @@ script = ExtResource( 2 )
 texture = SubResource( 8 )
 hframes = 2
 
-[node name="Ray" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 0, -16 )
-collision_mask = 64
-
 [node name="ExtendedCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
 shape = SubResource( 4 )
@@ -169,6 +167,15 @@ shape = SubResource( 4 )
 position = Vector2( 0, 12 )
 shape = SubResource( 5 )
 disabled = true
+
+[node name="PressArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="PressCollision" type="CollisionShape2D" parent="PressArea"]
+position = Vector2( 0, -11 )
+rotation = 3.14159
+shape = SubResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
@@ -179,3 +186,6 @@ anims/RESET = SubResource( 7 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 bus = "sfx"
+
+[connection signal="area_entered" from="PressArea" to="." method="press"]
+[connection signal="body_entered" from="PressArea" to="." method="press"]

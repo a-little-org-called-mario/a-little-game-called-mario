@@ -1,8 +1,9 @@
 # It will emit coin unless you reached limit
+tool
 extends "res://scripts/boxes/CoinBox.gd"
 
 
-export(int) var player_coin_limit = 5
+export(int) var player_coin_limit = 5 setget set_player_coin_limit
 
 
 var inventory = preload("res://scripts/resources/PlayerInventory.tres")
@@ -15,3 +16,8 @@ func bounce(body: KinematicBody2D):
 			.bounce(body)
 		else:
 			$AnimationPlayer.play("limit_reached")
+
+
+func set_player_coin_limit(value: int):
+	player_coin_limit = value
+	$Sprite/LimitLabel.text = str(value)

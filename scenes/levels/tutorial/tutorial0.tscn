@@ -97,8 +97,6 @@ position = Vector2( 3232, -96 )
 
 [node name="GreedyCoinBox" parent="Objects" instance=ExtResource( 13 )]
 position = Vector2( 2720, -160 )
-bounce_count = 5
-player_coin_limit = 5
 
 [node name="NotesNewTrigger" parent="Objects" instance=ExtResource( 16 )]
 position = Vector2( 3232, -96 )
@@ -119,13 +117,12 @@ This is where I make notes about my adventures! As I meet new people and make ne
 position = Vector2( 2944, -192 )
 scale = Vector2( 2, 2 )
 max_speed = 0.0
-direction = -1
 
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="proj_id_54" parent="NPCs" instance=ExtResource( 7 )]
 position = Vector2( -2208, 208 )
-frame = 2
+frame = 3
 
 [node name="Decorations" type="Node2D" parent="."]
 

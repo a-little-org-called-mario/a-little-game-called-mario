@@ -15,6 +15,16 @@ func _ready ():
 	initial_crosshair_pos = crosshair.translation
 	camera.set_current(true);
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	EventBus.connect("game_paused", self, "_on_game_paused")	
+	EventBus.connect("notes_opened", Input, "set_mouse_mode", [Input.MOUSE_MODE_VISIBLE])
+	EventBus.connect("notes_closed", Input, "set_mouse_mode", [Input.MOUSE_MODE_CAPTURED])
+
+
+func _on_game_paused(paused: bool) -> void:
+	if paused:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _input(event) -> void:

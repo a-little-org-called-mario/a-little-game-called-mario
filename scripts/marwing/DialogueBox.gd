@@ -1,4 +1,4 @@
-extends Popup
+extends Control
 
 var current_line := 0
 var convo = []

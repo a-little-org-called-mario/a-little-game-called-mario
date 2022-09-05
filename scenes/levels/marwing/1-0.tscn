@@ -46,3 +46,4 @@ curve = SubResource( 1 )
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000298113, 0.000109732, -2.55853e-05 )
 
 [node name="DialogueBox" parent="." instance=ExtResource( 7 )]
+visible = false

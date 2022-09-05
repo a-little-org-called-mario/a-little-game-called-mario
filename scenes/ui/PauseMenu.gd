@@ -50,9 +50,6 @@ onready var labels = [
 ]
 
 
-var current_mouse_mode := Input.MOUSE_MODE_VISIBLE
-
-
 ## Node ready override.
 func _ready():
 	# connect this node to the game_paused signal
@@ -167,8 +164,6 @@ func _process(_delta: float):
 #  @save: whether or not this should save settings on un-pause
 func pause_toggle(data: bool):
 	if data:
-		self.current_mouse_mode = Input.get_mouse_mode()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		# if pausing, show the pause menu and set up selection styling
 		$PauseMenu.show()
 		set_item_style()
@@ -177,8 +172,6 @@ func pause_toggle(data: bool):
 		if Settings.settings_loaded:
 			prepare_labels()
 	else:
-		Input.set_mouse_mode(self.current_mouse_mode)
-		self.current_mouse_mode = Input.MOUSE_MODE_VISIBLE
 		# if un-pausing, reset the pause menu and hide it
 		selected = 0
 		current_menu = 0

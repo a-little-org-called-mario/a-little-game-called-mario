@@ -7,6 +7,7 @@ radiance_size = 3
 panorama = ExtResource( 1 )
 
 [resource]
+resource_local_to_scene = true
 background_mode = 2
 background_sky = SubResource( 3 )
 background_color = Color( 0.360784, 0.870588, 0.47451, 1 )

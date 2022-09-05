@@ -22,3 +22,9 @@ expand = true
 stretch_mode = 7
 flip_v = true
 script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="." index="2"]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="TextureRect" method="_on_Timer_timeout"]

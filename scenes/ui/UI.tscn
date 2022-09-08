@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/ui/Themes/Default/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/CoinCount.gd" type="Script" id=2]
@@ -10,67 +10,12 @@
 [ext_resource path="res://scenes/ui/HeartIconContainer.gd" type="Script" id=8]
 [ext_resource path="res://scenes/ui/Heart.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/ui/StarNotification.gd" type="Script" id=10]
-[ext_resource path="res://scenes/ui/PlayerDied.gd" type="Script" id=11]
+[ext_resource path="res://scenes/ui/PlayerDiedPanel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://textures/trails/ranbow_flag.jpg" type="Texture" id=12]
 [ext_resource path="res://scenes/ui/CarPlayerStats.gd" type="Script" id=13]
 [ext_resource path="res://scenes/ui/UI.gd" type="Script" id=14]
 [ext_resource path="res://scenes/ui/notepad/Notepad.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/ui/powerups/fire_flower/FireFlowerUI.tscn" type="PackedScene" id=16]
-
-[sub_resource type="Animation" id=1]
-resource_name = "Appear"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=2]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
 
 [node name="UI" type="CanvasLayer"]
 
@@ -363,43 +308,8 @@ pause_mode = 2
 margin_top = 96.0
 margin_bottom = 160.0
 
-[node name="PlayerDiedPanel" type="Panel" parent="UI"]
-pause_mode = 2
+[node name="PlayerDiedPanel" parent="UI" instance=ExtResource( 11 )]
 visible = false
-margin_right = 1032.0
-margin_bottom = 609.0
-script = ExtResource( 11 )
-
-[node name="PlayerDied" type="RichTextLabel" parent="UI/PlayerDiedPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 303.0
-margin_right = -516.0
-margin_bottom = -303.0
-rect_min_size = Vector2( 516, 18 )
-rect_scale = Vector2( 2, 2 )
-rect_clip_content = false
-custom_fonts/normal_font = ExtResource( 1 )
-bbcode_enabled = true
-bbcode_text = "[center][wave amp=50 freq=2][rainbow freq=0.5 sat=1 val=20]YOU DIED[/rainbow][/wave][/center]"
-text = "YOU DIED"
-fit_content_height = true
-scroll_active = false
-
-[node name="SkipLabel" type="Label" parent="UI/PlayerDiedPanel"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -516.0
-margin_top = -49.0
-margin_right = 516.0
-margin_bottom = -33.0
-text = "(space or click to continue)"
-align = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/PlayerDiedPanel"]
-anims/Appear = SubResource( 1 )
-anims/RESET = SubResource( 2 )
+modulate = Color( 1, 1, 1, 1 )
 
 [node name="Toasty" parent="UI" instance=ExtResource( 7 )]

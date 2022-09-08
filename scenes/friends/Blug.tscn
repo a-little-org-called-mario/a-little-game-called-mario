@@ -12,6 +12,18 @@ extents = Vector2( 512, 512 )
 collision_layer = 0
 collision_mask = 64
 script = ExtResource( 3 )
+dialog = "blug
+glug
+hello
+it's a me, blug!
+how ya doin mario?
+wanna hang out sometime?
+what are you doing over here?
+stop that!
+come back!
+i need you!
+love me!
+love me mario!!"
 
 [node name="TextTrigger" parent="." instance=ExtResource( 1 )]
 text = "blug"
@@ -28,3 +40,5 @@ shape = SubResource( 1 )
 pageName = "blug"
 pageDesc = "blug"
 pageSprite = "blug"
+
+[connection signal="body_exited" from="TextTrigger" to="." method="_on_TextTrigger_body_exited"]

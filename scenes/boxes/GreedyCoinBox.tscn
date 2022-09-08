@@ -1,7 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/boxes/GreedyCoinBox.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/Themes/Default/default.tres" type="Theme" id=3]
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://sprites/box-empty.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+outline_size = 1
+outline_color = Color( 0.839216, 0.184314, 0.239216, 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -16,6 +25,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/LimitLabel:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -32,9 +53,47 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.4, 0.4, 0.4, 1 ), Color( 1, 1, 1, 1 ), Color( 0.4, 0.4, 0.4, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/LimitLabel:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -20.0, 20.0, -20.0, 0.0 ]
+}
 
 [node name="GreedyCoinBox" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+bounce_count = 1
+
+[node name="Sprite" parent="." index="4"]
+texture = ExtResource( 5 )
+
+[node name="LimitLabel" type="Label" parent="Sprite" index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -56.0
+margin_top = -56.0
+margin_right = -8.0
+margin_bottom = -8.0
+rect_pivot_offset = Vector2( 24, 24 )
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0.717647, 0.658824, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 0.4, 0.388235, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 4 )
+text = "5"
+align = 1
+valign = 1
+clip_text = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 anims/RESET = SubResource( 1 )

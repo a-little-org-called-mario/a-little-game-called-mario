@@ -284,6 +284,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/story_mode/item/Item.gd"
 }, {
+"base": "Area2D",
+"class": "TextTrigger",
+"language": "GDScript",
+"path": "res://scenes/ui/scripts/TextTrigger.gd"
+}, {
 "base": "Object",
 "class": "TextUtils",
 "language": "GDScript",
@@ -355,6 +360,7 @@ _global_script_class_icons={
 "Spotter": "",
 "StoryCharacterData": "",
 "StoryItem": "",
+"TextTrigger": "",
 "TextUtils": "",
 "TrackParser": "",
 "TypeShootEnemy": ""

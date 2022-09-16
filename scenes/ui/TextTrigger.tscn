@@ -15,7 +15,6 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="TextPanel" parent="." instance=ExtResource( 1 )]
-visible = false
 margin_left = -146.0
 margin_top = -148.0
 margin_right = 148.0

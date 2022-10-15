@@ -15,7 +15,7 @@ script = ExtResource( 3 )
 
 [node name="TextRandomTrigger" parent="." instance=ExtResource( 1 )]
 text = "blug"
-phrases = [ "blug", "glug", "hello", "it's a me, blug!", "how ya doin mario?", "wanna hang out sometime?", "what are you doing over here?", "stop that!", "come back!", "i need you!", "love me!", "love me mario!!" ]
+phrases = [ "blug", "glug", "hello", "it's a me, blug!", "how ya doin mario?", "wanna hang out sometime?", "what are you doing over here?", "stop that!", "come back!", "i need you!", "love me!", "love me mario!!", "I think, therefore I am." ]
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )

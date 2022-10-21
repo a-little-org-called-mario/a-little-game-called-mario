@@ -262,11 +262,11 @@ margin_bottom = 129.0
 bbcode_text = "[center]UP/DOWN: STRAFE
 RIGHT: ACCELERATE
 LEFT: BREAKS
-CTRL/B: HONK!"
+ENTER/B: HONK!"
 text = "UP/DOWN: STRAFE
 RIGHT: ACCELERATE
 LEFT: BREAKS
-CTRL/B: HONK!"
+ENTER/B: HONK!"
 
 [node name="Tolls" parent="." instance=ExtResource( 16 )]
 anchor_left = 1.0

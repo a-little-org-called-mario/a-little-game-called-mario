@@ -6,6 +6,7 @@ extends KinematicBody2D
 signal shooting
 signal crouched
 signal uncrouched
+signal collided(collision)
 
 const MAXSPEED = 350
 const CROUCH_MAXSPEED = MAXSPEED / 3
@@ -206,6 +207,10 @@ func _physics_process(delta: float) -> void:
 	)
 	var slide_count = get_slide_count()
 	added_motion = Vector2.ZERO
+	
+	for i in slide_count:
+		var col = get_slide_collision(i)
+		emit_signal("collided", col)
 
 	var slipped = false
 	# try slipping around block corners when jumping or crossing gaps
@@ -435,3 +440,7 @@ func _end_flash_sprite() -> void:
 	
 func add_motion(motion: Vector2) -> void:
 	added_motion += motion
+	
+	
+func begin_banana_slide():
+	$BananaSlide.activate()

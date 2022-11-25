@@ -546,4 +546,6 @@ script = ExtResource( 17 )
 [node name="BananaSlide" type="Node2D" parent="."]
 script = ExtResource( 31 )
 
+[connection signal="collided" from="." to="BananaSlide" method="_on_Player_collided"]
+
 [editable path="Hitbox"]

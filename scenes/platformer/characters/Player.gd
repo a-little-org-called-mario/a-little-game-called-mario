@@ -6,6 +6,7 @@ extends KinematicBody2D
 signal shooting
 signal crouched
 signal uncrouched
+signal collided(collision)
 
 const MAXSPEED = 350
 const CROUCH_MAXSPEED = MAXSPEED / 3
@@ -38,6 +39,9 @@ var super_jumping = false
 var super_jump_timer = 0.0
 var powerupspeed = 1
 var powerupaccel = 1
+var input_direction := Vector2.ZERO #The direction the player is pressing this frame
+var added_motion := Vector2.ZERO #Extra motion that needs to be added this frame, not multiplied by delta
+
 
 onready var pivot: Node2D = $Pivot
 onready var sprite := $Pivot/Sprite
@@ -76,6 +80,8 @@ func _exit_tree():
 
 
 func _physics_process(delta: float) -> void:
+	#Reset the input direction, will be changed if the player is moving
+	input_direction = Vector2.ZERO
 	# set these each loop in case of changes in gravity or acceleration modifiers
 	x_motion.max_speed = MAXSPEED if not crouching else CROUCH_MAXSPEED
 	x_motion.max_accel = MAXACCEL
@@ -103,6 +109,8 @@ func _physics_process(delta: float) -> void:
 		animationSpeed = 6
 	anim.playback_speed = animationSpeed
 	if Input.is_action_pressed("right"):
+		input_direction = Vector2.RIGHT
+		
 		jerk_right(JERK * jerk_modifier)
 		
 		skidding = x_motion.get_speed() < -skidding_force && _is_on_floor()
@@ -113,6 +121,8 @@ func _physics_process(delta: float) -> void:
 		
 		
 	elif Input.is_action_pressed("left"):
+		input_direction = Vector2.LEFT
+		
 		jerk_left(JERK * jerk_modifier)
 		skidding = x_motion.get_speed() > skidding_force && _is_on_floor()
 		anim.playAnim("Run")
@@ -193,9 +203,14 @@ func _physics_process(delta: float) -> void:
 	pivot.scale.y = gravity.direction.y
 
 	var move_and_slide_result = move_and_slide(
-		y_motion.update_motion() + x_motion.update_motion(), Vector2.UP
+		y_motion.update_motion() + x_motion.update_motion() + added_motion, Vector2.UP
 	)
 	var slide_count = get_slide_count()
+	added_motion = Vector2.ZERO
+	
+	for i in slide_count:
+		var col = get_slide_collision(i)
+		emit_signal("collided", col)
 
 	var slipped = false
 	# try slipping around block corners when jumping or crossing gaps
@@ -421,3 +436,7 @@ func flash_sprite() -> void:
 func _end_flash_sprite() -> void:
 	effect_anim.play("RESET")
 	hitbox.set_deferred('monitoring', true)
+	
+	
+func add_motion(motion: Vector2) -> void:
+	added_motion += motion

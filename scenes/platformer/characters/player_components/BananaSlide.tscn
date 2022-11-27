@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/banana_peel.png" type="Texture" id=1]
+[ext_resource path="res://scenes/platformer/characters/BananaSlide.gd" type="Script" id=2]
+
+[node name="BananaSlide" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="PeelSprite" type="Sprite" parent="."]
+position = Vector2( 21, -2 )
+rotation = -0.300687
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )

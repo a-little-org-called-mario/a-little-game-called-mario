@@ -18,6 +18,7 @@ func create_peel(velocity: Vector2):
 
 func _on_Banana_body_entered(body: Player) -> void:
 	if body:
+		HeartInventoryHandle.change_hearts_on(body, 1)
 		var normal = (body.global_position - global_position).normalized()
 		call_deferred("create_peel", Vector2(normal.x * 300, -300))
 		

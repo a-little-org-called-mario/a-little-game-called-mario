@@ -20,7 +20,10 @@ func _physics_process(delta):
 func _on_Hitbox_body_entered(body : Player):
 	if body:
 		var rel_position = body.global_position - global_position
-		body.begin_banana_slide(Vector2.RIGHT * -sign(rel_position.x))
+		var banana_slide = banana_slide_scene.instance()
+		banana_slide.direction = Vector2.RIGHT * -sign(rel_position.x)
+	        banana_slide.activate()
+		body.add_child(banana_slide)
 		queue_free()
 
 

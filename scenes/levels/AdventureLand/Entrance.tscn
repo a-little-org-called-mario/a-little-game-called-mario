@@ -10,7 +10,7 @@
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/objects/LimitSetArea.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/powerups/BananaPeel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/powerups/Banana.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 156, 68 )
@@ -59,8 +59,8 @@ shape = SubResource( 1 )
 [node name="SpawnPoint" parent="." instance=ExtResource( 1 )]
 position = Vector2( 128, -160 )
 
-[node name="BananaPeel" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1600, -91 )
+[node name="Banana" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1636, -160 )
 
 [node name="Starspine" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96, 352 )

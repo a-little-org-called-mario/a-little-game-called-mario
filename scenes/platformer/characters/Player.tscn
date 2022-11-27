@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://audio/sfx/mario_hurt.wav" type="AudioStream" id=29]
 [ext_resource path="res://scenes/platformer/characters/RestTimer.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/platformer/characters/BananaSlide.gd" type="Script" id=31]
+[ext_resource path="res://sprites/banana_peel.png" type="Texture" id=32]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
@@ -545,6 +546,13 @@ script = ExtResource( 17 )
 
 [node name="BananaSlide" type="Node2D" parent="."]
 script = ExtResource( 31 )
+
+[node name="PeelSprite" type="Sprite" parent="BananaSlide"]
+visible = false
+position = Vector2( 21, -2 )
+rotation = -0.300687
+scale = Vector2( 3, 3 )
+texture = ExtResource( 32 )
 
 [connection signal="collided" from="." to="BananaSlide" method="_on_Player_collided"]
 

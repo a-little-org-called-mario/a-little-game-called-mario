@@ -29,4 +29,9 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 2 )
 
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

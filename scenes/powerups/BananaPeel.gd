@@ -4,6 +4,7 @@ export var velocity := Vector2.ZERO
 export var gravity : float = 650
 export var spawn_cooldown : float = 1.5 #Make the peel not detect collisions immediately, so it won't be hit immediately after spawning
 
+var banana_slide_scene := preload("res://scenes/platformer/characters/player_components/BananaSlide.tscn")
 
 func _ready():
 	$Hitbox.monitoring = false
@@ -22,8 +23,8 @@ func _on_Hitbox_body_entered(body : Player):
 		var rel_position = body.global_position - global_position
 		var banana_slide = banana_slide_scene.instance()
 		banana_slide.direction = Vector2.RIGHT * -sign(rel_position.x)
-	        banana_slide.activate()
 		body.add_child(banana_slide)
+		
 		queue_free()
 
 

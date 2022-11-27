@@ -440,8 +440,3 @@ func _end_flash_sprite() -> void:
 	
 func add_motion(motion: Vector2) -> void:
 	added_motion += motion
-	
-	
-func begin_banana_slide(direction: Vector2):
-	$BananaSlide.direction = direction
-	$BananaSlide.activate()

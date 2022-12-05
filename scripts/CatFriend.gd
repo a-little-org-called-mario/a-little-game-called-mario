@@ -7,14 +7,26 @@ const MAX_SPEED = 220
 var _player: Player
 var _targetPos: Vector2
 
+var _target_node: Node2D
+var _cat_manager: CatManager
+
 
 func set_player(player: Player):
 	_player = player
+	
+	_cat_manager = _player.get_node_or_null("CatManager")
+	if not _cat_manager:
+		var manager := preload("res://scenes/platformer/characters/player_components/CatManager.tscn").instance()
+		_player.add_child(manager, true)
+		_cat_manager = manager
+		assert(player.get_node("CatManager") == manager)
+		
+	_target_node = _cat_manager.add_cat(self)
 
 
 func ai(_delta: float):
-	if _player.is_inside_tree():
-		_targetPos = _player.global_position + OFFSET
+	if is_instance_valid(_player) and _player.is_inside_tree():
+		_targetPos = _target_node.global_position + OFFSET
 
 
 func move(_delta: float):

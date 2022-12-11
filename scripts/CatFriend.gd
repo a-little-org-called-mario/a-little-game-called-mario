@@ -13,8 +13,9 @@ func set_player(player: Player):
 
 
 func ai(_delta: float):
-	if _player.is_inside_tree():
-		_targetPos = _player.global_position + OFFSET
+	if is_instance_valid(_player):
+		if _player.is_inside_tree():
+			_targetPos = _player.global_position + OFFSET
 
 
 func move(_delta: float):

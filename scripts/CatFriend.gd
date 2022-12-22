@@ -11,6 +11,14 @@ var _target_node: Node2D
 var _cat_manager: CatManager
 
 
+func _ready():
+	EventBus.connect("hub_entered", self, "_on_hub_entered")
+	
+	
+func _on_hub_entered(): #Properly remove cats when entering a level from the hub
+	queue_free()
+		
+
 func set_player(player: Player):
 	_player = player
 	

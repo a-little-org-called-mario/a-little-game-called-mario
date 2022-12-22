@@ -384,6 +384,7 @@ config/icon="res://sprites/icon.png"
 EventBus="*res://scripts/autoload/EventBus.gd"
 SceneTransition="*res://scenes/SceneTransition/SceneTransition.tscn"
 Settings="*res://scripts/autoload/Settings.gd"
+DataStore="*res://scripts/autoload/DataStore.gd"
 
 [debug]
 

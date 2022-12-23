@@ -13,22 +13,22 @@ var _cat_manager: CatManager
 
 func _ready():
 	EventBus.connect("hub_entered", self, "_on_hub_entered")
-	
-	
-func _on_hub_entered(): #Properly remove cats when entering a level from the hub
+
+
+func _on_hub_entered():  #Properly remove cats when entering a level from the hub
 	queue_free()
-		
+
 
 func set_player(player: Player):
 	_player = player
-	
+
 	_cat_manager = _player.get_node_or_null("CatManager")
 	if not _cat_manager:
 		var manager := preload("res://scenes/platformer/characters/player_components/CatManager.tscn").instance()
 		_player.add_child(manager, true)
 		_cat_manager = manager
 		assert(player.get_node("CatManager") == manager)
-		
+
 	_target_node = _cat_manager.add_cat(self)
 
 

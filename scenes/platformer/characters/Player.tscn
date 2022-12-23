@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://scenes/platformer/characters/SkidParticles.gd" type="Script" id=28]
 [ext_resource path="res://audio/sfx/mario_hurt.wav" type="AudioStream" id=29]
 [ext_resource path="res://scenes/platformer/characters/RestTimer.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/components/StoredSceneLoader.tscn" type="PackedScene" id=31]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
@@ -222,6 +223,14 @@ width = 128
 offsets = PoolRealArray( 0.471669, 1 )
 colors = PoolColorArray( 1, 0.54902, 0, 1, 0.946289, 0.107197, 0.107197, 0 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 175, 82 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 15 )
+region = Rect2( 175, 0, 175, 82 )
+
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 190, 80 )
@@ -238,24 +247,16 @@ region = Rect2( 380, 0, 190, 80 )
 atlas = ExtResource( 12 )
 region = Rect2( 570, 0, 190, 80 )
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 0, 175, 82 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 15 )
-region = Rect2( 175, 0, 175, 82 )
-
 [sub_resource type="SpriteFrames" id=41]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "driving",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "standing",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "driving",
 "speed": 5.0
 } ]
 
@@ -267,6 +268,9 @@ z_index = 1
 collision_layer = 64
 collision_mask = 30
 script = ExtResource( 3 )
+
+[node name="StoredSceneLoader" parent="." instance=ExtResource( 31 )]
+stored_scene_key = "PlayerStoredScenes"
 
 [node name="Hitbox" parent="." instance=ExtResource( 25 )]
 collision_mask = 24

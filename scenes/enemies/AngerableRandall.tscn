@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/enemies/GassyRandal.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/enemies/AngerableRandall.gd" type="Script" id=2]
+
+[node name="AngerableRandall" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="GassyRandal" parent="." instance=ExtResource( 1 )]

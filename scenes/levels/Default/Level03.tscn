@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/platformer/characters/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/enemies/GassyRandal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/enemies/AngerableRandall.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scripts/QuickText.gd" type="Script" id=9]
@@ -41,9 +41,6 @@ position = Vector2( 195, 472 )
 position = Vector2( 30, 99 )
 next_level_path = "res://scenes/levels/Default/Level04.tscn"
 
-[node name="Node2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( 377, 289 )
-
 [node name="Randall will remember that" type="Label" parent="."]
 visible = false
 margin_left = 214.0
@@ -62,4 +59,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AngerableRandall" parent="." instance=ExtResource( 5 )]
+position = Vector2( 377, 289 )
+
+[connection signal="collected" from="Coin3" to="AngerableRandall" method="anger"]
 [connection signal="tree_exited" from="Coin3" to="Randall will remember that" method="reveal"]

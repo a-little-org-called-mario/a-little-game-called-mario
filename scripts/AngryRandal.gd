@@ -2,11 +2,11 @@
 
 extends "res://scripts/GassyRandal.gd"
 
-export var health : int = 2
+export var health: int = 2
 export var moveDuration = 1.25
 export var waitTimeBetweenSwoops = 1.5
 export var damage_flash_interval := 0.15
-export var damage_flash_amount : int = 6
+export var damage_flash_amount: int = 6
 
 var time = 0
 var swooping := false
@@ -38,16 +38,19 @@ func _on_SwoopTimer_timeout() -> void:
 
 
 func initSwoopTargetLocations() -> void:
-	var player : Node2D = get_tree().get_nodes_in_group("Player")[0]
+	var player: Node2D = get_tree().get_nodes_in_group("Player")[0]
 
 	var upperLeftPoint = Vector2(position.x, position.y)
 	var bottomMiddlePoint = player.position
-	var upperRightPoint = (bottomMiddlePoint - upperLeftPoint).reflect(Vector2.RIGHT) + bottomMiddlePoint
+	var upperRightPoint = (
+		(bottomMiddlePoint - upperLeftPoint).reflect(Vector2.RIGHT)
+		+ bottomMiddlePoint
+	)
 
 	swoopFrom = [upperLeftPoint, bottomMiddlePoint, upperRightPoint, bottomMiddlePoint]
 	swoopTo = [bottomMiddlePoint, upperRightPoint, bottomMiddlePoint, upperLeftPoint]
-	
-	
+
+
 func kill(killer: Object, damage: int = 1) -> void:
 	_damage(damage, killer)
 
@@ -97,4 +100,3 @@ func _on_DamageFlashTimer_timeout():
 	else:
 		$RandalCloud.visible = true
 		$BigRandalCloud.visible = true
-	

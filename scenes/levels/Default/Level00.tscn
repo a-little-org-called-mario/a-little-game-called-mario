@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/boxes/CoinBox.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/powerups/Bus.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/PictureFrame.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/enemies/AngryRandallSpawner.tscn" type="PackedScene" id=9]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -78,5 +79,9 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
+
+[node name="AngryRandallSpawner" parent="." instance=ExtResource( 9 )]
+position = Vector2( 410, 91 )
+spawn_passive_randall = false
 
 [editable path="InstructionsBus"]

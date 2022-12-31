@@ -40,9 +40,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="AngryRandal" type="KinematicBody2D"]
+[node name="AngryRandal" type="KinematicBody2D" groups=["enemy"]]
 collision_layer = 8
-collision_mask = 64
+collision_mask = 320
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -50,7 +50,7 @@ shape = SubResource( 7 )
 
 [node name="RandalCloud" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 4
+frame = 3
 speed_scale = 1.25
 playing = true
 
@@ -58,6 +58,7 @@ playing = true
 modulate = Color( 1, 1, 1, 0.439216 )
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 6 )
+frame = 2
 speed_scale = 0.75
 playing = true
 
@@ -90,6 +91,12 @@ one_shot = true
 wait_time = 10.0
 autostart = true
 
+[node name="DamageFlashTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_BlinkTimer_timeout"]
 [connection signal="timeout" from="OpenTimer" to="." method="_on_OpenTimer_timeout"]
 [connection signal="timeout" from="SwoopTimer" to="." method="_on_OpenTimer_timeout"]
+[connection signal="timeout" from="DamageFlashTimer" to="." method="_on_DamageFlashTimer_timeout"]

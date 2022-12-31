@@ -2,19 +2,23 @@
 
 extends "res://scripts/GassyRandal.gd"
 
-export var moveDuration = 2
-export var waitTimeBetweenSwoops = 20
+export var health : int = 2
+export var moveDuration = 1.25
+export var waitTimeBetweenSwoops = 1.5
+export var damage_flash_interval := 0.15
+export var damage_flash_amount : int = 6
 
 var time = 0
 var swooping := false
 var currentSwoopIndex = 0
 var swoopFrom := []
 var swoopTo := []
+var damage_flash_left := 0
 
 
 func _ready():
 	initSwoopTimer()
-	initSwoopTargetLocations()
+	$DamageFlashTimer.wait_time = damage_flash_interval
 
 
 func initSwoopTimer() -> void:
@@ -24,22 +28,35 @@ func initSwoopTimer() -> void:
 
 
 func _on_SwoopTimer_timeout() -> void:
-	$SwoopTimer.stop()
-	swooping = true
-	currentSwoopIndex = 0
+	if $VisibilityNotifier2D.is_on_screen():
+		$SwoopTimer.stop()
+		initSwoopTargetLocations()
+		swooping = true
+		currentSwoopIndex = 0
+	else:
+		$SwoopTimer.start()
 
 
 func initSwoopTargetLocations() -> void:
-	var screenSize = get_viewport().get_visible_rect().size
+	var player : Node2D = get_tree().get_nodes_in_group("Player")[0]
 
 	var upperLeftPoint = Vector2(position.x, position.y)
-	var upperRightPoint = Vector2(position.x + screenSize.x - (screenSize.x * 0.1), position.y)
-	var bottomMiddlePoint = Vector2(
-		(upperLeftPoint.x + upperRightPoint.x) / 2, position.y + (screenSize.y * 0.8)
-	)
+	var bottomMiddlePoint = player.position
+	var upperRightPoint = (bottomMiddlePoint - upperLeftPoint).reflect(Vector2.RIGHT) + bottomMiddlePoint
 
 	swoopFrom = [upperLeftPoint, bottomMiddlePoint, upperRightPoint, bottomMiddlePoint]
 	swoopTo = [bottomMiddlePoint, upperRightPoint, bottomMiddlePoint, upperLeftPoint]
+	
+	
+func kill(killer: Object, damage: int = 1) -> void:
+	_damage(damage, killer)
+
+
+func _damage(dmg: int, _killer: Object) -> void:
+	health = health - dmg
+	damage_flash_left += damage_flash_amount
+	if health <= 0:
+		queue_free()
 
 
 func _process(delta: float):
@@ -70,3 +87,14 @@ func stopSwooping() -> void:
 func randalVibe():
 	if not swooping:
 		.randalVibe()
+
+
+func _on_DamageFlashTimer_timeout():
+	if damage_flash_left > 0:
+		$RandalCloud.visible = not $RandalCloud.visible
+		$BigRandalCloud.visible = not $BigRandalCloud.visible
+		damage_flash_left -= 1
+	else:
+		$RandalCloud.visible = true
+		$BigRandalCloud.visible = true
+	

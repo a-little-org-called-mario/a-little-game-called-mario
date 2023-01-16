@@ -313,6 +313,11 @@ _global_script_classes=[ {
 "class": "TypeShootEnemy",
 "language": "GDScript",
 "path": "res://scripts/typeshoot/TypeShootEnemy.gd"
+}, {
+"base": "Area2D",
+"class": "Water",
+"language": "GDScript",
+"path": "res://scenes/platformer/environment/water/BaseWater.gd"
 } ]
 _global_script_class_icons={
 "Achievement": "",
@@ -375,7 +380,8 @@ _global_script_class_icons={
 "TextTrigger": "",
 "TextUtils": "",
 "TrackParser": "",
-"TypeShootEnemy": ""
+"TypeShootEnemy": "",
+"Water": ""
 }
 
 [application]

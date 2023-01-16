@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scenes/levels/LevelMetadata.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+first_level_path = "res://scenes/levels/AdventureLand/Entrance.tscn"
+tags = [ "platformer" ]
+short_description = " "
+description = "Just a few levels to explore."

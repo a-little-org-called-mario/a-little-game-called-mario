@@ -1,0 +1,47 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec2 size;
+uniform vec4 color;
+uniform vec4 surface_color;
+uniform bool surface;
+
+uniform float surface_depth = 64.0;
+
+vec2 unscaled_uv(vec2 uv){
+	uv.x *= size.x;
+	uv.y *= size.y;
+	return uv;
+}
+
+float waviness(float x, float y){
+	return y - (10.0 * (sin((x / 100.0) + TIME) + 1.0));
+}
+
+
+float get_surface_effect(vec2 uv){
+	if(surface == false){
+		return 0.0;
+	}
+	float x = unscaled_uv(uv).x;
+	float y = unscaled_uv(uv).y;
+	
+	return smoothstep(surface_depth, 0, waviness(x, y));
+}
+
+
+void fragment(){
+	float x = unscaled_uv(UV).x;
+	float y = unscaled_uv(UV).y;
+	
+	COLOR = color;
+	
+	float surface_effect = get_surface_effect(UV);
+	if(surface_effect == 1.0){
+		discard;
+	} else {
+		COLOR = mix(color, surface_color, surface_effect)
+	}
+}"

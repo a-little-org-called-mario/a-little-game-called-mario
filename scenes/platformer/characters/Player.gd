@@ -10,7 +10,6 @@ signal collided(collision)
 
 const MAXSPEED = 350
 const CROUCH_MAXSPEED = MAXSPEED / 3
-const JUMPFORCE = 1120
 const MAXACCEL = 50
 const MINACCEL = 0.25 * MAXACCEL
 const JERK = 0.25
@@ -24,10 +23,12 @@ const SUPER_JUMP_MAX_TIME = 0.5
 var gravity = preload("res://scripts/resources/Gravity.tres")
 var stats = preload("res://scripts/resources/PlayerStats.tres")
 
+var jump_force = 1120
+
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
 var x_motion = AxisMotion.new(AxisMotion.X, MAXSPEED, MAXACCEL, JERK)
-var y_motion = AxisMotion.new(gravity.direction, JUMPFORCE, gravity.strength, 0.0)
+var y_motion = AxisMotion.new(gravity.direction, jump_force, gravity.strength, 0.0)
 var gravity_multiplier = 1  # used for jump height variability
 var double_jump = true
 var crouching = false
@@ -282,7 +283,7 @@ func jump():
 	stretch(0.2, 0, 0.5, 1.2)
 	jump_buffer_timer = 0
 	coyote_timer = 0
-	y_motion.set_speed(JUMPFORCE * -1)
+	y_motion.set_speed(jump_force * -1)
 	anticipating_jump = false
 	$JumpSFX.play()
 	EventBus.emit_signal("jumping")
@@ -295,7 +296,7 @@ func super_jump():
 	tween.stop_all()
 	uncrouch()
 	stretch(0.2, 0, 1.0, 2.5)
-	y_motion.set_speed(JUMPFORCE * -100)
+	y_motion.set_speed(jump_force * -100)
 	anticipating_jump = false
 	$JumpSFX.play()
 	EventBus.emit_signal("jumping")

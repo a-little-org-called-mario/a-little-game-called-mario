@@ -20,13 +20,14 @@ func _ready() -> void:
 		_find_current_camera()
 		if limitID == 0:
 			change_limits()
+		camera_reference.connect("tree_exiting", self, "_on_camera_exit_tree")
 
 
 func _enter_tree() -> void:
 	EventBus.connect("cameraL_enter_set_area",self,"_on_enter_set_area")
 
 
-func _exit_tree() -> void:
+func _on_camera_exit_tree() -> void:
 	EventBus.disconnect("cameraL_enter_set_area",self,"_on_enter_set_area")
 	if camera_reference != null and doLimitsReset:
 		camera_reference.limit_left = -10000000
@@ -35,7 +36,7 @@ func _exit_tree() -> void:
 		camera_reference.limit_bottom = 10000000
 
 
-func _process(delta):
+func _process(_delta):
 	set_corners()
 	
 	if Engine.editor_hint:
@@ -51,7 +52,7 @@ func _process(delta):
 func reset_points():
 	if $Line2D.get_point_count() != 5:
 		$Line2D.clear_points()
-		for i in range(5):
+		for _i in range(5):
 			$Line2D.add_point(Vector2(0, 0))
 
 

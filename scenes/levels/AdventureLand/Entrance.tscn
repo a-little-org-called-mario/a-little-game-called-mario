@@ -33,13 +33,11 @@ follow_vertically = true
 [node name="CameraLimits" parent="Camera" instance=ExtResource( 5 )]
 topLeft = Vector2( 0, -320 )
 bottomRight = Vector2( 2240, 1216 )
-doLimitsReset = false
 
 [node name="CameraLimits2" parent="Camera" instance=ExtResource( 5 )]
 topLeft = Vector2( 1088, -1024 )
 bottomRight = Vector2( 4096, 1216 )
 limitID = 1
-doLimitsReset = false
 
 [node name="LimitSetArea" parent="Camera" instance=ExtResource( 9 )]
 position = Vector2( 1752, -184 )
@@ -202,6 +200,7 @@ bounce_count = 5
 
 [node name="EndPortal" parent="." instance=ExtResource( 8 )]
 position = Vector2( 2080, -162 )
+next_level_path = "res://scenes/levels/AdventureLand/Pool.tscn"
 
 [node name="WarningSign" parent="." instance=ExtResource( 10 )]
 margin_left = 2560.0

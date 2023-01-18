@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/platformer/environment/water/WaterBox.gd" type="Script" id=1]
+[ext_resource path="res://scenes/platformer/environment/water/water_shader.tres" type="Shader" id=2]
+[ext_resource path="res://textures/flatcolor.png" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/size = Vector2( 1024, 300 )
+shader_param/color = Color( 0, 0.301961, 0.701961, 0.501961 )
+shader_param/surface_color = Color( 0.8, 0.8, 1, 0.701961 )
+shader_param/surface = false
+shader_param/surface_depth = 64.0
+
+[sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
+extents = Vector2( 512, 150 )
+
+[node name="WaterBox" type="Area2D"]
+collision_layer = 2
+collision_mask = 72
+space_override = 1
+gravity = 0.2
+linear_damp = 0.3
+script = ExtResource( 1 )
+color = Color( 0, 0.301961, 0.701961, 0.501961 )
+surface_color = Color( 0.8, 0.8, 1, 0.701961 )
+
+[node name="Display" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 1024, 300 )
+scale = Vector2( 1024, 300 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 512, 150 )
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

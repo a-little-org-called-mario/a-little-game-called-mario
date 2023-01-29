@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://audio/sfx/mario_hurt.wav" type="AudioStream" id=29]
 [ext_resource path="res://scenes/platformer/characters/RestTimer.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/components/StoredSceneLoader.tscn" type="PackedScene" id=31]
+[ext_resource path="res://scenes/platformer/characters/BusAttackBox.gd" type="Script" id=32]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
@@ -259,6 +260,9 @@ animations = [ {
 "name": "driving",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=49]
+extents = Vector2( 14, 36 )
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 55, 24 )
@@ -491,6 +495,18 @@ bus = "sfx"
 [node name="moving_sound" type="AudioStreamPlayer2D" parent="Pivot/BusSprite"]
 stream = ExtResource( 19 )
 bus = "sfx"
+
+[node name="BusAttackBox" type="Area2D" parent="Pivot/BusSprite"]
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+monitorable = false
+script = ExtResource( 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BusSprite/BusAttackBox"]
+position = Vector2( 80.2689, 0 )
+scale = Vector2( 0.999999, 1 )
+shape = SubResource( 49 )
 
 [node name="Tween" type="Tween" parent="."]
 

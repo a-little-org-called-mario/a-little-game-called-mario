@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/resources/stardepths_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/bosses/MegaBoss.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/bosses/MegaBossCut.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/EndPortal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/objects/PortalManager.gd" type="Script" id=8]
+[ext_resource path="res://scenes/objects/CameraLimits.tscn" type="PackedScene" id=9]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
@@ -91,6 +92,8 @@ script = ExtResource( 8 )
 [node name="EndPortal" parent="Portals" instance=ExtResource( 7 )]
 visible = false
 position = Vector2( 512, 160 )
+
+[node name="CameraLimits" parent="." instance=ExtResource( 9 )]
 
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning" method="_on_display_warning"]
 [connection signal="display_warning" from="BossNode2D/MegaBoss" to="Warnings/Warning2" method="_on_display_warning"]

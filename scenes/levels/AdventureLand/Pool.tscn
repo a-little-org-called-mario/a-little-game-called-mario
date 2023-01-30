@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/SpawnPoint.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scenes/enemies/Ombsti.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/enemies/AngryRandallSpawner.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/enemies/Luigi.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/toys/SoapBottle.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 89, 89 )
@@ -101,17 +102,17 @@ shape = SubResource( 4 )
 [node name="Water" type="Node" parent="."]
 
 [node name="WaterBox" parent="Water" instance=ExtResource( 4 )]
-position = Vector2( -2624, 1176 )
+position = Vector2( -2624, 1188 )
 size = Vector2( 5000, 1000 )
 
 [node name="WaterBox2" parent="Water" instance=ExtResource( 4 )]
-position = Vector2( 1536, 704 )
+position = Vector2( 1548, 704 )
 rotation = -1.5708
-size = Vector2( 1920, 320 )
+size = Vector2( 1920, 308 )
 
 [node name="WaterBox3" parent="Water" instance=ExtResource( 4 )]
-position = Vector2( -2816, -1024 )
-size = Vector2( 896, 320 )
+position = Vector2( -2816, -1000 )
+size = Vector2( 896, 296 )
 
 [node name="WaterBox4" parent="Water" instance=ExtResource( 4 )]
 position = Vector2( -256, -800 )
@@ -383,3 +384,9 @@ texture = ExtResource( 13 )
 [node name="TextTrigger" parent="SirDuckington" instance=ExtResource( 14 )]
 position = Vector2( 0, 24 )
 text = "This water... How does it work?"
+
+[node name="SoapBottle" parent="." instance=ExtResource( 18 )]
+position = Vector2( -88, 168 )
+
+[node name="SoapBottle2" parent="." instance=ExtResource( 18 )]
+position = Vector2( 1472, 608 )

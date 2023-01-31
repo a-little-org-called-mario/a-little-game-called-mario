@@ -10,6 +10,7 @@ onready var horn_sound : AudioStreamPlayer = get_node("Horn")
 onready var resting_sound : AudioStreamPlayer2D = get_node("brrrrrrrrr")
 onready var moving_sound : AudioStreamPlayer2D = get_node("moving_sound")
 onready var collision: CollisionShape2D = get_node(collision_shape)
+onready var attack_box : Area2D = $BusAttackBox
 
 enum busState {RESTING, MOVING};
 var state
@@ -73,15 +74,18 @@ func _set_state(newState):
 		playing = true
 		resting_sound.play(resting_sound.get_playback_position()) # When more state sounds are added that continuously should play
 		moving_sound.playing = false # make all the sounds a dictionary.
+		attack_box.activate(false)
 	if (newState == busState.MOVING):
 		animation = "driving"
 		playing = true
 		moving_sound.play(moving_sound.get_playback_position())
 		resting_sound.playing = false
+		attack_box.activate(true)
 	state = newState
 
 func _play_horn():
 	horn_sound.play()
 
 func exit_bus():
+	attack_box.activate(false)
 	call_deferred("_activate_bus", false)

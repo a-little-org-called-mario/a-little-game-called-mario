@@ -6,6 +6,7 @@ extends Area2D
 # Strange things will happen.
 export var gravity_multiplier := 0.2
 export var jump_multiplier := 0.5
+export var float_gravity_multiplier := -0.1
 
 const IN_WATER_GROUP := "in_water"
 const WATER_COUNT_META := "water_count"
@@ -33,6 +34,8 @@ func _on_body_entered(body: Node):
 			body.gravity.strength *= gravity_multiplier
 		if "jump_force" in body:
 			body.jump_force *= jump_multiplier
+		if "gravity_scale" in body:
+			body.gravity_scale *= float_gravity_multiplier
 
 
 func _on_body_exited(body: Node):
@@ -46,4 +49,6 @@ func _on_body_exited(body: Node):
 			body.gravity.strength /= gravity_multiplier
 		if "jump_force" in body:
 			body.jump_force /= jump_multiplier
+		if "gravity_scale" in body:
+			body.gravity_scale /= float_gravity_multiplier
 	

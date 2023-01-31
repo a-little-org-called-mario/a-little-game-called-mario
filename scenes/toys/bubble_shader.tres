@@ -1,0 +1,21 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec4 color = vec4(0.7, 0.3, 0.7, 1.0);
+
+void fragment(){
+	float x = (UV.x - 0.5) * 2.0;
+	float y = (UV.y - 0.5) * 2.0;
+	
+	float dist = sqrt(pow(x, 2) + pow(y, 2));
+	
+	if (dist > 1.0){
+		COLOR = vec4(0.6, 0.3, 0.9, 0.0);
+	} else {
+		COLOR = color;
+		COLOR.b += cos(TIME + x + y) / 12.0;
+		COLOR.a = dist;
+	}
+}"

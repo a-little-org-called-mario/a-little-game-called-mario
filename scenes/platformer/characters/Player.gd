@@ -23,7 +23,8 @@ const SUPER_JUMP_MAX_TIME = 0.5
 var gravity = preload("res://scripts/resources/Gravity.tres")
 var stats = preload("res://scripts/resources/PlayerStats.tres")
 
-var jump_force = 1120
+var jump_force := 1120
+var push_factor := 0.3 #How strongly the player pushes rigid bodies. Scaled by speed.
 
 var coyote_timer = COYOTE_TIME  # used to give a bit of extra-time to jump after leaving the ground
 var jump_buffer_timer = 0  # gives a bit of buffer to hit the jump button before landing
@@ -204,14 +205,20 @@ func _physics_process(delta: float) -> void:
 	pivot.scale.y = gravity.direction.y
 
 	var move_and_slide_result = move_and_slide(
-		y_motion.update_motion() + x_motion.update_motion() + added_motion, Vector2.UP
+		y_motion.update_motion() + x_motion.update_motion() + added_motion, Vector2.UP,
+		false, 4, 0.785398, false #infinite_inertia is disabled to prevent rigid bodies getting stuck in walls and similar problems
 	)
 	var slide_count = get_slide_count()
-	added_motion = Vector2.ZERO
 	
 	for i in slide_count:
 		var col = get_slide_collision(i)
 		emit_signal("collided", col)
+		
+		var collider : Node2D = col.collider
+		if collider is RigidBody2D: #Push any rigid bodies this collides with
+			collider.apply_impulse(col.position - collider.global_position, -col.normal * push_factor * get_velocity().length())
+			
+	added_motion = Vector2.ZERO
 
 	var slipped = false
 	# try slipping around block corners when jumping or crossing gaps
@@ -441,3 +448,7 @@ func _end_flash_sprite() -> void:
 	
 func add_motion(motion: Vector2) -> void:
 	added_motion += motion
+	
+	
+func get_velocity() -> Vector2:
+	return y_motion.get_motion() + x_motion.get_motion() + added_motion

@@ -36,9 +36,15 @@ func pop():
 
 
 func _on_Bubble_body_entered(body : Node2D):
-	if not body.is_in_group("bubble_spawner"):
+	if not body.is_in_group("no_pop_bubble"):
 		pop()
 
 
 func _on_RemoveTimer_timeout():
 	queue_free()
+
+
+func _on_Bubble_area_entered(area : Area2D):
+	if not area.is_in_group("no_pop_bubble"):
+		if area.get_collision_layer_bit(4) or area.get_collision_layer_bit(8): #Check if the area is an Enemy Projectile or Player Projectile
+			pop()

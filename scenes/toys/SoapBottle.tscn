@@ -7,7 +7,7 @@
 radius = 16.0
 height = 16.0
 
-[node name="SoapBottle" type="RigidBody2D" groups=["bubble_spawner"]]
+[node name="SoapBottle" type="RigidBody2D" groups=["no_pop_bubble"]]
 collision_layer = 2
 collision_mask = 346
 gravity_scale = 5.0

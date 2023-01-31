@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
 
-[node name="Bubble" type="Area2D"]
+[node name="Bubble" type="Area2D" groups=["no_pop_bubble"]]
 collision_layer = 2
 collision_mask = 858
 script = ExtResource( 3 )
@@ -31,7 +31,7 @@ lifetime_randomness = 0.4
 texture = ExtResource( 4 )
 flag_align_y = true
 spread = 180.0
-initial_velocity = 60.0
+initial_velocity = 80.0
 initial_velocity_random = 0.2
 scale_amount = 0.5
 color = Color( 1, 0, 0.772549, 1 )
@@ -41,5 +41,6 @@ process_mode = 0
 wait_time = 2.0
 one_shot = true
 
+[connection signal="area_entered" from="." to="." method="_on_Bubble_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Bubble_body_entered"]
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_RemoveTimer_timeout"]

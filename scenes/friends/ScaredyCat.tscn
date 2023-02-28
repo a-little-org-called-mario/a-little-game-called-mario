@@ -8,7 +8,7 @@
 extents = Vector2( 8, 8 )
 
 [node name="ScaredyCat" type="KinematicBody2D"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 script = ExtResource( 3 )
 

@@ -69,7 +69,7 @@ func get_data_in_dict(key, inner_key):
 func remove_data_in_dict(key, inner_key, survive_level_restart = false, survive_respawn = false):
 	var dict = get_data_or_null(key)
 	if !dict:
-		push_error("DataStore.data[%s] does not exist.".format(key))
+		push_error("DataStore.data[%s] does not exist." % key)
 	else:
 		assert(dict is Dictionary)
 		dict.erase(inner_key)

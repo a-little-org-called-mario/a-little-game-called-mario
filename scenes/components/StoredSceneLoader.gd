@@ -10,7 +10,7 @@ func _ready():
 	if not stored_scenes: #Nothing was set here yet
 		return
 	if not stored_scenes is Dictionary:
-		push_error("DataStore.data[%s] exists but is not a dictionary.".format(stored_scene_key))
+		push_error("DataStore.data[%s] exists but is not a dictionary." % stored_scene_key)
 	else:
 		for obj in stored_scenes.values():
 			var scene : PackedScene = obj

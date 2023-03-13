@@ -9,13 +9,17 @@ const STARTUP_SECTION = "startup"
 var menu : CanvasLayer = null
 var config := ConfigFile.new()
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
+	pause_mode = Node.PAUSE_MODE_PROCESS #Can't pause this!
 	var err := config.load(debug_settings_file_name)
 	if err == OK: #The file exists
 		var level = config.get_value(STARTUP_SECTION, "level", "")
+		var data = config.get_value(STARTUP_SECTION, "data", {})
 		if level:
 			_start_level(level)
+		if data:
+			DataStore.data = data
 			
 			
 func save_value(section, key, value):
@@ -23,8 +27,8 @@ func save_value(section, key, value):
 	config.save(debug_settings_file_name)
 	
 	
-func get_value(section, key):
-	return config.get_value(section, key)
+func get_value(section, key, default=null):
+	return config.get_value(section, key, default)
 
 
 func _start_level(level: String):
@@ -42,6 +46,8 @@ func _input(event: InputEvent):
 		if menu:
 			menu.queue_free()
 			menu = null
+			get_tree().paused = false
 		else:
 			menu = menu_scene.instance()
 			add_child(menu)
+			get_tree().paused = true

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://fonts/ASmallerNameCalled.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/ui/Themes/MenuTheme.tres" type="Theme" id=3]
-[ext_resource path="res://scenes/ui/DebugMenu.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ui/DebugMenuStartup.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ui/DebugMenuGeneral.gd" type="Script" id=5]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 0.207843, 0.0627451, 0.501961, 0, 0.470588 )
@@ -12,6 +13,8 @@ colors = PoolColorArray( 0, 0, 0, 0.207843, 0.0627451, 0.501961, 0, 0.470588 )
 gradient = SubResource( 1 )
 width = 1024
 
+[sub_resource type="StyleBoxEmpty" id=4]
+
 [sub_resource type="DynamicFont" id=3]
 size = 28
 outline_size = 3
@@ -19,17 +22,15 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
+pause_mode = 2
 layer = 100
 follow_viewport_enable = true
 
 [node name="Control" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
 theme = ExtResource( 3 )
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 margin_left = 1024.0
@@ -49,6 +50,7 @@ margin_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 400, 120 )
+mouse_filter = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 custom_fonts/normal_font = ExtResource( 1 )
@@ -60,9 +62,57 @@ text = "
 fit_content_height = true
 scroll_active = false
 
-[node name="StartInLevel" type="Node2D" parent="Control"]
+[node name="TabContainer" type="TabContainer" parent="Control"]
+margin_left = 20.0
+margin_top = 124.0
+margin_right = 1021.0
+margin_bottom = 600.0
+custom_styles/panel = SubResource( 4 )
+tab_align = 0
+all_tabs_in_front = true
 
-[node name="Label" type="Label" parent="Control/StartInLevel"]
+[node name="General" type="Control" parent="Control/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 31.0
+script = ExtResource( 5 )
+
+[node name="CoinSpinBox" type="SpinBox" parent="Control/TabContainer/General"]
+margin_left = 12.0
+margin_top = 40.0
+margin_right = 244.0
+margin_bottom = 79.0
+rect_pivot_offset = Vector2( -12, 39 )
+size_flags_horizontal = 0
+rounded = true
+allow_greater = true
+suffix = "Coins"
+
+[node name="HeartSpinBox" type="SpinBox" parent="Control/TabContainer/General"]
+margin_left = 12.0
+margin_top = 100.0
+margin_right = 244.0
+margin_bottom = 139.0
+rect_pivot_offset = Vector2( -12, 39 )
+size_flags_horizontal = 0
+rounded = true
+allow_greater = true
+suffix = "Hearts"
+
+[node name="Startup" type="Control" parent="Control/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 31.0
+theme = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StartLevel" type="Node2D" parent="Control/TabContainer/Startup"]
+
+[node name="Label" type="Label" parent="Control/TabContainer/Startup/StartLevel"]
 margin_left = 45.0
 margin_top = 144.0
 margin_right = 213.0
@@ -70,19 +120,55 @@ margin_bottom = 169.0
 custom_fonts/font = SubResource( 3 )
 text = "Start in"
 
-[node name="StartInPath" type="LineEdit" parent="Control/StartInLevel"]
+[node name="StartPath" type="LineEdit" parent="Control/TabContainer/Startup/StartLevel"]
+pause_mode = 2
 margin_left = 232.0
 margin_top = 134.0
 margin_right = 659.0
 margin_bottom = 173.0
-clear_button_enabled = true
 
-[node name="SetButton" type="Button" parent="Control/StartInLevel"]
+[node name="SetButton" type="Button" parent="Control/TabContainer/Startup/StartLevel"]
 margin_left = 677.0
 margin_top = 130.0
 margin_right = 757.0
 margin_bottom = 178.0
 text = "Set"
 
-[connection signal="text_changed" from="Control/StartInLevel/StartInPath" to="Control" method="_on_StartInPath_text_changed"]
-[connection signal="pressed" from="Control/StartInLevel/SetButton" to="Control" method="_on_SetButton_pressed"]
+[node name="ClearButton" type="Button" parent="Control/TabContainer/Startup/StartLevel"]
+margin_left = 769.0
+margin_top = 130.0
+margin_right = 884.0
+margin_bottom = 178.0
+text = "Clear"
+
+[node name="StartData" type="Node2D" parent="Control/TabContainer/Startup"]
+
+[node name="Label" type="Label" parent="Control/TabContainer/Startup/StartData"]
+margin_left = 42.0
+margin_top = 202.0
+margin_right = 252.0
+margin_bottom = 227.0
+custom_fonts/font = SubResource( 3 )
+text = "Start Data"
+
+[node name="SetButton" type="Button" parent="Control/TabContainer/Startup/StartData"]
+margin_left = 276.0
+margin_top = 188.0
+margin_right = 362.0
+margin_bottom = 236.0
+text = "Save"
+
+[node name="ClearButton" type="Button" parent="Control/TabContainer/Startup/StartData"]
+margin_left = 382.0
+margin_top = 188.0
+margin_right = 497.0
+margin_bottom = 236.0
+text = "Clear"
+
+[connection signal="value_changed" from="Control/TabContainer/General/CoinSpinBox" to="Control/TabContainer/General" method="_on_CoinSpinBox_value_changed"]
+[connection signal="value_changed" from="Control/TabContainer/General/HeartSpinBox" to="Control/TabContainer/General" method="_on_HeartSpinBox_value_changed"]
+[connection signal="text_changed" from="Control/TabContainer/Startup/StartLevel/StartPath" to="Control/TabContainer/Startup" method="_on_StartPath_text_changed"]
+[connection signal="pressed" from="Control/TabContainer/Startup/StartLevel/SetButton" to="Control/TabContainer/Startup" method="_on_SetButton_pressed"]
+[connection signal="pressed" from="Control/TabContainer/Startup/StartLevel/ClearButton" to="Control/TabContainer/Startup" method="_on_LevelClearButton_pressed"]
+[connection signal="pressed" from="Control/TabContainer/Startup/StartData/SetButton" to="Control/TabContainer/Startup" method="_on_DataSetButton_pressed"]
+[connection signal="pressed" from="Control/TabContainer/Startup/StartData/ClearButton" to="Control/TabContainer/Startup" method="_on_DataClearButton_pressed"]

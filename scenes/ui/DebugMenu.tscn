@@ -1,0 +1,183 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fonts/ASmallerNameCalled.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/ui/Themes/MenuTheme.tres" type="Theme" id=3]
+[ext_resource path="res://scenes/ui/DebugMenuStartup.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ui/DebugMenuGeneral.gd" type="Script" id=5]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0, 0, 0.207843, 0.0627451, 0.501961, 0, 0.470588 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 1024
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+pause_mode = 2
+layer = 100
+follow_viewport_enable = true
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+theme = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+margin_left = 1024.0
+margin_right = 1624.0
+margin_bottom = 1024.0
+rect_rotation = 90.0
+texture = SubResource( 2 )
+expand = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Title" type="RichTextLabel" parent="Control"]
+margin_top = 7.0
+margin_right = 1018.0
+margin_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 400, 120 )
+mouse_filter = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[center] A little [wave amp=100 freq=2][rainbow freq=0.5 sat=1 val=1][font=res://fonts/ALittleNameCalled.tres]Debug Menu[/font][/rainbow][/wave] called Mario"
+text = "
+ A little Debug Menu called Mario"
+fit_content_height = true
+scroll_active = false
+
+[node name="General" type="Control" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 155.0
+margin_right = 20.0
+margin_bottom = 124.0
+script = ExtResource( 5 )
+
+[node name="CoinSpinBox" type="SpinBox" parent="Control/General"]
+margin_left = 12.0
+margin_top = 40.0
+margin_right = 244.0
+margin_bottom = 79.0
+rect_pivot_offset = Vector2( -12, 39 )
+size_flags_horizontal = 0
+rounded = true
+allow_greater = true
+suffix = "Coins"
+
+[node name="HeartSpinBox" type="SpinBox" parent="Control/General"]
+margin_left = 254.0
+margin_top = 40.0
+margin_right = 486.0
+margin_bottom = 79.0
+rect_pivot_offset = Vector2( -12, 39 )
+size_flags_horizontal = 0
+rounded = true
+allow_greater = true
+suffix = "Hearts"
+
+[node name="Startup" type="Panel" parent="Control/General"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 98.0
+margin_right = 861.0
+margin_bottom = 266.0
+theme = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="StartLevel" type="Control" parent="Control/General/Startup"]
+margin_left = -25.0
+margin_top = -76.0
+margin_right = -25.0
+margin_bottom = -76.0
+
+[node name="Label" type="Label" parent="Control/General/Startup/StartLevel"]
+margin_left = 45.0
+margin_top = 144.0
+margin_right = 213.0
+margin_bottom = 169.0
+custom_fonts/font = SubResource( 3 )
+text = "Start in"
+
+[node name="StartPath" type="LineEdit" parent="Control/General/Startup/StartLevel"]
+pause_mode = 2
+margin_left = 232.0
+margin_top = 134.0
+margin_right = 500.0
+margin_bottom = 173.0
+
+[node name="SetButton" type="Button" parent="Control/General/Startup/StartLevel"]
+margin_left = 521.0
+margin_top = 130.0
+margin_right = 601.0
+margin_bottom = 178.0
+text = "Set"
+
+[node name="ClearButton" type="Button" parent="Control/General/Startup/StartLevel"]
+margin_left = 613.0
+margin_top = 130.0
+margin_right = 728.0
+margin_bottom = 178.0
+text = "Clear"
+
+[node name="StartData" type="Control" parent="Control/General/Startup"]
+margin_left = -23.0
+margin_top = -68.0
+margin_right = -23.0
+margin_bottom = -68.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Control/General/Startup/StartData"]
+margin_left = 42.0
+margin_top = 202.0
+margin_right = 252.0
+margin_bottom = 227.0
+custom_fonts/font = SubResource( 3 )
+text = "Start Data"
+
+[node name="SetButton" type="Button" parent="Control/General/Startup/StartData"]
+margin_left = 276.0
+margin_top = 188.0
+margin_right = 362.0
+margin_bottom = 236.0
+text = "Save"
+
+[node name="ClearButton" type="Button" parent="Control/General/Startup/StartData"]
+margin_left = 382.0
+margin_top = 188.0
+margin_right = 497.0
+margin_bottom = 236.0
+text = "Clear"
+
+[node name="Label" type="Label" parent="Control/General/Startup"]
+margin_left = 17.0
+margin_top = 12.0
+margin_right = 305.0
+margin_bottom = 33.0
+text = "Startup Settings"
+
+[connection signal="value_changed" from="Control/General/CoinSpinBox" to="Control/General" method="_on_CoinSpinBox_value_changed"]
+[connection signal="value_changed" from="Control/General/HeartSpinBox" to="Control/General" method="_on_HeartSpinBox_value_changed"]
+[connection signal="text_changed" from="Control/General/Startup/StartLevel/StartPath" to="Control/General/Startup" method="_on_StartPath_text_changed"]
+[connection signal="pressed" from="Control/General/Startup/StartLevel/SetButton" to="Control/General/Startup" method="_on_SetButton_pressed"]
+[connection signal="pressed" from="Control/General/Startup/StartLevel/ClearButton" to="Control/General/Startup" method="_on_LevelClearButton_pressed"]
+[connection signal="pressed" from="Control/General/Startup/StartData/SetButton" to="Control/General/Startup" method="_on_DataSetButton_pressed"]
+[connection signal="pressed" from="Control/General/Startup/StartData/ClearButton" to="Control/General/Startup" method="_on_DataClearButton_pressed"]

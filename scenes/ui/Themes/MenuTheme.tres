@@ -1,0 +1,111 @@
+[gd_resource type="Theme" load_steps=22 format=2]
+
+[ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/ASmallerNameCalled.tres" type="DynamicFont" id=2]
+
+[sub_resource type="DynamicFont" id=4]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0, 0.458824, 0.321569, 1, 0, 0.301961, 0.262745, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+width = 512
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = SubResource( 6 )
+region_rect = Rect2( 0, 0, 512, 1 )
+
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 0, 0.882353, 0.627451, 1, 0, 0.823529, 0.733333, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+width = 512
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = SubResource( 9 )
+region_rect = Rect2( 0, 0, 2048, 1 )
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 0, 0.25098, 0.176471, 1, 0, 0.129412, 0.113725, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+width = 512
+
+[sub_resource type="StyleBoxTexture" id=13]
+texture = SubResource( 12 )
+region_rect = Rect2( 0, 0, 512, 1 )
+
+[sub_resource type="Gradient" id=14]
+colors = PoolColorArray( 0, 0.560784, 0.443137, 1, 0, 0.458824, 0.329412, 1 )
+
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 14 )
+width = 512
+
+[sub_resource type="StyleBoxTexture" id=16]
+texture = SubResource( 15 )
+region_rect = Rect2( 0, 0, 512, 1 )
+expand_margin_left = 5.0
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0, 0.486275, 0.00784314, 0.392157 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.054902, 0.45098, 0, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=17]
+size = 24
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0, 0.494118, 0.458824, 1 )
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+expand_margin_top = 5.0
+
+[sub_resource type="Gradient" id=19]
+colors = PoolColorArray( 0, 0.764706, 1, 1, 0, 1, 0.623529, 1 )
+
+[sub_resource type="GradientTexture" id=20]
+gradient = SubResource( 19 )
+width = 1024
+
+[sub_resource type="StyleBoxTexture" id=21]
+texture = SubResource( 20 )
+region_rect = Rect2( 0, 0, 2048, 1 )
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+expand_margin_top = 5.0
+
+[resource]
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_focus = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = SubResource( 4 )
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource( 7 )
+Button/styles/normal = SubResource( 10 )
+Button/styles/pressed = SubResource( 13 )
+Label/fonts/font = ExtResource( 2 )
+Label/styles/normal = null
+LineEdit/fonts/font = ExtResource( 2 )
+LineEdit/styles/normal = SubResource( 16 )
+Panel/styles/panel = SubResource( 22 )
+TabContainer/fonts/font = SubResource( 17 )
+TabContainer/styles/tab_bg = SubResource( 18 )
+TabContainer/styles/tab_fg = SubResource( 21 )

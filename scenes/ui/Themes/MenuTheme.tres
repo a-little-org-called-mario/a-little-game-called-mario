@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=21 format=2]
+[gd_resource type="Theme" load_steps=22 format=2]
 
 [ext_resource path="res://fonts/ALittleNameCalle.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://fonts/ASmallerNameCalled.tres" type="DynamicFont" id=2]
@@ -50,7 +50,17 @@ width = 512
 
 [sub_resource type="StyleBoxTexture" id=16]
 texture = SubResource( 15 )
+region_rect = Rect2( 0, 0, 512, 1 )
 expand_margin_left = 5.0
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0, 0.486275, 0.00784314, 0.392157 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.054902, 0.45098, 0, 1 )
+border_blend = true
 
 [sub_resource type="DynamicFont" id=17]
 size = 24
@@ -95,6 +105,7 @@ Label/fonts/font = ExtResource( 2 )
 Label/styles/normal = null
 LineEdit/fonts/font = ExtResource( 2 )
 LineEdit/styles/normal = SubResource( 16 )
+Panel/styles/panel = SubResource( 22 )
 TabContainer/fonts/font = SubResource( 17 )
 TabContainer/styles/tab_bg = SubResource( 18 )
 TabContainer/styles/tab_fg = SubResource( 21 )

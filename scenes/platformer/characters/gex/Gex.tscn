@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/dustparticle.png" type="Texture" id=2]
@@ -6,12 +6,10 @@
 [ext_resource path="res://scenes/platformer/characters/Player.gd" type="Script" id=4]
 [ext_resource path="res://scenes/CameraFCandidate.gd" type="Script" id=5]
 [ext_resource path="res://scenes/HeartInventoryHandle.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/platformer/characters/PlayerAnims.gd" type="Script" id=7]
+[ext_resource path="res://scenes/levels/GDC/assets/GexSprite.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/Hitbox.tscn" type="PackedScene" id=8]
-[ext_resource path="res://sprites/characters/Gex.png" type="Texture" id=9]
 [ext_resource path="res://audio/sfx/player-hurt.wav" type="AudioStream" id=10]
 [ext_resource path="res://scenes/CoinInventoryHandle.tscn" type="PackedScene" id=11]
-[ext_resource path="res://shaders/hit_flash.gdshader" type="Shader" id=12]
 [ext_resource path="res://audio/sfx/metal_scrape.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/platformer/characters/SkidParticles.gd" type="Script" id=14]
 [ext_resource path="res://graphics/sprites/vfx/spark_star.png" type="Texture" id=15]
@@ -25,106 +23,6 @@ extents = Vector2( 18, 26 )
 [sub_resource type="Gradient" id=45]
 offsets = PoolRealArray( 0.471669, 1 )
 colors = PoolColorArray( 1, 0.54902, 0, 1, 0.946289, 0.107197, 0.107197, 0 )
-
-[sub_resource type="ShaderMaterial" id=15]
-shader = ExtResource( 12 )
-shader_param/flash_color = Color( 1, 1, 1, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="Animation" id=18]
-resource_name = "Idle"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=19]
-resource_name = "Jump"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-
-[sub_resource type="Animation" id=16]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=17]
-resource_name = "Run"
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 7, 8, 9, 10, 11 ]
-}
-
-[sub_resource type="Animation" id=42]
-resource_name = "Hurt"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1, 1.3, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0 ]
-}
-
-[sub_resource type="Animation" id=43]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
 
 [sub_resource type="AudioStreamRandomPitch" id=14]
 audio_stream = ExtResource( 10 )
@@ -187,26 +85,7 @@ angle_random = 1.0
 color_ramp = SubResource( 45 )
 script = ExtResource( 14 )
 
-[node name="Sprite" type="Sprite" parent="Pivot"]
-material = SubResource( 15 )
-position = Vector2( -2, 20 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 9 )
-offset = Vector2( 0, -13 )
-hframes = 6
-vframes = 2
-
-[node name="Anims" type="AnimationPlayer" parent="Pivot/Sprite"]
-autoplay = "Idle"
-anims/Idle = SubResource( 18 )
-anims/Jump = SubResource( 19 )
-anims/RESET = SubResource( 16 )
-anims/Run = SubResource( 17 )
-script = ExtResource( 7 )
-
-[node name="EffectAnims" type="AnimationPlayer" parent="Pivot/Sprite"]
-anims/Hurt = SubResource( 42 )
-anims/RESET = SubResource( 43 )
+[node name="Sprite" parent="Pivot" instance=ExtResource( 7 )]
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 visible = false

@@ -14,10 +14,6 @@
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 26, 24 )
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 64, 64 )
-
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 64, 64 )
@@ -50,13 +46,12 @@ region = Rect2( 256, 64, 64, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 320, 64, 64, 64 )
 
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 32 ) ],
-"loop": true,
-"name": "die",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 30 ), SubResource( 31 ) ],
 "loop": true,
 "name": "idle",
@@ -66,6 +61,11 @@ animations = [ {
 "loop": true,
 "name": "move",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 32 ) ],
+"loop": true,
+"name": "die",
+"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=34]
@@ -379,8 +379,6 @@ extents = Vector2( 192, 96 )
 [node name="Bub" instance=ExtResource( 1 )]
 collision_mask = 330
 script = ExtResource( 3 )
-max_speed = 150.0
-direction = -1
 bullet_scene = ExtResource( 5 )
 muzzle_flash_scene = ExtResource( 6 )
 

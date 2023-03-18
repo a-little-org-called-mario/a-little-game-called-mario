@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slide2.png-6ae13ebc6059f5f0c0a8406b13a6d009.stex"
+path="res://.import/bub_violence.png-a0d573af42e6699d2a191d55aaee095e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/levels/GDC/slide2.png"
-dest_files=[ "res://.import/slide2.png-6ae13ebc6059f5f0c0a8406b13a6d009.stex" ]
+source_file="res://scenes/levels/GDC/assets/bub_violence.png"
+dest_files=[ "res://.import/bub_violence.png-a0d573af42e6699d2a191d55aaee095e.stex" ]
 
 [params]
 

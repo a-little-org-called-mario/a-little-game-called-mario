@@ -1,0 +1,27 @@
+# This generates a credits.txt file as a build artifact
+# Really only intended to be used by Izzy for the GDC talk, but
+name: generate credits
+
+on: workflow_dispatch
+
+jobs:
+  generate_credits:
+    name: Generate Credits
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout latest code
+        uses: actions/checkout@v2.3.1
+        with:
+          fetch-depth: 0
+      - name: update credits
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const path = require('path');
+            const script = require(path.resolve('.github/workflows/update-credits.js'));
+            await script(github, context)
+      - name: Add credits.txt to build artifacts list
+        uses: actions/upload-artifact@v3
+        with:
+          name: credits
+          path: credits.txt

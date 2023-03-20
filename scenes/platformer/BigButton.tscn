@@ -187,5 +187,9 @@ anims/RESET = SubResource( 7 )
 stream = ExtResource( 3 )
 bus = "sfx"
 
+[node name="PlayOnPress" type="AudioStreamPlayer" parent="."]
+bus = "sfx"
+
 [connection signal="area_entered" from="PressArea" to="." method="press"]
 [connection signal="body_entered" from="PressArea" to="." method="press"]
+[connection signal="finished" from="PlayOnPress" to="." method="_on_PlayOnPress_finished"]

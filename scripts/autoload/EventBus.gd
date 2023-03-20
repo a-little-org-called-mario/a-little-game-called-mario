@@ -67,6 +67,7 @@ signal volume_changed(data)
 
 # Environmental
 signal big_button_pressed(button_id)
+signal big_button_play_on_press_finished(button_id)
 signal show_all_portals()
 
 # Notes

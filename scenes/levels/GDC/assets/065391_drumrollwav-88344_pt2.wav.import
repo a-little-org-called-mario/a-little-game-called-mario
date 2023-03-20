@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/065391_drumrollwav-88344_pt2.wav-c4f3a09ecdbd7502ea5f970b70be650d.sample"
+
+[deps]
+
+source_file="res://scenes/levels/GDC/assets/065391_drumrollwav-88344_pt2.wav"
+dest_files=[ "res://.import/065391_drumrollwav-88344_pt2.wav-c4f3a09ecdbd7502ea5f970b70be650d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

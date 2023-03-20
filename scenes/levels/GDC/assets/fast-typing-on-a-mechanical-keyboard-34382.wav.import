@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fast-typing-on-a-mechanical-keyboard-34382.wav-83df0ea139620593650f98318c73f792.sample"
+
+[deps]
+
+source_file="res://scenes/levels/GDC/assets/fast-typing-on-a-mechanical-keyboard-34382.wav"
+dest_files=[ "res://.import/fast-typing-on-a-mechanical-keyboard-34382.wav-83df0ea139620593650f98318c73f792.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

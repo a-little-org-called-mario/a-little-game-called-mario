@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=2]
+[gd_scene load_steps=109 format=2]
 
 [ext_resource path="res://scenes/levels/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/levels/GDC/slide2.png" type="Texture" id=2]
@@ -74,6 +74,7 @@
 [ext_resource path="res://sprites/tiles/awesome new tiles.png" type="Texture" id=72]
 [ext_resource path="res://audio/sfx/pop-gun.wav" type="AudioStream" id=73]
 [ext_resource path="res://scenes/platformer/BigButton.gd" type="Script" id=74]
+[ext_resource path="res://scenes/levels/GDC/TransFlagGDCPlayer.tscn" type="PackedScene" id=75]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 96, 32 )
@@ -466,6 +467,7 @@ teleport_to = Vector2( 142, 4 )
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 6 )]
 position = Vector2( 31, -151 )
+player_scene = ExtResource( 75 )
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -1
@@ -573,7 +575,7 @@ visible = false
 position = Vector2( -140.92, 27 )
 scale = Vector2( 0.789416, 0.789416 )
 animation = "old"
-frame = 35
+frame = 43
 
 [node name="SlideExtras2" type="Node2D" parent="Foreground/IntroSlides"]
 visible = false
@@ -584,34 +586,34 @@ visible = false
 position = Vector2( 76, 32 )
 scale = Vector2( 0.78597, 0.78597 )
 animation = "platformer"
-frame = 43
+frame = 21
 
 [node name="LilMarioGif" parent="Foreground/IntroSlides/SlideExtras2" instance=ExtResource( 7 )]
 visible = false
 position = Vector2( -223.462, -23.2748 )
 scale = Vector2( 0.591358, 0.591358 )
-frame = 28
+frame = 6
 
 [node name="LilMarioGif2" parent="Foreground/IntroSlides/SlideExtras2" instance=ExtResource( 7 )]
 visible = false
 position = Vector2( 614, -57 )
 scale = Vector2( 0.889102, 0.889102 )
 animation = "flappy"
-frame = 48
+frame = 26
 
 [node name="LilMarioGif6" parent="Foreground/IntroSlides/SlideExtras2" instance=ExtResource( 7 )]
 visible = false
 position = Vector2( -202, 139 )
 scale = Vector2( 0.786383, 0.786383 )
 animation = "sokoban"
-frame = 23
+frame = 67
 
 [node name="LilMarioGif3" parent="Foreground/IntroSlides/SlideExtras2" instance=ExtResource( 7 )]
 visible = false
 position = Vector2( 221, 74 )
 scale = Vector2( 0.634077, 0.634077 )
 animation = "marwing"
-frame = 18
+frame = 49
 
 [node name="Github1" type="Sprite" parent="Foreground"]
 position = Vector2( 5293, 363 )
@@ -789,15 +791,16 @@ scale = Vector2( 2, 2 )
 [node name="buff_boy" parent="." instance=ExtResource( 34 )]
 position = Vector2( 3531, 368 )
 scale = Vector2( 2, 2 )
-frame = 3
+frame = 0
 
 [node name="riled_up_dad" parent="." instance=ExtResource( 33 )]
 position = Vector2( 3600, 485 )
-frame = 3
+frame = 2
 
 [node name="riled_up_dad2" parent="." instance=ExtResource( 33 )]
 position = Vector2( 3424, 485 )
 frames = SubResource( 12 )
+frame = 3
 
 [node name="weird_flowers" parent="." instance=ExtResource( 42 )]
 position = Vector2( 3234, 484 )
@@ -807,15 +810,15 @@ position = Vector2( 1760, 486 )
 
 [node name="BasicDecoration" parent="." instance=ExtResource( 48 )]
 position = Vector2( 5824, 128 )
-frame = 3
+frame = 0
 
 [node name="BasicDecoration2" parent="." instance=ExtResource( 48 )]
 position = Vector2( 6464, 128 )
-frame = 3
+frame = 0
 
 [node name="BasicDecoration3" parent="." instance=ExtResource( 48 )]
 position = Vector2( 6144, 128 )
-frame = 2
+frame = 4
 
 [node name="CoinBox" parent="." instance=ExtResource( 37 )]
 position = Vector2( 3168, 350 )
@@ -1740,12 +1743,20 @@ position = Vector2( 6751, 352 )
 
 [node name="Ombsti" parent="." instance=ExtResource( 56 )]
 position = Vector2( 6119, 576 )
+heldItem = "bomb"
+numberThrown = 2
+veloMin = Vector2( 150, -250 )
+veloMax = Vector2( 450, -650 )
+delay = 70
 
 [node name="Luigi" parent="." instance=ExtResource( 54 )]
 position = Vector2( 5664, 544 )
 
 [node name="MotorSam" parent="." instance=ExtResource( 53 )]
 position = Vector2( 6368, 544 )
+move_direction = Vector2( -1, 0 )
+default_speed = 150
+force_speed = 500
 
 [node name="Bunny" type="AnimatedSprite" parent="."]
 position = Vector2( 1632, 484 )

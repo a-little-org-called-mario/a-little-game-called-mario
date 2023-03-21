@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/platformer/QueueFreeOnBigButtonPress.gd" type="Script" id=2]
 [ext_resource path="res://scenes/SimpleExplosion.tscn" type="PackedScene" id=3]
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=26]
 extents = Vector2( 32, 32 )
 
 [node name="BreakBrick" type="StaticBody2D"]
@@ -12,7 +12,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 13 )
+shape = SubResource( 26 )
 
 [node name="Brick" type="Sprite" parent="."]
 texture = ExtResource( 1 )

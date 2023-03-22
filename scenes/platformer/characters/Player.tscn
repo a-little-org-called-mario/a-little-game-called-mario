@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://scenes/platformer/characters/RunParticles.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -30,6 +30,8 @@
 [ext_resource path="res://scenes/platformer/characters/SkidParticles.gd" type="Script" id=28]
 [ext_resource path="res://audio/sfx/mario_hurt.wav" type="AudioStream" id=29]
 [ext_resource path="res://scenes/platformer/characters/RestTimer.tscn" type="PackedScene" id=30]
+[ext_resource path="res://palettes/Mario_base.png" type="Texture" id=31]
+[ext_resource path="res://shaders/palette_hit_flash.gdshader" type="Shader" id=32]
 
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 28 )
@@ -47,9 +49,11 @@ colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1 )
 extents = Vector2( 22, 26 )
 
 [sub_resource type="ShaderMaterial" id=15]
-shader = ExtResource( 13 )
+shader = ExtResource( 32 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
+shader_param/palette_width = 12
+shader_param/palette = ExtResource( 31 )
 
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 2 )
@@ -208,14 +212,32 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=29]
 radius = 4.0
 
+[sub_resource type="ShaderMaterial" id=54]
+shader = ExtResource( 13 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
 [sub_resource type="Curve" id=30]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.527273 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=40]
-colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
+[sub_resource type="Gradient" id=50]
+offsets = PoolRealArray( 0.00584795, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.1, 0.1, 0.1, 1 )
 
 [sub_resource type="GradientTexture" id=39]
-gradient = SubResource( 40 )
+gradient = SubResource( 50 )
+width = 128
+
+[sub_resource type="ShaderMaterial" id=55]
+shader = ExtResource( 13 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="Gradient" id=52]
+colors = PoolColorArray( 0, 0, 0, 1, 0.101563, 0.101563, 0.101563, 1 )
+
+[sub_resource type="GradientTexture" id=53]
+gradient = SubResource( 52 )
 width = 128
 
 [sub_resource type="Gradient" id=46]
@@ -303,6 +325,9 @@ position = Vector2( 0, 26 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 10 )
 offset = Vector2( 0, -16 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="ShootOrigin" type="Position2D" parent="Pivot/Sprite"]
 position = Vector2( 4, -16 )
@@ -322,96 +347,95 @@ anims/Hurt = SubResource( 42 )
 anims/RESET = SubResource( 43 )
 
 [node name="BouncyMoustache" type="Node2D" parent="Pivot"]
-material = SubResource( 15 )
 position = Vector2( 0, -6 )
 script = ExtResource( 16 )
 
-[node name="DampedSpringJoint2D" type="PinJoint2D" parent="Pivot/BouncyMoustache"]
+[node name="DampedSpringJointR" type="PinJoint2D" parent="Pivot/BouncyMoustache"]
 position = Vector2( 4.136, 3.15 )
 rotation = -1.5708
-node_a = NodePath("point1")
-node_b = NodePath("point2")
+node_a = NodePath("point1R")
+node_b = NodePath("point2R")
 bias = 0.5
 disable_collision = false
 softness = 6.0
 
-[node name="point1" type="StaticBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D"]
+[node name="point1R" type="StaticBody2D" parent="Pivot/BouncyMoustache/DampedSpringJointR"]
 collision_layer = 0
 collision_mask = 0
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point1"]
+[node name="MeshInstanceR" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJointR/point1R"]
 visible = false
 material = SubResource( 15 )
 scale = Vector2( 4, 4 )
 mesh = SubResource( 28 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point1"]
+[node name="CollisionShapeR" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJointR/point1R"]
 shape = SubResource( 29 )
 disabled = true
 
-[node name="Line2D" type="Line2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point1"]
-material = SubResource( 15 )
+[node name="LineR" type="Line2D" parent="Pivot/BouncyMoustache/DampedSpringJointR/point1R"]
+material = SubResource( 54 )
 width = 13.066
 width_curve = SubResource( 30 )
 default_color = Color( 1, 1, 1, 1 )
 texture = SubResource( 39 )
 texture_mode = 2
 
-[node name="point2" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D"]
+[node name="point2R" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJointR"]
 position = Vector2( 0.150002, 12.635 )
 collision_layer = 0
 collision_mask = 0
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point2"]
+[node name="MeshInstanceR" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJointR/point2R"]
 visible = false
 scale = Vector2( 4, 4 )
 mesh = SubResource( 28 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D/point2"]
+[node name="CollisionShapeR" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJointR/point2R"]
 shape = SubResource( 29 )
 disabled = true
 
-[node name="DampedSpringJoint2D2" type="PinJoint2D" parent="Pivot/BouncyMoustache"]
+[node name="DampedSpringJointL" type="PinJoint2D" parent="Pivot/BouncyMoustache"]
 position = Vector2( 4.365, 3.15 )
 rotation = 1.5708
-node_a = NodePath("point1")
-node_b = NodePath("point2")
+node_a = NodePath("point1L")
+node_b = NodePath("point2L")
 bias = 0.5
 disable_collision = false
 softness = 6.0
 
-[node name="point1" type="StaticBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2"]
+[node name="point1L" type="StaticBody2D" parent="Pivot/BouncyMoustache/DampedSpringJointL"]
 collision_layer = 0
 collision_mask = 0
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point1"]
+[node name="MeshInstanceL" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJointL/point1L"]
 visible = false
 scale = Vector2( 4, 4 )
 mesh = SubResource( 28 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point1"]
+[node name="CollisionShapeL" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJointL/point1L"]
 shape = SubResource( 29 )
 disabled = true
 
-[node name="Line2D" type="Line2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point1"]
-material = SubResource( 15 )
+[node name="LineL" type="Line2D" parent="Pivot/BouncyMoustache/DampedSpringJointL/point1L"]
+material = SubResource( 55 )
 width = 13.066
 width_curve = SubResource( 30 )
 default_color = Color( 1, 1, 1, 1 )
-texture = SubResource( 39 )
+texture = SubResource( 53 )
 texture_mode = 2
 
-[node name="point2" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2"]
+[node name="point2L" type="RigidBody2D" parent="Pivot/BouncyMoustache/DampedSpringJointL"]
 position = Vector2( 0.150002, 12.635 )
 collision_layer = 0
 collision_mask = 0
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point2"]
+[node name="MeshInstanceL" type="MeshInstance2D" parent="Pivot/BouncyMoustache/DampedSpringJointL/point2L"]
 visible = false
 scale = Vector2( 4, 4 )
 mesh = SubResource( 28 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJoint2D2/point2"]
+[node name="CollisionShapeL" type="CollisionShape2D" parent="Pivot/BouncyMoustache/DampedSpringJointL/point2L"]
 shape = SubResource( 29 )
 disabled = true
 

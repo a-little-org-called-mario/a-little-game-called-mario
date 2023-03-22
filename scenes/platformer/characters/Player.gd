@@ -191,7 +191,10 @@ func _physics_process(delta: float) -> void:
 
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
 	pivot.scale.y = gravity.direction.y
-
+	
+	
+	x_motion.set_speed(0 if is_zero_approx(x_motion.get_speed()) else x_motion.get_speed())
+	
 	var move_and_slide_result = move_and_slide(
 		y_motion.update_motion() + x_motion.update_motion(), Vector2.UP
 	)
@@ -205,6 +208,7 @@ func _physics_process(delta: float) -> void:
 	if !slipped:
 		x_motion.set_motion(move_and_slide_result)
 		y_motion.set_motion(move_and_slide_result)
+		
 
 
 func _is_on_floor() -> bool:

@@ -192,8 +192,8 @@ func _physics_process(delta: float) -> void:
 	y_motion.set_accel(gravity.strength * gravity_multiplier)
 	pivot.scale.y = gravity.direction.y
 	
-	
-	x_motion.set_speed(0 if is_zero_approx(x_motion.get_speed()) else x_motion.get_speed())
+	if is_zero_approx(x_motion.get_speed()):
+		x_motion.set_speed(0)
 	
 	var move_and_slide_result = move_and_slide(
 		y_motion.update_motion() + x_motion.update_motion(), Vector2.UP

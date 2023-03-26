@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/particles/HealPointHeart.png" type="Texture" id=1]
+[ext_resource path="res://scripts/objects/HealPoint.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 1.9381, 0, 0, Vector2( 0.131579, 1 ), 20.4941, 0.0, 0, 0, Vector2( 0.921053, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.190909 ), -18.3782, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.0123457, 0.152263, 0.753086, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 80 )
+
+[node name="HealPoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+script = ExtResource( 2 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 6
+lifetime = 2.0
+speed_scale = 0.75
+texture = ExtResource( 1 )
+emission_shape = 2
+emission_rect_extents = Vector2( 48, 32 )
+direction = Vector2( 0, 1 )
+spread = 90.0
+gravity = Vector2( 0, -60 )
+initial_velocity = 30.0
+initial_velocity_random = 0.5
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -32 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_body_entered"]

@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/decorations/DecorBasic.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/enemies/DepthBlob.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/enemies/BadCoin.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/objects/StatsGate.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/objects/HealPoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/boxes/GreedyCoinBox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Coin/Coin.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/objects/CameraLimits.tscn" type="PackedScene" id=11]
@@ -116,10 +116,6 @@ position = Vector2( -1024, 160 )
 
 [node name="Objects" type="Node" parent="."]
 
-[node name="StatsGate" parent="Objects" instance=ExtResource( 8 )]
-position = Vector2( 2528, -416 )
-resetValue = 10
-
 [node name="GreedyCoinBox" parent="Objects" instance=ExtResource( 9 )]
 position = Vector2( 368, -96 )
 player_coin_limit = 10
@@ -147,15 +143,17 @@ position = Vector2( 424, 0 )
 [node name="Coin6" parent="Objects" instance=ExtResource( 10 )]
 position = Vector2( 312, 0 )
 
+[node name="HealPoint" parent="Objects" instance=ExtResource( 8 )]
+position = Vector2( 2496, -352 )
+
 [node name="Decorations" type="Node" parent="."]
 
 [node name="BasicDecoration" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1168, -288 )
-frame = 3
 
 [node name="BasicDecoration6" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1392, -384 )
-frame = 2
+frame = 0
 
 [node name="BasicDecoration8" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1872, -352 )
@@ -175,22 +173,18 @@ frame = 0
 [node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 104, 8 )
 animation = "float_star"
-frame = 7
 
 [node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 784, 112 )
 animation = "float_star"
-frame = 7
 
 [node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2648, -448 )
 animation = "float_star"
-frame = 7
 
 [node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 752, -352 )
 animation = "float_star"
-frame = 7
 
 [node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2320, -352 )
@@ -199,6 +193,7 @@ frame = 0
 
 [node name="BasicDecoration7" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1120, -416 )
+frame = 4
 
 [node name="BasicDecoration2" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1328, -224 )

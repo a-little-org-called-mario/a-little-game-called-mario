@@ -37,3 +37,5 @@ color_ramp = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -32 )
 shape = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_body_entered"]

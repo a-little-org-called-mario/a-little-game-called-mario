@@ -27,7 +27,6 @@ texture = ExtResource( 1 )
 collision_layer = 16
 collision_mask = 0
 monitoring = false
-monitorable = false
 script = ExtResource( 3 )
 damage = 2
 
@@ -35,3 +34,4 @@ damage = 2
 position = Vector2( 750, 0 )
 scale = Vector2( 750, 1 )
 shape = SubResource( 1 )
+disabled = true

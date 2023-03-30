@@ -15,7 +15,7 @@ onready var _collision = $Hitbox/Collision
 
 func _ready():
 	$Line.width = false
-	$Hitbox.monitorable = false
+	$Hitbox/Collision.disabled = true
 
 
 func _physics_process(_delta):
@@ -54,8 +54,8 @@ func handle_activate():
 
 	elif activateTimer == 11:
 		_line.width = 32
-	elif activateTimer == 12:
-		_hitbox.monitorable = true
+	elif activateTimer == 13:
+		_collision.disabled = false
 		activateTimer = -1
 
 
@@ -63,7 +63,7 @@ func handle_deactivate():
 	deactivateTimer += 1
 	
 	if deactivateTimer == 1:
-		_hitbox.monitorable = false
+		_collision.disabled = true
 		_line.width = 24
 	elif deactivateTimer == 2:
 		_line.width = 16

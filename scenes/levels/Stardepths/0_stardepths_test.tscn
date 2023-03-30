@@ -40,11 +40,11 @@ __meta__ = {
 
 [node name="BasicDecoration" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1168, -288 )
-frame = 3
+frame = 0
 
 [node name="BasicDecoration6" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1392, -384 )
-frame = 2
+frame = 4
 
 [node name="BasicDecoration8" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1872, -352 )
@@ -64,18 +64,22 @@ frame = 0
 [node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 104, 8 )
 animation = "float_star"
+frame = 3
 
 [node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 784, 112 )
 animation = "float_star"
+frame = 3
 
 [node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2648, -448 )
 animation = "float_star"
+frame = 3
 
 [node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 752, -352 )
 animation = "float_star"
+frame = 3
 
 [node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 2320, -352 )
@@ -84,6 +88,7 @@ frame = 0
 
 [node name="BasicDecoration7" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1120, -416 )
+frame = 3
 
 [node name="BasicDecoration2" parent="Decorations" instance=ExtResource( 5 )]
 position = Vector2( 1328, -224 )
@@ -220,6 +225,17 @@ position = Vector2( 2496, -352 )
 position = Vector2( 512, 384 )
 enableBottom = false
 enableLeft = false
+deactivate = 30
+loop = 120
+
+[node name="LaserBox2" parent="Objects" instance=ExtResource( 15 )]
+position = Vector2( 1504, -192 )
+enableTop = false
+enableRight = false
+enableBottom = false
+activate = 60
+deactivate = 90
+loop = 120
 
 [editable path="Camera/LimitSetArea"]
 [editable path="Camera/LimitSetArea2"]

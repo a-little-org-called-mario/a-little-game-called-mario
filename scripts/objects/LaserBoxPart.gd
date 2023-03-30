@@ -8,6 +8,7 @@ var activateTimer = -1
 var deactivateTimer = -1
 
 onready var _line = $Line
+onready var _dot = $DotLine
 onready var _sprite = $Sprite
 onready var _hitbox = $Hitbox
 onready var _collision = $Hitbox/Collision
@@ -27,6 +28,7 @@ func _physics_process(_delta):
 		handle_deactivate()
 	
 	_line.points[1] = endPoint
+	_dot.points[1] = endPoint
 	_collision.scale.x = halfX
 	_collision.position.x  = halfX
 

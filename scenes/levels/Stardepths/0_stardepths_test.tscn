@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/resources/stardepths_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/SpawnPoint.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/objects/LimitSetArea.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/enemies/Ombsti.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/enemies/OmbstiEcho.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/objects/LaserBox.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 128 )
@@ -34,6 +35,80 @@ tile_data = PoolIntArray( -2162716, 0, 0, -2162715, 0, 1, -2162714, 0, 1, -21627
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Decorations" type="Node" parent="."]
+
+[node name="BasicDecoration" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 1168, -288 )
+frame = 0
+
+[node name="BasicDecoration6" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 1392, -384 )
+frame = 4
+
+[node name="BasicDecoration8" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 1872, -352 )
+animation = "rainbow"
+frame = 0
+
+[node name="BasicDecoration9" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 1152, -224 )
+animation = "rainbow"
+frame = 0
+
+[node name="BasicDecoration10" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 640, 352 )
+animation = "rainbow_stack"
+frame = 0
+
+[node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 104, 8 )
+animation = "float_star"
+frame = 3
+
+[node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 784, 112 )
+animation = "float_star"
+frame = 3
+
+[node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 2648, -448 )
+animation = "float_star"
+frame = 3
+
+[node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 752, -352 )
+animation = "float_star"
+frame = 3
+
+[node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 2320, -352 )
+animation = "rainbow_stack"
+frame = 0
+
+[node name="BasicDecoration7" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 1120, -416 )
+frame = 3
+
+[node name="BasicDecoration2" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 1328, -224 )
+animation = "star_tree_t"
+frame = 0
+
+[node name="BasicDecoration3" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 1728, -352 )
+animation = "star_tree_s"
+frame = 0
+
+[node name="BasicDecoration4" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 1792, -352 )
+animation = "star_tree_2b"
+frame = 0
+
+[node name="BasicDecoration5" parent="Decorations" instance=ExtResource( 5 )]
+position = Vector2( 2064, -352 )
+animation = "star_tree_2a"
+frame = 0
 
 [node name="Camera" type="Node" parent="."]
 
@@ -146,74 +221,21 @@ position = Vector2( 312, 0 )
 [node name="HealPoint" parent="Objects" instance=ExtResource( 8 )]
 position = Vector2( 2496, -352 )
 
-[node name="Decorations" type="Node" parent="."]
+[node name="LaserBox" parent="Objects" instance=ExtResource( 15 )]
+position = Vector2( 512, 384 )
+enableBottom = false
+enableLeft = false
+deactivate = 30
+loop = 120
 
-[node name="BasicDecoration" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 1168, -288 )
-
-[node name="BasicDecoration6" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 1392, -384 )
-frame = 0
-
-[node name="BasicDecoration8" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 1872, -352 )
-animation = "rainbow"
-frame = 0
-
-[node name="BasicDecoration9" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 1152, -224 )
-animation = "rainbow"
-frame = 0
-
-[node name="BasicDecoration10" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 560, 352 )
-animation = "rainbow_stack"
-frame = 0
-
-[node name="BasicDecoration12" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 104, 8 )
-animation = "float_star"
-
-[node name="BasicDecoration13" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 784, 112 )
-animation = "float_star"
-
-[node name="BasicDecoration14" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 2648, -448 )
-animation = "float_star"
-
-[node name="BasicDecoration15" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 752, -352 )
-animation = "float_star"
-
-[node name="BasicDecoration11" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 2320, -352 )
-animation = "rainbow_stack"
-frame = 0
-
-[node name="BasicDecoration7" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 1120, -416 )
-frame = 4
-
-[node name="BasicDecoration2" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 1328, -224 )
-animation = "star_tree_t"
-frame = 0
-
-[node name="BasicDecoration3" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 1728, -352 )
-animation = "star_tree_s"
-frame = 0
-
-[node name="BasicDecoration4" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 1792, -352 )
-animation = "star_tree_2b"
-frame = 0
-
-[node name="BasicDecoration5" parent="Decorations" instance=ExtResource( 5 )]
-position = Vector2( 2064, -352 )
-animation = "star_tree_2a"
-frame = 0
+[node name="LaserBox2" parent="Objects" instance=ExtResource( 15 )]
+position = Vector2( 1504, -192 )
+enableTop = false
+enableRight = false
+enableBottom = false
+activate = 60
+deactivate = 90
+loop = 120
 
 [editable path="Camera/LimitSetArea"]
 [editable path="Camera/LimitSetArea2"]

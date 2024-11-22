@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/story_mode/character/Character.gd" type="Script" id=1]
+[ext_resource path="res://fonts/ALittleNameCalled.tres" type="DynamicFont" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 158.382
@@ -21,11 +22,12 @@ shape = SubResource( 1 )
 position = Vector2( 2, -40 )
 
 [node name="TalkToLabel" type="Label" parent="."]
-margin_left = 28.0
-margin_top = -134.0
-margin_right = 114.0
-margin_bottom = -120.0
+margin_left = -53.0
+margin_top = -121.0
+margin_right = 115.0
+margin_bottom = -107.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 custom_styles/normal = SubResource( 2 )
 text = "[B] Talk to %s"
 

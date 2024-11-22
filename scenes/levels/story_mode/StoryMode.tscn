@@ -325,10 +325,10 @@ position = Vector2( 2, -120 )
 texture = ExtResource( 23 )
 
 [node name="TalkToLabel" parent="YSort/Characters/LadderMan" index="2"]
-margin_left = 39.0
-margin_top = -150.0
-margin_right = 159.0
-margin_bottom = -136.0
+margin_left = -127.0
+margin_top = 10.0
+margin_right = 137.0
+margin_bottom = 24.0
 text = "[Q] Talk to Ladder Man"
 
 [node name="Stone" parent="YSort/Characters" instance=ExtResource( 5 )]
@@ -341,9 +341,9 @@ position = Vector2( 2, -31 )
 texture = ExtResource( 22 )
 
 [node name="TalkToLabel" parent="YSort/Characters/Stone" index="2"]
-margin_left = -66.0
+margin_left = -102.0
 margin_top = 21.0
-margin_right = 20.0
+margin_right = 102.0
 margin_bottom = 35.0
 text = "[Q] Talk to Stone"
 
@@ -361,10 +361,10 @@ position = Vector2( 2, -30 )
 texture = ExtResource( 24 )
 
 [node name="TalkToLabel" parent="YSort/Characters/Lever" index="2"]
-margin_left = 33.0
-margin_top = -35.0
-margin_right = 119.0
-margin_bottom = -21.0
+margin_left = -26.0
+margin_top = 8.0
+margin_right = 130.0
+margin_bottom = 22.0
 text = "[Q] Use Lever"
 
 [node name="Sign" parent="YSort/Characters" instance=ExtResource( 5 )]
@@ -383,9 +383,9 @@ texture = ExtResource( 15 )
 
 [node name="TalkToLabel" parent="YSort/Characters/Sign" index="2"]
 margin_left = -127.0
-margin_top = -29.0
-margin_right = -41.0
-margin_bottom = -15.0
+margin_top = 25.0
+margin_right = 65.0
+margin_bottom = 39.0
 text = "[Q] Look at Sign"
 
 [node name="Donk" parent="YSort/Characters" instance=ExtResource( 5 )]
@@ -399,6 +399,8 @@ position = Vector2( 0, -45 )
 texture = SubResource( 1 )
 
 [node name="TalkToLabel" parent="YSort/Characters/Donk" index="2"]
+margin_left = -67.0
+margin_right = 209.0
 text = "[Q] Talk to weird group"
 
 [node name="WizardDude" parent="YSort/Characters" instance=ExtResource( 5 )]
@@ -425,9 +427,9 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 37 )
 
 [node name="TalkToLabel" parent="YSort/Characters/Sora" index="2"]
-margin_left = -47.0
+margin_left = -100.0
 margin_top = -80.0
-margin_right = 49.0
+margin_right = 92.0
 margin_bottom = -66.0
 text = "[Q] Talk to Sora"
 

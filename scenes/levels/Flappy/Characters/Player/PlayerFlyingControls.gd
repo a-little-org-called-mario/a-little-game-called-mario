@@ -3,7 +3,7 @@ class_name PlayerFlying
 
 signal game_over
 
-const ASCEND_FORCE = -200
+const ASCEND_FORCE = -300
 const MAX_ROTATION_UP = -30.0
 const MAX_ROTATION_DOWN = 90.0
 
